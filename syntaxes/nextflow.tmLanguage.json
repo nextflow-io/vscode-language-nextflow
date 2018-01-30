@@ -1,32 +1,94 @@
 {
 	"$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
 	"name": "Nextflow",
+	"scopeName": "source.nextflow",
+	"keyEquivalent": "^~N",
 	"patterns": [
 		{
-			"include": "#keywords"
-		},
-		{
-			"include": "#strings"
+			"include": "#nfl-rules"
 		}
 	],
 	"repository": {
-		"keywords": {
-			"patterns": [{
-				"name": "keyword.control.nextflow",
-				"match": "\\b(if|while|for|return)\\b"
-			}]
-		},
-		"strings": {
-			"name": "string.quoted.double.nextflow",
-			"begin": "\"",
-			"end": "\"",
+		"nfl-rules": {
 			"patterns": [
 				{
-					"name": "constant.character.escape.nextflow",
-					"match": "\\\\."
+					"include": "#process-def"
+				},
+				{
+					"include": "#code-block"
+				},
+				{
+					"include": "source.nextflow-groovy"
 				}
 			]
-		}
-	},
-	"scopeName": "source.nextflow"
+		},
+		"process-def": {
+			"name": "support.process.nextflow",
+			"begin": "^\\s*(process)\\s+(\\w+|\"[^\"]+\"|'[^']+')\\s*",
+			"beginCaptures": {
+				"1": {
+					"name": "support.keyword.nextflow"
+				},
+				"2": {
+					"name": "support.function.nextflow"
+				}
+			},
+			"end": "}",
+			"patterns": [{
+				"include": "#process-body"
+			}]	
+		},	
+		"process-body": {
+			"name": "support.process.body.nextflow",
+			"begin": "{",
+			"end": "(?=})",
+			"patterns": [
+			  {
+				"name": "support.process.directive.type.nextflow",
+				"match": "(?:afterScript|beforeScript|cache|container|cpus|clusterOptions|disk|echo|errorStrategy|executor|ext|maxErrors|maxForks|maxRetries|memory|module|penv|publishDir|queue|scratch|storeDir|stageInMode|stageOutMode|tag|time|validExitStatus)\\b"
+			  },
+			  {
+				"name": "support.constant.block.nextflow",
+				"match": "(?:input|output|script|shell|exec):"
+			  },
+			  {
+				"include": "source.nextflow-groovy#comments"
+			  },
+			  {
+				"include": "source.nextflow-groovy#support-functions"
+			  },
+			  {
+				"include": "source.nextflow-groovy#keyword"
+			  },
+			  {
+				"include": "source.nextflow-groovy#values"
+			  },
+			  {
+				"include": "source.nextflow-groovy#anonymous-classes-and-new"
+			  },
+			  {
+				"include": "source.nextflow-groovy#types"
+			  },
+			  {
+				"include": "source.nextflow-groovy#parens"
+			  },
+			  {
+				"include": "source.nextflow-groovy#closures"
+			  },
+			  {
+				"include": "source.nextflow-groovy#braces"
+			  }
+			]
+		},
+		"code-block": {
+			"name": "support.code.block.nextflow",
+			"begin": "{",
+			"end": "}",
+			"patterns": [
+			  {
+				"include": "#nfl-rules"
+			  }
+			]
+		  }
+	}
 }

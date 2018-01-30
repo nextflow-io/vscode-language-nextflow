@@ -23,7 +23,6 @@
             "path": "./syntaxes/nextflow.tmLanguage.json"
         }, 
         {
-            "language": "nextflow-groovy",
             "scopeName": "source.nextflow-groovy",
             "path": "./syntaxes/groovy.tmLanguage.json"
         }]
