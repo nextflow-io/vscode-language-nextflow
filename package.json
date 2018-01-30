@@ -1,0 +1,31 @@
+{
+    "name": "nextflow",
+    "displayName": "Nextflow",
+    "description": "Nextflow syntax highlighter for VS Code editor",
+    "version": "0.0.1",
+    "publisher": "pditommaso",
+    "engines": {
+        "vscode": "^1.19.0"
+    },
+    "categories": [
+        "Languages"
+    ],
+    "contributes": {
+        "languages": [{
+            "id": "nextflow",
+            "aliases": ["Nextflow", "nextflow"],
+            "extensions": [".nf"],
+            "configuration": "./language-configuration.json"
+        }],
+        "grammars": [{
+            "language": "nextflow",
+            "scopeName": "source.nextflow",
+            "path": "./syntaxes/nextflow.tmLanguage.json"
+        }, 
+        {
+            "language": "nextflow-groovy",
+            "scopeName": "source.nextflow-groovy",
+            "path": "./syntaxes/groovy.tmLanguage.json"
+        }]
+    }
+}
