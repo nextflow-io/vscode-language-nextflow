@@ -27,5 +27,12 @@ Hack the grammar and the snippet definition files. To quickly test changes use t
 
 Contributions are greatly appreciated. Please fork [this repository](https://github.com/nextflow-io/vscode-language-nextflow), open a pull request to add snippets, make grammar tweaks, fix issues, etc.
 
+## Useful links 
+
+* https://manual.macromates.com/en/language_grammars
+* https://code.visualstudio.com/docs/extensions/yocode
+* https://code.visualstudio.com/docs/extensionAPI/extension-manifest
+* https://marketplace.visualstudio.com/items?itemName=nextflow.nextflow
+
 
 **Enjoy!**
