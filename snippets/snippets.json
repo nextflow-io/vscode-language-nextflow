@@ -4,7 +4,6 @@
         "body": "#!/usr/bin/env nextflow\n\n",
         "description": "Script shebang declaration"
     },
-
     "process": {
         "prefix": "proc",
         "body": [
@@ -21,26 +20,30 @@
         ],
         "description": "Process definition"
     }, 
-
     "errorStrategy": {
         "prefix": "errorStrategy",
-        "body": "errorStrategy '$1'"
+        "body": "errorStrategy '$1'",
+        "description": "Process error strategy directive"
     },
     "clusterOptions": {
         "prefix": "clusterOptions",
-        "body": "clusterOptions '$1'"
+        "body": "clusterOptions '$1'",
+        "description": "Process cluster options directive"
     },
     "maxErrors": {
         "prefix": "maxErrors",
-        "body": "maxErrors $1"
+        "body": "maxErrors $1",
+        "description": "Process max errors directive"
     },
     "maxRetries": {
         "prefix": "maxRetries",
-        "body": "maxRetries $1"
+        "body": "maxRetries $1",
+        "description": "Process max retries directive"
     },
     "publishDir": {
         "prefix": "publishDir",
-        "body": "publishDir $1"
+        "body": "publishDir $1",
+        "description": "Process publish directory directive"
     }
 
 }
