@@ -1,8 +1,9 @@
 {
     "name": "nextflow",
     "displayName": "Nextflow",
-    "description": "Nextflow syntax highlighter for VS Code editor",
-    "version": "0.0.1",
+    "description": "Nextflow language support",
+    "version": "0.1.0",
+    "icon": "https://www.nextflow.io/img/nextflow-icon-128x128.png",
     "publisher": "pditommaso",
     "engines": {
         "vscode": "^1.19.0"
