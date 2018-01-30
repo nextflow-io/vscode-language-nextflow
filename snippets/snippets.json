@@ -1,0 +1,46 @@
+{
+    "shebang":{
+        "prefix": "#!",
+        "body": "#!/usr/bin/env nextflow\n\n",
+        "description": "Script shebang declaration"
+    },
+
+    "process": {
+        "prefix": "proc",
+        "body": [
+            "process $1 {",
+            "  input:",
+            "  $2",
+            "  output:",
+            "  $3",
+            "  script:",
+            "  \"\"\"",
+            "  $4",
+            "  \"\"\"",
+            "}"    
+        ],
+        "description": "Process definition"
+    }, 
+
+    "errorStrategy": {
+        "prefix": "errorStrategy",
+        "body": "errorStrategy '$1'"
+    },
+    "clusterOptions": {
+        "prefix": "clusterOptions",
+        "body": "clusterOptions '$1'"
+    },
+    "maxErrors": {
+        "prefix": "maxErrors",
+        "body": "maxErrors $1"
+    },
+    "maxRetries": {
+        "prefix": "maxRetries",
+        "body": "maxRetries $1"
+    },
+    "publishDir": {
+        "prefix": "publishDir",
+        "body": "publishDir $1"
+    }
+
+}

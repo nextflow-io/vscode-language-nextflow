@@ -16,6 +16,7 @@
             "id": "nextflow",
             "aliases": ["Nextflow", "nextflow"],
             "extensions": [".nf"],
+            "firstLine": "^#!.*\\bnextflow\\b",
             "configuration": "./language-configuration.json"
         }],
         "grammars": [{
@@ -26,6 +27,12 @@
         {
             "scopeName": "source.nextflow-groovy",
             "path": "./syntaxes/groovy.tmLanguage.json"
-        }]
+        }],
+        "snippets": [
+            {
+                "language": "nextflow",
+                "path": "./snippets/snippets.json"
+            }
+        ]
     }
 }
