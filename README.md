@@ -1,65 +1,31 @@
-# nextflow README
+# Nextflow language extension for Visual Studio Code
 
-This is the README for your extension "nextflow". After writing up a brief description, we recommend including the following sections.
+This extension adds the [Nextflow](https://www.nextflow.io/) language support 
+to Visual Studio Code editor. 
 
 ## Features
 
-Describe specific features of your extension including screenshots of your extension in action. Image paths are relative to this README file.
+It provides syntax highlighting for the Nextflow language and quick shortcuts for common code snippets.
 
-For example if there is an image subfolder under your extension project workspace:
+![Nextflow syntax highlighting](images/vscode-nextflow.png)
 
-\!\[feature X\]\(images/feature-x.png\)
 
-> Tip: Many popular extensions utilize animations. This is an excellent way to show off your extension! We recommend short, focused animations that are easy to follow.
+## Local development 
 
-## Requirements
+Clone the project repository in your computer: 
 
-If you have any requirements or dependencies, add a section describing those and how to install and configure them.
+    git clone https://github.com/nextflow-io/vscode-language-nextflow
 
-## Extension Settings
+Change in project directory and launch VS code: 
 
-Include if your extension adds any VS Code settings through the `contributes.configuration` extension point.
+    cd vscode-language-nextflow    
+    code . 
 
-For example:
+Hack the grammar and the snippet definition files. To quickly test changes use the `F5` key.     
 
-This extension contributes the following settings:
+## Contribution 
 
-* `myExtension.enable`: enable/disable this extension
-* `myExtension.thing`: set to `blah` to do something
+Contributions are greatly appreciated. Please fork [this repository](https://github.com/nextflow-io/vscode-language-nextflow), open a pull request to add snippets, make grammar tweaks, fix issues, etc.
 
-## Known Issues
-
-Calling out known issues can help limit users opening duplicate issues against your extension.
-
-## Release Notes
-
-Users appreciate release notes as you update your extension.
-
-### 1.0.0
-
-Initial release of ...
-
-### 1.0.1
-
-Fixed issue #.
-
-### 1.1.0
-
-Added features X, Y, and Z.
-
------------------------------------------------------------------------------------------------------------
-
-## Working with Markdown
-
-**Note:** You can author your README using Visual Studio Code.  Here are some useful editor keyboard shortcuts:
-
-* Split the editor (`Cmd+\` on OSX or `Ctrl+\` on Windows and Linux)
-* Toggle preview (`Shift+CMD+V` on OSX or `Shift+Ctrl+V` on Windows and Linux)
-* Press `Ctrl+Space` (Windows, Linux) or `Cmd+Space` (OSX) to see a list of Markdown snippets
-
-### For more information
-
-* [Visual Studio Code's Markdown Support](http://code.visualstudio.com/docs/languages/markdown)
-* [Markdown Syntax Reference](https://help.github.com/articles/markdown-basics/)
 
 **Enjoy!**
