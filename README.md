@@ -23,6 +23,17 @@ Change in project directory and launch VS code:
 
 Hack the grammar and the snippet definition files. To quickly test changes use the `F5` key.     
 
+## Publishing 
+
+Update the extension version number in the `package.json` file,
+then use the command: 
+
+```
+vsce publish
+```
+
+Read more at [this link](https://code.visualstudio.com/docs/extensions/publish-extension). 
+
 ## Contribution 
 
 Contributions are greatly appreciated. Please fork [this repository](https://github.com/nextflow-io/vscode-language-nextflow), open a pull request to add snippets, make grammar tweaks, fix issues, etc.
