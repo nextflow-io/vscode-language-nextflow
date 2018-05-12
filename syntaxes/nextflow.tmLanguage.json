@@ -23,14 +23,14 @@
 			]
 		},
 		"process-def": {
-			"name": "support.process.nextflow",
+			"name": "process.nextflow",
 			"begin": "^\\s*(process)\\s+(\\w+|\"[^\"]+\"|'[^']+')\\s*",
 			"beginCaptures": {
 				"1": {
-					"name": "support.keyword.nextflow"
+					"name": "keyword.nextflow"
 				},
 				"2": {
-					"name": "support.function.nextflow"
+					"name": "function.nextflow"
 				}
 			},
 			"end": "}",
@@ -39,16 +39,16 @@
 			}]	
 		},	
 		"process-body": {
-			"name": "support.process.body.nextflow",
+			"name": "process.body.nextflow",
 			"begin": "{",
 			"end": "(?=})",
 			"patterns": [
 			  {
-				"name": "support.process.directive.type.nextflow",
+				"name": "process.directive.type.nextflow",
 				"match": "(?:afterScript|beforeScript|cache|container|cpus|clusterOptions|disk|echo|errorStrategy|executor|ext|maxErrors|maxForks|maxRetries|memory|module|penv|publishDir|queue|scratch|storeDir|stageInMode|stageOutMode|tag|time|validExitStatus)\\b"
 			  },
 			  {
-				"name": "support.constant.block.nextflow",
+				"name": "constant.block.nextflow",
 				"match": "(?:input|output|script|shell|exec):"
 			  },
 			  {
@@ -81,7 +81,7 @@
 			]
 		},
 		"code-block": {
-			"name": "support.code.block.nextflow",
+			"name": "code.block.nextflow",
 			"begin": "{",
 			"end": "}",
 			"patterns": [
