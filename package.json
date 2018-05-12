@@ -2,7 +2,7 @@
     "name": "nextflow",
     "displayName": "Nextflow",
     "description": "Nextflow language support",
-    "version": "0.1.0",
+    "version": "0.1.1",
     "icon": "images/nextflow-icon-128x128.png",
     "publisher": "nextflow",
     "repository": {
