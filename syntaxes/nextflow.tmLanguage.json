@@ -49,7 +49,7 @@
 			  },
 			  {
 				"name": "constant.block.nextflow",
-				"match": "(?:input|output|script|shell|exec):"
+				"match": "(?:input|output|when|script|shell|exec):"
 			  },
 			  {
 				"include": "source.nextflow-groovy#comments"
