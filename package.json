@@ -23,7 +23,7 @@
         "languages": [{
             "id": "nextflow",
             "aliases": ["Nextflow", "nextflow"],
-            "extensions": [".nf"],
+            "extensions": [".nf", ".config"],
             "firstLine": "^#!.*\\bnextflow\\b",
             "configuration": "./language-configuration.json"
         }],
