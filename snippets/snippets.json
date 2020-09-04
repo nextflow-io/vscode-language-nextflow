@@ -1,8 +1,13 @@
 {
-    "shebang":{
-        "prefix": "#!",
+    "shebang": {
+        "prefix": ["#!", "shebang"],
         "body": "#!/usr/bin/env nextflow\n\n",
         "description": "Script shebang declaration"
+    },
+    "dsl2": {
+        "prefix": "dsl2",
+        "body": ["nextflow.enable.dsl=2\n","workflow $1{","$2","}"],
+        "description": "DSL 2 activation"
     },
     "process": {
         "prefix": "proc",
@@ -16,10 +21,14 @@
             "  \"\"\"",
             "  $4",
             "  \"\"\"",
-            "}"    
+            "}"
         ],
         "description": "Process definition"
-    }, 
+    },
+    "function": {
+        "prefix": "def",
+        "body": ["def $1($2) {","$3","}"]
+    },
     "errorStrategy": {
         "prefix": "errorStrategy",
         "body": "errorStrategy '$1'",
@@ -29,6 +38,21 @@
         "prefix": "clusterOptions",
         "body": "clusterOptions '$1'",
         "description": "Process cluster options directive"
+    },
+    "container": {
+        "prefix": "container",
+        "body": "container '$1'",
+        "description": "Process container directive"
+    },
+    "containerOptions": {
+        "prefix": "containerOptions",
+        "body": "containerOptions '$1'",
+        "description": "Process container options directive"
+    },
+    "cpus": {
+        "prefix": "cpus",
+        "body": "cpus $1",
+        "description": "Process cpus directive"
     },
     "maxErrors": {
         "prefix": "maxErrors",
@@ -40,10 +64,19 @@
         "body": "maxRetries $1",
         "description": "Process max retries directive"
     },
+    "memory": {
+        "prefix": "memory",
+        "body": "memory '$1'",
+        "description": "Process memory directive"
+    },
     "publishDir": {
         "prefix": "publishDir",
-        "body": "publishDir $1",
+        "body": "publishDir \"$1\", mode: '${2|symlink,copy,move,relink,link,copyNoFollow|}'",
         "description": "Process publish directory directive"
+    },
+    "tag": {
+        "prefix": "tag",
+        "body": "tag \"$1\"",
+        "description": "Process tag directive"
     }
-
 }
