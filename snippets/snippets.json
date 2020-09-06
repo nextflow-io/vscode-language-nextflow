@@ -1,12 +1,12 @@
 {
     "shebang": {
-        "prefix": ["#!", "shebang"],
+        "prefix": ["#!", "shebang", "sh"],
         "body": "#!/usr/bin/env nextflow\n\n",
         "description": "Script shebang declaration"
     },
     "dsl2": {
         "prefix": "dsl2",
-        "body": ["nextflow.enable.dsl=2\n","workflow $1{","$2","}"],
+        "body": ["nextflow.enable.dsl=2\n","workflow $1{", "  $2", "}"],
         "description": "DSL 2 activation"
     },
     "process": {
@@ -27,7 +27,8 @@
     },
     "function": {
         "prefix": "def",
-        "body": ["def $1($2) {","$3","}"]
+        "body": ["def $1($2) {", "  $3", "}"],
+        "description": "Function definition"
     },
     "errorStrategy": {
         "prefix": "errorStrategy",

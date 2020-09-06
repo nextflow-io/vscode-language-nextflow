@@ -15,6 +15,9 @@
 					"include": "#process-def"
 				},
 				{
+					"include": "#workflow-def"
+				},
+				{
 					"include": "#code-block"
 				},
 				{
@@ -37,7 +40,7 @@
 			"patterns": [{
 				"include": "#process-body"
 			}]	
-		},	
+		},
 		"process-body": {
 			"name": "process.body.nextflow",
 			"begin": "{",
@@ -80,6 +83,60 @@
 			  }
 			]
 		},
+		"workflow-def": {
+			"name": "workflow.nextflow",
+			"begin": "^\\s*(workflow)(?:\\s+(\\w+|\"[^\"]+\"|'[^']+'))?\\s*",
+			"beginCaptures": {
+				"1": {
+					"name": "keyword.nextflow"
+				},
+				"2": {
+					"name": "function.nextflow"
+				}
+			},
+			"end": "}",
+			"patterns": [{
+				"include": "#workflow-body"
+			}]	
+		},
+		"workflow-body": {
+			"name": "workflow.body.nextflow",
+			"begin": "{",
+			"end": "(?=})",
+			"patterns": [
+				{
+				  "name": "constant.block.nextflow",
+				  "match": "(?:take|main|emit):"
+				},
+				{
+				  "include": "source.nextflow-groovy#comments"
+				},
+				{
+				  "include": "source.nextflow-groovy#support-functions"
+				},
+				{
+				  "include": "source.nextflow-groovy#keyword"
+				},
+				{
+				  "include": "source.nextflow-groovy#values"
+				},
+				{
+				  "include": "source.nextflow-groovy#anonymous-classes-and-new"
+				},
+				{
+				  "include": "source.nextflow-groovy#types"
+				},
+				{
+				  "include": "source.nextflow-groovy#parens"
+				},
+				{
+				  "include": "source.nextflow-groovy#closures"
+				},
+				{
+				  "include": "source.nextflow-groovy#braces"
+				}
+			  ]
+		},
 		"code-block": {
 			"name": "code.block.nextflow",
 			"begin": "{",
@@ -89,6 +146,6 @@
 				"include": "#nfl-rules"
 			  }
 			]
-		  }
+		}
 	}
 }
