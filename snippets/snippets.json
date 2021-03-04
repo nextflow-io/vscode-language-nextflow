@@ -9,6 +9,13 @@
         "body": ["nextflow.enable.dsl=2\n","workflow $1{", "  $2", "}"],
         "description": "DSL 2 activation"
     },
+    "include": {
+		"prefix": "include",
+		"body": [
+			"include { $1 } from '$2'"
+		],
+		"description": "Module inclusion"
+	},
     "process": {
         "prefix": "proc",
         "body": [
@@ -30,6 +37,20 @@
         "body": ["def $1($2) {", "  $3", "}"],
         "description": "Function definition"
     },
+    "workflow": {
+		"prefix": "workflow",
+		"body": [
+			"workflow $1{",
+			"  take:",
+			"    $2",
+			"  main:",
+			"    $3",
+			"  emit:",
+			"    $4",
+			"}"
+		],
+		"description": "Workflow definition"
+	},
     "errorStrategy": {
         "prefix": "errorStrategy",
         "body": "errorStrategy '$1'",
