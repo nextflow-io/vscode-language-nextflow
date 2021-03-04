@@ -15,7 +15,7 @@
 			"include { $1 } from '$2'"
 		],
 		"description": "Module inclusion"
-	},
+    },
     "process": {
         "prefix": "proc",
         "body": [
@@ -50,7 +50,7 @@
 			"}"
 		],
 		"description": "Workflow definition"
-	},
+    },
     "errorStrategy": {
         "prefix": "errorStrategy",
         "body": "errorStrategy '$1'",
