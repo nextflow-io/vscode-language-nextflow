@@ -1,0 +1,25 @@
+{
+	"name": "lsp-sample-server",
+	"description": "Example implementation of a language server in node.",
+	"version": "1.0.0",
+	"author": "Microsoft Corporation",
+	"license": "MIT",
+	"engines": {
+		"node": "*"
+	},
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/Microsoft/vscode-extension-samples"
+	},
+	"dependencies": {
+		"vscode-languageserver": "^7.0.0",
+		"vscode-languageserver-textdocument": "^1.0.4",
+		"antlr4-c3": "^2.2.1",
+		"antlr4ts": "^0.5.0-alpha.4",
+		"denque": "^2.1.0"
+	},
+	"scripts": {
+		"antlr4ts_lex": "antlr4ts -visitor server/grammar/GroovyLexer.g4",
+		"antlr4ts_pars": "antlr4ts -visitor server/grammar/GroovyParser.g4"
+	}
+}
