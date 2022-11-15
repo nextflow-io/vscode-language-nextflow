@@ -25,6 +25,15 @@
         ],
         "description": "Process definition"
     },
+    "workflow": {
+        "prefix": "workflow",
+        "body": [
+            "workflow {",
+            "  $1",
+            "}"
+        ],
+        "description": "Workflow definition"
+    },
     "function": {
         "prefix": "def",
         "body": ["def $1($2) {", "  $3", "}"],
