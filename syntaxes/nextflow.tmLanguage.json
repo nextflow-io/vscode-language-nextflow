@@ -21,6 +21,9 @@
 					"include": "#code-block"
 				},
 				{
+					"include": "#include-statement"
+				},
+				{
 					"include": "source.nextflow-groovy"
 				}
 			]
@@ -145,6 +148,18 @@
 			  {
 				"include": "#nfl-rules"
 			  }
+			]
+		},
+		"include-statement": {
+			"patterns": [
+				{
+					"match": "^\\b(include)\\b",
+					"name": "keyword.nextflow"
+				},
+				{
+					"match": "\\b(from)\\b",
+					"name": "keyword.nextflow"
+				}
 			]
 		}
 	}

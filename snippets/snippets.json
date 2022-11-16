@@ -53,6 +53,11 @@
         "body": ["def $1($2) {", "  $3", "}"],
         "description": "Function definition"
     },
+    "include": {
+        "prefix": "include",
+        "body": "include { $1 } from './$2'",
+        "description": "Module inclusion statement"
+    },
     "errorStrategy": {
         "prefix": "errorStrategy",
         "body": "errorStrategy '$1'",
