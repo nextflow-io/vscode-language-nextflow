@@ -21,7 +21,7 @@
 					"include": "#code-block"
 				},
 				{
-					"include": "#keyword"
+					"include": "#include-statement"
 				},
 				{
 					"include": "source.nextflow-groovy"
@@ -150,15 +150,15 @@
 			  }
 			]
 		},
-		"keyword": {
+		"include-statement": {
 			"patterns": [
 				{
 					"match": "^\\b(include)\\b",
-					"name": "keyword.include.nextflow"
+					"name": "keyword.nextflow"
 				},
 				{
 					"match": "\\b(from)\\b",
-					"name": "keyword.from.nextflow"
+					"name": "keyword.nextflow"
 				}
 			]
 		}
