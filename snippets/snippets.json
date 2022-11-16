@@ -29,10 +29,24 @@
         "prefix": "workflow",
         "body": [
             "workflow {",
-            "  $1",
+            "\t$1",
             "}"
         ],
         "description": "Workflow definition"
+    },
+    "named workflow": {
+        "prefix": "workflow",
+        "body": [
+            "workflow $1 {",
+            "\ttake:",
+            "\t$2",
+            "\tmain:",
+            "\t$3",
+            "\temit:",
+            "\t$4",
+            "}"
+        ],
+        "description": "Named Workflow definition"
     },
     "function": {
         "prefix": "def",
