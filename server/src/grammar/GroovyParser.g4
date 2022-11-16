@@ -159,6 +159,33 @@ options {
 	}
 }
 
+// starting point for nextflow config files
+//Nextflow Config File Extensions
+aws_string_statement:
+    (
+        AWS_S3ACL 
+        | AWS_ENDPOINT 
+        | AWS_PROTOCOL 
+        | AWS_PROXYHOST 
+        | AWS_PROXYUSERNAME 
+        | AWS_PROXYPASSWORD 
+        | AWS_STORAGEKMSKEYID
+        | AWS_USERAGENT
+        | AWS_UPLOADSTORAGECLASS
+    ) ASSIGN (StringLiteral | statementExpression) (NL | SEMI)+
+    ;
+
+aws_scope_statement
+    : aws_string_statement*;
+
+aws_scope
+    : AWS_SCOPE LBRACE nls aws_scope_statement nls RBRACE;
+
+nextflow_config:
+    aws_scope
+    | statement*
+;
+
 // starting point for parsing a groovy file
 compilationUnit
     :   nls (packageDeclaration sep?)? scriptStatements? EOF

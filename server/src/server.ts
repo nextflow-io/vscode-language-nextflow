@@ -11,36 +11,17 @@ import {
 	InitializeParams,
 	DidChangeConfigurationNotification,
 	CompletionItem,
-	CompletionItemKind,
 	TextDocumentPositionParams,
 	TextDocumentSyncKind,
-	InitializeResult,
-	Range,
-	Position,
-	CompletionRequest
+	InitializeResult
 } from 'vscode-languageserver/node';
 
-import { ANTLRErrorListener, CharStream, CharStreams, CommonToken, CommonTokenStream, RecognitionException, Recognizer, Token } from 'antlr4ts';
 import './grammar/GroovyParser';
 
 import {
 	TextDocument
 } from 'vscode-languageserver-textdocument';
-import { Override } from 'antlr4ts/Decorators';
-import { CodeCompletionCore } from 'antlr4-c3';
-import { GroovyLexer } from './grammar/GroovyLexer';
-import { GroovyParser } from './grammar/GroovyParser';
-
-
-class ErrorListener implements ANTLRErrorListener<CommonToken> {
-    public errorCount = 0;
-
-    @Override
-    public syntaxError<T extends Token>(recognizer: Recognizer<T, any>, offendingSymbol: T | undefined, line: number,
-        charPositionInLine: number, msg: string, e: RecognitionException | undefined): void {
-        ++this.errorCount;
-    }
-}
+import { complete } from './grammarAdapter';
 
 // Create a connection for the server, using Node's IPC as a transport.
 // Also include all preview / proposed LSP features.
@@ -214,9 +195,9 @@ connection.onCompletion(
 		// which code complete got requested. For the example we ignore this
 		// info and always provide the same completion items.
 		const document = documents.get(_textDocumentPosition.textDocument.uri);
-		const document_text = document?.getText({start: {line: 0, character: 0}, end: _textDocumentPosition.position});
+		const document_text = document?.getText();
 		if (document_text !== undefined) {
-			const proposals = complete(document_text);
+			const proposals = complete(document_text, _textDocumentPosition);
 			console.log(proposals);
 			return proposals;
 		} else {
@@ -242,95 +223,3 @@ documents.listen(connection);
 
 // Listen on the connection
 connection.listen();
-
-
-//Code completion for nextflow
-const complete = function(text: string) {
-	const inputstream = CharStreams.fromString(text);
-	const lexer = new GroovyLexer(inputstream);
-	const tokenStream = new CommonTokenStream(lexer);
-	const parser = new GroovyParser(tokenStream);
-	const errorListener = new ErrorListener();
-	parser.addErrorListener(errorListener);
-
-	const core = new CodeCompletionCore(parser);
-	core.ignoredTokens = new Set<number>([
-		GroovyLexer.RANGE_EXCLUSIVE_FULL,
-		GroovyLexer.SPREAD_DOT,
-		GroovyLexer.SAFE_DOT,
-		GroovyLexer.SAFE_INDEX,
-		GroovyLexer.SAFE_CHAIN_DOT,
-		GroovyLexer.ELVIS,
-		GroovyLexer.METHOD_POINTER,
-		GroovyLexer.METHOD_REFERENCE,
-		GroovyLexer.REGEX_FIND,
-		GroovyLexer.REGEX_MATCH,
-		GroovyLexer.POWER,
-		GroovyLexer.POWER_ASSIGN,
-		GroovyLexer.SPACESHIP,
-		GroovyLexer.IDENTICAL,
-		GroovyLexer.NOT_IDENTICAL,
-		GroovyLexer.ARROW,
-		GroovyLexer.LPAREN,
-		GroovyLexer.RPAREN,
-		GroovyLexer.LBRACE,
-		GroovyLexer.RBRACE,
-		GroovyLexer.LBRACK,
-		GroovyLexer.RBRACK,
-		GroovyLexer.SEMI,
-		GroovyLexer.COMMA,
-		GroovyLexer.DOT,
-		GroovyLexer.ASSIGN,
-		GroovyLexer.GT,
-		GroovyLexer.LT,
-		GroovyLexer.NOT,
-		GroovyLexer.BITNOT,
-		GroovyLexer.QUESTION,
-		GroovyLexer.COLON,
-		GroovyLexer.EQUAL,
-		GroovyLexer.LE,
-		GroovyLexer.GE,
-		GroovyLexer.NOTEQUAL,
-		GroovyLexer.AND,
-		GroovyLexer.OR,
-		GroovyLexer.INC,
-		GroovyLexer.DEC,
-		GroovyLexer.ADD,
-		GroovyLexer.SUB,
-		GroovyLexer.MUL,
-		GroovyLexer.DIV,
-		GroovyLexer.BITAND,
-		GroovyLexer.BITOR,
-		GroovyLexer.XOR,
-		GroovyLexer.MOD,
-		GroovyLexer.ADD_ASSIGN,
-		GroovyLexer.SUB_ASSIGN,
-		GroovyLexer.MUL_ASSIGN,
-		GroovyLexer.DIV_ASSIGN,
-		GroovyLexer.AND_ASSIGN,
-		GroovyLexer.OR_ASSIGN,
-		GroovyLexer.XOR_ASSIGN,
-		GroovyLexer.MOD_ASSIGN,
-		GroovyLexer.LSHIFT_ASSIGN,
-		GroovyLexer.RSHIFT_ASSIGN,
-		GroovyLexer.URSHIFT_ASSIGN,
-		GroovyLexer.ELVIS_ASSIGN
-	]);
-	
-	const candidates = core.collectCandidates(6);
-	const retval = [];
-	console.log(candidates.tokens);
-	for (const x of candidates.tokens.keys()) {
-		let label = GroovyLexer._LITERAL_NAMES[x];
-		if (label !== undefined) {
-			label = label.replace(/'/gi,"");
-			retval.push(
-				{
-					label: label,
-					kind: CompletionItemKind.Keyword,
-					data: label
-				});
-			}
-	}
-	return retval;
-};

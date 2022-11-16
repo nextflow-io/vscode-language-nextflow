@@ -295,6 +295,34 @@ class Paren {
     }
 }
 
+//nextflow literals
+//nextflow config script
+// $AWS Scope
+AWS_SCOPE : 'aws';
+AWS_ANONYMOUS   : 'anonymous';
+AWS_S3ACL       : 's3Acl';
+AWS_CONNECTIONTIMEOUT   : 'connectionTimeout';
+AWS_ENDPOINT    : 'endpoint';
+AWS_MAXCONNECTIONS      : 'maxConnections';
+AWS_MAXERRORRETRY       : 'maxErrorRetry';
+AWS_PROTOCOL    : 'protocol';
+AWS_PROXYHOST   : 'proxyHost';
+AWS_PROXYPORT   : 'proxyPort';
+AWS_PROXYUSERNAME       : 'proxyUsername';
+AWS_PROXYPASSWORD       : 'proxyPassword';
+AWS_S3PATHSTYLEACCESS   : 's3PathStyleAccess';
+AWS_SIGNEROVERRIDE      : 'signerOverride';
+AWS_SOCKETSENDBUFFERSIZEHINT    : 'socketSendBufferSizeHint';
+AWS_SOCKETRECVBUFFERSIZEHINT    : 'socketRecvBufferSizeHint';
+AWS_SOCKETTIMEOUT       : 'socketTimeout';
+AWS_STORAGEENCRYPTION   : 'storageEncryption';
+AWS_STORAGEKMSKEYID     : 'storageKmsKeyId';
+AWS_USERAGENT   : 'userAgent';
+AWS_UPLOADMAXTHREADS    : 'uploadMaxThreads';
+AWS_UPLOADCHUNKSIZE     : 'uploadChunkSize';
+AWS_UPLOADSTORAGECLASS  : 'uploadStorageClass';
+AWS_UPLOADMAXATTEMPTS   : 'uploadMaxAttempts';
+AWS_UPLOADRETRYSLEEP    : 'uploadRetrySleep';
 
 // §3.10.5 String Literals
 StringLiteral
@@ -986,7 +1014,7 @@ JavaLetterOrDigit
         { GroovyLexer.isJavaIdentifierPartAndNotIdentifierIgnorable(String.fromCodePoint(this._input.LA(-1))) }?
     |   // covers UTF-16 surrogate pairs encodings for U+10000 to U+10FFFF
         [\uD800-\uDBFF] [\uDC00-\uDFFF]
-        { CISJAVAIDENTIFIERPART_PATTERN.test(String.fromCodePoint(this._input.LA(-2),this._input.LA(-1))) }?
+        { ISJAVAIDENTIFIERPART_PATTERN.test(String.fromCodePoint(this._input.LA(-2),this._input.LA(-1))) }?
     ;
 
 fragment
@@ -1036,3 +1064,6 @@ SH_COMMENT
 UNEXPECTED_CHAR
     :   . { this.check(this.errorIgnored, "Unexpected character: '" + this.text.replace("'", "\\'") + "'", -1, false); }
     ;
+
+
+
