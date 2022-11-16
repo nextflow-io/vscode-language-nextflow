@@ -3,7 +3,6 @@
     "displayName": "Nextflow",
     "description": "Nextflow language support",
     "version": "0.1.1",
-    "icon": "images/nextflow-icon-128x128.png",
     "publisher": "nextflow",
     "repository": {
         "type": "git",
@@ -25,7 +24,11 @@
             "aliases": ["Nextflow", "nextflow"],
             "extensions": [".nf"],
             "firstLine": "^#!.*\\bnextflow\\b",
-            "configuration": "./language-configuration.json"
+            "configuration": "./language-configuration.json",
+            "icon": {
+                "light": "./images/nextflow-icon-128x128.png",
+                "dark": "./images/nextflow-icon-128x128.png"
+                }
         }],
         "grammars": [{
             "language": "nextflow",
