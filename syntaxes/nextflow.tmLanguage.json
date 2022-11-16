@@ -21,6 +21,9 @@
 					"include": "#code-block"
 				},
 				{
+					"include": "#implicit-variables"
+				},
+				{
 					"include": "source.nextflow-groovy"
 				}
 			]
@@ -80,6 +83,9 @@
 			  },
 			  {
 				"include": "source.nextflow-groovy#braces"
+			  },
+			  {
+				"include": "#implicit-variables"
 			  }
 			]
 		},
@@ -134,6 +140,9 @@
 				},
 				{
 				  "include": "source.nextflow-groovy#braces"
+				},
+				{
+					"include": "#implicit-variables"
 				}
 			  ]
 		},
@@ -145,6 +154,38 @@
 			  {
 				"include": "#nfl-rules"
 			  }
+			]
+		},
+		"implicit-variables": {
+			"patterns": [
+				{
+					"match": "\\b(params)\\b",
+					"name": "variable.language.nextflow"
+				},
+				{
+					"match": "\\b(launchDir)\\b",
+					"name": "variable.language.nextflow"
+				},
+				{
+					"match": "\\b(moduleDir)\\b",
+					"name": "variable.language.nextflow"
+				},
+				{
+					"match": "\\b(nextflow)\\b",
+					"name": "variable.language.nextflow"
+				},
+				{
+					"match": "\\b(projectDir)\\b",
+					"name": "variable.language.nextflow"
+				},
+				{
+					"match": "\\b(workDir)\\b",
+					"name": "variable.language.nextflow"
+				},
+				{
+					"match": "\\b(workflow)\\b",
+					"name": "variable.language.nextflow"
+				}
 			]
 		}
 	}

@@ -79,5 +79,35 @@
         "prefix": "tag",
         "body": "tag \"$1\"",
         "description": "Process tag directive"
+    },
+    "params": {
+        "prefix": "params",
+        "body": "params",
+        "description": "Dictionary like object holding workflow parameters"
+    },
+    "launchDir": {
+        "prefix": "launchDir",
+        "body": "launchDir",
+        "description": "The directory where the workflow is run"
+    },
+    "moduleDir": {
+        "prefix": "moduleDir",
+        "body": "moduleDir",
+        "description": "The directory where a module script is located"
+    },
+    "projectDir": {
+        "prefix": "projectDir",
+        "body": "projectDir",
+        "description": "The directory where the main script is located"
+    },
+    "workDir": {
+        "prefix": "workDir",
+        "body": "workDir",
+        "description": "The directory where tasks temporary files are created"
+    },
+    "nextflow": {
+        "prefix": "nextflow",
+        "body": "nextflow",
+        "description": "Dictionary like object representing nextflow runtime information"
     }
 }
