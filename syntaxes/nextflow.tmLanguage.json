@@ -24,6 +24,9 @@
 					"include": "#implicit-variables"
 				},
 				{
+					"include": "#include-statement"
+				},
+				{
 					"include": "source.nextflow-groovy"
 				}
 			]
@@ -185,6 +188,18 @@
 				{
 					"match": "\\b(workflow)\\b",
 					"name": "variable.language.nextflow"
+				}
+			]
+		},
+		"include-statement": {
+			"patterns": [
+				{
+					"match": "^\\b(include)\\b",
+					"name": "keyword.nextflow"
+				},
+				{
+					"match": "\\b(from)\\b",
+					"name": "keyword.nextflow"
 				}
 			]
 		}
