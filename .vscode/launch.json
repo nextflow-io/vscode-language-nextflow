@@ -1,6 +1,6 @@
 // A launch configuration that launches the extension inside a new window
 {
-    "version": "0.1.0",
+	"version": "0.2.0",
     "configurations": [
 		{
 			"type": "extensionHost",
@@ -21,6 +21,18 @@
 			"port": 6009,
 			"restart": true,
 			"outFiles": ["${workspaceRoot}/server/out/**/*.js"]
+		},
+		{
+			"name" : "Run Language Test",
+			"request": "launch",
+			"type": "node",
+			"trace": true,
+			"console": "integratedTerminal",
+			"program": "${workspaceRoot}/server/out/grammarTest.js",
+			"preLaunchTask": {
+				"type": "npm",
+				"script": "compile"
+			}
 		},
 		{
 			"name": "Language Server E2E Test",
