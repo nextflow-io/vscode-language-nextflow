@@ -27,6 +27,9 @@
 					"include": "#include-statement"
 				},
 				{
+					"include": "#parens"
+				},
+				{
 					"include": "source.nextflow-groovy"
 				}
 			]
@@ -79,7 +82,7 @@
 				"include": "source.nextflow-groovy#types"
 			  },
 			  {
-				"include": "source.nextflow-groovy#parens"
+				"include": "#parens"
 			  },
 			  {
 				"include": "source.nextflow-groovy#closures"
@@ -136,7 +139,7 @@
 				  "include": "source.nextflow-groovy#types"
 				},
 				{
-				  "include": "source.nextflow-groovy#parens"
+				  "include": "#parens"
 				},
 				{
 				  "include": "source.nextflow-groovy#closures"
@@ -145,7 +148,7 @@
 				  "include": "source.nextflow-groovy#braces"
 				},
 				{
-					"include": "#implicit-variables"
+				  "include": "#implicit-variables"
 				}
 			  ]
 		},
@@ -159,34 +162,46 @@
 			  }
 			]
 		},
+		"parens": {
+			"begin": "\\(",
+			"end": "\\)",
+			"patterns": [
+				{
+					"include": "source.nextflow-groovy#groovy-code"
+				},
+				{
+					"include": "#implicit-variables"
+				}
+			]
+		},
 		"implicit-variables": {
 			"patterns": [
 				{
-					"match": "\\b(params)\\b",
+					"match": "(?<=[^\\.\\w]|^)(params)\\b",
 					"name": "variable.language.nextflow"
 				},
 				{
-					"match": "\\b(launchDir)\\b",
+					"match": "(?<=[^\\.\\w]|^)(launchDir)\\b",
 					"name": "variable.language.nextflow"
 				},
 				{
-					"match": "\\b(moduleDir)\\b",
+					"match": "(?<=[^\\.\\w]|^)(moduleDir)\\b",
 					"name": "variable.language.nextflow"
 				},
 				{
-					"match": "\\b(nextflow)\\b",
+					"match": "(?<=[^\\.\\w]|^)(nextflow)\\b",
 					"name": "variable.language.nextflow"
 				},
 				{
-					"match": "\\b(projectDir)\\b",
+					"match": "(?<=[^\\.\\w]|^)(projectDir)\\b",
 					"name": "variable.language.nextflow"
 				},
 				{
-					"match": "\\b(workDir)\\b",
+					"match": "(?<=[^\\.\\w]|^)(workDir)\\b",
 					"name": "variable.language.nextflow"
 				},
 				{
-					"match": "\\b(workflow)\\b",
+					"match": "(?<=[^\\.\\w]|^)(workflow)\\b",
 					"name": "variable.language.nextflow"
 				}
 			]
