@@ -5,11 +5,11 @@
 	"keyEquivalent": "^~N",
 	"patterns": [
 		{
-			"include": "#nfl-rules"
+			"include": "#nfl-top"
 		}
 	],
 	"repository": {
-		"nfl-rules": {
+		"nfl-top": {
 			"patterns": [
 				{
 					"include": "#process-def"
@@ -18,13 +18,23 @@
 					"include": "#workflow-def"
 				},
 				{
-					"include": "#code-block"
+					"include": "#include-statement"
 				},
+				{
+					"include": "#nfl-base"
+				},
+				{
+					"include": "source.nextflow-groovy"
+				}
+			]
+		},
+		"nfl-base": {
+			"patterns": [
 				{
 					"include": "#implicit-variables"
 				},
 				{
-					"include": "#include-statement"
+					"include": "#code-block"
 				},
 				{
 					"include": "#parens"
@@ -33,7 +43,28 @@
 					"include": "#method-call"
 				},
 				{
-					"include": "source.nextflow-groovy"
+					"include": "source.nextflow-groovy#comments"
+				},
+				{
+					"include": "source.nextflow-groovy#support-functions"
+				},
+				{
+					"include": "source.nextflow-groovy#keyword"
+				},
+				{
+					"include": "source.nextflow-groovy#values"
+				},
+				{
+					"include": "source.nextflow-groovy#anonymous-classes-and-new"
+				},
+				{
+					"include": "source.nextflow-groovy#types"
+				},
+				{
+					"include": "source.nextflow-groovy#closures"
+				},
+				{
+					"include": "source.nextflow-groovy#braces"
 				}
 			]
 		},
@@ -59,12 +90,6 @@
 			"end": "(?=})",
 			"patterns": [
 			  {
-				"include": "#parens"
-			  },
-			  {
-				"include": "#method-call"
-			  },
-			  {
 				"name": "process.directive.type.nextflow",
 				"match": "(?:accelerator|afterScript|beforeScript|cache|cpus|conda|container|containerOptions|clusterOptions|disk|echo|errorStrategy|executor|ext|label|machineType|maxErrors|maxForks|maxRetries|memory|module|penv|pod|publishDir|queue|scratch|stageInMode|stageOutMode|storeDir|tag|time|validExitStatus)\\b"
 			  },
@@ -73,31 +98,7 @@
 				"match": "(?:input|output|when|script|shell|exec):"
 			  },
 			  {
-				"include": "source.nextflow-groovy#comments"
-			  },
-			  {
-				"include": "source.nextflow-groovy#support-functions"
-			  },
-			  {
-				"include": "source.nextflow-groovy#keyword"
-			  },
-			  {
-				"include": "source.nextflow-groovy#values"
-			  },
-			  {
-				"include": "source.nextflow-groovy#anonymous-classes-and-new"
-			  },
-			  {
-				"include": "source.nextflow-groovy#types"
-			  },
-			  {
-				"include": "source.nextflow-groovy#closures"
-			  },
-			  {
-				"include": "source.nextflow-groovy#braces"
-			  },
-			  {
-				"include": "#implicit-variables"
+				"include": "#nfl-base"
 			  }
 			]
 		},
@@ -123,41 +124,11 @@
 			"end": "(?=})",
 			"patterns": [
 				{
-					"include": "#parens"
-				},
-				{
-					"include": "#method-call"
-				},
-				{
 				  "name": "constant.block.nextflow",
 				  "match": "(?:take|main|emit):"
 				},
 				{
-				  "include": "source.nextflow-groovy#comments"
-				},
-				{
-				  "include": "source.nextflow-groovy#support-functions"
-				},
-				{
-				  "include": "source.nextflow-groovy#keyword"
-				},
-				{
-				  "include": "source.nextflow-groovy#values"
-				},
-				{
-				  "include": "source.nextflow-groovy#anonymous-classes-and-new"
-				},
-				{
-				  "include": "source.nextflow-groovy#types"
-				},
-				{
-				  "include": "source.nextflow-groovy#closures"
-				},
-				{
-				  "include": "source.nextflow-groovy#braces"
-				},
-				{
-				  "include": "#implicit-variables"
+					"include": "#nfl-base"
 				}
 			  ]
 		},
@@ -167,14 +138,14 @@
 			"end": "}",
 			"patterns": [
 			  {
-				"include": "#nfl-rules"
+				"include": "#nfl-base"
 			  }
 			]
 		},
 		"method-call": {
 			"patterns": [
 				{
-					"match": "([\\w$]+)(?=\\s*\\()",
+					"match": "([\\w$]+)(?=\\s*[\\({])",
 					"name": "meta.method.nextflow"
 				}
 			]
@@ -184,10 +155,7 @@
 			"end": "\\)",
 			"patterns": [
 				{
-					"include": "source.nextflow-groovy#groovy-code"
-				},
-				{
-					"include": "#implicit-variables"
+					"include": "#nfl-base"
 				}
 			]
 		},
