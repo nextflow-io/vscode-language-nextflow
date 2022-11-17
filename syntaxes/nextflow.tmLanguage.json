@@ -30,6 +30,9 @@
 					"include": "#parens"
 				},
 				{
+					"include": "#method-call"
+				},
+				{
 					"include": "source.nextflow-groovy"
 				}
 			]
@@ -56,6 +59,12 @@
 			"end": "(?=})",
 			"patterns": [
 			  {
+				"include": "#parens"
+			  },
+			  {
+				"include": "#method-call"
+			  },
+			  {
 				"name": "process.directive.type.nextflow",
 				"match": "(?:accelerator|afterScript|beforeScript|cache|cpus|conda|container|containerOptions|clusterOptions|disk|echo|errorStrategy|executor|ext|label|machineType|maxErrors|maxForks|maxRetries|memory|module|penv|pod|publishDir|queue|scratch|stageInMode|stageOutMode|storeDir|tag|time|validExitStatus)\\b"
 			  },
@@ -80,9 +89,6 @@
 			  },
 			  {
 				"include": "source.nextflow-groovy#types"
-			  },
-			  {
-				"include": "#parens"
 			  },
 			  {
 				"include": "source.nextflow-groovy#closures"
@@ -117,6 +123,12 @@
 			"end": "(?=})",
 			"patterns": [
 				{
+					"include": "#parens"
+				},
+				{
+					"include": "#method-call"
+				},
+				{
 				  "name": "constant.block.nextflow",
 				  "match": "(?:take|main|emit):"
 				},
@@ -139,9 +151,6 @@
 				  "include": "source.nextflow-groovy#types"
 				},
 				{
-				  "include": "#parens"
-				},
-				{
 				  "include": "source.nextflow-groovy#closures"
 				},
 				{
@@ -160,6 +169,14 @@
 			  {
 				"include": "#nfl-rules"
 			  }
+			]
+		},
+		"method-call": {
+			"patterns": [
+				{
+					"match": "([\\w$]+)(?=\\s*\\()",
+					"name": "meta.method.nextflow"
+				}
 			]
 		},
 		"parens": {
