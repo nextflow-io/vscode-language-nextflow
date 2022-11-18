@@ -50,12 +50,16 @@
 			"end": "(?=})",
 			"patterns": [
 			  {
-				"name": "process.directive.type.nextflow",
-				"match": "(?:accelerator|afterScript|beforeScript|cache|cpus|conda|container|containerOptions|clusterOptions|disk|echo|errorStrategy|executor|ext|label|machineType|maxErrors|maxForks|maxRetries|memory|module|penv|pod|publishDir|queue|scratch|stageInMode|stageOutMode|storeDir|tag|time|validExitStatus)\\b"
+				"name": "entity.name.function.nextflow",
+				"match": "(?:accelerator|afterScript|beforeScript|cache|cpus|conda|container|containerOptions|clusterOptions|debug|disk|echo|errorStrategy|executor|ext|label|machineType|maxErrors|maxForks|maxRetries|memory|module|penv|pod|publishDir|queue|resourceLabels|scratch|stageInMode|stageOutMode|storeDir|tag|time)\\b"
 			  },
 			  {
 				"name": "constant.block.nextflow",
 				"match": "(?:input|output|when|script|shell|exec):"
+			  },
+			  {
+				"name": "entity.name.function.nextflow",
+				"match": "(?:tuple|set|path|file|val|stdout)(\\(|\\s) "
 			  },
 			  {
 				"include": "source.nextflow-groovy#comments"
