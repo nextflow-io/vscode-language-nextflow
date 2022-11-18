@@ -59,7 +59,7 @@
 			  },
 			  {
 				"name": "entity.name.function.nextflow",
-				"match": "(?:tuple|set|path|file|val|stdout)(\\(|\\s) "
+				"match": "(tuple|set|path|file|val|stdout)(\\(|\\s)"
 			  },
 			  {
 				"include": "source.nextflow-groovy#comments"
