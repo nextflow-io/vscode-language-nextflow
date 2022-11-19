@@ -1,0 +1,155 @@
+{
+	"$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+	"name": "Nextflow-config",
+	"scopeName": "source.nextflow-config",
+	"keyEquivalent": "^~N",
+	"patterns": [
+        {
+			"include": "#profile-scope"
+		},
+		{
+			"include": "#process-scope"
+		},
+        {
+			"include": "#executor-scope"
+		},
+        {
+			"include": "#singularity-scope"
+		},
+        {
+			"include": "#other-scope"
+		},
+		{
+			"include": "source.nextflow-groovy"
+		}
+	],
+	"repository": {
+        "profile-scope": {
+			"name": "profile.scope",
+			"begin": "^\\s*(profile)(?=\\s*{)",
+			"beginCaptures": {
+				"1": {
+					"name": "keyword.nextflow"
+				}
+			},
+			"end": "}",
+			"patterns": [{
+                "include": "source.nextflow-config"
+            }]
+		},  
+		"process-scope": {
+			"name": "process.scope",
+			"begin": "^\\s*(process)(?=\\s*{)",
+			"beginCaptures": {
+				"1": {
+					"name": "keyword.nextflow"
+				}
+			},
+			"end": "}",
+			"patterns": [{
+				"include": "#process-scope-body"
+			}]	
+		},
+		"process-scope-body": {
+			"begin": "{",
+			"end": "(?=})",
+			"patterns": [
+			  {
+				"name": "variable.language.nextflow",
+				"match": "(?:shell|accelerator|afterScript|beforeScript|cache|cpus|conda|container|containerOptions|clusterOptions|debug|disk|echo|errorStrategy|executor|ext|label|machineType|maxErrors|maxForks|maxRetries|memory|module|penv|pod|publishDir|queue|resourceLabels|scratch|stageInMode|stageOutMode|storeDir|tag|time)(?=\\s*\\=)"
+			  },
+			  {
+				"begin": "^\\s*((whithName|withLabel):)\\s+(\\w+|\"[^\"]+\"|'[^']+')(?=\\s*{)",
+				"beginCaptures": {
+					"1": {
+						"name": "constant.block.nextflow"
+					},
+					"2": {
+						"name": "function.nextflow"
+					}
+				},
+				"end": "}",
+				"patterns": [{
+					"include": "#process-scope-body"
+				}]	
+			  },
+			  {
+				"include": "source.nextflow-groovy"
+			  }
+			]
+		},
+		"executor-scope": {
+			"name": "executor.scope",
+			"begin": "^\\s*(executor)(?=\\s*{)",
+			"beginCaptures": {
+				"1": {
+					"name": "keyword.nextflow"
+				}
+			},
+			"end": "}",
+			"patterns": [{
+				"include": "#executor-scope-body"
+			}]	
+		},
+		"executor-scope-body": {
+			"begin": "{",
+			"end": "(?=})",
+			"patterns": [
+			  {
+				"name": "variable.language.nextflow",
+				"match": "(?:name|queueSize|submitRateLimit|pollInterval|dumpInterval|queueStatInterval|exitReadTimeout|killBatchSize|perJobMemLimit|perTaskReserve|jobName|cpus|memory|retry.delay|retry.maxDelay|retry.jitter|retry.maxAttempts|retry.reason)(?=\\s*\\=)"
+			  },
+			  {
+				"include": "source.nextflow-groovy"
+			  }
+			]
+		},
+		"singularity-scope": {
+			"name": "singularity.scope",
+			"begin": "^\\s*(singularity)(?=\\s*{)",
+			"beginCaptures": {
+				"1": {
+					"name": "keyword.nextflow"
+				}
+			},
+			"end": "}",
+			"patterns": [{
+				"include": "#singularity-scope-body"
+			}]	
+		},
+		"singularity-scope-body": {
+			"begin": "{",
+			"end": "(?=})",
+			"patterns": [
+			  {
+				"name": "variable.language.nextflow",
+				"match": "(?:enabled|engineOptions|envWhitelist|runOptions|noHttps|autoMounts|cacheDir|pullTimeout)(?=\\s*\\=)"
+			  },
+			  {
+				"include": "source.nextflow-groovy"
+			  }
+			]
+		},
+        "other-scope": {
+			"begin": "^\\s*(aws|charliecloud|cloud|conda|dag|docker|env|executor|k8s|mail|manifest|podman|report|shifter|timeline|tower|trace|weblog)(?=\\s*{)",
+			"beginCaptures": {
+				"1": {
+					"name": "keyword.nextflow"
+				}
+			},
+			"end": "}",
+			"patterns": [{
+				"include": "#other-scope-body"
+			}]
+		},
+        "other-scope-body": {
+			"begin": "{",
+			"end": "(?=})",
+			"patterns": [
+			  {
+				"include": "source.nextflow-groovy"
+			  }
+			]
+		}
+	}
+}
