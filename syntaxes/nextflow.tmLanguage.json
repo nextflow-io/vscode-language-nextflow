@@ -24,6 +24,9 @@
 					"include": "#include-statement"
 				},
 				{
+					"include": "#implicit-variables"
+				},
+				{
 					"include": "source.nextflow-groovy"
 				}
 			]
@@ -60,6 +63,9 @@
 			  {
 				"name": "entity.name.function.nextflow",
 				"match": "\\b(tuple|set|path|file|val|stdout)(\\(|\\s)"
+			  },
+			  {
+				"include": "#implicit-variables"
 			  },
 			  {
 				"include": "source.nextflow-groovy#comments"
@@ -112,6 +118,9 @@
 			"end": "(?=})",
 			"patterns": [
 				{
+			      "include": "#implicit-variables"
+				},
+				{
 				  "name": "constant.block.nextflow",
 				  "match": "(?:take|main|emit):"
 				},
@@ -163,6 +172,14 @@
 				{
 					"match": "\\b(from)\\b",
 					"name": "keyword.nextflow"
+				}
+			]
+		},
+		"implicit-variables": {
+			"patterns": [
+				{
+					"match": "(?<=[^\\.\\w]|^)(params|nextflow|workflow|launchDir|moduleDir|projectDir|workDir)\\b",
+					"name": "variable.language.nextflow"
 				}
 			]
 		}
