@@ -212,7 +212,7 @@
 			]
 		},
 		"docker-scope": {
-			"name": "singularity.scope",
+			"name": "docker.scope",
 			"begin": "^\\s*(docker)(?=\\s*{)",
 			"beginCaptures": {
 				"1": {
