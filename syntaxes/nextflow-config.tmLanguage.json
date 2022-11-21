@@ -163,7 +163,7 @@
 			"patterns": [
 			  {
 				"name": "variable.language.nextflow",
-				"match": "^\\s*(shell|accelerator|afterScript|beforeScript|cache|cpus|conda|container|containerOptions|clusterOptions|debug|disk|echo|errorStrategy|executor|ext|label|machineType|maxErrors|maxForks|maxRetries|memory|module|penv|pod|publishDir|queue|resourceLabels|scratch|stageInMode|stageOutMode|storeDir|tag|time)(?=(\\s*\\=|\\s*$))"
+				"match": "(?<=(^|{)\\s*)(shell|accelerator|afterScript|beforeScript|cache|cpus|conda|container|containerOptions|clusterOptions|debug|disk|echo|errorStrategy|executor|ext|label|machineType|maxErrors|maxForks|maxRetries|memory|module|penv|pod|publishDir|queue|resourceLabels|scratch|stageInMode|stageOutMode|storeDir|tag|time)(?=(\\s*\\=|\\s*$))"
 			  },
 			  {
 				"begin": "^\\s*((withName|withLabel):)\\s+(\\w+|\"[^\"]+\"|'[^']+')(?=\\s*{)",
@@ -204,7 +204,7 @@
 			"patterns": [
 			  {
 				"name": "variable.language.nextflow",
-				"match": "^\\s*(name|queueSize|submitRateLimit|pollInterval|dumpInterval|queueStatInterval|exitReadTimeout|killBatchSize|perJobMemLimit|perTaskReserve|jobName|cpus|memory|retry.delay|retry.maxDelay|retry.jitter|retry.maxAttempts|retry.reason)(?=(\\s*\\=|\\s*$))"
+				"match": "(?<=(^|{)\\s*)(name|queueSize|submitRateLimit|pollInterval|dumpInterval|queueStatInterval|exitReadTimeout|killBatchSize|perJobMemLimit|perTaskReserve|jobName|cpus|memory|retry.delay|retry.maxDelay|retry.jitter|retry.maxAttempts|retry.reason)(?=(\\s*\\=|\\s*$))"
 			  },
 			  {
 				"include": "#nxf-cfg-base"
@@ -213,7 +213,7 @@
 		},
 		"docker-scope": {
 			"name": "docker.scope",
-			"begin": "^\\s*(docker)(?=\\s*{)",
+			"begin": "[^{]\\s*(docker)(?=\\s*{)",
 			"beginCaptures": {
 				"1": {
 					"name": "keyword.nextflow"
@@ -230,7 +230,7 @@
 			"patterns": [
 			  {
 				"name": "variable.language.nextflow",
-				"match": "^\\s*(enabled|envWhitelist|legacy|sudo|tty|temp|remove|runOptions|registry|fixOwnership|engineOptions|mountFlags)(?=(\\s*\\=|\\s*$))"
+				"match": "(?<=(^|{)\\s*)(enabled|envWhitelist|legacy|sudo|tty|temp|remove|runOptions|registry|fixOwnership|engineOptions|mountFlags)(?=(\\s*\\=|\\s*$))"
 			  },
 			  {
 				"include": "#nxf-cfg-base"
@@ -256,7 +256,7 @@
 			"patterns": [
 			  {
 				"name": "variable.language.nextflow",
-				"match": "^\\s*(enabled|engineOptions|envWhitelist|runOptions|noHttps|autoMounts|cacheDir|pullTimeout)(?=(\\s*\\=|\\s*$))"
+				"match": "(?<=(^|{)\\s*)(enabled|engineOptions|envWhitelist|runOptions|noHttps|autoMounts|cacheDir|pullTimeout)(?=(\\s*\\=|\\s*$))"
 			  },
 			  {
 				"include": "#nxf-cfg-base"
