@@ -34,6 +34,9 @@
 					"include": "#executor-scope"
 				},
 				{
+					"include": "#docker-scope"
+				},
+				{
 					"include": "#singularity-scope"
 				},
 				{
@@ -125,16 +128,16 @@
 			"patterns": [
 			  {
 				"name": "variable.language.nextflow",
-				"match": "(?:shell|accelerator|afterScript|beforeScript|cache|cpus|conda|container|containerOptions|clusterOptions|debug|disk|echo|errorStrategy|executor|ext|label|machineType|maxErrors|maxForks|maxRetries|memory|module|penv|pod|publishDir|queue|resourceLabels|scratch|stageInMode|stageOutMode|storeDir|tag|time)(?=\\s*\\=)"
+				"match": "^\\s*(shell|accelerator|afterScript|beforeScript|cache|cpus|conda|container|containerOptions|clusterOptions|debug|disk|echo|errorStrategy|executor|ext|label|machineType|maxErrors|maxForks|maxRetries|memory|module|penv|pod|publishDir|queue|resourceLabels|scratch|stageInMode|stageOutMode|storeDir|tag|time)(?=(\\s*\\=|\\s*$))"
 			  },
 			  {
-				"begin": "^\\s*((whithName|withLabel):)\\s+(\\w+|\"[^\"]+\"|'[^']+')(?=\\s*{)",
+				"begin": "^\\s*((withName|withLabel):)\\s+(\\w+|\"[^\"]+\"|'[^']+')(?=\\s*{)",
 				"beginCaptures": {
 					"1": {
 						"name": "constant.block.nextflow"
 					},
-					"2": {
-						"name": "function.nextflow"
+					"3": {
+						"name": "string.nextflow"
 					}
 				},
 				"end": "}",
@@ -166,7 +169,33 @@
 			"patterns": [
 			  {
 				"name": "variable.language.nextflow",
-				"match": "(?:name|queueSize|submitRateLimit|pollInterval|dumpInterval|queueStatInterval|exitReadTimeout|killBatchSize|perJobMemLimit|perTaskReserve|jobName|cpus|memory|retry.delay|retry.maxDelay|retry.jitter|retry.maxAttempts|retry.reason)(?=\\s*\\=)"
+				"match": "^\\s*(name|queueSize|submitRateLimit|pollInterval|dumpInterval|queueStatInterval|exitReadTimeout|killBatchSize|perJobMemLimit|perTaskReserve|jobName|cpus|memory|retry.delay|retry.maxDelay|retry.jitter|retry.maxAttempts|retry.reason)(?=(\\s*\\=|\\s*$))"
+			  },
+			  {
+				"include": "#nxf-cfg-base"
+			  }
+			]
+		},
+		"docker-scope": {
+			"name": "singularity.scope",
+			"begin": "^\\s*(docker)(?=\\s*{)",
+			"beginCaptures": {
+				"1": {
+					"name": "keyword.nextflow"
+				}
+			},
+			"end": "}",
+			"patterns": [{
+				"include": "#docker-scope-body"
+			}]	
+		},
+		"docker-scope-body": {
+			"begin": "{",
+			"end": "(?=})",
+			"patterns": [
+			  {
+				"name": "variable.language.nextflow",
+				"match": "^\\s*(enabled|envWhitelist|legacy|sudo|tty|temp|remove|runOptions|registry|fixOwnership|engineOptions|mountFlags)(?=(\\s*\\=|\\s*$))"
 			  },
 			  {
 				"include": "#nxf-cfg-base"
@@ -192,7 +221,7 @@
 			"patterns": [
 			  {
 				"name": "variable.language.nextflow",
-				"match": "(?:enabled|engineOptions|envWhitelist|runOptions|noHttps|autoMounts|cacheDir|pullTimeout)(?=\\s*\\=)"
+				"match": "^\\s*(enabled|engineOptions|envWhitelist|runOptions|noHttps|autoMounts|cacheDir|pullTimeout)(?=(\\s*\\=|\\s*$))"
 			  },
 			  {
 				"include": "#nxf-cfg-base"
@@ -200,7 +229,7 @@
 			]
 		},
         "other-scope": {
-			"begin": "^\\s*(aws|charliecloud|cloud|conda|dag|docker|env|k8s|mail|manifest|podman|report|shifter|timeline|tower|trace|weblog)(?=\\s*{)",
+			"begin": "^\\s*(aws|charliecloud|cloud|conda|dag|env|k8s|mail|manifest|params|podman|report|shifter|timeline|tower|trace|weblog)(?=\\s*{)",
 			"beginCaptures": {
 				"1": {
 					"name": "keyword.nextflow"
