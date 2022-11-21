@@ -22,7 +22,7 @@
 		"nxf-cfg-mid": {
 			"patterns": [
 				{
-					"include": "#dots"
+					"include": "#dot-scopes"
 				},
 				{
 					"include": "#params-dot"
@@ -70,8 +70,8 @@
 			"name": "keyword.nextflow",
 			"match": "^\\s*includeConfig(?=[\\s(])"
 		},
-		"dots": {
-			"match": "^\\s*(aws|charliecloud|cloud|conda|dag|docker|env|executor|k8s|mail|manifest|podman|profile|process|report|singularity|shifter|timeline|tower|trace|weblog)(?=[\\.])",
+		"dot-scopes": {
+			"match": "^\\s*(aws|charliecloud|cloud|conda|dag|docker|env|executor|k8s|mail|manifest|podman|process|report|singularity|shifter|timeline|tower|trace|weblog)(?=[\\.])",
 			"name": "keyword.nextflow"
 		},
 		"params-dot": {
