@@ -22,7 +22,13 @@
 		"nxf-cfg-mid": {
 			"patterns": [
 				{
-					"include": "#dot-scopes"
+					"include": "#dots"
+				},
+				{
+					"include": "#params-dot"
+				},
+				{
+					"include": "#params-scope"
 				},
 				{
 					"include": "#profile-scope"
@@ -53,6 +59,9 @@
 		"nxf-cfg-base": {
 			"patterns": [
 				{
+					"include": "#implicit-variables"
+				},
+				{
 					"include": "source.nextflow-groovy"
 				}
 			]
@@ -61,9 +70,35 @@
 			"name": "keyword.nextflow",
 			"match": "^\\s*includeConfig(?=[\\s(])"
 		},
-		"dot-scopes": {
-			"match": "^\\s*(aws|charliecloud|cloud|conda|dag|docker|env|executor|k8s|mail|manifest|params|podman|profile|process|report|singularity|shifter|timeline|tower|trace|weblog)(?=[\\.])",
+		"dots": {
+			"match": "^\\s*(aws|charliecloud|cloud|conda|dag|docker|env|executor|k8s|mail|manifest|podman|profile|process|report|singularity|shifter|timeline|tower|trace|weblog)(?=[\\.])",
+			"name": "keyword.nextflow"
+		},
+		"params-dot": {
+			"match": "^\\s*(params)(?=[\\.])",
 			"name": "variable.language.nextflow"
+		},
+		"params-scope": {
+			"name": "params.scope",
+			"begin": "^\\s*(params)(?=\\s*{)",
+			"beginCaptures": {
+				"1": {
+					"name": "variable.language.nextflow"
+				}
+			},
+			"end": "}",
+			"patterns": [{
+                "include": "#params-scope-body"
+            }]
+		},
+		"params-scope-body": {
+			"begin": "{",
+			"end": "(?=})",
+			"patterns": [
+			  {
+				"include": "#nxf-cfg-base"
+			  }
+			]
 		},
         "profile-scope": {
 			"name": "profile.scope",
@@ -247,6 +282,14 @@
 			  {
 				"include": "#nxf-cfg-base"
 			  }
+			]
+		},
+		"implicit-variables": {
+			"patterns": [
+				{
+					"match": "(?<=[^\\.\\w]|^)(launchDir|projectDir|workDir)\\b",
+					"name": "variable.language.nextflow"
+				}
 			]
 		}
 	}
