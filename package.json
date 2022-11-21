@@ -29,12 +29,26 @@
                 "light": "./images/nextflow-icon-128x128.png",
                 "dark": "./images/nextflow-icon-128x128.png"
                 }
+        },
+        {
+            "id": "nextflow-config",
+            "extensions": [".config"],
+            "configuration": "./language-configuration.json",
+            "icon": {
+                "light": "./images/nextflow-icon-128x128_grayscale.png",
+                "dark": "./images/nextflow-icon-128x128_grayscale.png"
+                }
         }],
         "grammars": [{
             "language": "nextflow",
             "scopeName": "source.nextflow",
             "path": "./syntaxes/nextflow.tmLanguage.json"
-        }, 
+        },
+        {
+            "language": "nextflow-config",
+            "scopeName": "source.nextflow-config",
+            "path": "./syntaxes/nextflow-config.tmLanguage.json"
+        },  
         {
             "scopeName": "source.nextflow-groovy",
             "path": "./syntaxes/groovy.tmLanguage.json"
