@@ -4,29 +4,67 @@
 	"scopeName": "source.nextflow-config",
 	"keyEquivalent": "^~N",
 	"patterns": [
-        {
-			"include": "#profile-scope"
-		},
 		{
-			"include": "#process-scope"
-		},
-        {
-			"include": "#executor-scope"
-		},
-        {
-			"include": "#singularity-scope"
-		},
-        {
-			"include": "#other-scope"
-		},
-		{
-			"include": "source.nextflow-groovy"
+			"include": "#nxf-cfg-top"
 		}
 	],
 	"repository": {
+		"nxf-cfg-top": {
+			"patterns": [
+				{
+					"include": "#profile-scope"
+				},
+				{
+					"include": "#nxf-cfg-mid"
+				}
+			]
+		},
+		"nxf-cfg-mid": {
+			"patterns": [
+				{
+					"include": "#dot-scopes"
+				},
+				{
+					"include": "#profile-scope"
+				},
+				{
+					"include": "#process-scope"
+				},
+				{
+					"include": "#executor-scope"
+				},
+				{
+					"include": "#singularity-scope"
+				},
+				{
+					"include": "#other-scope"
+				},
+				{
+					"include": "#include-config"
+				},
+				{
+					"include": "#nxf-cfg-base"
+				}
+			]
+		},
+		"nxf-cfg-base": {
+			"patterns": [
+				{
+					"include": "source.nextflow-groovy"
+				}
+			]
+		},    
+		"include-config": {
+			"name": "keyword.nextflow",
+			"match": "^\\s*includeConfig(?=[\\s(])"
+		},
+		"dot-scopes": {
+			"match": "^\\s*(aws|charliecloud|cloud|conda|dag|docker|env|executor|k8s|mail|manifest|params|podman|profile|process|report|singularity|shifter|timeline|tower|trace|weblog)(?=[\\.])",
+			"name": "variable.language.nextflow"
+		},
         "profile-scope": {
 			"name": "profile.scope",
-			"begin": "^\\s*(profile)(?=\\s*{)",
+			"begin": "^\\s*(profiles)(?=\\s*{)",
 			"beginCaptures": {
 				"1": {
 					"name": "keyword.nextflow"
@@ -34,9 +72,40 @@
 			},
 			"end": "}",
 			"patterns": [{
-                "include": "source.nextflow-config"
+                "include": "#profile-scope-body"
             }]
-		},  
+		},
+		"profile-scope-body": {
+			"begin": "{",
+			"end": "(?=})",
+			"patterns": [
+			  {
+				"include": "#profile-def"
+			  }
+			]
+		},
+		"profile-def": {
+			"name": "profile.nextflow",
+			"begin": "^\\s*(\\w+)(?=\\s*{)",
+			"beginCaptures": {
+				"1": {
+					"name": "constant.nextflow"
+				}
+			},
+			"end": "}",
+			"patterns": [{
+				"include": "#profile-def-body"
+			}]	
+		},
+		"profile-def-body": {
+			"begin": "{",
+			"end": "(?=})",
+			"patterns": [
+			  {
+				"include": "#nxf-cfg-mid"
+			  }
+			]
+		},
 		"process-scope": {
 			"name": "process.scope",
 			"begin": "^\\s*(process)(?=\\s*{)",
@@ -74,7 +143,7 @@
 				}]	
 			  },
 			  {
-				"include": "source.nextflow-groovy"
+				"include": "#nxf-cfg-base"
 			  }
 			]
 		},
@@ -100,7 +169,7 @@
 				"match": "(?:name|queueSize|submitRateLimit|pollInterval|dumpInterval|queueStatInterval|exitReadTimeout|killBatchSize|perJobMemLimit|perTaskReserve|jobName|cpus|memory|retry.delay|retry.maxDelay|retry.jitter|retry.maxAttempts|retry.reason)(?=\\s*\\=)"
 			  },
 			  {
-				"include": "source.nextflow-groovy"
+				"include": "#nxf-cfg-base"
 			  }
 			]
 		},
@@ -126,12 +195,12 @@
 				"match": "(?:enabled|engineOptions|envWhitelist|runOptions|noHttps|autoMounts|cacheDir|pullTimeout)(?=\\s*\\=)"
 			  },
 			  {
-				"include": "source.nextflow-groovy"
+				"include": "#nxf-cfg-base"
 			  }
 			]
 		},
         "other-scope": {
-			"begin": "^\\s*(aws|charliecloud|cloud|conda|dag|docker|env|executor|k8s|mail|manifest|podman|report|shifter|timeline|tower|trace|weblog)(?=\\s*{)",
+			"begin": "^\\s*(aws|charliecloud|cloud|conda|dag|docker|env|k8s|mail|manifest|podman|report|shifter|timeline|tower|trace|weblog)(?=\\s*{)",
 			"beginCaptures": {
 				"1": {
 					"name": "keyword.nextflow"
@@ -147,7 +216,7 @@
 			"end": "(?=})",
 			"patterns": [
 			  {
-				"include": "source.nextflow-groovy"
+				"include": "#nxf-cfg-base"
 			  }
 			]
 		}
