@@ -28,10 +28,10 @@
 				},
 				{
 					"comment": "method call and parens",
-					"begin": "(\\w*)(\\()",
+					"begin": "(\\w*\\()",
 					"beginCaptures": {
 						"1": {
-							"name": "meta.method.nextflow"
+							"patterns": [{"include": "source.nextflow-groovy"}]
 						}
 					},
 					"end": "\\)",
@@ -83,10 +83,10 @@
 				},
 				{
 					"comment": "method call and parens",
-					"begin": "(\\w*)(\\()",
+					"begin": "(\\w*\\()",
 					"beginCaptures": {
 						"1": {
-							"name": "meta.method.nextflow"
+							"patterns": [{"include": "source.nextflow-groovy"}]
 						}
 					},
 					"end": "\\)",
@@ -158,10 +158,10 @@
 				},
 				{
 					"comment": "method call and parens",
-					"begin": "(\\w*)(\\()",
+					"begin": "(\\w*\\()",
 					"beginCaptures": {
 						"1": {
-							"name": "meta.method.nextflow"
+							"patterns": [{"include": "source.nextflow-groovy"}]
 						}
 					},
 					"end": "\\)",
