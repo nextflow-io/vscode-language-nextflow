@@ -49,9 +49,6 @@
 					"include": "#include-config"
 				},
 				{
-					"include": "#implicit-variables"
-				},
-				{
 					"comment": "method call and parens",
 					"begin": "(\\w*\\()",
 					"beginCaptures": {
