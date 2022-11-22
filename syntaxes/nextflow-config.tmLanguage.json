@@ -25,9 +25,6 @@
 					"include": "#dot-scopes"
 				},
 				{
-					"include": "#params-dot"
-				},
-				{
 					"include": "#params-scope"
 				},
 				{
@@ -52,6 +49,23 @@
 					"include": "#include-config"
 				},
 				{
+					"comment": "method call and parens",
+					"begin": "(\\w*\\()",
+					"beginCaptures": {
+						"1": {
+							"patterns": [{"include": "source.nextflow-groovy"}]
+						}
+					},
+					"end": "\\)",
+					"patterns": [{"include": "#nxf-cfg-mid"}]
+				},
+				{
+					"comment": "braces",
+					"begin": "{",
+					"end": "}",
+					"patterns": [{"include": "#nxf-cfg-mid"}]
+				},
+				{
 					"include": "#nxf-cfg-base"
 				}
 			]
@@ -68,15 +82,11 @@
 		},    
 		"include-config": {
 			"name": "keyword.nextflow",
-			"match": "^\\s*includeConfig(?=[\\s(])"
+			"match": "(?<=(^|{)\\s*)includeConfig(?=[\\s(])"
 		},
 		"dot-scopes": {
 			"match": "^\\s*(aws|charliecloud|cloud|conda|dag|docker|env|executor|k8s|mail|manifest|podman|process|report|singularity|shifter|timeline|tower|trace|weblog)(?=[\\.])",
 			"name": "keyword.nextflow"
-		},
-		"params-dot": {
-			"match": "^\\s*(params)(?=[\\.])",
-			"name": "variable.language.nextflow"
 		},
 		"params-scope": {
 			"name": "params.scope",
@@ -101,7 +111,6 @@
 			]
 		},
         "profile-scope": {
-			"name": "profile.scope",
 			"begin": "^\\s*(profiles)(?=\\s*{)",
 			"beginCaptures": {
 				"1": {
@@ -119,11 +128,13 @@
 			"patterns": [
 			  {
 				"include": "#profile-def"
+			  },
+			  {
+				"include": "#nxf-cfg-base"
 			  }
 			]
 		},
 		"profile-def": {
-			"name": "profile.nextflow",
 			"begin": "^\\s*(\\w+)(?=\\s*{)",
 			"beginCaptures": {
 				"1": {
@@ -146,7 +157,7 @@
 		},
 		"process-scope": {
 			"name": "process.scope",
-			"begin": "^\\s*(process)(?=\\s*{)",
+			"begin": "^\\s*(process)\\s*{",
 			"beginCaptures": {
 				"1": {
 					"name": "keyword.nextflow"
@@ -155,23 +166,21 @@
 			"end": "}",
 			"patterns": [{
 				"include": "#process-scope-body"
-			}]	
+			}]
 		},
 		"process-scope-body": {
-			"begin": "{",
-			"end": "(?=})",
 			"patterns": [
 			  {
 				"name": "variable.language.nextflow",
 				"match": "(?<=(^|{)\\s*)(shell|accelerator|afterScript|beforeScript|cache|cpus|conda|container|containerOptions|clusterOptions|debug|disk|echo|errorStrategy|executor|ext|label|machineType|maxErrors|maxForks|maxRetries|memory|module|penv|pod|publishDir|queue|resourceLabels|scratch|stageInMode|stageOutMode|storeDir|tag|time)(?=(\\s*\\=|\\s*$))"
 			  },
 			  {
-				"begin": "^\\s*((withName|withLabel):)\\s+(\\w+|\"[^\"]+\"|'[^']+')(?=\\s*{)",
+				"begin": "^\\s*(withName|withLabel):\\s+(\\w+|\"[^\"]+\"|'[^']+')\\s*{",
 				"beginCaptures": {
 					"1": {
 						"name": "constant.block.nextflow"
 					},
-					"3": {
+					"2": {
 						"name": "string.nextflow"
 					}
 				},
@@ -287,7 +296,7 @@
 		"implicit-variables": {
 			"patterns": [
 				{
-					"match": "(?<=[^\\.\\w]|^)(launchDir|projectDir|workDir)\\b",
+					"match": "(?<=[^\\.\\w]|^)(params|launchDir|projectDir|workDir)\\b",
 					"name": "variable.language.nextflow"
 				}
 			]
