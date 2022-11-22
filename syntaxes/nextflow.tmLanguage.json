@@ -157,6 +157,27 @@
 				  "match": "(?<=[\\s\\.])(branch|buffer|close|collate|collect|collectFile|combine|concat|count|countBy|cross|distinct|dump|filter|first|flatMap|flatten|groupTuple|ifEmpty|join|last|map|max|merge|min|mix|multiMap|randomSample|reduce|set|splitCsv|splitFasta|splitFastq|splitText|sum|take|tap|toInteger|toList|toSortedList|transpose|unique|until|view)(?=[{\\(\\s])"
 				},
 				{
+					"comment": "Channel factory single line",
+					"match": "\\b((?:C|c)hannel\\.)((fromList|fromPath|fromFilePairs|fromSRA|from|of|empty|value|watchPath)\\W)?",
+					"captures": {
+						"1": {"name": "keyword.nextflow"},
+						"2": {"name": "entity.name.function.nextflow"}
+					}
+				},
+				{
+					"comment": "Channel factory multi-line",
+					"begin": "\\b((?:C|c)hannel)\\s*$",
+					"beginCaptures": {
+						"1": {"name": "keyword.nextflow"}
+					},
+					"end": "(^\\s*)(?:(\\.)(fromList|fromPath|fromFilePairs|fromSRA|from|of|empty|value|watchPath)\\W)?",
+					"endCaptures": {
+						"1": {"name": "keyword.nextflow"},
+						"2": {"name": "keyword.nextflow"},
+						"3": {"name": "entity.name.function.nextflow"}
+					}
+				},
+				{
 					"comment": "method call and parens",
 					"begin": "(\\w*\\()",
 					"beginCaptures": {
