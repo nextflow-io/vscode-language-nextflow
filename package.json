@@ -3,7 +3,6 @@
     "displayName": "Nextflow",
     "description": "Nextflow language support",
     "version": "0.1.1",
-    "icon": "images/nextflow-icon-128x128.png",
     "publisher": "nextflow",
     "repository": {
         "type": "git",
@@ -25,19 +24,31 @@
             "aliases": ["Nextflow", "nextflow"],
             "extensions": [".nf"],
             "firstLine": "^#!.*\\bnextflow\\b",
-            "configuration": "./language-configuration.json"
-        },{
+            "configuration": "./language-configuration.json",
+            "icon": {
+                "light": "./images/nextflow-icon-128x128.png",
+                "dark": "./images/nextflow-icon-128x128.png"
+                }
+        },
+        {
             "id": "nextflow-config",
-            "aliases": ["Nextflow-config", "nextflow-config"],
             "extensions": [".config"],
-            "firstLine": "^#!.*\\bnextflow\\b",
-            "configuration": "./language-configuration.json"
+            "configuration": "./language-configuration.json",
+            "icon": {
+                "light": "./images/nextflow-icon-128x128_grayscale.png",
+                "dark": "./images/nextflow-icon-128x128_grayscale.png"
+                }
         }],
         "grammars": [{
             "language": "nextflow",
             "scopeName": "source.nextflow",
             "path": "./syntaxes/nextflow.tmLanguage.json"
-        }, 
+        },
+        {
+            "language": "nextflow-config",
+            "scopeName": "source.nextflow-config",
+            "path": "./syntaxes/nextflow-config.tmLanguage.json"
+        },  
         {
             "scopeName": "source.nextflow-groovy",
             "path": "./syntaxes/groovy.tmLanguage.json"
