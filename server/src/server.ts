@@ -210,9 +210,6 @@ connection.onCompletion(
 // the completion list.
 connection.onCompletionResolve(
 	(item: CompletionItem): CompletionItem => {
-		console.log(item.data);
-		item.detail = "{";
-		item.documentation = "blabla";
 		return item;
 	}
 );

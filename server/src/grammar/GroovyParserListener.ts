@@ -1,4 +1,4 @@
-// Generated from server/src/grammar/GroovyParser.g4 by ANTLR 4.9.0-SNAPSHOT
+// Generated from src/grammar/GroovyParser.g4 by ANTLR 4.9.0-SNAPSHOT
 
 
 
@@ -208,10 +208,6 @@ import { KeywordsContext } from "./GroovyParser";
 import { RparenContext } from "./GroovyParser";
 import { NlsContext } from "./GroovyParser";
 import { SepContext } from "./GroovyParser";
-import { Aws_string_statementContext } from "./GroovyParser";
-import { Aws_scope_statementContext } from "./GroovyParser";
-import { Aws_scopeContext } from "./GroovyParser";
-import { Nextflow_configContext } from "./GroovyParser";
 
 
 /**
@@ -2561,49 +2557,5 @@ export interface GroovyParserListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	exitSep?: (ctx: SepContext) => void;
-
-	/**
-	 * Enter a parse tree produced by `GroovyParser.aws_string_statement`.
-	 * @param ctx the parse tree
-	 */
-	enterAws_string_statement?: (ctx: Aws_string_statementContext) => void;
-	/**
-	 * Exit a parse tree produced by `GroovyParser.aws_string_statement`.
-	 * @param ctx the parse tree
-	 */
-	exitAws_string_statement?: (ctx: Aws_string_statementContext) => void;
-
-	/**
-	 * Enter a parse tree produced by `GroovyParser.aws_scope_statement`.
-	 * @param ctx the parse tree
-	 */
-	enterAws_scope_statement?: (ctx: Aws_scope_statementContext) => void;
-	/**
-	 * Exit a parse tree produced by `GroovyParser.aws_scope_statement`.
-	 * @param ctx the parse tree
-	 */
-	exitAws_scope_statement?: (ctx: Aws_scope_statementContext) => void;
-
-	/**
-	 * Enter a parse tree produced by `GroovyParser.aws_scope`.
-	 * @param ctx the parse tree
-	 */
-	enterAws_scope?: (ctx: Aws_scopeContext) => void;
-	/**
-	 * Exit a parse tree produced by `GroovyParser.aws_scope`.
-	 * @param ctx the parse tree
-	 */
-	exitAws_scope?: (ctx: Aws_scopeContext) => void;
-
-	/**
-	 * Enter a parse tree produced by `GroovyParser.nextflow_config`.
-	 * @param ctx the parse tree
-	 */
-	enterNextflow_config?: (ctx: Nextflow_configContext) => void;
-	/**
-	 * Exit a parse tree produced by `GroovyParser.nextflow_config`.
-	 * @param ctx the parse tree
-	 */
-	exitNextflow_config?: (ctx: Nextflow_configContext) => void;
 }
 

@@ -1,4 +1,4 @@
-// Generated from server/src/grammar/GroovyParser.g4 by ANTLR 4.9.0-SNAPSHOT
+// Generated from src/grammar/GroovyParser.g4 by ANTLR 4.9.0-SNAPSHOT
 
 
 
@@ -208,10 +208,6 @@ import { KeywordsContext } from "./GroovyParser";
 import { RparenContext } from "./GroovyParser";
 import { NlsContext } from "./GroovyParser";
 import { SepContext } from "./GroovyParser";
-import { Aws_string_statementContext } from "./GroovyParser";
-import { Aws_scope_statementContext } from "./GroovyParser";
-import { Aws_scopeContext } from "./GroovyParser";
-import { Nextflow_configContext } from "./GroovyParser";
 
 
 /**
@@ -1697,33 +1693,5 @@ export interface GroovyParserVisitor<Result> extends ParseTreeVisitor<Result> {
 	 * @return the visitor result
 	 */
 	visitSep?: (ctx: SepContext) => Result;
-
-	/**
-	 * Visit a parse tree produced by `GroovyParser.aws_string_statement`.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	visitAws_string_statement?: (ctx: Aws_string_statementContext) => Result;
-
-	/**
-	 * Visit a parse tree produced by `GroovyParser.aws_scope_statement`.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	visitAws_scope_statement?: (ctx: Aws_scope_statementContext) => Result;
-
-	/**
-	 * Visit a parse tree produced by `GroovyParser.aws_scope`.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	visitAws_scope?: (ctx: Aws_scopeContext) => Result;
-
-	/**
-	 * Visit a parse tree produced by `GroovyParser.nextflow_config`.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	visitNextflow_config?: (ctx: Nextflow_configContext) => Result;
 }
 

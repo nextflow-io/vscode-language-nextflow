@@ -19,7 +19,7 @@
 		"denque": "^2.1.0"
 	},
 	"scripts": {
-		"antlr4ts_lex": "antlr4ts -visitor server/grammar/GroovyLexer.g4",
-		"antlr4ts_pars": "antlr4ts -visitor server/grammar/GroovyParser.g4"
+		"antlr4ts_lex": "antlr4ts -visitor src/grammar/GroovyLexer.g4",
+		"antlr4ts_pars": "antlr4ts -visitor src/grammar/GroovyParser.g4"
 	}
 }
