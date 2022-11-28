@@ -38,13 +38,29 @@ options {
 }
 
 @header {
+package groovy.parser;
 }
 
 @members {
     private inSwitchExpressionLevel = 0;
-    static MODIFIER_SET = new Set<Number|undefined>([GroovyParser.DEF, GroovyParser.VAR, 
-			GroovyParser.NATIVE, GroovyParser.SYNCHRONIZED, GroovyParser.TRANSIENT, GroovyParser.VOLATILE,
-			GroovyParser.PUBLIC, GroovyParser.PROTECTED, GroovyParser.PRIVATE, GroovyParser.STATIC, GroovyParser.ABSTRACT, GroovyParser.SEALED, GroovyParser.NON_SEALED, GroovyParser.FINAL, GroovyParser.STRICTFP, GroovyParser.DEFAULT]);
+    static MODIFIER_SET = new Set<Number|undefined>([
+        GroovyParser.DEF,
+        GroovyParser.VAR,
+        GroovyParser.NATIVE,
+        GroovyParser.SYNCHRONIZED,
+        GroovyParser.TRANSIENT,
+        GroovyParser.VOLATILE,
+        GroovyParser.PUBLIC,
+        GroovyParser.PROTECTED,
+        GroovyParser.PRIVATE,
+        GroovyParser.STATIC,
+        GroovyParser.ABSTRACT,
+        GroovyParser.SEALED,
+        GroovyParser.NON_SEALED,
+        GroovyParser.FINAL,
+        GroovyParser.STRICTFP,
+        GroovyParser.DEFAULT
+    ]);
 
     @Override
     public getSyntaxErrorSource() {
@@ -70,97 +86,93 @@ options {
 
         let length = token.text?.length;
 
-		if (length === undefined) {
-			length = 0;
-		}
+        if (length === undefined) {
+            length = 0;
+        }
 
-	    return token.charPositionInLine + 1 + length;
+        return token.charPositionInLine + 1 + length;
     }
 
     public static isInvalidMethodDeclaration(ts: TokenStream) {
-		let tokenType = ts.LT(1).type;
-	
-		return (tokenType === GroovyParser.Identifier ||  tokenType === GroovyParser.CapitalizedIdentifier || tokenType === GroovyParser.StringLiteral || tokenType === GroovyParser.YIELD)
-				&& ts.LT(2).type === GroovyParser.LPAREN;
-	}
+        let tokenType = ts.LT(1).type;
 
-	public static isInvalidLocalVariableDeclaration(ts: TokenStream) {
-	    let index = 2;
-	    let token: Token|undefined = undefined;
+        return (tokenType === GroovyParser.Identifier || tokenType === GroovyParser.CapitalizedIdentifier || tokenType === GroovyParser.StringLiteral || tokenType === GroovyParser.YIELD)
+                && ts.LT(2).type === GroovyParser.LPAREN;
+    }
+
+    public static isInvalidLocalVariableDeclaration(ts: TokenStream) {
+        let index = 2;
+        let token: Token|undefined = undefined;
         let tokenType: number| undefined = undefined;
-	    let tokenType2 = ts.LT(index).type;
-	    let tokenType3: number|undefined = undefined;
+        let tokenType2 = ts.LT(index).type;
+        let tokenType3: number|undefined = undefined;
 
-	    if (GroovyParser.DOT === tokenType2) {
-	        let tokeTypeN = tokenType2;
+        if (GroovyParser.DOT === tokenType2) {
+            let tokeTypeN = tokenType2;
 
             do {
-	            index = index + 2;
-	            tokeTypeN = ts.LT(index).type;
-	        } while (GroovyParser.DOT === tokeTypeN);
+                index = index + 2;
+                tokeTypeN = ts.LT(index).type;
+            } while (GroovyParser.DOT === tokeTypeN);
 
-	        if (GroovyParser.LT === tokeTypeN || GroovyParser.LBRACK === tokeTypeN) {
+            if (GroovyParser.LT === tokeTypeN || GroovyParser.LBRACK === tokeTypeN) {
                 return false;
-	        }
+            }
 
-	        index = index - 1;
-	        tokenType2 = ts.LT(index + 1).type;
+            index = index - 1;
+            tokenType2 = ts.LT(index + 1).type;
         } else {
-	        index = 1;
-	    }
+            index = 1;
+        }
 
-	    token = ts.LT(index);
+        token = ts.LT(index);
         tokenType = token.type;
-	    tokenType3 = ts.LT(index + 2).type;
-	    let nextCodePointorundef = token.text?.codePointAt(0);
-		let nextCodePoint = 0;
+        tokenType3 = ts.LT(index + 2).type;
+        let nextCodePointorundef = token.text?.codePointAt(0);
+        let nextCodePoint = 0;
 
-		if (nextCodePointorundef !== undefined) {
-			nextCodePoint = nextCodePointorundef;
-		}
+        if (nextCodePointorundef !== undefined) {
+            nextCodePoint = nextCodePointorundef;
+        }
 
         return // VOID == tokenType ||
-		    !( tokenType === GroovyParser.BuiltInPrimitiveType || GroovyParser.MODIFIER_SET.has(tokenType))
-		        && String.fromCodePoint(nextCodePoint).toUpperCase() !== String.fromCodePoint(nextCodePoint)
-		        && String.fromCodePoint(nextCodePoint) !== '@'
-		        && !(GroovyParser.ASSIGN === tokenType3 || (GroovyParser.LT === tokenType2 || GroovyParser.LBRACK === tokenType2));
-	}
+            !( tokenType === GroovyParser.BuiltInPrimitiveType || GroovyParser.MODIFIER_SET.has(tokenType))
+                && String.fromCodePoint(nextCodePoint).toUpperCase() !== String.fromCodePoint(nextCodePoint)
+                && String.fromCodePoint(nextCodePoint) !== '@'
+                && !(GroovyParser.ASSIGN === tokenType3 || (GroovyParser.LT === tokenType2 || GroovyParser.LBRACK === tokenType2));
+    }
 
     public static isFollowingArgumentsOrClosure(context:ExpressionContext) {
-		if (context instanceof PostfixExprAltContext) {
-			let peacChildren = (context as PostfixExprAltContext).children;
-	
-				
-			if (peacChildren === undefined || peacChildren.length === 0) {
-				throw "Unexpected structure of expression context: " + context;
-			}
-			let peacChild = peacChildren[0];
-			if (!(peacChild instanceof PostfixExpressionContext)) {
-				throw "Unexpected structure of expression context: " + context;
-			}
-			let pecChildren = (peacChild as PostfixExpressionContext).children;
+        if (context instanceof PostfixExprAltContext) {
+            let peacChildren = (context as PostfixExprAltContext).children;
 
-			if (pecChildren === undefined || pecChildren.length === 0) {
-				throw "Unexpected structure of expression context: " + context;
-			}
-			let pecChild = pecChildren[0];
+            if (peacChildren === undefined || peacChildren.length === 0) {
+                throw "Unexpected structure of expression context: " + context;
+            }
+            let peacChild = peacChildren[0];
+            if (!(peacChild instanceof PostfixExpressionContext)) {
+                throw "Unexpected structure of expression context: " + context;
+            }
+            let pecChildren = (peacChild as PostfixExpressionContext).children;
 
-			if (!(pecChild instanceof PathExpressionContext)) {
-				throw "Unexpected structure of expression context: " + context;
-			}
-			let pec = pecChild as PathExpressionContext;
-	
-			let t = pec.t;
-	
-			return (2 === t || 3 === t);
-		}
-	
-		return false;
-	}
+            if (pecChildren === undefined || pecChildren.length === 0) {
+                throw "Unexpected structure of expression context: " + context;
+            }
+            let pecChild = pecChildren[0];
+
+            if (!(pecChild instanceof PathExpressionContext)) {
+                throw "Unexpected structure of expression context: " + context;
+            }
+            let pec = pecChild as PathExpressionContext;
+
+            let t = pec.t;
+
+            return (2 === t || 3 === t);
+        }
+
+        return false;
+    }
 }
-
-// starting point for nextflow config files
-//Nextflow Config File Extensions
 
 // starting point for parsing a groovy file
 compilationUnit
@@ -187,7 +199,6 @@ packageDeclaration
 importDeclaration
     :   annotationsOpt IMPORT STATIC? qualifiedName (DOT MUL | AS alias=identifier)?
     ;
-
 
 typeDeclaration
     :   classOrInterfaceModifiersOpt classDeclaration
@@ -279,7 +290,6 @@ typeBound
 typeList
     :   type (COMMA nls type)*
     ;
-
 
 /**
  *  t   0: class; 1: interface; 2: enum; 3: annotation; 4: trait; 5: record
@@ -511,11 +521,11 @@ qualifiedStandardClassName
     ;
 
 literal
-    :   IntegerLiteral                                                                      #integerLiteralAlt
-    |   FloatingPointLiteral                                                                #floatingPointLiteralAlt
-    |   stringLiteral                                                                       #stringLiteralAlt
-    |   BooleanLiteral                                                                      #booleanLiteralAlt
-    |   NullLiteral                                                                         #nullLiteralAlt
+    :   IntegerLiteral          #integerLiteralAlt
+    |   FloatingPointLiteral    #floatingPointLiteralAlt
+    |   stringLiteral           #stringLiteralAlt
+    |   BooleanLiteral          #booleanLiteralAlt
+    |   NullLiteral             #nullLiteralAlt
     ;
 
 // GSTRING
@@ -533,14 +543,15 @@ gstringPath
     :   identifier GStringPathPart*
     ;
 
-
 // LAMBDA EXPRESSION
+
 lambdaExpression
 options { baseContext = standardLambdaExpression; }
     :   lambdaParameters nls ARROW nls lambdaBody
     ;
 
 // JAVA STANDARD LAMBDA EXPRESSION
+
 standardLambdaExpression
     :   standardLambdaParameters nls ARROW nls lambdaBody
     ;
@@ -565,6 +576,7 @@ lambdaBody
     ;
 
 // CLOSURE
+
 closure
     :   LBRACE (nls (formalParameterList nls)? ARROW)? sep? blockStatementsOpt RBRACE
     ;
@@ -678,9 +690,9 @@ switchStatement
     ;
 
 loopStatement
-    :   FOR LPAREN forControl rparen nls statement                                                            #forStmtAlt
-    |   WHILE expressionInPar nls statement                                                                   #whileStmtAlt
-    |   DO nls statement nls WHILE expressionInPar                                                            #doWhileStmtAlt
+    :   FOR LPAREN forControl rparen nls statement  #forStmtAlt
+    |   WHILE expressionInPar nls statement         #whileStmtAlt
+    |   DO nls statement nls WHILE expressionInPar  #doWhileStmtAlt
     ;
 
 continueStatement
@@ -709,22 +721,22 @@ assertStatement
     ;
 
 statement
-    :   block                                                                                               #blockStmtAlt
-    |   conditionalStatement                                                                                #conditionalStmtAlt
-    |   loopStatement                                                                                       #loopStmtAlt
-    |   tryCatchStatement                                                                                   #tryCatchStmtAlt
-    |   SYNCHRONIZED expressionInPar nls block                                                              #synchronizedStmtAlt
-    |   RETURN expression?                                                                                  #returnStmtAlt
-    |   THROW expression                                                                                    #throwStmtAlt
-    |   breakStatement                                                                                      #breakStmtAlt
-    |   continueStatement                                                                                   #continueStmtAlt
+    :   block                                   #blockStmtAlt
+    |   conditionalStatement                    #conditionalStmtAlt
+    |   loopStatement                           #loopStmtAlt
+    |   tryCatchStatement                       #tryCatchStmtAlt
+    |   SYNCHRONIZED expressionInPar nls block  #synchronizedStmtAlt
+    |   RETURN expression?                      #returnStmtAlt
+    |   THROW expression                        #throwStmtAlt
+    |   breakStatement                          #breakStmtAlt
+    |   continueStatement                       #continueStmtAlt
     |   { this.inSwitchExpressionLevel > 0 }?
-        yieldStatement                                                                                      #yieldStmtAlt
-    |   identifier COLON nls statement                                                                      #labeledStmtAlt
-    |   assertStatement                                                                                     #assertStmtAlt
-    |   localVariableDeclaration                                                                            #localVariableDeclarationStmtAlt
-    |   statementExpression                                                                                 #expressionStmtAlt
-    |   SEMI                                                                                                #emptyStmtAlt
+        yieldStatement                          #yieldStmtAlt
+    |   identifier COLON nls statement          #labeledStmtAlt
+    |   assertStatement                         #assertStmtAlt
+    |   localVariableDeclaration                #localVariableDeclarationStmtAlt
+    |   statementExpression                     #expressionStmtAlt
+    |   SEMI                                    #emptyStmtAlt
     ;
 
 catchClause
@@ -751,7 +763,6 @@ resource
     :   localVariableDeclaration
     |   expression
     ;
-
 
 /** Matches cases then statements, both of which are mandatory.
  *  To handle empty cases at the end, we add switchLabel* to statement.
@@ -787,7 +798,6 @@ forUpdate
     :   expressionList[false]
     ;
 
-
 // EXPRESSIONS
 
 castParExpression
@@ -816,7 +826,7 @@ enhancedStatementExpression
     ;
 
 statementExpression
-    :   commandExpression                   #commandExprAlt
+    :   commandExpression   #commandExprAlt
     ;
 
 postfixExpression
@@ -844,7 +854,7 @@ switchExpressionLabel
     ;
 
 expression
-    // must come before postfixExpression to resovle the ambiguities between casting and call on parentheses expression, e.g. (int)(1 / 2)
+    // must come before postfixExpression to resolve the ambiguities between casting and call on parentheses expression, e.g. (int)(1 / 2)
     :   castParExpression castOperandExpression                                             #castExprAlt
 
     // qualified names, array expressions, method invocation, post inc/dec
@@ -1063,13 +1073,6 @@ namePart
 
         |   dynamicMemberName
 
-        /* just a PROPOSAL, which has not been implemented yet!
-        // PROPOSAL, DECIDE:  Is this inline form of the 'with' statement useful?
-        // Definition:  a.{foo} === {with(a) {foo}}
-        // May cover some path expression use-cases previously handled by dynamic scoping (closure delegates).
-        |   block
-        */
-
         // let's allow common keywords as property names
         |   keywords
         )
@@ -1101,39 +1104,39 @@ primary
     :
         // Append `typeArguments?` to `identifier` to support constructor reference with generics, e.g. HashMap<String, Integer>::new
         // Though this is not a graceful solution, it is much faster than replacing `builtInType` with `type`
-        identifier typeArguments?                                                           #identifierPrmrAlt
-    |   literal                                                                             #literalPrmrAlt
-    |   gstring                                                                             #gstringPrmrAlt
-    |   NEW nls creator[0]                                                                  #newPrmrAlt
-    |   THIS                                                                                #thisPrmrAlt
-    |   SUPER                                                                               #superPrmrAlt
-    |   parExpression                                                                       #parenPrmrAlt
-    |   closureOrLambdaExpression                                                           #closureOrLambdaExpressionPrmrAlt
-    |   list                                                                                #listPrmrAlt
-    |   map                                                                                 #mapPrmrAlt
-    |   builtInType                                                                         #builtInTypePrmrAlt
+        identifier typeArguments?   #identifierPrmrAlt
+    |   literal                     #literalPrmrAlt
+    |   gstring                     #gstringPrmrAlt
+    |   NEW nls creator[0]          #newPrmrAlt
+    |   THIS                        #thisPrmrAlt
+    |   SUPER                       #superPrmrAlt
+    |   parExpression               #parenPrmrAlt
+    |   closureOrLambdaExpression   #closureOrLambdaExpressionPrmrAlt
+    |   list                        #listPrmrAlt
+    |   map                         #mapPrmrAlt
+    |   builtInType                 #builtInTypePrmrAlt
     ;
 
 namedPropertyArgPrimary
 options { baseContext = primary; }
-    :   identifier                                                                          #identifierPrmrAlt
-    |   literal                                                                             #literalPrmrAlt
-    |   gstring                                                                             #gstringPrmrAlt
-    |   parExpression                                                                       #parenPrmrAlt
+    :   identifier                  #identifierPrmrAlt
+    |   literal                     #literalPrmrAlt
+    |   gstring                     #gstringPrmrAlt
+    |   parExpression               #parenPrmrAlt
     ;
 
 namedArgPrimary
 options { baseContext = primary; }
-    :   identifier                                                                          #identifierPrmrAlt
-    |   literal                                                                             #literalPrmrAlt
-    |   gstring                                                                             #gstringPrmrAlt
+    :   identifier                  #identifierPrmrAlt
+    |   literal                     #literalPrmrAlt
+    |   gstring                     #gstringPrmrAlt
     ;
 
 commandPrimary
 options { baseContext = primary; }
-    :   identifier                                                                          #identifierPrmrAlt
-    |   literal                                                                             #literalPrmrAlt
-    |   gstring                                                                             #gstringPrmrAlt
+    :   identifier                  #identifierPrmrAlt
+    |   literal                     #literalPrmrAlt
+    |   gstring                     #gstringPrmrAlt
     ;
 
 list
@@ -1282,7 +1285,6 @@ identifier
     |   CapitalizedIdentifier
     |   VAR
     |   IN
-//  |   DEF
     |   TRAIT
     |   AS
     |   YIELD
