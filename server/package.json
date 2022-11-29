@@ -20,6 +20,10 @@
 	},
 	"scripts": {
 		"antlr4ts_lex": "antlr4ts -visitor src/grammar/GroovyLexer.g4",
-		"antlr4ts_pars": "antlr4ts -visitor src/grammar/GroovyParser.g4"
+		"antlr4ts_pars": "antlr4ts -visitor src/grammar/GroovyParser.g4", 
+		"antlr4ts_config_lex": "antlr4ts -visitor src/grammar/NextflowConfigLexer.g4",
+		"antlr4ts_config_pars": "antlr4ts -visitor src/grammar/NextflowConfigParser.g4",
+		"antlr4ts_script_lex": "antlr4ts -visitor src/grammar/NextflowScriptLexer.g4",
+		"antlr4ts_script_pars": "antlr4ts -visitor src/grammar/NextflowScriptParser.g4"
 	}
 }

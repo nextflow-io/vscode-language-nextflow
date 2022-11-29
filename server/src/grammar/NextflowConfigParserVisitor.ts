@@ -1,225 +1,232 @@
-// Generated from src/grammar/GroovyParser.g4 by ANTLR 4.9.0-SNAPSHOT
+// Generated from src/grammar/NextflowConfigParser.g4 by ANTLR 4.9.0-SNAPSHOT
 
+
+package groovy.parser;
 
 
 import { ParseTreeVisitor } from "antlr4ts/tree/ParseTreeVisitor";
 
-import { IdentifierPrmrAltContext } from "./GroovyParser";
-import { LiteralPrmrAltContext } from "./GroovyParser";
-import { GstringPrmrAltContext } from "./GroovyParser";
-import { NewPrmrAltContext } from "./GroovyParser";
-import { ThisPrmrAltContext } from "./GroovyParser";
-import { SuperPrmrAltContext } from "./GroovyParser";
-import { ParenPrmrAltContext } from "./GroovyParser";
-import { ClosureOrLambdaExpressionPrmrAltContext } from "./GroovyParser";
-import { ListPrmrAltContext } from "./GroovyParser";
-import { MapPrmrAltContext } from "./GroovyParser";
-import { BuiltInTypePrmrAltContext } from "./GroovyParser";
-import { IntegerLiteralAltContext } from "./GroovyParser";
-import { FloatingPointLiteralAltContext } from "./GroovyParser";
-import { StringLiteralAltContext } from "./GroovyParser";
-import { BooleanLiteralAltContext } from "./GroovyParser";
-import { NullLiteralAltContext } from "./GroovyParser";
-import { CastExprAltContext } from "./GroovyParser";
-import { PostfixExprAltContext } from "./GroovyParser";
-import { SwitchExprAltContext } from "./GroovyParser";
-import { UnaryNotExprAltContext } from "./GroovyParser";
-import { PowerExprAltContext } from "./GroovyParser";
-import { UnaryAddExprAltContext } from "./GroovyParser";
-import { MultiplicativeExprAltContext } from "./GroovyParser";
-import { AdditiveExprAltContext } from "./GroovyParser";
-import { ShiftExprAltContext } from "./GroovyParser";
-import { RelationalExprAltContext } from "./GroovyParser";
-import { EqualityExprAltContext } from "./GroovyParser";
-import { RegexExprAltContext } from "./GroovyParser";
-import { AndExprAltContext } from "./GroovyParser";
-import { ExclusiveOrExprAltContext } from "./GroovyParser";
-import { InclusiveOrExprAltContext } from "./GroovyParser";
-import { LogicalAndExprAltContext } from "./GroovyParser";
-import { LogicalOrExprAltContext } from "./GroovyParser";
-import { ConditionalExprAltContext } from "./GroovyParser";
-import { MultipleAssignmentExprAltContext } from "./GroovyParser";
-import { AssignmentExprAltContext } from "./GroovyParser";
-import { BlockStmtAltContext } from "./GroovyParser";
-import { ConditionalStmtAltContext } from "./GroovyParser";
-import { LoopStmtAltContext } from "./GroovyParser";
-import { TryCatchStmtAltContext } from "./GroovyParser";
-import { SynchronizedStmtAltContext } from "./GroovyParser";
-import { ReturnStmtAltContext } from "./GroovyParser";
-import { ThrowStmtAltContext } from "./GroovyParser";
-import { BreakStmtAltContext } from "./GroovyParser";
-import { ContinueStmtAltContext } from "./GroovyParser";
-import { YieldStmtAltContext } from "./GroovyParser";
-import { LabeledStmtAltContext } from "./GroovyParser";
-import { AssertStmtAltContext } from "./GroovyParser";
-import { LocalVariableDeclarationStmtAltContext } from "./GroovyParser";
-import { ExpressionStmtAltContext } from "./GroovyParser";
-import { EmptyStmtAltContext } from "./GroovyParser";
-import { CommandExprAltContext } from "./GroovyParser";
-import { ForStmtAltContext } from "./GroovyParser";
-import { WhileStmtAltContext } from "./GroovyParser";
-import { DoWhileStmtAltContext } from "./GroovyParser";
-import { CompilationUnitContext } from "./GroovyParser";
-import { ScriptStatementsContext } from "./GroovyParser";
-import { ScriptStatementContext } from "./GroovyParser";
-import { PackageDeclarationContext } from "./GroovyParser";
-import { ImportDeclarationContext } from "./GroovyParser";
-import { TypeDeclarationContext } from "./GroovyParser";
-import { ModifierContext } from "./GroovyParser";
-import { ModifiersOptContext } from "./GroovyParser";
-import { ModifiersContext } from "./GroovyParser";
-import { ClassOrInterfaceModifiersOptContext } from "./GroovyParser";
-import { ClassOrInterfaceModifiersContext } from "./GroovyParser";
-import { ClassOrInterfaceModifierContext } from "./GroovyParser";
-import { VariableModifierContext } from "./GroovyParser";
-import { VariableModifiersOptContext } from "./GroovyParser";
-import { VariableModifiersContext } from "./GroovyParser";
-import { TypeParametersContext } from "./GroovyParser";
-import { TypeParameterContext } from "./GroovyParser";
-import { TypeBoundContext } from "./GroovyParser";
-import { TypeListContext } from "./GroovyParser";
-import { ClassDeclarationContext } from "./GroovyParser";
-import { ClassBodyContext } from "./GroovyParser";
-import { EnumConstantsContext } from "./GroovyParser";
-import { EnumConstantContext } from "./GroovyParser";
-import { ClassBodyDeclarationContext } from "./GroovyParser";
-import { MemberDeclarationContext } from "./GroovyParser";
-import { MethodDeclarationContext } from "./GroovyParser";
-import { CompactConstructorDeclarationContext } from "./GroovyParser";
-import { MethodNameContext } from "./GroovyParser";
-import { ReturnTypeContext } from "./GroovyParser";
-import { FieldDeclarationContext } from "./GroovyParser";
-import { VariableDeclaratorsContext } from "./GroovyParser";
-import { VariableDeclaratorContext } from "./GroovyParser";
-import { VariableDeclaratorIdContext } from "./GroovyParser";
-import { VariableInitializerContext } from "./GroovyParser";
-import { VariableInitializersContext } from "./GroovyParser";
-import { EmptyDimsContext } from "./GroovyParser";
-import { EmptyDimsOptContext } from "./GroovyParser";
-import { TypeContext } from "./GroovyParser";
-import { ClassOrInterfaceTypeContext } from "./GroovyParser";
-import { PrimitiveTypeContext } from "./GroovyParser";
-import { TypeArgumentsContext } from "./GroovyParser";
-import { TypeArgumentContext } from "./GroovyParser";
-import { AnnotatedQualifiedClassNameContext } from "./GroovyParser";
-import { QualifiedClassNameListContext } from "./GroovyParser";
-import { FormalParametersContext } from "./GroovyParser";
-import { FormalParameterListContext } from "./GroovyParser";
-import { ThisFormalParameterContext } from "./GroovyParser";
-import { FormalParameterContext } from "./GroovyParser";
-import { MethodBodyContext } from "./GroovyParser";
-import { QualifiedNameContext } from "./GroovyParser";
-import { QualifiedNameElementContext } from "./GroovyParser";
-import { QualifiedNameElementsContext } from "./GroovyParser";
-import { QualifiedClassNameContext } from "./GroovyParser";
-import { QualifiedStandardClassNameContext } from "./GroovyParser";
-import { LiteralContext } from "./GroovyParser";
-import { GstringContext } from "./GroovyParser";
-import { GstringValueContext } from "./GroovyParser";
-import { GstringPathContext } from "./GroovyParser";
-import { StandardLambdaExpressionContext } from "./GroovyParser";
-import { StandardLambdaParametersContext } from "./GroovyParser";
-import { LambdaBodyContext } from "./GroovyParser";
-import { ClosureContext } from "./GroovyParser";
-import { ClosureOrLambdaExpressionContext } from "./GroovyParser";
-import { BlockStatementsOptContext } from "./GroovyParser";
-import { BlockStatementsContext } from "./GroovyParser";
-import { AnnotationsOptContext } from "./GroovyParser";
-import { AnnotationContext } from "./GroovyParser";
-import { ElementValuesContext } from "./GroovyParser";
-import { AnnotationNameContext } from "./GroovyParser";
-import { ElementValuePairsContext } from "./GroovyParser";
-import { ElementValuePairContext } from "./GroovyParser";
-import { ElementValuePairNameContext } from "./GroovyParser";
-import { ElementValueContext } from "./GroovyParser";
-import { ElementValueArrayInitializerContext } from "./GroovyParser";
-import { BlockContext } from "./GroovyParser";
-import { BlockStatementContext } from "./GroovyParser";
-import { LocalVariableDeclarationContext } from "./GroovyParser";
-import { VariableDeclarationContext } from "./GroovyParser";
-import { TypeNamePairsContext } from "./GroovyParser";
-import { TypeNamePairContext } from "./GroovyParser";
-import { VariableNamesContext } from "./GroovyParser";
-import { ConditionalStatementContext } from "./GroovyParser";
-import { IfElseStatementContext } from "./GroovyParser";
-import { SwitchStatementContext } from "./GroovyParser";
-import { LoopStatementContext } from "./GroovyParser";
-import { ContinueStatementContext } from "./GroovyParser";
-import { BreakStatementContext } from "./GroovyParser";
-import { YieldStatementContext } from "./GroovyParser";
-import { TryCatchStatementContext } from "./GroovyParser";
-import { AssertStatementContext } from "./GroovyParser";
-import { StatementContext } from "./GroovyParser";
-import { CatchClauseContext } from "./GroovyParser";
-import { CatchTypeContext } from "./GroovyParser";
-import { FinallyBlockContext } from "./GroovyParser";
-import { ResourcesContext } from "./GroovyParser";
-import { ResourceListContext } from "./GroovyParser";
-import { ResourceContext } from "./GroovyParser";
-import { SwitchBlockStatementGroupContext } from "./GroovyParser";
-import { SwitchLabelContext } from "./GroovyParser";
-import { ForControlContext } from "./GroovyParser";
-import { EnhancedForControlContext } from "./GroovyParser";
-import { ClassicalForControlContext } from "./GroovyParser";
-import { ForInitContext } from "./GroovyParser";
-import { ForUpdateContext } from "./GroovyParser";
-import { CastParExpressionContext } from "./GroovyParser";
-import { ParExpressionContext } from "./GroovyParser";
-import { ExpressionInParContext } from "./GroovyParser";
-import { ExpressionListContext } from "./GroovyParser";
-import { ExpressionListElementContext } from "./GroovyParser";
-import { EnhancedStatementExpressionContext } from "./GroovyParser";
-import { StatementExpressionContext } from "./GroovyParser";
-import { PostfixExpressionContext } from "./GroovyParser";
-import { SwitchExpressionContext } from "./GroovyParser";
-import { SwitchBlockStatementExpressionGroupContext } from "./GroovyParser";
-import { SwitchExpressionLabelContext } from "./GroovyParser";
-import { ExpressionContext } from "./GroovyParser";
-import { CommandExpressionContext } from "./GroovyParser";
-import { CommandArgumentContext } from "./GroovyParser";
-import { PathExpressionContext } from "./GroovyParser";
-import { PathElementContext } from "./GroovyParser";
-import { NamePartContext } from "./GroovyParser";
-import { DynamicMemberNameContext } from "./GroovyParser";
-import { IndexPropertyArgsContext } from "./GroovyParser";
-import { NamedPropertyArgsContext } from "./GroovyParser";
-import { PrimaryContext } from "./GroovyParser";
-import { ListContext } from "./GroovyParser";
-import { MapContext } from "./GroovyParser";
-import { MapEntryListContext } from "./GroovyParser";
-import { MapEntryContext } from "./GroovyParser";
-import { MapEntryLabelContext } from "./GroovyParser";
-import { CreatorContext } from "./GroovyParser";
-import { DimContext } from "./GroovyParser";
-import { ArrayInitializerContext } from "./GroovyParser";
-import { AnonymousInnerClassDeclarationContext } from "./GroovyParser";
-import { CreatedNameContext } from "./GroovyParser";
-import { NonWildcardTypeArgumentsContext } from "./GroovyParser";
-import { TypeArgumentsOrDiamondContext } from "./GroovyParser";
-import { ArgumentsContext } from "./GroovyParser";
-import { EnhancedArgumentListInParContext } from "./GroovyParser";
-import { EnhancedArgumentListElementContext } from "./GroovyParser";
-import { StringLiteralContext } from "./GroovyParser";
-import { ClassNameContext } from "./GroovyParser";
-import { IdentifierContext } from "./GroovyParser";
-import { BuiltInTypeContext } from "./GroovyParser";
-import { KeywordsContext } from "./GroovyParser";
-import { RparenContext } from "./GroovyParser";
-import { NlsContext } from "./GroovyParser";
-import { SepContext } from "./GroovyParser";
+import { IdentifierPrmrAltContext } from "./NextflowConfigParser";
+import { LiteralPrmrAltContext } from "./NextflowConfigParser";
+import { GstringPrmrAltContext } from "./NextflowConfigParser";
+import { NewPrmrAltContext } from "./NextflowConfigParser";
+import { ThisPrmrAltContext } from "./NextflowConfigParser";
+import { SuperPrmrAltContext } from "./NextflowConfigParser";
+import { ParenPrmrAltContext } from "./NextflowConfigParser";
+import { ClosureOrLambdaExpressionPrmrAltContext } from "./NextflowConfigParser";
+import { ListPrmrAltContext } from "./NextflowConfigParser";
+import { MapPrmrAltContext } from "./NextflowConfigParser";
+import { BuiltInTypePrmrAltContext } from "./NextflowConfigParser";
+import { IntegerLiteralAltContext } from "./NextflowConfigParser";
+import { FloatingPointLiteralAltContext } from "./NextflowConfigParser";
+import { StringLiteralAltContext } from "./NextflowConfigParser";
+import { BooleanLiteralAltContext } from "./NextflowConfigParser";
+import { NullLiteralAltContext } from "./NextflowConfigParser";
+import { CastExprAltContext } from "./NextflowConfigParser";
+import { PostfixExprAltContext } from "./NextflowConfigParser";
+import { SwitchExprAltContext } from "./NextflowConfigParser";
+import { UnaryNotExprAltContext } from "./NextflowConfigParser";
+import { PowerExprAltContext } from "./NextflowConfigParser";
+import { UnaryAddExprAltContext } from "./NextflowConfigParser";
+import { MultiplicativeExprAltContext } from "./NextflowConfigParser";
+import { AdditiveExprAltContext } from "./NextflowConfigParser";
+import { ShiftExprAltContext } from "./NextflowConfigParser";
+import { RelationalExprAltContext } from "./NextflowConfigParser";
+import { EqualityExprAltContext } from "./NextflowConfigParser";
+import { RegexExprAltContext } from "./NextflowConfigParser";
+import { AndExprAltContext } from "./NextflowConfigParser";
+import { ExclusiveOrExprAltContext } from "./NextflowConfigParser";
+import { InclusiveOrExprAltContext } from "./NextflowConfigParser";
+import { LogicalAndExprAltContext } from "./NextflowConfigParser";
+import { LogicalOrExprAltContext } from "./NextflowConfigParser";
+import { ConditionalExprAltContext } from "./NextflowConfigParser";
+import { MultipleAssignmentExprAltContext } from "./NextflowConfigParser";
+import { AssignmentExprAltContext } from "./NextflowConfigParser";
+import { BlockStmtAltContext } from "./NextflowConfigParser";
+import { ConditionalStmtAltContext } from "./NextflowConfigParser";
+import { LoopStmtAltContext } from "./NextflowConfigParser";
+import { TryCatchStmtAltContext } from "./NextflowConfigParser";
+import { SynchronizedStmtAltContext } from "./NextflowConfigParser";
+import { ReturnStmtAltContext } from "./NextflowConfigParser";
+import { ThrowStmtAltContext } from "./NextflowConfigParser";
+import { BreakStmtAltContext } from "./NextflowConfigParser";
+import { ContinueStmtAltContext } from "./NextflowConfigParser";
+import { YieldStmtAltContext } from "./NextflowConfigParser";
+import { LabeledStmtAltContext } from "./NextflowConfigParser";
+import { AssertStmtAltContext } from "./NextflowConfigParser";
+import { LocalVariableDeclarationStmtAltContext } from "./NextflowConfigParser";
+import { ExpressionStmtAltContext } from "./NextflowConfigParser";
+import { EmptyStmtAltContext } from "./NextflowConfigParser";
+import { CommandExprAltContext } from "./NextflowConfigParser";
+import { ForStmtAltContext } from "./NextflowConfigParser";
+import { WhileStmtAltContext } from "./NextflowConfigParser";
+import { DoWhileStmtAltContext } from "./NextflowConfigParser";
+import { CompilationUnitContext } from "./NextflowConfigParser";
+import { ConfigStatementContext } from "./NextflowConfigParser";
+import { IncludeStatementContext } from "./NextflowConfigParser";
+import { AssignmentContext } from "./NextflowConfigParser";
+import { ConfigPathExpressionContext } from "./NextflowConfigParser";
+import { BlockContext } from "./NextflowConfigParser";
+import { BlockStatementContext } from "./NextflowConfigParser";
+import { SelectorContext } from "./NextflowConfigParser";
+import { ScriptStatementsContext } from "./NextflowConfigParser";
+import { ScriptStatementContext } from "./NextflowConfigParser";
+import { PackageDeclarationContext } from "./NextflowConfigParser";
+import { ImportDeclarationContext } from "./NextflowConfigParser";
+import { TypeDeclarationContext } from "./NextflowConfigParser";
+import { ModifierContext } from "./NextflowConfigParser";
+import { ModifiersOptContext } from "./NextflowConfigParser";
+import { ModifiersContext } from "./NextflowConfigParser";
+import { ClassOrInterfaceModifiersOptContext } from "./NextflowConfigParser";
+import { ClassOrInterfaceModifiersContext } from "./NextflowConfigParser";
+import { ClassOrInterfaceModifierContext } from "./NextflowConfigParser";
+import { VariableModifierContext } from "./NextflowConfigParser";
+import { VariableModifiersOptContext } from "./NextflowConfigParser";
+import { VariableModifiersContext } from "./NextflowConfigParser";
+import { TypeParametersContext } from "./NextflowConfigParser";
+import { TypeParameterContext } from "./NextflowConfigParser";
+import { TypeBoundContext } from "./NextflowConfigParser";
+import { TypeListContext } from "./NextflowConfigParser";
+import { ClassDeclarationContext } from "./NextflowConfigParser";
+import { ClassBodyContext } from "./NextflowConfigParser";
+import { EnumConstantsContext } from "./NextflowConfigParser";
+import { EnumConstantContext } from "./NextflowConfigParser";
+import { ClassBodyDeclarationContext } from "./NextflowConfigParser";
+import { MemberDeclarationContext } from "./NextflowConfigParser";
+import { MethodDeclarationContext } from "./NextflowConfigParser";
+import { CompactConstructorDeclarationContext } from "./NextflowConfigParser";
+import { MethodNameContext } from "./NextflowConfigParser";
+import { ReturnTypeContext } from "./NextflowConfigParser";
+import { FieldDeclarationContext } from "./NextflowConfigParser";
+import { VariableDeclaratorsContext } from "./NextflowConfigParser";
+import { VariableDeclaratorContext } from "./NextflowConfigParser";
+import { VariableDeclaratorIdContext } from "./NextflowConfigParser";
+import { VariableInitializerContext } from "./NextflowConfigParser";
+import { VariableInitializersContext } from "./NextflowConfigParser";
+import { EmptyDimsContext } from "./NextflowConfigParser";
+import { EmptyDimsOptContext } from "./NextflowConfigParser";
+import { TypeContext } from "./NextflowConfigParser";
+import { ClassOrInterfaceTypeContext } from "./NextflowConfigParser";
+import { PrimitiveTypeContext } from "./NextflowConfigParser";
+import { TypeArgumentsContext } from "./NextflowConfigParser";
+import { TypeArgumentContext } from "./NextflowConfigParser";
+import { AnnotatedQualifiedClassNameContext } from "./NextflowConfigParser";
+import { QualifiedClassNameListContext } from "./NextflowConfigParser";
+import { FormalParametersContext } from "./NextflowConfigParser";
+import { FormalParameterListContext } from "./NextflowConfigParser";
+import { ThisFormalParameterContext } from "./NextflowConfigParser";
+import { FormalParameterContext } from "./NextflowConfigParser";
+import { MethodBodyContext } from "./NextflowConfigParser";
+import { QualifiedNameContext } from "./NextflowConfigParser";
+import { QualifiedNameElementContext } from "./NextflowConfigParser";
+import { QualifiedNameElementsContext } from "./NextflowConfigParser";
+import { QualifiedClassNameContext } from "./NextflowConfigParser";
+import { QualifiedStandardClassNameContext } from "./NextflowConfigParser";
+import { LiteralContext } from "./NextflowConfigParser";
+import { GstringContext } from "./NextflowConfigParser";
+import { GstringValueContext } from "./NextflowConfigParser";
+import { GstringPathContext } from "./NextflowConfigParser";
+import { StandardLambdaExpressionContext } from "./NextflowConfigParser";
+import { StandardLambdaParametersContext } from "./NextflowConfigParser";
+import { LambdaBodyContext } from "./NextflowConfigParser";
+import { ClosureContext } from "./NextflowConfigParser";
+import { ClosureOrLambdaExpressionContext } from "./NextflowConfigParser";
+import { BlockStatementsOptContext } from "./NextflowConfigParser";
+import { BlockStatementsContext } from "./NextflowConfigParser";
+import { AnnotationsOptContext } from "./NextflowConfigParser";
+import { AnnotationContext } from "./NextflowConfigParser";
+import { ElementValuesContext } from "./NextflowConfigParser";
+import { AnnotationNameContext } from "./NextflowConfigParser";
+import { ElementValuePairsContext } from "./NextflowConfigParser";
+import { ElementValuePairContext } from "./NextflowConfigParser";
+import { ElementValuePairNameContext } from "./NextflowConfigParser";
+import { ElementValueContext } from "./NextflowConfigParser";
+import { ElementValueArrayInitializerContext } from "./NextflowConfigParser";
+import { LocalVariableDeclarationContext } from "./NextflowConfigParser";
+import { VariableDeclarationContext } from "./NextflowConfigParser";
+import { TypeNamePairsContext } from "./NextflowConfigParser";
+import { TypeNamePairContext } from "./NextflowConfigParser";
+import { VariableNamesContext } from "./NextflowConfigParser";
+import { ConditionalStatementContext } from "./NextflowConfigParser";
+import { IfElseStatementContext } from "./NextflowConfigParser";
+import { SwitchStatementContext } from "./NextflowConfigParser";
+import { LoopStatementContext } from "./NextflowConfigParser";
+import { ContinueStatementContext } from "./NextflowConfigParser";
+import { BreakStatementContext } from "./NextflowConfigParser";
+import { YieldStatementContext } from "./NextflowConfigParser";
+import { TryCatchStatementContext } from "./NextflowConfigParser";
+import { AssertStatementContext } from "./NextflowConfigParser";
+import { StatementContext } from "./NextflowConfigParser";
+import { CatchClauseContext } from "./NextflowConfigParser";
+import { CatchTypeContext } from "./NextflowConfigParser";
+import { FinallyBlockContext } from "./NextflowConfigParser";
+import { ResourcesContext } from "./NextflowConfigParser";
+import { ResourceListContext } from "./NextflowConfigParser";
+import { ResourceContext } from "./NextflowConfigParser";
+import { SwitchBlockStatementGroupContext } from "./NextflowConfigParser";
+import { SwitchLabelContext } from "./NextflowConfigParser";
+import { ForControlContext } from "./NextflowConfigParser";
+import { EnhancedForControlContext } from "./NextflowConfigParser";
+import { ClassicalForControlContext } from "./NextflowConfigParser";
+import { ForInitContext } from "./NextflowConfigParser";
+import { ForUpdateContext } from "./NextflowConfigParser";
+import { CastParExpressionContext } from "./NextflowConfigParser";
+import { ParExpressionContext } from "./NextflowConfigParser";
+import { ExpressionInParContext } from "./NextflowConfigParser";
+import { ExpressionListContext } from "./NextflowConfigParser";
+import { ExpressionListElementContext } from "./NextflowConfigParser";
+import { EnhancedStatementExpressionContext } from "./NextflowConfigParser";
+import { StatementExpressionContext } from "./NextflowConfigParser";
+import { PostfixExpressionContext } from "./NextflowConfigParser";
+import { SwitchExpressionContext } from "./NextflowConfigParser";
+import { SwitchBlockStatementExpressionGroupContext } from "./NextflowConfigParser";
+import { SwitchExpressionLabelContext } from "./NextflowConfigParser";
+import { ExpressionContext } from "./NextflowConfigParser";
+import { CommandExpressionContext } from "./NextflowConfigParser";
+import { CommandArgumentContext } from "./NextflowConfigParser";
+import { PathExpressionContext } from "./NextflowConfigParser";
+import { PathElementContext } from "./NextflowConfigParser";
+import { NamePartContext } from "./NextflowConfigParser";
+import { DynamicMemberNameContext } from "./NextflowConfigParser";
+import { IndexPropertyArgsContext } from "./NextflowConfigParser";
+import { NamedPropertyArgsContext } from "./NextflowConfigParser";
+import { PrimaryContext } from "./NextflowConfigParser";
+import { ListContext } from "./NextflowConfigParser";
+import { MapContext } from "./NextflowConfigParser";
+import { MapEntryListContext } from "./NextflowConfigParser";
+import { MapEntryContext } from "./NextflowConfigParser";
+import { MapEntryLabelContext } from "./NextflowConfigParser";
+import { CreatorContext } from "./NextflowConfigParser";
+import { DimContext } from "./NextflowConfigParser";
+import { ArrayInitializerContext } from "./NextflowConfigParser";
+import { AnonymousInnerClassDeclarationContext } from "./NextflowConfigParser";
+import { CreatedNameContext } from "./NextflowConfigParser";
+import { NonWildcardTypeArgumentsContext } from "./NextflowConfigParser";
+import { TypeArgumentsOrDiamondContext } from "./NextflowConfigParser";
+import { ArgumentsContext } from "./NextflowConfigParser";
+import { EnhancedArgumentListInParContext } from "./NextflowConfigParser";
+import { EnhancedArgumentListElementContext } from "./NextflowConfigParser";
+import { StringLiteralContext } from "./NextflowConfigParser";
+import { ClassNameContext } from "./NextflowConfigParser";
+import { IdentifierContext } from "./NextflowConfigParser";
+import { BuiltInTypeContext } from "./NextflowConfigParser";
+import { KeywordsContext } from "./NextflowConfigParser";
+import { RparenContext } from "./NextflowConfigParser";
+import { NlsContext } from "./NextflowConfigParser";
+import { SepContext } from "./NextflowConfigParser";
 
 
 /**
  * This interface defines a complete generic visitor for a parse tree produced
- * by `GroovyParser`.
+ * by `NextflowConfigParser`.
  *
  * @param <Result> The return type of the visit operation. Use `void` for
  * operations with no return type.
  */
-export interface GroovyParserVisitor<Result> extends ParseTreeVisitor<Result> {
+export interface NextflowConfigParserVisitor<Result> extends ParseTreeVisitor<Result> {
 	/**
 	 * Visit a parse tree produced by the `identifierPrmrAlt`
-	 * labeled alternative in `GroovyParser.commandPrimary`.
+	 * labeled alternative in `NextflowConfigParser.commandPrimary`.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
@@ -227,7 +234,7 @@ export interface GroovyParserVisitor<Result> extends ParseTreeVisitor<Result> {
 
 	/**
 	 * Visit a parse tree produced by the `literalPrmrAlt`
-	 * labeled alternative in `GroovyParser.commandPrimary`.
+	 * labeled alternative in `NextflowConfigParser.commandPrimary`.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
@@ -235,7 +242,7 @@ export interface GroovyParserVisitor<Result> extends ParseTreeVisitor<Result> {
 
 	/**
 	 * Visit a parse tree produced by the `gstringPrmrAlt`
-	 * labeled alternative in `GroovyParser.commandPrimary`.
+	 * labeled alternative in `NextflowConfigParser.commandPrimary`.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
@@ -243,7 +250,7 @@ export interface GroovyParserVisitor<Result> extends ParseTreeVisitor<Result> {
 
 	/**
 	 * Visit a parse tree produced by the `newPrmrAlt`
-	 * labeled alternative in `GroovyParser.primary`.
+	 * labeled alternative in `NextflowConfigParser.primary`.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
@@ -251,7 +258,7 @@ export interface GroovyParserVisitor<Result> extends ParseTreeVisitor<Result> {
 
 	/**
 	 * Visit a parse tree produced by the `thisPrmrAlt`
-	 * labeled alternative in `GroovyParser.primary`.
+	 * labeled alternative in `NextflowConfigParser.primary`.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
@@ -259,7 +266,7 @@ export interface GroovyParserVisitor<Result> extends ParseTreeVisitor<Result> {
 
 	/**
 	 * Visit a parse tree produced by the `superPrmrAlt`
-	 * labeled alternative in `GroovyParser.primary`.
+	 * labeled alternative in `NextflowConfigParser.primary`.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
@@ -267,7 +274,7 @@ export interface GroovyParserVisitor<Result> extends ParseTreeVisitor<Result> {
 
 	/**
 	 * Visit a parse tree produced by the `parenPrmrAlt`
-	 * labeled alternative in `GroovyParser.namedPropertyArgPrimary`.
+	 * labeled alternative in `NextflowConfigParser.namedPropertyArgPrimary`.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
@@ -275,7 +282,7 @@ export interface GroovyParserVisitor<Result> extends ParseTreeVisitor<Result> {
 
 	/**
 	 * Visit a parse tree produced by the `closureOrLambdaExpressionPrmrAlt`
-	 * labeled alternative in `GroovyParser.primary`.
+	 * labeled alternative in `NextflowConfigParser.primary`.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
@@ -283,7 +290,7 @@ export interface GroovyParserVisitor<Result> extends ParseTreeVisitor<Result> {
 
 	/**
 	 * Visit a parse tree produced by the `listPrmrAlt`
-	 * labeled alternative in `GroovyParser.primary`.
+	 * labeled alternative in `NextflowConfigParser.primary`.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
@@ -291,7 +298,7 @@ export interface GroovyParserVisitor<Result> extends ParseTreeVisitor<Result> {
 
 	/**
 	 * Visit a parse tree produced by the `mapPrmrAlt`
-	 * labeled alternative in `GroovyParser.primary`.
+	 * labeled alternative in `NextflowConfigParser.primary`.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
@@ -299,7 +306,7 @@ export interface GroovyParserVisitor<Result> extends ParseTreeVisitor<Result> {
 
 	/**
 	 * Visit a parse tree produced by the `builtInTypePrmrAlt`
-	 * labeled alternative in `GroovyParser.primary`.
+	 * labeled alternative in `NextflowConfigParser.primary`.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
@@ -307,7 +314,7 @@ export interface GroovyParserVisitor<Result> extends ParseTreeVisitor<Result> {
 
 	/**
 	 * Visit a parse tree produced by the `integerLiteralAlt`
-	 * labeled alternative in `GroovyParser.literal`.
+	 * labeled alternative in `NextflowConfigParser.literal`.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
@@ -315,7 +322,7 @@ export interface GroovyParserVisitor<Result> extends ParseTreeVisitor<Result> {
 
 	/**
 	 * Visit a parse tree produced by the `floatingPointLiteralAlt`
-	 * labeled alternative in `GroovyParser.literal`.
+	 * labeled alternative in `NextflowConfigParser.literal`.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
@@ -323,7 +330,7 @@ export interface GroovyParserVisitor<Result> extends ParseTreeVisitor<Result> {
 
 	/**
 	 * Visit a parse tree produced by the `stringLiteralAlt`
-	 * labeled alternative in `GroovyParser.literal`.
+	 * labeled alternative in `NextflowConfigParser.literal`.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
@@ -331,7 +338,7 @@ export interface GroovyParserVisitor<Result> extends ParseTreeVisitor<Result> {
 
 	/**
 	 * Visit a parse tree produced by the `booleanLiteralAlt`
-	 * labeled alternative in `GroovyParser.literal`.
+	 * labeled alternative in `NextflowConfigParser.literal`.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
@@ -339,7 +346,7 @@ export interface GroovyParserVisitor<Result> extends ParseTreeVisitor<Result> {
 
 	/**
 	 * Visit a parse tree produced by the `nullLiteralAlt`
-	 * labeled alternative in `GroovyParser.literal`.
+	 * labeled alternative in `NextflowConfigParser.literal`.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
@@ -347,7 +354,7 @@ export interface GroovyParserVisitor<Result> extends ParseTreeVisitor<Result> {
 
 	/**
 	 * Visit a parse tree produced by the `castExprAlt`
-	 * labeled alternative in `GroovyParser.castOperandExpression`.
+	 * labeled alternative in `NextflowConfigParser.castOperandExpression`.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
@@ -355,7 +362,7 @@ export interface GroovyParserVisitor<Result> extends ParseTreeVisitor<Result> {
 
 	/**
 	 * Visit a parse tree produced by the `postfixExprAlt`
-	 * labeled alternative in `GroovyParser.castOperandExpression`.
+	 * labeled alternative in `NextflowConfigParser.castOperandExpression`.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
@@ -363,7 +370,7 @@ export interface GroovyParserVisitor<Result> extends ParseTreeVisitor<Result> {
 
 	/**
 	 * Visit a parse tree produced by the `switchExprAlt`
-	 * labeled alternative in `GroovyParser.expression`.
+	 * labeled alternative in `NextflowConfigParser.expression`.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
@@ -371,7 +378,7 @@ export interface GroovyParserVisitor<Result> extends ParseTreeVisitor<Result> {
 
 	/**
 	 * Visit a parse tree produced by the `unaryNotExprAlt`
-	 * labeled alternative in `GroovyParser.castOperandExpression`.
+	 * labeled alternative in `NextflowConfigParser.castOperandExpression`.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
@@ -379,7 +386,7 @@ export interface GroovyParserVisitor<Result> extends ParseTreeVisitor<Result> {
 
 	/**
 	 * Visit a parse tree produced by the `powerExprAlt`
-	 * labeled alternative in `GroovyParser.expression`.
+	 * labeled alternative in `NextflowConfigParser.expression`.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
@@ -387,7 +394,7 @@ export interface GroovyParserVisitor<Result> extends ParseTreeVisitor<Result> {
 
 	/**
 	 * Visit a parse tree produced by the `unaryAddExprAlt`
-	 * labeled alternative in `GroovyParser.castOperandExpression`.
+	 * labeled alternative in `NextflowConfigParser.castOperandExpression`.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
@@ -395,7 +402,7 @@ export interface GroovyParserVisitor<Result> extends ParseTreeVisitor<Result> {
 
 	/**
 	 * Visit a parse tree produced by the `multiplicativeExprAlt`
-	 * labeled alternative in `GroovyParser.expression`.
+	 * labeled alternative in `NextflowConfigParser.expression`.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
@@ -403,7 +410,7 @@ export interface GroovyParserVisitor<Result> extends ParseTreeVisitor<Result> {
 
 	/**
 	 * Visit a parse tree produced by the `additiveExprAlt`
-	 * labeled alternative in `GroovyParser.expression`.
+	 * labeled alternative in `NextflowConfigParser.expression`.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
@@ -411,7 +418,7 @@ export interface GroovyParserVisitor<Result> extends ParseTreeVisitor<Result> {
 
 	/**
 	 * Visit a parse tree produced by the `shiftExprAlt`
-	 * labeled alternative in `GroovyParser.expression`.
+	 * labeled alternative in `NextflowConfigParser.expression`.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
@@ -419,7 +426,7 @@ export interface GroovyParserVisitor<Result> extends ParseTreeVisitor<Result> {
 
 	/**
 	 * Visit a parse tree produced by the `relationalExprAlt`
-	 * labeled alternative in `GroovyParser.expression`.
+	 * labeled alternative in `NextflowConfigParser.expression`.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
@@ -427,7 +434,7 @@ export interface GroovyParserVisitor<Result> extends ParseTreeVisitor<Result> {
 
 	/**
 	 * Visit a parse tree produced by the `equalityExprAlt`
-	 * labeled alternative in `GroovyParser.expression`.
+	 * labeled alternative in `NextflowConfigParser.expression`.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
@@ -435,7 +442,7 @@ export interface GroovyParserVisitor<Result> extends ParseTreeVisitor<Result> {
 
 	/**
 	 * Visit a parse tree produced by the `regexExprAlt`
-	 * labeled alternative in `GroovyParser.expression`.
+	 * labeled alternative in `NextflowConfigParser.expression`.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
@@ -443,7 +450,7 @@ export interface GroovyParserVisitor<Result> extends ParseTreeVisitor<Result> {
 
 	/**
 	 * Visit a parse tree produced by the `andExprAlt`
-	 * labeled alternative in `GroovyParser.expression`.
+	 * labeled alternative in `NextflowConfigParser.expression`.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
@@ -451,7 +458,7 @@ export interface GroovyParserVisitor<Result> extends ParseTreeVisitor<Result> {
 
 	/**
 	 * Visit a parse tree produced by the `exclusiveOrExprAlt`
-	 * labeled alternative in `GroovyParser.expression`.
+	 * labeled alternative in `NextflowConfigParser.expression`.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
@@ -459,7 +466,7 @@ export interface GroovyParserVisitor<Result> extends ParseTreeVisitor<Result> {
 
 	/**
 	 * Visit a parse tree produced by the `inclusiveOrExprAlt`
-	 * labeled alternative in `GroovyParser.expression`.
+	 * labeled alternative in `NextflowConfigParser.expression`.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
@@ -467,7 +474,7 @@ export interface GroovyParserVisitor<Result> extends ParseTreeVisitor<Result> {
 
 	/**
 	 * Visit a parse tree produced by the `logicalAndExprAlt`
-	 * labeled alternative in `GroovyParser.expression`.
+	 * labeled alternative in `NextflowConfigParser.expression`.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
@@ -475,7 +482,7 @@ export interface GroovyParserVisitor<Result> extends ParseTreeVisitor<Result> {
 
 	/**
 	 * Visit a parse tree produced by the `logicalOrExprAlt`
-	 * labeled alternative in `GroovyParser.expression`.
+	 * labeled alternative in `NextflowConfigParser.expression`.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
@@ -483,7 +490,7 @@ export interface GroovyParserVisitor<Result> extends ParseTreeVisitor<Result> {
 
 	/**
 	 * Visit a parse tree produced by the `conditionalExprAlt`
-	 * labeled alternative in `GroovyParser.expression`.
+	 * labeled alternative in `NextflowConfigParser.expression`.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
@@ -491,7 +498,7 @@ export interface GroovyParserVisitor<Result> extends ParseTreeVisitor<Result> {
 
 	/**
 	 * Visit a parse tree produced by the `multipleAssignmentExprAlt`
-	 * labeled alternative in `GroovyParser.expression`.
+	 * labeled alternative in `NextflowConfigParser.expression`.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
@@ -499,7 +506,7 @@ export interface GroovyParserVisitor<Result> extends ParseTreeVisitor<Result> {
 
 	/**
 	 * Visit a parse tree produced by the `assignmentExprAlt`
-	 * labeled alternative in `GroovyParser.expression`.
+	 * labeled alternative in `NextflowConfigParser.expression`.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
@@ -507,7 +514,7 @@ export interface GroovyParserVisitor<Result> extends ParseTreeVisitor<Result> {
 
 	/**
 	 * Visit a parse tree produced by the `blockStmtAlt`
-	 * labeled alternative in `GroovyParser.statement`.
+	 * labeled alternative in `NextflowConfigParser.statement`.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
@@ -515,7 +522,7 @@ export interface GroovyParserVisitor<Result> extends ParseTreeVisitor<Result> {
 
 	/**
 	 * Visit a parse tree produced by the `conditionalStmtAlt`
-	 * labeled alternative in `GroovyParser.statement`.
+	 * labeled alternative in `NextflowConfigParser.statement`.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
@@ -523,7 +530,7 @@ export interface GroovyParserVisitor<Result> extends ParseTreeVisitor<Result> {
 
 	/**
 	 * Visit a parse tree produced by the `loopStmtAlt`
-	 * labeled alternative in `GroovyParser.statement`.
+	 * labeled alternative in `NextflowConfigParser.statement`.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
@@ -531,7 +538,7 @@ export interface GroovyParserVisitor<Result> extends ParseTreeVisitor<Result> {
 
 	/**
 	 * Visit a parse tree produced by the `tryCatchStmtAlt`
-	 * labeled alternative in `GroovyParser.statement`.
+	 * labeled alternative in `NextflowConfigParser.statement`.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
@@ -539,7 +546,7 @@ export interface GroovyParserVisitor<Result> extends ParseTreeVisitor<Result> {
 
 	/**
 	 * Visit a parse tree produced by the `synchronizedStmtAlt`
-	 * labeled alternative in `GroovyParser.statement`.
+	 * labeled alternative in `NextflowConfigParser.statement`.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
@@ -547,7 +554,7 @@ export interface GroovyParserVisitor<Result> extends ParseTreeVisitor<Result> {
 
 	/**
 	 * Visit a parse tree produced by the `returnStmtAlt`
-	 * labeled alternative in `GroovyParser.statement`.
+	 * labeled alternative in `NextflowConfigParser.statement`.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
@@ -555,7 +562,7 @@ export interface GroovyParserVisitor<Result> extends ParseTreeVisitor<Result> {
 
 	/**
 	 * Visit a parse tree produced by the `throwStmtAlt`
-	 * labeled alternative in `GroovyParser.statement`.
+	 * labeled alternative in `NextflowConfigParser.statement`.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
@@ -563,7 +570,7 @@ export interface GroovyParserVisitor<Result> extends ParseTreeVisitor<Result> {
 
 	/**
 	 * Visit a parse tree produced by the `breakStmtAlt`
-	 * labeled alternative in `GroovyParser.statement`.
+	 * labeled alternative in `NextflowConfigParser.statement`.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
@@ -571,7 +578,7 @@ export interface GroovyParserVisitor<Result> extends ParseTreeVisitor<Result> {
 
 	/**
 	 * Visit a parse tree produced by the `continueStmtAlt`
-	 * labeled alternative in `GroovyParser.statement`.
+	 * labeled alternative in `NextflowConfigParser.statement`.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
@@ -579,7 +586,7 @@ export interface GroovyParserVisitor<Result> extends ParseTreeVisitor<Result> {
 
 	/**
 	 * Visit a parse tree produced by the `yieldStmtAlt`
-	 * labeled alternative in `GroovyParser.statement`.
+	 * labeled alternative in `NextflowConfigParser.statement`.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
@@ -587,7 +594,7 @@ export interface GroovyParserVisitor<Result> extends ParseTreeVisitor<Result> {
 
 	/**
 	 * Visit a parse tree produced by the `labeledStmtAlt`
-	 * labeled alternative in `GroovyParser.statement`.
+	 * labeled alternative in `NextflowConfigParser.statement`.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
@@ -595,7 +602,7 @@ export interface GroovyParserVisitor<Result> extends ParseTreeVisitor<Result> {
 
 	/**
 	 * Visit a parse tree produced by the `assertStmtAlt`
-	 * labeled alternative in `GroovyParser.statement`.
+	 * labeled alternative in `NextflowConfigParser.statement`.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
@@ -603,7 +610,7 @@ export interface GroovyParserVisitor<Result> extends ParseTreeVisitor<Result> {
 
 	/**
 	 * Visit a parse tree produced by the `localVariableDeclarationStmtAlt`
-	 * labeled alternative in `GroovyParser.statement`.
+	 * labeled alternative in `NextflowConfigParser.statement`.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
@@ -611,7 +618,7 @@ export interface GroovyParserVisitor<Result> extends ParseTreeVisitor<Result> {
 
 	/**
 	 * Visit a parse tree produced by the `expressionStmtAlt`
-	 * labeled alternative in `GroovyParser.statement`.
+	 * labeled alternative in `NextflowConfigParser.statement`.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
@@ -619,7 +626,7 @@ export interface GroovyParserVisitor<Result> extends ParseTreeVisitor<Result> {
 
 	/**
 	 * Visit a parse tree produced by the `emptyStmtAlt`
-	 * labeled alternative in `GroovyParser.statement`.
+	 * labeled alternative in `NextflowConfigParser.statement`.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
@@ -627,7 +634,7 @@ export interface GroovyParserVisitor<Result> extends ParseTreeVisitor<Result> {
 
 	/**
 	 * Visit a parse tree produced by the `commandExprAlt`
-	 * labeled alternative in `GroovyParser.statementExpression`.
+	 * labeled alternative in `NextflowConfigParser.statementExpression`.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
@@ -635,7 +642,7 @@ export interface GroovyParserVisitor<Result> extends ParseTreeVisitor<Result> {
 
 	/**
 	 * Visit a parse tree produced by the `forStmtAlt`
-	 * labeled alternative in `GroovyParser.loopStatement`.
+	 * labeled alternative in `NextflowConfigParser.loopStatement`.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
@@ -643,7 +650,7 @@ export interface GroovyParserVisitor<Result> extends ParseTreeVisitor<Result> {
 
 	/**
 	 * Visit a parse tree produced by the `whileStmtAlt`
-	 * labeled alternative in `GroovyParser.loopStatement`.
+	 * labeled alternative in `NextflowConfigParser.loopStatement`.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
@@ -651,1043 +658,1078 @@ export interface GroovyParserVisitor<Result> extends ParseTreeVisitor<Result> {
 
 	/**
 	 * Visit a parse tree produced by the `doWhileStmtAlt`
-	 * labeled alternative in `GroovyParser.loopStatement`.
+	 * labeled alternative in `NextflowConfigParser.loopStatement`.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
 	visitDoWhileStmtAlt?: (ctx: DoWhileStmtAltContext) => Result;
 
 	/**
-	 * Visit a parse tree produced by `GroovyParser.compilationUnit`.
+	 * Visit a parse tree produced by `NextflowConfigParser.compilationUnit`.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
 	visitCompilationUnit?: (ctx: CompilationUnitContext) => Result;
 
 	/**
-	 * Visit a parse tree produced by `GroovyParser.scriptStatements`.
+	 * Visit a parse tree produced by `NextflowConfigParser.configStatement`.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	visitScriptStatements?: (ctx: ScriptStatementsContext) => Result;
+	visitConfigStatement?: (ctx: ConfigStatementContext) => Result;
 
 	/**
-	 * Visit a parse tree produced by `GroovyParser.scriptStatement`.
+	 * Visit a parse tree produced by `NextflowConfigParser.includeStatement`.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	visitScriptStatement?: (ctx: ScriptStatementContext) => Result;
+	visitIncludeStatement?: (ctx: IncludeStatementContext) => Result;
 
 	/**
-	 * Visit a parse tree produced by `GroovyParser.packageDeclaration`.
+	 * Visit a parse tree produced by `NextflowConfigParser.assignment`.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	visitPackageDeclaration?: (ctx: PackageDeclarationContext) => Result;
+	visitAssignment?: (ctx: AssignmentContext) => Result;
 
 	/**
-	 * Visit a parse tree produced by `GroovyParser.importDeclaration`.
+	 * Visit a parse tree produced by `NextflowConfigParser.configPathExpression`.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	visitImportDeclaration?: (ctx: ImportDeclarationContext) => Result;
+	visitConfigPathExpression?: (ctx: ConfigPathExpressionContext) => Result;
 
 	/**
-	 * Visit a parse tree produced by `GroovyParser.typeDeclaration`.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	visitTypeDeclaration?: (ctx: TypeDeclarationContext) => Result;
-
-	/**
-	 * Visit a parse tree produced by `GroovyParser.modifier`.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	visitModifier?: (ctx: ModifierContext) => Result;
-
-	/**
-	 * Visit a parse tree produced by `GroovyParser.modifiersOpt`.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	visitModifiersOpt?: (ctx: ModifiersOptContext) => Result;
-
-	/**
-	 * Visit a parse tree produced by `GroovyParser.modifiers`.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	visitModifiers?: (ctx: ModifiersContext) => Result;
-
-	/**
-	 * Visit a parse tree produced by `GroovyParser.classOrInterfaceModifiersOpt`.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	visitClassOrInterfaceModifiersOpt?: (ctx: ClassOrInterfaceModifiersOptContext) => Result;
-
-	/**
-	 * Visit a parse tree produced by `GroovyParser.classOrInterfaceModifiers`.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	visitClassOrInterfaceModifiers?: (ctx: ClassOrInterfaceModifiersContext) => Result;
-
-	/**
-	 * Visit a parse tree produced by `GroovyParser.classOrInterfaceModifier`.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	visitClassOrInterfaceModifier?: (ctx: ClassOrInterfaceModifierContext) => Result;
-
-	/**
-	 * Visit a parse tree produced by `GroovyParser.variableModifier`.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	visitVariableModifier?: (ctx: VariableModifierContext) => Result;
-
-	/**
-	 * Visit a parse tree produced by `GroovyParser.variableModifiersOpt`.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	visitVariableModifiersOpt?: (ctx: VariableModifiersOptContext) => Result;
-
-	/**
-	 * Visit a parse tree produced by `GroovyParser.variableModifiers`.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	visitVariableModifiers?: (ctx: VariableModifiersContext) => Result;
-
-	/**
-	 * Visit a parse tree produced by `GroovyParser.typeParameters`.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	visitTypeParameters?: (ctx: TypeParametersContext) => Result;
-
-	/**
-	 * Visit a parse tree produced by `GroovyParser.typeParameter`.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	visitTypeParameter?: (ctx: TypeParameterContext) => Result;
-
-	/**
-	 * Visit a parse tree produced by `GroovyParser.typeBound`.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	visitTypeBound?: (ctx: TypeBoundContext) => Result;
-
-	/**
-	 * Visit a parse tree produced by `GroovyParser.typeList`.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	visitTypeList?: (ctx: TypeListContext) => Result;
-
-	/**
-	 * Visit a parse tree produced by `GroovyParser.classDeclaration`.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	visitClassDeclaration?: (ctx: ClassDeclarationContext) => Result;
-
-	/**
-	 * Visit a parse tree produced by `GroovyParser.classBody`.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	visitClassBody?: (ctx: ClassBodyContext) => Result;
-
-	/**
-	 * Visit a parse tree produced by `GroovyParser.enumConstants`.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	visitEnumConstants?: (ctx: EnumConstantsContext) => Result;
-
-	/**
-	 * Visit a parse tree produced by `GroovyParser.enumConstant`.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	visitEnumConstant?: (ctx: EnumConstantContext) => Result;
-
-	/**
-	 * Visit a parse tree produced by `GroovyParser.classBodyDeclaration`.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	visitClassBodyDeclaration?: (ctx: ClassBodyDeclarationContext) => Result;
-
-	/**
-	 * Visit a parse tree produced by `GroovyParser.memberDeclaration`.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	visitMemberDeclaration?: (ctx: MemberDeclarationContext) => Result;
-
-	/**
-	 * Visit a parse tree produced by `GroovyParser.methodDeclaration`.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	visitMethodDeclaration?: (ctx: MethodDeclarationContext) => Result;
-
-	/**
-	 * Visit a parse tree produced by `GroovyParser.compactConstructorDeclaration`.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	visitCompactConstructorDeclaration?: (ctx: CompactConstructorDeclarationContext) => Result;
-
-	/**
-	 * Visit a parse tree produced by `GroovyParser.methodName`.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	visitMethodName?: (ctx: MethodNameContext) => Result;
-
-	/**
-	 * Visit a parse tree produced by `GroovyParser.returnType`.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	visitReturnType?: (ctx: ReturnTypeContext) => Result;
-
-	/**
-	 * Visit a parse tree produced by `GroovyParser.fieldDeclaration`.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	visitFieldDeclaration?: (ctx: FieldDeclarationContext) => Result;
-
-	/**
-	 * Visit a parse tree produced by `GroovyParser.variableDeclarators`.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	visitVariableDeclarators?: (ctx: VariableDeclaratorsContext) => Result;
-
-	/**
-	 * Visit a parse tree produced by `GroovyParser.variableDeclarator`.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	visitVariableDeclarator?: (ctx: VariableDeclaratorContext) => Result;
-
-	/**
-	 * Visit a parse tree produced by `GroovyParser.variableDeclaratorId`.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	visitVariableDeclaratorId?: (ctx: VariableDeclaratorIdContext) => Result;
-
-	/**
-	 * Visit a parse tree produced by `GroovyParser.variableInitializer`.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	visitVariableInitializer?: (ctx: VariableInitializerContext) => Result;
-
-	/**
-	 * Visit a parse tree produced by `GroovyParser.variableInitializers`.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	visitVariableInitializers?: (ctx: VariableInitializersContext) => Result;
-
-	/**
-	 * Visit a parse tree produced by `GroovyParser.emptyDims`.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	visitEmptyDims?: (ctx: EmptyDimsContext) => Result;
-
-	/**
-	 * Visit a parse tree produced by `GroovyParser.emptyDimsOpt`.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	visitEmptyDimsOpt?: (ctx: EmptyDimsOptContext) => Result;
-
-	/**
-	 * Visit a parse tree produced by `GroovyParser.type`.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	visitType?: (ctx: TypeContext) => Result;
-
-	/**
-	 * Visit a parse tree produced by `GroovyParser.classOrInterfaceType`.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	visitClassOrInterfaceType?: (ctx: ClassOrInterfaceTypeContext) => Result;
-
-	/**
-	 * Visit a parse tree produced by `GroovyParser.primitiveType`.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	visitPrimitiveType?: (ctx: PrimitiveTypeContext) => Result;
-
-	/**
-	 * Visit a parse tree produced by `GroovyParser.typeArguments`.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	visitTypeArguments?: (ctx: TypeArgumentsContext) => Result;
-
-	/**
-	 * Visit a parse tree produced by `GroovyParser.typeArgument`.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	visitTypeArgument?: (ctx: TypeArgumentContext) => Result;
-
-	/**
-	 * Visit a parse tree produced by `GroovyParser.annotatedQualifiedClassName`.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	visitAnnotatedQualifiedClassName?: (ctx: AnnotatedQualifiedClassNameContext) => Result;
-
-	/**
-	 * Visit a parse tree produced by `GroovyParser.qualifiedClassNameList`.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	visitQualifiedClassNameList?: (ctx: QualifiedClassNameListContext) => Result;
-
-	/**
-	 * Visit a parse tree produced by `GroovyParser.formalParameters`.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	visitFormalParameters?: (ctx: FormalParametersContext) => Result;
-
-	/**
-	 * Visit a parse tree produced by `GroovyParser.formalParameterList`.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	visitFormalParameterList?: (ctx: FormalParameterListContext) => Result;
-
-	/**
-	 * Visit a parse tree produced by `GroovyParser.thisFormalParameter`.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	visitThisFormalParameter?: (ctx: ThisFormalParameterContext) => Result;
-
-	/**
-	 * Visit a parse tree produced by `GroovyParser.formalParameter`.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	visitFormalParameter?: (ctx: FormalParameterContext) => Result;
-
-	/**
-	 * Visit a parse tree produced by `GroovyParser.methodBody`.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	visitMethodBody?: (ctx: MethodBodyContext) => Result;
-
-	/**
-	 * Visit a parse tree produced by `GroovyParser.qualifiedName`.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	visitQualifiedName?: (ctx: QualifiedNameContext) => Result;
-
-	/**
-	 * Visit a parse tree produced by `GroovyParser.qualifiedNameElement`.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	visitQualifiedNameElement?: (ctx: QualifiedNameElementContext) => Result;
-
-	/**
-	 * Visit a parse tree produced by `GroovyParser.qualifiedNameElements`.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	visitQualifiedNameElements?: (ctx: QualifiedNameElementsContext) => Result;
-
-	/**
-	 * Visit a parse tree produced by `GroovyParser.qualifiedClassName`.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	visitQualifiedClassName?: (ctx: QualifiedClassNameContext) => Result;
-
-	/**
-	 * Visit a parse tree produced by `GroovyParser.qualifiedStandardClassName`.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	visitQualifiedStandardClassName?: (ctx: QualifiedStandardClassNameContext) => Result;
-
-	/**
-	 * Visit a parse tree produced by `GroovyParser.literal`.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	visitLiteral?: (ctx: LiteralContext) => Result;
-
-	/**
-	 * Visit a parse tree produced by `GroovyParser.gstring`.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	visitGstring?: (ctx: GstringContext) => Result;
-
-	/**
-	 * Visit a parse tree produced by `GroovyParser.gstringValue`.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	visitGstringValue?: (ctx: GstringValueContext) => Result;
-
-	/**
-	 * Visit a parse tree produced by `GroovyParser.gstringPath`.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	visitGstringPath?: (ctx: GstringPathContext) => Result;
-
-	/**
-	 * Visit a parse tree produced by `GroovyParser.standardLambdaExpression`.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	visitStandardLambdaExpression?: (ctx: StandardLambdaExpressionContext) => Result;
-
-	/**
-	 * Visit a parse tree produced by `GroovyParser.standardLambdaParameters`.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	visitStandardLambdaParameters?: (ctx: StandardLambdaParametersContext) => Result;
-
-	/**
-	 * Visit a parse tree produced by `GroovyParser.lambdaBody`.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	visitLambdaBody?: (ctx: LambdaBodyContext) => Result;
-
-	/**
-	 * Visit a parse tree produced by `GroovyParser.closure`.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	visitClosure?: (ctx: ClosureContext) => Result;
-
-	/**
-	 * Visit a parse tree produced by `GroovyParser.closureOrLambdaExpression`.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	visitClosureOrLambdaExpression?: (ctx: ClosureOrLambdaExpressionContext) => Result;
-
-	/**
-	 * Visit a parse tree produced by `GroovyParser.blockStatementsOpt`.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	visitBlockStatementsOpt?: (ctx: BlockStatementsOptContext) => Result;
-
-	/**
-	 * Visit a parse tree produced by `GroovyParser.blockStatements`.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	visitBlockStatements?: (ctx: BlockStatementsContext) => Result;
-
-	/**
-	 * Visit a parse tree produced by `GroovyParser.annotationsOpt`.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	visitAnnotationsOpt?: (ctx: AnnotationsOptContext) => Result;
-
-	/**
-	 * Visit a parse tree produced by `GroovyParser.annotation`.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	visitAnnotation?: (ctx: AnnotationContext) => Result;
-
-	/**
-	 * Visit a parse tree produced by `GroovyParser.elementValues`.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	visitElementValues?: (ctx: ElementValuesContext) => Result;
-
-	/**
-	 * Visit a parse tree produced by `GroovyParser.annotationName`.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	visitAnnotationName?: (ctx: AnnotationNameContext) => Result;
-
-	/**
-	 * Visit a parse tree produced by `GroovyParser.elementValuePairs`.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	visitElementValuePairs?: (ctx: ElementValuePairsContext) => Result;
-
-	/**
-	 * Visit a parse tree produced by `GroovyParser.elementValuePair`.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	visitElementValuePair?: (ctx: ElementValuePairContext) => Result;
-
-	/**
-	 * Visit a parse tree produced by `GroovyParser.elementValuePairName`.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	visitElementValuePairName?: (ctx: ElementValuePairNameContext) => Result;
-
-	/**
-	 * Visit a parse tree produced by `GroovyParser.elementValue`.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	visitElementValue?: (ctx: ElementValueContext) => Result;
-
-	/**
-	 * Visit a parse tree produced by `GroovyParser.elementValueArrayInitializer`.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	visitElementValueArrayInitializer?: (ctx: ElementValueArrayInitializerContext) => Result;
-
-	/**
-	 * Visit a parse tree produced by `GroovyParser.block`.
+	 * Visit a parse tree produced by `NextflowConfigParser.block`.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
 	visitBlock?: (ctx: BlockContext) => Result;
 
 	/**
-	 * Visit a parse tree produced by `GroovyParser.blockStatement`.
+	 * Visit a parse tree produced by `NextflowConfigParser.blockStatement`.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
 	visitBlockStatement?: (ctx: BlockStatementContext) => Result;
 
 	/**
-	 * Visit a parse tree produced by `GroovyParser.localVariableDeclaration`.
+	 * Visit a parse tree produced by `NextflowConfigParser.selector`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitSelector?: (ctx: SelectorContext) => Result;
+
+	/**
+	 * Visit a parse tree produced by `NextflowConfigParser.scriptStatements`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitScriptStatements?: (ctx: ScriptStatementsContext) => Result;
+
+	/**
+	 * Visit a parse tree produced by `NextflowConfigParser.scriptStatement`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitScriptStatement?: (ctx: ScriptStatementContext) => Result;
+
+	/**
+	 * Visit a parse tree produced by `NextflowConfigParser.packageDeclaration`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitPackageDeclaration?: (ctx: PackageDeclarationContext) => Result;
+
+	/**
+	 * Visit a parse tree produced by `NextflowConfigParser.importDeclaration`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitImportDeclaration?: (ctx: ImportDeclarationContext) => Result;
+
+	/**
+	 * Visit a parse tree produced by `NextflowConfigParser.typeDeclaration`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitTypeDeclaration?: (ctx: TypeDeclarationContext) => Result;
+
+	/**
+	 * Visit a parse tree produced by `NextflowConfigParser.modifier`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitModifier?: (ctx: ModifierContext) => Result;
+
+	/**
+	 * Visit a parse tree produced by `NextflowConfigParser.modifiersOpt`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitModifiersOpt?: (ctx: ModifiersOptContext) => Result;
+
+	/**
+	 * Visit a parse tree produced by `NextflowConfigParser.modifiers`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitModifiers?: (ctx: ModifiersContext) => Result;
+
+	/**
+	 * Visit a parse tree produced by `NextflowConfigParser.classOrInterfaceModifiersOpt`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitClassOrInterfaceModifiersOpt?: (ctx: ClassOrInterfaceModifiersOptContext) => Result;
+
+	/**
+	 * Visit a parse tree produced by `NextflowConfigParser.classOrInterfaceModifiers`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitClassOrInterfaceModifiers?: (ctx: ClassOrInterfaceModifiersContext) => Result;
+
+	/**
+	 * Visit a parse tree produced by `NextflowConfigParser.classOrInterfaceModifier`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitClassOrInterfaceModifier?: (ctx: ClassOrInterfaceModifierContext) => Result;
+
+	/**
+	 * Visit a parse tree produced by `NextflowConfigParser.variableModifier`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitVariableModifier?: (ctx: VariableModifierContext) => Result;
+
+	/**
+	 * Visit a parse tree produced by `NextflowConfigParser.variableModifiersOpt`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitVariableModifiersOpt?: (ctx: VariableModifiersOptContext) => Result;
+
+	/**
+	 * Visit a parse tree produced by `NextflowConfigParser.variableModifiers`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitVariableModifiers?: (ctx: VariableModifiersContext) => Result;
+
+	/**
+	 * Visit a parse tree produced by `NextflowConfigParser.typeParameters`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitTypeParameters?: (ctx: TypeParametersContext) => Result;
+
+	/**
+	 * Visit a parse tree produced by `NextflowConfigParser.typeParameter`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitTypeParameter?: (ctx: TypeParameterContext) => Result;
+
+	/**
+	 * Visit a parse tree produced by `NextflowConfigParser.typeBound`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitTypeBound?: (ctx: TypeBoundContext) => Result;
+
+	/**
+	 * Visit a parse tree produced by `NextflowConfigParser.typeList`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitTypeList?: (ctx: TypeListContext) => Result;
+
+	/**
+	 * Visit a parse tree produced by `NextflowConfigParser.classDeclaration`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitClassDeclaration?: (ctx: ClassDeclarationContext) => Result;
+
+	/**
+	 * Visit a parse tree produced by `NextflowConfigParser.classBody`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitClassBody?: (ctx: ClassBodyContext) => Result;
+
+	/**
+	 * Visit a parse tree produced by `NextflowConfigParser.enumConstants`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitEnumConstants?: (ctx: EnumConstantsContext) => Result;
+
+	/**
+	 * Visit a parse tree produced by `NextflowConfigParser.enumConstant`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitEnumConstant?: (ctx: EnumConstantContext) => Result;
+
+	/**
+	 * Visit a parse tree produced by `NextflowConfigParser.classBodyDeclaration`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitClassBodyDeclaration?: (ctx: ClassBodyDeclarationContext) => Result;
+
+	/**
+	 * Visit a parse tree produced by `NextflowConfigParser.memberDeclaration`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitMemberDeclaration?: (ctx: MemberDeclarationContext) => Result;
+
+	/**
+	 * Visit a parse tree produced by `NextflowConfigParser.methodDeclaration`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitMethodDeclaration?: (ctx: MethodDeclarationContext) => Result;
+
+	/**
+	 * Visit a parse tree produced by `NextflowConfigParser.compactConstructorDeclaration`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitCompactConstructorDeclaration?: (ctx: CompactConstructorDeclarationContext) => Result;
+
+	/**
+	 * Visit a parse tree produced by `NextflowConfigParser.methodName`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitMethodName?: (ctx: MethodNameContext) => Result;
+
+	/**
+	 * Visit a parse tree produced by `NextflowConfigParser.returnType`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitReturnType?: (ctx: ReturnTypeContext) => Result;
+
+	/**
+	 * Visit a parse tree produced by `NextflowConfigParser.fieldDeclaration`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitFieldDeclaration?: (ctx: FieldDeclarationContext) => Result;
+
+	/**
+	 * Visit a parse tree produced by `NextflowConfigParser.variableDeclarators`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitVariableDeclarators?: (ctx: VariableDeclaratorsContext) => Result;
+
+	/**
+	 * Visit a parse tree produced by `NextflowConfigParser.variableDeclarator`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitVariableDeclarator?: (ctx: VariableDeclaratorContext) => Result;
+
+	/**
+	 * Visit a parse tree produced by `NextflowConfigParser.variableDeclaratorId`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitVariableDeclaratorId?: (ctx: VariableDeclaratorIdContext) => Result;
+
+	/**
+	 * Visit a parse tree produced by `NextflowConfigParser.variableInitializer`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitVariableInitializer?: (ctx: VariableInitializerContext) => Result;
+
+	/**
+	 * Visit a parse tree produced by `NextflowConfigParser.variableInitializers`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitVariableInitializers?: (ctx: VariableInitializersContext) => Result;
+
+	/**
+	 * Visit a parse tree produced by `NextflowConfigParser.emptyDims`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitEmptyDims?: (ctx: EmptyDimsContext) => Result;
+
+	/**
+	 * Visit a parse tree produced by `NextflowConfigParser.emptyDimsOpt`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitEmptyDimsOpt?: (ctx: EmptyDimsOptContext) => Result;
+
+	/**
+	 * Visit a parse tree produced by `NextflowConfigParser.type`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitType?: (ctx: TypeContext) => Result;
+
+	/**
+	 * Visit a parse tree produced by `NextflowConfigParser.classOrInterfaceType`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitClassOrInterfaceType?: (ctx: ClassOrInterfaceTypeContext) => Result;
+
+	/**
+	 * Visit a parse tree produced by `NextflowConfigParser.primitiveType`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitPrimitiveType?: (ctx: PrimitiveTypeContext) => Result;
+
+	/**
+	 * Visit a parse tree produced by `NextflowConfigParser.typeArguments`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitTypeArguments?: (ctx: TypeArgumentsContext) => Result;
+
+	/**
+	 * Visit a parse tree produced by `NextflowConfigParser.typeArgument`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitTypeArgument?: (ctx: TypeArgumentContext) => Result;
+
+	/**
+	 * Visit a parse tree produced by `NextflowConfigParser.annotatedQualifiedClassName`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitAnnotatedQualifiedClassName?: (ctx: AnnotatedQualifiedClassNameContext) => Result;
+
+	/**
+	 * Visit a parse tree produced by `NextflowConfigParser.qualifiedClassNameList`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitQualifiedClassNameList?: (ctx: QualifiedClassNameListContext) => Result;
+
+	/**
+	 * Visit a parse tree produced by `NextflowConfigParser.formalParameters`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitFormalParameters?: (ctx: FormalParametersContext) => Result;
+
+	/**
+	 * Visit a parse tree produced by `NextflowConfigParser.formalParameterList`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitFormalParameterList?: (ctx: FormalParameterListContext) => Result;
+
+	/**
+	 * Visit a parse tree produced by `NextflowConfigParser.thisFormalParameter`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitThisFormalParameter?: (ctx: ThisFormalParameterContext) => Result;
+
+	/**
+	 * Visit a parse tree produced by `NextflowConfigParser.formalParameter`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitFormalParameter?: (ctx: FormalParameterContext) => Result;
+
+	/**
+	 * Visit a parse tree produced by `NextflowConfigParser.methodBody`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitMethodBody?: (ctx: MethodBodyContext) => Result;
+
+	/**
+	 * Visit a parse tree produced by `NextflowConfigParser.qualifiedName`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitQualifiedName?: (ctx: QualifiedNameContext) => Result;
+
+	/**
+	 * Visit a parse tree produced by `NextflowConfigParser.qualifiedNameElement`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitQualifiedNameElement?: (ctx: QualifiedNameElementContext) => Result;
+
+	/**
+	 * Visit a parse tree produced by `NextflowConfigParser.qualifiedNameElements`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitQualifiedNameElements?: (ctx: QualifiedNameElementsContext) => Result;
+
+	/**
+	 * Visit a parse tree produced by `NextflowConfigParser.qualifiedClassName`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitQualifiedClassName?: (ctx: QualifiedClassNameContext) => Result;
+
+	/**
+	 * Visit a parse tree produced by `NextflowConfigParser.qualifiedStandardClassName`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitQualifiedStandardClassName?: (ctx: QualifiedStandardClassNameContext) => Result;
+
+	/**
+	 * Visit a parse tree produced by `NextflowConfigParser.literal`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitLiteral?: (ctx: LiteralContext) => Result;
+
+	/**
+	 * Visit a parse tree produced by `NextflowConfigParser.gstring`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitGstring?: (ctx: GstringContext) => Result;
+
+	/**
+	 * Visit a parse tree produced by `NextflowConfigParser.gstringValue`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitGstringValue?: (ctx: GstringValueContext) => Result;
+
+	/**
+	 * Visit a parse tree produced by `NextflowConfigParser.gstringPath`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitGstringPath?: (ctx: GstringPathContext) => Result;
+
+	/**
+	 * Visit a parse tree produced by `NextflowConfigParser.standardLambdaExpression`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitStandardLambdaExpression?: (ctx: StandardLambdaExpressionContext) => Result;
+
+	/**
+	 * Visit a parse tree produced by `NextflowConfigParser.standardLambdaParameters`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitStandardLambdaParameters?: (ctx: StandardLambdaParametersContext) => Result;
+
+	/**
+	 * Visit a parse tree produced by `NextflowConfigParser.lambdaBody`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitLambdaBody?: (ctx: LambdaBodyContext) => Result;
+
+	/**
+	 * Visit a parse tree produced by `NextflowConfigParser.closure`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitClosure?: (ctx: ClosureContext) => Result;
+
+	/**
+	 * Visit a parse tree produced by `NextflowConfigParser.closureOrLambdaExpression`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitClosureOrLambdaExpression?: (ctx: ClosureOrLambdaExpressionContext) => Result;
+
+	/**
+	 * Visit a parse tree produced by `NextflowConfigParser.blockStatementsOpt`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitBlockStatementsOpt?: (ctx: BlockStatementsOptContext) => Result;
+
+	/**
+	 * Visit a parse tree produced by `NextflowConfigParser.blockStatements`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitBlockStatements?: (ctx: BlockStatementsContext) => Result;
+
+	/**
+	 * Visit a parse tree produced by `NextflowConfigParser.annotationsOpt`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitAnnotationsOpt?: (ctx: AnnotationsOptContext) => Result;
+
+	/**
+	 * Visit a parse tree produced by `NextflowConfigParser.annotation`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitAnnotation?: (ctx: AnnotationContext) => Result;
+
+	/**
+	 * Visit a parse tree produced by `NextflowConfigParser.elementValues`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitElementValues?: (ctx: ElementValuesContext) => Result;
+
+	/**
+	 * Visit a parse tree produced by `NextflowConfigParser.annotationName`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitAnnotationName?: (ctx: AnnotationNameContext) => Result;
+
+	/**
+	 * Visit a parse tree produced by `NextflowConfigParser.elementValuePairs`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitElementValuePairs?: (ctx: ElementValuePairsContext) => Result;
+
+	/**
+	 * Visit a parse tree produced by `NextflowConfigParser.elementValuePair`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitElementValuePair?: (ctx: ElementValuePairContext) => Result;
+
+	/**
+	 * Visit a parse tree produced by `NextflowConfigParser.elementValuePairName`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitElementValuePairName?: (ctx: ElementValuePairNameContext) => Result;
+
+	/**
+	 * Visit a parse tree produced by `NextflowConfigParser.elementValue`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitElementValue?: (ctx: ElementValueContext) => Result;
+
+	/**
+	 * Visit a parse tree produced by `NextflowConfigParser.elementValueArrayInitializer`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitElementValueArrayInitializer?: (ctx: ElementValueArrayInitializerContext) => Result;
+
+	/**
+	 * Visit a parse tree produced by `NextflowConfigParser.localVariableDeclaration`.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
 	visitLocalVariableDeclaration?: (ctx: LocalVariableDeclarationContext) => Result;
 
 	/**
-	 * Visit a parse tree produced by `GroovyParser.variableDeclaration`.
+	 * Visit a parse tree produced by `NextflowConfigParser.variableDeclaration`.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
 	visitVariableDeclaration?: (ctx: VariableDeclarationContext) => Result;
 
 	/**
-	 * Visit a parse tree produced by `GroovyParser.typeNamePairs`.
+	 * Visit a parse tree produced by `NextflowConfigParser.typeNamePairs`.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
 	visitTypeNamePairs?: (ctx: TypeNamePairsContext) => Result;
 
 	/**
-	 * Visit a parse tree produced by `GroovyParser.typeNamePair`.
+	 * Visit a parse tree produced by `NextflowConfigParser.typeNamePair`.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
 	visitTypeNamePair?: (ctx: TypeNamePairContext) => Result;
 
 	/**
-	 * Visit a parse tree produced by `GroovyParser.variableNames`.
+	 * Visit a parse tree produced by `NextflowConfigParser.variableNames`.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
 	visitVariableNames?: (ctx: VariableNamesContext) => Result;
 
 	/**
-	 * Visit a parse tree produced by `GroovyParser.conditionalStatement`.
+	 * Visit a parse tree produced by `NextflowConfigParser.conditionalStatement`.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
 	visitConditionalStatement?: (ctx: ConditionalStatementContext) => Result;
 
 	/**
-	 * Visit a parse tree produced by `GroovyParser.ifElseStatement`.
+	 * Visit a parse tree produced by `NextflowConfigParser.ifElseStatement`.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
 	visitIfElseStatement?: (ctx: IfElseStatementContext) => Result;
 
 	/**
-	 * Visit a parse tree produced by `GroovyParser.switchStatement`.
+	 * Visit a parse tree produced by `NextflowConfigParser.switchStatement`.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
 	visitSwitchStatement?: (ctx: SwitchStatementContext) => Result;
 
 	/**
-	 * Visit a parse tree produced by `GroovyParser.loopStatement`.
+	 * Visit a parse tree produced by `NextflowConfigParser.loopStatement`.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
 	visitLoopStatement?: (ctx: LoopStatementContext) => Result;
 
 	/**
-	 * Visit a parse tree produced by `GroovyParser.continueStatement`.
+	 * Visit a parse tree produced by `NextflowConfigParser.continueStatement`.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
 	visitContinueStatement?: (ctx: ContinueStatementContext) => Result;
 
 	/**
-	 * Visit a parse tree produced by `GroovyParser.breakStatement`.
+	 * Visit a parse tree produced by `NextflowConfigParser.breakStatement`.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
 	visitBreakStatement?: (ctx: BreakStatementContext) => Result;
 
 	/**
-	 * Visit a parse tree produced by `GroovyParser.yieldStatement`.
+	 * Visit a parse tree produced by `NextflowConfigParser.yieldStatement`.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
 	visitYieldStatement?: (ctx: YieldStatementContext) => Result;
 
 	/**
-	 * Visit a parse tree produced by `GroovyParser.tryCatchStatement`.
+	 * Visit a parse tree produced by `NextflowConfigParser.tryCatchStatement`.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
 	visitTryCatchStatement?: (ctx: TryCatchStatementContext) => Result;
 
 	/**
-	 * Visit a parse tree produced by `GroovyParser.assertStatement`.
+	 * Visit a parse tree produced by `NextflowConfigParser.assertStatement`.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
 	visitAssertStatement?: (ctx: AssertStatementContext) => Result;
 
 	/**
-	 * Visit a parse tree produced by `GroovyParser.statement`.
+	 * Visit a parse tree produced by `NextflowConfigParser.statement`.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
 	visitStatement?: (ctx: StatementContext) => Result;
 
 	/**
-	 * Visit a parse tree produced by `GroovyParser.catchClause`.
+	 * Visit a parse tree produced by `NextflowConfigParser.catchClause`.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
 	visitCatchClause?: (ctx: CatchClauseContext) => Result;
 
 	/**
-	 * Visit a parse tree produced by `GroovyParser.catchType`.
+	 * Visit a parse tree produced by `NextflowConfigParser.catchType`.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
 	visitCatchType?: (ctx: CatchTypeContext) => Result;
 
 	/**
-	 * Visit a parse tree produced by `GroovyParser.finallyBlock`.
+	 * Visit a parse tree produced by `NextflowConfigParser.finallyBlock`.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
 	visitFinallyBlock?: (ctx: FinallyBlockContext) => Result;
 
 	/**
-	 * Visit a parse tree produced by `GroovyParser.resources`.
+	 * Visit a parse tree produced by `NextflowConfigParser.resources`.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
 	visitResources?: (ctx: ResourcesContext) => Result;
 
 	/**
-	 * Visit a parse tree produced by `GroovyParser.resourceList`.
+	 * Visit a parse tree produced by `NextflowConfigParser.resourceList`.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
 	visitResourceList?: (ctx: ResourceListContext) => Result;
 
 	/**
-	 * Visit a parse tree produced by `GroovyParser.resource`.
+	 * Visit a parse tree produced by `NextflowConfigParser.resource`.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
 	visitResource?: (ctx: ResourceContext) => Result;
 
 	/**
-	 * Visit a parse tree produced by `GroovyParser.switchBlockStatementGroup`.
+	 * Visit a parse tree produced by `NextflowConfigParser.switchBlockStatementGroup`.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
 	visitSwitchBlockStatementGroup?: (ctx: SwitchBlockStatementGroupContext) => Result;
 
 	/**
-	 * Visit a parse tree produced by `GroovyParser.switchLabel`.
+	 * Visit a parse tree produced by `NextflowConfigParser.switchLabel`.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
 	visitSwitchLabel?: (ctx: SwitchLabelContext) => Result;
 
 	/**
-	 * Visit a parse tree produced by `GroovyParser.forControl`.
+	 * Visit a parse tree produced by `NextflowConfigParser.forControl`.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
 	visitForControl?: (ctx: ForControlContext) => Result;
 
 	/**
-	 * Visit a parse tree produced by `GroovyParser.enhancedForControl`.
+	 * Visit a parse tree produced by `NextflowConfigParser.enhancedForControl`.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
 	visitEnhancedForControl?: (ctx: EnhancedForControlContext) => Result;
 
 	/**
-	 * Visit a parse tree produced by `GroovyParser.classicalForControl`.
+	 * Visit a parse tree produced by `NextflowConfigParser.classicalForControl`.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
 	visitClassicalForControl?: (ctx: ClassicalForControlContext) => Result;
 
 	/**
-	 * Visit a parse tree produced by `GroovyParser.forInit`.
+	 * Visit a parse tree produced by `NextflowConfigParser.forInit`.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
 	visitForInit?: (ctx: ForInitContext) => Result;
 
 	/**
-	 * Visit a parse tree produced by `GroovyParser.forUpdate`.
+	 * Visit a parse tree produced by `NextflowConfigParser.forUpdate`.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
 	visitForUpdate?: (ctx: ForUpdateContext) => Result;
 
 	/**
-	 * Visit a parse tree produced by `GroovyParser.castParExpression`.
+	 * Visit a parse tree produced by `NextflowConfigParser.castParExpression`.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
 	visitCastParExpression?: (ctx: CastParExpressionContext) => Result;
 
 	/**
-	 * Visit a parse tree produced by `GroovyParser.parExpression`.
+	 * Visit a parse tree produced by `NextflowConfigParser.parExpression`.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
 	visitParExpression?: (ctx: ParExpressionContext) => Result;
 
 	/**
-	 * Visit a parse tree produced by `GroovyParser.expressionInPar`.
+	 * Visit a parse tree produced by `NextflowConfigParser.expressionInPar`.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
 	visitExpressionInPar?: (ctx: ExpressionInParContext) => Result;
 
 	/**
-	 * Visit a parse tree produced by `GroovyParser.expressionList`.
+	 * Visit a parse tree produced by `NextflowConfigParser.expressionList`.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
 	visitExpressionList?: (ctx: ExpressionListContext) => Result;
 
 	/**
-	 * Visit a parse tree produced by `GroovyParser.expressionListElement`.
+	 * Visit a parse tree produced by `NextflowConfigParser.expressionListElement`.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
 	visitExpressionListElement?: (ctx: ExpressionListElementContext) => Result;
 
 	/**
-	 * Visit a parse tree produced by `GroovyParser.enhancedStatementExpression`.
+	 * Visit a parse tree produced by `NextflowConfigParser.enhancedStatementExpression`.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
 	visitEnhancedStatementExpression?: (ctx: EnhancedStatementExpressionContext) => Result;
 
 	/**
-	 * Visit a parse tree produced by `GroovyParser.statementExpression`.
+	 * Visit a parse tree produced by `NextflowConfigParser.statementExpression`.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
 	visitStatementExpression?: (ctx: StatementExpressionContext) => Result;
 
 	/**
-	 * Visit a parse tree produced by `GroovyParser.postfixExpression`.
+	 * Visit a parse tree produced by `NextflowConfigParser.postfixExpression`.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
 	visitPostfixExpression?: (ctx: PostfixExpressionContext) => Result;
 
 	/**
-	 * Visit a parse tree produced by `GroovyParser.switchExpression`.
+	 * Visit a parse tree produced by `NextflowConfigParser.switchExpression`.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
 	visitSwitchExpression?: (ctx: SwitchExpressionContext) => Result;
 
 	/**
-	 * Visit a parse tree produced by `GroovyParser.switchBlockStatementExpressionGroup`.
+	 * Visit a parse tree produced by `NextflowConfigParser.switchBlockStatementExpressionGroup`.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
 	visitSwitchBlockStatementExpressionGroup?: (ctx: SwitchBlockStatementExpressionGroupContext) => Result;
 
 	/**
-	 * Visit a parse tree produced by `GroovyParser.switchExpressionLabel`.
+	 * Visit a parse tree produced by `NextflowConfigParser.switchExpressionLabel`.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
 	visitSwitchExpressionLabel?: (ctx: SwitchExpressionLabelContext) => Result;
 
 	/**
-	 * Visit a parse tree produced by `GroovyParser.expression`.
+	 * Visit a parse tree produced by `NextflowConfigParser.expression`.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
 	visitExpression?: (ctx: ExpressionContext) => Result;
 
 	/**
-	 * Visit a parse tree produced by `GroovyParser.commandExpression`.
+	 * Visit a parse tree produced by `NextflowConfigParser.commandExpression`.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
 	visitCommandExpression?: (ctx: CommandExpressionContext) => Result;
 
 	/**
-	 * Visit a parse tree produced by `GroovyParser.commandArgument`.
+	 * Visit a parse tree produced by `NextflowConfigParser.commandArgument`.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
 	visitCommandArgument?: (ctx: CommandArgumentContext) => Result;
 
 	/**
-	 * Visit a parse tree produced by `GroovyParser.pathExpression`.
+	 * Visit a parse tree produced by `NextflowConfigParser.pathExpression`.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
 	visitPathExpression?: (ctx: PathExpressionContext) => Result;
 
 	/**
-	 * Visit a parse tree produced by `GroovyParser.pathElement`.
+	 * Visit a parse tree produced by `NextflowConfigParser.pathElement`.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
 	visitPathElement?: (ctx: PathElementContext) => Result;
 
 	/**
-	 * Visit a parse tree produced by `GroovyParser.namePart`.
+	 * Visit a parse tree produced by `NextflowConfigParser.namePart`.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
 	visitNamePart?: (ctx: NamePartContext) => Result;
 
 	/**
-	 * Visit a parse tree produced by `GroovyParser.dynamicMemberName`.
+	 * Visit a parse tree produced by `NextflowConfigParser.dynamicMemberName`.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
 	visitDynamicMemberName?: (ctx: DynamicMemberNameContext) => Result;
 
 	/**
-	 * Visit a parse tree produced by `GroovyParser.indexPropertyArgs`.
+	 * Visit a parse tree produced by `NextflowConfigParser.indexPropertyArgs`.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
 	visitIndexPropertyArgs?: (ctx: IndexPropertyArgsContext) => Result;
 
 	/**
-	 * Visit a parse tree produced by `GroovyParser.namedPropertyArgs`.
+	 * Visit a parse tree produced by `NextflowConfigParser.namedPropertyArgs`.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
 	visitNamedPropertyArgs?: (ctx: NamedPropertyArgsContext) => Result;
 
 	/**
-	 * Visit a parse tree produced by `GroovyParser.primary`.
+	 * Visit a parse tree produced by `NextflowConfigParser.primary`.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
 	visitPrimary?: (ctx: PrimaryContext) => Result;
 
 	/**
-	 * Visit a parse tree produced by `GroovyParser.list`.
+	 * Visit a parse tree produced by `NextflowConfigParser.list`.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
 	visitList?: (ctx: ListContext) => Result;
 
 	/**
-	 * Visit a parse tree produced by `GroovyParser.map`.
+	 * Visit a parse tree produced by `NextflowConfigParser.map`.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
 	visitMap?: (ctx: MapContext) => Result;
 
 	/**
-	 * Visit a parse tree produced by `GroovyParser.mapEntryList`.
+	 * Visit a parse tree produced by `NextflowConfigParser.mapEntryList`.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
 	visitMapEntryList?: (ctx: MapEntryListContext) => Result;
 
 	/**
-	 * Visit a parse tree produced by `GroovyParser.mapEntry`.
+	 * Visit a parse tree produced by `NextflowConfigParser.mapEntry`.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
 	visitMapEntry?: (ctx: MapEntryContext) => Result;
 
 	/**
-	 * Visit a parse tree produced by `GroovyParser.mapEntryLabel`.
+	 * Visit a parse tree produced by `NextflowConfigParser.mapEntryLabel`.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
 	visitMapEntryLabel?: (ctx: MapEntryLabelContext) => Result;
 
 	/**
-	 * Visit a parse tree produced by `GroovyParser.creator`.
+	 * Visit a parse tree produced by `NextflowConfigParser.creator`.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
 	visitCreator?: (ctx: CreatorContext) => Result;
 
 	/**
-	 * Visit a parse tree produced by `GroovyParser.dim`.
+	 * Visit a parse tree produced by `NextflowConfigParser.dim`.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
 	visitDim?: (ctx: DimContext) => Result;
 
 	/**
-	 * Visit a parse tree produced by `GroovyParser.arrayInitializer`.
+	 * Visit a parse tree produced by `NextflowConfigParser.arrayInitializer`.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
 	visitArrayInitializer?: (ctx: ArrayInitializerContext) => Result;
 
 	/**
-	 * Visit a parse tree produced by `GroovyParser.anonymousInnerClassDeclaration`.
+	 * Visit a parse tree produced by `NextflowConfigParser.anonymousInnerClassDeclaration`.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
 	visitAnonymousInnerClassDeclaration?: (ctx: AnonymousInnerClassDeclarationContext) => Result;
 
 	/**
-	 * Visit a parse tree produced by `GroovyParser.createdName`.
+	 * Visit a parse tree produced by `NextflowConfigParser.createdName`.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
 	visitCreatedName?: (ctx: CreatedNameContext) => Result;
 
 	/**
-	 * Visit a parse tree produced by `GroovyParser.nonWildcardTypeArguments`.
+	 * Visit a parse tree produced by `NextflowConfigParser.nonWildcardTypeArguments`.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
 	visitNonWildcardTypeArguments?: (ctx: NonWildcardTypeArgumentsContext) => Result;
 
 	/**
-	 * Visit a parse tree produced by `GroovyParser.typeArgumentsOrDiamond`.
+	 * Visit a parse tree produced by `NextflowConfigParser.typeArgumentsOrDiamond`.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
 	visitTypeArgumentsOrDiamond?: (ctx: TypeArgumentsOrDiamondContext) => Result;
 
 	/**
-	 * Visit a parse tree produced by `GroovyParser.arguments`.
+	 * Visit a parse tree produced by `NextflowConfigParser.arguments`.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
 	visitArguments?: (ctx: ArgumentsContext) => Result;
 
 	/**
-	 * Visit a parse tree produced by `GroovyParser.enhancedArgumentListInPar`.
+	 * Visit a parse tree produced by `NextflowConfigParser.enhancedArgumentListInPar`.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
 	visitEnhancedArgumentListInPar?: (ctx: EnhancedArgumentListInParContext) => Result;
 
 	/**
-	 * Visit a parse tree produced by `GroovyParser.enhancedArgumentListElement`.
+	 * Visit a parse tree produced by `NextflowConfigParser.enhancedArgumentListElement`.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
 	visitEnhancedArgumentListElement?: (ctx: EnhancedArgumentListElementContext) => Result;
 
 	/**
-	 * Visit a parse tree produced by `GroovyParser.stringLiteral`.
+	 * Visit a parse tree produced by `NextflowConfigParser.stringLiteral`.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
 	visitStringLiteral?: (ctx: StringLiteralContext) => Result;
 
 	/**
-	 * Visit a parse tree produced by `GroovyParser.className`.
+	 * Visit a parse tree produced by `NextflowConfigParser.className`.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
 	visitClassName?: (ctx: ClassNameContext) => Result;
 
 	/**
-	 * Visit a parse tree produced by `GroovyParser.identifier`.
+	 * Visit a parse tree produced by `NextflowConfigParser.identifier`.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
 	visitIdentifier?: (ctx: IdentifierContext) => Result;
 
 	/**
-	 * Visit a parse tree produced by `GroovyParser.builtInType`.
+	 * Visit a parse tree produced by `NextflowConfigParser.builtInType`.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
 	visitBuiltInType?: (ctx: BuiltInTypeContext) => Result;
 
 	/**
-	 * Visit a parse tree produced by `GroovyParser.keywords`.
+	 * Visit a parse tree produced by `NextflowConfigParser.keywords`.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
 	visitKeywords?: (ctx: KeywordsContext) => Result;
 
 	/**
-	 * Visit a parse tree produced by `GroovyParser.rparen`.
+	 * Visit a parse tree produced by `NextflowConfigParser.rparen`.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
 	visitRparen?: (ctx: RparenContext) => Result;
 
 	/**
-	 * Visit a parse tree produced by `GroovyParser.nls`.
+	 * Visit a parse tree produced by `NextflowConfigParser.nls`.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
 	visitNls?: (ctx: NlsContext) => Result;
 
 	/**
-	 * Visit a parse tree produced by `GroovyParser.sep`.
+	 * Visit a parse tree produced by `NextflowConfigParser.sep`.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */

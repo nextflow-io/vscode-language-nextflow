@@ -121,7 +121,7 @@ class Paren {
         return super.emit(token);
     }
 
-    private static REGEX_CHECK_ARRAY = new Set<Number> ([
+    public static REGEX_CHECK_ARRAY = new Set<Number> ([
         GroovyLexer.DEC,
         GroovyLexer.INC,
         GroovyLexer.THIS,
@@ -276,11 +276,11 @@ class Paren {
         return Number.MIN_VALUE;
     }
 
-    private static isJavaIdentifierStartAndNotIdentifierIgnorable(str: string) {
+    public static isJavaIdentifierStartAndNotIdentifierIgnorable(str: string) {
         return ISJAVAIDENTIFIERSTART_PATTERN.test(str) && !ISIDENTIFIERIGNORABLE.test(str);
     }
 
-    private static isJavaIdentifierPartAndNotIdentifierIgnorable(str: string) {
+    public static isJavaIdentifierPartAndNotIdentifierIgnorable(str: string) {
         return ISJAVAIDENTIFIERPART_PATTERN.test(str) && !ISIDENTIFIERIGNORABLE.test(str);
     }
 

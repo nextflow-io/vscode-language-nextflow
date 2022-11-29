@@ -1,16 +1,12 @@
 // Grammar specification for the Nextflow configuration language.
 
-grammar NextflowConfig;
+parser grammar NextflowConfigParser;
 
 options {
-    tokenVocab = GroovyLexer;
+    tokenVocab = NextflowConfigLexer;
 }
 
 import GroovyParser;
-
-@header {
-package nextflow.config.parser;
-}
 
 // top-level config statements
 compilationUnit
@@ -25,21 +21,21 @@ configStatement
 
 // include statement
 includeStatement
-    : 'includeConfig' expression
+    : INCLUDECONF expression
     ;
 
 // config assignment
 assignment
-    : configPathExpression '=' expression
+    : configPathExpression ASSIGN expression
     ;
 
 configPathExpression
-    : Identifier ('.' Identifier)*
+    : Identifier (DOT Identifier)*
     ;
 
 // config block
 block
-    : Identifier '{' blockStatement* '}'
+    : Identifier LBRACE blockStatement* LBRACE
     ;
 
 blockStatement
@@ -49,5 +45,5 @@ blockStatement
     ;
 
 selector
-    : Identifier ':' expression '{' assignment* '}'
+    : Identifier COLON expression LBRACE assignment* RBRACE
     ;
