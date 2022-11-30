@@ -9,7 +9,7 @@ options {
 import GroovyParser;
 
 @header {
-
+import { GroovyParser } from './GroovyParser';
 }
 
 // top-level script statements

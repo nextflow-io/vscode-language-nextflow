@@ -1,10 +1,9 @@
 // Generated from src/grammar/NextflowScriptParser.g4 by ANTLR 4.9.0-SNAPSHOT
 
 
+import { GroovyParser } from './GroovyParser';
 
 
-
-package groovy.parser;
 
 
 import { ParseTreeVisitor } from "antlr4ts/tree/ParseTreeVisitor";

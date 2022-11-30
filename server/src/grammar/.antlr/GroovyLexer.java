@@ -1,7 +1,5 @@
 // Generated from /Users/uwewinter/Documents/Biocommons/tower/vscode-fork/server/src/grammar/GroovyLexer.g4 by ANTLR 4.9.2
 
-package groovy.lexer;
-
 import Denque = require("denque");
 import { Token } from "antlr4ts";
 import { IntStream } from "antlr4ts";

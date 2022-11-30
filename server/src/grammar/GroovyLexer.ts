@@ -1,4 +1,6 @@
 // Generated from src/grammar/GroovyLexer.g4 by ANTLR 4.9.0-SNAPSHOT
+
+
 import Denque = require("denque");
 import { Token } from "antlr4ts";
 import { IntStream } from "antlr4ts";

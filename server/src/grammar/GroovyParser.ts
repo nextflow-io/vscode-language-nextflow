@@ -1,6 +1,8 @@
 // Generated from src/grammar/GroovyParser.g4 by ANTLR 4.9.0-SNAPSHOT
 
 
+
+
 import { ATN } from "antlr4ts/atn/ATN";
 import { ATNDeserializer } from "antlr4ts/atn/ATNDeserializer";
 import { FailedPredicateException } from "antlr4ts/FailedPredicateException";

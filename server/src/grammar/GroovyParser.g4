@@ -38,7 +38,6 @@ options {
 }
 
 @header {
-package groovy.parser;
 }
 
 @members {

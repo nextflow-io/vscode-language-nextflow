@@ -23,12 +23,24 @@
 			"outFiles": ["${workspaceRoot}/server/out/**/*.js"]
 		},
 		{
-			"name" : "Run Language Test",
+			"name" : "Run Grammar Test",
 			"request": "launch",
 			"type": "node",
 			"trace": true,
 			"console": "integratedTerminal",
 			"program": "${workspaceRoot}/server/out/grammarTest.js",
+			"preLaunchTask": {
+				"type": "npm",
+				"script": "compile"
+			}
+		},
+		{
+			"name" : "Run completion Test",
+			"request": "launch",
+			"type": "node",
+			"trace": true,
+			"console": "integratedTerminal",
+			"program": "${workspaceRoot}/server/out/completionTest.js",
 			"preLaunchTask": {
 				"type": "npm",
 				"script": "compile"

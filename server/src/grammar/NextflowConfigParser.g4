@@ -2,6 +2,10 @@
 
 parser grammar NextflowConfigParser;
 
+@header {
+    import { GroovyParser } from './GroovyParser';
+}
+
 options {
     tokenVocab = NextflowConfigLexer;
 }
@@ -10,40 +14,41 @@ import GroovyParser;
 
 // top-level config statements
 compilationUnit
-    : configStatement* EOF
+    : nls nfconfigStatement* EOF
     ;
 
-configStatement
-    : includeStatement
-    | assignment
-    | block
+nfconfigStatement
+    : nfincludeStatement
+    | nfconfigAssignment
+    | nfblock
+    | methodDeclaration[3,9]
     ;
 
 // include statement
-includeStatement
-    : INCLUDECONF expression
+nfincludeStatement
+    : INCLUDECONF expression sep
     ;
 
 // config assignment
-assignment
-    : configPathExpression ASSIGN expression
+nfconfigAssignment
+    : nfconfigPathExpression ASSIGN statementExpression sep
     ;
 
-configPathExpression
+nfconfigPathExpression
     : Identifier (DOT Identifier)*
     ;
 
 // config block
-block
-    : Identifier LBRACE blockStatement* LBRACE
+nfblock
+    : Identifier LBRACE nls nfblockStatement* nls RBRACE nls
     ;
 
-blockStatement
-    : assignment
-    | block
-    | selector
+nfblockStatement
+    : nfconfigAssignment
+    | nfblock
+    | nfselector
+    | nfincludeStatement
     ;
 
-selector
-    : Identifier COLON expression LBRACE assignment* RBRACE
-    ;
+nfselector
+    : Identifier COLON expression LBRACE nls nfconfigAssignment* nls RBRACE nls;

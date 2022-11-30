@@ -9,7 +9,7 @@ options {
 import GroovyLexer;
 
 @header {
-    
+    import { GroovyLexer } from './GroovyLexer';
 }
 
 INCLUDE: 'include';

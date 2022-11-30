@@ -2,6 +2,10 @@
 
 lexer grammar NextflowConfigLexer;
 
+@header {
+    import { GroovyLexer } from './GroovyLexer';
+}
+
 options {
     tokenVocab = GroovyLexer;
 }

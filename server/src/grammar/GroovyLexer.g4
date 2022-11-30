@@ -34,8 +34,6 @@
 lexer grammar GroovyLexer;
 
 @header {
-package groovy.lexer;
-
 import Denque = require("denque");
 import { Token } from "antlr4ts";
 import { IntStream } from "antlr4ts";

@@ -1,7 +1,9 @@
 // Generated from src/grammar/NextflowConfigParser.g4 by ANTLR 4.9.0-SNAPSHOT
 
 
-package groovy.parser;
+    import { GroovyParser } from './GroovyParser';
+
+
 
 
 import { ParseTreeListener } from "antlr4ts/tree/ParseTreeListener";
@@ -62,13 +64,13 @@ import { ForStmtAltContext } from "./NextflowConfigParser";
 import { WhileStmtAltContext } from "./NextflowConfigParser";
 import { DoWhileStmtAltContext } from "./NextflowConfigParser";
 import { CompilationUnitContext } from "./NextflowConfigParser";
-import { ConfigStatementContext } from "./NextflowConfigParser";
-import { IncludeStatementContext } from "./NextflowConfigParser";
-import { AssignmentContext } from "./NextflowConfigParser";
-import { ConfigPathExpressionContext } from "./NextflowConfigParser";
-import { BlockContext } from "./NextflowConfigParser";
-import { BlockStatementContext } from "./NextflowConfigParser";
-import { SelectorContext } from "./NextflowConfigParser";
+import { NfconfigStatementContext } from "./NextflowConfigParser";
+import { NfincludeStatementContext } from "./NextflowConfigParser";
+import { NfassignmentContext } from "./NextflowConfigParser";
+import { NfconfigPathExpressionContext } from "./NextflowConfigParser";
+import { NfblockContext } from "./NextflowConfigParser";
+import { NfblockStatementContext } from "./NextflowConfigParser";
+import { NfselectorContext } from "./NextflowConfigParser";
 import { ScriptStatementsContext } from "./NextflowConfigParser";
 import { ScriptStatementContext } from "./NextflowConfigParser";
 import { PackageDeclarationContext } from "./NextflowConfigParser";
@@ -142,6 +144,8 @@ import { ElementValuePairContext } from "./NextflowConfigParser";
 import { ElementValuePairNameContext } from "./NextflowConfigParser";
 import { ElementValueContext } from "./NextflowConfigParser";
 import { ElementValueArrayInitializerContext } from "./NextflowConfigParser";
+import { BlockContext } from "./NextflowConfigParser";
+import { BlockStatementContext } from "./NextflowConfigParser";
 import { LocalVariableDeclarationContext } from "./NextflowConfigParser";
 import { VariableDeclarationContext } from "./NextflowConfigParser";
 import { TypeNamePairsContext } from "./NextflowConfigParser";
@@ -948,81 +952,81 @@ export interface NextflowConfigParserListener extends ParseTreeListener {
 	exitCompilationUnit?: (ctx: CompilationUnitContext) => void;
 
 	/**
-	 * Enter a parse tree produced by `NextflowConfigParser.configStatement`.
+	 * Enter a parse tree produced by `NextflowConfigParser.nfconfigStatement`.
 	 * @param ctx the parse tree
 	 */
-	enterConfigStatement?: (ctx: ConfigStatementContext) => void;
+	enterNfconfigStatement?: (ctx: NfconfigStatementContext) => void;
 	/**
-	 * Exit a parse tree produced by `NextflowConfigParser.configStatement`.
+	 * Exit a parse tree produced by `NextflowConfigParser.nfconfigStatement`.
 	 * @param ctx the parse tree
 	 */
-	exitConfigStatement?: (ctx: ConfigStatementContext) => void;
+	exitNfconfigStatement?: (ctx: NfconfigStatementContext) => void;
 
 	/**
-	 * Enter a parse tree produced by `NextflowConfigParser.includeStatement`.
+	 * Enter a parse tree produced by `NextflowConfigParser.nfincludeStatement`.
 	 * @param ctx the parse tree
 	 */
-	enterIncludeStatement?: (ctx: IncludeStatementContext) => void;
+	enterNfincludeStatement?: (ctx: NfincludeStatementContext) => void;
 	/**
-	 * Exit a parse tree produced by `NextflowConfigParser.includeStatement`.
+	 * Exit a parse tree produced by `NextflowConfigParser.nfincludeStatement`.
 	 * @param ctx the parse tree
 	 */
-	exitIncludeStatement?: (ctx: IncludeStatementContext) => void;
+	exitNfincludeStatement?: (ctx: NfincludeStatementContext) => void;
 
 	/**
-	 * Enter a parse tree produced by `NextflowConfigParser.assignment`.
+	 * Enter a parse tree produced by `NextflowConfigParser.nfassignment`.
 	 * @param ctx the parse tree
 	 */
-	enterAssignment?: (ctx: AssignmentContext) => void;
+	enterNfassignment?: (ctx: NfassignmentContext) => void;
 	/**
-	 * Exit a parse tree produced by `NextflowConfigParser.assignment`.
+	 * Exit a parse tree produced by `NextflowConfigParser.nfassignment`.
 	 * @param ctx the parse tree
 	 */
-	exitAssignment?: (ctx: AssignmentContext) => void;
+	exitNfassignment?: (ctx: NfassignmentContext) => void;
 
 	/**
-	 * Enter a parse tree produced by `NextflowConfigParser.configPathExpression`.
+	 * Enter a parse tree produced by `NextflowConfigParser.nfconfigPathExpression`.
 	 * @param ctx the parse tree
 	 */
-	enterConfigPathExpression?: (ctx: ConfigPathExpressionContext) => void;
+	enterNfconfigPathExpression?: (ctx: NfconfigPathExpressionContext) => void;
 	/**
-	 * Exit a parse tree produced by `NextflowConfigParser.configPathExpression`.
+	 * Exit a parse tree produced by `NextflowConfigParser.nfconfigPathExpression`.
 	 * @param ctx the parse tree
 	 */
-	exitConfigPathExpression?: (ctx: ConfigPathExpressionContext) => void;
+	exitNfconfigPathExpression?: (ctx: NfconfigPathExpressionContext) => void;
 
 	/**
-	 * Enter a parse tree produced by `NextflowConfigParser.block`.
+	 * Enter a parse tree produced by `NextflowConfigParser.nfblock`.
 	 * @param ctx the parse tree
 	 */
-	enterBlock?: (ctx: BlockContext) => void;
+	enterNfblock?: (ctx: NfblockContext) => void;
 	/**
-	 * Exit a parse tree produced by `NextflowConfigParser.block`.
+	 * Exit a parse tree produced by `NextflowConfigParser.nfblock`.
 	 * @param ctx the parse tree
 	 */
-	exitBlock?: (ctx: BlockContext) => void;
+	exitNfblock?: (ctx: NfblockContext) => void;
 
 	/**
-	 * Enter a parse tree produced by `NextflowConfigParser.blockStatement`.
+	 * Enter a parse tree produced by `NextflowConfigParser.nfblockStatement`.
 	 * @param ctx the parse tree
 	 */
-	enterBlockStatement?: (ctx: BlockStatementContext) => void;
+	enterNfblockStatement?: (ctx: NfblockStatementContext) => void;
 	/**
-	 * Exit a parse tree produced by `NextflowConfigParser.blockStatement`.
+	 * Exit a parse tree produced by `NextflowConfigParser.nfblockStatement`.
 	 * @param ctx the parse tree
 	 */
-	exitBlockStatement?: (ctx: BlockStatementContext) => void;
+	exitNfblockStatement?: (ctx: NfblockStatementContext) => void;
 
 	/**
-	 * Enter a parse tree produced by `NextflowConfigParser.selector`.
+	 * Enter a parse tree produced by `NextflowConfigParser.nfselector`.
 	 * @param ctx the parse tree
 	 */
-	enterSelector?: (ctx: SelectorContext) => void;
+	enterNfselector?: (ctx: NfselectorContext) => void;
 	/**
-	 * Exit a parse tree produced by `NextflowConfigParser.selector`.
+	 * Exit a parse tree produced by `NextflowConfigParser.nfselector`.
 	 * @param ctx the parse tree
 	 */
-	exitSelector?: (ctx: SelectorContext) => void;
+	exitNfselector?: (ctx: NfselectorContext) => void;
 
 	/**
 	 * Enter a parse tree produced by `NextflowConfigParser.scriptStatements`.
@@ -1826,6 +1830,28 @@ export interface NextflowConfigParserListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	exitElementValueArrayInitializer?: (ctx: ElementValueArrayInitializerContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `NextflowConfigParser.block`.
+	 * @param ctx the parse tree
+	 */
+	enterBlock?: (ctx: BlockContext) => void;
+	/**
+	 * Exit a parse tree produced by `NextflowConfigParser.block`.
+	 * @param ctx the parse tree
+	 */
+	exitBlock?: (ctx: BlockContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `NextflowConfigParser.blockStatement`.
+	 * @param ctx the parse tree
+	 */
+	enterBlockStatement?: (ctx: BlockStatementContext) => void;
+	/**
+	 * Exit a parse tree produced by `NextflowConfigParser.blockStatement`.
+	 * @param ctx the parse tree
+	 */
+	exitBlockStatement?: (ctx: BlockStatementContext) => void;
 
 	/**
 	 * Enter a parse tree produced by `NextflowConfigParser.localVariableDeclaration`.

@@ -1,7 +1,9 @@
 // Generated from src/grammar/NextflowConfigParser.g4 by ANTLR 4.9.0-SNAPSHOT
 
 
-package groovy.parser;
+    import { GroovyParser } from './GroovyParser';
+
+
 
 
 import { ParseTreeVisitor } from "antlr4ts/tree/ParseTreeVisitor";
@@ -62,13 +64,13 @@ import { ForStmtAltContext } from "./NextflowConfigParser";
 import { WhileStmtAltContext } from "./NextflowConfigParser";
 import { DoWhileStmtAltContext } from "./NextflowConfigParser";
 import { CompilationUnitContext } from "./NextflowConfigParser";
-import { ConfigStatementContext } from "./NextflowConfigParser";
-import { IncludeStatementContext } from "./NextflowConfigParser";
-import { AssignmentContext } from "./NextflowConfigParser";
-import { ConfigPathExpressionContext } from "./NextflowConfigParser";
-import { BlockContext } from "./NextflowConfigParser";
-import { BlockStatementContext } from "./NextflowConfigParser";
-import { SelectorContext } from "./NextflowConfigParser";
+import { NfconfigStatementContext } from "./NextflowConfigParser";
+import { NfincludeStatementContext } from "./NextflowConfigParser";
+import { NfassignmentContext } from "./NextflowConfigParser";
+import { NfconfigPathExpressionContext } from "./NextflowConfigParser";
+import { NfblockContext } from "./NextflowConfigParser";
+import { NfblockStatementContext } from "./NextflowConfigParser";
+import { NfselectorContext } from "./NextflowConfigParser";
 import { ScriptStatementsContext } from "./NextflowConfigParser";
 import { ScriptStatementContext } from "./NextflowConfigParser";
 import { PackageDeclarationContext } from "./NextflowConfigParser";
@@ -142,6 +144,8 @@ import { ElementValuePairContext } from "./NextflowConfigParser";
 import { ElementValuePairNameContext } from "./NextflowConfigParser";
 import { ElementValueContext } from "./NextflowConfigParser";
 import { ElementValueArrayInitializerContext } from "./NextflowConfigParser";
+import { BlockContext } from "./NextflowConfigParser";
+import { BlockStatementContext } from "./NextflowConfigParser";
 import { LocalVariableDeclarationContext } from "./NextflowConfigParser";
 import { VariableDeclarationContext } from "./NextflowConfigParser";
 import { TypeNamePairsContext } from "./NextflowConfigParser";
@@ -672,53 +676,53 @@ export interface NextflowConfigParserVisitor<Result> extends ParseTreeVisitor<Re
 	visitCompilationUnit?: (ctx: CompilationUnitContext) => Result;
 
 	/**
-	 * Visit a parse tree produced by `NextflowConfigParser.configStatement`.
+	 * Visit a parse tree produced by `NextflowConfigParser.nfconfigStatement`.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	visitConfigStatement?: (ctx: ConfigStatementContext) => Result;
+	visitNfconfigStatement?: (ctx: NfconfigStatementContext) => Result;
 
 	/**
-	 * Visit a parse tree produced by `NextflowConfigParser.includeStatement`.
+	 * Visit a parse tree produced by `NextflowConfigParser.nfincludeStatement`.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	visitIncludeStatement?: (ctx: IncludeStatementContext) => Result;
+	visitNfincludeStatement?: (ctx: NfincludeStatementContext) => Result;
 
 	/**
-	 * Visit a parse tree produced by `NextflowConfigParser.assignment`.
+	 * Visit a parse tree produced by `NextflowConfigParser.nfassignment`.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	visitAssignment?: (ctx: AssignmentContext) => Result;
+	visitNfassignment?: (ctx: NfassignmentContext) => Result;
 
 	/**
-	 * Visit a parse tree produced by `NextflowConfigParser.configPathExpression`.
+	 * Visit a parse tree produced by `NextflowConfigParser.nfconfigPathExpression`.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	visitConfigPathExpression?: (ctx: ConfigPathExpressionContext) => Result;
+	visitNfconfigPathExpression?: (ctx: NfconfigPathExpressionContext) => Result;
 
 	/**
-	 * Visit a parse tree produced by `NextflowConfigParser.block`.
+	 * Visit a parse tree produced by `NextflowConfigParser.nfblock`.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	visitBlock?: (ctx: BlockContext) => Result;
+	visitNfblock?: (ctx: NfblockContext) => Result;
 
 	/**
-	 * Visit a parse tree produced by `NextflowConfigParser.blockStatement`.
+	 * Visit a parse tree produced by `NextflowConfigParser.nfblockStatement`.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	visitBlockStatement?: (ctx: BlockStatementContext) => Result;
+	visitNfblockStatement?: (ctx: NfblockStatementContext) => Result;
 
 	/**
-	 * Visit a parse tree produced by `NextflowConfigParser.selector`.
+	 * Visit a parse tree produced by `NextflowConfigParser.nfselector`.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	visitSelector?: (ctx: SelectorContext) => Result;
+	visitNfselector?: (ctx: NfselectorContext) => Result;
 
 	/**
 	 * Visit a parse tree produced by `NextflowConfigParser.scriptStatements`.
@@ -1230,6 +1234,20 @@ export interface NextflowConfigParserVisitor<Result> extends ParseTreeVisitor<Re
 	 * @return the visitor result
 	 */
 	visitElementValueArrayInitializer?: (ctx: ElementValueArrayInitializerContext) => Result;
+
+	/**
+	 * Visit a parse tree produced by `NextflowConfigParser.block`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitBlock?: (ctx: BlockContext) => Result;
+
+	/**
+	 * Visit a parse tree produced by `NextflowConfigParser.blockStatement`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitBlockStatement?: (ctx: BlockStatementContext) => Result;
 
 	/**
 	 * Visit a parse tree produced by `NextflowConfigParser.localVariableDeclaration`.

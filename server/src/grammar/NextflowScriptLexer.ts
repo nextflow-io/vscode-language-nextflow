@@ -1,7 +1,8 @@
 // Generated from src/grammar/NextflowScriptLexer.g4 by ANTLR 4.9.0-SNAPSHOT
 
 
-    
+    import { GroovyLexer } from './GroovyLexer';
+
 
 import Denque = require("denque");
 import { Token } from "antlr4ts";
@@ -72,7 +73,6 @@ import { Vocabulary } from "antlr4ts/Vocabulary";
 import { VocabularyImpl } from "antlr4ts/VocabularyImpl";
 
 import * as Utils from "antlr4ts/misc/Utils";
-import { GroovyLexer } from './GroovyLexer';
 
 
 export class NextflowScriptLexer extends Lexer {

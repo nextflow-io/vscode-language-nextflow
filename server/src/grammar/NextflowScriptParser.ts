@@ -1,5 +1,11 @@
 // Generated from src/grammar/NextflowScriptParser.g4 by ANTLR 4.9.0-SNAPSHOT
 
+
+import { GroovyParser } from './GroovyParser';
+
+
+
+
 import { ATN } from "antlr4ts/atn/ATN";
 import { ATNDeserializer } from "antlr4ts/atn/ATNDeserializer";
 import { FailedPredicateException } from "antlr4ts/FailedPredicateException";
@@ -24,7 +30,6 @@ import * as Utils from "antlr4ts/misc/Utils";
 
 import { NextflowScriptParserListener } from "./NextflowScriptParserListener";
 import { NextflowScriptParserVisitor } from "./NextflowScriptParserVisitor";
-import { GroovyParser } from './GroovyParser';
 
 
 export class NextflowScriptParser extends Parser {

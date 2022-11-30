@@ -1,9 +1,7 @@
 // Generated from /Users/uwewinter/Documents/Biocommons/tower/vscode-fork/server/src/grammar/NextflowScriptLexer.g4 by ANTLR 4.9.2
 
-    
+    import { GroovyLexer } from './GroovyLexer';
 
-
-package groovy.lexer;
 
 import Denque = require("denque");
 import { Token } from "antlr4ts";
