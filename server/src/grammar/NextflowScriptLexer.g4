@@ -1,5 +1,6 @@
-// Grammar specification for the Nextflow scripting language.
-
+/**
+ * Grammar specification for the Nextflow scripting language.
+ */
 lexer grammar NextflowScriptLexer;
 
 options {
@@ -9,28 +10,27 @@ options {
 import GroovyLexer;
 
 @header {
-    import { GroovyLexer } from './GroovyLexer';
+import { GroovyLexer } from './GroovyLexer';
 }
 
-INCLUDE: 'include';
-FROM: 'from';
-AS: 'as';
-PROCESS: 'process';
-VAL: 'val';
-FILE: 'file';
-ENV: 'env';
-PATH: 'path';
-STDIN: 'stdin';
-TUPLE: 'tuple';
-STDOUT: 'stdout';
-WORKFLOW: 'workflow';
-TAKE: 'take:';
-MAIN: 'main:';
-EMIT: 'emit:';
-INPUT: 'input:';
-OUTPUT: 'output:';
-WHEN: 'when:';
-SCRIPT: 'script:';
-SHELL: 'shell:';
-EXEC: 'exec:';
-STUB: 'stub:';
+EMIT_GUARD      : 'emit:';
+ENV             : 'env';
+EXEC_GUARD      : 'exec:';
+FILE            : 'file';
+FROM            : 'from';
+INCLUDE         : 'include';
+INPUT_GUARD     : 'input:';
+MAIN_GUARD      : 'main:';
+OUTPUT_GUARD    : 'output:';
+PATH            : 'path';
+PROCESS         : 'process';
+SCRIPT_GUARD    : 'script:';
+SHELL_GUARD     : 'shell:';
+STDIN           : 'stdin';
+STDOUT          : 'stdout';
+STUB_GUARD      : 'stub:';
+TAKE_GUARD      : 'take:';
+TUPLE           : 'tuple';
+VAL             : 'val';
+WHEN_GUARD      : 'when:';
+WORKFLOW        : 'workflow';

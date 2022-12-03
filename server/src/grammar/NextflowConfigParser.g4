@@ -1,10 +1,7 @@
-// Grammar specification for the Nextflow configuration language.
-
+/**
+ * Grammar specification for the Nextflow configuration language.
+ */
 parser grammar NextflowConfigParser;
-
-@header {
-    import { GroovyParser } from './GroovyParser';
-}
 
 options {
     tokenVocab = NextflowConfigLexer;
@@ -12,43 +9,52 @@ options {
 
 import GroovyParser;
 
+@header {
+import { GroovyParser } from './GroovyParser';
+}
+
 // top-level config statements
 compilationUnit
-    : nls nfconfigStatement* EOF
+    :   nls configStatements? EOF
     ;
 
-nfconfigStatement
-    : nfincludeStatement
-    | nfconfigAssignment
-    | nfblock
-    | methodDeclaration[3,9]
+configStatements
+    :   scriptStatement (sep scriptStatement)* sep?
+    ;
+
+configStatement
+    :   configIncludeStatement
+    |   configAssignment
+    |   configBlock
+    |   scriptStatement
     ;
 
 // include statement
-nfincludeStatement
-    : INCLUDECONF expression sep
+configIncludeStatement
+    :   INCLUDE_CONFIG expression
     ;
 
 // config assignment
-nfconfigAssignment
-    : nfconfigPathExpression ASSIGN statementExpression sep
+configAssignment
+    :   configPathExpression nls ASSIGN nls expression
     ;
 
-nfconfigPathExpression
-    : Identifier (DOT Identifier)*
+configPathExpression
+    :   Identifier (DOT Identifier)*
     ;
 
 // config block
-nfblock
-    : Identifier LBRACE nls nfblockStatement* nls RBRACE nls
+configBlock
+    :   Identifier nls LBRACE nls (configBlockStatement nls)* RBRACE
     ;
 
-nfblockStatement
-    : nfconfigAssignment
-    | nfblock
-    | nfselector
-    | nfincludeStatement
+configBlockStatement
+    :   configAssignment
+    |   configBlock
+    |   processSelector
+    |   configIncludeStatement
     ;
 
-nfselector
-    : Identifier COLON expression LBRACE nls nfconfigAssignment* nls RBRACE nls;
+processSelector
+    :   Identifier COLON expression nls LBRACE nls (configAssignment nls)* RBRACE
+    ;

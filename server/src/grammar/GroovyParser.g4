@@ -28,8 +28,9 @@
  */
 
 /**
- * The Groovy grammar is based on the official grammar for Java:
- * https://github.com/antlr/grammars-v4/blob/master/java/Java.g4
+ * Grammar specification for Groovy 3.0.13, adapted for use with TypeScript.
+ *
+ * Source: https://github.com/apache/groovy/blob/GROOVY_3_0_13/src/antlr/GroovyParser.g4
  */
 parser grammar GroovyParser;
 
@@ -37,11 +38,7 @@ options {
     tokenVocab = GroovyLexer;
 }
 
-@header {
-}
-
 @members {
-    private inSwitchExpressionLevel = 0;
     static MODIFIER_SET = new Set<Number|undefined>([
         GroovyParser.DEF,
         GroovyParser.VAR,
@@ -54,8 +51,6 @@ options {
         GroovyParser.PRIVATE,
         GroovyParser.STATIC,
         GroovyParser.ABSTRACT,
-        GroovyParser.SEALED,
-        GroovyParser.NON_SEALED,
         GroovyParser.FINAL,
         GroovyParser.STRICTFP,
         GroovyParser.DEFAULT
@@ -95,7 +90,7 @@ options {
     public static isInvalidMethodDeclaration(ts: TokenStream) {
         let tokenType = ts.LT(1).type;
 
-        return (tokenType === GroovyParser.Identifier || tokenType === GroovyParser.CapitalizedIdentifier || tokenType === GroovyParser.StringLiteral || tokenType === GroovyParser.YIELD)
+        return (tokenType === GroovyParser.Identifier || tokenType === GroovyParser.CapitalizedIdentifier || tokenType === GroovyParser.StringLiteral)
                 && ts.LT(2).type === GroovyParser.LPAREN;
     }
 
@@ -183,7 +178,7 @@ scriptStatements
     ;
 
 scriptStatement
-    :   importDeclaration // Import statement.  Can be used in any scope.  Has "import x as y" also.
+    :   importDeclaration
     |   typeDeclaration
     // validate the method in the AstBuilder#visitMethodDeclaration, e.g. method without method body is not allowed
     |   { !GroovyParser.isInvalidMethodDeclaration(this._input) }?
@@ -239,8 +234,6 @@ classOrInterfaceModifier
           |   PRIVATE    // class or interface
           |   STATIC     // class or interface
           |   ABSTRACT   // class or interface
-          |   SEALED     // class or interface
-          |   NON_SEALED // class or interface
           |   FINAL      // class only -- does not apply to interfaces
           |   STRICTFP   // class or interface
           |   DEFAULT    // interface only -- does not apply to classes
@@ -279,7 +272,7 @@ typeParameters
     ;
 
 typeParameter
-    :   annotationsOpt className (EXTENDS nls typeBound)?
+    :   className (EXTENDS nls typeBound)?
     ;
 
 typeBound
@@ -291,7 +284,7 @@ typeList
     ;
 
 /**
- *  t   0: class; 1: interface; 2: enum; 3: annotation; 4: trait; 5: record
+ *  t   0: class; 1: interface; 2: enum; 3: annotation; 4: trait
  */
 classDeclaration
 locals[ number | undefined t ]
@@ -300,14 +293,11 @@ locals[ number | undefined t ]
         |   ENUM { $t = 2; }
         |   AT INTERFACE { $t = 3; }
         |   TRAIT { $t = 4; }
-        |   RECORD { $t = 5; }
         )
         identifier
         (nls typeParameters)?
-        (nls formalParameters)?
         (nls EXTENDS nls scs=typeList)?
         (nls IMPLEMENTS nls is=typeList)?
-        (nls PERMITS nls ps=typeList)?
         nls classBody[$t]
     ;
 
@@ -339,9 +329,7 @@ classBodyDeclaration[number t]
 memberDeclaration[number t]
     :   methodDeclaration[0, $t]
     |   fieldDeclaration
-    |   modifiersOpt (  classDeclaration
-                     |  compactConstructorDeclaration
-                     )
+    |   modifiersOpt classDeclaration
     ;
 
 /**
@@ -359,10 +347,6 @@ methodDeclaration[number t, number ct]
             (nls THROWS nls qualifiedClassNameList)?
             (nls methodBody)?
         )?
-    ;
-
-compactConstructorDeclaration
-    :   methodName nls methodBody
     ;
 
 methodName
@@ -704,11 +688,6 @@ breakStatement
         identifier?
     ;
 
-yieldStatement
-    :   YIELD
-        expression
-    ;
-
 tryCatchStatement
     :   TRY resources? nls block
         (nls catchClause)*
@@ -729,8 +708,6 @@ statement
     |   THROW expression                        #throwStmtAlt
     |   breakStatement                          #breakStmtAlt
     |   continueStatement                       #continueStmtAlt
-    |   { this.inSwitchExpressionLevel > 0 }?
-        yieldStatement                          #yieldStmtAlt
     |   identifier COLON nls statement          #labeledStmtAlt
     |   assertStatement                         #assertStmtAlt
     |   localVariableDeclaration                #localVariableDeclarationStmtAlt
@@ -812,7 +789,7 @@ expressionInPar
     ;
 
 expressionList[boolean canSpread]
-    :   expressionListElement[$canSpread] (COMMA nls expressionListElement[$canSpread])*
+    :   expressionListElement[$canSpread] (COMMA expressionListElement[$canSpread])*
     ;
 
 expressionListElement[boolean canSpread]
@@ -832,34 +809,12 @@ postfixExpression
     :   pathExpression op=(INC | DEC)?
     ;
 
-switchExpression
-@init {
-    this.inSwitchExpressionLevel++;
-}
-@after {
-    this.inSwitchExpressionLevel--;
-}
-    :   SWITCH expressionInPar nls LBRACE nls switchBlockStatementExpressionGroup* nls RBRACE
-    ;
-
-switchBlockStatementExpressionGroup
-    :   (switchExpressionLabel nls)+ blockStatements
-    ;
-
-switchExpressionLabel
-    :   (   CASE expressionList[true]
-        |   DEFAULT
-        ) ac=(ARROW | COLON)
-    ;
-
 expression
     // must come before postfixExpression to resolve the ambiguities between casting and call on parentheses expression, e.g. (int)(1 / 2)
     :   castParExpression castOperandExpression                                             #castExprAlt
 
     // qualified names, array expressions, method invocation, post inc/dec
     |   postfixExpression                                                                   #postfixExprAlt
-
-    |   switchExpression                                                                    #switchExprAlt
 
     // ~(BNOT)/!(LNOT) (level 1)
     |   (BITNOT | NOT) nls expression                                                       #unaryNotExprAlt
@@ -883,9 +838,7 @@ expression
                         |   dgOp=GT GT
                         )
             |   rangeOp=(    RANGE_INCLUSIVE
-                        |    RANGE_EXCLUSIVE_LEFT
-                        |    RANGE_EXCLUSIVE_RIGHT
-                        |    RANGE_EXCLUSIVE_FULL
+                        |    RANGE_EXCLUSIVE
                         )
             ) nls
         right=expression                                                                    #shiftExprAlt
@@ -932,7 +885,7 @@ expression
         fb=expression                                                                       #conditionalExprAlt
 
     // assignment expression (level 15)
-    // "(a) = [1]" is a special case of multipleAssignmentExprAlt, it will be handle by assignmentExprAlt
+    // "(a) = [1]" is a special case of multipleAssignmentExprAlt, it will be handled by assignmentExprAlt
     |   <assoc=right> left=variableNames nls op=ASSIGN nls right=statementExpression        #multipleAssignmentExprAlt
     |   <assoc=right> left=expression nls
                         op=(   ASSIGN
@@ -1092,11 +1045,11 @@ dynamicMemberName
  *  The brackets may also be empty, as in T[].  This is how Groovy names array types.
  */
 indexPropertyArgs
-    :   (SAFE_INDEX | LBRACK) expressionList[true]? RBRACK
+    :   QUESTION? LBRACK expressionList[true]? RBRACK
     ;
 
 namedPropertyArgs
-    :   (SAFE_INDEX | LBRACK) (namedPropertyArgList | COLON) RBRACK
+    :   QUESTION? LBRACK (namedPropertyArgList | COLON) RBRACK
     ;
 
 primary
@@ -1122,6 +1075,8 @@ options { baseContext = primary; }
     |   literal                     #literalPrmrAlt
     |   gstring                     #gstringPrmrAlt
     |   parExpression               #parenPrmrAlt
+    |   list                        #listPrmrAlt
+    |   map                         #mapPrmrAlt
     ;
 
 namedArgPrimary
@@ -1246,6 +1201,14 @@ options { baseContext = enhancedArgumentListInPar; }
         )*
     ;
 
+enhancedArgumentList
+options { baseContext = enhancedArgumentListInPar; }
+    :   firstEnhancedArgumentListElement
+        (   COMMA nls
+            enhancedArgumentListElement
+        )*
+    ;
+
 enhancedArgumentListInPar
     :   enhancedArgumentListElement
         (   COMMA nls
@@ -1263,6 +1226,13 @@ argumentListElement
 options { baseContext = enhancedArgumentListElement; }
     :   expressionListElement[true]
     |   namedPropertyArg
+    ;
+
+firstEnhancedArgumentListElement
+options { baseContext = enhancedArgumentListElement; }
+    :   expressionListElement[true]
+    |   standardLambdaExpression
+    |   namedArg
     ;
 
 enhancedArgumentListElement
@@ -1286,9 +1256,6 @@ identifier
     |   IN
     |   TRAIT
     |   AS
-    |   YIELD
-    |   PERMITS
-    |   RECORD
     ;
 
 builtInType
@@ -1324,12 +1291,8 @@ keywords
     |   INTERFACE
     |   NATIVE
     |   NEW
-    |   NON_SEALED
     |   PACKAGE
-    |   PERMITS
-    |   RECORD
     |   RETURN
-    |   SEALED
     |   STATIC
     |   STRICTFP
     |   SUPER
@@ -1345,7 +1308,6 @@ keywords
     |   VAR
     |   VOLATILE
     |   WHILE
-    |   YIELD
 
     |   NullLiteral
     |   BooleanLiteral

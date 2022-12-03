@@ -1,6 +1,4 @@
-// Generated from src/grammar/GroovyParser.g4 by ANTLR 4.9.0-SNAPSHOT
-
-
+// Generated from server/src/grammar/GroovyParser.g4 by ANTLR 4.9.0-SNAPSHOT
 
 
 import { ParseTreeVisitor } from "antlr4ts/tree/ParseTreeVisitor";
@@ -23,7 +21,6 @@ import { BooleanLiteralAltContext } from "./GroovyParser";
 import { NullLiteralAltContext } from "./GroovyParser";
 import { CastExprAltContext } from "./GroovyParser";
 import { PostfixExprAltContext } from "./GroovyParser";
-import { SwitchExprAltContext } from "./GroovyParser";
 import { UnaryNotExprAltContext } from "./GroovyParser";
 import { PowerExprAltContext } from "./GroovyParser";
 import { UnaryAddExprAltContext } from "./GroovyParser";
@@ -50,7 +47,6 @@ import { ReturnStmtAltContext } from "./GroovyParser";
 import { ThrowStmtAltContext } from "./GroovyParser";
 import { BreakStmtAltContext } from "./GroovyParser";
 import { ContinueStmtAltContext } from "./GroovyParser";
-import { YieldStmtAltContext } from "./GroovyParser";
 import { LabeledStmtAltContext } from "./GroovyParser";
 import { AssertStmtAltContext } from "./GroovyParser";
 import { LocalVariableDeclarationStmtAltContext } from "./GroovyParser";
@@ -86,7 +82,6 @@ import { EnumConstantContext } from "./GroovyParser";
 import { ClassBodyDeclarationContext } from "./GroovyParser";
 import { MemberDeclarationContext } from "./GroovyParser";
 import { MethodDeclarationContext } from "./GroovyParser";
-import { CompactConstructorDeclarationContext } from "./GroovyParser";
 import { MethodNameContext } from "./GroovyParser";
 import { ReturnTypeContext } from "./GroovyParser";
 import { FieldDeclarationContext } from "./GroovyParser";
@@ -147,7 +142,6 @@ import { SwitchStatementContext } from "./GroovyParser";
 import { LoopStatementContext } from "./GroovyParser";
 import { ContinueStatementContext } from "./GroovyParser";
 import { BreakStatementContext } from "./GroovyParser";
-import { YieldStatementContext } from "./GroovyParser";
 import { TryCatchStatementContext } from "./GroovyParser";
 import { AssertStatementContext } from "./GroovyParser";
 import { StatementContext } from "./GroovyParser";
@@ -172,9 +166,6 @@ import { ExpressionListElementContext } from "./GroovyParser";
 import { EnhancedStatementExpressionContext } from "./GroovyParser";
 import { StatementExpressionContext } from "./GroovyParser";
 import { PostfixExpressionContext } from "./GroovyParser";
-import { SwitchExpressionContext } from "./GroovyParser";
-import { SwitchBlockStatementExpressionGroupContext } from "./GroovyParser";
-import { SwitchExpressionLabelContext } from "./GroovyParser";
 import { ExpressionContext } from "./GroovyParser";
 import { CommandExpressionContext } from "./GroovyParser";
 import { CommandArgumentContext } from "./GroovyParser";
@@ -284,7 +275,7 @@ export interface GroovyParserVisitor<Result> extends ParseTreeVisitor<Result> {
 
 	/**
 	 * Visit a parse tree produced by the `listPrmrAlt`
-	 * labeled alternative in `GroovyParser.primary`.
+	 * labeled alternative in `GroovyParser.namedPropertyArgPrimary`.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
@@ -292,7 +283,7 @@ export interface GroovyParserVisitor<Result> extends ParseTreeVisitor<Result> {
 
 	/**
 	 * Visit a parse tree produced by the `mapPrmrAlt`
-	 * labeled alternative in `GroovyParser.primary`.
+	 * labeled alternative in `GroovyParser.namedPropertyArgPrimary`.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
@@ -361,14 +352,6 @@ export interface GroovyParserVisitor<Result> extends ParseTreeVisitor<Result> {
 	 * @return the visitor result
 	 */
 	visitPostfixExprAlt?: (ctx: PostfixExprAltContext) => Result;
-
-	/**
-	 * Visit a parse tree produced by the `switchExprAlt`
-	 * labeled alternative in `GroovyParser.expression`.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	visitSwitchExprAlt?: (ctx: SwitchExprAltContext) => Result;
 
 	/**
 	 * Visit a parse tree produced by the `unaryNotExprAlt`
@@ -577,14 +560,6 @@ export interface GroovyParserVisitor<Result> extends ParseTreeVisitor<Result> {
 	 * @return the visitor result
 	 */
 	visitContinueStmtAlt?: (ctx: ContinueStmtAltContext) => Result;
-
-	/**
-	 * Visit a parse tree produced by the `yieldStmtAlt`
-	 * labeled alternative in `GroovyParser.statement`.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	visitYieldStmtAlt?: (ctx: YieldStmtAltContext) => Result;
 
 	/**
 	 * Visit a parse tree produced by the `labeledStmtAlt`
@@ -839,13 +814,6 @@ export interface GroovyParserVisitor<Result> extends ParseTreeVisitor<Result> {
 	 * @return the visitor result
 	 */
 	visitMethodDeclaration?: (ctx: MethodDeclarationContext) => Result;
-
-	/**
-	 * Visit a parse tree produced by `GroovyParser.compactConstructorDeclaration`.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	visitCompactConstructorDeclaration?: (ctx: CompactConstructorDeclarationContext) => Result;
 
 	/**
 	 * Visit a parse tree produced by `GroovyParser.methodName`.
@@ -1268,13 +1236,6 @@ export interface GroovyParserVisitor<Result> extends ParseTreeVisitor<Result> {
 	visitBreakStatement?: (ctx: BreakStatementContext) => Result;
 
 	/**
-	 * Visit a parse tree produced by `GroovyParser.yieldStatement`.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	visitYieldStatement?: (ctx: YieldStatementContext) => Result;
-
-	/**
 	 * Visit a parse tree produced by `GroovyParser.tryCatchStatement`.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -1441,27 +1402,6 @@ export interface GroovyParserVisitor<Result> extends ParseTreeVisitor<Result> {
 	 * @return the visitor result
 	 */
 	visitPostfixExpression?: (ctx: PostfixExpressionContext) => Result;
-
-	/**
-	 * Visit a parse tree produced by `GroovyParser.switchExpression`.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	visitSwitchExpression?: (ctx: SwitchExpressionContext) => Result;
-
-	/**
-	 * Visit a parse tree produced by `GroovyParser.switchBlockStatementExpressionGroup`.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	visitSwitchBlockStatementExpressionGroup?: (ctx: SwitchBlockStatementExpressionGroupContext) => Result;
-
-	/**
-	 * Visit a parse tree produced by `GroovyParser.switchExpressionLabel`.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	visitSwitchExpressionLabel?: (ctx: SwitchExpressionLabelContext) => Result;
 
 	/**
 	 * Visit a parse tree produced by `GroovyParser.expression`.

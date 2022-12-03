@@ -33,23 +33,22 @@ class ErrorListener implements ANTLRErrorListener<CommonToken> {
     }
 }
 
-let config_files = walk("/Users/uwewinter/Documents/Biocommons/tower/nf-core/proteinfold/conf/");
+let configFiles = walk("./server/configs");
 
-
-for (let file of config_files) {
-	fs.readFile(file,(err,data) => {
-		console.log(file)
-		let charstream = CharStreams.fromString(data.toString());
-		const lexer = new NextflowConfigLexer(charstream);
-		const tokenstream = new CommonTokenStream(lexer);
-		const parser = new NextflowConfigParser(tokenstream);
-		const errorListener = new ErrorListener();
-		parser.addErrorListener(errorListener);
-		try {
-			let tree = parser.compilationUnit();
-		} catch (ex) {
-			console.log(ex);
-		}
-	});
+for (let file of configFiles) {
+    fs.readFile(file, (err, data) => {
+        console.log(file)
+        let charStream = CharStreams.fromString(data.toString());
+        const lexer = new GroovyLexer(charStream);
+        const tokenStream = new CommonTokenStream(lexer);
+        const parser = new GroovyParser(tokenStream);
+        const errorListener = new ErrorListener();
+        parser.addErrorListener(errorListener);
+        try {
+            let tree = parser.compilationUnit();
+        } catch (ex) {
+            console.error(ex);
+        }
+        console.log();
+    });
 }
-

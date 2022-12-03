@@ -1,5 +1,6 @@
-// Grammar specification for the Nextflow scripting language.
-
+/**
+ * Grammar specification for the Nextflow scripting language.
+ */
 parser grammar NextflowScriptParser;
 
 options {
@@ -14,136 +15,144 @@ import { GroovyParser } from './GroovyParser';
 
 // top-level script statements
 compilationUnit
-    : scriptStatement* EOF
+    :   nls scriptStatements? EOF
+    ;
+
+scriptStatements
+    :   scriptStatement (sep scriptStatement)* sep?
     ;
 
 scriptStatement
-    : includeStatement
-    | methodDeclaration[1,9]
-    | processDef
-    | workflowDef
+    // nextflow script statements
+    :   includeStatement
+    |   processDef
+    |   workflowDef
+    // groovy script statements
+    |   importDeclaration
+    |   typeDeclaration
+    |   { !GroovyParser.isInvalidMethodDeclaration(this._input) }?
+        methodDeclaration[3, 9]
+    |   statement
     ;
 
 // include statement
 includeStatement
-    : INCLUDE includeNames FROM expression
+    :   INCLUDE includeNames FROM expression
     ;
 
 includeNames
-    : includeName
-    | LBRACE includeName (COMMA includeName)* RBRACE;
+    :   includeName
+    |   LBRACE includeName (COMMA includeName)* RBRACE;
 
 includeName
-    : Identifier
-    | Identifier AS Identifier;
+    :   Identifier
+    |   Identifier AS Identifier;
 
 // process definition
 processDef
-    : PROCESS Identifier LBRACE processStatement* RBRACE
+    :   PROCESS Identifier nls LBRACE sep? processStatements? RBRACE
+    ;
+
+processStatements
+    :   processStatement (sep processStatement)* sep?
     ;
 
 processStatement
-    : processDirective
-    | INPUT processInput+
-    | OUTPUT processOutput+
-    | WHEN expression
-    | SCRIPT statement+
-    | SHELL statement+
-    | EXEC statement+
-    | STUB statement+
+    :   processDirective
+    |   INPUT_GUARD processInput+
+    |   OUTPUT_GUARD processOutput+
+    |   WHEN_GUARD expression
+    |   SCRIPT_GUARD statement+
+    |   SHELL_GUARD statement+
+    |   EXEC_GUARD statement+
+    |   STUB_GUARD statement+
     ;
 
 processDirective
-    : Identifier expression (COMMA Identifier COLON expression)*
+    :   Identifier expression (COMMA Identifier COLON expression)*
     ;
 
 // -- process inputs
 processInput
-    : (processInputType | processInputExpr) (COMMA Identifier COLON expression)*
+    :   processInputType (COMMA Identifier COLON expression)*
     ;
 
 processInputType
-    : processInputVal
-    | processInputEnv
-    | processInputFile
-    | processInputPath
-    | processInputStdin
+    :   processInputVal
+    |   processInputEnv
+    |   processInputFile
+    |   processInputPath
+    |   processInputStdin
+    |   processInputTuple
     ;
 
 processInputVal
-    : VAL LPAREN Identifier RPAREN
+    :   VAL LPAREN Identifier RPAREN
     ;
 
 processInputEnv
-    : ENV LPAREN Identifier RPAREN
+    :   ENV LPAREN Identifier RPAREN
     ;
 
 processInputFile
-    : FILE LPAREN expression (COMMA Identifier COLON expression)* RPAREN
+    :   FILE LPAREN expression (COMMA Identifier COLON expression)* RPAREN
     ;
 
 processInputPath
-    : PATH LPAREN expression (COMMA Identifier COLON expression)* RPAREN
+    :   PATH LPAREN expression (COMMA Identifier COLON expression)* RPAREN
     ;
 
 processInputStdin
-    : STDIN | SUB
-    ;
-
-processInputExpr
-    : processInputTuple
+    :   STDIN | SUB
     ;
 
 processInputTuple
-    : TUPLE LPAREN processInputType (COMMA processInputType)* RPAREN
+    :   TUPLE LPAREN processInputType (COMMA processInputType)* RPAREN
     ;
 
 // -- process outputs
 processOutput
-    : (processOutputType | processOutputExpr) (COMMA Identifier COLON expression)*
+    :   processOutputType (COMMA Identifier COLON expression)*
     ;
 
 processOutputType
-    : processOutputVal
-    | processOutputEnv
-    | processOutputFile
-    | processOutputPath
-    | processOutputStdout
+    :   processOutputVal
+    |   processOutputEnv
+    |   processOutputFile
+    |   processOutputPath
+    |   processOutputStdout
+    |   processOutputTuple
     ;
 
 processOutputVal
-    : VAL LPAREN Identifier RPAREN
+    :   VAL LPAREN Identifier RPAREN
     ;
 
 processOutputEnv
-    : ENV LPAREN Identifier RPAREN
+    :   ENV LPAREN Identifier RPAREN
     ;
 
 processOutputFile
-    : FILE LPAREN expression (COMMA Identifier COLON expression)* RPAREN
+    :   FILE LPAREN expression (COMMA Identifier COLON expression)* RPAREN
     ;
 
 processOutputPath
-    : PATH LPAREN expression (COMMA Identifier COLON expression)* RPAREN
+    :   PATH LPAREN expression (COMMA Identifier COLON expression)* RPAREN
     ;
 
 processOutputStdout
-    : STDOUT | SUB
-    ;
-
-processOutputExpr
-    : processOutputTuple
+    :   STDOUT | SUB
     ;
 
 processOutputTuple
-    : TUPLE LPAREN processOutputType (COMMA processOutputType)* RPAREN
+    :   TUPLE LPAREN processOutputType (COMMA processOutputType)* RPAREN
     ;
 
 // workflow definition
 workflowDef
-    : WORKFLOW Identifier? LBRACE (workflowBody | statement*) RBRACE
+    :   WORKFLOW Identifier? LBRACE (workflowBody | statement*) RBRACE
     ;
 
 workflowBody
-    : (TAKE Identifier+)? (MAIN statement+)? (EMIT expression+)?
+    :   (TAKE_GUARD Identifier+)? (MAIN_GUARD statement+)? (EMIT_GUARD expression+)?
     ;

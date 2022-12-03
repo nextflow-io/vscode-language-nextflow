@@ -14,7 +14,6 @@ interface parseNode {
 	idx: number
 };
 
-
 class ErrorListener implements ANTLRErrorListener<CommonToken> {
     public errorCount = 0;
 
@@ -32,6 +31,7 @@ function computeTokenIndex(parseTree: ParseTree, caretPosition: Position): parse
         return computeTokenIndexOfChildNode(parseTree, caretPosition);
     }
 }
+
 function computeTokenIndexOfTerminalNode(parseTree: TerminalNode, caretPosition: Position) {
     let start = parseTree.symbol.charPositionInLine;
     let stop = parseTree.symbol.charPositionInLine + parseTree.text.length;
@@ -102,7 +102,6 @@ function findParentRuleOfContext(parseTree: RuleNode | undefined, ctxt: any) : R
 function isInsideContext(parseTree: RuleNode | undefined,ctxt: any) {
 	return findParentContext(parseTree, ctxt) !== undefined;
 }
-
 
 function walkToTerminal(parseTree: ParseTree | undefined) : TerminalNode | undefined {
 	if (parseTree) {
@@ -218,10 +217,9 @@ export const complete = function(text: string, carretPosition: TextDocumentPosit
 
 	const core = new CodeCompletionCore(parser);
 	core.ignoredTokens = new Set<number>([
-		GroovyLexer.RANGE_EXCLUSIVE_FULL,
+		GroovyLexer.RANGE_EXCLUSIVE,
 		GroovyLexer.SPREAD_DOT,
 		GroovyLexer.SAFE_DOT,
-		GroovyLexer.SAFE_INDEX,
 		GroovyLexer.SAFE_CHAIN_DOT,
 		GroovyLexer.ELVIS,
 		GroovyLexer.METHOD_POINTER,

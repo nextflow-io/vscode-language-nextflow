@@ -28,8 +28,9 @@
  */
 
 /**
- * The Groovy grammar is based on the official grammar for Java:
- * https://github.com/antlr/grammars-v4/blob/master/java/Java.g4
+ * Grammar specification for Groovy 3.0.13, adapted for use with TypeScript.
+ *
+ * Source: https://github.com/apache/groovy/blob/GROOVY_3_0_13/src/antlr/GroovyLexer.g4
  */
 lexer grammar GroovyLexer;
 
@@ -167,6 +168,7 @@ class Paren {
 
     private isInsideParens() {
         let paren = this.parenStack.peekBack();
+
         // We just care about "(", "[" and "?[", inside which the new lines will be ignored.
         // Notice: the new lines between "{" and "}" can not be ignored.
         if (paren === undefined) {
@@ -299,8 +301,8 @@ class Paren {
     }
 }
 
-
 // §3.10.5 String Literals
+
 StringLiteral
     :   GStringQuotationMark  DqStringCharacter*  GStringQuotationMark
     |   SqStringQuotationMark  SqStringCharacter*  SqStringQuotationMark
@@ -325,78 +327,72 @@ DollarSlashyGStringBegin
     ;
 
 mode DQ_GSTRING_MODE;
-
-    GStringEnd
-        :   GStringQuotationMark     -> popMode
-        ;
-    GStringPart
-        :   Dollar  -> pushMode(GSTRING_TYPE_SELECTOR_MODE)
-        ;
-    GStringCharacter
-        :   DqStringCharacter -> more
-        ;
+GStringEnd
+    :   GStringQuotationMark     -> popMode
+    ;
+GStringPart
+    :   Dollar  -> pushMode(GSTRING_TYPE_SELECTOR_MODE)
+    ;
+GStringCharacter
+    :   DqStringCharacter -> more
+    ;
 
 mode TDQ_GSTRING_MODE;
-
-    TdqGStringEnd
-        :   TdqStringQuotationMark    -> type(GStringEnd), popMode
-        ;
-    TdqGStringPart
-        :   Dollar   -> type(GStringPart), pushMode(GSTRING_TYPE_SELECTOR_MODE)
-        ;
-    TdqGStringCharacter
-        :   TdqStringCharacter -> more
-        ;
+TdqGStringEnd
+    :   TdqStringQuotationMark    -> type(GStringEnd), popMode
+    ;
+TdqGStringPart
+    :   Dollar   -> type(GStringPart), pushMode(GSTRING_TYPE_SELECTOR_MODE)
+    ;
+TdqGStringCharacter
+    :   TdqStringCharacter -> more
+    ;
 
 mode SLASHY_GSTRING_MODE;
-
-    SlashyGStringEnd
-        :   Dollar? Slash  -> type(GStringEnd), popMode
-        ;
-    SlashyGStringPart
-        :   Dollar { GroovyLexer.isFollowedByJavaLetterInGString(this._input) }?   -> type(GStringPart), pushMode(GSTRING_TYPE_SELECTOR_MODE)
-        ;
-    SlashyGStringCharacter
-        :   SlashyStringCharacter -> more
-        ;
+SlashyGStringEnd
+    :   Dollar? Slash  -> type(GStringEnd), popMode
+    ;
+SlashyGStringPart
+    :   Dollar { GroovyLexer.isFollowedByJavaLetterInGString(this._input) }?   -> type(GStringPart), pushMode(GSTRING_TYPE_SELECTOR_MODE)
+    ;
+SlashyGStringCharacter
+    :   SlashyStringCharacter -> more
+    ;
 
 mode DOLLAR_SLASHY_GSTRING_MODE;
-
-    DollarSlashyGStringEnd
-        :   DollarSlashyGStringQuotationMarkEnd      -> type(GStringEnd), popMode
-        ;
-    DollarSlashyGStringPart
-        :   Dollar { GroovyLexer.isFollowedByJavaLetterInGString(this._input) }?   -> type(GStringPart), pushMode(GSTRING_TYPE_SELECTOR_MODE)
-        ;
-    DollarSlashyGStringCharacter
-        :   DollarSlashyStringCharacter -> more
-        ;
+DollarSlashyGStringEnd
+    :   DollarSlashyGStringQuotationMarkEnd      -> type(GStringEnd), popMode
+    ;
+DollarSlashyGStringPart
+    :   Dollar { GroovyLexer.isFollowedByJavaLetterInGString(this._input) }?   -> type(GStringPart), pushMode(GSTRING_TYPE_SELECTOR_MODE)
+    ;
+DollarSlashyGStringCharacter
+    :   DollarSlashyStringCharacter -> more
+    ;
 
 mode GSTRING_TYPE_SELECTOR_MODE;
-
-    GStringLBrace
-        :   '{' { this.enterParen();  } -> type(LBRACE), popMode, pushMode(DEFAULT_MODE)
-        ;
-    GStringIdentifier
-        :   IdentifierInGString -> type(Identifier), popMode, pushMode(GSTRING_PATH_MODE)
-        ;
+GStringLBrace
+    :   '{' { this.enterParen();  } -> type(LBRACE), popMode, pushMode(DEFAULT_MODE)
+    ;
+GStringIdentifier
+    :   IdentifierInGString -> type(Identifier), popMode, pushMode(GSTRING_PATH_MODE)
+    ;
 
 mode GSTRING_PATH_MODE;
-
-    GStringPathPart
-        :   Dot IdentifierInGString
-        ;
-    RollBackOne
-        :   . {
-                // a trick to handle GStrings followed by EOF properly
-                let readChar = String.fromCodePoint(this._input.LA(-1));
-                if (GroovyLexer.EOF == this._input.LA(1) && ('"' === readChar || '/' === readChar)) {
-                    this.type = GroovyLexer.GStringEnd;
-                } else {
-                    this.channel = Token.HIDDEN_CHANNEL;
-                }
-            } -> popMode
-        ;
+GStringPathPart
+    :   Dot IdentifierInGString
+    ;
+RollBackOne
+    :   . {
+            // a trick to handle GStrings followed by EOF properly
+            let readChar = String.fromCodePoint(this._input.LA(-1));
+            if (GroovyLexer.EOF == this._input.LA(1) && ('"' === readChar || '/' === readChar)) {
+                this.type = GroovyLexer.GStringEnd;
+            } else {
+                this.channel = Token.HIDDEN_CHANNEL;
+            }
+        } -> popMode
+    ;
 
 mode DEFAULT_MODE;
 
@@ -435,9 +431,7 @@ fragment SlashyStringCharacter
 
 // character in the dollar slashy string. e.g. $/a/$
 fragment DollarSlashyStringCharacter
-    :   DollarDollarEscape
-    |   DollarSlashDollarEscape { String.fromCodePoint(this._input.LA(-4)) != '$' }?
-    |   DollarSlashEscape { String.fromCodePoint(this._input.LA(1)) != '$' }?
+    :   DollarSlashEscape | DollarDollarEscape
     |   Slash { String.fromCodePoint(this._input.LA(1)) != '$' }?
     |   Dollar { !GroovyLexer.isFollowedByJavaLetterInGString(this._input) }?
     |   ~[/$\u0000]
@@ -454,6 +448,7 @@ THREADSAFE      : 'threadsafe'; // reserved keyword
 VAR             : 'var';
 
 // §3.9 Keywords
+
 BuiltInPrimitiveType
     :   BOOLEAN
     |   CHAR
@@ -472,7 +467,6 @@ fragment
 BOOLEAN       : 'boolean';
 
 BREAK         : 'break';
-YIELD         : 'yield';
 
 fragment
 BYTE          : 'byte';
@@ -518,18 +512,11 @@ LONG          : 'long';
 
 NATIVE        : 'native';
 NEW           : 'new';
-NON_SEALED    : 'non-sealed';
-
 PACKAGE       : 'package';
-PERMITS       : 'permits';
 PRIVATE       : 'private';
 PROTECTED     : 'protected';
 PUBLIC        : 'public';
-
-RECORD        : 'record';
 RETURN        : 'return';
-
-SEALED        : 'sealed';
 
 fragment
 SHORT         : 'short';
@@ -807,47 +794,38 @@ fragment DollarSlashyGStringQuotationMarkEnd
     :   '/$'
     ;
 
-// escaped forward slash
 fragment DollarSlashEscape
     :   '$/'
     ;
 
-// escaped dollar sign
 fragment DollarDollarEscape
     :   '$$'
     ;
 
-// escaped dollar slashy string delimiter
-fragment DollarSlashDollarEscape
-    :   '$/$'
-    ;
-
 // §3.10.7 The Null Literal
+
 NullLiteral
     :   'null'
     ;
 
 // Groovy Operators
 
-RANGE_INCLUSIVE         : '..';
-RANGE_EXCLUSIVE_LEFT    : '<..';
-RANGE_EXCLUSIVE_RIGHT   : '..<';
-RANGE_EXCLUSIVE_FULL    : '<..<';
-SPREAD_DOT              : '*.';
-SAFE_DOT                : '?.';
-SAFE_INDEX              : '?[' { this.enterParen();     } -> pushMode(DEFAULT_MODE);
-SAFE_CHAIN_DOT          : '??.';
-ELVIS                   : '?:';
-METHOD_POINTER          : '.&';
-METHOD_REFERENCE        : '::';
-REGEX_FIND              : '=~';
-REGEX_MATCH             : '==~';
-POWER                   : '**';
-POWER_ASSIGN            : '**=';
-SPACESHIP               : '<=>';
-IDENTICAL               : '===';
-NOT_IDENTICAL           : '!==';
-ARROW                   : '->';
+RANGE_INCLUSIVE     : '..';
+RANGE_EXCLUSIVE     : '..<';
+SPREAD_DOT          : '*.';
+SAFE_DOT            : '?.';
+SAFE_CHAIN_DOT      : '??.';
+ELVIS               : '?:';
+METHOD_POINTER      : '.&';
+METHOD_REFERENCE    : '::';
+REGEX_FIND          : '=~';
+REGEX_MATCH         : '==~';
+POWER               : '**';
+POWER_ASSIGN        : '**=';
+SPACESHIP           : '<=>';
+IDENTICAL           : '===';
+NOT_IDENTICAL       : '!==';
+ARROW               : '->';
 
 // !internalPromise will be parsed as !in ternalPromise, so semantic predicates are necessary
 NOT_INSTANCEOF      : '!instanceof' { GroovyLexer.isFollowedBy(this._input, ' ', '\t', '\r', '\n') }?;

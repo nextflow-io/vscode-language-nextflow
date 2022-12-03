@@ -1,9 +1,7 @@
-// Generated from src/grammar/NextflowScriptParser.g4 by ANTLR 4.9.0-SNAPSHOT
+// Generated from server/src/grammar/NextflowScriptParser.g4 by ANTLR 4.9.0-SNAPSHOT
 
 
 import { GroovyParser } from './GroovyParser';
-
-
 
 
 import { ATN } from "antlr4ts/atn/ATN";
@@ -49,355 +47,342 @@ export class NextflowScriptParser extends Parser {
 	public static readonly ABSTRACT = 14;
 	public static readonly ASSERT = 15;
 	public static readonly BREAK = 16;
-	public static readonly YIELD = 17;
-	public static readonly CASE = 18;
-	public static readonly CATCH = 19;
-	public static readonly CLASS = 20;
-	public static readonly CONST = 21;
-	public static readonly CONTINUE = 22;
-	public static readonly DEFAULT = 23;
-	public static readonly DO = 24;
-	public static readonly ELSE = 25;
-	public static readonly ENUM = 26;
-	public static readonly EXTENDS = 27;
-	public static readonly FINAL = 28;
-	public static readonly FINALLY = 29;
-	public static readonly FOR = 30;
-	public static readonly IF = 31;
-	public static readonly GOTO = 32;
-	public static readonly IMPLEMENTS = 33;
-	public static readonly IMPORT = 34;
-	public static readonly INSTANCEOF = 35;
-	public static readonly INTERFACE = 36;
-	public static readonly NATIVE = 37;
-	public static readonly NEW = 38;
-	public static readonly NON_SEALED = 39;
-	public static readonly PACKAGE = 40;
-	public static readonly PERMITS = 41;
-	public static readonly PRIVATE = 42;
-	public static readonly PROTECTED = 43;
-	public static readonly PUBLIC = 44;
-	public static readonly RECORD = 45;
-	public static readonly RETURN = 46;
-	public static readonly SEALED = 47;
-	public static readonly STATIC = 48;
-	public static readonly STRICTFP = 49;
-	public static readonly SUPER = 50;
-	public static readonly SWITCH = 51;
-	public static readonly SYNCHRONIZED = 52;
-	public static readonly THIS = 53;
-	public static readonly THROW = 54;
-	public static readonly THROWS = 55;
-	public static readonly TRANSIENT = 56;
-	public static readonly TRY = 57;
-	public static readonly VOID = 58;
-	public static readonly VOLATILE = 59;
-	public static readonly WHILE = 60;
-	public static readonly IntegerLiteral = 61;
-	public static readonly FloatingPointLiteral = 62;
-	public static readonly BooleanLiteral = 63;
-	public static readonly NullLiteral = 64;
-	public static readonly RANGE_INCLUSIVE = 65;
-	public static readonly RANGE_EXCLUSIVE_LEFT = 66;
-	public static readonly RANGE_EXCLUSIVE_RIGHT = 67;
-	public static readonly RANGE_EXCLUSIVE_FULL = 68;
-	public static readonly SPREAD_DOT = 69;
-	public static readonly SAFE_DOT = 70;
-	public static readonly SAFE_INDEX = 71;
-	public static readonly SAFE_CHAIN_DOT = 72;
-	public static readonly ELVIS = 73;
-	public static readonly METHOD_POINTER = 74;
-	public static readonly METHOD_REFERENCE = 75;
-	public static readonly REGEX_FIND = 76;
-	public static readonly REGEX_MATCH = 77;
-	public static readonly POWER = 78;
-	public static readonly POWER_ASSIGN = 79;
-	public static readonly SPACESHIP = 80;
-	public static readonly IDENTICAL = 81;
-	public static readonly NOT_IDENTICAL = 82;
-	public static readonly ARROW = 83;
-	public static readonly NOT_INSTANCEOF = 84;
-	public static readonly NOT_IN = 85;
-	public static readonly LPAREN = 86;
-	public static readonly RPAREN = 87;
-	public static readonly LBRACE = 88;
-	public static readonly RBRACE = 89;
-	public static readonly LBRACK = 90;
-	public static readonly RBRACK = 91;
-	public static readonly SEMI = 92;
-	public static readonly COMMA = 93;
-	public static readonly DOT = 94;
-	public static readonly ASSIGN = 95;
-	public static readonly GT = 96;
-	public static readonly LT = 97;
-	public static readonly NOT = 98;
-	public static readonly BITNOT = 99;
-	public static readonly QUESTION = 100;
-	public static readonly COLON = 101;
-	public static readonly EQUAL = 102;
-	public static readonly LE = 103;
-	public static readonly GE = 104;
-	public static readonly NOTEQUAL = 105;
-	public static readonly AND = 106;
-	public static readonly OR = 107;
-	public static readonly INC = 108;
-	public static readonly DEC = 109;
-	public static readonly ADD = 110;
-	public static readonly SUB = 111;
-	public static readonly MUL = 112;
-	public static readonly DIV = 113;
-	public static readonly BITAND = 114;
-	public static readonly BITOR = 115;
-	public static readonly XOR = 116;
-	public static readonly MOD = 117;
-	public static readonly ADD_ASSIGN = 118;
-	public static readonly SUB_ASSIGN = 119;
-	public static readonly MUL_ASSIGN = 120;
-	public static readonly DIV_ASSIGN = 121;
-	public static readonly AND_ASSIGN = 122;
-	public static readonly OR_ASSIGN = 123;
-	public static readonly XOR_ASSIGN = 124;
-	public static readonly MOD_ASSIGN = 125;
-	public static readonly LSHIFT_ASSIGN = 126;
-	public static readonly RSHIFT_ASSIGN = 127;
-	public static readonly URSHIFT_ASSIGN = 128;
-	public static readonly ELVIS_ASSIGN = 129;
-	public static readonly CapitalizedIdentifier = 130;
-	public static readonly Identifier = 131;
-	public static readonly AT = 132;
-	public static readonly ELLIPSIS = 133;
-	public static readonly WS = 134;
-	public static readonly NL = 135;
-	public static readonly SH_COMMENT = 136;
-	public static readonly UNEXPECTED_CHAR = 137;
-	public static readonly INCLUDE = 138;
-	public static readonly FROM = 139;
+	public static readonly CASE = 17;
+	public static readonly CATCH = 18;
+	public static readonly CLASS = 19;
+	public static readonly CONST = 20;
+	public static readonly CONTINUE = 21;
+	public static readonly DEFAULT = 22;
+	public static readonly DO = 23;
+	public static readonly ELSE = 24;
+	public static readonly ENUM = 25;
+	public static readonly EXTENDS = 26;
+	public static readonly FINAL = 27;
+	public static readonly FINALLY = 28;
+	public static readonly FOR = 29;
+	public static readonly IF = 30;
+	public static readonly GOTO = 31;
+	public static readonly IMPLEMENTS = 32;
+	public static readonly IMPORT = 33;
+	public static readonly INSTANCEOF = 34;
+	public static readonly INTERFACE = 35;
+	public static readonly NATIVE = 36;
+	public static readonly NEW = 37;
+	public static readonly PACKAGE = 38;
+	public static readonly PRIVATE = 39;
+	public static readonly PROTECTED = 40;
+	public static readonly PUBLIC = 41;
+	public static readonly RETURN = 42;
+	public static readonly STATIC = 43;
+	public static readonly STRICTFP = 44;
+	public static readonly SUPER = 45;
+	public static readonly SWITCH = 46;
+	public static readonly SYNCHRONIZED = 47;
+	public static readonly THIS = 48;
+	public static readonly THROW = 49;
+	public static readonly THROWS = 50;
+	public static readonly TRANSIENT = 51;
+	public static readonly TRY = 52;
+	public static readonly VOID = 53;
+	public static readonly VOLATILE = 54;
+	public static readonly WHILE = 55;
+	public static readonly IntegerLiteral = 56;
+	public static readonly FloatingPointLiteral = 57;
+	public static readonly BooleanLiteral = 58;
+	public static readonly NullLiteral = 59;
+	public static readonly RANGE_INCLUSIVE = 60;
+	public static readonly RANGE_EXCLUSIVE = 61;
+	public static readonly SPREAD_DOT = 62;
+	public static readonly SAFE_DOT = 63;
+	public static readonly SAFE_CHAIN_DOT = 64;
+	public static readonly ELVIS = 65;
+	public static readonly METHOD_POINTER = 66;
+	public static readonly METHOD_REFERENCE = 67;
+	public static readonly REGEX_FIND = 68;
+	public static readonly REGEX_MATCH = 69;
+	public static readonly POWER = 70;
+	public static readonly POWER_ASSIGN = 71;
+	public static readonly SPACESHIP = 72;
+	public static readonly IDENTICAL = 73;
+	public static readonly NOT_IDENTICAL = 74;
+	public static readonly ARROW = 75;
+	public static readonly NOT_INSTANCEOF = 76;
+	public static readonly NOT_IN = 77;
+	public static readonly LPAREN = 78;
+	public static readonly RPAREN = 79;
+	public static readonly LBRACE = 80;
+	public static readonly RBRACE = 81;
+	public static readonly LBRACK = 82;
+	public static readonly RBRACK = 83;
+	public static readonly SEMI = 84;
+	public static readonly COMMA = 85;
+	public static readonly DOT = 86;
+	public static readonly ASSIGN = 87;
+	public static readonly GT = 88;
+	public static readonly LT = 89;
+	public static readonly NOT = 90;
+	public static readonly BITNOT = 91;
+	public static readonly QUESTION = 92;
+	public static readonly COLON = 93;
+	public static readonly EQUAL = 94;
+	public static readonly LE = 95;
+	public static readonly GE = 96;
+	public static readonly NOTEQUAL = 97;
+	public static readonly AND = 98;
+	public static readonly OR = 99;
+	public static readonly INC = 100;
+	public static readonly DEC = 101;
+	public static readonly ADD = 102;
+	public static readonly SUB = 103;
+	public static readonly MUL = 104;
+	public static readonly DIV = 105;
+	public static readonly BITAND = 106;
+	public static readonly BITOR = 107;
+	public static readonly XOR = 108;
+	public static readonly MOD = 109;
+	public static readonly ADD_ASSIGN = 110;
+	public static readonly SUB_ASSIGN = 111;
+	public static readonly MUL_ASSIGN = 112;
+	public static readonly DIV_ASSIGN = 113;
+	public static readonly AND_ASSIGN = 114;
+	public static readonly OR_ASSIGN = 115;
+	public static readonly XOR_ASSIGN = 116;
+	public static readonly MOD_ASSIGN = 117;
+	public static readonly LSHIFT_ASSIGN = 118;
+	public static readonly RSHIFT_ASSIGN = 119;
+	public static readonly URSHIFT_ASSIGN = 120;
+	public static readonly ELVIS_ASSIGN = 121;
+	public static readonly CapitalizedIdentifier = 122;
+	public static readonly Identifier = 123;
+	public static readonly AT = 124;
+	public static readonly ELLIPSIS = 125;
+	public static readonly WS = 126;
+	public static readonly NL = 127;
+	public static readonly SH_COMMENT = 128;
+	public static readonly UNEXPECTED_CHAR = 129;
+	public static readonly EMIT_GUARD = 130;
+	public static readonly ENV = 131;
+	public static readonly EXEC_GUARD = 132;
+	public static readonly FILE = 133;
+	public static readonly FROM = 134;
+	public static readonly INCLUDE = 135;
+	public static readonly INPUT_GUARD = 136;
+	public static readonly MAIN_GUARD = 137;
+	public static readonly OUTPUT_GUARD = 138;
+	public static readonly PATH = 139;
 	public static readonly PROCESS = 140;
-	public static readonly VAL = 141;
-	public static readonly FILE = 142;
-	public static readonly ENV = 143;
-	public static readonly PATH = 144;
-	public static readonly STDIN = 145;
-	public static readonly TUPLE = 146;
-	public static readonly STDOUT = 147;
-	public static readonly WORKFLOW = 148;
-	public static readonly TAKE = 149;
-	public static readonly MAIN = 150;
-	public static readonly EMIT = 151;
-	public static readonly INPUT = 152;
-	public static readonly OUTPUT = 153;
-	public static readonly WHEN = 154;
-	public static readonly SCRIPT = 155;
-	public static readonly SHELL = 156;
-	public static readonly EXEC = 157;
-	public static readonly STUB = 158;
+	public static readonly SCRIPT_GUARD = 141;
+	public static readonly SHELL_GUARD = 142;
+	public static readonly STDIN = 143;
+	public static readonly STDOUT = 144;
+	public static readonly STUB_GUARD = 145;
+	public static readonly TAKE_GUARD = 146;
+	public static readonly TUPLE = 147;
+	public static readonly VAL = 148;
+	public static readonly WHEN_GUARD = 149;
+	public static readonly WORKFLOW = 150;
 	public static readonly RULE_compilationUnit = 0;
-	public static readonly RULE_scriptStatement = 1;
-	public static readonly RULE_includeStatement = 2;
-	public static readonly RULE_includeNames = 3;
-	public static readonly RULE_includeName = 4;
-	public static readonly RULE_processDef = 5;
-	public static readonly RULE_processStatement = 6;
-	public static readonly RULE_processDirective = 7;
-	public static readonly RULE_processInput = 8;
-	public static readonly RULE_processInputType = 9;
-	public static readonly RULE_processInputVal = 10;
-	public static readonly RULE_processInputEnv = 11;
-	public static readonly RULE_processInputFile = 12;
-	public static readonly RULE_processInputPath = 13;
-	public static readonly RULE_processInputStdin = 14;
-	public static readonly RULE_processInputExpr = 15;
-	public static readonly RULE_processInputTuple = 16;
-	public static readonly RULE_processOutput = 17;
-	public static readonly RULE_processOutputType = 18;
-	public static readonly RULE_processOutputVal = 19;
-	public static readonly RULE_processOutputEnv = 20;
-	public static readonly RULE_processOutputFile = 21;
-	public static readonly RULE_processOutputPath = 22;
-	public static readonly RULE_processOutputStdout = 23;
-	public static readonly RULE_processOutputExpr = 24;
+	public static readonly RULE_scriptStatements = 1;
+	public static readonly RULE_scriptStatement = 2;
+	public static readonly RULE_includeStatement = 3;
+	public static readonly RULE_includeNames = 4;
+	public static readonly RULE_includeName = 5;
+	public static readonly RULE_processDef = 6;
+	public static readonly RULE_processStatements = 7;
+	public static readonly RULE_processStatement = 8;
+	public static readonly RULE_processDirective = 9;
+	public static readonly RULE_processInput = 10;
+	public static readonly RULE_processInputType = 11;
+	public static readonly RULE_processInputVal = 12;
+	public static readonly RULE_processInputEnv = 13;
+	public static readonly RULE_processInputFile = 14;
+	public static readonly RULE_processInputPath = 15;
+	public static readonly RULE_processInputStdin = 16;
+	public static readonly RULE_processInputTuple = 17;
+	public static readonly RULE_processOutput = 18;
+	public static readonly RULE_processOutputType = 19;
+	public static readonly RULE_processOutputVal = 20;
+	public static readonly RULE_processOutputEnv = 21;
+	public static readonly RULE_processOutputFile = 22;
+	public static readonly RULE_processOutputPath = 23;
+	public static readonly RULE_processOutputStdout = 24;
 	public static readonly RULE_processOutputTuple = 25;
 	public static readonly RULE_workflowDef = 26;
 	public static readonly RULE_workflowBody = 27;
-	public static readonly RULE_scriptStatements = 28;
-	public static readonly RULE_packageDeclaration = 29;
-	public static readonly RULE_importDeclaration = 30;
-	public static readonly RULE_typeDeclaration = 31;
-	public static readonly RULE_modifier = 32;
-	public static readonly RULE_modifiersOpt = 33;
-	public static readonly RULE_modifiers = 34;
-	public static readonly RULE_classOrInterfaceModifiersOpt = 35;
-	public static readonly RULE_classOrInterfaceModifiers = 36;
-	public static readonly RULE_classOrInterfaceModifier = 37;
-	public static readonly RULE_variableModifier = 38;
-	public static readonly RULE_variableModifiersOpt = 39;
-	public static readonly RULE_variableModifiers = 40;
-	public static readonly RULE_typeParameters = 41;
-	public static readonly RULE_typeParameter = 42;
-	public static readonly RULE_typeBound = 43;
-	public static readonly RULE_typeList = 44;
-	public static readonly RULE_classDeclaration = 45;
-	public static readonly RULE_classBody = 46;
-	public static readonly RULE_enumConstants = 47;
-	public static readonly RULE_enumConstant = 48;
-	public static readonly RULE_classBodyDeclaration = 49;
-	public static readonly RULE_memberDeclaration = 50;
-	public static readonly RULE_methodDeclaration = 51;
-	public static readonly RULE_compactConstructorDeclaration = 52;
-	public static readonly RULE_methodName = 53;
-	public static readonly RULE_returnType = 54;
-	public static readonly RULE_fieldDeclaration = 55;
-	public static readonly RULE_variableDeclarators = 56;
-	public static readonly RULE_variableDeclarator = 57;
-	public static readonly RULE_variableDeclaratorId = 58;
-	public static readonly RULE_variableInitializer = 59;
-	public static readonly RULE_variableInitializers = 60;
-	public static readonly RULE_emptyDims = 61;
-	public static readonly RULE_emptyDimsOpt = 62;
-	public static readonly RULE_standardType = 63;
-	public static readonly RULE_type = 64;
-	public static readonly RULE_classOrInterfaceType = 65;
-	public static readonly RULE_generalClassOrInterfaceType = 66;
-	public static readonly RULE_standardClassOrInterfaceType = 67;
-	public static readonly RULE_primitiveType = 68;
-	public static readonly RULE_typeArguments = 69;
-	public static readonly RULE_typeArgument = 70;
-	public static readonly RULE_annotatedQualifiedClassName = 71;
-	public static readonly RULE_qualifiedClassNameList = 72;
-	public static readonly RULE_formalParameters = 73;
-	public static readonly RULE_formalParameterList = 74;
-	public static readonly RULE_thisFormalParameter = 75;
-	public static readonly RULE_formalParameter = 76;
-	public static readonly RULE_methodBody = 77;
-	public static readonly RULE_qualifiedName = 78;
-	public static readonly RULE_qualifiedNameElement = 79;
-	public static readonly RULE_qualifiedNameElements = 80;
-	public static readonly RULE_qualifiedClassName = 81;
-	public static readonly RULE_qualifiedStandardClassName = 82;
-	public static readonly RULE_literal = 83;
-	public static readonly RULE_gstring = 84;
-	public static readonly RULE_gstringValue = 85;
-	public static readonly RULE_gstringPath = 86;
-	public static readonly RULE_lambdaExpression = 87;
-	public static readonly RULE_standardLambdaExpression = 88;
-	public static readonly RULE_lambdaParameters = 89;
-	public static readonly RULE_standardLambdaParameters = 90;
-	public static readonly RULE_lambdaBody = 91;
-	public static readonly RULE_closure = 92;
-	public static readonly RULE_closureOrLambdaExpression = 93;
-	public static readonly RULE_blockStatementsOpt = 94;
-	public static readonly RULE_blockStatements = 95;
-	public static readonly RULE_annotationsOpt = 96;
-	public static readonly RULE_annotation = 97;
-	public static readonly RULE_elementValues = 98;
-	public static readonly RULE_annotationName = 99;
-	public static readonly RULE_elementValuePairs = 100;
-	public static readonly RULE_elementValuePair = 101;
-	public static readonly RULE_elementValuePairName = 102;
-	public static readonly RULE_elementValue = 103;
-	public static readonly RULE_elementValueArrayInitializer = 104;
-	public static readonly RULE_block = 105;
-	public static readonly RULE_blockStatement = 106;
-	public static readonly RULE_localVariableDeclaration = 107;
-	public static readonly RULE_variableDeclaration = 108;
-	public static readonly RULE_typeNamePairs = 109;
-	public static readonly RULE_typeNamePair = 110;
-	public static readonly RULE_variableNames = 111;
-	public static readonly RULE_conditionalStatement = 112;
-	public static readonly RULE_ifElseStatement = 113;
-	public static readonly RULE_switchStatement = 114;
-	public static readonly RULE_loopStatement = 115;
-	public static readonly RULE_continueStatement = 116;
-	public static readonly RULE_breakStatement = 117;
-	public static readonly RULE_yieldStatement = 118;
-	public static readonly RULE_tryCatchStatement = 119;
-	public static readonly RULE_assertStatement = 120;
-	public static readonly RULE_statement = 121;
-	public static readonly RULE_catchClause = 122;
-	public static readonly RULE_catchType = 123;
-	public static readonly RULE_finallyBlock = 124;
-	public static readonly RULE_resources = 125;
-	public static readonly RULE_resourceList = 126;
-	public static readonly RULE_resource = 127;
-	public static readonly RULE_switchBlockStatementGroup = 128;
-	public static readonly RULE_switchLabel = 129;
-	public static readonly RULE_forControl = 130;
-	public static readonly RULE_enhancedForControl = 131;
-	public static readonly RULE_classicalForControl = 132;
-	public static readonly RULE_forInit = 133;
-	public static readonly RULE_forUpdate = 134;
-	public static readonly RULE_castParExpression = 135;
-	public static readonly RULE_parExpression = 136;
-	public static readonly RULE_expressionInPar = 137;
-	public static readonly RULE_expressionList = 138;
-	public static readonly RULE_expressionListElement = 139;
-	public static readonly RULE_enhancedStatementExpression = 140;
-	public static readonly RULE_statementExpression = 141;
-	public static readonly RULE_postfixExpression = 142;
-	public static readonly RULE_switchExpression = 143;
-	public static readonly RULE_switchBlockStatementExpressionGroup = 144;
-	public static readonly RULE_switchExpressionLabel = 145;
-	public static readonly RULE_expression = 146;
-	public static readonly RULE_castOperandExpression = 147;
-	public static readonly RULE_commandExpression = 148;
-	public static readonly RULE_commandArgument = 149;
-	public static readonly RULE_pathExpression = 150;
-	public static readonly RULE_pathElement = 151;
-	public static readonly RULE_namePart = 152;
-	public static readonly RULE_dynamicMemberName = 153;
-	public static readonly RULE_indexPropertyArgs = 154;
-	public static readonly RULE_namedPropertyArgs = 155;
-	public static readonly RULE_primary = 156;
-	public static readonly RULE_namedPropertyArgPrimary = 157;
-	public static readonly RULE_namedArgPrimary = 158;
-	public static readonly RULE_commandPrimary = 159;
-	public static readonly RULE_list = 160;
-	public static readonly RULE_map = 161;
-	public static readonly RULE_mapEntryList = 162;
-	public static readonly RULE_namedPropertyArgList = 163;
-	public static readonly RULE_mapEntry = 164;
-	public static readonly RULE_namedPropertyArg = 165;
-	public static readonly RULE_namedArg = 166;
-	public static readonly RULE_mapEntryLabel = 167;
-	public static readonly RULE_namedPropertyArgLabel = 168;
-	public static readonly RULE_namedArgLabel = 169;
-	public static readonly RULE_creator = 170;
-	public static readonly RULE_dim = 171;
-	public static readonly RULE_arrayInitializer = 172;
-	public static readonly RULE_anonymousInnerClassDeclaration = 173;
-	public static readonly RULE_createdName = 174;
-	public static readonly RULE_nonWildcardTypeArguments = 175;
-	public static readonly RULE_typeArgumentsOrDiamond = 176;
-	public static readonly RULE_arguments = 177;
-	public static readonly RULE_argumentList = 178;
-	public static readonly RULE_enhancedArgumentListInPar = 179;
-	public static readonly RULE_firstArgumentListElement = 180;
-	public static readonly RULE_argumentListElement = 181;
-	public static readonly RULE_enhancedArgumentListElement = 182;
-	public static readonly RULE_stringLiteral = 183;
-	public static readonly RULE_className = 184;
-	public static readonly RULE_identifier = 185;
-	public static readonly RULE_builtInType = 186;
-	public static readonly RULE_keywords = 187;
-	public static readonly RULE_rparen = 188;
-	public static readonly RULE_nls = 189;
-	public static readonly RULE_sep = 190;
+	public static readonly RULE_packageDeclaration = 28;
+	public static readonly RULE_importDeclaration = 29;
+	public static readonly RULE_typeDeclaration = 30;
+	public static readonly RULE_modifier = 31;
+	public static readonly RULE_modifiersOpt = 32;
+	public static readonly RULE_modifiers = 33;
+	public static readonly RULE_classOrInterfaceModifiersOpt = 34;
+	public static readonly RULE_classOrInterfaceModifiers = 35;
+	public static readonly RULE_classOrInterfaceModifier = 36;
+	public static readonly RULE_variableModifier = 37;
+	public static readonly RULE_variableModifiersOpt = 38;
+	public static readonly RULE_variableModifiers = 39;
+	public static readonly RULE_typeParameters = 40;
+	public static readonly RULE_typeParameter = 41;
+	public static readonly RULE_typeBound = 42;
+	public static readonly RULE_typeList = 43;
+	public static readonly RULE_classDeclaration = 44;
+	public static readonly RULE_classBody = 45;
+	public static readonly RULE_enumConstants = 46;
+	public static readonly RULE_enumConstant = 47;
+	public static readonly RULE_classBodyDeclaration = 48;
+	public static readonly RULE_memberDeclaration = 49;
+	public static readonly RULE_methodDeclaration = 50;
+	public static readonly RULE_methodName = 51;
+	public static readonly RULE_returnType = 52;
+	public static readonly RULE_fieldDeclaration = 53;
+	public static readonly RULE_variableDeclarators = 54;
+	public static readonly RULE_variableDeclarator = 55;
+	public static readonly RULE_variableDeclaratorId = 56;
+	public static readonly RULE_variableInitializer = 57;
+	public static readonly RULE_variableInitializers = 58;
+	public static readonly RULE_emptyDims = 59;
+	public static readonly RULE_emptyDimsOpt = 60;
+	public static readonly RULE_standardType = 61;
+	public static readonly RULE_type = 62;
+	public static readonly RULE_classOrInterfaceType = 63;
+	public static readonly RULE_generalClassOrInterfaceType = 64;
+	public static readonly RULE_standardClassOrInterfaceType = 65;
+	public static readonly RULE_primitiveType = 66;
+	public static readonly RULE_typeArguments = 67;
+	public static readonly RULE_typeArgument = 68;
+	public static readonly RULE_annotatedQualifiedClassName = 69;
+	public static readonly RULE_qualifiedClassNameList = 70;
+	public static readonly RULE_formalParameters = 71;
+	public static readonly RULE_formalParameterList = 72;
+	public static readonly RULE_thisFormalParameter = 73;
+	public static readonly RULE_formalParameter = 74;
+	public static readonly RULE_methodBody = 75;
+	public static readonly RULE_qualifiedName = 76;
+	public static readonly RULE_qualifiedNameElement = 77;
+	public static readonly RULE_qualifiedNameElements = 78;
+	public static readonly RULE_qualifiedClassName = 79;
+	public static readonly RULE_qualifiedStandardClassName = 80;
+	public static readonly RULE_literal = 81;
+	public static readonly RULE_gstring = 82;
+	public static readonly RULE_gstringValue = 83;
+	public static readonly RULE_gstringPath = 84;
+	public static readonly RULE_lambdaExpression = 85;
+	public static readonly RULE_standardLambdaExpression = 86;
+	public static readonly RULE_lambdaParameters = 87;
+	public static readonly RULE_standardLambdaParameters = 88;
+	public static readonly RULE_lambdaBody = 89;
+	public static readonly RULE_closure = 90;
+	public static readonly RULE_closureOrLambdaExpression = 91;
+	public static readonly RULE_blockStatementsOpt = 92;
+	public static readonly RULE_blockStatements = 93;
+	public static readonly RULE_annotationsOpt = 94;
+	public static readonly RULE_annotation = 95;
+	public static readonly RULE_elementValues = 96;
+	public static readonly RULE_annotationName = 97;
+	public static readonly RULE_elementValuePairs = 98;
+	public static readonly RULE_elementValuePair = 99;
+	public static readonly RULE_elementValuePairName = 100;
+	public static readonly RULE_elementValue = 101;
+	public static readonly RULE_elementValueArrayInitializer = 102;
+	public static readonly RULE_block = 103;
+	public static readonly RULE_blockStatement = 104;
+	public static readonly RULE_localVariableDeclaration = 105;
+	public static readonly RULE_variableDeclaration = 106;
+	public static readonly RULE_typeNamePairs = 107;
+	public static readonly RULE_typeNamePair = 108;
+	public static readonly RULE_variableNames = 109;
+	public static readonly RULE_conditionalStatement = 110;
+	public static readonly RULE_ifElseStatement = 111;
+	public static readonly RULE_switchStatement = 112;
+	public static readonly RULE_loopStatement = 113;
+	public static readonly RULE_continueStatement = 114;
+	public static readonly RULE_breakStatement = 115;
+	public static readonly RULE_tryCatchStatement = 116;
+	public static readonly RULE_assertStatement = 117;
+	public static readonly RULE_statement = 118;
+	public static readonly RULE_catchClause = 119;
+	public static readonly RULE_catchType = 120;
+	public static readonly RULE_finallyBlock = 121;
+	public static readonly RULE_resources = 122;
+	public static readonly RULE_resourceList = 123;
+	public static readonly RULE_resource = 124;
+	public static readonly RULE_switchBlockStatementGroup = 125;
+	public static readonly RULE_switchLabel = 126;
+	public static readonly RULE_forControl = 127;
+	public static readonly RULE_enhancedForControl = 128;
+	public static readonly RULE_classicalForControl = 129;
+	public static readonly RULE_forInit = 130;
+	public static readonly RULE_forUpdate = 131;
+	public static readonly RULE_castParExpression = 132;
+	public static readonly RULE_parExpression = 133;
+	public static readonly RULE_expressionInPar = 134;
+	public static readonly RULE_expressionList = 135;
+	public static readonly RULE_expressionListElement = 136;
+	public static readonly RULE_enhancedStatementExpression = 137;
+	public static readonly RULE_statementExpression = 138;
+	public static readonly RULE_postfixExpression = 139;
+	public static readonly RULE_expression = 140;
+	public static readonly RULE_castOperandExpression = 141;
+	public static readonly RULE_commandExpression = 142;
+	public static readonly RULE_commandArgument = 143;
+	public static readonly RULE_pathExpression = 144;
+	public static readonly RULE_pathElement = 145;
+	public static readonly RULE_namePart = 146;
+	public static readonly RULE_dynamicMemberName = 147;
+	public static readonly RULE_indexPropertyArgs = 148;
+	public static readonly RULE_namedPropertyArgs = 149;
+	public static readonly RULE_primary = 150;
+	public static readonly RULE_namedPropertyArgPrimary = 151;
+	public static readonly RULE_namedArgPrimary = 152;
+	public static readonly RULE_commandPrimary = 153;
+	public static readonly RULE_list = 154;
+	public static readonly RULE_map = 155;
+	public static readonly RULE_mapEntryList = 156;
+	public static readonly RULE_namedPropertyArgList = 157;
+	public static readonly RULE_mapEntry = 158;
+	public static readonly RULE_namedPropertyArg = 159;
+	public static readonly RULE_namedArg = 160;
+	public static readonly RULE_mapEntryLabel = 161;
+	public static readonly RULE_namedPropertyArgLabel = 162;
+	public static readonly RULE_namedArgLabel = 163;
+	public static readonly RULE_creator = 164;
+	public static readonly RULE_dim = 165;
+	public static readonly RULE_arrayInitializer = 166;
+	public static readonly RULE_anonymousInnerClassDeclaration = 167;
+	public static readonly RULE_createdName = 168;
+	public static readonly RULE_nonWildcardTypeArguments = 169;
+	public static readonly RULE_typeArgumentsOrDiamond = 170;
+	public static readonly RULE_arguments = 171;
+	public static readonly RULE_argumentList = 172;
+	public static readonly RULE_enhancedArgumentList = 173;
+	public static readonly RULE_enhancedArgumentListInPar = 174;
+	public static readonly RULE_firstArgumentListElement = 175;
+	public static readonly RULE_argumentListElement = 176;
+	public static readonly RULE_firstEnhancedArgumentListElement = 177;
+	public static readonly RULE_enhancedArgumentListElement = 178;
+	public static readonly RULE_stringLiteral = 179;
+	public static readonly RULE_className = 180;
+	public static readonly RULE_identifier = 181;
+	public static readonly RULE_builtInType = 182;
+	public static readonly RULE_keywords = 183;
+	public static readonly RULE_rparen = 184;
+	public static readonly RULE_nls = 185;
+	public static readonly RULE_sep = 186;
 	// tslint:disable:no-trailing-whitespace
 	public static readonly ruleNames: string[] = [
-		"compilationUnit", "scriptStatement", "includeStatement", "includeNames", 
-		"includeName", "processDef", "processStatement", "processDirective", "processInput", 
-		"processInputType", "processInputVal", "processInputEnv", "processInputFile", 
-		"processInputPath", "processInputStdin", "processInputExpr", "processInputTuple", 
-		"processOutput", "processOutputType", "processOutputVal", "processOutputEnv", 
-		"processOutputFile", "processOutputPath", "processOutputStdout", "processOutputExpr", 
-		"processOutputTuple", "workflowDef", "workflowBody", "scriptStatements", 
-		"packageDeclaration", "importDeclaration", "typeDeclaration", "modifier", 
-		"modifiersOpt", "modifiers", "classOrInterfaceModifiersOpt", "classOrInterfaceModifiers", 
-		"classOrInterfaceModifier", "variableModifier", "variableModifiersOpt", 
-		"variableModifiers", "typeParameters", "typeParameter", "typeBound", "typeList", 
-		"classDeclaration", "classBody", "enumConstants", "enumConstant", "classBodyDeclaration", 
-		"memberDeclaration", "methodDeclaration", "compactConstructorDeclaration", 
-		"methodName", "returnType", "fieldDeclaration", "variableDeclarators", 
+		"compilationUnit", "scriptStatements", "scriptStatement", "includeStatement", 
+		"includeNames", "includeName", "processDef", "processStatements", "processStatement", 
+		"processDirective", "processInput", "processInputType", "processInputVal", 
+		"processInputEnv", "processInputFile", "processInputPath", "processInputStdin", 
+		"processInputTuple", "processOutput", "processOutputType", "processOutputVal", 
+		"processOutputEnv", "processOutputFile", "processOutputPath", "processOutputStdout", 
+		"processOutputTuple", "workflowDef", "workflowBody", "packageDeclaration", 
+		"importDeclaration", "typeDeclaration", "modifier", "modifiersOpt", "modifiers", 
+		"classOrInterfaceModifiersOpt", "classOrInterfaceModifiers", "classOrInterfaceModifier", 
+		"variableModifier", "variableModifiersOpt", "variableModifiers", "typeParameters", 
+		"typeParameter", "typeBound", "typeList", "classDeclaration", "classBody", 
+		"enumConstants", "enumConstant", "classBodyDeclaration", "memberDeclaration", 
+		"methodDeclaration", "methodName", "returnType", "fieldDeclaration", "variableDeclarators", 
 		"variableDeclarator", "variableDeclaratorId", "variableInitializer", "variableInitializers", 
 		"emptyDims", "emptyDimsOpt", "standardType", "type", "classOrInterfaceType", 
 		"generalClassOrInterfaceType", "standardClassOrInterfaceType", "primitiveType", 
@@ -413,24 +398,23 @@ export class NextflowScriptParser extends Parser {
 		"block", "blockStatement", "localVariableDeclaration", "variableDeclaration", 
 		"typeNamePairs", "typeNamePair", "variableNames", "conditionalStatement", 
 		"ifElseStatement", "switchStatement", "loopStatement", "continueStatement", 
-		"breakStatement", "yieldStatement", "tryCatchStatement", "assertStatement", 
-		"statement", "catchClause", "catchType", "finallyBlock", "resources", 
-		"resourceList", "resource", "switchBlockStatementGroup", "switchLabel", 
-		"forControl", "enhancedForControl", "classicalForControl", "forInit", 
-		"forUpdate", "castParExpression", "parExpression", "expressionInPar", 
-		"expressionList", "expressionListElement", "enhancedStatementExpression", 
-		"statementExpression", "postfixExpression", "switchExpression", "switchBlockStatementExpressionGroup", 
-		"switchExpressionLabel", "expression", "castOperandExpression", "commandExpression", 
-		"commandArgument", "pathExpression", "pathElement", "namePart", "dynamicMemberName", 
-		"indexPropertyArgs", "namedPropertyArgs", "primary", "namedPropertyArgPrimary", 
-		"namedArgPrimary", "commandPrimary", "list", "map", "mapEntryList", "namedPropertyArgList", 
+		"breakStatement", "tryCatchStatement", "assertStatement", "statement", 
+		"catchClause", "catchType", "finallyBlock", "resources", "resourceList", 
+		"resource", "switchBlockStatementGroup", "switchLabel", "forControl", 
+		"enhancedForControl", "classicalForControl", "forInit", "forUpdate", "castParExpression", 
+		"parExpression", "expressionInPar", "expressionList", "expressionListElement", 
+		"enhancedStatementExpression", "statementExpression", "postfixExpression", 
+		"expression", "castOperandExpression", "commandExpression", "commandArgument", 
+		"pathExpression", "pathElement", "namePart", "dynamicMemberName", "indexPropertyArgs", 
+		"namedPropertyArgs", "primary", "namedPropertyArgPrimary", "namedArgPrimary", 
+		"commandPrimary", "list", "map", "mapEntryList", "namedPropertyArgList", 
 		"mapEntry", "namedPropertyArg", "namedArg", "mapEntryLabel", "namedPropertyArgLabel", 
 		"namedArgLabel", "creator", "dim", "arrayInitializer", "anonymousInnerClassDeclaration", 
 		"createdName", "nonWildcardTypeArguments", "typeArgumentsOrDiamond", "arguments", 
-		"argumentList", "enhancedArgumentListInPar", "firstArgumentListElement", 
-		"argumentListElement", "enhancedArgumentListElement", "stringLiteral", 
-		"className", "identifier", "builtInType", "keywords", "rparen", "nls", 
-		"sep",
+		"argumentList", "enhancedArgumentList", "enhancedArgumentListInPar", "firstArgumentListElement", 
+		"argumentListElement", "firstEnhancedArgumentListElement", "enhancedArgumentListElement", 
+		"stringLiteral", "className", "identifier", "builtInType", "keywords", 
+		"rparen", "nls", "sep",
 	];
 
 	private static readonly _LITERAL_NAMES: Array<string | undefined> = [
@@ -452,37 +436,35 @@ export class NextflowScriptParser extends Parser {
 		undefined, undefined, undefined, undefined, undefined, undefined, undefined, 
 		undefined, undefined, undefined, undefined, undefined, undefined, undefined, 
 		undefined, undefined, undefined, undefined, undefined, undefined, undefined, 
-		undefined, undefined, undefined, undefined, undefined, undefined, undefined, 
-		undefined, undefined, undefined, undefined, undefined, "'include'", "'from'", 
-		"'process'", "'val'", "'file'", "'env'", "'path'", "'stdin'", "'tuple'", 
-		"'stdout'", "'workflow'", "'take:'", "'main:'", "'emit:'", "'input:'", 
-		"'output:'", "'when:'", "'script:'", "'shell:'", "'exec:'", "'stub:'",
+		undefined, undefined, undefined, undefined, "'emit:'", "'env'", "'exec:'", 
+		"'file'", "'from'", "'include'", "'input:'", "'main:'", "'output:'", "'path'", 
+		"'process'", "'script:'", "'shell:'", "'stdin'", "'stdout'", "'stub:'", 
+		"'take:'", "'tuple'", "'val'", "'when:'", "'workflow'",
 	];
 	private static readonly _SYMBOLIC_NAMES: Array<string | undefined> = [
 		undefined, "StringLiteral", "GStringBegin", "GStringEnd", "GStringPart", 
 		"GStringPathPart", "RollBackOne", "AS", "DEF", "IN", "TRAIT", "THREADSAFE", 
-		"VAR", "BuiltInPrimitiveType", "ABSTRACT", "ASSERT", "BREAK", "YIELD", 
-		"CASE", "CATCH", "CLASS", "CONST", "CONTINUE", "DEFAULT", "DO", "ELSE", 
-		"ENUM", "EXTENDS", "FINAL", "FINALLY", "FOR", "IF", "GOTO", "IMPLEMENTS", 
-		"IMPORT", "INSTANCEOF", "INTERFACE", "NATIVE", "NEW", "NON_SEALED", "PACKAGE", 
-		"PERMITS", "PRIVATE", "PROTECTED", "PUBLIC", "RECORD", "RETURN", "SEALED", 
-		"STATIC", "STRICTFP", "SUPER", "SWITCH", "SYNCHRONIZED", "THIS", "THROW", 
-		"THROWS", "TRANSIENT", "TRY", "VOID", "VOLATILE", "WHILE", "IntegerLiteral", 
-		"FloatingPointLiteral", "BooleanLiteral", "NullLiteral", "RANGE_INCLUSIVE", 
-		"RANGE_EXCLUSIVE_LEFT", "RANGE_EXCLUSIVE_RIGHT", "RANGE_EXCLUSIVE_FULL", 
-		"SPREAD_DOT", "SAFE_DOT", "SAFE_INDEX", "SAFE_CHAIN_DOT", "ELVIS", "METHOD_POINTER", 
-		"METHOD_REFERENCE", "REGEX_FIND", "REGEX_MATCH", "POWER", "POWER_ASSIGN", 
-		"SPACESHIP", "IDENTICAL", "NOT_IDENTICAL", "ARROW", "NOT_INSTANCEOF", 
-		"NOT_IN", "LPAREN", "RPAREN", "LBRACE", "RBRACE", "LBRACK", "RBRACK", 
-		"SEMI", "COMMA", "DOT", "ASSIGN", "GT", "LT", "NOT", "BITNOT", "QUESTION", 
-		"COLON", "EQUAL", "LE", "GE", "NOTEQUAL", "AND", "OR", "INC", "DEC", "ADD", 
-		"SUB", "MUL", "DIV", "BITAND", "BITOR", "XOR", "MOD", "ADD_ASSIGN", "SUB_ASSIGN", 
-		"MUL_ASSIGN", "DIV_ASSIGN", "AND_ASSIGN", "OR_ASSIGN", "XOR_ASSIGN", "MOD_ASSIGN", 
-		"LSHIFT_ASSIGN", "RSHIFT_ASSIGN", "URSHIFT_ASSIGN", "ELVIS_ASSIGN", "CapitalizedIdentifier", 
-		"Identifier", "AT", "ELLIPSIS", "WS", "NL", "SH_COMMENT", "UNEXPECTED_CHAR", 
-		"INCLUDE", "FROM", "PROCESS", "VAL", "FILE", "ENV", "PATH", "STDIN", "TUPLE", 
-		"STDOUT", "WORKFLOW", "TAKE", "MAIN", "EMIT", "INPUT", "OUTPUT", "WHEN", 
-		"SCRIPT", "SHELL", "EXEC", "STUB",
+		"VAR", "BuiltInPrimitiveType", "ABSTRACT", "ASSERT", "BREAK", "CASE", 
+		"CATCH", "CLASS", "CONST", "CONTINUE", "DEFAULT", "DO", "ELSE", "ENUM", 
+		"EXTENDS", "FINAL", "FINALLY", "FOR", "IF", "GOTO", "IMPLEMENTS", "IMPORT", 
+		"INSTANCEOF", "INTERFACE", "NATIVE", "NEW", "PACKAGE", "PRIVATE", "PROTECTED", 
+		"PUBLIC", "RETURN", "STATIC", "STRICTFP", "SUPER", "SWITCH", "SYNCHRONIZED", 
+		"THIS", "THROW", "THROWS", "TRANSIENT", "TRY", "VOID", "VOLATILE", "WHILE", 
+		"IntegerLiteral", "FloatingPointLiteral", "BooleanLiteral", "NullLiteral", 
+		"RANGE_INCLUSIVE", "RANGE_EXCLUSIVE", "SPREAD_DOT", "SAFE_DOT", "SAFE_CHAIN_DOT", 
+		"ELVIS", "METHOD_POINTER", "METHOD_REFERENCE", "REGEX_FIND", "REGEX_MATCH", 
+		"POWER", "POWER_ASSIGN", "SPACESHIP", "IDENTICAL", "NOT_IDENTICAL", "ARROW", 
+		"NOT_INSTANCEOF", "NOT_IN", "LPAREN", "RPAREN", "LBRACE", "RBRACE", "LBRACK", 
+		"RBRACK", "SEMI", "COMMA", "DOT", "ASSIGN", "GT", "LT", "NOT", "BITNOT", 
+		"QUESTION", "COLON", "EQUAL", "LE", "GE", "NOTEQUAL", "AND", "OR", "INC", 
+		"DEC", "ADD", "SUB", "MUL", "DIV", "BITAND", "BITOR", "XOR", "MOD", "ADD_ASSIGN", 
+		"SUB_ASSIGN", "MUL_ASSIGN", "DIV_ASSIGN", "AND_ASSIGN", "OR_ASSIGN", "XOR_ASSIGN", 
+		"MOD_ASSIGN", "LSHIFT_ASSIGN", "RSHIFT_ASSIGN", "URSHIFT_ASSIGN", "ELVIS_ASSIGN", 
+		"CapitalizedIdentifier", "Identifier", "AT", "ELLIPSIS", "WS", "NL", "SH_COMMENT", 
+		"UNEXPECTED_CHAR", "EMIT_GUARD", "ENV", "EXEC_GUARD", "FILE", "FROM", 
+		"INCLUDE", "INPUT_GUARD", "MAIN_GUARD", "OUTPUT_GUARD", "PATH", "PROCESS", 
+		"SCRIPT_GUARD", "SHELL_GUARD", "STDIN", "STDOUT", "STUB_GUARD", "TAKE_GUARD", 
+		"TUPLE", "VAL", "WHEN_GUARD", "WORKFLOW",
 	];
 	public static readonly VOCABULARY: Vocabulary = new VocabularyImpl(NextflowScriptParser._LITERAL_NAMES, NextflowScriptParser._SYMBOLIC_NAMES, []);
 
@@ -507,7 +489,6 @@ export class NextflowScriptParser extends Parser {
 	}
 
 
-	    private inSwitchExpressionLevel = 0;
 	    static MODIFIER_SET = new Set<Number|undefined>([
 	        GroovyParser.DEF,
 	        GroovyParser.VAR,
@@ -520,8 +501,6 @@ export class NextflowScriptParser extends Parser {
 	        GroovyParser.PRIVATE,
 	        GroovyParser.STATIC,
 	        GroovyParser.ABSTRACT,
-	        GroovyParser.SEALED,
-	        GroovyParser.NON_SEALED,
 	        GroovyParser.FINAL,
 	        GroovyParser.STRICTFP,
 	        GroovyParser.DEFAULT
@@ -561,7 +540,7 @@ export class NextflowScriptParser extends Parser {
 	    public static isInvalidMethodDeclaration(ts: TokenStream) {
 	        let tokenType = ts.LT(1).type;
 
-	        return (tokenType === GroovyParser.Identifier || tokenType === GroovyParser.CapitalizedIdentifier || tokenType === GroovyParser.StringLiteral || tokenType === GroovyParser.YIELD)
+	        return (tokenType === GroovyParser.Identifier || tokenType === GroovyParser.CapitalizedIdentifier || tokenType === GroovyParser.StringLiteral)
 	                && ts.LT(2).type === GroovyParser.LPAREN;
 	    }
 
@@ -646,26 +625,78 @@ export class NextflowScriptParser extends Parser {
 	public compilationUnit(): CompilationUnitContext {
 		let _localctx: CompilationUnitContext = new CompilationUnitContext(this._ctx, this.state);
 		this.enterRule(_localctx, 0, NextflowScriptParser.RULE_compilationUnit);
-		let _la: number;
 		try {
 			this.enterOuterAlt(_localctx, 1);
 			{
-			this.state = 385;
+			this.state = 374;
+			this.nls();
+			this.state = 376;
+			this._errHandler.sync(this);
+			switch ( this.interpreter.adaptivePredict(this._input, 0, this._ctx) ) {
+			case 1:
+				{
+				this.state = 375;
+				this.scriptStatements();
+				}
+				break;
+			}
+			this.state = 378;
+			this.match(NextflowScriptParser.EOF);
+			}
+		}
+		catch (re) {
+			if (re instanceof RecognitionException) {
+				_localctx.exception = re;
+				this._errHandler.reportError(this, re);
+				this._errHandler.recover(this, re);
+			} else {
+				throw re;
+			}
+		}
+		finally {
+			this.exitRule();
+		}
+		return _localctx;
+	}
+	// @RuleVersion(0)
+	public scriptStatements(): ScriptStatementsContext {
+		let _localctx: ScriptStatementsContext = new ScriptStatementsContext(this._ctx, this.state);
+		this.enterRule(_localctx, 2, NextflowScriptParser.RULE_scriptStatements);
+		let _la: number;
+		try {
+			let _alt: number;
+			this.enterOuterAlt(_localctx, 1);
+			{
+			this.state = 380;
+			this.scriptStatement();
+			this.state = 386;
+			this._errHandler.sync(this);
+			_alt = this.interpreter.adaptivePredict(this._input, 1, this._ctx);
+			while (_alt !== 2 && _alt !== ATN.INVALID_ALT_NUMBER) {
+				if (_alt === 1) {
+					{
+					{
+					this.state = 381;
+					this.sep();
+					this.state = 382;
+					this.scriptStatement();
+					}
+					}
+				}
+				this.state = 388;
+				this._errHandler.sync(this);
+				_alt = this.interpreter.adaptivePredict(this._input, 1, this._ctx);
+			}
+			this.state = 390;
 			this._errHandler.sync(this);
 			_la = this._input.LA(1);
-			while ((((_la) & ~0x1F) === 0 && ((1 << _la) & ((1 << NextflowScriptParser.StringLiteral) | (1 << NextflowScriptParser.AS) | (1 << NextflowScriptParser.DEF) | (1 << NextflowScriptParser.IN) | (1 << NextflowScriptParser.TRAIT) | (1 << NextflowScriptParser.VAR) | (1 << NextflowScriptParser.BuiltInPrimitiveType) | (1 << NextflowScriptParser.ABSTRACT) | (1 << NextflowScriptParser.YIELD) | (1 << NextflowScriptParser.CLASS) | (1 << NextflowScriptParser.DEFAULT) | (1 << NextflowScriptParser.ENUM) | (1 << NextflowScriptParser.FINAL))) !== 0) || ((((_la - 34)) & ~0x1F) === 0 && ((1 << (_la - 34)) & ((1 << (NextflowScriptParser.IMPORT - 34)) | (1 << (NextflowScriptParser.INTERFACE - 34)) | (1 << (NextflowScriptParser.NATIVE - 34)) | (1 << (NextflowScriptParser.NON_SEALED - 34)) | (1 << (NextflowScriptParser.PACKAGE - 34)) | (1 << (NextflowScriptParser.PERMITS - 34)) | (1 << (NextflowScriptParser.PRIVATE - 34)) | (1 << (NextflowScriptParser.PROTECTED - 34)) | (1 << (NextflowScriptParser.PUBLIC - 34)) | (1 << (NextflowScriptParser.RECORD - 34)) | (1 << (NextflowScriptParser.SEALED - 34)) | (1 << (NextflowScriptParser.STATIC - 34)) | (1 << (NextflowScriptParser.STRICTFP - 34)) | (1 << (NextflowScriptParser.SYNCHRONIZED - 34)) | (1 << (NextflowScriptParser.TRANSIENT - 34)) | (1 << (NextflowScriptParser.VOID - 34)) | (1 << (NextflowScriptParser.VOLATILE - 34)))) !== 0) || ((((_la - 90)) & ~0x1F) === 0 && ((1 << (_la - 90)) & ((1 << (NextflowScriptParser.LBRACK - 90)) | (1 << (NextflowScriptParser.LT - 90)) | (1 << (NextflowScriptParser.QUESTION - 90)))) !== 0) || ((((_la - 130)) & ~0x1F) === 0 && ((1 << (_la - 130)) & ((1 << (NextflowScriptParser.CapitalizedIdentifier - 130)) | (1 << (NextflowScriptParser.Identifier - 130)) | (1 << (NextflowScriptParser.AT - 130)) | (1 << (NextflowScriptParser.INCLUDE - 130)) | (1 << (NextflowScriptParser.PROCESS - 130)) | (1 << (NextflowScriptParser.WORKFLOW - 130)))) !== 0)) {
+			if (_la === NextflowScriptParser.SEMI || _la === NextflowScriptParser.NL) {
 				{
-				{
-				this.state = 382;
-				this.scriptStatement();
+				this.state = 389;
+				this.sep();
 				}
-				}
-				this.state = 387;
-				this._errHandler.sync(this);
-				_la = this._input.LA(1);
 			}
-			this.state = 388;
-			this.match(NextflowScriptParser.EOF);
+
 			}
 		}
 		catch (re) {
@@ -685,76 +716,70 @@ export class NextflowScriptParser extends Parser {
 	// @RuleVersion(0)
 	public scriptStatement(): ScriptStatementContext {
 		let _localctx: ScriptStatementContext = new ScriptStatementContext(this._ctx, this.state);
-		this.enterRule(_localctx, 2, NextflowScriptParser.RULE_scriptStatement);
+		this.enterRule(_localctx, 4, NextflowScriptParser.RULE_scriptStatement);
 		try {
-			this.state = 394;
+			this.state = 400;
 			this._errHandler.sync(this);
-			switch (this._input.LA(1)) {
-			case NextflowScriptParser.INCLUDE:
+			switch ( this.interpreter.adaptivePredict(this._input, 3, this._ctx) ) {
+			case 1:
 				this.enterOuterAlt(_localctx, 1);
 				{
-				this.state = 390;
+				this.state = 392;
 				this.includeStatement();
 				}
 				break;
-			case NextflowScriptParser.StringLiteral:
-			case NextflowScriptParser.AS:
-			case NextflowScriptParser.DEF:
-			case NextflowScriptParser.IN:
-			case NextflowScriptParser.TRAIT:
-			case NextflowScriptParser.VAR:
-			case NextflowScriptParser.BuiltInPrimitiveType:
-			case NextflowScriptParser.ABSTRACT:
-			case NextflowScriptParser.YIELD:
-			case NextflowScriptParser.CLASS:
-			case NextflowScriptParser.DEFAULT:
-			case NextflowScriptParser.ENUM:
-			case NextflowScriptParser.FINAL:
-			case NextflowScriptParser.IMPORT:
-			case NextflowScriptParser.INTERFACE:
-			case NextflowScriptParser.NATIVE:
-			case NextflowScriptParser.NON_SEALED:
-			case NextflowScriptParser.PACKAGE:
-			case NextflowScriptParser.PERMITS:
-			case NextflowScriptParser.PRIVATE:
-			case NextflowScriptParser.PROTECTED:
-			case NextflowScriptParser.PUBLIC:
-			case NextflowScriptParser.RECORD:
-			case NextflowScriptParser.SEALED:
-			case NextflowScriptParser.STATIC:
-			case NextflowScriptParser.STRICTFP:
-			case NextflowScriptParser.SYNCHRONIZED:
-			case NextflowScriptParser.TRANSIENT:
-			case NextflowScriptParser.VOID:
-			case NextflowScriptParser.VOLATILE:
-			case NextflowScriptParser.LBRACK:
-			case NextflowScriptParser.LT:
-			case NextflowScriptParser.QUESTION:
-			case NextflowScriptParser.CapitalizedIdentifier:
-			case NextflowScriptParser.Identifier:
-			case NextflowScriptParser.AT:
+
+			case 2:
 				this.enterOuterAlt(_localctx, 2);
 				{
-				this.state = 391;
-				this.methodDeclaration(1,9);
-				}
-				break;
-			case NextflowScriptParser.PROCESS:
-				this.enterOuterAlt(_localctx, 3);
-				{
-				this.state = 392;
+				this.state = 393;
 				this.processDef();
 				}
 				break;
-			case NextflowScriptParser.WORKFLOW:
-				this.enterOuterAlt(_localctx, 4);
+
+			case 3:
+				this.enterOuterAlt(_localctx, 3);
 				{
-				this.state = 393;
+				this.state = 394;
 				this.workflowDef();
 				}
 				break;
-			default:
-				throw new NoViableAltException(this);
+
+			case 4:
+				this.enterOuterAlt(_localctx, 4);
+				{
+				this.state = 395;
+				this.importDeclaration();
+				}
+				break;
+
+			case 5:
+				this.enterOuterAlt(_localctx, 5);
+				{
+				this.state = 396;
+				this.typeDeclaration();
+				}
+				break;
+
+			case 6:
+				this.enterOuterAlt(_localctx, 6);
+				{
+				this.state = 397;
+				if (!( !GroovyParser.isInvalidMethodDeclaration(this._input) )) {
+					throw this.createFailedPredicateException(" !GroovyParser.isInvalidMethodDeclaration(this._input) ");
+				}
+				this.state = 398;
+				this.methodDeclaration(3, 9);
+				}
+				break;
+
+			case 7:
+				this.enterOuterAlt(_localctx, 7);
+				{
+				this.state = 399;
+				this.statement();
+				}
+				break;
 			}
 		}
 		catch (re) {
@@ -774,17 +799,17 @@ export class NextflowScriptParser extends Parser {
 	// @RuleVersion(0)
 	public includeStatement(): IncludeStatementContext {
 		let _localctx: IncludeStatementContext = new IncludeStatementContext(this._ctx, this.state);
-		this.enterRule(_localctx, 4, NextflowScriptParser.RULE_includeStatement);
+		this.enterRule(_localctx, 6, NextflowScriptParser.RULE_includeStatement);
 		try {
 			this.enterOuterAlt(_localctx, 1);
 			{
-			this.state = 396;
+			this.state = 402;
 			this.match(NextflowScriptParser.INCLUDE);
-			this.state = 397;
+			this.state = 403;
 			this.includeNames();
-			this.state = 398;
+			this.state = 404;
 			this.match(NextflowScriptParser.FROM);
-			this.state = 399;
+			this.state = 405;
 			this.expression(0);
 			}
 		}
@@ -805,43 +830,43 @@ export class NextflowScriptParser extends Parser {
 	// @RuleVersion(0)
 	public includeNames(): IncludeNamesContext {
 		let _localctx: IncludeNamesContext = new IncludeNamesContext(this._ctx, this.state);
-		this.enterRule(_localctx, 6, NextflowScriptParser.RULE_includeNames);
+		this.enterRule(_localctx, 8, NextflowScriptParser.RULE_includeNames);
 		let _la: number;
 		try {
-			this.state = 413;
+			this.state = 419;
 			this._errHandler.sync(this);
 			switch (this._input.LA(1)) {
 			case NextflowScriptParser.Identifier:
 				this.enterOuterAlt(_localctx, 1);
 				{
-				this.state = 401;
+				this.state = 407;
 				this.includeName();
 				}
 				break;
 			case NextflowScriptParser.LBRACE:
 				this.enterOuterAlt(_localctx, 2);
 				{
-				this.state = 402;
-				this.match(NextflowScriptParser.LBRACE);
-				this.state = 403;
-				this.includeName();
 				this.state = 408;
+				this.match(NextflowScriptParser.LBRACE);
+				this.state = 409;
+				this.includeName();
+				this.state = 414;
 				this._errHandler.sync(this);
 				_la = this._input.LA(1);
 				while (_la === NextflowScriptParser.COMMA) {
 					{
 					{
-					this.state = 404;
+					this.state = 410;
 					this.match(NextflowScriptParser.COMMA);
-					this.state = 405;
+					this.state = 411;
 					this.includeName();
 					}
 					}
-					this.state = 410;
+					this.state = 416;
 					this._errHandler.sync(this);
 					_la = this._input.LA(1);
 				}
-				this.state = 411;
+				this.state = 417;
 				this.match(NextflowScriptParser.RBRACE);
 				}
 				break;
@@ -866,15 +891,15 @@ export class NextflowScriptParser extends Parser {
 	// @RuleVersion(0)
 	public includeName(): IncludeNameContext {
 		let _localctx: IncludeNameContext = new IncludeNameContext(this._ctx, this.state);
-		this.enterRule(_localctx, 8, NextflowScriptParser.RULE_includeName);
+		this.enterRule(_localctx, 10, NextflowScriptParser.RULE_includeName);
 		try {
-			this.state = 419;
+			this.state = 425;
 			this._errHandler.sync(this);
-			switch ( this.interpreter.adaptivePredict(this._input, 4, this._ctx) ) {
+			switch ( this.interpreter.adaptivePredict(this._input, 6, this._ctx) ) {
 			case 1:
 				this.enterOuterAlt(_localctx, 1);
 				{
-				this.state = 415;
+				this.state = 421;
 				this.match(NextflowScriptParser.Identifier);
 				}
 				break;
@@ -882,11 +907,11 @@ export class NextflowScriptParser extends Parser {
 			case 2:
 				this.enterOuterAlt(_localctx, 2);
 				{
-				this.state = 416;
+				this.state = 422;
 				this.match(NextflowScriptParser.Identifier);
-				this.state = 417;
+				this.state = 423;
 				this.match(NextflowScriptParser.AS);
-				this.state = 418;
+				this.state = 424;
 				this.match(NextflowScriptParser.Identifier);
 				}
 				break;
@@ -909,33 +934,96 @@ export class NextflowScriptParser extends Parser {
 	// @RuleVersion(0)
 	public processDef(): ProcessDefContext {
 		let _localctx: ProcessDefContext = new ProcessDefContext(this._ctx, this.state);
-		this.enterRule(_localctx, 10, NextflowScriptParser.RULE_processDef);
+		this.enterRule(_localctx, 12, NextflowScriptParser.RULE_processDef);
 		let _la: number;
 		try {
 			this.enterOuterAlt(_localctx, 1);
 			{
-			this.state = 421;
-			this.match(NextflowScriptParser.PROCESS);
-			this.state = 422;
-			this.match(NextflowScriptParser.Identifier);
-			this.state = 423;
-			this.match(NextflowScriptParser.LBRACE);
 			this.state = 427;
+			this.match(NextflowScriptParser.PROCESS);
+			this.state = 428;
+			this.match(NextflowScriptParser.Identifier);
+			this.state = 429;
+			this.nls();
+			this.state = 430;
+			this.match(NextflowScriptParser.LBRACE);
+			this.state = 432;
 			this._errHandler.sync(this);
 			_la = this._input.LA(1);
-			while (((((_la - 131)) & ~0x1F) === 0 && ((1 << (_la - 131)) & ((1 << (NextflowScriptParser.Identifier - 131)) | (1 << (NextflowScriptParser.INPUT - 131)) | (1 << (NextflowScriptParser.OUTPUT - 131)) | (1 << (NextflowScriptParser.WHEN - 131)) | (1 << (NextflowScriptParser.SCRIPT - 131)) | (1 << (NextflowScriptParser.SHELL - 131)) | (1 << (NextflowScriptParser.EXEC - 131)) | (1 << (NextflowScriptParser.STUB - 131)))) !== 0)) {
+			if (_la === NextflowScriptParser.SEMI || _la === NextflowScriptParser.NL) {
 				{
-				{
-				this.state = 424;
-				this.processStatement();
+				this.state = 431;
+				this.sep();
 				}
-				}
-				this.state = 429;
-				this._errHandler.sync(this);
-				_la = this._input.LA(1);
 			}
-			this.state = 430;
+
+			this.state = 435;
+			this._errHandler.sync(this);
+			_la = this._input.LA(1);
+			if (((((_la - 123)) & ~0x1F) === 0 && ((1 << (_la - 123)) & ((1 << (NextflowScriptParser.Identifier - 123)) | (1 << (NextflowScriptParser.EXEC_GUARD - 123)) | (1 << (NextflowScriptParser.INPUT_GUARD - 123)) | (1 << (NextflowScriptParser.OUTPUT_GUARD - 123)) | (1 << (NextflowScriptParser.SCRIPT_GUARD - 123)) | (1 << (NextflowScriptParser.SHELL_GUARD - 123)) | (1 << (NextflowScriptParser.STUB_GUARD - 123)) | (1 << (NextflowScriptParser.WHEN_GUARD - 123)))) !== 0)) {
+				{
+				this.state = 434;
+				this.processStatements();
+				}
+			}
+
+			this.state = 437;
 			this.match(NextflowScriptParser.RBRACE);
+			}
+		}
+		catch (re) {
+			if (re instanceof RecognitionException) {
+				_localctx.exception = re;
+				this._errHandler.reportError(this, re);
+				this._errHandler.recover(this, re);
+			} else {
+				throw re;
+			}
+		}
+		finally {
+			this.exitRule();
+		}
+		return _localctx;
+	}
+	// @RuleVersion(0)
+	public processStatements(): ProcessStatementsContext {
+		let _localctx: ProcessStatementsContext = new ProcessStatementsContext(this._ctx, this.state);
+		this.enterRule(_localctx, 14, NextflowScriptParser.RULE_processStatements);
+		let _la: number;
+		try {
+			let _alt: number;
+			this.enterOuterAlt(_localctx, 1);
+			{
+			this.state = 439;
+			this.processStatement();
+			this.state = 445;
+			this._errHandler.sync(this);
+			_alt = this.interpreter.adaptivePredict(this._input, 9, this._ctx);
+			while (_alt !== 2 && _alt !== ATN.INVALID_ALT_NUMBER) {
+				if (_alt === 1) {
+					{
+					{
+					this.state = 440;
+					this.sep();
+					this.state = 441;
+					this.processStatement();
+					}
+					}
+				}
+				this.state = 447;
+				this._errHandler.sync(this);
+				_alt = this.interpreter.adaptivePredict(this._input, 9, this._ctx);
+			}
+			this.state = 449;
+			this._errHandler.sync(this);
+			_la = this._input.LA(1);
+			if (_la === NextflowScriptParser.SEMI || _la === NextflowScriptParser.NL) {
+				{
+				this.state = 448;
+				this.sep();
+				}
+			}
+
 			}
 		}
 		catch (re) {
@@ -955,77 +1043,77 @@ export class NextflowScriptParser extends Parser {
 	// @RuleVersion(0)
 	public processStatement(): ProcessStatementContext {
 		let _localctx: ProcessStatementContext = new ProcessStatementContext(this._ctx, this.state);
-		this.enterRule(_localctx, 12, NextflowScriptParser.RULE_processStatement);
+		this.enterRule(_localctx, 16, NextflowScriptParser.RULE_processStatement);
 		let _la: number;
 		try {
 			let _alt: number;
-			this.state = 471;
+			this.state = 490;
 			this._errHandler.sync(this);
 			switch (this._input.LA(1)) {
 			case NextflowScriptParser.Identifier:
 				this.enterOuterAlt(_localctx, 1);
 				{
-				this.state = 432;
+				this.state = 451;
 				this.processDirective();
 				}
 				break;
-			case NextflowScriptParser.INPUT:
+			case NextflowScriptParser.INPUT_GUARD:
 				this.enterOuterAlt(_localctx, 2);
 				{
-				this.state = 433;
-				this.match(NextflowScriptParser.INPUT);
-				this.state = 435;
+				this.state = 452;
+				this.match(NextflowScriptParser.INPUT_GUARD);
+				this.state = 454;
 				this._errHandler.sync(this);
 				_la = this._input.LA(1);
 				do {
 					{
 					{
-					this.state = 434;
+					this.state = 453;
 					this.processInput();
 					}
 					}
-					this.state = 437;
+					this.state = 456;
 					this._errHandler.sync(this);
 					_la = this._input.LA(1);
-				} while (((((_la - 111)) & ~0x1F) === 0 && ((1 << (_la - 111)) & ((1 << (NextflowScriptParser.SUB - 111)) | (1 << (NextflowScriptParser.VAL - 111)) | (1 << (NextflowScriptParser.FILE - 111)))) !== 0) || ((((_la - 143)) & ~0x1F) === 0 && ((1 << (_la - 143)) & ((1 << (NextflowScriptParser.ENV - 143)) | (1 << (NextflowScriptParser.PATH - 143)) | (1 << (NextflowScriptParser.STDIN - 143)) | (1 << (NextflowScriptParser.TUPLE - 143)))) !== 0));
+				} while (((((_la - 103)) & ~0x1F) === 0 && ((1 << (_la - 103)) & ((1 << (NextflowScriptParser.SUB - 103)) | (1 << (NextflowScriptParser.ENV - 103)) | (1 << (NextflowScriptParser.FILE - 103)))) !== 0) || ((((_la - 139)) & ~0x1F) === 0 && ((1 << (_la - 139)) & ((1 << (NextflowScriptParser.PATH - 139)) | (1 << (NextflowScriptParser.STDIN - 139)) | (1 << (NextflowScriptParser.TUPLE - 139)) | (1 << (NextflowScriptParser.VAL - 139)))) !== 0));
 				}
 				break;
-			case NextflowScriptParser.OUTPUT:
+			case NextflowScriptParser.OUTPUT_GUARD:
 				this.enterOuterAlt(_localctx, 3);
 				{
-				this.state = 439;
-				this.match(NextflowScriptParser.OUTPUT);
-				this.state = 441;
+				this.state = 458;
+				this.match(NextflowScriptParser.OUTPUT_GUARD);
+				this.state = 460;
 				this._errHandler.sync(this);
 				_la = this._input.LA(1);
 				do {
 					{
 					{
-					this.state = 440;
+					this.state = 459;
 					this.processOutput();
 					}
 					}
-					this.state = 443;
+					this.state = 462;
 					this._errHandler.sync(this);
 					_la = this._input.LA(1);
-				} while (((((_la - 111)) & ~0x1F) === 0 && ((1 << (_la - 111)) & ((1 << (NextflowScriptParser.SUB - 111)) | (1 << (NextflowScriptParser.VAL - 111)) | (1 << (NextflowScriptParser.FILE - 111)))) !== 0) || ((((_la - 143)) & ~0x1F) === 0 && ((1 << (_la - 143)) & ((1 << (NextflowScriptParser.ENV - 143)) | (1 << (NextflowScriptParser.PATH - 143)) | (1 << (NextflowScriptParser.TUPLE - 143)) | (1 << (NextflowScriptParser.STDOUT - 143)))) !== 0));
+				} while (((((_la - 103)) & ~0x1F) === 0 && ((1 << (_la - 103)) & ((1 << (NextflowScriptParser.SUB - 103)) | (1 << (NextflowScriptParser.ENV - 103)) | (1 << (NextflowScriptParser.FILE - 103)))) !== 0) || ((((_la - 139)) & ~0x1F) === 0 && ((1 << (_la - 139)) & ((1 << (NextflowScriptParser.PATH - 139)) | (1 << (NextflowScriptParser.STDOUT - 139)) | (1 << (NextflowScriptParser.TUPLE - 139)) | (1 << (NextflowScriptParser.VAL - 139)))) !== 0));
 				}
 				break;
-			case NextflowScriptParser.WHEN:
+			case NextflowScriptParser.WHEN_GUARD:
 				this.enterOuterAlt(_localctx, 4);
 				{
-				this.state = 445;
-				this.match(NextflowScriptParser.WHEN);
-				this.state = 446;
+				this.state = 464;
+				this.match(NextflowScriptParser.WHEN_GUARD);
+				this.state = 465;
 				this.expression(0);
 				}
 				break;
-			case NextflowScriptParser.SCRIPT:
+			case NextflowScriptParser.SCRIPT_GUARD:
 				this.enterOuterAlt(_localctx, 5);
 				{
-				this.state = 447;
-				this.match(NextflowScriptParser.SCRIPT);
-				this.state = 449;
+				this.state = 466;
+				this.match(NextflowScriptParser.SCRIPT_GUARD);
+				this.state = 468;
 				this._errHandler.sync(this);
 				_alt = 1;
 				do {
@@ -1033,7 +1121,7 @@ export class NextflowScriptParser extends Parser {
 					case 1:
 						{
 						{
-						this.state = 448;
+						this.state = 467;
 						this.statement();
 						}
 						}
@@ -1041,18 +1129,18 @@ export class NextflowScriptParser extends Parser {
 					default:
 						throw new NoViableAltException(this);
 					}
-					this.state = 451;
+					this.state = 470;
 					this._errHandler.sync(this);
-					_alt = this.interpreter.adaptivePredict(this._input, 8, this._ctx);
+					_alt = this.interpreter.adaptivePredict(this._input, 13, this._ctx);
 				} while (_alt !== 2 && _alt !== ATN.INVALID_ALT_NUMBER);
 				}
 				break;
-			case NextflowScriptParser.SHELL:
+			case NextflowScriptParser.SHELL_GUARD:
 				this.enterOuterAlt(_localctx, 6);
 				{
-				this.state = 453;
-				this.match(NextflowScriptParser.SHELL);
-				this.state = 455;
+				this.state = 472;
+				this.match(NextflowScriptParser.SHELL_GUARD);
+				this.state = 474;
 				this._errHandler.sync(this);
 				_alt = 1;
 				do {
@@ -1060,7 +1148,7 @@ export class NextflowScriptParser extends Parser {
 					case 1:
 						{
 						{
-						this.state = 454;
+						this.state = 473;
 						this.statement();
 						}
 						}
@@ -1068,18 +1156,18 @@ export class NextflowScriptParser extends Parser {
 					default:
 						throw new NoViableAltException(this);
 					}
-					this.state = 457;
+					this.state = 476;
 					this._errHandler.sync(this);
-					_alt = this.interpreter.adaptivePredict(this._input, 9, this._ctx);
+					_alt = this.interpreter.adaptivePredict(this._input, 14, this._ctx);
 				} while (_alt !== 2 && _alt !== ATN.INVALID_ALT_NUMBER);
 				}
 				break;
-			case NextflowScriptParser.EXEC:
+			case NextflowScriptParser.EXEC_GUARD:
 				this.enterOuterAlt(_localctx, 7);
 				{
-				this.state = 459;
-				this.match(NextflowScriptParser.EXEC);
-				this.state = 461;
+				this.state = 478;
+				this.match(NextflowScriptParser.EXEC_GUARD);
+				this.state = 480;
 				this._errHandler.sync(this);
 				_alt = 1;
 				do {
@@ -1087,7 +1175,7 @@ export class NextflowScriptParser extends Parser {
 					case 1:
 						{
 						{
-						this.state = 460;
+						this.state = 479;
 						this.statement();
 						}
 						}
@@ -1095,18 +1183,18 @@ export class NextflowScriptParser extends Parser {
 					default:
 						throw new NoViableAltException(this);
 					}
-					this.state = 463;
+					this.state = 482;
 					this._errHandler.sync(this);
-					_alt = this.interpreter.adaptivePredict(this._input, 10, this._ctx);
+					_alt = this.interpreter.adaptivePredict(this._input, 15, this._ctx);
 				} while (_alt !== 2 && _alt !== ATN.INVALID_ALT_NUMBER);
 				}
 				break;
-			case NextflowScriptParser.STUB:
+			case NextflowScriptParser.STUB_GUARD:
 				this.enterOuterAlt(_localctx, 8);
 				{
-				this.state = 465;
-				this.match(NextflowScriptParser.STUB);
-				this.state = 467;
+				this.state = 484;
+				this.match(NextflowScriptParser.STUB_GUARD);
+				this.state = 486;
 				this._errHandler.sync(this);
 				_alt = 1;
 				do {
@@ -1114,7 +1202,7 @@ export class NextflowScriptParser extends Parser {
 					case 1:
 						{
 						{
-						this.state = 466;
+						this.state = 485;
 						this.statement();
 						}
 						}
@@ -1122,9 +1210,9 @@ export class NextflowScriptParser extends Parser {
 					default:
 						throw new NoViableAltException(this);
 					}
-					this.state = 469;
+					this.state = 488;
 					this._errHandler.sync(this);
-					_alt = this.interpreter.adaptivePredict(this._input, 11, this._ctx);
+					_alt = this.interpreter.adaptivePredict(this._input, 16, this._ctx);
 				} while (_alt !== 2 && _alt !== ATN.INVALID_ALT_NUMBER);
 				}
 				break;
@@ -1149,32 +1237,32 @@ export class NextflowScriptParser extends Parser {
 	// @RuleVersion(0)
 	public processDirective(): ProcessDirectiveContext {
 		let _localctx: ProcessDirectiveContext = new ProcessDirectiveContext(this._ctx, this.state);
-		this.enterRule(_localctx, 14, NextflowScriptParser.RULE_processDirective);
+		this.enterRule(_localctx, 18, NextflowScriptParser.RULE_processDirective);
 		let _la: number;
 		try {
 			this.enterOuterAlt(_localctx, 1);
 			{
-			this.state = 473;
+			this.state = 492;
 			this.match(NextflowScriptParser.Identifier);
-			this.state = 474;
+			this.state = 493;
 			this.expression(0);
-			this.state = 481;
+			this.state = 500;
 			this._errHandler.sync(this);
 			_la = this._input.LA(1);
 			while (_la === NextflowScriptParser.COMMA) {
 				{
 				{
-				this.state = 475;
+				this.state = 494;
 				this.match(NextflowScriptParser.COMMA);
-				this.state = 476;
+				this.state = 495;
 				this.match(NextflowScriptParser.Identifier);
-				this.state = 477;
+				this.state = 496;
 				this.match(NextflowScriptParser.COLON);
-				this.state = 478;
+				this.state = 497;
 				this.expression(0);
 				}
 				}
-				this.state = 483;
+				this.state = 502;
 				this._errHandler.sync(this);
 				_la = this._input.LA(1);
 			}
@@ -1197,51 +1285,30 @@ export class NextflowScriptParser extends Parser {
 	// @RuleVersion(0)
 	public processInput(): ProcessInputContext {
 		let _localctx: ProcessInputContext = new ProcessInputContext(this._ctx, this.state);
-		this.enterRule(_localctx, 16, NextflowScriptParser.RULE_processInput);
+		this.enterRule(_localctx, 20, NextflowScriptParser.RULE_processInput);
 		let _la: number;
 		try {
 			this.enterOuterAlt(_localctx, 1);
 			{
-			this.state = 486;
-			this._errHandler.sync(this);
-			switch (this._input.LA(1)) {
-			case NextflowScriptParser.SUB:
-			case NextflowScriptParser.VAL:
-			case NextflowScriptParser.FILE:
-			case NextflowScriptParser.ENV:
-			case NextflowScriptParser.PATH:
-			case NextflowScriptParser.STDIN:
-				{
-				this.state = 484;
-				this.processInputType();
-				}
-				break;
-			case NextflowScriptParser.TUPLE:
-				{
-				this.state = 485;
-				this.processInputExpr();
-				}
-				break;
-			default:
-				throw new NoViableAltException(this);
-			}
-			this.state = 494;
+			this.state = 503;
+			this.processInputType();
+			this.state = 510;
 			this._errHandler.sync(this);
 			_la = this._input.LA(1);
 			while (_la === NextflowScriptParser.COMMA) {
 				{
 				{
-				this.state = 488;
+				this.state = 504;
 				this.match(NextflowScriptParser.COMMA);
-				this.state = 489;
+				this.state = 505;
 				this.match(NextflowScriptParser.Identifier);
-				this.state = 490;
+				this.state = 506;
 				this.match(NextflowScriptParser.COLON);
-				this.state = 491;
+				this.state = 507;
 				this.expression(0);
 				}
 				}
-				this.state = 496;
+				this.state = 512;
 				this._errHandler.sync(this);
 				_la = this._input.LA(1);
 			}
@@ -1264,36 +1331,36 @@ export class NextflowScriptParser extends Parser {
 	// @RuleVersion(0)
 	public processInputType(): ProcessInputTypeContext {
 		let _localctx: ProcessInputTypeContext = new ProcessInputTypeContext(this._ctx, this.state);
-		this.enterRule(_localctx, 18, NextflowScriptParser.RULE_processInputType);
+		this.enterRule(_localctx, 22, NextflowScriptParser.RULE_processInputType);
 		try {
-			this.state = 502;
+			this.state = 519;
 			this._errHandler.sync(this);
 			switch (this._input.LA(1)) {
 			case NextflowScriptParser.VAL:
 				this.enterOuterAlt(_localctx, 1);
 				{
-				this.state = 497;
+				this.state = 513;
 				this.processInputVal();
 				}
 				break;
 			case NextflowScriptParser.ENV:
 				this.enterOuterAlt(_localctx, 2);
 				{
-				this.state = 498;
+				this.state = 514;
 				this.processInputEnv();
 				}
 				break;
 			case NextflowScriptParser.FILE:
 				this.enterOuterAlt(_localctx, 3);
 				{
-				this.state = 499;
+				this.state = 515;
 				this.processInputFile();
 				}
 				break;
 			case NextflowScriptParser.PATH:
 				this.enterOuterAlt(_localctx, 4);
 				{
-				this.state = 500;
+				this.state = 516;
 				this.processInputPath();
 				}
 				break;
@@ -1301,8 +1368,15 @@ export class NextflowScriptParser extends Parser {
 			case NextflowScriptParser.STDIN:
 				this.enterOuterAlt(_localctx, 5);
 				{
-				this.state = 501;
+				this.state = 517;
 				this.processInputStdin();
+				}
+				break;
+			case NextflowScriptParser.TUPLE:
+				this.enterOuterAlt(_localctx, 6);
+				{
+				this.state = 518;
+				this.processInputTuple();
 				}
 				break;
 			default:
@@ -1326,17 +1400,17 @@ export class NextflowScriptParser extends Parser {
 	// @RuleVersion(0)
 	public processInputVal(): ProcessInputValContext {
 		let _localctx: ProcessInputValContext = new ProcessInputValContext(this._ctx, this.state);
-		this.enterRule(_localctx, 20, NextflowScriptParser.RULE_processInputVal);
+		this.enterRule(_localctx, 24, NextflowScriptParser.RULE_processInputVal);
 		try {
 			this.enterOuterAlt(_localctx, 1);
 			{
-			this.state = 504;
+			this.state = 521;
 			this.match(NextflowScriptParser.VAL);
-			this.state = 505;
+			this.state = 522;
 			this.match(NextflowScriptParser.LPAREN);
-			this.state = 506;
+			this.state = 523;
 			this.match(NextflowScriptParser.Identifier);
-			this.state = 507;
+			this.state = 524;
 			this.match(NextflowScriptParser.RPAREN);
 			}
 		}
@@ -1357,17 +1431,17 @@ export class NextflowScriptParser extends Parser {
 	// @RuleVersion(0)
 	public processInputEnv(): ProcessInputEnvContext {
 		let _localctx: ProcessInputEnvContext = new ProcessInputEnvContext(this._ctx, this.state);
-		this.enterRule(_localctx, 22, NextflowScriptParser.RULE_processInputEnv);
+		this.enterRule(_localctx, 26, NextflowScriptParser.RULE_processInputEnv);
 		try {
 			this.enterOuterAlt(_localctx, 1);
 			{
-			this.state = 509;
+			this.state = 526;
 			this.match(NextflowScriptParser.ENV);
-			this.state = 510;
+			this.state = 527;
 			this.match(NextflowScriptParser.LPAREN);
-			this.state = 511;
+			this.state = 528;
 			this.match(NextflowScriptParser.Identifier);
-			this.state = 512;
+			this.state = 529;
 			this.match(NextflowScriptParser.RPAREN);
 			}
 		}
@@ -1388,38 +1462,38 @@ export class NextflowScriptParser extends Parser {
 	// @RuleVersion(0)
 	public processInputFile(): ProcessInputFileContext {
 		let _localctx: ProcessInputFileContext = new ProcessInputFileContext(this._ctx, this.state);
-		this.enterRule(_localctx, 24, NextflowScriptParser.RULE_processInputFile);
+		this.enterRule(_localctx, 28, NextflowScriptParser.RULE_processInputFile);
 		let _la: number;
 		try {
 			this.enterOuterAlt(_localctx, 1);
 			{
-			this.state = 514;
+			this.state = 531;
 			this.match(NextflowScriptParser.FILE);
-			this.state = 515;
+			this.state = 532;
 			this.match(NextflowScriptParser.LPAREN);
-			this.state = 516;
+			this.state = 533;
 			this.expression(0);
-			this.state = 523;
+			this.state = 540;
 			this._errHandler.sync(this);
 			_la = this._input.LA(1);
 			while (_la === NextflowScriptParser.COMMA) {
 				{
 				{
-				this.state = 517;
+				this.state = 534;
 				this.match(NextflowScriptParser.COMMA);
-				this.state = 518;
+				this.state = 535;
 				this.match(NextflowScriptParser.Identifier);
-				this.state = 519;
+				this.state = 536;
 				this.match(NextflowScriptParser.COLON);
-				this.state = 520;
+				this.state = 537;
 				this.expression(0);
 				}
 				}
-				this.state = 525;
+				this.state = 542;
 				this._errHandler.sync(this);
 				_la = this._input.LA(1);
 			}
-			this.state = 526;
+			this.state = 543;
 			this.match(NextflowScriptParser.RPAREN);
 			}
 		}
@@ -1440,38 +1514,38 @@ export class NextflowScriptParser extends Parser {
 	// @RuleVersion(0)
 	public processInputPath(): ProcessInputPathContext {
 		let _localctx: ProcessInputPathContext = new ProcessInputPathContext(this._ctx, this.state);
-		this.enterRule(_localctx, 26, NextflowScriptParser.RULE_processInputPath);
+		this.enterRule(_localctx, 30, NextflowScriptParser.RULE_processInputPath);
 		let _la: number;
 		try {
 			this.enterOuterAlt(_localctx, 1);
 			{
-			this.state = 528;
+			this.state = 545;
 			this.match(NextflowScriptParser.PATH);
-			this.state = 529;
+			this.state = 546;
 			this.match(NextflowScriptParser.LPAREN);
-			this.state = 530;
+			this.state = 547;
 			this.expression(0);
-			this.state = 537;
+			this.state = 554;
 			this._errHandler.sync(this);
 			_la = this._input.LA(1);
 			while (_la === NextflowScriptParser.COMMA) {
 				{
 				{
-				this.state = 531;
+				this.state = 548;
 				this.match(NextflowScriptParser.COMMA);
-				this.state = 532;
+				this.state = 549;
 				this.match(NextflowScriptParser.Identifier);
-				this.state = 533;
+				this.state = 550;
 				this.match(NextflowScriptParser.COLON);
-				this.state = 534;
+				this.state = 551;
 				this.expression(0);
 				}
 				}
-				this.state = 539;
+				this.state = 556;
 				this._errHandler.sync(this);
 				_la = this._input.LA(1);
 			}
-			this.state = 540;
+			this.state = 557;
 			this.match(NextflowScriptParser.RPAREN);
 			}
 		}
@@ -1492,12 +1566,12 @@ export class NextflowScriptParser extends Parser {
 	// @RuleVersion(0)
 	public processInputStdin(): ProcessInputStdinContext {
 		let _localctx: ProcessInputStdinContext = new ProcessInputStdinContext(this._ctx, this.state);
-		this.enterRule(_localctx, 28, NextflowScriptParser.RULE_processInputStdin);
+		this.enterRule(_localctx, 32, NextflowScriptParser.RULE_processInputStdin);
 		let _la: number;
 		try {
 			this.enterOuterAlt(_localctx, 1);
 			{
-			this.state = 542;
+			this.state = 559;
 			_la = this._input.LA(1);
 			if (!(_la === NextflowScriptParser.SUB || _la === NextflowScriptParser.STDIN)) {
 			this._errHandler.recoverInline(this);
@@ -1526,61 +1600,36 @@ export class NextflowScriptParser extends Parser {
 		return _localctx;
 	}
 	// @RuleVersion(0)
-	public processInputExpr(): ProcessInputExprContext {
-		let _localctx: ProcessInputExprContext = new ProcessInputExprContext(this._ctx, this.state);
-		this.enterRule(_localctx, 30, NextflowScriptParser.RULE_processInputExpr);
-		try {
-			this.enterOuterAlt(_localctx, 1);
-			{
-			this.state = 544;
-			this.processInputTuple();
-			}
-		}
-		catch (re) {
-			if (re instanceof RecognitionException) {
-				_localctx.exception = re;
-				this._errHandler.reportError(this, re);
-				this._errHandler.recover(this, re);
-			} else {
-				throw re;
-			}
-		}
-		finally {
-			this.exitRule();
-		}
-		return _localctx;
-	}
-	// @RuleVersion(0)
 	public processInputTuple(): ProcessInputTupleContext {
 		let _localctx: ProcessInputTupleContext = new ProcessInputTupleContext(this._ctx, this.state);
-		this.enterRule(_localctx, 32, NextflowScriptParser.RULE_processInputTuple);
+		this.enterRule(_localctx, 34, NextflowScriptParser.RULE_processInputTuple);
 		let _la: number;
 		try {
 			this.enterOuterAlt(_localctx, 1);
 			{
-			this.state = 546;
+			this.state = 561;
 			this.match(NextflowScriptParser.TUPLE);
-			this.state = 547;
+			this.state = 562;
 			this.match(NextflowScriptParser.LPAREN);
-			this.state = 548;
+			this.state = 563;
 			this.processInputType();
-			this.state = 553;
+			this.state = 568;
 			this._errHandler.sync(this);
 			_la = this._input.LA(1);
 			while (_la === NextflowScriptParser.COMMA) {
 				{
 				{
-				this.state = 549;
+				this.state = 564;
 				this.match(NextflowScriptParser.COMMA);
-				this.state = 550;
+				this.state = 565;
 				this.processInputType();
 				}
 				}
-				this.state = 555;
+				this.state = 570;
 				this._errHandler.sync(this);
 				_la = this._input.LA(1);
 			}
-			this.state = 556;
+			this.state = 571;
 			this.match(NextflowScriptParser.RPAREN);
 			}
 		}
@@ -1601,51 +1650,30 @@ export class NextflowScriptParser extends Parser {
 	// @RuleVersion(0)
 	public processOutput(): ProcessOutputContext {
 		let _localctx: ProcessOutputContext = new ProcessOutputContext(this._ctx, this.state);
-		this.enterRule(_localctx, 34, NextflowScriptParser.RULE_processOutput);
+		this.enterRule(_localctx, 36, NextflowScriptParser.RULE_processOutput);
 		let _la: number;
 		try {
 			this.enterOuterAlt(_localctx, 1);
 			{
-			this.state = 560;
-			this._errHandler.sync(this);
-			switch (this._input.LA(1)) {
-			case NextflowScriptParser.SUB:
-			case NextflowScriptParser.VAL:
-			case NextflowScriptParser.FILE:
-			case NextflowScriptParser.ENV:
-			case NextflowScriptParser.PATH:
-			case NextflowScriptParser.STDOUT:
-				{
-				this.state = 558;
-				this.processOutputType();
-				}
-				break;
-			case NextflowScriptParser.TUPLE:
-				{
-				this.state = 559;
-				this.processOutputExpr();
-				}
-				break;
-			default:
-				throw new NoViableAltException(this);
-			}
-			this.state = 568;
+			this.state = 573;
+			this.processOutputType();
+			this.state = 580;
 			this._errHandler.sync(this);
 			_la = this._input.LA(1);
 			while (_la === NextflowScriptParser.COMMA) {
 				{
 				{
-				this.state = 562;
+				this.state = 574;
 				this.match(NextflowScriptParser.COMMA);
-				this.state = 563;
+				this.state = 575;
 				this.match(NextflowScriptParser.Identifier);
-				this.state = 564;
+				this.state = 576;
 				this.match(NextflowScriptParser.COLON);
-				this.state = 565;
+				this.state = 577;
 				this.expression(0);
 				}
 				}
-				this.state = 570;
+				this.state = 582;
 				this._errHandler.sync(this);
 				_la = this._input.LA(1);
 			}
@@ -1668,36 +1696,36 @@ export class NextflowScriptParser extends Parser {
 	// @RuleVersion(0)
 	public processOutputType(): ProcessOutputTypeContext {
 		let _localctx: ProcessOutputTypeContext = new ProcessOutputTypeContext(this._ctx, this.state);
-		this.enterRule(_localctx, 36, NextflowScriptParser.RULE_processOutputType);
+		this.enterRule(_localctx, 38, NextflowScriptParser.RULE_processOutputType);
 		try {
-			this.state = 576;
+			this.state = 589;
 			this._errHandler.sync(this);
 			switch (this._input.LA(1)) {
 			case NextflowScriptParser.VAL:
 				this.enterOuterAlt(_localctx, 1);
 				{
-				this.state = 571;
+				this.state = 583;
 				this.processOutputVal();
 				}
 				break;
 			case NextflowScriptParser.ENV:
 				this.enterOuterAlt(_localctx, 2);
 				{
-				this.state = 572;
+				this.state = 584;
 				this.processOutputEnv();
 				}
 				break;
 			case NextflowScriptParser.FILE:
 				this.enterOuterAlt(_localctx, 3);
 				{
-				this.state = 573;
+				this.state = 585;
 				this.processOutputFile();
 				}
 				break;
 			case NextflowScriptParser.PATH:
 				this.enterOuterAlt(_localctx, 4);
 				{
-				this.state = 574;
+				this.state = 586;
 				this.processOutputPath();
 				}
 				break;
@@ -1705,8 +1733,15 @@ export class NextflowScriptParser extends Parser {
 			case NextflowScriptParser.STDOUT:
 				this.enterOuterAlt(_localctx, 5);
 				{
-				this.state = 575;
+				this.state = 587;
 				this.processOutputStdout();
+				}
+				break;
+			case NextflowScriptParser.TUPLE:
+				this.enterOuterAlt(_localctx, 6);
+				{
+				this.state = 588;
+				this.processOutputTuple();
 				}
 				break;
 			default:
@@ -1730,17 +1765,17 @@ export class NextflowScriptParser extends Parser {
 	// @RuleVersion(0)
 	public processOutputVal(): ProcessOutputValContext {
 		let _localctx: ProcessOutputValContext = new ProcessOutputValContext(this._ctx, this.state);
-		this.enterRule(_localctx, 38, NextflowScriptParser.RULE_processOutputVal);
+		this.enterRule(_localctx, 40, NextflowScriptParser.RULE_processOutputVal);
 		try {
 			this.enterOuterAlt(_localctx, 1);
 			{
-			this.state = 578;
+			this.state = 591;
 			this.match(NextflowScriptParser.VAL);
-			this.state = 579;
+			this.state = 592;
 			this.match(NextflowScriptParser.LPAREN);
-			this.state = 580;
+			this.state = 593;
 			this.match(NextflowScriptParser.Identifier);
-			this.state = 581;
+			this.state = 594;
 			this.match(NextflowScriptParser.RPAREN);
 			}
 		}
@@ -1761,17 +1796,17 @@ export class NextflowScriptParser extends Parser {
 	// @RuleVersion(0)
 	public processOutputEnv(): ProcessOutputEnvContext {
 		let _localctx: ProcessOutputEnvContext = new ProcessOutputEnvContext(this._ctx, this.state);
-		this.enterRule(_localctx, 40, NextflowScriptParser.RULE_processOutputEnv);
+		this.enterRule(_localctx, 42, NextflowScriptParser.RULE_processOutputEnv);
 		try {
 			this.enterOuterAlt(_localctx, 1);
 			{
-			this.state = 583;
+			this.state = 596;
 			this.match(NextflowScriptParser.ENV);
-			this.state = 584;
+			this.state = 597;
 			this.match(NextflowScriptParser.LPAREN);
-			this.state = 585;
+			this.state = 598;
 			this.match(NextflowScriptParser.Identifier);
-			this.state = 586;
+			this.state = 599;
 			this.match(NextflowScriptParser.RPAREN);
 			}
 		}
@@ -1792,38 +1827,38 @@ export class NextflowScriptParser extends Parser {
 	// @RuleVersion(0)
 	public processOutputFile(): ProcessOutputFileContext {
 		let _localctx: ProcessOutputFileContext = new ProcessOutputFileContext(this._ctx, this.state);
-		this.enterRule(_localctx, 42, NextflowScriptParser.RULE_processOutputFile);
+		this.enterRule(_localctx, 44, NextflowScriptParser.RULE_processOutputFile);
 		let _la: number;
 		try {
 			this.enterOuterAlt(_localctx, 1);
 			{
-			this.state = 588;
+			this.state = 601;
 			this.match(NextflowScriptParser.FILE);
-			this.state = 589;
+			this.state = 602;
 			this.match(NextflowScriptParser.LPAREN);
-			this.state = 590;
+			this.state = 603;
 			this.expression(0);
-			this.state = 597;
+			this.state = 610;
 			this._errHandler.sync(this);
 			_la = this._input.LA(1);
 			while (_la === NextflowScriptParser.COMMA) {
 				{
 				{
-				this.state = 591;
+				this.state = 604;
 				this.match(NextflowScriptParser.COMMA);
-				this.state = 592;
+				this.state = 605;
 				this.match(NextflowScriptParser.Identifier);
-				this.state = 593;
+				this.state = 606;
 				this.match(NextflowScriptParser.COLON);
-				this.state = 594;
+				this.state = 607;
 				this.expression(0);
 				}
 				}
-				this.state = 599;
+				this.state = 612;
 				this._errHandler.sync(this);
 				_la = this._input.LA(1);
 			}
-			this.state = 600;
+			this.state = 613;
 			this.match(NextflowScriptParser.RPAREN);
 			}
 		}
@@ -1844,38 +1879,38 @@ export class NextflowScriptParser extends Parser {
 	// @RuleVersion(0)
 	public processOutputPath(): ProcessOutputPathContext {
 		let _localctx: ProcessOutputPathContext = new ProcessOutputPathContext(this._ctx, this.state);
-		this.enterRule(_localctx, 44, NextflowScriptParser.RULE_processOutputPath);
+		this.enterRule(_localctx, 46, NextflowScriptParser.RULE_processOutputPath);
 		let _la: number;
 		try {
 			this.enterOuterAlt(_localctx, 1);
 			{
-			this.state = 602;
+			this.state = 615;
 			this.match(NextflowScriptParser.PATH);
-			this.state = 603;
+			this.state = 616;
 			this.match(NextflowScriptParser.LPAREN);
-			this.state = 604;
+			this.state = 617;
 			this.expression(0);
-			this.state = 611;
+			this.state = 624;
 			this._errHandler.sync(this);
 			_la = this._input.LA(1);
 			while (_la === NextflowScriptParser.COMMA) {
 				{
 				{
-				this.state = 605;
+				this.state = 618;
 				this.match(NextflowScriptParser.COMMA);
-				this.state = 606;
+				this.state = 619;
 				this.match(NextflowScriptParser.Identifier);
-				this.state = 607;
+				this.state = 620;
 				this.match(NextflowScriptParser.COLON);
-				this.state = 608;
+				this.state = 621;
 				this.expression(0);
 				}
 				}
-				this.state = 613;
+				this.state = 626;
 				this._errHandler.sync(this);
 				_la = this._input.LA(1);
 			}
-			this.state = 614;
+			this.state = 627;
 			this.match(NextflowScriptParser.RPAREN);
 			}
 		}
@@ -1896,12 +1931,12 @@ export class NextflowScriptParser extends Parser {
 	// @RuleVersion(0)
 	public processOutputStdout(): ProcessOutputStdoutContext {
 		let _localctx: ProcessOutputStdoutContext = new ProcessOutputStdoutContext(this._ctx, this.state);
-		this.enterRule(_localctx, 46, NextflowScriptParser.RULE_processOutputStdout);
+		this.enterRule(_localctx, 48, NextflowScriptParser.RULE_processOutputStdout);
 		let _la: number;
 		try {
 			this.enterOuterAlt(_localctx, 1);
 			{
-			this.state = 616;
+			this.state = 629;
 			_la = this._input.LA(1);
 			if (!(_la === NextflowScriptParser.SUB || _la === NextflowScriptParser.STDOUT)) {
 			this._errHandler.recoverInline(this);
@@ -1930,31 +1965,6 @@ export class NextflowScriptParser extends Parser {
 		return _localctx;
 	}
 	// @RuleVersion(0)
-	public processOutputExpr(): ProcessOutputExprContext {
-		let _localctx: ProcessOutputExprContext = new ProcessOutputExprContext(this._ctx, this.state);
-		this.enterRule(_localctx, 48, NextflowScriptParser.RULE_processOutputExpr);
-		try {
-			this.enterOuterAlt(_localctx, 1);
-			{
-			this.state = 618;
-			this.processOutputTuple();
-			}
-		}
-		catch (re) {
-			if (re instanceof RecognitionException) {
-				_localctx.exception = re;
-				this._errHandler.reportError(this, re);
-				this._errHandler.recover(this, re);
-			} else {
-				throw re;
-			}
-		}
-		finally {
-			this.exitRule();
-		}
-		return _localctx;
-	}
-	// @RuleVersion(0)
 	public processOutputTuple(): ProcessOutputTupleContext {
 		let _localctx: ProcessOutputTupleContext = new ProcessOutputTupleContext(this._ctx, this.state);
 		this.enterRule(_localctx, 50, NextflowScriptParser.RULE_processOutputTuple);
@@ -1962,29 +1972,29 @@ export class NextflowScriptParser extends Parser {
 		try {
 			this.enterOuterAlt(_localctx, 1);
 			{
-			this.state = 620;
+			this.state = 631;
 			this.match(NextflowScriptParser.TUPLE);
-			this.state = 621;
+			this.state = 632;
 			this.match(NextflowScriptParser.LPAREN);
-			this.state = 622;
+			this.state = 633;
 			this.processOutputType();
-			this.state = 627;
+			this.state = 638;
 			this._errHandler.sync(this);
 			_la = this._input.LA(1);
 			while (_la === NextflowScriptParser.COMMA) {
 				{
 				{
-				this.state = 623;
+				this.state = 634;
 				this.match(NextflowScriptParser.COMMA);
-				this.state = 624;
+				this.state = 635;
 				this.processOutputType();
 				}
 				}
-				this.state = 629;
+				this.state = 640;
 				this._errHandler.sync(this);
 				_la = this._input.LA(1);
 			}
-			this.state = 630;
+			this.state = 641;
 			this.match(NextflowScriptParser.RPAREN);
 			}
 		}
@@ -2011,52 +2021,52 @@ export class NextflowScriptParser extends Parser {
 			let _alt: number;
 			this.enterOuterAlt(_localctx, 1);
 			{
-			this.state = 632;
+			this.state = 643;
 			this.match(NextflowScriptParser.WORKFLOW);
-			this.state = 634;
+			this.state = 645;
 			this._errHandler.sync(this);
 			_la = this._input.LA(1);
 			if (_la === NextflowScriptParser.Identifier) {
 				{
-				this.state = 633;
+				this.state = 644;
 				this.match(NextflowScriptParser.Identifier);
 				}
 			}
 
-			this.state = 636;
+			this.state = 647;
 			this.match(NextflowScriptParser.LBRACE);
-			this.state = 644;
+			this.state = 655;
 			this._errHandler.sync(this);
-			switch ( this.interpreter.adaptivePredict(this._input, 28, this._ctx) ) {
+			switch ( this.interpreter.adaptivePredict(this._input, 31, this._ctx) ) {
 			case 1:
 				{
-				this.state = 637;
+				this.state = 648;
 				this.workflowBody();
 				}
 				break;
 
 			case 2:
 				{
-				this.state = 641;
+				this.state = 652;
 				this._errHandler.sync(this);
-				_alt = this.interpreter.adaptivePredict(this._input, 27, this._ctx);
+				_alt = this.interpreter.adaptivePredict(this._input, 30, this._ctx);
 				while (_alt !== 2 && _alt !== ATN.INVALID_ALT_NUMBER) {
 					if (_alt === 1) {
 						{
 						{
-						this.state = 638;
+						this.state = 649;
 						this.statement();
 						}
 						}
 					}
-					this.state = 643;
+					this.state = 654;
 					this._errHandler.sync(this);
-					_alt = this.interpreter.adaptivePredict(this._input, 27, this._ctx);
+					_alt = this.interpreter.adaptivePredict(this._input, 30, this._ctx);
 				}
 				}
 				break;
 			}
-			this.state = 646;
+			this.state = 657;
 			this.match(NextflowScriptParser.RBRACE);
 			}
 		}
@@ -2083,38 +2093,38 @@ export class NextflowScriptParser extends Parser {
 			let _alt: number;
 			this.enterOuterAlt(_localctx, 1);
 			{
-			this.state = 654;
+			this.state = 665;
 			this._errHandler.sync(this);
 			_la = this._input.LA(1);
-			if (_la === NextflowScriptParser.TAKE) {
+			if (_la === NextflowScriptParser.TAKE_GUARD) {
 				{
-				this.state = 648;
-				this.match(NextflowScriptParser.TAKE);
-				this.state = 650;
+				this.state = 659;
+				this.match(NextflowScriptParser.TAKE_GUARD);
+				this.state = 661;
 				this._errHandler.sync(this);
 				_la = this._input.LA(1);
 				do {
 					{
 					{
-					this.state = 649;
+					this.state = 660;
 					this.match(NextflowScriptParser.Identifier);
 					}
 					}
-					this.state = 652;
+					this.state = 663;
 					this._errHandler.sync(this);
 					_la = this._input.LA(1);
 				} while (_la === NextflowScriptParser.Identifier);
 				}
 			}
 
-			this.state = 662;
+			this.state = 673;
 			this._errHandler.sync(this);
 			_la = this._input.LA(1);
-			if (_la === NextflowScriptParser.MAIN) {
+			if (_la === NextflowScriptParser.MAIN_GUARD) {
 				{
-				this.state = 656;
-				this.match(NextflowScriptParser.MAIN);
-				this.state = 658;
+				this.state = 667;
+				this.match(NextflowScriptParser.MAIN_GUARD);
+				this.state = 669;
 				this._errHandler.sync(this);
 				_alt = 1;
 				do {
@@ -2122,7 +2132,7 @@ export class NextflowScriptParser extends Parser {
 					case 1:
 						{
 						{
-						this.state = 657;
+						this.state = 668;
 						this.statement();
 						}
 						}
@@ -2130,21 +2140,21 @@ export class NextflowScriptParser extends Parser {
 					default:
 						throw new NoViableAltException(this);
 					}
-					this.state = 660;
+					this.state = 671;
 					this._errHandler.sync(this);
-					_alt = this.interpreter.adaptivePredict(this._input, 31, this._ctx);
+					_alt = this.interpreter.adaptivePredict(this._input, 34, this._ctx);
 				} while (_alt !== 2 && _alt !== ATN.INVALID_ALT_NUMBER);
 				}
 			}
 
-			this.state = 670;
+			this.state = 681;
 			this._errHandler.sync(this);
 			_la = this._input.LA(1);
-			if (_la === NextflowScriptParser.EMIT) {
+			if (_la === NextflowScriptParser.EMIT_GUARD) {
 				{
-				this.state = 664;
-				this.match(NextflowScriptParser.EMIT);
-				this.state = 666;
+				this.state = 675;
+				this.match(NextflowScriptParser.EMIT_GUARD);
+				this.state = 677;
 				this._errHandler.sync(this);
 				_alt = 1;
 				do {
@@ -2152,7 +2162,7 @@ export class NextflowScriptParser extends Parser {
 					case 1:
 						{
 						{
-						this.state = 665;
+						this.state = 676;
 						this.expression(0);
 						}
 						}
@@ -2160,65 +2170,10 @@ export class NextflowScriptParser extends Parser {
 					default:
 						throw new NoViableAltException(this);
 					}
-					this.state = 668;
+					this.state = 679;
 					this._errHandler.sync(this);
-					_alt = this.interpreter.adaptivePredict(this._input, 33, this._ctx);
+					_alt = this.interpreter.adaptivePredict(this._input, 36, this._ctx);
 				} while (_alt !== 2 && _alt !== ATN.INVALID_ALT_NUMBER);
-				}
-			}
-
-			}
-		}
-		catch (re) {
-			if (re instanceof RecognitionException) {
-				_localctx.exception = re;
-				this._errHandler.reportError(this, re);
-				this._errHandler.recover(this, re);
-			} else {
-				throw re;
-			}
-		}
-		finally {
-			this.exitRule();
-		}
-		return _localctx;
-	}
-	// @RuleVersion(0)
-	public scriptStatements(): ScriptStatementsContext {
-		let _localctx: ScriptStatementsContext = new ScriptStatementsContext(this._ctx, this.state);
-		this.enterRule(_localctx, 56, NextflowScriptParser.RULE_scriptStatements);
-		let _la: number;
-		try {
-			let _alt: number;
-			this.enterOuterAlt(_localctx, 1);
-			{
-			this.state = 672;
-			this.scriptStatement();
-			this.state = 678;
-			this._errHandler.sync(this);
-			_alt = this.interpreter.adaptivePredict(this._input, 35, this._ctx);
-			while (_alt !== 2 && _alt !== ATN.INVALID_ALT_NUMBER) {
-				if (_alt === 1) {
-					{
-					{
-					this.state = 673;
-					this.sep();
-					this.state = 674;
-					this.scriptStatement();
-					}
-					}
-				}
-				this.state = 680;
-				this._errHandler.sync(this);
-				_alt = this.interpreter.adaptivePredict(this._input, 35, this._ctx);
-			}
-			this.state = 682;
-			this._errHandler.sync(this);
-			_la = this._input.LA(1);
-			if (_la === NextflowScriptParser.SEMI || _la === NextflowScriptParser.NL) {
-				{
-				this.state = 681;
-				this.sep();
 				}
 			}
 
@@ -2241,15 +2196,15 @@ export class NextflowScriptParser extends Parser {
 	// @RuleVersion(0)
 	public packageDeclaration(): PackageDeclarationContext {
 		let _localctx: PackageDeclarationContext = new PackageDeclarationContext(this._ctx, this.state);
-		this.enterRule(_localctx, 58, NextflowScriptParser.RULE_packageDeclaration);
+		this.enterRule(_localctx, 56, NextflowScriptParser.RULE_packageDeclaration);
 		try {
 			this.enterOuterAlt(_localctx, 1);
 			{
-			this.state = 684;
+			this.state = 683;
 			this.annotationsOpt();
-			this.state = 685;
+			this.state = 684;
 			this.match(NextflowScriptParser.PACKAGE);
-			this.state = 686;
+			this.state = 685;
 			this.qualifiedName();
 			}
 		}
@@ -2270,47 +2225,49 @@ export class NextflowScriptParser extends Parser {
 	// @RuleVersion(0)
 	public importDeclaration(): ImportDeclarationContext {
 		let _localctx: ImportDeclarationContext = new ImportDeclarationContext(this._ctx, this.state);
-		this.enterRule(_localctx, 60, NextflowScriptParser.RULE_importDeclaration);
+		this.enterRule(_localctx, 58, NextflowScriptParser.RULE_importDeclaration);
 		let _la: number;
 		try {
 			this.enterOuterAlt(_localctx, 1);
 			{
-			this.state = 688;
+			this.state = 687;
 			this.annotationsOpt();
-			this.state = 689;
+			this.state = 688;
 			this.match(NextflowScriptParser.IMPORT);
-			this.state = 691;
+			this.state = 690;
 			this._errHandler.sync(this);
 			_la = this._input.LA(1);
 			if (_la === NextflowScriptParser.STATIC) {
 				{
-				this.state = 690;
+				this.state = 689;
 				this.match(NextflowScriptParser.STATIC);
 				}
 			}
 
-			this.state = 693;
+			this.state = 692;
 			this.qualifiedName();
-			this.state = 698;
+			this.state = 697;
 			this._errHandler.sync(this);
 			switch (this._input.LA(1)) {
 			case NextflowScriptParser.DOT:
 				{
-				this.state = 694;
+				this.state = 693;
 				this.match(NextflowScriptParser.DOT);
-				this.state = 695;
+				this.state = 694;
 				this.match(NextflowScriptParser.MUL);
 				}
 				break;
 			case NextflowScriptParser.AS:
 				{
-				this.state = 696;
+				this.state = 695;
 				this.match(NextflowScriptParser.AS);
-				this.state = 697;
+				this.state = 696;
 				_localctx._alias = this.identifier();
 				}
 				break;
 			case NextflowScriptParser.EOF:
+			case NextflowScriptParser.SEMI:
+			case NextflowScriptParser.NL:
 				break;
 			default:
 				break;
@@ -2334,13 +2291,13 @@ export class NextflowScriptParser extends Parser {
 	// @RuleVersion(0)
 	public typeDeclaration(): TypeDeclarationContext {
 		let _localctx: TypeDeclarationContext = new TypeDeclarationContext(this._ctx, this.state);
-		this.enterRule(_localctx, 62, NextflowScriptParser.RULE_typeDeclaration);
+		this.enterRule(_localctx, 60, NextflowScriptParser.RULE_typeDeclaration);
 		try {
 			this.enterOuterAlt(_localctx, 1);
 			{
-			this.state = 700;
+			this.state = 699;
 			this.classOrInterfaceModifiersOpt();
-			this.state = 701;
+			this.state = 700;
 			this.classDeclaration();
 			}
 		}
@@ -2361,26 +2318,24 @@ export class NextflowScriptParser extends Parser {
 	// @RuleVersion(0)
 	public modifier(): ModifierContext {
 		let _localctx: ModifierContext = new ModifierContext(this._ctx, this.state);
-		this.enterRule(_localctx, 64, NextflowScriptParser.RULE_modifier);
+		this.enterRule(_localctx, 62, NextflowScriptParser.RULE_modifier);
 		let _la: number;
 		try {
-			this.state = 705;
+			this.state = 704;
 			this._errHandler.sync(this);
 			switch (this._input.LA(1)) {
 			case NextflowScriptParser.ABSTRACT:
 			case NextflowScriptParser.DEFAULT:
 			case NextflowScriptParser.FINAL:
-			case NextflowScriptParser.NON_SEALED:
 			case NextflowScriptParser.PRIVATE:
 			case NextflowScriptParser.PROTECTED:
 			case NextflowScriptParser.PUBLIC:
-			case NextflowScriptParser.SEALED:
 			case NextflowScriptParser.STATIC:
 			case NextflowScriptParser.STRICTFP:
 			case NextflowScriptParser.AT:
 				this.enterOuterAlt(_localctx, 1);
 				{
-				this.state = 703;
+				this.state = 702;
 				this.classOrInterfaceModifier();
 				}
 				break;
@@ -2392,10 +2347,10 @@ export class NextflowScriptParser extends Parser {
 			case NextflowScriptParser.VOLATILE:
 				this.enterOuterAlt(_localctx, 2);
 				{
-				this.state = 704;
+				this.state = 703;
 				_localctx._m = this._input.LT(1);
 				_la = this._input.LA(1);
-				if (!(_la === NextflowScriptParser.DEF || _la === NextflowScriptParser.VAR || ((((_la - 37)) & ~0x1F) === 0 && ((1 << (_la - 37)) & ((1 << (NextflowScriptParser.NATIVE - 37)) | (1 << (NextflowScriptParser.SYNCHRONIZED - 37)) | (1 << (NextflowScriptParser.TRANSIENT - 37)) | (1 << (NextflowScriptParser.VOLATILE - 37)))) !== 0))) {
+				if (!(_la === NextflowScriptParser.DEF || _la === NextflowScriptParser.VAR || ((((_la - 36)) & ~0x1F) === 0 && ((1 << (_la - 36)) & ((1 << (NextflowScriptParser.NATIVE - 36)) | (1 << (NextflowScriptParser.SYNCHRONIZED - 36)) | (1 << (NextflowScriptParser.TRANSIENT - 36)) | (1 << (NextflowScriptParser.VOLATILE - 36)))) !== 0))) {
 					_localctx._m = this._errHandler.recoverInline(this);
 				} else {
 					if (this._input.LA(1) === Token.EOF) {
@@ -2428,18 +2383,18 @@ export class NextflowScriptParser extends Parser {
 	// @RuleVersion(0)
 	public modifiersOpt(): ModifiersOptContext {
 		let _localctx: ModifiersOptContext = new ModifiersOptContext(this._ctx, this.state);
-		this.enterRule(_localctx, 66, NextflowScriptParser.RULE_modifiersOpt);
+		this.enterRule(_localctx, 64, NextflowScriptParser.RULE_modifiersOpt);
 		try {
 			this.enterOuterAlt(_localctx, 1);
 			{
-			this.state = 710;
+			this.state = 709;
 			this._errHandler.sync(this);
-			switch ( this.interpreter.adaptivePredict(this._input, 40, this._ctx) ) {
+			switch ( this.interpreter.adaptivePredict(this._input, 41, this._ctx) ) {
 			case 1:
 				{
-				this.state = 707;
+				this.state = 706;
 				this.modifiers();
-				this.state = 708;
+				this.state = 707;
 				this.nls();
 				}
 				break;
@@ -2463,30 +2418,30 @@ export class NextflowScriptParser extends Parser {
 	// @RuleVersion(0)
 	public modifiers(): ModifiersContext {
 		let _localctx: ModifiersContext = new ModifiersContext(this._ctx, this.state);
-		this.enterRule(_localctx, 68, NextflowScriptParser.RULE_modifiers);
+		this.enterRule(_localctx, 66, NextflowScriptParser.RULE_modifiers);
 		try {
 			let _alt: number;
 			this.enterOuterAlt(_localctx, 1);
 			{
-			this.state = 712;
+			this.state = 711;
 			this.modifier();
-			this.state = 718;
+			this.state = 717;
 			this._errHandler.sync(this);
-			_alt = this.interpreter.adaptivePredict(this._input, 41, this._ctx);
+			_alt = this.interpreter.adaptivePredict(this._input, 42, this._ctx);
 			while (_alt !== 2 && _alt !== ATN.INVALID_ALT_NUMBER) {
 				if (_alt === 1) {
 					{
 					{
-					this.state = 713;
+					this.state = 712;
 					this.nls();
-					this.state = 714;
+					this.state = 713;
 					this.modifier();
 					}
 					}
 				}
-				this.state = 720;
+				this.state = 719;
 				this._errHandler.sync(this);
-				_alt = this.interpreter.adaptivePredict(this._input, 41, this._ctx);
+				_alt = this.interpreter.adaptivePredict(this._input, 42, this._ctx);
 			}
 			}
 		}
@@ -2507,29 +2462,29 @@ export class NextflowScriptParser extends Parser {
 	// @RuleVersion(0)
 	public classOrInterfaceModifiersOpt(): ClassOrInterfaceModifiersOptContext {
 		let _localctx: ClassOrInterfaceModifiersOptContext = new ClassOrInterfaceModifiersOptContext(this._ctx, this.state);
-		this.enterRule(_localctx, 70, NextflowScriptParser.RULE_classOrInterfaceModifiersOpt);
+		this.enterRule(_localctx, 68, NextflowScriptParser.RULE_classOrInterfaceModifiersOpt);
 		let _la: number;
 		try {
 			this.enterOuterAlt(_localctx, 1);
 			{
-			this.state = 728;
+			this.state = 727;
 			this._errHandler.sync(this);
-			switch ( this.interpreter.adaptivePredict(this._input, 43, this._ctx) ) {
+			switch ( this.interpreter.adaptivePredict(this._input, 44, this._ctx) ) {
 			case 1:
 				{
-				this.state = 721;
+				this.state = 720;
 				this.classOrInterfaceModifiers();
-				this.state = 725;
+				this.state = 724;
 				this._errHandler.sync(this);
 				_la = this._input.LA(1);
 				while (_la === NextflowScriptParser.NL) {
 					{
 					{
-					this.state = 722;
+					this.state = 721;
 					this.match(NextflowScriptParser.NL);
 					}
 					}
-					this.state = 727;
+					this.state = 726;
 					this._errHandler.sync(this);
 					_la = this._input.LA(1);
 				}
@@ -2555,30 +2510,30 @@ export class NextflowScriptParser extends Parser {
 	// @RuleVersion(0)
 	public classOrInterfaceModifiers(): ClassOrInterfaceModifiersContext {
 		let _localctx: ClassOrInterfaceModifiersContext = new ClassOrInterfaceModifiersContext(this._ctx, this.state);
-		this.enterRule(_localctx, 72, NextflowScriptParser.RULE_classOrInterfaceModifiers);
+		this.enterRule(_localctx, 70, NextflowScriptParser.RULE_classOrInterfaceModifiers);
 		try {
 			let _alt: number;
 			this.enterOuterAlt(_localctx, 1);
 			{
-			this.state = 730;
+			this.state = 729;
 			this.classOrInterfaceModifier();
-			this.state = 736;
+			this.state = 735;
 			this._errHandler.sync(this);
-			_alt = this.interpreter.adaptivePredict(this._input, 44, this._ctx);
+			_alt = this.interpreter.adaptivePredict(this._input, 45, this._ctx);
 			while (_alt !== 2 && _alt !== ATN.INVALID_ALT_NUMBER) {
 				if (_alt === 1) {
 					{
 					{
-					this.state = 731;
+					this.state = 730;
 					this.nls();
-					this.state = 732;
+					this.state = 731;
 					this.classOrInterfaceModifier();
 					}
 					}
 				}
-				this.state = 738;
+				this.state = 737;
 				this._errHandler.sync(this);
-				_alt = this.interpreter.adaptivePredict(this._input, 44, this._ctx);
+				_alt = this.interpreter.adaptivePredict(this._input, 45, this._ctx);
 			}
 			}
 		}
@@ -2599,35 +2554,33 @@ export class NextflowScriptParser extends Parser {
 	// @RuleVersion(0)
 	public classOrInterfaceModifier(): ClassOrInterfaceModifierContext {
 		let _localctx: ClassOrInterfaceModifierContext = new ClassOrInterfaceModifierContext(this._ctx, this.state);
-		this.enterRule(_localctx, 74, NextflowScriptParser.RULE_classOrInterfaceModifier);
+		this.enterRule(_localctx, 72, NextflowScriptParser.RULE_classOrInterfaceModifier);
 		let _la: number;
 		try {
-			this.state = 741;
+			this.state = 740;
 			this._errHandler.sync(this);
 			switch (this._input.LA(1)) {
 			case NextflowScriptParser.AT:
 				this.enterOuterAlt(_localctx, 1);
 				{
-				this.state = 739;
+				this.state = 738;
 				this.annotation();
 				}
 				break;
 			case NextflowScriptParser.ABSTRACT:
 			case NextflowScriptParser.DEFAULT:
 			case NextflowScriptParser.FINAL:
-			case NextflowScriptParser.NON_SEALED:
 			case NextflowScriptParser.PRIVATE:
 			case NextflowScriptParser.PROTECTED:
 			case NextflowScriptParser.PUBLIC:
-			case NextflowScriptParser.SEALED:
 			case NextflowScriptParser.STATIC:
 			case NextflowScriptParser.STRICTFP:
 				this.enterOuterAlt(_localctx, 2);
 				{
-				this.state = 740;
+				this.state = 739;
 				_localctx._m = this._input.LT(1);
 				_la = this._input.LA(1);
-				if (!((((_la) & ~0x1F) === 0 && ((1 << _la) & ((1 << NextflowScriptParser.ABSTRACT) | (1 << NextflowScriptParser.DEFAULT) | (1 << NextflowScriptParser.FINAL))) !== 0) || ((((_la - 39)) & ~0x1F) === 0 && ((1 << (_la - 39)) & ((1 << (NextflowScriptParser.NON_SEALED - 39)) | (1 << (NextflowScriptParser.PRIVATE - 39)) | (1 << (NextflowScriptParser.PROTECTED - 39)) | (1 << (NextflowScriptParser.PUBLIC - 39)) | (1 << (NextflowScriptParser.SEALED - 39)) | (1 << (NextflowScriptParser.STATIC - 39)) | (1 << (NextflowScriptParser.STRICTFP - 39)))) !== 0))) {
+				if (!(((((_la - 14)) & ~0x1F) === 0 && ((1 << (_la - 14)) & ((1 << (NextflowScriptParser.ABSTRACT - 14)) | (1 << (NextflowScriptParser.DEFAULT - 14)) | (1 << (NextflowScriptParser.FINAL - 14)) | (1 << (NextflowScriptParser.PRIVATE - 14)) | (1 << (NextflowScriptParser.PROTECTED - 14)) | (1 << (NextflowScriptParser.PUBLIC - 14)) | (1 << (NextflowScriptParser.STATIC - 14)) | (1 << (NextflowScriptParser.STRICTFP - 14)))) !== 0))) {
 					_localctx._m = this._errHandler.recoverInline(this);
 				} else {
 					if (this._input.LA(1) === Token.EOF) {
@@ -2660,16 +2613,16 @@ export class NextflowScriptParser extends Parser {
 	// @RuleVersion(0)
 	public variableModifier(): VariableModifierContext {
 		let _localctx: VariableModifierContext = new VariableModifierContext(this._ctx, this.state);
-		this.enterRule(_localctx, 76, NextflowScriptParser.RULE_variableModifier);
+		this.enterRule(_localctx, 74, NextflowScriptParser.RULE_variableModifier);
 		let _la: number;
 		try {
-			this.state = 745;
+			this.state = 744;
 			this._errHandler.sync(this);
 			switch (this._input.LA(1)) {
 			case NextflowScriptParser.AT:
 				this.enterOuterAlt(_localctx, 1);
 				{
-				this.state = 743;
+				this.state = 742;
 				this.annotation();
 				}
 				break;
@@ -2684,10 +2637,10 @@ export class NextflowScriptParser extends Parser {
 			case NextflowScriptParser.STRICTFP:
 				this.enterOuterAlt(_localctx, 2);
 				{
-				this.state = 744;
+				this.state = 743;
 				_localctx._m = this._input.LT(1);
 				_la = this._input.LA(1);
-				if (!((((_la) & ~0x1F) === 0 && ((1 << _la) & ((1 << NextflowScriptParser.DEF) | (1 << NextflowScriptParser.VAR) | (1 << NextflowScriptParser.ABSTRACT) | (1 << NextflowScriptParser.FINAL))) !== 0) || ((((_la - 42)) & ~0x1F) === 0 && ((1 << (_la - 42)) & ((1 << (NextflowScriptParser.PRIVATE - 42)) | (1 << (NextflowScriptParser.PROTECTED - 42)) | (1 << (NextflowScriptParser.PUBLIC - 42)) | (1 << (NextflowScriptParser.STATIC - 42)) | (1 << (NextflowScriptParser.STRICTFP - 42)))) !== 0))) {
+				if (!((((_la) & ~0x1F) === 0 && ((1 << _la) & ((1 << NextflowScriptParser.DEF) | (1 << NextflowScriptParser.VAR) | (1 << NextflowScriptParser.ABSTRACT) | (1 << NextflowScriptParser.FINAL))) !== 0) || ((((_la - 39)) & ~0x1F) === 0 && ((1 << (_la - 39)) & ((1 << (NextflowScriptParser.PRIVATE - 39)) | (1 << (NextflowScriptParser.PROTECTED - 39)) | (1 << (NextflowScriptParser.PUBLIC - 39)) | (1 << (NextflowScriptParser.STATIC - 39)) | (1 << (NextflowScriptParser.STRICTFP - 39)))) !== 0))) {
 					_localctx._m = this._errHandler.recoverInline(this);
 				} else {
 					if (this._input.LA(1) === Token.EOF) {
@@ -2720,18 +2673,18 @@ export class NextflowScriptParser extends Parser {
 	// @RuleVersion(0)
 	public variableModifiersOpt(): VariableModifiersOptContext {
 		let _localctx: VariableModifiersOptContext = new VariableModifiersOptContext(this._ctx, this.state);
-		this.enterRule(_localctx, 78, NextflowScriptParser.RULE_variableModifiersOpt);
+		this.enterRule(_localctx, 76, NextflowScriptParser.RULE_variableModifiersOpt);
 		try {
 			this.enterOuterAlt(_localctx, 1);
 			{
-			this.state = 750;
+			this.state = 749;
 			this._errHandler.sync(this);
-			switch ( this.interpreter.adaptivePredict(this._input, 47, this._ctx) ) {
+			switch ( this.interpreter.adaptivePredict(this._input, 48, this._ctx) ) {
 			case 1:
 				{
-				this.state = 747;
+				this.state = 746;
 				this.variableModifiers();
-				this.state = 748;
+				this.state = 747;
 				this.nls();
 				}
 				break;
@@ -2755,30 +2708,30 @@ export class NextflowScriptParser extends Parser {
 	// @RuleVersion(0)
 	public variableModifiers(): VariableModifiersContext {
 		let _localctx: VariableModifiersContext = new VariableModifiersContext(this._ctx, this.state);
-		this.enterRule(_localctx, 80, NextflowScriptParser.RULE_variableModifiers);
+		this.enterRule(_localctx, 78, NextflowScriptParser.RULE_variableModifiers);
 		try {
 			let _alt: number;
 			this.enterOuterAlt(_localctx, 1);
 			{
-			this.state = 752;
+			this.state = 751;
 			this.variableModifier();
-			this.state = 758;
+			this.state = 757;
 			this._errHandler.sync(this);
-			_alt = this.interpreter.adaptivePredict(this._input, 48, this._ctx);
+			_alt = this.interpreter.adaptivePredict(this._input, 49, this._ctx);
 			while (_alt !== 2 && _alt !== ATN.INVALID_ALT_NUMBER) {
 				if (_alt === 1) {
 					{
 					{
-					this.state = 753;
+					this.state = 752;
 					this.nls();
-					this.state = 754;
+					this.state = 753;
 					this.variableModifier();
 					}
 					}
 				}
-				this.state = 760;
+				this.state = 759;
 				this._errHandler.sync(this);
-				_alt = this.interpreter.adaptivePredict(this._input, 48, this._ctx);
+				_alt = this.interpreter.adaptivePredict(this._input, 49, this._ctx);
 			}
 			}
 		}
@@ -2799,40 +2752,40 @@ export class NextflowScriptParser extends Parser {
 	// @RuleVersion(0)
 	public typeParameters(): TypeParametersContext {
 		let _localctx: TypeParametersContext = new TypeParametersContext(this._ctx, this.state);
-		this.enterRule(_localctx, 82, NextflowScriptParser.RULE_typeParameters);
+		this.enterRule(_localctx, 80, NextflowScriptParser.RULE_typeParameters);
 		try {
 			let _alt: number;
 			this.enterOuterAlt(_localctx, 1);
 			{
-			this.state = 761;
+			this.state = 760;
 			this.match(NextflowScriptParser.LT);
-			this.state = 762;
+			this.state = 761;
 			this.nls();
-			this.state = 763;
+			this.state = 762;
 			this.typeParameter();
-			this.state = 770;
+			this.state = 769;
 			this._errHandler.sync(this);
-			_alt = this.interpreter.adaptivePredict(this._input, 49, this._ctx);
+			_alt = this.interpreter.adaptivePredict(this._input, 50, this._ctx);
 			while (_alt !== 2 && _alt !== ATN.INVALID_ALT_NUMBER) {
 				if (_alt === 1) {
 					{
 					{
-					this.state = 764;
+					this.state = 763;
 					this.match(NextflowScriptParser.COMMA);
-					this.state = 765;
+					this.state = 764;
 					this.nls();
-					this.state = 766;
+					this.state = 765;
 					this.typeParameter();
 					}
 					}
 				}
-				this.state = 772;
+				this.state = 771;
 				this._errHandler.sync(this);
-				_alt = this.interpreter.adaptivePredict(this._input, 49, this._ctx);
+				_alt = this.interpreter.adaptivePredict(this._input, 50, this._ctx);
 			}
-			this.state = 773;
+			this.state = 772;
 			this.nls();
-			this.state = 774;
+			this.state = 773;
 			this.match(NextflowScriptParser.GT);
 			}
 		}
@@ -2853,24 +2806,22 @@ export class NextflowScriptParser extends Parser {
 	// @RuleVersion(0)
 	public typeParameter(): TypeParameterContext {
 		let _localctx: TypeParameterContext = new TypeParameterContext(this._ctx, this.state);
-		this.enterRule(_localctx, 84, NextflowScriptParser.RULE_typeParameter);
+		this.enterRule(_localctx, 82, NextflowScriptParser.RULE_typeParameter);
 		try {
 			this.enterOuterAlt(_localctx, 1);
 			{
-			this.state = 776;
-			this.annotationsOpt();
-			this.state = 777;
+			this.state = 775;
 			this.className();
-			this.state = 782;
+			this.state = 780;
 			this._errHandler.sync(this);
-			switch ( this.interpreter.adaptivePredict(this._input, 50, this._ctx) ) {
+			switch ( this.interpreter.adaptivePredict(this._input, 51, this._ctx) ) {
 			case 1:
 				{
-				this.state = 778;
+				this.state = 776;
 				this.match(NextflowScriptParser.EXTENDS);
-				this.state = 779;
+				this.state = 777;
 				this.nls();
-				this.state = 780;
+				this.state = 778;
 				this.typeBound();
 				}
 				break;
@@ -2894,76 +2845,30 @@ export class NextflowScriptParser extends Parser {
 	// @RuleVersion(0)
 	public typeBound(): TypeBoundContext {
 		let _localctx: TypeBoundContext = new TypeBoundContext(this._ctx, this.state);
-		this.enterRule(_localctx, 86, NextflowScriptParser.RULE_typeBound);
+		this.enterRule(_localctx, 84, NextflowScriptParser.RULE_typeBound);
 		try {
 			let _alt: number;
 			this.enterOuterAlt(_localctx, 1);
 			{
-			this.state = 784;
+			this.state = 782;
 			this.type();
-			this.state = 791;
-			this._errHandler.sync(this);
-			_alt = this.interpreter.adaptivePredict(this._input, 51, this._ctx);
-			while (_alt !== 2 && _alt !== ATN.INVALID_ALT_NUMBER) {
-				if (_alt === 1) {
-					{
-					{
-					this.state = 785;
-					this.match(NextflowScriptParser.BITAND);
-					this.state = 786;
-					this.nls();
-					this.state = 787;
-					this.type();
-					}
-					}
-				}
-				this.state = 793;
-				this._errHandler.sync(this);
-				_alt = this.interpreter.adaptivePredict(this._input, 51, this._ctx);
-			}
-			}
-		}
-		catch (re) {
-			if (re instanceof RecognitionException) {
-				_localctx.exception = re;
-				this._errHandler.reportError(this, re);
-				this._errHandler.recover(this, re);
-			} else {
-				throw re;
-			}
-		}
-		finally {
-			this.exitRule();
-		}
-		return _localctx;
-	}
-	// @RuleVersion(0)
-	public typeList(): TypeListContext {
-		let _localctx: TypeListContext = new TypeListContext(this._ctx, this.state);
-		this.enterRule(_localctx, 88, NextflowScriptParser.RULE_typeList);
-		try {
-			let _alt: number;
-			this.enterOuterAlt(_localctx, 1);
-			{
-			this.state = 794;
-			this.type();
-			this.state = 801;
+			this.state = 789;
 			this._errHandler.sync(this);
 			_alt = this.interpreter.adaptivePredict(this._input, 52, this._ctx);
 			while (_alt !== 2 && _alt !== ATN.INVALID_ALT_NUMBER) {
 				if (_alt === 1) {
 					{
 					{
-					this.state = 795;
-					this.match(NextflowScriptParser.COMMA);
-					this.state = 796;
+					this.state = 783;
+					this.match(NextflowScriptParser.BITAND);
+					this.state = 784;
 					this.nls();
-					this.state = 797;
+					this.state = 785;
 					this.type();
 					}
 					}
 				}
-				this.state = 803;
+				this.state = 791;
 				this._errHandler.sync(this);
 				_alt = this.interpreter.adaptivePredict(this._input, 52, this._ctx);
 			}
@@ -2984,139 +2889,150 @@ export class NextflowScriptParser extends Parser {
 		return _localctx;
 	}
 	// @RuleVersion(0)
+	public typeList(): TypeListContext {
+		let _localctx: TypeListContext = new TypeListContext(this._ctx, this.state);
+		this.enterRule(_localctx, 86, NextflowScriptParser.RULE_typeList);
+		try {
+			let _alt: number;
+			this.enterOuterAlt(_localctx, 1);
+			{
+			this.state = 792;
+			this.type();
+			this.state = 799;
+			this._errHandler.sync(this);
+			_alt = this.interpreter.adaptivePredict(this._input, 53, this._ctx);
+			while (_alt !== 2 && _alt !== ATN.INVALID_ALT_NUMBER) {
+				if (_alt === 1) {
+					{
+					{
+					this.state = 793;
+					this.match(NextflowScriptParser.COMMA);
+					this.state = 794;
+					this.nls();
+					this.state = 795;
+					this.type();
+					}
+					}
+				}
+				this.state = 801;
+				this._errHandler.sync(this);
+				_alt = this.interpreter.adaptivePredict(this._input, 53, this._ctx);
+			}
+			}
+		}
+		catch (re) {
+			if (re instanceof RecognitionException) {
+				_localctx.exception = re;
+				this._errHandler.reportError(this, re);
+				this._errHandler.recover(this, re);
+			} else {
+				throw re;
+			}
+		}
+		finally {
+			this.exitRule();
+		}
+		return _localctx;
+	}
+	// @RuleVersion(0)
 	public classDeclaration(): ClassDeclarationContext {
 		let _localctx: ClassDeclarationContext = new ClassDeclarationContext(this._ctx, this.state);
-		this.enterRule(_localctx, 90, NextflowScriptParser.RULE_classDeclaration);
+		this.enterRule(_localctx, 88, NextflowScriptParser.RULE_classDeclaration);
 		try {
 			this.enterOuterAlt(_localctx, 1);
 			{
-			this.state = 817;
+			this.state = 813;
 			this._errHandler.sync(this);
 			switch (this._input.LA(1)) {
 			case NextflowScriptParser.CLASS:
 				{
-				this.state = 804;
+				this.state = 802;
 				this.match(NextflowScriptParser.CLASS);
 				 _localctx.t =  0; 
 				}
 				break;
 			case NextflowScriptParser.INTERFACE:
 				{
-				this.state = 806;
+				this.state = 804;
 				this.match(NextflowScriptParser.INTERFACE);
 				 _localctx.t =  1; 
 				}
 				break;
 			case NextflowScriptParser.ENUM:
 				{
-				this.state = 808;
+				this.state = 806;
 				this.match(NextflowScriptParser.ENUM);
 				 _localctx.t =  2; 
 				}
 				break;
 			case NextflowScriptParser.AT:
 				{
-				this.state = 810;
+				this.state = 808;
 				this.match(NextflowScriptParser.AT);
-				this.state = 811;
+				this.state = 809;
 				this.match(NextflowScriptParser.INTERFACE);
 				 _localctx.t =  3; 
 				}
 				break;
 			case NextflowScriptParser.TRAIT:
 				{
-				this.state = 813;
+				this.state = 811;
 				this.match(NextflowScriptParser.TRAIT);
 				 _localctx.t =  4; 
-				}
-				break;
-			case NextflowScriptParser.RECORD:
-				{
-				this.state = 815;
-				this.match(NextflowScriptParser.RECORD);
-				 _localctx.t =  5; 
 				}
 				break;
 			default:
 				throw new NoViableAltException(this);
 			}
-			this.state = 819;
+			this.state = 815;
 			this.identifier();
-			this.state = 823;
-			this._errHandler.sync(this);
-			switch ( this.interpreter.adaptivePredict(this._input, 54, this._ctx) ) {
-			case 1:
-				{
-				this.state = 820;
-				this.nls();
-				this.state = 821;
-				this.typeParameters();
-				}
-				break;
-			}
-			this.state = 828;
+			this.state = 819;
 			this._errHandler.sync(this);
 			switch ( this.interpreter.adaptivePredict(this._input, 55, this._ctx) ) {
 			case 1:
 				{
-				this.state = 825;
+				this.state = 816;
 				this.nls();
-				this.state = 826;
-				this.formalParameters();
+				this.state = 817;
+				this.typeParameters();
 				}
 				break;
 			}
-			this.state = 835;
+			this.state = 826;
 			this._errHandler.sync(this);
 			switch ( this.interpreter.adaptivePredict(this._input, 56, this._ctx) ) {
 			case 1:
 				{
-				this.state = 830;
+				this.state = 821;
 				this.nls();
-				this.state = 831;
+				this.state = 822;
 				this.match(NextflowScriptParser.EXTENDS);
-				this.state = 832;
+				this.state = 823;
 				this.nls();
-				this.state = 833;
+				this.state = 824;
 				_localctx._scs = this.typeList();
 				}
 				break;
 			}
-			this.state = 842;
+			this.state = 833;
 			this._errHandler.sync(this);
 			switch ( this.interpreter.adaptivePredict(this._input, 57, this._ctx) ) {
 			case 1:
 				{
-				this.state = 837;
+				this.state = 828;
 				this.nls();
-				this.state = 838;
+				this.state = 829;
 				this.match(NextflowScriptParser.IMPLEMENTS);
-				this.state = 839;
+				this.state = 830;
 				this.nls();
-				this.state = 840;
+				this.state = 831;
 				_localctx._is = this.typeList();
 				}
 				break;
 			}
-			this.state = 849;
-			this._errHandler.sync(this);
-			switch ( this.interpreter.adaptivePredict(this._input, 58, this._ctx) ) {
-			case 1:
-				{
-				this.state = 844;
-				this.nls();
-				this.state = 845;
-				this.match(NextflowScriptParser.PERMITS);
-				this.state = 846;
-				this.nls();
-				this.state = 847;
-				_localctx._ps = this.typeList();
-				}
-				break;
-			}
-			this.state = 851;
+			this.state = 835;
 			this.nls();
-			this.state = 852;
+			this.state = 836;
 			this.classBody(_localctx.t);
 			}
 		}
@@ -3137,45 +3053,45 @@ export class NextflowScriptParser extends Parser {
 	// @RuleVersion(0)
 	public classBody(t: number): ClassBodyContext {
 		let _localctx: ClassBodyContext = new ClassBodyContext(this._ctx, this.state, t);
-		this.enterRule(_localctx, 92, NextflowScriptParser.RULE_classBody);
+		this.enterRule(_localctx, 90, NextflowScriptParser.RULE_classBody);
 		let _la: number;
 		try {
 			let _alt: number;
 			this.enterOuterAlt(_localctx, 1);
 			{
-			this.state = 854;
+			this.state = 838;
 			this.match(NextflowScriptParser.LBRACE);
-			this.state = 855;
+			this.state = 839;
 			this.nls();
-			this.state = 867;
+			this.state = 851;
 			this._errHandler.sync(this);
-			switch ( this.interpreter.adaptivePredict(this._input, 61, this._ctx) ) {
+			switch ( this.interpreter.adaptivePredict(this._input, 60, this._ctx) ) {
 			case 1:
 				{
-				this.state = 856;
+				this.state = 840;
 				if (!( 2 == _localctx.t )) {
 					throw this.createFailedPredicateException(" 2 == $t ");
 				}
-				this.state = 857;
+				this.state = 841;
 				this.enumConstants();
-				this.state = 861;
+				this.state = 845;
 				this._errHandler.sync(this);
-				switch ( this.interpreter.adaptivePredict(this._input, 59, this._ctx) ) {
+				switch ( this.interpreter.adaptivePredict(this._input, 58, this._ctx) ) {
 				case 1:
 					{
-					this.state = 858;
+					this.state = 842;
 					this.nls();
-					this.state = 859;
+					this.state = 843;
 					this.match(NextflowScriptParser.COMMA);
 					}
 					break;
 				}
-				this.state = 864;
+				this.state = 848;
 				this._errHandler.sync(this);
-				switch ( this.interpreter.adaptivePredict(this._input, 60, this._ctx) ) {
+				switch ( this.interpreter.adaptivePredict(this._input, 59, this._ctx) ) {
 				case 1:
 					{
-					this.state = 863;
+					this.state = 847;
 					this.sep();
 					}
 					break;
@@ -3189,45 +3105,45 @@ export class NextflowScriptParser extends Parser {
 				}
 				break;
 			}
-			this.state = 878;
+			this.state = 862;
 			this._errHandler.sync(this);
 			_la = this._input.LA(1);
-			if ((((_la) & ~0x1F) === 0 && ((1 << _la) & ((1 << NextflowScriptParser.StringLiteral) | (1 << NextflowScriptParser.AS) | (1 << NextflowScriptParser.DEF) | (1 << NextflowScriptParser.IN) | (1 << NextflowScriptParser.TRAIT) | (1 << NextflowScriptParser.VAR) | (1 << NextflowScriptParser.BuiltInPrimitiveType) | (1 << NextflowScriptParser.ABSTRACT) | (1 << NextflowScriptParser.YIELD) | (1 << NextflowScriptParser.CLASS) | (1 << NextflowScriptParser.DEFAULT) | (1 << NextflowScriptParser.ENUM) | (1 << NextflowScriptParser.FINAL))) !== 0) || ((((_la - 34)) & ~0x1F) === 0 && ((1 << (_la - 34)) & ((1 << (NextflowScriptParser.IMPORT - 34)) | (1 << (NextflowScriptParser.INTERFACE - 34)) | (1 << (NextflowScriptParser.NATIVE - 34)) | (1 << (NextflowScriptParser.NON_SEALED - 34)) | (1 << (NextflowScriptParser.PACKAGE - 34)) | (1 << (NextflowScriptParser.PERMITS - 34)) | (1 << (NextflowScriptParser.PRIVATE - 34)) | (1 << (NextflowScriptParser.PROTECTED - 34)) | (1 << (NextflowScriptParser.PUBLIC - 34)) | (1 << (NextflowScriptParser.RECORD - 34)) | (1 << (NextflowScriptParser.SEALED - 34)) | (1 << (NextflowScriptParser.STATIC - 34)) | (1 << (NextflowScriptParser.STRICTFP - 34)) | (1 << (NextflowScriptParser.SYNCHRONIZED - 34)) | (1 << (NextflowScriptParser.TRANSIENT - 34)) | (1 << (NextflowScriptParser.VOID - 34)) | (1 << (NextflowScriptParser.VOLATILE - 34)))) !== 0) || ((((_la - 88)) & ~0x1F) === 0 && ((1 << (_la - 88)) & ((1 << (NextflowScriptParser.LBRACE - 88)) | (1 << (NextflowScriptParser.LBRACK - 88)) | (1 << (NextflowScriptParser.LT - 88)) | (1 << (NextflowScriptParser.QUESTION - 88)))) !== 0) || ((((_la - 130)) & ~0x1F) === 0 && ((1 << (_la - 130)) & ((1 << (NextflowScriptParser.CapitalizedIdentifier - 130)) | (1 << (NextflowScriptParser.Identifier - 130)) | (1 << (NextflowScriptParser.AT - 130)))) !== 0)) {
+			if ((((_la) & ~0x1F) === 0 && ((1 << _la) & ((1 << NextflowScriptParser.StringLiteral) | (1 << NextflowScriptParser.AS) | (1 << NextflowScriptParser.DEF) | (1 << NextflowScriptParser.IN) | (1 << NextflowScriptParser.TRAIT) | (1 << NextflowScriptParser.VAR) | (1 << NextflowScriptParser.BuiltInPrimitiveType) | (1 << NextflowScriptParser.ABSTRACT) | (1 << NextflowScriptParser.CLASS) | (1 << NextflowScriptParser.DEFAULT) | (1 << NextflowScriptParser.ENUM) | (1 << NextflowScriptParser.FINAL))) !== 0) || ((((_la - 33)) & ~0x1F) === 0 && ((1 << (_la - 33)) & ((1 << (NextflowScriptParser.IMPORT - 33)) | (1 << (NextflowScriptParser.INTERFACE - 33)) | (1 << (NextflowScriptParser.NATIVE - 33)) | (1 << (NextflowScriptParser.PACKAGE - 33)) | (1 << (NextflowScriptParser.PRIVATE - 33)) | (1 << (NextflowScriptParser.PROTECTED - 33)) | (1 << (NextflowScriptParser.PUBLIC - 33)) | (1 << (NextflowScriptParser.STATIC - 33)) | (1 << (NextflowScriptParser.STRICTFP - 33)) | (1 << (NextflowScriptParser.SYNCHRONIZED - 33)) | (1 << (NextflowScriptParser.TRANSIENT - 33)) | (1 << (NextflowScriptParser.VOID - 33)) | (1 << (NextflowScriptParser.VOLATILE - 33)))) !== 0) || ((((_la - 80)) & ~0x1F) === 0 && ((1 << (_la - 80)) & ((1 << (NextflowScriptParser.LBRACE - 80)) | (1 << (NextflowScriptParser.LBRACK - 80)) | (1 << (NextflowScriptParser.LT - 80)) | (1 << (NextflowScriptParser.QUESTION - 80)))) !== 0) || ((((_la - 122)) & ~0x1F) === 0 && ((1 << (_la - 122)) & ((1 << (NextflowScriptParser.CapitalizedIdentifier - 122)) | (1 << (NextflowScriptParser.Identifier - 122)) | (1 << (NextflowScriptParser.AT - 122)))) !== 0)) {
 				{
-				this.state = 869;
+				this.state = 853;
 				this.classBodyDeclaration(_localctx.t);
-				this.state = 875;
+				this.state = 859;
 				this._errHandler.sync(this);
-				_alt = this.interpreter.adaptivePredict(this._input, 62, this._ctx);
+				_alt = this.interpreter.adaptivePredict(this._input, 61, this._ctx);
 				while (_alt !== 2 && _alt !== ATN.INVALID_ALT_NUMBER) {
 					if (_alt === 1) {
 						{
 						{
-						this.state = 870;
+						this.state = 854;
 						this.sep();
-						this.state = 871;
+						this.state = 855;
 						this.classBodyDeclaration(_localctx.t);
 						}
 						}
 					}
-					this.state = 877;
+					this.state = 861;
 					this._errHandler.sync(this);
-					_alt = this.interpreter.adaptivePredict(this._input, 62, this._ctx);
+					_alt = this.interpreter.adaptivePredict(this._input, 61, this._ctx);
 				}
 				}
 			}
 
-			this.state = 881;
+			this.state = 865;
 			this._errHandler.sync(this);
 			_la = this._input.LA(1);
 			if (_la === NextflowScriptParser.SEMI || _la === NextflowScriptParser.NL) {
 				{
-				this.state = 880;
+				this.state = 864;
 				this.sep();
 				}
 			}
 
-			this.state = 883;
+			this.state = 867;
 			this.match(NextflowScriptParser.RBRACE);
 			}
 		}
@@ -3248,34 +3164,34 @@ export class NextflowScriptParser extends Parser {
 	// @RuleVersion(0)
 	public enumConstants(): EnumConstantsContext {
 		let _localctx: EnumConstantsContext = new EnumConstantsContext(this._ctx, this.state);
-		this.enterRule(_localctx, 94, NextflowScriptParser.RULE_enumConstants);
+		this.enterRule(_localctx, 92, NextflowScriptParser.RULE_enumConstants);
 		try {
 			let _alt: number;
 			this.enterOuterAlt(_localctx, 1);
 			{
-			this.state = 885;
+			this.state = 869;
 			this.enumConstant();
-			this.state = 893;
+			this.state = 877;
 			this._errHandler.sync(this);
-			_alt = this.interpreter.adaptivePredict(this._input, 65, this._ctx);
+			_alt = this.interpreter.adaptivePredict(this._input, 64, this._ctx);
 			while (_alt !== 2 && _alt !== ATN.INVALID_ALT_NUMBER) {
 				if (_alt === 1) {
 					{
 					{
-					this.state = 886;
+					this.state = 870;
 					this.nls();
-					this.state = 887;
+					this.state = 871;
 					this.match(NextflowScriptParser.COMMA);
-					this.state = 888;
+					this.state = 872;
 					this.nls();
-					this.state = 889;
+					this.state = 873;
 					this.enumConstant();
 					}
 					}
 				}
-				this.state = 895;
+				this.state = 879;
 				this._errHandler.sync(this);
-				_alt = this.interpreter.adaptivePredict(this._input, 65, this._ctx);
+				_alt = this.interpreter.adaptivePredict(this._input, 64, this._ctx);
 			}
 			}
 		}
@@ -3296,30 +3212,30 @@ export class NextflowScriptParser extends Parser {
 	// @RuleVersion(0)
 	public enumConstant(): EnumConstantContext {
 		let _localctx: EnumConstantContext = new EnumConstantContext(this._ctx, this.state);
-		this.enterRule(_localctx, 96, NextflowScriptParser.RULE_enumConstant);
+		this.enterRule(_localctx, 94, NextflowScriptParser.RULE_enumConstant);
 		try {
 			this.enterOuterAlt(_localctx, 1);
 			{
-			this.state = 896;
+			this.state = 880;
 			this.annotationsOpt();
-			this.state = 897;
+			this.state = 881;
 			this.identifier();
-			this.state = 899;
+			this.state = 883;
 			this._errHandler.sync(this);
-			switch ( this.interpreter.adaptivePredict(this._input, 66, this._ctx) ) {
+			switch ( this.interpreter.adaptivePredict(this._input, 65, this._ctx) ) {
 			case 1:
 				{
-				this.state = 898;
+				this.state = 882;
 				this.arguments();
 				}
 				break;
 			}
-			this.state = 902;
+			this.state = 886;
 			this._errHandler.sync(this);
-			switch ( this.interpreter.adaptivePredict(this._input, 67, this._ctx) ) {
+			switch ( this.interpreter.adaptivePredict(this._input, 66, this._ctx) ) {
 			case 1:
 				{
-				this.state = 901;
+				this.state = 885;
 				this.anonymousInnerClassDeclaration(1);
 				}
 				break;
@@ -3343,28 +3259,28 @@ export class NextflowScriptParser extends Parser {
 	// @RuleVersion(0)
 	public classBodyDeclaration(t: number): ClassBodyDeclarationContext {
 		let _localctx: ClassBodyDeclarationContext = new ClassBodyDeclarationContext(this._ctx, this.state, t);
-		this.enterRule(_localctx, 98, NextflowScriptParser.RULE_classBodyDeclaration);
+		this.enterRule(_localctx, 96, NextflowScriptParser.RULE_classBodyDeclaration);
 		let _la: number;
 		try {
-			this.state = 910;
+			this.state = 894;
 			this._errHandler.sync(this);
-			switch ( this.interpreter.adaptivePredict(this._input, 69, this._ctx) ) {
+			switch ( this.interpreter.adaptivePredict(this._input, 68, this._ctx) ) {
 			case 1:
 				this.enterOuterAlt(_localctx, 1);
 				{
-				this.state = 906;
+				this.state = 890;
 				this._errHandler.sync(this);
 				_la = this._input.LA(1);
 				if (_la === NextflowScriptParser.STATIC) {
 					{
-					this.state = 904;
+					this.state = 888;
 					this.match(NextflowScriptParser.STATIC);
-					this.state = 905;
+					this.state = 889;
 					this.nls();
 					}
 				}
 
-				this.state = 908;
+				this.state = 892;
 				this.block();
 				}
 				break;
@@ -3372,7 +3288,7 @@ export class NextflowScriptParser extends Parser {
 			case 2:
 				this.enterOuterAlt(_localctx, 2);
 				{
-				this.state = 909;
+				this.state = 893;
 				this.memberDeclaration(_localctx.t);
 				}
 				break;
@@ -3395,15 +3311,15 @@ export class NextflowScriptParser extends Parser {
 	// @RuleVersion(0)
 	public memberDeclaration(t: number): MemberDeclarationContext {
 		let _localctx: MemberDeclarationContext = new MemberDeclarationContext(this._ctx, this.state, t);
-		this.enterRule(_localctx, 100, NextflowScriptParser.RULE_memberDeclaration);
+		this.enterRule(_localctx, 98, NextflowScriptParser.RULE_memberDeclaration);
 		try {
-			this.state = 919;
+			this.state = 901;
 			this._errHandler.sync(this);
-			switch ( this.interpreter.adaptivePredict(this._input, 71, this._ctx) ) {
+			switch ( this.interpreter.adaptivePredict(this._input, 69, this._ctx) ) {
 			case 1:
 				this.enterOuterAlt(_localctx, 1);
 				{
-				this.state = 912;
+				this.state = 896;
 				this.methodDeclaration(0, _localctx.t);
 				}
 				break;
@@ -3411,7 +3327,7 @@ export class NextflowScriptParser extends Parser {
 			case 2:
 				this.enterOuterAlt(_localctx, 2);
 				{
-				this.state = 913;
+				this.state = 897;
 				this.fieldDeclaration();
 				}
 				break;
@@ -3419,25 +3335,10 @@ export class NextflowScriptParser extends Parser {
 			case 3:
 				this.enterOuterAlt(_localctx, 3);
 				{
-				this.state = 914;
+				this.state = 898;
 				this.modifiersOpt();
-				this.state = 917;
-				this._errHandler.sync(this);
-				switch ( this.interpreter.adaptivePredict(this._input, 70, this._ctx) ) {
-				case 1:
-					{
-					this.state = 915;
-					this.classDeclaration();
-					}
-					break;
-
-				case 2:
-					{
-					this.state = 916;
-					this.compactConstructorDeclaration();
-					}
-					break;
-				}
+				this.state = 899;
+				this.classDeclaration();
 				}
 				break;
 			}
@@ -3459,79 +3360,79 @@ export class NextflowScriptParser extends Parser {
 	// @RuleVersion(0)
 	public methodDeclaration(t: number,ct: number): MethodDeclarationContext {
 		let _localctx: MethodDeclarationContext = new MethodDeclarationContext(this._ctx, this.state, t, ct);
-		this.enterRule(_localctx, 102, NextflowScriptParser.RULE_methodDeclaration);
+		this.enterRule(_localctx, 100, NextflowScriptParser.RULE_methodDeclaration);
 		let _la: number;
 		try {
 			this.enterOuterAlt(_localctx, 1);
 			{
-			this.state = 921;
+			this.state = 903;
 			this.modifiersOpt();
-			this.state = 923;
+			this.state = 905;
 			this._errHandler.sync(this);
 			_la = this._input.LA(1);
 			if (_la === NextflowScriptParser.LT) {
 				{
-				this.state = 922;
+				this.state = 904;
 				this.typeParameters();
 				}
 			}
 
-			this.state = 928;
+			this.state = 910;
 			this._errHandler.sync(this);
-			switch ( this.interpreter.adaptivePredict(this._input, 73, this._ctx) ) {
+			switch ( this.interpreter.adaptivePredict(this._input, 71, this._ctx) ) {
 			case 1:
 				{
-				this.state = 925;
+				this.state = 907;
 				this.returnType(_localctx.ct);
-				this.state = 926;
+				this.state = 908;
 				this.nls();
 				}
 				break;
 			}
-			this.state = 930;
+			this.state = 912;
 			this.methodName();
-			this.state = 931;
+			this.state = 913;
 			this.formalParameters();
-			this.state = 948;
+			this.state = 930;
 			this._errHandler.sync(this);
-			switch ( this.interpreter.adaptivePredict(this._input, 76, this._ctx) ) {
+			switch ( this.interpreter.adaptivePredict(this._input, 74, this._ctx) ) {
 			case 1:
 				{
-				this.state = 932;
+				this.state = 914;
 				this.match(NextflowScriptParser.DEFAULT);
-				this.state = 933;
+				this.state = 915;
 				this.nls();
-				this.state = 934;
+				this.state = 916;
 				this.elementValue();
 				}
 				break;
 
 			case 2:
 				{
-				this.state = 941;
+				this.state = 923;
 				this._errHandler.sync(this);
-				switch ( this.interpreter.adaptivePredict(this._input, 74, this._ctx) ) {
+				switch ( this.interpreter.adaptivePredict(this._input, 72, this._ctx) ) {
 				case 1:
 					{
-					this.state = 936;
+					this.state = 918;
 					this.nls();
-					this.state = 937;
+					this.state = 919;
 					this.match(NextflowScriptParser.THROWS);
-					this.state = 938;
+					this.state = 920;
 					this.nls();
-					this.state = 939;
+					this.state = 921;
 					this.qualifiedClassNameList();
 					}
 					break;
 				}
-				this.state = 946;
+				this.state = 928;
 				this._errHandler.sync(this);
-				switch ( this.interpreter.adaptivePredict(this._input, 75, this._ctx) ) {
+				switch ( this.interpreter.adaptivePredict(this._input, 73, this._ctx) ) {
 				case 1:
 					{
-					this.state = 943;
+					this.state = 925;
 					this.nls();
-					this.state = 944;
+					this.state = 926;
 					this.methodBody();
 					}
 					break;
@@ -3556,61 +3457,29 @@ export class NextflowScriptParser extends Parser {
 		return _localctx;
 	}
 	// @RuleVersion(0)
-	public compactConstructorDeclaration(): CompactConstructorDeclarationContext {
-		let _localctx: CompactConstructorDeclarationContext = new CompactConstructorDeclarationContext(this._ctx, this.state);
-		this.enterRule(_localctx, 104, NextflowScriptParser.RULE_compactConstructorDeclaration);
-		try {
-			this.enterOuterAlt(_localctx, 1);
-			{
-			this.state = 950;
-			this.methodName();
-			this.state = 951;
-			this.nls();
-			this.state = 952;
-			this.methodBody();
-			}
-		}
-		catch (re) {
-			if (re instanceof RecognitionException) {
-				_localctx.exception = re;
-				this._errHandler.reportError(this, re);
-				this._errHandler.recover(this, re);
-			} else {
-				throw re;
-			}
-		}
-		finally {
-			this.exitRule();
-		}
-		return _localctx;
-	}
-	// @RuleVersion(0)
 	public methodName(): MethodNameContext {
 		let _localctx: MethodNameContext = new MethodNameContext(this._ctx, this.state);
-		this.enterRule(_localctx, 106, NextflowScriptParser.RULE_methodName);
+		this.enterRule(_localctx, 102, NextflowScriptParser.RULE_methodName);
 		try {
-			this.state = 956;
+			this.state = 934;
 			this._errHandler.sync(this);
 			switch (this._input.LA(1)) {
 			case NextflowScriptParser.AS:
 			case NextflowScriptParser.IN:
 			case NextflowScriptParser.TRAIT:
 			case NextflowScriptParser.VAR:
-			case NextflowScriptParser.YIELD:
-			case NextflowScriptParser.PERMITS:
-			case NextflowScriptParser.RECORD:
 			case NextflowScriptParser.CapitalizedIdentifier:
 			case NextflowScriptParser.Identifier:
 				this.enterOuterAlt(_localctx, 1);
 				{
-				this.state = 954;
+				this.state = 932;
 				this.identifier();
 				}
 				break;
 			case NextflowScriptParser.StringLiteral:
 				this.enterOuterAlt(_localctx, 2);
 				{
-				this.state = 955;
+				this.state = 933;
 				this.stringLiteral();
 				}
 				break;
@@ -3635,15 +3504,15 @@ export class NextflowScriptParser extends Parser {
 	// @RuleVersion(0)
 	public returnType(ct: number): ReturnTypeContext {
 		let _localctx: ReturnTypeContext = new ReturnTypeContext(this._ctx, this.state, ct);
-		this.enterRule(_localctx, 108, NextflowScriptParser.RULE_returnType);
+		this.enterRule(_localctx, 104, NextflowScriptParser.RULE_returnType);
 		try {
-			this.state = 960;
+			this.state = 938;
 			this._errHandler.sync(this);
-			switch ( this.interpreter.adaptivePredict(this._input, 78, this._ctx) ) {
+			switch ( this.interpreter.adaptivePredict(this._input, 76, this._ctx) ) {
 			case 1:
 				this.enterOuterAlt(_localctx, 1);
 				{
-				this.state = 958;
+				this.state = 936;
 				this.standardType();
 				}
 				break;
@@ -3651,7 +3520,7 @@ export class NextflowScriptParser extends Parser {
 			case 2:
 				this.enterOuterAlt(_localctx, 2);
 				{
-				this.state = 959;
+				this.state = 937;
 				this.match(NextflowScriptParser.VOID);
 				}
 				break;
@@ -3674,11 +3543,11 @@ export class NextflowScriptParser extends Parser {
 	// @RuleVersion(0)
 	public fieldDeclaration(): FieldDeclarationContext {
 		let _localctx: FieldDeclarationContext = new FieldDeclarationContext(this._ctx, this.state);
-		this.enterRule(_localctx, 110, NextflowScriptParser.RULE_fieldDeclaration);
+		this.enterRule(_localctx, 106, NextflowScriptParser.RULE_fieldDeclaration);
 		try {
 			this.enterOuterAlt(_localctx, 1);
 			{
-			this.state = 962;
+			this.state = 940;
 			this.variableDeclaration(1);
 			}
 		}
@@ -3699,32 +3568,32 @@ export class NextflowScriptParser extends Parser {
 	// @RuleVersion(0)
 	public variableDeclarators(): VariableDeclaratorsContext {
 		let _localctx: VariableDeclaratorsContext = new VariableDeclaratorsContext(this._ctx, this.state);
-		this.enterRule(_localctx, 112, NextflowScriptParser.RULE_variableDeclarators);
+		this.enterRule(_localctx, 108, NextflowScriptParser.RULE_variableDeclarators);
 		try {
 			let _alt: number;
 			this.enterOuterAlt(_localctx, 1);
 			{
-			this.state = 964;
+			this.state = 942;
 			this.variableDeclarator();
-			this.state = 971;
+			this.state = 949;
 			this._errHandler.sync(this);
-			_alt = this.interpreter.adaptivePredict(this._input, 79, this._ctx);
+			_alt = this.interpreter.adaptivePredict(this._input, 77, this._ctx);
 			while (_alt !== 2 && _alt !== ATN.INVALID_ALT_NUMBER) {
 				if (_alt === 1) {
 					{
 					{
-					this.state = 965;
+					this.state = 943;
 					this.match(NextflowScriptParser.COMMA);
-					this.state = 966;
+					this.state = 944;
 					this.nls();
-					this.state = 967;
+					this.state = 945;
 					this.variableDeclarator();
 					}
 					}
 				}
-				this.state = 973;
+				this.state = 951;
 				this._errHandler.sync(this);
-				_alt = this.interpreter.adaptivePredict(this._input, 79, this._ctx);
+				_alt = this.interpreter.adaptivePredict(this._input, 77, this._ctx);
 			}
 			}
 		}
@@ -3745,24 +3614,24 @@ export class NextflowScriptParser extends Parser {
 	// @RuleVersion(0)
 	public variableDeclarator(): VariableDeclaratorContext {
 		let _localctx: VariableDeclaratorContext = new VariableDeclaratorContext(this._ctx, this.state);
-		this.enterRule(_localctx, 114, NextflowScriptParser.RULE_variableDeclarator);
+		this.enterRule(_localctx, 110, NextflowScriptParser.RULE_variableDeclarator);
 		try {
 			this.enterOuterAlt(_localctx, 1);
 			{
-			this.state = 974;
+			this.state = 952;
 			this.variableDeclaratorId();
-			this.state = 980;
+			this.state = 958;
 			this._errHandler.sync(this);
-			switch ( this.interpreter.adaptivePredict(this._input, 80, this._ctx) ) {
+			switch ( this.interpreter.adaptivePredict(this._input, 78, this._ctx) ) {
 			case 1:
 				{
-				this.state = 975;
+				this.state = 953;
 				this.nls();
-				this.state = 976;
+				this.state = 954;
 				this.match(NextflowScriptParser.ASSIGN);
-				this.state = 977;
+				this.state = 955;
 				this.nls();
-				this.state = 978;
+				this.state = 956;
 				this.variableInitializer();
 				}
 				break;
@@ -3786,11 +3655,11 @@ export class NextflowScriptParser extends Parser {
 	// @RuleVersion(0)
 	public variableDeclaratorId(): VariableDeclaratorIdContext {
 		let _localctx: VariableDeclaratorIdContext = new VariableDeclaratorIdContext(this._ctx, this.state);
-		this.enterRule(_localctx, 116, NextflowScriptParser.RULE_variableDeclaratorId);
+		this.enterRule(_localctx, 112, NextflowScriptParser.RULE_variableDeclaratorId);
 		try {
 			this.enterOuterAlt(_localctx, 1);
 			{
-			this.state = 982;
+			this.state = 960;
 			this.identifier();
 			}
 		}
@@ -3811,11 +3680,11 @@ export class NextflowScriptParser extends Parser {
 	// @RuleVersion(0)
 	public variableInitializer(): VariableInitializerContext {
 		let _localctx: VariableInitializerContext = new VariableInitializerContext(this._ctx, this.state);
-		this.enterRule(_localctx, 118, NextflowScriptParser.RULE_variableInitializer);
+		this.enterRule(_localctx, 114, NextflowScriptParser.RULE_variableInitializer);
 		try {
 			this.enterOuterAlt(_localctx, 1);
 			{
-			this.state = 984;
+			this.state = 962;
 			this.enhancedStatementExpression();
 			}
 		}
@@ -3836,43 +3705,43 @@ export class NextflowScriptParser extends Parser {
 	// @RuleVersion(0)
 	public variableInitializers(): VariableInitializersContext {
 		let _localctx: VariableInitializersContext = new VariableInitializersContext(this._ctx, this.state);
-		this.enterRule(_localctx, 120, NextflowScriptParser.RULE_variableInitializers);
+		this.enterRule(_localctx, 116, NextflowScriptParser.RULE_variableInitializers);
 		try {
 			let _alt: number;
 			this.enterOuterAlt(_localctx, 1);
 			{
-			this.state = 986;
+			this.state = 964;
 			this.variableInitializer();
-			this.state = 994;
+			this.state = 972;
 			this._errHandler.sync(this);
-			_alt = this.interpreter.adaptivePredict(this._input, 81, this._ctx);
+			_alt = this.interpreter.adaptivePredict(this._input, 79, this._ctx);
 			while (_alt !== 2 && _alt !== ATN.INVALID_ALT_NUMBER) {
 				if (_alt === 1) {
 					{
 					{
-					this.state = 987;
+					this.state = 965;
 					this.nls();
-					this.state = 988;
+					this.state = 966;
 					this.match(NextflowScriptParser.COMMA);
-					this.state = 989;
+					this.state = 967;
 					this.nls();
-					this.state = 990;
+					this.state = 968;
 					this.variableInitializer();
 					}
 					}
 				}
-				this.state = 996;
+				this.state = 974;
 				this._errHandler.sync(this);
-				_alt = this.interpreter.adaptivePredict(this._input, 81, this._ctx);
+				_alt = this.interpreter.adaptivePredict(this._input, 79, this._ctx);
 			}
-			this.state = 997;
+			this.state = 975;
 			this.nls();
-			this.state = 999;
+			this.state = 977;
 			this._errHandler.sync(this);
-			switch ( this.interpreter.adaptivePredict(this._input, 82, this._ctx) ) {
+			switch ( this.interpreter.adaptivePredict(this._input, 80, this._ctx) ) {
 			case 1:
 				{
-				this.state = 998;
+				this.state = 976;
 				this.match(NextflowScriptParser.COMMA);
 				}
 				break;
@@ -3896,12 +3765,12 @@ export class NextflowScriptParser extends Parser {
 	// @RuleVersion(0)
 	public emptyDims(): EmptyDimsContext {
 		let _localctx: EmptyDimsContext = new EmptyDimsContext(this._ctx, this.state);
-		this.enterRule(_localctx, 122, NextflowScriptParser.RULE_emptyDims);
+		this.enterRule(_localctx, 118, NextflowScriptParser.RULE_emptyDims);
 		try {
 			let _alt: number;
 			this.enterOuterAlt(_localctx, 1);
 			{
-			this.state = 1005;
+			this.state = 983;
 			this._errHandler.sync(this);
 			_alt = 1;
 			do {
@@ -3909,11 +3778,11 @@ export class NextflowScriptParser extends Parser {
 				case 1:
 					{
 					{
-					this.state = 1001;
+					this.state = 979;
 					this.annotationsOpt();
-					this.state = 1002;
+					this.state = 980;
 					this.match(NextflowScriptParser.LBRACK);
-					this.state = 1003;
+					this.state = 981;
 					this.match(NextflowScriptParser.RBRACK);
 					}
 					}
@@ -3921,9 +3790,9 @@ export class NextflowScriptParser extends Parser {
 				default:
 					throw new NoViableAltException(this);
 				}
-				this.state = 1007;
+				this.state = 985;
 				this._errHandler.sync(this);
-				_alt = this.interpreter.adaptivePredict(this._input, 83, this._ctx);
+				_alt = this.interpreter.adaptivePredict(this._input, 81, this._ctx);
 			} while (_alt !== 2 && _alt !== ATN.INVALID_ALT_NUMBER);
 			}
 		}
@@ -3944,16 +3813,16 @@ export class NextflowScriptParser extends Parser {
 	// @RuleVersion(0)
 	public emptyDimsOpt(): EmptyDimsOptContext {
 		let _localctx: EmptyDimsOptContext = new EmptyDimsOptContext(this._ctx, this.state);
-		this.enterRule(_localctx, 124, NextflowScriptParser.RULE_emptyDimsOpt);
+		this.enterRule(_localctx, 120, NextflowScriptParser.RULE_emptyDimsOpt);
 		try {
 			this.enterOuterAlt(_localctx, 1);
 			{
-			this.state = 1010;
+			this.state = 988;
 			this._errHandler.sync(this);
-			switch ( this.interpreter.adaptivePredict(this._input, 84, this._ctx) ) {
+			switch ( this.interpreter.adaptivePredict(this._input, 82, this._ctx) ) {
 			case 1:
 				{
-				this.state = 1009;
+				this.state = 987;
 				this.emptyDims();
 				}
 				break;
@@ -3977,18 +3846,18 @@ export class NextflowScriptParser extends Parser {
 	// @RuleVersion(0)
 	public standardType(): TypeContext {
 		let _localctx: TypeContext = new TypeContext(this._ctx, this.state);
-		this.enterRule(_localctx, 126, NextflowScriptParser.RULE_standardType);
+		this.enterRule(_localctx, 122, NextflowScriptParser.RULE_standardType);
 		try {
 			this.enterOuterAlt(_localctx, 1);
 			{
-			this.state = 1012;
+			this.state = 990;
 			this.annotationsOpt();
-			this.state = 1015;
+			this.state = 993;
 			this._errHandler.sync(this);
 			switch (this._input.LA(1)) {
 			case NextflowScriptParser.BuiltInPrimitiveType:
 				{
-				this.state = 1013;
+				this.state = 991;
 				this.primitiveType();
 				}
 				break;
@@ -3997,20 +3866,17 @@ export class NextflowScriptParser extends Parser {
 			case NextflowScriptParser.IN:
 			case NextflowScriptParser.TRAIT:
 			case NextflowScriptParser.VAR:
-			case NextflowScriptParser.YIELD:
-			case NextflowScriptParser.PERMITS:
-			case NextflowScriptParser.RECORD:
 			case NextflowScriptParser.CapitalizedIdentifier:
 			case NextflowScriptParser.Identifier:
 				{
-				this.state = 1014;
+				this.state = 992;
 				this.standardClassOrInterfaceType();
 				}
 				break;
 			default:
 				throw new NoViableAltException(this);
 			}
-			this.state = 1017;
+			this.state = 995;
 			this.emptyDimsOpt();
 			}
 		}
@@ -4031,30 +3897,30 @@ export class NextflowScriptParser extends Parser {
 	// @RuleVersion(0)
 	public type(): TypeContext {
 		let _localctx: TypeContext = new TypeContext(this._ctx, this.state);
-		this.enterRule(_localctx, 128, NextflowScriptParser.RULE_type);
+		this.enterRule(_localctx, 124, NextflowScriptParser.RULE_type);
 		try {
 			this.enterOuterAlt(_localctx, 1);
 			{
-			this.state = 1019;
+			this.state = 997;
 			this.annotationsOpt();
-			this.state = 1025;
+			this.state = 1003;
 			this._errHandler.sync(this);
 			switch (this._input.LA(1)) {
 			case NextflowScriptParser.BuiltInPrimitiveType:
 			case NextflowScriptParser.VOID:
 				{
-				this.state = 1022;
+				this.state = 1000;
 				this._errHandler.sync(this);
 				switch (this._input.LA(1)) {
 				case NextflowScriptParser.BuiltInPrimitiveType:
 					{
-					this.state = 1020;
+					this.state = 998;
 					this.primitiveType();
 					}
 					break;
 				case NextflowScriptParser.VOID:
 					{
-					this.state = 1021;
+					this.state = 999;
 					this.match(NextflowScriptParser.VOID);
 					}
 					break;
@@ -4068,20 +3934,17 @@ export class NextflowScriptParser extends Parser {
 			case NextflowScriptParser.IN:
 			case NextflowScriptParser.TRAIT:
 			case NextflowScriptParser.VAR:
-			case NextflowScriptParser.YIELD:
-			case NextflowScriptParser.PERMITS:
-			case NextflowScriptParser.RECORD:
 			case NextflowScriptParser.CapitalizedIdentifier:
 			case NextflowScriptParser.Identifier:
 				{
-				this.state = 1024;
+				this.state = 1002;
 				this.generalClassOrInterfaceType();
 				}
 				break;
 			default:
 				throw new NoViableAltException(this);
 			}
-			this.state = 1027;
+			this.state = 1005;
 			this.emptyDimsOpt();
 			}
 		}
@@ -4102,34 +3965,34 @@ export class NextflowScriptParser extends Parser {
 	// @RuleVersion(0)
 	public classOrInterfaceType(): ClassOrInterfaceTypeContext {
 		let _localctx: ClassOrInterfaceTypeContext = new ClassOrInterfaceTypeContext(this._ctx, this.state);
-		this.enterRule(_localctx, 130, NextflowScriptParser.RULE_classOrInterfaceType);
+		this.enterRule(_localctx, 126, NextflowScriptParser.RULE_classOrInterfaceType);
 		let _la: number;
 		try {
 			this.enterOuterAlt(_localctx, 1);
 			{
-			this.state = 1031;
+			this.state = 1009;
 			this._errHandler.sync(this);
-			switch ( this.interpreter.adaptivePredict(this._input, 88, this._ctx) ) {
+			switch ( this.interpreter.adaptivePredict(this._input, 86, this._ctx) ) {
 			case 1:
 				{
-				this.state = 1029;
+				this.state = 1007;
 				this.qualifiedClassName();
 				}
 				break;
 
 			case 2:
 				{
-				this.state = 1030;
+				this.state = 1008;
 				this.qualifiedStandardClassName();
 				}
 				break;
 			}
-			this.state = 1034;
+			this.state = 1012;
 			this._errHandler.sync(this);
 			_la = this._input.LA(1);
 			if (_la === NextflowScriptParser.LT) {
 				{
-				this.state = 1033;
+				this.state = 1011;
 				this.typeArguments();
 				}
 			}
@@ -4153,18 +4016,18 @@ export class NextflowScriptParser extends Parser {
 	// @RuleVersion(0)
 	public generalClassOrInterfaceType(): ClassOrInterfaceTypeContext {
 		let _localctx: ClassOrInterfaceTypeContext = new ClassOrInterfaceTypeContext(this._ctx, this.state);
-		this.enterRule(_localctx, 132, NextflowScriptParser.RULE_generalClassOrInterfaceType);
+		this.enterRule(_localctx, 128, NextflowScriptParser.RULE_generalClassOrInterfaceType);
 		try {
 			this.enterOuterAlt(_localctx, 1);
 			{
-			this.state = 1036;
+			this.state = 1014;
 			this.qualifiedClassName();
-			this.state = 1038;
+			this.state = 1016;
 			this._errHandler.sync(this);
-			switch ( this.interpreter.adaptivePredict(this._input, 90, this._ctx) ) {
+			switch ( this.interpreter.adaptivePredict(this._input, 88, this._ctx) ) {
 			case 1:
 				{
-				this.state = 1037;
+				this.state = 1015;
 				this.typeArguments();
 				}
 				break;
@@ -4188,18 +4051,18 @@ export class NextflowScriptParser extends Parser {
 	// @RuleVersion(0)
 	public standardClassOrInterfaceType(): ClassOrInterfaceTypeContext {
 		let _localctx: ClassOrInterfaceTypeContext = new ClassOrInterfaceTypeContext(this._ctx, this.state);
-		this.enterRule(_localctx, 134, NextflowScriptParser.RULE_standardClassOrInterfaceType);
+		this.enterRule(_localctx, 130, NextflowScriptParser.RULE_standardClassOrInterfaceType);
 		try {
 			this.enterOuterAlt(_localctx, 1);
 			{
-			this.state = 1040;
+			this.state = 1018;
 			this.qualifiedStandardClassName();
-			this.state = 1042;
+			this.state = 1020;
 			this._errHandler.sync(this);
-			switch ( this.interpreter.adaptivePredict(this._input, 91, this._ctx) ) {
+			switch ( this.interpreter.adaptivePredict(this._input, 89, this._ctx) ) {
 			case 1:
 				{
-				this.state = 1041;
+				this.state = 1019;
 				this.typeArguments();
 				}
 				break;
@@ -4223,11 +4086,11 @@ export class NextflowScriptParser extends Parser {
 	// @RuleVersion(0)
 	public primitiveType(): PrimitiveTypeContext {
 		let _localctx: PrimitiveTypeContext = new PrimitiveTypeContext(this._ctx, this.state);
-		this.enterRule(_localctx, 136, NextflowScriptParser.RULE_primitiveType);
+		this.enterRule(_localctx, 132, NextflowScriptParser.RULE_primitiveType);
 		try {
 			this.enterOuterAlt(_localctx, 1);
 			{
-			this.state = 1044;
+			this.state = 1022;
 			this.match(NextflowScriptParser.BuiltInPrimitiveType);
 			}
 		}
@@ -4248,40 +4111,40 @@ export class NextflowScriptParser extends Parser {
 	// @RuleVersion(0)
 	public typeArguments(): TypeArgumentsContext {
 		let _localctx: TypeArgumentsContext = new TypeArgumentsContext(this._ctx, this.state);
-		this.enterRule(_localctx, 138, NextflowScriptParser.RULE_typeArguments);
+		this.enterRule(_localctx, 134, NextflowScriptParser.RULE_typeArguments);
 		try {
 			let _alt: number;
 			this.enterOuterAlt(_localctx, 1);
 			{
-			this.state = 1046;
+			this.state = 1024;
 			this.match(NextflowScriptParser.LT);
-			this.state = 1047;
+			this.state = 1025;
 			this.nls();
-			this.state = 1048;
+			this.state = 1026;
 			this.typeArgument();
-			this.state = 1055;
+			this.state = 1033;
 			this._errHandler.sync(this);
-			_alt = this.interpreter.adaptivePredict(this._input, 92, this._ctx);
+			_alt = this.interpreter.adaptivePredict(this._input, 90, this._ctx);
 			while (_alt !== 2 && _alt !== ATN.INVALID_ALT_NUMBER) {
 				if (_alt === 1) {
 					{
 					{
-					this.state = 1049;
+					this.state = 1027;
 					this.match(NextflowScriptParser.COMMA);
-					this.state = 1050;
+					this.state = 1028;
 					this.nls();
-					this.state = 1051;
+					this.state = 1029;
 					this.typeArgument();
 					}
 					}
 				}
-				this.state = 1057;
+				this.state = 1035;
 				this._errHandler.sync(this);
-				_alt = this.interpreter.adaptivePredict(this._input, 92, this._ctx);
+				_alt = this.interpreter.adaptivePredict(this._input, 90, this._ctx);
 			}
-			this.state = 1058;
+			this.state = 1036;
 			this.nls();
-			this.state = 1059;
+			this.state = 1037;
 			this.match(NextflowScriptParser.GT);
 			}
 		}
@@ -4302,16 +4165,16 @@ export class NextflowScriptParser extends Parser {
 	// @RuleVersion(0)
 	public typeArgument(): TypeArgumentContext {
 		let _localctx: TypeArgumentContext = new TypeArgumentContext(this._ctx, this.state);
-		this.enterRule(_localctx, 140, NextflowScriptParser.RULE_typeArgument);
+		this.enterRule(_localctx, 136, NextflowScriptParser.RULE_typeArgument);
 		let _la: number;
 		try {
-			this.state = 1070;
+			this.state = 1048;
 			this._errHandler.sync(this);
-			switch ( this.interpreter.adaptivePredict(this._input, 94, this._ctx) ) {
+			switch ( this.interpreter.adaptivePredict(this._input, 92, this._ctx) ) {
 			case 1:
 				this.enterOuterAlt(_localctx, 1);
 				{
-				this.state = 1061;
+				this.state = 1039;
 				this.type();
 				}
 				break;
@@ -4319,16 +4182,16 @@ export class NextflowScriptParser extends Parser {
 			case 2:
 				this.enterOuterAlt(_localctx, 2);
 				{
-				this.state = 1062;
+				this.state = 1040;
 				this.annotationsOpt();
-				this.state = 1063;
+				this.state = 1041;
 				this.match(NextflowScriptParser.QUESTION);
-				this.state = 1068;
+				this.state = 1046;
 				this._errHandler.sync(this);
-				switch ( this.interpreter.adaptivePredict(this._input, 93, this._ctx) ) {
+				switch ( this.interpreter.adaptivePredict(this._input, 91, this._ctx) ) {
 				case 1:
 					{
-					this.state = 1064;
+					this.state = 1042;
 					_la = this._input.LA(1);
 					if (!(_la === NextflowScriptParser.EXTENDS || _la === NextflowScriptParser.SUPER)) {
 					this._errHandler.recoverInline(this);
@@ -4340,9 +4203,9 @@ export class NextflowScriptParser extends Parser {
 						this._errHandler.reportMatch(this);
 						this.consume();
 					}
-					this.state = 1065;
+					this.state = 1043;
 					this.nls();
-					this.state = 1066;
+					this.state = 1044;
 					this.type();
 					}
 					break;
@@ -4368,13 +4231,13 @@ export class NextflowScriptParser extends Parser {
 	// @RuleVersion(0)
 	public annotatedQualifiedClassName(): AnnotatedQualifiedClassNameContext {
 		let _localctx: AnnotatedQualifiedClassNameContext = new AnnotatedQualifiedClassNameContext(this._ctx, this.state);
-		this.enterRule(_localctx, 142, NextflowScriptParser.RULE_annotatedQualifiedClassName);
+		this.enterRule(_localctx, 138, NextflowScriptParser.RULE_annotatedQualifiedClassName);
 		try {
 			this.enterOuterAlt(_localctx, 1);
 			{
-			this.state = 1072;
+			this.state = 1050;
 			this.annotationsOpt();
-			this.state = 1073;
+			this.state = 1051;
 			this.qualifiedClassName();
 			}
 		}
@@ -4395,32 +4258,32 @@ export class NextflowScriptParser extends Parser {
 	// @RuleVersion(0)
 	public qualifiedClassNameList(): QualifiedClassNameListContext {
 		let _localctx: QualifiedClassNameListContext = new QualifiedClassNameListContext(this._ctx, this.state);
-		this.enterRule(_localctx, 144, NextflowScriptParser.RULE_qualifiedClassNameList);
+		this.enterRule(_localctx, 140, NextflowScriptParser.RULE_qualifiedClassNameList);
 		try {
 			let _alt: number;
 			this.enterOuterAlt(_localctx, 1);
 			{
-			this.state = 1075;
+			this.state = 1053;
 			this.annotatedQualifiedClassName();
-			this.state = 1082;
+			this.state = 1060;
 			this._errHandler.sync(this);
-			_alt = this.interpreter.adaptivePredict(this._input, 95, this._ctx);
+			_alt = this.interpreter.adaptivePredict(this._input, 93, this._ctx);
 			while (_alt !== 2 && _alt !== ATN.INVALID_ALT_NUMBER) {
 				if (_alt === 1) {
 					{
 					{
-					this.state = 1076;
+					this.state = 1054;
 					this.match(NextflowScriptParser.COMMA);
-					this.state = 1077;
+					this.state = 1055;
 					this.nls();
-					this.state = 1078;
+					this.state = 1056;
 					this.annotatedQualifiedClassName();
 					}
 					}
 				}
-				this.state = 1084;
+				this.state = 1062;
 				this._errHandler.sync(this);
-				_alt = this.interpreter.adaptivePredict(this._input, 95, this._ctx);
+				_alt = this.interpreter.adaptivePredict(this._input, 93, this._ctx);
 			}
 			}
 		}
@@ -4441,24 +4304,24 @@ export class NextflowScriptParser extends Parser {
 	// @RuleVersion(0)
 	public formalParameters(): FormalParametersContext {
 		let _localctx: FormalParametersContext = new FormalParametersContext(this._ctx, this.state);
-		this.enterRule(_localctx, 146, NextflowScriptParser.RULE_formalParameters);
+		this.enterRule(_localctx, 142, NextflowScriptParser.RULE_formalParameters);
 		let _la: number;
 		try {
 			this.enterOuterAlt(_localctx, 1);
 			{
-			this.state = 1085;
+			this.state = 1063;
 			this.match(NextflowScriptParser.LPAREN);
-			this.state = 1087;
+			this.state = 1065;
 			this._errHandler.sync(this);
 			_la = this._input.LA(1);
-			if ((((_la) & ~0x1F) === 0 && ((1 << _la) & ((1 << NextflowScriptParser.AS) | (1 << NextflowScriptParser.DEF) | (1 << NextflowScriptParser.IN) | (1 << NextflowScriptParser.TRAIT) | (1 << NextflowScriptParser.VAR) | (1 << NextflowScriptParser.BuiltInPrimitiveType) | (1 << NextflowScriptParser.ABSTRACT) | (1 << NextflowScriptParser.YIELD) | (1 << NextflowScriptParser.FINAL))) !== 0) || ((((_la - 34)) & ~0x1F) === 0 && ((1 << (_la - 34)) & ((1 << (NextflowScriptParser.IMPORT - 34)) | (1 << (NextflowScriptParser.PACKAGE - 34)) | (1 << (NextflowScriptParser.PERMITS - 34)) | (1 << (NextflowScriptParser.PRIVATE - 34)) | (1 << (NextflowScriptParser.PROTECTED - 34)) | (1 << (NextflowScriptParser.PUBLIC - 34)) | (1 << (NextflowScriptParser.RECORD - 34)) | (1 << (NextflowScriptParser.STATIC - 34)) | (1 << (NextflowScriptParser.STRICTFP - 34)) | (1 << (NextflowScriptParser.VOID - 34)))) !== 0) || _la === NextflowScriptParser.LBRACK || _la === NextflowScriptParser.QUESTION || ((((_la - 130)) & ~0x1F) === 0 && ((1 << (_la - 130)) & ((1 << (NextflowScriptParser.CapitalizedIdentifier - 130)) | (1 << (NextflowScriptParser.Identifier - 130)) | (1 << (NextflowScriptParser.AT - 130)) | (1 << (NextflowScriptParser.ELLIPSIS - 130)))) !== 0)) {
+			if ((((_la) & ~0x1F) === 0 && ((1 << _la) & ((1 << NextflowScriptParser.AS) | (1 << NextflowScriptParser.DEF) | (1 << NextflowScriptParser.IN) | (1 << NextflowScriptParser.TRAIT) | (1 << NextflowScriptParser.VAR) | (1 << NextflowScriptParser.BuiltInPrimitiveType) | (1 << NextflowScriptParser.ABSTRACT) | (1 << NextflowScriptParser.FINAL))) !== 0) || ((((_la - 33)) & ~0x1F) === 0 && ((1 << (_la - 33)) & ((1 << (NextflowScriptParser.IMPORT - 33)) | (1 << (NextflowScriptParser.PACKAGE - 33)) | (1 << (NextflowScriptParser.PRIVATE - 33)) | (1 << (NextflowScriptParser.PROTECTED - 33)) | (1 << (NextflowScriptParser.PUBLIC - 33)) | (1 << (NextflowScriptParser.STATIC - 33)) | (1 << (NextflowScriptParser.STRICTFP - 33)) | (1 << (NextflowScriptParser.VOID - 33)))) !== 0) || _la === NextflowScriptParser.LBRACK || _la === NextflowScriptParser.QUESTION || ((((_la - 122)) & ~0x1F) === 0 && ((1 << (_la - 122)) & ((1 << (NextflowScriptParser.CapitalizedIdentifier - 122)) | (1 << (NextflowScriptParser.Identifier - 122)) | (1 << (NextflowScriptParser.AT - 122)) | (1 << (NextflowScriptParser.ELLIPSIS - 122)))) !== 0)) {
 				{
-				this.state = 1086;
+				this.state = 1064;
 				this.formalParameterList();
 				}
 			}
 
-			this.state = 1089;
+			this.state = 1067;
 			this.rparen();
 			}
 		}
@@ -4479,47 +4342,47 @@ export class NextflowScriptParser extends Parser {
 	// @RuleVersion(0)
 	public formalParameterList(): FormalParameterListContext {
 		let _localctx: FormalParameterListContext = new FormalParameterListContext(this._ctx, this.state);
-		this.enterRule(_localctx, 148, NextflowScriptParser.RULE_formalParameterList);
+		this.enterRule(_localctx, 144, NextflowScriptParser.RULE_formalParameterList);
 		try {
 			let _alt: number;
 			this.enterOuterAlt(_localctx, 1);
 			{
-			this.state = 1093;
+			this.state = 1071;
 			this._errHandler.sync(this);
-			switch ( this.interpreter.adaptivePredict(this._input, 97, this._ctx) ) {
+			switch ( this.interpreter.adaptivePredict(this._input, 95, this._ctx) ) {
 			case 1:
 				{
-				this.state = 1091;
+				this.state = 1069;
 				this.formalParameter();
 				}
 				break;
 
 			case 2:
 				{
-				this.state = 1092;
+				this.state = 1070;
 				this.thisFormalParameter();
 				}
 				break;
 			}
-			this.state = 1101;
+			this.state = 1079;
 			this._errHandler.sync(this);
-			_alt = this.interpreter.adaptivePredict(this._input, 98, this._ctx);
+			_alt = this.interpreter.adaptivePredict(this._input, 96, this._ctx);
 			while (_alt !== 2 && _alt !== ATN.INVALID_ALT_NUMBER) {
 				if (_alt === 1) {
 					{
 					{
-					this.state = 1095;
+					this.state = 1073;
 					this.match(NextflowScriptParser.COMMA);
-					this.state = 1096;
+					this.state = 1074;
 					this.nls();
-					this.state = 1097;
+					this.state = 1075;
 					this.formalParameter();
 					}
 					}
 				}
-				this.state = 1103;
+				this.state = 1081;
 				this._errHandler.sync(this);
-				_alt = this.interpreter.adaptivePredict(this._input, 98, this._ctx);
+				_alt = this.interpreter.adaptivePredict(this._input, 96, this._ctx);
 			}
 			}
 		}
@@ -4540,13 +4403,13 @@ export class NextflowScriptParser extends Parser {
 	// @RuleVersion(0)
 	public thisFormalParameter(): ThisFormalParameterContext {
 		let _localctx: ThisFormalParameterContext = new ThisFormalParameterContext(this._ctx, this.state);
-		this.enterRule(_localctx, 150, NextflowScriptParser.RULE_thisFormalParameter);
+		this.enterRule(_localctx, 146, NextflowScriptParser.RULE_thisFormalParameter);
 		try {
 			this.enterOuterAlt(_localctx, 1);
 			{
-			this.state = 1104;
+			this.state = 1082;
 			this.type();
-			this.state = 1105;
+			this.state = 1083;
 			this.match(NextflowScriptParser.THIS);
 			}
 		}
@@ -4567,47 +4430,47 @@ export class NextflowScriptParser extends Parser {
 	// @RuleVersion(0)
 	public formalParameter(): FormalParameterContext {
 		let _localctx: FormalParameterContext = new FormalParameterContext(this._ctx, this.state);
-		this.enterRule(_localctx, 152, NextflowScriptParser.RULE_formalParameter);
+		this.enterRule(_localctx, 148, NextflowScriptParser.RULE_formalParameter);
 		let _la: number;
 		try {
 			this.enterOuterAlt(_localctx, 1);
 			{
-			this.state = 1107;
+			this.state = 1085;
 			this.variableModifiersOpt();
-			this.state = 1109;
+			this.state = 1087;
 			this._errHandler.sync(this);
-			switch ( this.interpreter.adaptivePredict(this._input, 99, this._ctx) ) {
+			switch ( this.interpreter.adaptivePredict(this._input, 97, this._ctx) ) {
 			case 1:
 				{
-				this.state = 1108;
+				this.state = 1086;
 				this.type();
 				}
 				break;
 			}
-			this.state = 1112;
+			this.state = 1090;
 			this._errHandler.sync(this);
 			_la = this._input.LA(1);
 			if (_la === NextflowScriptParser.ELLIPSIS) {
 				{
-				this.state = 1111;
+				this.state = 1089;
 				this.match(NextflowScriptParser.ELLIPSIS);
 				}
 			}
 
-			this.state = 1114;
+			this.state = 1092;
 			this.variableDeclaratorId();
-			this.state = 1120;
+			this.state = 1098;
 			this._errHandler.sync(this);
-			switch ( this.interpreter.adaptivePredict(this._input, 101, this._ctx) ) {
+			switch ( this.interpreter.adaptivePredict(this._input, 99, this._ctx) ) {
 			case 1:
 				{
-				this.state = 1115;
+				this.state = 1093;
 				this.nls();
-				this.state = 1116;
+				this.state = 1094;
 				this.match(NextflowScriptParser.ASSIGN);
-				this.state = 1117;
+				this.state = 1095;
 				this.nls();
-				this.state = 1118;
+				this.state = 1096;
 				this.expression(0);
 				}
 				break;
@@ -4631,11 +4494,11 @@ export class NextflowScriptParser extends Parser {
 	// @RuleVersion(0)
 	public methodBody(): MethodBodyContext {
 		let _localctx: MethodBodyContext = new MethodBodyContext(this._ctx, this.state);
-		this.enterRule(_localctx, 154, NextflowScriptParser.RULE_methodBody);
+		this.enterRule(_localctx, 150, NextflowScriptParser.RULE_methodBody);
 		try {
 			this.enterOuterAlt(_localctx, 1);
 			{
-			this.state = 1122;
+			this.state = 1100;
 			this.block();
 			}
 		}
@@ -4656,30 +4519,30 @@ export class NextflowScriptParser extends Parser {
 	// @RuleVersion(0)
 	public qualifiedName(): QualifiedNameContext {
 		let _localctx: QualifiedNameContext = new QualifiedNameContext(this._ctx, this.state);
-		this.enterRule(_localctx, 156, NextflowScriptParser.RULE_qualifiedName);
+		this.enterRule(_localctx, 152, NextflowScriptParser.RULE_qualifiedName);
 		try {
 			let _alt: number;
 			this.enterOuterAlt(_localctx, 1);
 			{
-			this.state = 1124;
+			this.state = 1102;
 			this.qualifiedNameElement();
-			this.state = 1129;
+			this.state = 1107;
 			this._errHandler.sync(this);
-			_alt = this.interpreter.adaptivePredict(this._input, 102, this._ctx);
+			_alt = this.interpreter.adaptivePredict(this._input, 100, this._ctx);
 			while (_alt !== 2 && _alt !== ATN.INVALID_ALT_NUMBER) {
 				if (_alt === 1) {
 					{
 					{
-					this.state = 1125;
+					this.state = 1103;
 					this.match(NextflowScriptParser.DOT);
-					this.state = 1126;
+					this.state = 1104;
 					this.qualifiedNameElement();
 					}
 					}
 				}
-				this.state = 1131;
+				this.state = 1109;
 				this._errHandler.sync(this);
-				_alt = this.interpreter.adaptivePredict(this._input, 102, this._ctx);
+				_alt = this.interpreter.adaptivePredict(this._input, 100, this._ctx);
 			}
 			}
 		}
@@ -4700,15 +4563,15 @@ export class NextflowScriptParser extends Parser {
 	// @RuleVersion(0)
 	public qualifiedNameElement(): QualifiedNameElementContext {
 		let _localctx: QualifiedNameElementContext = new QualifiedNameElementContext(this._ctx, this.state);
-		this.enterRule(_localctx, 158, NextflowScriptParser.RULE_qualifiedNameElement);
+		this.enterRule(_localctx, 154, NextflowScriptParser.RULE_qualifiedNameElement);
 		try {
-			this.state = 1137;
+			this.state = 1115;
 			this._errHandler.sync(this);
-			switch ( this.interpreter.adaptivePredict(this._input, 103, this._ctx) ) {
+			switch ( this.interpreter.adaptivePredict(this._input, 101, this._ctx) ) {
 			case 1:
 				this.enterOuterAlt(_localctx, 1);
 				{
-				this.state = 1132;
+				this.state = 1110;
 				this.identifier();
 				}
 				break;
@@ -4716,7 +4579,7 @@ export class NextflowScriptParser extends Parser {
 			case 2:
 				this.enterOuterAlt(_localctx, 2);
 				{
-				this.state = 1133;
+				this.state = 1111;
 				this.match(NextflowScriptParser.DEF);
 				}
 				break;
@@ -4724,7 +4587,7 @@ export class NextflowScriptParser extends Parser {
 			case 3:
 				this.enterOuterAlt(_localctx, 3);
 				{
-				this.state = 1134;
+				this.state = 1112;
 				this.match(NextflowScriptParser.IN);
 				}
 				break;
@@ -4732,7 +4595,7 @@ export class NextflowScriptParser extends Parser {
 			case 4:
 				this.enterOuterAlt(_localctx, 4);
 				{
-				this.state = 1135;
+				this.state = 1113;
 				this.match(NextflowScriptParser.AS);
 				}
 				break;
@@ -4740,7 +4603,7 @@ export class NextflowScriptParser extends Parser {
 			case 5:
 				this.enterOuterAlt(_localctx, 5);
 				{
-				this.state = 1136;
+				this.state = 1114;
 				this.match(NextflowScriptParser.TRAIT);
 				}
 				break;
@@ -4763,28 +4626,28 @@ export class NextflowScriptParser extends Parser {
 	// @RuleVersion(0)
 	public qualifiedNameElements(): QualifiedNameElementsContext {
 		let _localctx: QualifiedNameElementsContext = new QualifiedNameElementsContext(this._ctx, this.state);
-		this.enterRule(_localctx, 160, NextflowScriptParser.RULE_qualifiedNameElements);
+		this.enterRule(_localctx, 156, NextflowScriptParser.RULE_qualifiedNameElements);
 		try {
 			let _alt: number;
 			this.enterOuterAlt(_localctx, 1);
 			{
-			this.state = 1144;
+			this.state = 1122;
 			this._errHandler.sync(this);
-			_alt = this.interpreter.adaptivePredict(this._input, 104, this._ctx);
+			_alt = this.interpreter.adaptivePredict(this._input, 102, this._ctx);
 			while (_alt !== 2 && _alt !== ATN.INVALID_ALT_NUMBER) {
 				if (_alt === 1) {
 					{
 					{
-					this.state = 1139;
+					this.state = 1117;
 					this.qualifiedNameElement();
-					this.state = 1140;
+					this.state = 1118;
 					this.match(NextflowScriptParser.DOT);
 					}
 					}
 				}
-				this.state = 1146;
+				this.state = 1124;
 				this._errHandler.sync(this);
-				_alt = this.interpreter.adaptivePredict(this._input, 104, this._ctx);
+				_alt = this.interpreter.adaptivePredict(this._input, 102, this._ctx);
 			}
 			}
 		}
@@ -4805,13 +4668,13 @@ export class NextflowScriptParser extends Parser {
 	// @RuleVersion(0)
 	public qualifiedClassName(): QualifiedClassNameContext {
 		let _localctx: QualifiedClassNameContext = new QualifiedClassNameContext(this._ctx, this.state);
-		this.enterRule(_localctx, 162, NextflowScriptParser.RULE_qualifiedClassName);
+		this.enterRule(_localctx, 158, NextflowScriptParser.RULE_qualifiedClassName);
 		try {
 			this.enterOuterAlt(_localctx, 1);
 			{
-			this.state = 1147;
+			this.state = 1125;
 			this.qualifiedNameElements();
-			this.state = 1148;
+			this.state = 1126;
 			this.identifier();
 			}
 		}
@@ -4832,32 +4695,32 @@ export class NextflowScriptParser extends Parser {
 	// @RuleVersion(0)
 	public qualifiedStandardClassName(): QualifiedStandardClassNameContext {
 		let _localctx: QualifiedStandardClassNameContext = new QualifiedStandardClassNameContext(this._ctx, this.state);
-		this.enterRule(_localctx, 164, NextflowScriptParser.RULE_qualifiedStandardClassName);
+		this.enterRule(_localctx, 160, NextflowScriptParser.RULE_qualifiedStandardClassName);
 		try {
 			let _alt: number;
 			this.enterOuterAlt(_localctx, 1);
 			{
-			this.state = 1150;
+			this.state = 1128;
 			this.qualifiedNameElements();
-			this.state = 1151;
+			this.state = 1129;
 			this.className();
-			this.state = 1156;
+			this.state = 1134;
 			this._errHandler.sync(this);
-			_alt = this.interpreter.adaptivePredict(this._input, 105, this._ctx);
+			_alt = this.interpreter.adaptivePredict(this._input, 103, this._ctx);
 			while (_alt !== 2 && _alt !== ATN.INVALID_ALT_NUMBER) {
 				if (_alt === 1) {
 					{
 					{
-					this.state = 1152;
+					this.state = 1130;
 					this.match(NextflowScriptParser.DOT);
-					this.state = 1153;
+					this.state = 1131;
 					this.className();
 					}
 					}
 				}
-				this.state = 1158;
+				this.state = 1136;
 				this._errHandler.sync(this);
-				_alt = this.interpreter.adaptivePredict(this._input, 105, this._ctx);
+				_alt = this.interpreter.adaptivePredict(this._input, 103, this._ctx);
 			}
 			}
 		}
@@ -4878,16 +4741,16 @@ export class NextflowScriptParser extends Parser {
 	// @RuleVersion(0)
 	public literal(): LiteralContext {
 		let _localctx: LiteralContext = new LiteralContext(this._ctx, this.state);
-		this.enterRule(_localctx, 166, NextflowScriptParser.RULE_literal);
+		this.enterRule(_localctx, 162, NextflowScriptParser.RULE_literal);
 		try {
-			this.state = 1164;
+			this.state = 1142;
 			this._errHandler.sync(this);
 			switch (this._input.LA(1)) {
 			case NextflowScriptParser.IntegerLiteral:
 				_localctx = new IntegerLiteralAltContext(_localctx);
 				this.enterOuterAlt(_localctx, 1);
 				{
-				this.state = 1159;
+				this.state = 1137;
 				this.match(NextflowScriptParser.IntegerLiteral);
 				}
 				break;
@@ -4895,7 +4758,7 @@ export class NextflowScriptParser extends Parser {
 				_localctx = new FloatingPointLiteralAltContext(_localctx);
 				this.enterOuterAlt(_localctx, 2);
 				{
-				this.state = 1160;
+				this.state = 1138;
 				this.match(NextflowScriptParser.FloatingPointLiteral);
 				}
 				break;
@@ -4903,7 +4766,7 @@ export class NextflowScriptParser extends Parser {
 				_localctx = new StringLiteralAltContext(_localctx);
 				this.enterOuterAlt(_localctx, 3);
 				{
-				this.state = 1161;
+				this.state = 1139;
 				this.stringLiteral();
 				}
 				break;
@@ -4911,7 +4774,7 @@ export class NextflowScriptParser extends Parser {
 				_localctx = new BooleanLiteralAltContext(_localctx);
 				this.enterOuterAlt(_localctx, 4);
 				{
-				this.state = 1162;
+				this.state = 1140;
 				this.match(NextflowScriptParser.BooleanLiteral);
 				}
 				break;
@@ -4919,7 +4782,7 @@ export class NextflowScriptParser extends Parser {
 				_localctx = new NullLiteralAltContext(_localctx);
 				this.enterOuterAlt(_localctx, 5);
 				{
-				this.state = 1163;
+				this.state = 1141;
 				this.match(NextflowScriptParser.NullLiteral);
 				}
 				break;
@@ -4944,32 +4807,32 @@ export class NextflowScriptParser extends Parser {
 	// @RuleVersion(0)
 	public gstring(): GstringContext {
 		let _localctx: GstringContext = new GstringContext(this._ctx, this.state);
-		this.enterRule(_localctx, 168, NextflowScriptParser.RULE_gstring);
+		this.enterRule(_localctx, 164, NextflowScriptParser.RULE_gstring);
 		let _la: number;
 		try {
 			this.enterOuterAlt(_localctx, 1);
 			{
-			this.state = 1166;
+			this.state = 1144;
 			this.match(NextflowScriptParser.GStringBegin);
-			this.state = 1167;
+			this.state = 1145;
 			this.gstringValue();
-			this.state = 1172;
+			this.state = 1150;
 			this._errHandler.sync(this);
 			_la = this._input.LA(1);
 			while (_la === NextflowScriptParser.GStringPart) {
 				{
 				{
-				this.state = 1168;
+				this.state = 1146;
 				this.match(NextflowScriptParser.GStringPart);
-				this.state = 1169;
+				this.state = 1147;
 				this.gstringValue();
 				}
 				}
-				this.state = 1174;
+				this.state = 1152;
 				this._errHandler.sync(this);
 				_la = this._input.LA(1);
 			}
-			this.state = 1175;
+			this.state = 1153;
 			this.match(NextflowScriptParser.GStringEnd);
 			}
 		}
@@ -4990,30 +4853,27 @@ export class NextflowScriptParser extends Parser {
 	// @RuleVersion(0)
 	public gstringValue(): GstringValueContext {
 		let _localctx: GstringValueContext = new GstringValueContext(this._ctx, this.state);
-		this.enterRule(_localctx, 170, NextflowScriptParser.RULE_gstringValue);
+		this.enterRule(_localctx, 166, NextflowScriptParser.RULE_gstringValue);
 		try {
-			this.state = 1179;
+			this.state = 1157;
 			this._errHandler.sync(this);
 			switch (this._input.LA(1)) {
 			case NextflowScriptParser.AS:
 			case NextflowScriptParser.IN:
 			case NextflowScriptParser.TRAIT:
 			case NextflowScriptParser.VAR:
-			case NextflowScriptParser.YIELD:
-			case NextflowScriptParser.PERMITS:
-			case NextflowScriptParser.RECORD:
 			case NextflowScriptParser.CapitalizedIdentifier:
 			case NextflowScriptParser.Identifier:
 				this.enterOuterAlt(_localctx, 1);
 				{
-				this.state = 1177;
+				this.state = 1155;
 				this.gstringPath();
 				}
 				break;
 			case NextflowScriptParser.LBRACE:
 				this.enterOuterAlt(_localctx, 2);
 				{
-				this.state = 1178;
+				this.state = 1156;
 				this.closure();
 				}
 				break;
@@ -5038,24 +4898,24 @@ export class NextflowScriptParser extends Parser {
 	// @RuleVersion(0)
 	public gstringPath(): GstringPathContext {
 		let _localctx: GstringPathContext = new GstringPathContext(this._ctx, this.state);
-		this.enterRule(_localctx, 172, NextflowScriptParser.RULE_gstringPath);
+		this.enterRule(_localctx, 168, NextflowScriptParser.RULE_gstringPath);
 		let _la: number;
 		try {
 			this.enterOuterAlt(_localctx, 1);
 			{
-			this.state = 1181;
+			this.state = 1159;
 			this.identifier();
-			this.state = 1185;
+			this.state = 1163;
 			this._errHandler.sync(this);
 			_la = this._input.LA(1);
 			while (_la === NextflowScriptParser.GStringPathPart) {
 				{
 				{
-				this.state = 1182;
+				this.state = 1160;
 				this.match(NextflowScriptParser.GStringPathPart);
 				}
 				}
-				this.state = 1187;
+				this.state = 1165;
 				this._errHandler.sync(this);
 				_la = this._input.LA(1);
 			}
@@ -5078,19 +4938,19 @@ export class NextflowScriptParser extends Parser {
 	// @RuleVersion(0)
 	public lambdaExpression(): StandardLambdaExpressionContext {
 		let _localctx: StandardLambdaExpressionContext = new StandardLambdaExpressionContext(this._ctx, this.state);
-		this.enterRule(_localctx, 174, NextflowScriptParser.RULE_lambdaExpression);
+		this.enterRule(_localctx, 170, NextflowScriptParser.RULE_lambdaExpression);
 		try {
 			this.enterOuterAlt(_localctx, 1);
 			{
-			this.state = 1188;
+			this.state = 1166;
 			this.lambdaParameters();
-			this.state = 1189;
+			this.state = 1167;
 			this.nls();
-			this.state = 1190;
+			this.state = 1168;
 			this.match(NextflowScriptParser.ARROW);
-			this.state = 1191;
+			this.state = 1169;
 			this.nls();
-			this.state = 1192;
+			this.state = 1170;
 			this.lambdaBody();
 			}
 		}
@@ -5111,19 +4971,19 @@ export class NextflowScriptParser extends Parser {
 	// @RuleVersion(0)
 	public standardLambdaExpression(): StandardLambdaExpressionContext {
 		let _localctx: StandardLambdaExpressionContext = new StandardLambdaExpressionContext(this._ctx, this.state);
-		this.enterRule(_localctx, 176, NextflowScriptParser.RULE_standardLambdaExpression);
+		this.enterRule(_localctx, 172, NextflowScriptParser.RULE_standardLambdaExpression);
 		try {
 			this.enterOuterAlt(_localctx, 1);
 			{
-			this.state = 1194;
+			this.state = 1172;
 			this.standardLambdaParameters();
-			this.state = 1195;
+			this.state = 1173;
 			this.nls();
-			this.state = 1196;
+			this.state = 1174;
 			this.match(NextflowScriptParser.ARROW);
-			this.state = 1197;
+			this.state = 1175;
 			this.nls();
-			this.state = 1198;
+			this.state = 1176;
 			this.lambdaBody();
 			}
 		}
@@ -5144,11 +5004,11 @@ export class NextflowScriptParser extends Parser {
 	// @RuleVersion(0)
 	public lambdaParameters(): StandardLambdaParametersContext {
 		let _localctx: StandardLambdaParametersContext = new StandardLambdaParametersContext(this._ctx, this.state);
-		this.enterRule(_localctx, 178, NextflowScriptParser.RULE_lambdaParameters);
+		this.enterRule(_localctx, 174, NextflowScriptParser.RULE_lambdaParameters);
 		try {
 			this.enterOuterAlt(_localctx, 1);
 			{
-			this.state = 1200;
+			this.state = 1178;
 			this.formalParameters();
 			}
 		}
@@ -5169,15 +5029,15 @@ export class NextflowScriptParser extends Parser {
 	// @RuleVersion(0)
 	public standardLambdaParameters(): StandardLambdaParametersContext {
 		let _localctx: StandardLambdaParametersContext = new StandardLambdaParametersContext(this._ctx, this.state);
-		this.enterRule(_localctx, 180, NextflowScriptParser.RULE_standardLambdaParameters);
+		this.enterRule(_localctx, 176, NextflowScriptParser.RULE_standardLambdaParameters);
 		try {
-			this.state = 1204;
+			this.state = 1182;
 			this._errHandler.sync(this);
 			switch (this._input.LA(1)) {
 			case NextflowScriptParser.LPAREN:
 				this.enterOuterAlt(_localctx, 1);
 				{
-				this.state = 1202;
+				this.state = 1180;
 				this.formalParameters();
 				}
 				break;
@@ -5185,14 +5045,11 @@ export class NextflowScriptParser extends Parser {
 			case NextflowScriptParser.IN:
 			case NextflowScriptParser.TRAIT:
 			case NextflowScriptParser.VAR:
-			case NextflowScriptParser.YIELD:
-			case NextflowScriptParser.PERMITS:
-			case NextflowScriptParser.RECORD:
 			case NextflowScriptParser.CapitalizedIdentifier:
 			case NextflowScriptParser.Identifier:
 				this.enterOuterAlt(_localctx, 2);
 				{
-				this.state = 1203;
+				this.state = 1181;
 				this.variableDeclaratorId();
 				}
 				break;
@@ -5217,15 +5074,15 @@ export class NextflowScriptParser extends Parser {
 	// @RuleVersion(0)
 	public lambdaBody(): LambdaBodyContext {
 		let _localctx: LambdaBodyContext = new LambdaBodyContext(this._ctx, this.state);
-		this.enterRule(_localctx, 182, NextflowScriptParser.RULE_lambdaBody);
+		this.enterRule(_localctx, 178, NextflowScriptParser.RULE_lambdaBody);
 		try {
-			this.state = 1208;
+			this.state = 1186;
 			this._errHandler.sync(this);
-			switch ( this.interpreter.adaptivePredict(this._input, 111, this._ctx) ) {
+			switch ( this.interpreter.adaptivePredict(this._input, 109, this._ctx) ) {
 			case 1:
 				this.enterOuterAlt(_localctx, 1);
 				{
-				this.state = 1206;
+				this.state = 1184;
 				this.block();
 				}
 				break;
@@ -5233,7 +5090,7 @@ export class NextflowScriptParser extends Parser {
 			case 2:
 				this.enterOuterAlt(_localctx, 2);
 				{
-				this.state = 1207;
+				this.state = 1185;
 				this.statementExpression();
 				}
 				break;
@@ -5256,50 +5113,50 @@ export class NextflowScriptParser extends Parser {
 	// @RuleVersion(0)
 	public closure(): ClosureContext {
 		let _localctx: ClosureContext = new ClosureContext(this._ctx, this.state);
-		this.enterRule(_localctx, 184, NextflowScriptParser.RULE_closure);
+		this.enterRule(_localctx, 180, NextflowScriptParser.RULE_closure);
 		let _la: number;
 		try {
 			this.enterOuterAlt(_localctx, 1);
 			{
-			this.state = 1210;
+			this.state = 1188;
 			this.match(NextflowScriptParser.LBRACE);
-			this.state = 1219;
+			this.state = 1197;
 			this._errHandler.sync(this);
-			switch ( this.interpreter.adaptivePredict(this._input, 113, this._ctx) ) {
+			switch ( this.interpreter.adaptivePredict(this._input, 111, this._ctx) ) {
 			case 1:
 				{
-				this.state = 1211;
+				this.state = 1189;
 				this.nls();
-				this.state = 1215;
+				this.state = 1193;
 				this._errHandler.sync(this);
 				_la = this._input.LA(1);
-				if ((((_la) & ~0x1F) === 0 && ((1 << _la) & ((1 << NextflowScriptParser.AS) | (1 << NextflowScriptParser.DEF) | (1 << NextflowScriptParser.IN) | (1 << NextflowScriptParser.TRAIT) | (1 << NextflowScriptParser.VAR) | (1 << NextflowScriptParser.BuiltInPrimitiveType) | (1 << NextflowScriptParser.ABSTRACT) | (1 << NextflowScriptParser.YIELD) | (1 << NextflowScriptParser.FINAL))) !== 0) || ((((_la - 34)) & ~0x1F) === 0 && ((1 << (_la - 34)) & ((1 << (NextflowScriptParser.IMPORT - 34)) | (1 << (NextflowScriptParser.PACKAGE - 34)) | (1 << (NextflowScriptParser.PERMITS - 34)) | (1 << (NextflowScriptParser.PRIVATE - 34)) | (1 << (NextflowScriptParser.PROTECTED - 34)) | (1 << (NextflowScriptParser.PUBLIC - 34)) | (1 << (NextflowScriptParser.RECORD - 34)) | (1 << (NextflowScriptParser.STATIC - 34)) | (1 << (NextflowScriptParser.STRICTFP - 34)) | (1 << (NextflowScriptParser.VOID - 34)))) !== 0) || _la === NextflowScriptParser.LBRACK || _la === NextflowScriptParser.QUESTION || ((((_la - 130)) & ~0x1F) === 0 && ((1 << (_la - 130)) & ((1 << (NextflowScriptParser.CapitalizedIdentifier - 130)) | (1 << (NextflowScriptParser.Identifier - 130)) | (1 << (NextflowScriptParser.AT - 130)) | (1 << (NextflowScriptParser.ELLIPSIS - 130)))) !== 0)) {
+				if ((((_la) & ~0x1F) === 0 && ((1 << _la) & ((1 << NextflowScriptParser.AS) | (1 << NextflowScriptParser.DEF) | (1 << NextflowScriptParser.IN) | (1 << NextflowScriptParser.TRAIT) | (1 << NextflowScriptParser.VAR) | (1 << NextflowScriptParser.BuiltInPrimitiveType) | (1 << NextflowScriptParser.ABSTRACT) | (1 << NextflowScriptParser.FINAL))) !== 0) || ((((_la - 33)) & ~0x1F) === 0 && ((1 << (_la - 33)) & ((1 << (NextflowScriptParser.IMPORT - 33)) | (1 << (NextflowScriptParser.PACKAGE - 33)) | (1 << (NextflowScriptParser.PRIVATE - 33)) | (1 << (NextflowScriptParser.PROTECTED - 33)) | (1 << (NextflowScriptParser.PUBLIC - 33)) | (1 << (NextflowScriptParser.STATIC - 33)) | (1 << (NextflowScriptParser.STRICTFP - 33)) | (1 << (NextflowScriptParser.VOID - 33)))) !== 0) || _la === NextflowScriptParser.LBRACK || _la === NextflowScriptParser.QUESTION || ((((_la - 122)) & ~0x1F) === 0 && ((1 << (_la - 122)) & ((1 << (NextflowScriptParser.CapitalizedIdentifier - 122)) | (1 << (NextflowScriptParser.Identifier - 122)) | (1 << (NextflowScriptParser.AT - 122)) | (1 << (NextflowScriptParser.ELLIPSIS - 122)))) !== 0)) {
 					{
-					this.state = 1212;
+					this.state = 1190;
 					this.formalParameterList();
-					this.state = 1213;
+					this.state = 1191;
 					this.nls();
 					}
 				}
 
-				this.state = 1217;
+				this.state = 1195;
 				this.match(NextflowScriptParser.ARROW);
 				}
 				break;
 			}
-			this.state = 1222;
+			this.state = 1200;
 			this._errHandler.sync(this);
-			switch ( this.interpreter.adaptivePredict(this._input, 114, this._ctx) ) {
+			switch ( this.interpreter.adaptivePredict(this._input, 112, this._ctx) ) {
 			case 1:
 				{
-				this.state = 1221;
+				this.state = 1199;
 				this.sep();
 				}
 				break;
 			}
-			this.state = 1224;
+			this.state = 1202;
 			this.blockStatementsOpt();
-			this.state = 1225;
+			this.state = 1203;
 			this.match(NextflowScriptParser.RBRACE);
 			}
 		}
@@ -5320,22 +5177,22 @@ export class NextflowScriptParser extends Parser {
 	// @RuleVersion(0)
 	public closureOrLambdaExpression(): ClosureOrLambdaExpressionContext {
 		let _localctx: ClosureOrLambdaExpressionContext = new ClosureOrLambdaExpressionContext(this._ctx, this.state);
-		this.enterRule(_localctx, 186, NextflowScriptParser.RULE_closureOrLambdaExpression);
+		this.enterRule(_localctx, 182, NextflowScriptParser.RULE_closureOrLambdaExpression);
 		try {
-			this.state = 1229;
+			this.state = 1207;
 			this._errHandler.sync(this);
 			switch (this._input.LA(1)) {
 			case NextflowScriptParser.LBRACE:
 				this.enterOuterAlt(_localctx, 1);
 				{
-				this.state = 1227;
+				this.state = 1205;
 				this.closure();
 				}
 				break;
 			case NextflowScriptParser.LPAREN:
 				this.enterOuterAlt(_localctx, 2);
 				{
-				this.state = 1228;
+				this.state = 1206;
 				this.lambdaExpression();
 				}
 				break;
@@ -5360,16 +5217,16 @@ export class NextflowScriptParser extends Parser {
 	// @RuleVersion(0)
 	public blockStatementsOpt(): BlockStatementsOptContext {
 		let _localctx: BlockStatementsOptContext = new BlockStatementsOptContext(this._ctx, this.state);
-		this.enterRule(_localctx, 188, NextflowScriptParser.RULE_blockStatementsOpt);
+		this.enterRule(_localctx, 184, NextflowScriptParser.RULE_blockStatementsOpt);
 		try {
 			this.enterOuterAlt(_localctx, 1);
 			{
-			this.state = 1232;
+			this.state = 1210;
 			this._errHandler.sync(this);
-			switch ( this.interpreter.adaptivePredict(this._input, 116, this._ctx) ) {
+			switch ( this.interpreter.adaptivePredict(this._input, 114, this._ctx) ) {
 			case 1:
 				{
-				this.state = 1231;
+				this.state = 1209;
 				this.blockStatements();
 				}
 				break;
@@ -5393,37 +5250,37 @@ export class NextflowScriptParser extends Parser {
 	// @RuleVersion(0)
 	public blockStatements(): BlockStatementsContext {
 		let _localctx: BlockStatementsContext = new BlockStatementsContext(this._ctx, this.state);
-		this.enterRule(_localctx, 190, NextflowScriptParser.RULE_blockStatements);
+		this.enterRule(_localctx, 186, NextflowScriptParser.RULE_blockStatements);
 		try {
 			let _alt: number;
 			this.enterOuterAlt(_localctx, 1);
 			{
-			this.state = 1234;
+			this.state = 1212;
 			this.blockStatement();
-			this.state = 1240;
+			this.state = 1218;
 			this._errHandler.sync(this);
-			_alt = this.interpreter.adaptivePredict(this._input, 117, this._ctx);
+			_alt = this.interpreter.adaptivePredict(this._input, 115, this._ctx);
 			while (_alt !== 2 && _alt !== ATN.INVALID_ALT_NUMBER) {
 				if (_alt === 1) {
 					{
 					{
-					this.state = 1235;
+					this.state = 1213;
 					this.sep();
-					this.state = 1236;
+					this.state = 1214;
 					this.blockStatement();
 					}
 					}
 				}
-				this.state = 1242;
+				this.state = 1220;
 				this._errHandler.sync(this);
-				_alt = this.interpreter.adaptivePredict(this._input, 117, this._ctx);
+				_alt = this.interpreter.adaptivePredict(this._input, 115, this._ctx);
 			}
-			this.state = 1244;
+			this.state = 1222;
 			this._errHandler.sync(this);
-			switch ( this.interpreter.adaptivePredict(this._input, 118, this._ctx) ) {
+			switch ( this.interpreter.adaptivePredict(this._input, 116, this._ctx) ) {
 			case 1:
 				{
-				this.state = 1243;
+				this.state = 1221;
 				this.sep();
 				}
 				break;
@@ -5447,38 +5304,38 @@ export class NextflowScriptParser extends Parser {
 	// @RuleVersion(0)
 	public annotationsOpt(): AnnotationsOptContext {
 		let _localctx: AnnotationsOptContext = new AnnotationsOptContext(this._ctx, this.state);
-		this.enterRule(_localctx, 192, NextflowScriptParser.RULE_annotationsOpt);
+		this.enterRule(_localctx, 188, NextflowScriptParser.RULE_annotationsOpt);
 		let _la: number;
 		try {
 			let _alt: number;
 			this.enterOuterAlt(_localctx, 1);
 			{
-			this.state = 1257;
+			this.state = 1235;
 			this._errHandler.sync(this);
 			_la = this._input.LA(1);
 			if (_la === NextflowScriptParser.AT) {
 				{
-				this.state = 1246;
+				this.state = 1224;
 				this.annotation();
-				this.state = 1252;
+				this.state = 1230;
 				this._errHandler.sync(this);
-				_alt = this.interpreter.adaptivePredict(this._input, 119, this._ctx);
+				_alt = this.interpreter.adaptivePredict(this._input, 117, this._ctx);
 				while (_alt !== 2 && _alt !== ATN.INVALID_ALT_NUMBER) {
 					if (_alt === 1) {
 						{
 						{
-						this.state = 1247;
+						this.state = 1225;
 						this.nls();
-						this.state = 1248;
+						this.state = 1226;
 						this.annotation();
 						}
 						}
 					}
-					this.state = 1254;
+					this.state = 1232;
 					this._errHandler.sync(this);
-					_alt = this.interpreter.adaptivePredict(this._input, 119, this._ctx);
+					_alt = this.interpreter.adaptivePredict(this._input, 117, this._ctx);
 				}
-				this.state = 1255;
+				this.state = 1233;
 				this.nls();
 				}
 			}
@@ -5502,34 +5359,34 @@ export class NextflowScriptParser extends Parser {
 	// @RuleVersion(0)
 	public annotation(): AnnotationContext {
 		let _localctx: AnnotationContext = new AnnotationContext(this._ctx, this.state);
-		this.enterRule(_localctx, 194, NextflowScriptParser.RULE_annotation);
+		this.enterRule(_localctx, 190, NextflowScriptParser.RULE_annotation);
 		try {
 			this.enterOuterAlt(_localctx, 1);
 			{
-			this.state = 1259;
+			this.state = 1237;
 			this.match(NextflowScriptParser.AT);
-			this.state = 1260;
+			this.state = 1238;
 			this.annotationName();
-			this.state = 1268;
+			this.state = 1246;
 			this._errHandler.sync(this);
-			switch ( this.interpreter.adaptivePredict(this._input, 122, this._ctx) ) {
+			switch ( this.interpreter.adaptivePredict(this._input, 120, this._ctx) ) {
 			case 1:
 				{
-				this.state = 1261;
+				this.state = 1239;
 				this.nls();
-				this.state = 1262;
+				this.state = 1240;
 				this.match(NextflowScriptParser.LPAREN);
-				this.state = 1264;
+				this.state = 1242;
 				this._errHandler.sync(this);
-				switch ( this.interpreter.adaptivePredict(this._input, 121, this._ctx) ) {
+				switch ( this.interpreter.adaptivePredict(this._input, 119, this._ctx) ) {
 				case 1:
 					{
-					this.state = 1263;
+					this.state = 1241;
 					this.elementValues();
 					}
 					break;
 				}
-				this.state = 1266;
+				this.state = 1244;
 				this.rparen();
 				}
 				break;
@@ -5553,15 +5410,15 @@ export class NextflowScriptParser extends Parser {
 	// @RuleVersion(0)
 	public elementValues(): ElementValuesContext {
 		let _localctx: ElementValuesContext = new ElementValuesContext(this._ctx, this.state);
-		this.enterRule(_localctx, 196, NextflowScriptParser.RULE_elementValues);
+		this.enterRule(_localctx, 192, NextflowScriptParser.RULE_elementValues);
 		try {
-			this.state = 1272;
+			this.state = 1250;
 			this._errHandler.sync(this);
-			switch ( this.interpreter.adaptivePredict(this._input, 123, this._ctx) ) {
+			switch ( this.interpreter.adaptivePredict(this._input, 121, this._ctx) ) {
 			case 1:
 				this.enterOuterAlt(_localctx, 1);
 				{
-				this.state = 1270;
+				this.state = 1248;
 				this.elementValuePairs();
 				}
 				break;
@@ -5569,7 +5426,7 @@ export class NextflowScriptParser extends Parser {
 			case 2:
 				this.enterOuterAlt(_localctx, 2);
 				{
-				this.state = 1271;
+				this.state = 1249;
 				this.elementValue();
 				}
 				break;
@@ -5592,11 +5449,11 @@ export class NextflowScriptParser extends Parser {
 	// @RuleVersion(0)
 	public annotationName(): AnnotationNameContext {
 		let _localctx: AnnotationNameContext = new AnnotationNameContext(this._ctx, this.state);
-		this.enterRule(_localctx, 198, NextflowScriptParser.RULE_annotationName);
+		this.enterRule(_localctx, 194, NextflowScriptParser.RULE_annotationName);
 		try {
 			this.enterOuterAlt(_localctx, 1);
 			{
-			this.state = 1274;
+			this.state = 1252;
 			this.qualifiedClassName();
 			}
 		}
@@ -5617,26 +5474,26 @@ export class NextflowScriptParser extends Parser {
 	// @RuleVersion(0)
 	public elementValuePairs(): ElementValuePairsContext {
 		let _localctx: ElementValuePairsContext = new ElementValuePairsContext(this._ctx, this.state);
-		this.enterRule(_localctx, 200, NextflowScriptParser.RULE_elementValuePairs);
+		this.enterRule(_localctx, 196, NextflowScriptParser.RULE_elementValuePairs);
 		let _la: number;
 		try {
 			this.enterOuterAlt(_localctx, 1);
 			{
-			this.state = 1276;
+			this.state = 1254;
 			this.elementValuePair();
-			this.state = 1281;
+			this.state = 1259;
 			this._errHandler.sync(this);
 			_la = this._input.LA(1);
 			while (_la === NextflowScriptParser.COMMA) {
 				{
 				{
-				this.state = 1277;
+				this.state = 1255;
 				this.match(NextflowScriptParser.COMMA);
-				this.state = 1278;
+				this.state = 1256;
 				this.elementValuePair();
 				}
 				}
-				this.state = 1283;
+				this.state = 1261;
 				this._errHandler.sync(this);
 				_la = this._input.LA(1);
 			}
@@ -5659,19 +5516,19 @@ export class NextflowScriptParser extends Parser {
 	// @RuleVersion(0)
 	public elementValuePair(): ElementValuePairContext {
 		let _localctx: ElementValuePairContext = new ElementValuePairContext(this._ctx, this.state);
-		this.enterRule(_localctx, 202, NextflowScriptParser.RULE_elementValuePair);
+		this.enterRule(_localctx, 198, NextflowScriptParser.RULE_elementValuePair);
 		try {
 			this.enterOuterAlt(_localctx, 1);
 			{
-			this.state = 1284;
+			this.state = 1262;
 			this.elementValuePairName();
-			this.state = 1285;
+			this.state = 1263;
 			this.nls();
-			this.state = 1286;
+			this.state = 1264;
 			this.match(NextflowScriptParser.ASSIGN);
-			this.state = 1287;
+			this.state = 1265;
 			this.nls();
-			this.state = 1288;
+			this.state = 1266;
 			this.elementValue();
 			}
 		}
@@ -5692,15 +5549,15 @@ export class NextflowScriptParser extends Parser {
 	// @RuleVersion(0)
 	public elementValuePairName(): ElementValuePairNameContext {
 		let _localctx: ElementValuePairNameContext = new ElementValuePairNameContext(this._ctx, this.state);
-		this.enterRule(_localctx, 204, NextflowScriptParser.RULE_elementValuePairName);
+		this.enterRule(_localctx, 200, NextflowScriptParser.RULE_elementValuePairName);
 		try {
-			this.state = 1292;
+			this.state = 1270;
 			this._errHandler.sync(this);
-			switch ( this.interpreter.adaptivePredict(this._input, 125, this._ctx) ) {
+			switch ( this.interpreter.adaptivePredict(this._input, 123, this._ctx) ) {
 			case 1:
 				this.enterOuterAlt(_localctx, 1);
 				{
-				this.state = 1290;
+				this.state = 1268;
 				this.identifier();
 				}
 				break;
@@ -5708,7 +5565,7 @@ export class NextflowScriptParser extends Parser {
 			case 2:
 				this.enterOuterAlt(_localctx, 2);
 				{
-				this.state = 1291;
+				this.state = 1269;
 				this.keywords();
 				}
 				break;
@@ -5731,15 +5588,15 @@ export class NextflowScriptParser extends Parser {
 	// @RuleVersion(0)
 	public elementValue(): ElementValueContext {
 		let _localctx: ElementValueContext = new ElementValueContext(this._ctx, this.state);
-		this.enterRule(_localctx, 206, NextflowScriptParser.RULE_elementValue);
+		this.enterRule(_localctx, 202, NextflowScriptParser.RULE_elementValue);
 		try {
-			this.state = 1297;
+			this.state = 1275;
 			this._errHandler.sync(this);
-			switch ( this.interpreter.adaptivePredict(this._input, 126, this._ctx) ) {
+			switch ( this.interpreter.adaptivePredict(this._input, 124, this._ctx) ) {
 			case 1:
 				this.enterOuterAlt(_localctx, 1);
 				{
-				this.state = 1294;
+				this.state = 1272;
 				this.elementValueArrayInitializer();
 				}
 				break;
@@ -5747,7 +5604,7 @@ export class NextflowScriptParser extends Parser {
 			case 2:
 				this.enterOuterAlt(_localctx, 2);
 				{
-				this.state = 1295;
+				this.state = 1273;
 				this.annotation();
 				}
 				break;
@@ -5755,7 +5612,7 @@ export class NextflowScriptParser extends Parser {
 			case 3:
 				this.enterOuterAlt(_localctx, 3);
 				{
-				this.state = 1296;
+				this.state = 1274;
 				this.expression(0);
 				}
 				break;
@@ -5778,45 +5635,45 @@ export class NextflowScriptParser extends Parser {
 	// @RuleVersion(0)
 	public elementValueArrayInitializer(): ElementValueArrayInitializerContext {
 		let _localctx: ElementValueArrayInitializerContext = new ElementValueArrayInitializerContext(this._ctx, this.state);
-		this.enterRule(_localctx, 208, NextflowScriptParser.RULE_elementValueArrayInitializer);
+		this.enterRule(_localctx, 204, NextflowScriptParser.RULE_elementValueArrayInitializer);
 		let _la: number;
 		try {
 			let _alt: number;
 			this.enterOuterAlt(_localctx, 1);
 			{
-			this.state = 1299;
+			this.state = 1277;
 			this.match(NextflowScriptParser.LBRACK);
-			this.state = 1311;
+			this.state = 1289;
 			this._errHandler.sync(this);
-			switch ( this.interpreter.adaptivePredict(this._input, 129, this._ctx) ) {
+			switch ( this.interpreter.adaptivePredict(this._input, 127, this._ctx) ) {
 			case 1:
 				{
-				this.state = 1300;
+				this.state = 1278;
 				this.elementValue();
-				this.state = 1305;
+				this.state = 1283;
 				this._errHandler.sync(this);
-				_alt = this.interpreter.adaptivePredict(this._input, 127, this._ctx);
+				_alt = this.interpreter.adaptivePredict(this._input, 125, this._ctx);
 				while (_alt !== 2 && _alt !== ATN.INVALID_ALT_NUMBER) {
 					if (_alt === 1) {
 						{
 						{
-						this.state = 1301;
+						this.state = 1279;
 						this.match(NextflowScriptParser.COMMA);
-						this.state = 1302;
+						this.state = 1280;
 						this.elementValue();
 						}
 						}
 					}
-					this.state = 1307;
+					this.state = 1285;
 					this._errHandler.sync(this);
-					_alt = this.interpreter.adaptivePredict(this._input, 127, this._ctx);
+					_alt = this.interpreter.adaptivePredict(this._input, 125, this._ctx);
 				}
-				this.state = 1309;
+				this.state = 1287;
 				this._errHandler.sync(this);
 				_la = this._input.LA(1);
 				if (_la === NextflowScriptParser.COMMA) {
 					{
-					this.state = 1308;
+					this.state = 1286;
 					this.match(NextflowScriptParser.COMMA);
 					}
 				}
@@ -5824,7 +5681,7 @@ export class NextflowScriptParser extends Parser {
 				}
 				break;
 			}
-			this.state = 1313;
+			this.state = 1291;
 			this.match(NextflowScriptParser.RBRACK);
 			}
 		}
@@ -5845,25 +5702,25 @@ export class NextflowScriptParser extends Parser {
 	// @RuleVersion(0)
 	public block(): BlockContext {
 		let _localctx: BlockContext = new BlockContext(this._ctx, this.state);
-		this.enterRule(_localctx, 210, NextflowScriptParser.RULE_block);
+		this.enterRule(_localctx, 206, NextflowScriptParser.RULE_block);
 		try {
 			this.enterOuterAlt(_localctx, 1);
 			{
-			this.state = 1315;
+			this.state = 1293;
 			this.match(NextflowScriptParser.LBRACE);
-			this.state = 1317;
+			this.state = 1295;
 			this._errHandler.sync(this);
-			switch ( this.interpreter.adaptivePredict(this._input, 130, this._ctx) ) {
+			switch ( this.interpreter.adaptivePredict(this._input, 128, this._ctx) ) {
 			case 1:
 				{
-				this.state = 1316;
+				this.state = 1294;
 				this.sep();
 				}
 				break;
 			}
-			this.state = 1319;
+			this.state = 1297;
 			this.blockStatementsOpt();
-			this.state = 1320;
+			this.state = 1298;
 			this.match(NextflowScriptParser.RBRACE);
 			}
 		}
@@ -5884,15 +5741,15 @@ export class NextflowScriptParser extends Parser {
 	// @RuleVersion(0)
 	public blockStatement(): BlockStatementContext {
 		let _localctx: BlockStatementContext = new BlockStatementContext(this._ctx, this.state);
-		this.enterRule(_localctx, 212, NextflowScriptParser.RULE_blockStatement);
+		this.enterRule(_localctx, 208, NextflowScriptParser.RULE_blockStatement);
 		try {
-			this.state = 1324;
+			this.state = 1302;
 			this._errHandler.sync(this);
-			switch ( this.interpreter.adaptivePredict(this._input, 131, this._ctx) ) {
+			switch ( this.interpreter.adaptivePredict(this._input, 129, this._ctx) ) {
 			case 1:
 				this.enterOuterAlt(_localctx, 1);
 				{
-				this.state = 1322;
+				this.state = 1300;
 				this.localVariableDeclaration();
 				}
 				break;
@@ -5900,7 +5757,7 @@ export class NextflowScriptParser extends Parser {
 			case 2:
 				this.enterOuterAlt(_localctx, 2);
 				{
-				this.state = 1323;
+				this.state = 1301;
 				this.statement();
 				}
 				break;
@@ -5923,15 +5780,15 @@ export class NextflowScriptParser extends Parser {
 	// @RuleVersion(0)
 	public localVariableDeclaration(): LocalVariableDeclarationContext {
 		let _localctx: LocalVariableDeclarationContext = new LocalVariableDeclarationContext(this._ctx, this.state);
-		this.enterRule(_localctx, 214, NextflowScriptParser.RULE_localVariableDeclaration);
+		this.enterRule(_localctx, 210, NextflowScriptParser.RULE_localVariableDeclaration);
 		try {
 			this.enterOuterAlt(_localctx, 1);
 			{
-			this.state = 1326;
+			this.state = 1304;
 			if (!( !GroovyParser.isInvalidLocalVariableDeclaration(this._input) )) {
 				throw this.createFailedPredicateException(" !GroovyParser.isInvalidLocalVariableDeclaration(this._input) ");
 			}
-			this.state = 1327;
+			this.state = 1305;
 			this.variableDeclaration(0);
 			}
 		}
@@ -5952,19 +5809,19 @@ export class NextflowScriptParser extends Parser {
 	// @RuleVersion(0)
 	public variableDeclaration(t: number): VariableDeclarationContext {
 		let _localctx: VariableDeclarationContext = new VariableDeclarationContext(this._ctx, this.state, t);
-		this.enterRule(_localctx, 216, NextflowScriptParser.RULE_variableDeclaration);
+		this.enterRule(_localctx, 212, NextflowScriptParser.RULE_variableDeclaration);
 		try {
-			this.state = 1346;
+			this.state = 1324;
 			this._errHandler.sync(this);
-			switch ( this.interpreter.adaptivePredict(this._input, 134, this._ctx) ) {
+			switch ( this.interpreter.adaptivePredict(this._input, 132, this._ctx) ) {
 			case 1:
 				this.enterOuterAlt(_localctx, 1);
 				{
-				this.state = 1329;
+				this.state = 1307;
 				this.modifiers();
-				this.state = 1330;
+				this.state = 1308;
 				this.nls();
-				this.state = 1341;
+				this.state = 1319;
 				this._errHandler.sync(this);
 				switch (this._input.LA(1)) {
 				case NextflowScriptParser.AS:
@@ -5973,11 +5830,8 @@ export class NextflowScriptParser extends Parser {
 				case NextflowScriptParser.TRAIT:
 				case NextflowScriptParser.VAR:
 				case NextflowScriptParser.BuiltInPrimitiveType:
-				case NextflowScriptParser.YIELD:
 				case NextflowScriptParser.IMPORT:
 				case NextflowScriptParser.PACKAGE:
-				case NextflowScriptParser.PERMITS:
-				case NextflowScriptParser.RECORD:
 				case NextflowScriptParser.VOID:
 				case NextflowScriptParser.LBRACK:
 				case NextflowScriptParser.QUESTION:
@@ -5985,31 +5839,31 @@ export class NextflowScriptParser extends Parser {
 				case NextflowScriptParser.Identifier:
 				case NextflowScriptParser.AT:
 					{
-					this.state = 1332;
+					this.state = 1310;
 					this._errHandler.sync(this);
-					switch ( this.interpreter.adaptivePredict(this._input, 132, this._ctx) ) {
+					switch ( this.interpreter.adaptivePredict(this._input, 130, this._ctx) ) {
 					case 1:
 						{
-						this.state = 1331;
+						this.state = 1309;
 						this.type();
 						}
 						break;
 					}
-					this.state = 1334;
+					this.state = 1312;
 					this.variableDeclarators();
 					}
 					break;
 				case NextflowScriptParser.LPAREN:
 					{
-					this.state = 1335;
+					this.state = 1313;
 					this.typeNamePairs();
-					this.state = 1336;
+					this.state = 1314;
 					this.nls();
-					this.state = 1337;
+					this.state = 1315;
 					this.match(NextflowScriptParser.ASSIGN);
-					this.state = 1338;
+					this.state = 1316;
 					this.nls();
-					this.state = 1339;
+					this.state = 1317;
 					this.variableInitializer();
 					}
 					break;
@@ -6022,9 +5876,9 @@ export class NextflowScriptParser extends Parser {
 			case 2:
 				this.enterOuterAlt(_localctx, 2);
 				{
-				this.state = 1343;
+				this.state = 1321;
 				this.type();
-				this.state = 1344;
+				this.state = 1322;
 				this.variableDeclarators();
 				}
 				break;
@@ -6047,32 +5901,32 @@ export class NextflowScriptParser extends Parser {
 	// @RuleVersion(0)
 	public typeNamePairs(): TypeNamePairsContext {
 		let _localctx: TypeNamePairsContext = new TypeNamePairsContext(this._ctx, this.state);
-		this.enterRule(_localctx, 218, NextflowScriptParser.RULE_typeNamePairs);
+		this.enterRule(_localctx, 214, NextflowScriptParser.RULE_typeNamePairs);
 		let _la: number;
 		try {
 			this.enterOuterAlt(_localctx, 1);
 			{
-			this.state = 1348;
+			this.state = 1326;
 			this.match(NextflowScriptParser.LPAREN);
-			this.state = 1349;
+			this.state = 1327;
 			this.typeNamePair();
-			this.state = 1354;
+			this.state = 1332;
 			this._errHandler.sync(this);
 			_la = this._input.LA(1);
 			while (_la === NextflowScriptParser.COMMA) {
 				{
 				{
-				this.state = 1350;
+				this.state = 1328;
 				this.match(NextflowScriptParser.COMMA);
-				this.state = 1351;
+				this.state = 1329;
 				this.typeNamePair();
 				}
 				}
-				this.state = 1356;
+				this.state = 1334;
 				this._errHandler.sync(this);
 				_la = this._input.LA(1);
 			}
-			this.state = 1357;
+			this.state = 1335;
 			this.rparen();
 			}
 		}
@@ -6093,21 +5947,21 @@ export class NextflowScriptParser extends Parser {
 	// @RuleVersion(0)
 	public typeNamePair(): TypeNamePairContext {
 		let _localctx: TypeNamePairContext = new TypeNamePairContext(this._ctx, this.state);
-		this.enterRule(_localctx, 220, NextflowScriptParser.RULE_typeNamePair);
+		this.enterRule(_localctx, 216, NextflowScriptParser.RULE_typeNamePair);
 		try {
 			this.enterOuterAlt(_localctx, 1);
 			{
-			this.state = 1360;
+			this.state = 1338;
 			this._errHandler.sync(this);
-			switch ( this.interpreter.adaptivePredict(this._input, 136, this._ctx) ) {
+			switch ( this.interpreter.adaptivePredict(this._input, 134, this._ctx) ) {
 			case 1:
 				{
-				this.state = 1359;
+				this.state = 1337;
 				this.type();
 				}
 				break;
 			}
-			this.state = 1362;
+			this.state = 1340;
 			this.variableDeclaratorId();
 			}
 		}
@@ -6128,32 +5982,32 @@ export class NextflowScriptParser extends Parser {
 	// @RuleVersion(0)
 	public variableNames(): VariableNamesContext {
 		let _localctx: VariableNamesContext = new VariableNamesContext(this._ctx, this.state);
-		this.enterRule(_localctx, 222, NextflowScriptParser.RULE_variableNames);
+		this.enterRule(_localctx, 218, NextflowScriptParser.RULE_variableNames);
 		let _la: number;
 		try {
 			this.enterOuterAlt(_localctx, 1);
 			{
-			this.state = 1364;
+			this.state = 1342;
 			this.match(NextflowScriptParser.LPAREN);
-			this.state = 1365;
+			this.state = 1343;
 			this.variableDeclaratorId();
-			this.state = 1368;
+			this.state = 1346;
 			this._errHandler.sync(this);
 			_la = this._input.LA(1);
 			do {
 				{
 				{
-				this.state = 1366;
+				this.state = 1344;
 				this.match(NextflowScriptParser.COMMA);
-				this.state = 1367;
+				this.state = 1345;
 				this.variableDeclaratorId();
 				}
 				}
-				this.state = 1370;
+				this.state = 1348;
 				this._errHandler.sync(this);
 				_la = this._input.LA(1);
 			} while (_la === NextflowScriptParser.COMMA);
-			this.state = 1372;
+			this.state = 1350;
 			this.rparen();
 			}
 		}
@@ -6174,22 +6028,22 @@ export class NextflowScriptParser extends Parser {
 	// @RuleVersion(0)
 	public conditionalStatement(): ConditionalStatementContext {
 		let _localctx: ConditionalStatementContext = new ConditionalStatementContext(this._ctx, this.state);
-		this.enterRule(_localctx, 224, NextflowScriptParser.RULE_conditionalStatement);
+		this.enterRule(_localctx, 220, NextflowScriptParser.RULE_conditionalStatement);
 		try {
-			this.state = 1376;
+			this.state = 1354;
 			this._errHandler.sync(this);
 			switch (this._input.LA(1)) {
 			case NextflowScriptParser.IF:
 				this.enterOuterAlt(_localctx, 1);
 				{
-				this.state = 1374;
+				this.state = 1352;
 				this.ifElseStatement();
 				}
 				break;
 			case NextflowScriptParser.SWITCH:
 				this.enterOuterAlt(_localctx, 2);
 				{
-				this.state = 1375;
+				this.state = 1353;
 				this.switchStatement();
 				}
 				break;
@@ -6214,45 +6068,45 @@ export class NextflowScriptParser extends Parser {
 	// @RuleVersion(0)
 	public ifElseStatement(): IfElseStatementContext {
 		let _localctx: IfElseStatementContext = new IfElseStatementContext(this._ctx, this.state);
-		this.enterRule(_localctx, 226, NextflowScriptParser.RULE_ifElseStatement);
+		this.enterRule(_localctx, 222, NextflowScriptParser.RULE_ifElseStatement);
 		try {
 			this.enterOuterAlt(_localctx, 1);
 			{
-			this.state = 1378;
+			this.state = 1356;
 			this.match(NextflowScriptParser.IF);
-			this.state = 1379;
+			this.state = 1357;
 			this.expressionInPar();
-			this.state = 1380;
+			this.state = 1358;
 			this.nls();
-			this.state = 1381;
+			this.state = 1359;
 			_localctx._tb = this.statement();
-			this.state = 1390;
+			this.state = 1368;
 			this._errHandler.sync(this);
-			switch ( this.interpreter.adaptivePredict(this._input, 140, this._ctx) ) {
+			switch ( this.interpreter.adaptivePredict(this._input, 138, this._ctx) ) {
 			case 1:
 				{
-				this.state = 1384;
+				this.state = 1362;
 				this._errHandler.sync(this);
-				switch ( this.interpreter.adaptivePredict(this._input, 139, this._ctx) ) {
+				switch ( this.interpreter.adaptivePredict(this._input, 137, this._ctx) ) {
 				case 1:
 					{
-					this.state = 1382;
+					this.state = 1360;
 					this.nls();
 					}
 					break;
 
 				case 2:
 					{
-					this.state = 1383;
+					this.state = 1361;
 					this.sep();
 					}
 					break;
 				}
-				this.state = 1386;
+				this.state = 1364;
 				this.match(NextflowScriptParser.ELSE);
-				this.state = 1387;
+				this.state = 1365;
 				this.nls();
-				this.state = 1388;
+				this.state = 1366;
 				_localctx._fb = this.statement();
 				}
 				break;
@@ -6276,28 +6130,28 @@ export class NextflowScriptParser extends Parser {
 	// @RuleVersion(0)
 	public switchStatement(): SwitchStatementContext {
 		let _localctx: SwitchStatementContext = new SwitchStatementContext(this._ctx, this.state);
-		this.enterRule(_localctx, 228, NextflowScriptParser.RULE_switchStatement);
+		this.enterRule(_localctx, 224, NextflowScriptParser.RULE_switchStatement);
 		let _la: number;
 		try {
 			let _alt: number;
 			this.enterOuterAlt(_localctx, 1);
 			{
-			this.state = 1392;
+			this.state = 1370;
 			this.match(NextflowScriptParser.SWITCH);
-			this.state = 1393;
+			this.state = 1371;
 			this.expressionInPar();
-			this.state = 1394;
+			this.state = 1372;
 			this.nls();
-			this.state = 1395;
+			this.state = 1373;
 			this.match(NextflowScriptParser.LBRACE);
-			this.state = 1396;
+			this.state = 1374;
 			this.nls();
-			this.state = 1404;
+			this.state = 1382;
 			this._errHandler.sync(this);
 			_la = this._input.LA(1);
 			if (_la === NextflowScriptParser.CASE || _la === NextflowScriptParser.DEFAULT) {
 				{
-				this.state = 1398;
+				this.state = 1376;
 				this._errHandler.sync(this);
 				_alt = 1;
 				do {
@@ -6305,7 +6159,7 @@ export class NextflowScriptParser extends Parser {
 					case 1:
 						{
 						{
-						this.state = 1397;
+						this.state = 1375;
 						this.switchBlockStatementGroup();
 						}
 						}
@@ -6313,16 +6167,16 @@ export class NextflowScriptParser extends Parser {
 					default:
 						throw new NoViableAltException(this);
 					}
-					this.state = 1400;
+					this.state = 1378;
 					this._errHandler.sync(this);
-					_alt = this.interpreter.adaptivePredict(this._input, 141, this._ctx);
+					_alt = this.interpreter.adaptivePredict(this._input, 139, this._ctx);
 				} while (_alt !== 2 && _alt !== ATN.INVALID_ALT_NUMBER);
-				this.state = 1402;
+				this.state = 1380;
 				this.nls();
 				}
 			}
 
-			this.state = 1406;
+			this.state = 1384;
 			this.match(NextflowScriptParser.RBRACE);
 			}
 		}
@@ -6343,26 +6197,26 @@ export class NextflowScriptParser extends Parser {
 	// @RuleVersion(0)
 	public loopStatement(): LoopStatementContext {
 		let _localctx: LoopStatementContext = new LoopStatementContext(this._ctx, this.state);
-		this.enterRule(_localctx, 230, NextflowScriptParser.RULE_loopStatement);
+		this.enterRule(_localctx, 226, NextflowScriptParser.RULE_loopStatement);
 		try {
-			this.state = 1427;
+			this.state = 1405;
 			this._errHandler.sync(this);
 			switch (this._input.LA(1)) {
 			case NextflowScriptParser.FOR:
 				_localctx = new ForStmtAltContext(_localctx);
 				this.enterOuterAlt(_localctx, 1);
 				{
-				this.state = 1408;
+				this.state = 1386;
 				this.match(NextflowScriptParser.FOR);
-				this.state = 1409;
+				this.state = 1387;
 				this.match(NextflowScriptParser.LPAREN);
-				this.state = 1410;
+				this.state = 1388;
 				this.forControl();
-				this.state = 1411;
+				this.state = 1389;
 				this.rparen();
-				this.state = 1412;
+				this.state = 1390;
 				this.nls();
-				this.state = 1413;
+				this.state = 1391;
 				this.statement();
 				}
 				break;
@@ -6370,13 +6224,13 @@ export class NextflowScriptParser extends Parser {
 				_localctx = new WhileStmtAltContext(_localctx);
 				this.enterOuterAlt(_localctx, 2);
 				{
-				this.state = 1415;
+				this.state = 1393;
 				this.match(NextflowScriptParser.WHILE);
-				this.state = 1416;
+				this.state = 1394;
 				this.expressionInPar();
-				this.state = 1417;
+				this.state = 1395;
 				this.nls();
-				this.state = 1418;
+				this.state = 1396;
 				this.statement();
 				}
 				break;
@@ -6384,17 +6238,17 @@ export class NextflowScriptParser extends Parser {
 				_localctx = new DoWhileStmtAltContext(_localctx);
 				this.enterOuterAlt(_localctx, 3);
 				{
-				this.state = 1420;
+				this.state = 1398;
 				this.match(NextflowScriptParser.DO);
-				this.state = 1421;
+				this.state = 1399;
 				this.nls();
-				this.state = 1422;
+				this.state = 1400;
 				this.statement();
-				this.state = 1423;
+				this.state = 1401;
 				this.nls();
-				this.state = 1424;
+				this.state = 1402;
 				this.match(NextflowScriptParser.WHILE);
-				this.state = 1425;
+				this.state = 1403;
 				this.expressionInPar();
 				}
 				break;
@@ -6419,18 +6273,18 @@ export class NextflowScriptParser extends Parser {
 	// @RuleVersion(0)
 	public continueStatement(): ContinueStatementContext {
 		let _localctx: ContinueStatementContext = new ContinueStatementContext(this._ctx, this.state);
-		this.enterRule(_localctx, 232, NextflowScriptParser.RULE_continueStatement);
+		this.enterRule(_localctx, 228, NextflowScriptParser.RULE_continueStatement);
 		try {
 			this.enterOuterAlt(_localctx, 1);
 			{
-			this.state = 1429;
+			this.state = 1407;
 			this.match(NextflowScriptParser.CONTINUE);
-			this.state = 1431;
+			this.state = 1409;
 			this._errHandler.sync(this);
-			switch ( this.interpreter.adaptivePredict(this._input, 144, this._ctx) ) {
+			switch ( this.interpreter.adaptivePredict(this._input, 142, this._ctx) ) {
 			case 1:
 				{
-				this.state = 1430;
+				this.state = 1408;
 				this.identifier();
 				}
 				break;
@@ -6454,18 +6308,18 @@ export class NextflowScriptParser extends Parser {
 	// @RuleVersion(0)
 	public breakStatement(): BreakStatementContext {
 		let _localctx: BreakStatementContext = new BreakStatementContext(this._ctx, this.state);
-		this.enterRule(_localctx, 234, NextflowScriptParser.RULE_breakStatement);
+		this.enterRule(_localctx, 230, NextflowScriptParser.RULE_breakStatement);
 		try {
 			this.enterOuterAlt(_localctx, 1);
 			{
-			this.state = 1433;
+			this.state = 1411;
 			this.match(NextflowScriptParser.BREAK);
-			this.state = 1435;
+			this.state = 1413;
 			this._errHandler.sync(this);
-			switch ( this.interpreter.adaptivePredict(this._input, 145, this._ctx) ) {
+			switch ( this.interpreter.adaptivePredict(this._input, 143, this._ctx) ) {
 			case 1:
 				{
-				this.state = 1434;
+				this.state = 1412;
 				this.identifier();
 				}
 				break;
@@ -6487,82 +6341,55 @@ export class NextflowScriptParser extends Parser {
 		return _localctx;
 	}
 	// @RuleVersion(0)
-	public yieldStatement(): YieldStatementContext {
-		let _localctx: YieldStatementContext = new YieldStatementContext(this._ctx, this.state);
-		this.enterRule(_localctx, 236, NextflowScriptParser.RULE_yieldStatement);
-		try {
-			this.enterOuterAlt(_localctx, 1);
-			{
-			this.state = 1437;
-			this.match(NextflowScriptParser.YIELD);
-			this.state = 1438;
-			this.expression(0);
-			}
-		}
-		catch (re) {
-			if (re instanceof RecognitionException) {
-				_localctx.exception = re;
-				this._errHandler.reportError(this, re);
-				this._errHandler.recover(this, re);
-			} else {
-				throw re;
-			}
-		}
-		finally {
-			this.exitRule();
-		}
-		return _localctx;
-	}
-	// @RuleVersion(0)
 	public tryCatchStatement(): TryCatchStatementContext {
 		let _localctx: TryCatchStatementContext = new TryCatchStatementContext(this._ctx, this.state);
-		this.enterRule(_localctx, 238, NextflowScriptParser.RULE_tryCatchStatement);
+		this.enterRule(_localctx, 232, NextflowScriptParser.RULE_tryCatchStatement);
 		try {
 			let _alt: number;
 			this.enterOuterAlt(_localctx, 1);
 			{
-			this.state = 1440;
+			this.state = 1415;
 			this.match(NextflowScriptParser.TRY);
-			this.state = 1442;
+			this.state = 1417;
 			this._errHandler.sync(this);
-			switch ( this.interpreter.adaptivePredict(this._input, 146, this._ctx) ) {
+			switch ( this.interpreter.adaptivePredict(this._input, 144, this._ctx) ) {
 			case 1:
 				{
-				this.state = 1441;
+				this.state = 1416;
 				this.resources();
 				}
 				break;
 			}
-			this.state = 1444;
+			this.state = 1419;
 			this.nls();
-			this.state = 1445;
+			this.state = 1420;
 			this.block();
-			this.state = 1451;
+			this.state = 1426;
 			this._errHandler.sync(this);
-			_alt = this.interpreter.adaptivePredict(this._input, 147, this._ctx);
+			_alt = this.interpreter.adaptivePredict(this._input, 145, this._ctx);
 			while (_alt !== 2 && _alt !== ATN.INVALID_ALT_NUMBER) {
 				if (_alt === 1) {
 					{
 					{
-					this.state = 1446;
+					this.state = 1421;
 					this.nls();
-					this.state = 1447;
+					this.state = 1422;
 					this.catchClause();
 					}
 					}
 				}
-				this.state = 1453;
+				this.state = 1428;
 				this._errHandler.sync(this);
-				_alt = this.interpreter.adaptivePredict(this._input, 147, this._ctx);
+				_alt = this.interpreter.adaptivePredict(this._input, 145, this._ctx);
 			}
-			this.state = 1457;
+			this.state = 1432;
 			this._errHandler.sync(this);
-			switch ( this.interpreter.adaptivePredict(this._input, 148, this._ctx) ) {
+			switch ( this.interpreter.adaptivePredict(this._input, 146, this._ctx) ) {
 			case 1:
 				{
-				this.state = 1454;
+				this.state = 1429;
 				this.nls();
-				this.state = 1455;
+				this.state = 1430;
 				this.finallyBlock();
 				}
 				break;
@@ -6586,23 +6413,23 @@ export class NextflowScriptParser extends Parser {
 	// @RuleVersion(0)
 	public assertStatement(): AssertStatementContext {
 		let _localctx: AssertStatementContext = new AssertStatementContext(this._ctx, this.state);
-		this.enterRule(_localctx, 240, NextflowScriptParser.RULE_assertStatement);
+		this.enterRule(_localctx, 234, NextflowScriptParser.RULE_assertStatement);
 		let _la: number;
 		try {
 			this.enterOuterAlt(_localctx, 1);
 			{
-			this.state = 1459;
+			this.state = 1434;
 			this.match(NextflowScriptParser.ASSERT);
-			this.state = 1460;
+			this.state = 1435;
 			_localctx._ce = this.expression(0);
-			this.state = 1466;
+			this.state = 1441;
 			this._errHandler.sync(this);
-			switch ( this.interpreter.adaptivePredict(this._input, 149, this._ctx) ) {
+			switch ( this.interpreter.adaptivePredict(this._input, 147, this._ctx) ) {
 			case 1:
 				{
-				this.state = 1461;
+				this.state = 1436;
 				this.nls();
-				this.state = 1462;
+				this.state = 1437;
 				_la = this._input.LA(1);
 				if (!(_la === NextflowScriptParser.COMMA || _la === NextflowScriptParser.COLON)) {
 				this._errHandler.recoverInline(this);
@@ -6614,9 +6441,9 @@ export class NextflowScriptParser extends Parser {
 					this._errHandler.reportMatch(this);
 					this.consume();
 				}
-				this.state = 1463;
+				this.state = 1438;
 				this.nls();
-				this.state = 1464;
+				this.state = 1439;
 				_localctx._me = this.expression(0);
 				}
 				break;
@@ -6640,16 +6467,16 @@ export class NextflowScriptParser extends Parser {
 	// @RuleVersion(0)
 	public statement(): StatementContext {
 		let _localctx: StatementContext = new StatementContext(this._ctx, this.state);
-		this.enterRule(_localctx, 242, NextflowScriptParser.RULE_statement);
+		this.enterRule(_localctx, 236, NextflowScriptParser.RULE_statement);
 		try {
-			this.state = 1496;
+			this.state = 1469;
 			this._errHandler.sync(this);
-			switch ( this.interpreter.adaptivePredict(this._input, 151, this._ctx) ) {
+			switch ( this.interpreter.adaptivePredict(this._input, 149, this._ctx) ) {
 			case 1:
 				_localctx = new BlockStmtAltContext(_localctx);
 				this.enterOuterAlt(_localctx, 1);
 				{
-				this.state = 1468;
+				this.state = 1443;
 				this.block();
 				}
 				break;
@@ -6658,7 +6485,7 @@ export class NextflowScriptParser extends Parser {
 				_localctx = new ConditionalStmtAltContext(_localctx);
 				this.enterOuterAlt(_localctx, 2);
 				{
-				this.state = 1469;
+				this.state = 1444;
 				this.conditionalStatement();
 				}
 				break;
@@ -6667,7 +6494,7 @@ export class NextflowScriptParser extends Parser {
 				_localctx = new LoopStmtAltContext(_localctx);
 				this.enterOuterAlt(_localctx, 3);
 				{
-				this.state = 1470;
+				this.state = 1445;
 				this.loopStatement();
 				}
 				break;
@@ -6676,7 +6503,7 @@ export class NextflowScriptParser extends Parser {
 				_localctx = new TryCatchStmtAltContext(_localctx);
 				this.enterOuterAlt(_localctx, 4);
 				{
-				this.state = 1471;
+				this.state = 1446;
 				this.tryCatchStatement();
 				}
 				break;
@@ -6685,13 +6512,13 @@ export class NextflowScriptParser extends Parser {
 				_localctx = new SynchronizedStmtAltContext(_localctx);
 				this.enterOuterAlt(_localctx, 5);
 				{
-				this.state = 1472;
+				this.state = 1447;
 				this.match(NextflowScriptParser.SYNCHRONIZED);
-				this.state = 1473;
+				this.state = 1448;
 				this.expressionInPar();
-				this.state = 1474;
+				this.state = 1449;
 				this.nls();
-				this.state = 1475;
+				this.state = 1450;
 				this.block();
 				}
 				break;
@@ -6700,14 +6527,14 @@ export class NextflowScriptParser extends Parser {
 				_localctx = new ReturnStmtAltContext(_localctx);
 				this.enterOuterAlt(_localctx, 6);
 				{
-				this.state = 1477;
+				this.state = 1452;
 				this.match(NextflowScriptParser.RETURN);
-				this.state = 1479;
+				this.state = 1454;
 				this._errHandler.sync(this);
-				switch ( this.interpreter.adaptivePredict(this._input, 150, this._ctx) ) {
+				switch ( this.interpreter.adaptivePredict(this._input, 148, this._ctx) ) {
 				case 1:
 					{
-					this.state = 1478;
+					this.state = 1453;
 					this.expression(0);
 					}
 					break;
@@ -6719,9 +6546,9 @@ export class NextflowScriptParser extends Parser {
 				_localctx = new ThrowStmtAltContext(_localctx);
 				this.enterOuterAlt(_localctx, 7);
 				{
-				this.state = 1481;
+				this.state = 1456;
 				this.match(NextflowScriptParser.THROW);
-				this.state = 1482;
+				this.state = 1457;
 				this.expression(0);
 				}
 				break;
@@ -6730,7 +6557,7 @@ export class NextflowScriptParser extends Parser {
 				_localctx = new BreakStmtAltContext(_localctx);
 				this.enterOuterAlt(_localctx, 8);
 				{
-				this.state = 1483;
+				this.state = 1458;
 				this.breakStatement();
 				}
 				break;
@@ -6739,71 +6566,58 @@ export class NextflowScriptParser extends Parser {
 				_localctx = new ContinueStmtAltContext(_localctx);
 				this.enterOuterAlt(_localctx, 9);
 				{
-				this.state = 1484;
+				this.state = 1459;
 				this.continueStatement();
 				}
 				break;
 
 			case 10:
-				_localctx = new YieldStmtAltContext(_localctx);
+				_localctx = new LabeledStmtAltContext(_localctx);
 				this.enterOuterAlt(_localctx, 10);
 				{
-				this.state = 1485;
-				if (!( this.inSwitchExpressionLevel > 0 )) {
-					throw this.createFailedPredicateException(" this.inSwitchExpressionLevel > 0 ");
-				}
-				this.state = 1486;
-				this.yieldStatement();
-				}
-				break;
-
-			case 11:
-				_localctx = new LabeledStmtAltContext(_localctx);
-				this.enterOuterAlt(_localctx, 11);
-				{
-				this.state = 1487;
+				this.state = 1460;
 				this.identifier();
-				this.state = 1488;
+				this.state = 1461;
 				this.match(NextflowScriptParser.COLON);
-				this.state = 1489;
+				this.state = 1462;
 				this.nls();
-				this.state = 1490;
+				this.state = 1463;
 				this.statement();
 				}
 				break;
 
-			case 12:
+			case 11:
 				_localctx = new AssertStmtAltContext(_localctx);
-				this.enterOuterAlt(_localctx, 12);
+				this.enterOuterAlt(_localctx, 11);
 				{
-				this.state = 1492;
+				this.state = 1465;
 				this.assertStatement();
 				}
 				break;
 
-			case 13:
+			case 12:
 				_localctx = new LocalVariableDeclarationStmtAltContext(_localctx);
-				this.enterOuterAlt(_localctx, 13);
+				this.enterOuterAlt(_localctx, 12);
 				{
-				this.state = 1493;
+				this.state = 1466;
 				this.localVariableDeclaration();
 				}
 				break;
 
-			case 14:
+			case 13:
 				_localctx = new ExpressionStmtAltContext(_localctx);
-				this.enterOuterAlt(_localctx, 14);
+				this.enterOuterAlt(_localctx, 13);
 				{
-				this.state = 1494;
+				this.state = 1467;
 				this.statementExpression();
 				}
 				break;
 
-			case 15:
+			case 14:
 				_localctx = new EmptyStmtAltContext(_localctx);
-				this.enterOuterAlt(_localctx, 15);
+				this.enterOuterAlt(_localctx, 14);
 				{
-				this.state = 1495;
+				this.state = 1468;
 				this.match(NextflowScriptParser.SEMI);
 				}
 				break;
@@ -6826,33 +6640,33 @@ export class NextflowScriptParser extends Parser {
 	// @RuleVersion(0)
 	public catchClause(): CatchClauseContext {
 		let _localctx: CatchClauseContext = new CatchClauseContext(this._ctx, this.state);
-		this.enterRule(_localctx, 244, NextflowScriptParser.RULE_catchClause);
+		this.enterRule(_localctx, 238, NextflowScriptParser.RULE_catchClause);
 		try {
 			this.enterOuterAlt(_localctx, 1);
 			{
-			this.state = 1498;
+			this.state = 1471;
 			this.match(NextflowScriptParser.CATCH);
-			this.state = 1499;
+			this.state = 1472;
 			this.match(NextflowScriptParser.LPAREN);
-			this.state = 1500;
+			this.state = 1473;
 			this.variableModifiersOpt();
-			this.state = 1502;
+			this.state = 1475;
 			this._errHandler.sync(this);
-			switch ( this.interpreter.adaptivePredict(this._input, 152, this._ctx) ) {
+			switch ( this.interpreter.adaptivePredict(this._input, 150, this._ctx) ) {
 			case 1:
 				{
-				this.state = 1501;
+				this.state = 1474;
 				this.catchType();
 				}
 				break;
 			}
-			this.state = 1504;
+			this.state = 1477;
 			this.identifier();
-			this.state = 1505;
+			this.state = 1478;
 			this.rparen();
-			this.state = 1506;
+			this.state = 1479;
 			this.nls();
-			this.state = 1507;
+			this.state = 1480;
 			this.block();
 			}
 		}
@@ -6873,26 +6687,26 @@ export class NextflowScriptParser extends Parser {
 	// @RuleVersion(0)
 	public catchType(): CatchTypeContext {
 		let _localctx: CatchTypeContext = new CatchTypeContext(this._ctx, this.state);
-		this.enterRule(_localctx, 246, NextflowScriptParser.RULE_catchType);
+		this.enterRule(_localctx, 240, NextflowScriptParser.RULE_catchType);
 		let _la: number;
 		try {
 			this.enterOuterAlt(_localctx, 1);
 			{
-			this.state = 1509;
+			this.state = 1482;
 			this.qualifiedClassName();
-			this.state = 1514;
+			this.state = 1487;
 			this._errHandler.sync(this);
 			_la = this._input.LA(1);
 			while (_la === NextflowScriptParser.BITOR) {
 				{
 				{
-				this.state = 1510;
+				this.state = 1483;
 				this.match(NextflowScriptParser.BITOR);
-				this.state = 1511;
+				this.state = 1484;
 				this.qualifiedClassName();
 				}
 				}
-				this.state = 1516;
+				this.state = 1489;
 				this._errHandler.sync(this);
 				_la = this._input.LA(1);
 			}
@@ -6915,15 +6729,15 @@ export class NextflowScriptParser extends Parser {
 	// @RuleVersion(0)
 	public finallyBlock(): FinallyBlockContext {
 		let _localctx: FinallyBlockContext = new FinallyBlockContext(this._ctx, this.state);
-		this.enterRule(_localctx, 248, NextflowScriptParser.RULE_finallyBlock);
+		this.enterRule(_localctx, 242, NextflowScriptParser.RULE_finallyBlock);
 		try {
 			this.enterOuterAlt(_localctx, 1);
 			{
-			this.state = 1517;
+			this.state = 1490;
 			this.match(NextflowScriptParser.FINALLY);
-			this.state = 1518;
+			this.state = 1491;
 			this.nls();
-			this.state = 1519;
+			this.state = 1492;
 			this.block();
 			}
 		}
@@ -6944,28 +6758,28 @@ export class NextflowScriptParser extends Parser {
 	// @RuleVersion(0)
 	public resources(): ResourcesContext {
 		let _localctx: ResourcesContext = new ResourcesContext(this._ctx, this.state);
-		this.enterRule(_localctx, 250, NextflowScriptParser.RULE_resources);
+		this.enterRule(_localctx, 244, NextflowScriptParser.RULE_resources);
 		let _la: number;
 		try {
 			this.enterOuterAlt(_localctx, 1);
 			{
-			this.state = 1521;
+			this.state = 1494;
 			this.match(NextflowScriptParser.LPAREN);
-			this.state = 1522;
+			this.state = 1495;
 			this.nls();
-			this.state = 1523;
+			this.state = 1496;
 			this.resourceList();
-			this.state = 1525;
+			this.state = 1498;
 			this._errHandler.sync(this);
 			_la = this._input.LA(1);
 			if (_la === NextflowScriptParser.SEMI || _la === NextflowScriptParser.NL) {
 				{
-				this.state = 1524;
+				this.state = 1497;
 				this.sep();
 				}
 			}
 
-			this.state = 1527;
+			this.state = 1500;
 			this.rparen();
 			}
 		}
@@ -6986,30 +6800,30 @@ export class NextflowScriptParser extends Parser {
 	// @RuleVersion(0)
 	public resourceList(): ResourceListContext {
 		let _localctx: ResourceListContext = new ResourceListContext(this._ctx, this.state);
-		this.enterRule(_localctx, 252, NextflowScriptParser.RULE_resourceList);
+		this.enterRule(_localctx, 246, NextflowScriptParser.RULE_resourceList);
 		try {
 			let _alt: number;
 			this.enterOuterAlt(_localctx, 1);
 			{
-			this.state = 1529;
+			this.state = 1502;
 			this.resource();
-			this.state = 1535;
+			this.state = 1508;
 			this._errHandler.sync(this);
-			_alt = this.interpreter.adaptivePredict(this._input, 155, this._ctx);
+			_alt = this.interpreter.adaptivePredict(this._input, 153, this._ctx);
 			while (_alt !== 2 && _alt !== ATN.INVALID_ALT_NUMBER) {
 				if (_alt === 1) {
 					{
 					{
-					this.state = 1530;
+					this.state = 1503;
 					this.sep();
-					this.state = 1531;
+					this.state = 1504;
 					this.resource();
 					}
 					}
 				}
-				this.state = 1537;
+				this.state = 1510;
 				this._errHandler.sync(this);
-				_alt = this.interpreter.adaptivePredict(this._input, 155, this._ctx);
+				_alt = this.interpreter.adaptivePredict(this._input, 153, this._ctx);
 			}
 			}
 		}
@@ -7030,15 +6844,15 @@ export class NextflowScriptParser extends Parser {
 	// @RuleVersion(0)
 	public resource(): ResourceContext {
 		let _localctx: ResourceContext = new ResourceContext(this._ctx, this.state);
-		this.enterRule(_localctx, 254, NextflowScriptParser.RULE_resource);
+		this.enterRule(_localctx, 248, NextflowScriptParser.RULE_resource);
 		try {
-			this.state = 1540;
+			this.state = 1513;
 			this._errHandler.sync(this);
-			switch ( this.interpreter.adaptivePredict(this._input, 156, this._ctx) ) {
+			switch ( this.interpreter.adaptivePredict(this._input, 154, this._ctx) ) {
 			case 1:
 				this.enterOuterAlt(_localctx, 1);
 				{
-				this.state = 1538;
+				this.state = 1511;
 				this.localVariableDeclaration();
 				}
 				break;
@@ -7046,7 +6860,7 @@ export class NextflowScriptParser extends Parser {
 			case 2:
 				this.enterOuterAlt(_localctx, 2);
 				{
-				this.state = 1539;
+				this.state = 1512;
 				this.expression(0);
 				}
 				break;
@@ -7069,34 +6883,34 @@ export class NextflowScriptParser extends Parser {
 	// @RuleVersion(0)
 	public switchBlockStatementGroup(): SwitchBlockStatementGroupContext {
 		let _localctx: SwitchBlockStatementGroupContext = new SwitchBlockStatementGroupContext(this._ctx, this.state);
-		this.enterRule(_localctx, 256, NextflowScriptParser.RULE_switchBlockStatementGroup);
+		this.enterRule(_localctx, 250, NextflowScriptParser.RULE_switchBlockStatementGroup);
 		try {
 			let _alt: number;
 			this.enterOuterAlt(_localctx, 1);
 			{
-			this.state = 1542;
+			this.state = 1515;
 			this.switchLabel();
-			this.state = 1548;
+			this.state = 1521;
 			this._errHandler.sync(this);
-			_alt = this.interpreter.adaptivePredict(this._input, 157, this._ctx);
+			_alt = this.interpreter.adaptivePredict(this._input, 155, this._ctx);
 			while (_alt !== 2 && _alt !== ATN.INVALID_ALT_NUMBER) {
 				if (_alt === 1) {
 					{
 					{
-					this.state = 1543;
+					this.state = 1516;
 					this.nls();
-					this.state = 1544;
+					this.state = 1517;
 					this.switchLabel();
 					}
 					}
 				}
-				this.state = 1550;
+				this.state = 1523;
 				this._errHandler.sync(this);
-				_alt = this.interpreter.adaptivePredict(this._input, 157, this._ctx);
+				_alt = this.interpreter.adaptivePredict(this._input, 155, this._ctx);
 			}
-			this.state = 1551;
+			this.state = 1524;
 			this.nls();
-			this.state = 1552;
+			this.state = 1525;
 			this.blockStatements();
 			}
 		}
@@ -7117,28 +6931,28 @@ export class NextflowScriptParser extends Parser {
 	// @RuleVersion(0)
 	public switchLabel(): SwitchLabelContext {
 		let _localctx: SwitchLabelContext = new SwitchLabelContext(this._ctx, this.state);
-		this.enterRule(_localctx, 258, NextflowScriptParser.RULE_switchLabel);
+		this.enterRule(_localctx, 252, NextflowScriptParser.RULE_switchLabel);
 		try {
-			this.state = 1560;
+			this.state = 1533;
 			this._errHandler.sync(this);
 			switch (this._input.LA(1)) {
 			case NextflowScriptParser.CASE:
 				this.enterOuterAlt(_localctx, 1);
 				{
-				this.state = 1554;
+				this.state = 1527;
 				this.match(NextflowScriptParser.CASE);
-				this.state = 1555;
+				this.state = 1528;
 				this.expression(0);
-				this.state = 1556;
+				this.state = 1529;
 				this.match(NextflowScriptParser.COLON);
 				}
 				break;
 			case NextflowScriptParser.DEFAULT:
 				this.enterOuterAlt(_localctx, 2);
 				{
-				this.state = 1558;
+				this.state = 1531;
 				this.match(NextflowScriptParser.DEFAULT);
-				this.state = 1559;
+				this.state = 1532;
 				this.match(NextflowScriptParser.COLON);
 				}
 				break;
@@ -7163,15 +6977,15 @@ export class NextflowScriptParser extends Parser {
 	// @RuleVersion(0)
 	public forControl(): ForControlContext {
 		let _localctx: ForControlContext = new ForControlContext(this._ctx, this.state);
-		this.enterRule(_localctx, 260, NextflowScriptParser.RULE_forControl);
+		this.enterRule(_localctx, 254, NextflowScriptParser.RULE_forControl);
 		try {
-			this.state = 1564;
+			this.state = 1537;
 			this._errHandler.sync(this);
-			switch ( this.interpreter.adaptivePredict(this._input, 159, this._ctx) ) {
+			switch ( this.interpreter.adaptivePredict(this._input, 157, this._ctx) ) {
 			case 1:
 				this.enterOuterAlt(_localctx, 1);
 				{
-				this.state = 1562;
+				this.state = 1535;
 				this.enhancedForControl();
 				}
 				break;
@@ -7179,7 +6993,7 @@ export class NextflowScriptParser extends Parser {
 			case 2:
 				this.enterOuterAlt(_localctx, 2);
 				{
-				this.state = 1563;
+				this.state = 1536;
 				this.classicalForControl();
 				}
 				break;
@@ -7202,26 +7016,26 @@ export class NextflowScriptParser extends Parser {
 	// @RuleVersion(0)
 	public enhancedForControl(): EnhancedForControlContext {
 		let _localctx: EnhancedForControlContext = new EnhancedForControlContext(this._ctx, this.state);
-		this.enterRule(_localctx, 262, NextflowScriptParser.RULE_enhancedForControl);
+		this.enterRule(_localctx, 256, NextflowScriptParser.RULE_enhancedForControl);
 		let _la: number;
 		try {
 			this.enterOuterAlt(_localctx, 1);
 			{
-			this.state = 1566;
+			this.state = 1539;
 			this.variableModifiersOpt();
-			this.state = 1568;
+			this.state = 1541;
 			this._errHandler.sync(this);
-			switch ( this.interpreter.adaptivePredict(this._input, 160, this._ctx) ) {
+			switch ( this.interpreter.adaptivePredict(this._input, 158, this._ctx) ) {
 			case 1:
 				{
-				this.state = 1567;
+				this.state = 1540;
 				this.type();
 				}
 				break;
 			}
-			this.state = 1570;
+			this.state = 1543;
 			this.variableDeclaratorId();
-			this.state = 1571;
+			this.state = 1544;
 			_la = this._input.LA(1);
 			if (!(_la === NextflowScriptParser.IN || _la === NextflowScriptParser.COLON)) {
 			this._errHandler.recoverInline(this);
@@ -7233,7 +7047,7 @@ export class NextflowScriptParser extends Parser {
 				this._errHandler.reportMatch(this);
 				this.consume();
 			}
-			this.state = 1572;
+			this.state = 1545;
 			this.expression(0);
 			}
 		}
@@ -7254,40 +7068,40 @@ export class NextflowScriptParser extends Parser {
 	// @RuleVersion(0)
 	public classicalForControl(): ClassicalForControlContext {
 		let _localctx: ClassicalForControlContext = new ClassicalForControlContext(this._ctx, this.state);
-		this.enterRule(_localctx, 264, NextflowScriptParser.RULE_classicalForControl);
+		this.enterRule(_localctx, 258, NextflowScriptParser.RULE_classicalForControl);
 		try {
 			this.enterOuterAlt(_localctx, 1);
 			{
-			this.state = 1575;
+			this.state = 1548;
 			this._errHandler.sync(this);
-			switch ( this.interpreter.adaptivePredict(this._input, 161, this._ctx) ) {
+			switch ( this.interpreter.adaptivePredict(this._input, 159, this._ctx) ) {
 			case 1:
 				{
-				this.state = 1574;
+				this.state = 1547;
 				this.forInit();
 				}
 				break;
 			}
-			this.state = 1577;
+			this.state = 1550;
 			this.match(NextflowScriptParser.SEMI);
-			this.state = 1579;
+			this.state = 1552;
 			this._errHandler.sync(this);
-			switch ( this.interpreter.adaptivePredict(this._input, 162, this._ctx) ) {
+			switch ( this.interpreter.adaptivePredict(this._input, 160, this._ctx) ) {
 			case 1:
 				{
-				this.state = 1578;
+				this.state = 1551;
 				this.expression(0);
 				}
 				break;
 			}
-			this.state = 1581;
+			this.state = 1554;
 			this.match(NextflowScriptParser.SEMI);
-			this.state = 1583;
+			this.state = 1556;
 			this._errHandler.sync(this);
-			switch ( this.interpreter.adaptivePredict(this._input, 163, this._ctx) ) {
+			switch ( this.interpreter.adaptivePredict(this._input, 161, this._ctx) ) {
 			case 1:
 				{
-				this.state = 1582;
+				this.state = 1555;
 				this.forUpdate();
 				}
 				break;
@@ -7311,15 +7125,15 @@ export class NextflowScriptParser extends Parser {
 	// @RuleVersion(0)
 	public forInit(): ForInitContext {
 		let _localctx: ForInitContext = new ForInitContext(this._ctx, this.state);
-		this.enterRule(_localctx, 266, NextflowScriptParser.RULE_forInit);
+		this.enterRule(_localctx, 260, NextflowScriptParser.RULE_forInit);
 		try {
-			this.state = 1587;
+			this.state = 1560;
 			this._errHandler.sync(this);
-			switch ( this.interpreter.adaptivePredict(this._input, 164, this._ctx) ) {
+			switch ( this.interpreter.adaptivePredict(this._input, 162, this._ctx) ) {
 			case 1:
 				this.enterOuterAlt(_localctx, 1);
 				{
-				this.state = 1585;
+				this.state = 1558;
 				this.localVariableDeclaration();
 				}
 				break;
@@ -7327,7 +7141,7 @@ export class NextflowScriptParser extends Parser {
 			case 2:
 				this.enterOuterAlt(_localctx, 2);
 				{
-				this.state = 1586;
+				this.state = 1559;
 				this.expressionList(false);
 				}
 				break;
@@ -7350,11 +7164,11 @@ export class NextflowScriptParser extends Parser {
 	// @RuleVersion(0)
 	public forUpdate(): ForUpdateContext {
 		let _localctx: ForUpdateContext = new ForUpdateContext(this._ctx, this.state);
-		this.enterRule(_localctx, 268, NextflowScriptParser.RULE_forUpdate);
+		this.enterRule(_localctx, 262, NextflowScriptParser.RULE_forUpdate);
 		try {
 			this.enterOuterAlt(_localctx, 1);
 			{
-			this.state = 1589;
+			this.state = 1562;
 			this.expressionList(false);
 			}
 		}
@@ -7375,15 +7189,15 @@ export class NextflowScriptParser extends Parser {
 	// @RuleVersion(0)
 	public castParExpression(): CastParExpressionContext {
 		let _localctx: CastParExpressionContext = new CastParExpressionContext(this._ctx, this.state);
-		this.enterRule(_localctx, 270, NextflowScriptParser.RULE_castParExpression);
+		this.enterRule(_localctx, 264, NextflowScriptParser.RULE_castParExpression);
 		try {
 			this.enterOuterAlt(_localctx, 1);
 			{
-			this.state = 1591;
+			this.state = 1564;
 			this.match(NextflowScriptParser.LPAREN);
-			this.state = 1592;
+			this.state = 1565;
 			this.type();
-			this.state = 1593;
+			this.state = 1566;
 			this.rparen();
 			}
 		}
@@ -7404,11 +7218,11 @@ export class NextflowScriptParser extends Parser {
 	// @RuleVersion(0)
 	public parExpression(): ParExpressionContext {
 		let _localctx: ParExpressionContext = new ParExpressionContext(this._ctx, this.state);
-		this.enterRule(_localctx, 272, NextflowScriptParser.RULE_parExpression);
+		this.enterRule(_localctx, 266, NextflowScriptParser.RULE_parExpression);
 		try {
 			this.enterOuterAlt(_localctx, 1);
 			{
-			this.state = 1595;
+			this.state = 1568;
 			this.expressionInPar();
 			}
 		}
@@ -7429,15 +7243,15 @@ export class NextflowScriptParser extends Parser {
 	// @RuleVersion(0)
 	public expressionInPar(): ExpressionInParContext {
 		let _localctx: ExpressionInParContext = new ExpressionInParContext(this._ctx, this.state);
-		this.enterRule(_localctx, 274, NextflowScriptParser.RULE_expressionInPar);
+		this.enterRule(_localctx, 268, NextflowScriptParser.RULE_expressionInPar);
 		try {
 			this.enterOuterAlt(_localctx, 1);
 			{
-			this.state = 1597;
+			this.state = 1570;
 			this.match(NextflowScriptParser.LPAREN);
-			this.state = 1598;
+			this.state = 1571;
 			this.enhancedStatementExpression();
-			this.state = 1599;
+			this.state = 1572;
 			this.rparen();
 			}
 		}
@@ -7458,32 +7272,30 @@ export class NextflowScriptParser extends Parser {
 	// @RuleVersion(0)
 	public expressionList(canSpread: boolean): ExpressionListContext {
 		let _localctx: ExpressionListContext = new ExpressionListContext(this._ctx, this.state, canSpread);
-		this.enterRule(_localctx, 276, NextflowScriptParser.RULE_expressionList);
+		this.enterRule(_localctx, 270, NextflowScriptParser.RULE_expressionList);
 		try {
 			let _alt: number;
 			this.enterOuterAlt(_localctx, 1);
 			{
-			this.state = 1601;
+			this.state = 1574;
 			this.expressionListElement(_localctx.canSpread);
-			this.state = 1608;
+			this.state = 1579;
 			this._errHandler.sync(this);
-			_alt = this.interpreter.adaptivePredict(this._input, 165, this._ctx);
+			_alt = this.interpreter.adaptivePredict(this._input, 163, this._ctx);
 			while (_alt !== 2 && _alt !== ATN.INVALID_ALT_NUMBER) {
 				if (_alt === 1) {
 					{
 					{
-					this.state = 1602;
+					this.state = 1575;
 					this.match(NextflowScriptParser.COMMA);
-					this.state = 1603;
-					this.nls();
-					this.state = 1604;
+					this.state = 1576;
 					this.expressionListElement(_localctx.canSpread);
 					}
 					}
 				}
-				this.state = 1610;
+				this.state = 1581;
 				this._errHandler.sync(this);
-				_alt = this.interpreter.adaptivePredict(this._input, 165, this._ctx);
+				_alt = this.interpreter.adaptivePredict(this._input, 163, this._ctx);
 			}
 			}
 		}
@@ -7504,21 +7316,21 @@ export class NextflowScriptParser extends Parser {
 	// @RuleVersion(0)
 	public expressionListElement(canSpread: boolean): ExpressionListElementContext {
 		let _localctx: ExpressionListElementContext = new ExpressionListElementContext(this._ctx, this.state, canSpread);
-		this.enterRule(_localctx, 278, NextflowScriptParser.RULE_expressionListElement);
+		this.enterRule(_localctx, 272, NextflowScriptParser.RULE_expressionListElement);
 		try {
 			this.enterOuterAlt(_localctx, 1);
 			{
-			this.state = 1612;
+			this.state = 1583;
 			this._errHandler.sync(this);
-			switch ( this.interpreter.adaptivePredict(this._input, 166, this._ctx) ) {
+			switch ( this.interpreter.adaptivePredict(this._input, 164, this._ctx) ) {
 			case 1:
 				{
-				this.state = 1611;
+				this.state = 1582;
 				this.match(NextflowScriptParser.MUL);
 				}
 				break;
 			}
-			this.state = 1614;
+			this.state = 1585;
 			this.expression(0);
 			}
 		}
@@ -7539,15 +7351,15 @@ export class NextflowScriptParser extends Parser {
 	// @RuleVersion(0)
 	public enhancedStatementExpression(): EnhancedStatementExpressionContext {
 		let _localctx: EnhancedStatementExpressionContext = new EnhancedStatementExpressionContext(this._ctx, this.state);
-		this.enterRule(_localctx, 280, NextflowScriptParser.RULE_enhancedStatementExpression);
+		this.enterRule(_localctx, 274, NextflowScriptParser.RULE_enhancedStatementExpression);
 		try {
-			this.state = 1618;
+			this.state = 1589;
 			this._errHandler.sync(this);
-			switch ( this.interpreter.adaptivePredict(this._input, 167, this._ctx) ) {
+			switch ( this.interpreter.adaptivePredict(this._input, 165, this._ctx) ) {
 			case 1:
 				this.enterOuterAlt(_localctx, 1);
 				{
-				this.state = 1616;
+				this.state = 1587;
 				this.statementExpression();
 				}
 				break;
@@ -7555,7 +7367,7 @@ export class NextflowScriptParser extends Parser {
 			case 2:
 				this.enterOuterAlt(_localctx, 2);
 				{
-				this.state = 1617;
+				this.state = 1588;
 				this.standardLambdaExpression();
 				}
 				break;
@@ -7578,12 +7390,12 @@ export class NextflowScriptParser extends Parser {
 	// @RuleVersion(0)
 	public statementExpression(): StatementExpressionContext {
 		let _localctx: StatementExpressionContext = new StatementExpressionContext(this._ctx, this.state);
-		this.enterRule(_localctx, 282, NextflowScriptParser.RULE_statementExpression);
+		this.enterRule(_localctx, 276, NextflowScriptParser.RULE_statementExpression);
 		try {
 			_localctx = new CommandExprAltContext(_localctx);
 			this.enterOuterAlt(_localctx, 1);
 			{
-			this.state = 1620;
+			this.state = 1591;
 			this.commandExpression();
 			}
 		}
@@ -7604,19 +7416,19 @@ export class NextflowScriptParser extends Parser {
 	// @RuleVersion(0)
 	public postfixExpression(): PostfixExpressionContext {
 		let _localctx: PostfixExpressionContext = new PostfixExpressionContext(this._ctx, this.state);
-		this.enterRule(_localctx, 284, NextflowScriptParser.RULE_postfixExpression);
+		this.enterRule(_localctx, 278, NextflowScriptParser.RULE_postfixExpression);
 		let _la: number;
 		try {
 			this.enterOuterAlt(_localctx, 1);
 			{
-			this.state = 1622;
+			this.state = 1593;
 			this.pathExpression();
-			this.state = 1624;
+			this.state = 1595;
 			this._errHandler.sync(this);
-			switch ( this.interpreter.adaptivePredict(this._input, 168, this._ctx) ) {
+			switch ( this.interpreter.adaptivePredict(this._input, 166, this._ctx) ) {
 			case 1:
 				{
-				this.state = 1623;
+				this.state = 1594;
 				_localctx._op = this._input.LT(1);
 				_la = this._input.LA(1);
 				if (!(_la === NextflowScriptParser.INC || _la === NextflowScriptParser.DEC)) {
@@ -7648,172 +7460,6 @@ export class NextflowScriptParser extends Parser {
 		}
 		return _localctx;
 	}
-	// @RuleVersion(0)
-	public switchExpression(): SwitchExpressionContext {
-		let _localctx: SwitchExpressionContext = new SwitchExpressionContext(this._ctx, this.state);
-		this.enterRule(_localctx, 286, NextflowScriptParser.RULE_switchExpression);
-
-		    this.inSwitchExpressionLevel++;
-
-		try {
-			let _alt: number;
-			this.enterOuterAlt(_localctx, 1);
-			{
-			this.state = 1626;
-			this.match(NextflowScriptParser.SWITCH);
-			this.state = 1627;
-			this.expressionInPar();
-			this.state = 1628;
-			this.nls();
-			this.state = 1629;
-			this.match(NextflowScriptParser.LBRACE);
-			this.state = 1630;
-			this.nls();
-			this.state = 1634;
-			this._errHandler.sync(this);
-			_alt = this.interpreter.adaptivePredict(this._input, 169, this._ctx);
-			while (_alt !== 2 && _alt !== ATN.INVALID_ALT_NUMBER) {
-				if (_alt === 1) {
-					{
-					{
-					this.state = 1631;
-					this.switchBlockStatementExpressionGroup();
-					}
-					}
-				}
-				this.state = 1636;
-				this._errHandler.sync(this);
-				_alt = this.interpreter.adaptivePredict(this._input, 169, this._ctx);
-			}
-			this.state = 1637;
-			this.nls();
-			this.state = 1638;
-			this.match(NextflowScriptParser.RBRACE);
-			}
-			this._ctx._stop = this._input.tryLT(-1);
-
-			    this.inSwitchExpressionLevel--;
-
-		}
-		catch (re) {
-			if (re instanceof RecognitionException) {
-				_localctx.exception = re;
-				this._errHandler.reportError(this, re);
-				this._errHandler.recover(this, re);
-			} else {
-				throw re;
-			}
-		}
-		finally {
-			this.exitRule();
-		}
-		return _localctx;
-	}
-	// @RuleVersion(0)
-	public switchBlockStatementExpressionGroup(): SwitchBlockStatementExpressionGroupContext {
-		let _localctx: SwitchBlockStatementExpressionGroupContext = new SwitchBlockStatementExpressionGroupContext(this._ctx, this.state);
-		this.enterRule(_localctx, 288, NextflowScriptParser.RULE_switchBlockStatementExpressionGroup);
-		try {
-			let _alt: number;
-			this.enterOuterAlt(_localctx, 1);
-			{
-			this.state = 1643;
-			this._errHandler.sync(this);
-			_alt = 1;
-			do {
-				switch (_alt) {
-				case 1:
-					{
-					{
-					this.state = 1640;
-					this.switchExpressionLabel();
-					this.state = 1641;
-					this.nls();
-					}
-					}
-					break;
-				default:
-					throw new NoViableAltException(this);
-				}
-				this.state = 1645;
-				this._errHandler.sync(this);
-				_alt = this.interpreter.adaptivePredict(this._input, 170, this._ctx);
-			} while (_alt !== 2 && _alt !== ATN.INVALID_ALT_NUMBER);
-			this.state = 1647;
-			this.blockStatements();
-			}
-		}
-		catch (re) {
-			if (re instanceof RecognitionException) {
-				_localctx.exception = re;
-				this._errHandler.reportError(this, re);
-				this._errHandler.recover(this, re);
-			} else {
-				throw re;
-			}
-		}
-		finally {
-			this.exitRule();
-		}
-		return _localctx;
-	}
-	// @RuleVersion(0)
-	public switchExpressionLabel(): SwitchExpressionLabelContext {
-		let _localctx: SwitchExpressionLabelContext = new SwitchExpressionLabelContext(this._ctx, this.state);
-		this.enterRule(_localctx, 290, NextflowScriptParser.RULE_switchExpressionLabel);
-		let _la: number;
-		try {
-			this.enterOuterAlt(_localctx, 1);
-			{
-			this.state = 1652;
-			this._errHandler.sync(this);
-			switch (this._input.LA(1)) {
-			case NextflowScriptParser.CASE:
-				{
-				this.state = 1649;
-				this.match(NextflowScriptParser.CASE);
-				this.state = 1650;
-				this.expressionList(true);
-				}
-				break;
-			case NextflowScriptParser.DEFAULT:
-				{
-				this.state = 1651;
-				this.match(NextflowScriptParser.DEFAULT);
-				}
-				break;
-			default:
-				throw new NoViableAltException(this);
-			}
-			this.state = 1654;
-			_localctx._ac = this._input.LT(1);
-			_la = this._input.LA(1);
-			if (!(_la === NextflowScriptParser.ARROW || _la === NextflowScriptParser.COLON)) {
-				_localctx._ac = this._errHandler.recoverInline(this);
-			} else {
-				if (this._input.LA(1) === Token.EOF) {
-					this.matchedEOF = true;
-				}
-
-				this._errHandler.reportMatch(this);
-				this.consume();
-			}
-			}
-		}
-		catch (re) {
-			if (re instanceof RecognitionException) {
-				_localctx.exception = re;
-				this._errHandler.reportError(this, re);
-				this._errHandler.recover(this, re);
-			} else {
-				throw re;
-			}
-		}
-		finally {
-			this.exitRule();
-		}
-		return _localctx;
-	}
 
 	public expression(): ExpressionContext;
 	public expression(_p: number): ExpressionContext;
@@ -7827,25 +7473,25 @@ export class NextflowScriptParser extends Parser {
 		let _parentState: number = this.state;
 		let _localctx: ExpressionContext = new ExpressionContext(this._ctx, _parentState);
 		let _prevctx: ExpressionContext = _localctx;
-		let _startState: number = 292;
-		this.enterRecursionRule(_localctx, 292, NextflowScriptParser.RULE_expression, _p);
+		let _startState: number = 280;
+		this.enterRecursionRule(_localctx, 280, NextflowScriptParser.RULE_expression, _p);
 		let _la: number;
 		try {
 			let _alt: number;
 			this.enterOuterAlt(_localctx, 1);
 			{
-			this.state = 1674;
+			this.state = 1614;
 			this._errHandler.sync(this);
-			switch ( this.interpreter.adaptivePredict(this._input, 172, this._ctx) ) {
+			switch ( this.interpreter.adaptivePredict(this._input, 167, this._ctx) ) {
 			case 1:
 				{
 				_localctx = new CastExprAltContext(_localctx);
 				this._ctx = _localctx;
 				_prevctx = _localctx;
 
-				this.state = 1657;
+				this.state = 1598;
 				this.castParExpression();
-				this.state = 1658;
+				this.state = 1599;
 				this.castOperandExpression();
 				}
 				break;
@@ -7855,27 +7501,17 @@ export class NextflowScriptParser extends Parser {
 				_localctx = new PostfixExprAltContext(_localctx);
 				this._ctx = _localctx;
 				_prevctx = _localctx;
-				this.state = 1660;
+				this.state = 1601;
 				this.postfixExpression();
 				}
 				break;
 
 			case 3:
 				{
-				_localctx = new SwitchExprAltContext(_localctx);
-				this._ctx = _localctx;
-				_prevctx = _localctx;
-				this.state = 1661;
-				this.switchExpression();
-				}
-				break;
-
-			case 4:
-				{
 				_localctx = new UnaryNotExprAltContext(_localctx);
 				this._ctx = _localctx;
 				_prevctx = _localctx;
-				this.state = 1662;
+				this.state = 1602;
 				_la = this._input.LA(1);
 				if (!(_la === NextflowScriptParser.NOT || _la === NextflowScriptParser.BITNOT)) {
 				this._errHandler.recoverInline(this);
@@ -7887,22 +7523,22 @@ export class NextflowScriptParser extends Parser {
 					this._errHandler.reportMatch(this);
 					this.consume();
 				}
-				this.state = 1663;
+				this.state = 1603;
 				this.nls();
-				this.state = 1664;
+				this.state = 1604;
 				this.expression(18);
 				}
 				break;
 
-			case 5:
+			case 4:
 				{
 				_localctx = new UnaryAddExprAltContext(_localctx);
 				this._ctx = _localctx;
 				_prevctx = _localctx;
-				this.state = 1666;
+				this.state = 1606;
 				(_localctx as UnaryAddExprAltContext)._op = this._input.LT(1);
 				_la = this._input.LA(1);
-				if (!(((((_la - 108)) & ~0x1F) === 0 && ((1 << (_la - 108)) & ((1 << (NextflowScriptParser.INC - 108)) | (1 << (NextflowScriptParser.DEC - 108)) | (1 << (NextflowScriptParser.ADD - 108)) | (1 << (NextflowScriptParser.SUB - 108)))) !== 0))) {
+				if (!(((((_la - 100)) & ~0x1F) === 0 && ((1 << (_la - 100)) & ((1 << (NextflowScriptParser.INC - 100)) | (1 << (NextflowScriptParser.DEC - 100)) | (1 << (NextflowScriptParser.ADD - 100)) | (1 << (NextflowScriptParser.SUB - 100)))) !== 0))) {
 					(_localctx as UnaryAddExprAltContext)._op = this._errHandler.recoverInline(this);
 				} else {
 					if (this._input.LA(1) === Token.EOF) {
@@ -7912,33 +7548,33 @@ export class NextflowScriptParser extends Parser {
 					this._errHandler.reportMatch(this);
 					this.consume();
 				}
-				this.state = 1667;
+				this.state = 1607;
 				this.expression(16);
 				}
 				break;
 
-			case 6:
+			case 5:
 				{
 				_localctx = new MultipleAssignmentExprAltContext(_localctx);
 				this._ctx = _localctx;
 				_prevctx = _localctx;
-				this.state = 1668;
+				this.state = 1608;
 				(_localctx as MultipleAssignmentExprAltContext)._left = this.variableNames();
-				this.state = 1669;
+				this.state = 1609;
 				this.nls();
-				this.state = 1670;
+				this.state = 1610;
 				(_localctx as MultipleAssignmentExprAltContext)._op = this.match(NextflowScriptParser.ASSIGN);
-				this.state = 1671;
+				this.state = 1611;
 				this.nls();
-				this.state = 1672;
+				this.state = 1612;
 				(_localctx as MultipleAssignmentExprAltContext)._right = this.statementExpression();
 				}
 				break;
 			}
 			this._ctx._stop = this._input.tryLT(-1);
-			this.state = 1786;
+			this.state = 1726;
 			this._errHandler.sync(this);
-			_alt = this.interpreter.adaptivePredict(this._input, 177, this._ctx);
+			_alt = this.interpreter.adaptivePredict(this._input, 172, this._ctx);
 			while (_alt !== 2 && _alt !== ATN.INVALID_ALT_NUMBER) {
 				if (_alt === 1) {
 					if (this._parseListeners != null) {
@@ -7946,23 +7582,23 @@ export class NextflowScriptParser extends Parser {
 					}
 					_prevctx = _localctx;
 					{
-					this.state = 1784;
+					this.state = 1724;
 					this._errHandler.sync(this);
-					switch ( this.interpreter.adaptivePredict(this._input, 176, this._ctx) ) {
+					switch ( this.interpreter.adaptivePredict(this._input, 171, this._ctx) ) {
 					case 1:
 						{
 						_localctx = new PowerExprAltContext(new ExpressionContext(_parentctx, _parentState));
 						(_localctx as PowerExprAltContext)._left = _prevctx;
 						this.pushNewRecursionContext(_localctx, _startState, NextflowScriptParser.RULE_expression);
-						this.state = 1676;
+						this.state = 1616;
 						if (!(this.precpred(this._ctx, 17))) {
 							throw this.createFailedPredicateException("this.precpred(this._ctx, 17)");
 						}
-						this.state = 1677;
+						this.state = 1617;
 						(_localctx as PowerExprAltContext)._op = this.match(NextflowScriptParser.POWER);
-						this.state = 1678;
+						this.state = 1618;
 						this.nls();
-						this.state = 1679;
+						this.state = 1619;
 						(_localctx as PowerExprAltContext)._right = this.expression(18);
 						}
 						break;
@@ -7972,16 +7608,16 @@ export class NextflowScriptParser extends Parser {
 						_localctx = new MultiplicativeExprAltContext(new ExpressionContext(_parentctx, _parentState));
 						(_localctx as MultiplicativeExprAltContext)._left = _prevctx;
 						this.pushNewRecursionContext(_localctx, _startState, NextflowScriptParser.RULE_expression);
-						this.state = 1681;
+						this.state = 1621;
 						if (!(this.precpred(this._ctx, 15))) {
 							throw this.createFailedPredicateException("this.precpred(this._ctx, 15)");
 						}
-						this.state = 1682;
+						this.state = 1622;
 						this.nls();
-						this.state = 1683;
+						this.state = 1623;
 						(_localctx as MultiplicativeExprAltContext)._op = this._input.LT(1);
 						_la = this._input.LA(1);
-						if (!(((((_la - 112)) & ~0x1F) === 0 && ((1 << (_la - 112)) & ((1 << (NextflowScriptParser.MUL - 112)) | (1 << (NextflowScriptParser.DIV - 112)) | (1 << (NextflowScriptParser.MOD - 112)))) !== 0))) {
+						if (!(((((_la - 104)) & ~0x1F) === 0 && ((1 << (_la - 104)) & ((1 << (NextflowScriptParser.MUL - 104)) | (1 << (NextflowScriptParser.DIV - 104)) | (1 << (NextflowScriptParser.MOD - 104)))) !== 0))) {
 							(_localctx as MultiplicativeExprAltContext)._op = this._errHandler.recoverInline(this);
 						} else {
 							if (this._input.LA(1) === Token.EOF) {
@@ -7991,9 +7627,9 @@ export class NextflowScriptParser extends Parser {
 							this._errHandler.reportMatch(this);
 							this.consume();
 						}
-						this.state = 1684;
+						this.state = 1624;
 						this.nls();
-						this.state = 1685;
+						this.state = 1625;
 						(_localctx as MultiplicativeExprAltContext)._right = this.expression(16);
 						}
 						break;
@@ -8003,11 +7639,11 @@ export class NextflowScriptParser extends Parser {
 						_localctx = new AdditiveExprAltContext(new ExpressionContext(_parentctx, _parentState));
 						(_localctx as AdditiveExprAltContext)._left = _prevctx;
 						this.pushNewRecursionContext(_localctx, _startState, NextflowScriptParser.RULE_expression);
-						this.state = 1687;
+						this.state = 1627;
 						if (!(this.precpred(this._ctx, 14))) {
 							throw this.createFailedPredicateException("this.precpred(this._ctx, 14)");
 						}
-						this.state = 1688;
+						this.state = 1628;
 						(_localctx as AdditiveExprAltContext)._op = this._input.LT(1);
 						_la = this._input.LA(1);
 						if (!(_la === NextflowScriptParser.ADD || _la === NextflowScriptParser.SUB)) {
@@ -8020,9 +7656,9 @@ export class NextflowScriptParser extends Parser {
 							this._errHandler.reportMatch(this);
 							this.consume();
 						}
-						this.state = 1689;
+						this.state = 1629;
 						this.nls();
-						this.state = 1690;
+						this.state = 1630;
 						(_localctx as AdditiveExprAltContext)._right = this.expression(15);
 						}
 						break;
@@ -8032,46 +7668,46 @@ export class NextflowScriptParser extends Parser {
 						_localctx = new ShiftExprAltContext(new ExpressionContext(_parentctx, _parentState));
 						(_localctx as ShiftExprAltContext)._left = _prevctx;
 						this.pushNewRecursionContext(_localctx, _startState, NextflowScriptParser.RULE_expression);
-						this.state = 1692;
+						this.state = 1632;
 						if (!(this.precpred(this._ctx, 13))) {
 							throw this.createFailedPredicateException("this.precpred(this._ctx, 13)");
 						}
-						this.state = 1693;
+						this.state = 1633;
 						this.nls();
-						this.state = 1704;
+						this.state = 1644;
 						this._errHandler.sync(this);
 						switch (this._input.LA(1)) {
 						case NextflowScriptParser.GT:
 						case NextflowScriptParser.LT:
 							{
-							this.state = 1701;
+							this.state = 1641;
 							this._errHandler.sync(this);
-							switch ( this.interpreter.adaptivePredict(this._input, 173, this._ctx) ) {
+							switch ( this.interpreter.adaptivePredict(this._input, 168, this._ctx) ) {
 							case 1:
 								{
-								this.state = 1694;
+								this.state = 1634;
 								(_localctx as ShiftExprAltContext)._dlOp = this.match(NextflowScriptParser.LT);
-								this.state = 1695;
+								this.state = 1635;
 								this.match(NextflowScriptParser.LT);
 								}
 								break;
 
 							case 2:
 								{
-								this.state = 1696;
+								this.state = 1636;
 								(_localctx as ShiftExprAltContext)._tgOp = this.match(NextflowScriptParser.GT);
-								this.state = 1697;
+								this.state = 1637;
 								this.match(NextflowScriptParser.GT);
-								this.state = 1698;
+								this.state = 1638;
 								this.match(NextflowScriptParser.GT);
 								}
 								break;
 
 							case 3:
 								{
-								this.state = 1699;
+								this.state = 1639;
 								(_localctx as ShiftExprAltContext)._dgOp = this.match(NextflowScriptParser.GT);
-								this.state = 1700;
+								this.state = 1640;
 								this.match(NextflowScriptParser.GT);
 								}
 								break;
@@ -8079,14 +7715,12 @@ export class NextflowScriptParser extends Parser {
 							}
 							break;
 						case NextflowScriptParser.RANGE_INCLUSIVE:
-						case NextflowScriptParser.RANGE_EXCLUSIVE_LEFT:
-						case NextflowScriptParser.RANGE_EXCLUSIVE_RIGHT:
-						case NextflowScriptParser.RANGE_EXCLUSIVE_FULL:
+						case NextflowScriptParser.RANGE_EXCLUSIVE:
 							{
-							this.state = 1703;
+							this.state = 1643;
 							(_localctx as ShiftExprAltContext)._rangeOp = this._input.LT(1);
 							_la = this._input.LA(1);
-							if (!(((((_la - 65)) & ~0x1F) === 0 && ((1 << (_la - 65)) & ((1 << (NextflowScriptParser.RANGE_INCLUSIVE - 65)) | (1 << (NextflowScriptParser.RANGE_EXCLUSIVE_LEFT - 65)) | (1 << (NextflowScriptParser.RANGE_EXCLUSIVE_RIGHT - 65)) | (1 << (NextflowScriptParser.RANGE_EXCLUSIVE_FULL - 65)))) !== 0))) {
+							if (!(_la === NextflowScriptParser.RANGE_INCLUSIVE || _la === NextflowScriptParser.RANGE_EXCLUSIVE)) {
 								(_localctx as ShiftExprAltContext)._rangeOp = this._errHandler.recoverInline(this);
 							} else {
 								if (this._input.LA(1) === Token.EOF) {
@@ -8101,9 +7735,9 @@ export class NextflowScriptParser extends Parser {
 						default:
 							throw new NoViableAltException(this);
 						}
-						this.state = 1706;
+						this.state = 1646;
 						this.nls();
-						this.state = 1707;
+						this.state = 1647;
 						(_localctx as ShiftExprAltContext)._right = this.expression(14);
 						}
 						break;
@@ -8113,16 +7747,16 @@ export class NextflowScriptParser extends Parser {
 						_localctx = new RelationalExprAltContext(new ExpressionContext(_parentctx, _parentState));
 						(_localctx as RelationalExprAltContext)._left = _prevctx;
 						this.pushNewRecursionContext(_localctx, _startState, NextflowScriptParser.RULE_expression);
-						this.state = 1709;
+						this.state = 1649;
 						if (!(this.precpred(this._ctx, 11))) {
 							throw this.createFailedPredicateException("this.precpred(this._ctx, 11)");
 						}
-						this.state = 1710;
+						this.state = 1650;
 						this.nls();
-						this.state = 1711;
+						this.state = 1651;
 						(_localctx as RelationalExprAltContext)._op = this._input.LT(1);
 						_la = this._input.LA(1);
-						if (!(_la === NextflowScriptParser.IN || ((((_la - 85)) & ~0x1F) === 0 && ((1 << (_la - 85)) & ((1 << (NextflowScriptParser.NOT_IN - 85)) | (1 << (NextflowScriptParser.GT - 85)) | (1 << (NextflowScriptParser.LT - 85)) | (1 << (NextflowScriptParser.LE - 85)) | (1 << (NextflowScriptParser.GE - 85)))) !== 0))) {
+						if (!(_la === NextflowScriptParser.IN || ((((_la - 77)) & ~0x1F) === 0 && ((1 << (_la - 77)) & ((1 << (NextflowScriptParser.NOT_IN - 77)) | (1 << (NextflowScriptParser.GT - 77)) | (1 << (NextflowScriptParser.LT - 77)) | (1 << (NextflowScriptParser.LE - 77)) | (1 << (NextflowScriptParser.GE - 77)))) !== 0))) {
 							(_localctx as RelationalExprAltContext)._op = this._errHandler.recoverInline(this);
 						} else {
 							if (this._input.LA(1) === Token.EOF) {
@@ -8132,9 +7766,9 @@ export class NextflowScriptParser extends Parser {
 							this._errHandler.reportMatch(this);
 							this.consume();
 						}
-						this.state = 1712;
+						this.state = 1652;
 						this.nls();
-						this.state = 1713;
+						this.state = 1653;
 						(_localctx as RelationalExprAltContext)._right = this.expression(12);
 						}
 						break;
@@ -8144,16 +7778,16 @@ export class NextflowScriptParser extends Parser {
 						_localctx = new EqualityExprAltContext(new ExpressionContext(_parentctx, _parentState));
 						(_localctx as EqualityExprAltContext)._left = _prevctx;
 						this.pushNewRecursionContext(_localctx, _startState, NextflowScriptParser.RULE_expression);
-						this.state = 1715;
+						this.state = 1655;
 						if (!(this.precpred(this._ctx, 10))) {
 							throw this.createFailedPredicateException("this.precpred(this._ctx, 10)");
 						}
-						this.state = 1716;
+						this.state = 1656;
 						this.nls();
-						this.state = 1717;
+						this.state = 1657;
 						(_localctx as EqualityExprAltContext)._op = this._input.LT(1);
 						_la = this._input.LA(1);
-						if (!(((((_la - 80)) & ~0x1F) === 0 && ((1 << (_la - 80)) & ((1 << (NextflowScriptParser.SPACESHIP - 80)) | (1 << (NextflowScriptParser.IDENTICAL - 80)) | (1 << (NextflowScriptParser.NOT_IDENTICAL - 80)) | (1 << (NextflowScriptParser.EQUAL - 80)) | (1 << (NextflowScriptParser.NOTEQUAL - 80)))) !== 0))) {
+						if (!(((((_la - 72)) & ~0x1F) === 0 && ((1 << (_la - 72)) & ((1 << (NextflowScriptParser.SPACESHIP - 72)) | (1 << (NextflowScriptParser.IDENTICAL - 72)) | (1 << (NextflowScriptParser.NOT_IDENTICAL - 72)) | (1 << (NextflowScriptParser.EQUAL - 72)) | (1 << (NextflowScriptParser.NOTEQUAL - 72)))) !== 0))) {
 							(_localctx as EqualityExprAltContext)._op = this._errHandler.recoverInline(this);
 						} else {
 							if (this._input.LA(1) === Token.EOF) {
@@ -8163,9 +7797,9 @@ export class NextflowScriptParser extends Parser {
 							this._errHandler.reportMatch(this);
 							this.consume();
 						}
-						this.state = 1718;
+						this.state = 1658;
 						this.nls();
-						this.state = 1719;
+						this.state = 1659;
 						(_localctx as EqualityExprAltContext)._right = this.expression(11);
 						}
 						break;
@@ -8175,13 +7809,13 @@ export class NextflowScriptParser extends Parser {
 						_localctx = new RegexExprAltContext(new ExpressionContext(_parentctx, _parentState));
 						(_localctx as RegexExprAltContext)._left = _prevctx;
 						this.pushNewRecursionContext(_localctx, _startState, NextflowScriptParser.RULE_expression);
-						this.state = 1721;
+						this.state = 1661;
 						if (!(this.precpred(this._ctx, 9))) {
 							throw this.createFailedPredicateException("this.precpred(this._ctx, 9)");
 						}
-						this.state = 1722;
+						this.state = 1662;
 						this.nls();
-						this.state = 1723;
+						this.state = 1663;
 						(_localctx as RegexExprAltContext)._op = this._input.LT(1);
 						_la = this._input.LA(1);
 						if (!(_la === NextflowScriptParser.REGEX_FIND || _la === NextflowScriptParser.REGEX_MATCH)) {
@@ -8194,9 +7828,9 @@ export class NextflowScriptParser extends Parser {
 							this._errHandler.reportMatch(this);
 							this.consume();
 						}
-						this.state = 1724;
+						this.state = 1664;
 						this.nls();
-						this.state = 1725;
+						this.state = 1665;
 						(_localctx as RegexExprAltContext)._right = this.expression(10);
 						}
 						break;
@@ -8206,17 +7840,17 @@ export class NextflowScriptParser extends Parser {
 						_localctx = new AndExprAltContext(new ExpressionContext(_parentctx, _parentState));
 						(_localctx as AndExprAltContext)._left = _prevctx;
 						this.pushNewRecursionContext(_localctx, _startState, NextflowScriptParser.RULE_expression);
-						this.state = 1727;
+						this.state = 1667;
 						if (!(this.precpred(this._ctx, 8))) {
 							throw this.createFailedPredicateException("this.precpred(this._ctx, 8)");
 						}
-						this.state = 1728;
+						this.state = 1668;
 						this.nls();
-						this.state = 1729;
+						this.state = 1669;
 						(_localctx as AndExprAltContext)._op = this.match(NextflowScriptParser.BITAND);
-						this.state = 1730;
+						this.state = 1670;
 						this.nls();
-						this.state = 1731;
+						this.state = 1671;
 						(_localctx as AndExprAltContext)._right = this.expression(9);
 						}
 						break;
@@ -8226,17 +7860,17 @@ export class NextflowScriptParser extends Parser {
 						_localctx = new ExclusiveOrExprAltContext(new ExpressionContext(_parentctx, _parentState));
 						(_localctx as ExclusiveOrExprAltContext)._left = _prevctx;
 						this.pushNewRecursionContext(_localctx, _startState, NextflowScriptParser.RULE_expression);
-						this.state = 1733;
+						this.state = 1673;
 						if (!(this.precpred(this._ctx, 7))) {
 							throw this.createFailedPredicateException("this.precpred(this._ctx, 7)");
 						}
-						this.state = 1734;
+						this.state = 1674;
 						this.nls();
-						this.state = 1735;
+						this.state = 1675;
 						(_localctx as ExclusiveOrExprAltContext)._op = this.match(NextflowScriptParser.XOR);
-						this.state = 1736;
+						this.state = 1676;
 						this.nls();
-						this.state = 1737;
+						this.state = 1677;
 						(_localctx as ExclusiveOrExprAltContext)._right = this.expression(8);
 						}
 						break;
@@ -8246,17 +7880,17 @@ export class NextflowScriptParser extends Parser {
 						_localctx = new InclusiveOrExprAltContext(new ExpressionContext(_parentctx, _parentState));
 						(_localctx as InclusiveOrExprAltContext)._left = _prevctx;
 						this.pushNewRecursionContext(_localctx, _startState, NextflowScriptParser.RULE_expression);
-						this.state = 1739;
+						this.state = 1679;
 						if (!(this.precpred(this._ctx, 6))) {
 							throw this.createFailedPredicateException("this.precpred(this._ctx, 6)");
 						}
-						this.state = 1740;
+						this.state = 1680;
 						this.nls();
-						this.state = 1741;
+						this.state = 1681;
 						(_localctx as InclusiveOrExprAltContext)._op = this.match(NextflowScriptParser.BITOR);
-						this.state = 1742;
+						this.state = 1682;
 						this.nls();
-						this.state = 1743;
+						this.state = 1683;
 						(_localctx as InclusiveOrExprAltContext)._right = this.expression(7);
 						}
 						break;
@@ -8266,17 +7900,17 @@ export class NextflowScriptParser extends Parser {
 						_localctx = new LogicalAndExprAltContext(new ExpressionContext(_parentctx, _parentState));
 						(_localctx as LogicalAndExprAltContext)._left = _prevctx;
 						this.pushNewRecursionContext(_localctx, _startState, NextflowScriptParser.RULE_expression);
-						this.state = 1745;
+						this.state = 1685;
 						if (!(this.precpred(this._ctx, 5))) {
 							throw this.createFailedPredicateException("this.precpred(this._ctx, 5)");
 						}
-						this.state = 1746;
+						this.state = 1686;
 						this.nls();
-						this.state = 1747;
+						this.state = 1687;
 						(_localctx as LogicalAndExprAltContext)._op = this.match(NextflowScriptParser.AND);
-						this.state = 1748;
+						this.state = 1688;
 						this.nls();
-						this.state = 1749;
+						this.state = 1689;
 						(_localctx as LogicalAndExprAltContext)._right = this.expression(6);
 						}
 						break;
@@ -8286,17 +7920,17 @@ export class NextflowScriptParser extends Parser {
 						_localctx = new LogicalOrExprAltContext(new ExpressionContext(_parentctx, _parentState));
 						(_localctx as LogicalOrExprAltContext)._left = _prevctx;
 						this.pushNewRecursionContext(_localctx, _startState, NextflowScriptParser.RULE_expression);
-						this.state = 1751;
+						this.state = 1691;
 						if (!(this.precpred(this._ctx, 4))) {
 							throw this.createFailedPredicateException("this.precpred(this._ctx, 4)");
 						}
-						this.state = 1752;
+						this.state = 1692;
 						this.nls();
-						this.state = 1753;
+						this.state = 1693;
 						(_localctx as LogicalOrExprAltContext)._op = this.match(NextflowScriptParser.OR);
-						this.state = 1754;
+						this.state = 1694;
 						this.nls();
-						this.state = 1755;
+						this.state = 1695;
 						(_localctx as LogicalOrExprAltContext)._right = this.expression(5);
 						}
 						break;
@@ -8306,43 +7940,43 @@ export class NextflowScriptParser extends Parser {
 						_localctx = new ConditionalExprAltContext(new ExpressionContext(_parentctx, _parentState));
 						(_localctx as ConditionalExprAltContext)._con = _prevctx;
 						this.pushNewRecursionContext(_localctx, _startState, NextflowScriptParser.RULE_expression);
-						this.state = 1757;
+						this.state = 1697;
 						if (!(this.precpred(this._ctx, 3))) {
 							throw this.createFailedPredicateException("this.precpred(this._ctx, 3)");
 						}
-						this.state = 1758;
+						this.state = 1698;
 						this.nls();
-						this.state = 1768;
+						this.state = 1708;
 						this._errHandler.sync(this);
 						switch (this._input.LA(1)) {
 						case NextflowScriptParser.QUESTION:
 							{
-							this.state = 1759;
+							this.state = 1699;
 							this.match(NextflowScriptParser.QUESTION);
-							this.state = 1760;
+							this.state = 1700;
 							this.nls();
-							this.state = 1761;
+							this.state = 1701;
 							(_localctx as ConditionalExprAltContext)._tb = this.expression(0);
-							this.state = 1762;
+							this.state = 1702;
 							this.nls();
-							this.state = 1763;
+							this.state = 1703;
 							this.match(NextflowScriptParser.COLON);
-							this.state = 1764;
+							this.state = 1704;
 							this.nls();
 							}
 							break;
 						case NextflowScriptParser.ELVIS:
 							{
-							this.state = 1766;
+							this.state = 1706;
 							this.match(NextflowScriptParser.ELVIS);
-							this.state = 1767;
+							this.state = 1707;
 							this.nls();
 							}
 							break;
 						default:
 							throw new NoViableAltException(this);
 						}
-						this.state = 1770;
+						this.state = 1710;
 						(_localctx as ConditionalExprAltContext)._fb = this.expression(3);
 						}
 						break;
@@ -8352,13 +7986,13 @@ export class NextflowScriptParser extends Parser {
 						_localctx = new RelationalExprAltContext(new ExpressionContext(_parentctx, _parentState));
 						(_localctx as RelationalExprAltContext)._left = _prevctx;
 						this.pushNewRecursionContext(_localctx, _startState, NextflowScriptParser.RULE_expression);
-						this.state = 1772;
+						this.state = 1712;
 						if (!(this.precpred(this._ctx, 12))) {
 							throw this.createFailedPredicateException("this.precpred(this._ctx, 12)");
 						}
-						this.state = 1773;
+						this.state = 1713;
 						this.nls();
-						this.state = 1774;
+						this.state = 1714;
 						(_localctx as RelationalExprAltContext)._op = this._input.LT(1);
 						_la = this._input.LA(1);
 						if (!(_la === NextflowScriptParser.AS || _la === NextflowScriptParser.INSTANCEOF || _la === NextflowScriptParser.NOT_INSTANCEOF)) {
@@ -8371,9 +8005,9 @@ export class NextflowScriptParser extends Parser {
 							this._errHandler.reportMatch(this);
 							this.consume();
 						}
-						this.state = 1775;
+						this.state = 1715;
 						this.nls();
-						this.state = 1776;
+						this.state = 1716;
 						this.type();
 						}
 						break;
@@ -8383,16 +8017,16 @@ export class NextflowScriptParser extends Parser {
 						_localctx = new AssignmentExprAltContext(new ExpressionContext(_parentctx, _parentState));
 						(_localctx as AssignmentExprAltContext)._left = _prevctx;
 						this.pushNewRecursionContext(_localctx, _startState, NextflowScriptParser.RULE_expression);
-						this.state = 1778;
+						this.state = 1718;
 						if (!(this.precpred(this._ctx, 1))) {
 							throw this.createFailedPredicateException("this.precpred(this._ctx, 1)");
 						}
-						this.state = 1779;
+						this.state = 1719;
 						this.nls();
-						this.state = 1780;
+						this.state = 1720;
 						(_localctx as AssignmentExprAltContext)._op = this._input.LT(1);
 						_la = this._input.LA(1);
-						if (!(_la === NextflowScriptParser.POWER_ASSIGN || _la === NextflowScriptParser.ASSIGN || ((((_la - 118)) & ~0x1F) === 0 && ((1 << (_la - 118)) & ((1 << (NextflowScriptParser.ADD_ASSIGN - 118)) | (1 << (NextflowScriptParser.SUB_ASSIGN - 118)) | (1 << (NextflowScriptParser.MUL_ASSIGN - 118)) | (1 << (NextflowScriptParser.DIV_ASSIGN - 118)) | (1 << (NextflowScriptParser.AND_ASSIGN - 118)) | (1 << (NextflowScriptParser.OR_ASSIGN - 118)) | (1 << (NextflowScriptParser.XOR_ASSIGN - 118)) | (1 << (NextflowScriptParser.MOD_ASSIGN - 118)) | (1 << (NextflowScriptParser.LSHIFT_ASSIGN - 118)) | (1 << (NextflowScriptParser.RSHIFT_ASSIGN - 118)) | (1 << (NextflowScriptParser.URSHIFT_ASSIGN - 118)) | (1 << (NextflowScriptParser.ELVIS_ASSIGN - 118)))) !== 0))) {
+						if (!(_la === NextflowScriptParser.POWER_ASSIGN || _la === NextflowScriptParser.ASSIGN || ((((_la - 110)) & ~0x1F) === 0 && ((1 << (_la - 110)) & ((1 << (NextflowScriptParser.ADD_ASSIGN - 110)) | (1 << (NextflowScriptParser.SUB_ASSIGN - 110)) | (1 << (NextflowScriptParser.MUL_ASSIGN - 110)) | (1 << (NextflowScriptParser.DIV_ASSIGN - 110)) | (1 << (NextflowScriptParser.AND_ASSIGN - 110)) | (1 << (NextflowScriptParser.OR_ASSIGN - 110)) | (1 << (NextflowScriptParser.XOR_ASSIGN - 110)) | (1 << (NextflowScriptParser.MOD_ASSIGN - 110)) | (1 << (NextflowScriptParser.LSHIFT_ASSIGN - 110)) | (1 << (NextflowScriptParser.RSHIFT_ASSIGN - 110)) | (1 << (NextflowScriptParser.URSHIFT_ASSIGN - 110)) | (1 << (NextflowScriptParser.ELVIS_ASSIGN - 110)))) !== 0))) {
 							(_localctx as AssignmentExprAltContext)._op = this._errHandler.recoverInline(this);
 						} else {
 							if (this._input.LA(1) === Token.EOF) {
@@ -8402,18 +8036,18 @@ export class NextflowScriptParser extends Parser {
 							this._errHandler.reportMatch(this);
 							this.consume();
 						}
-						this.state = 1781;
+						this.state = 1721;
 						this.nls();
-						this.state = 1782;
+						this.state = 1722;
 						(_localctx as AssignmentExprAltContext)._right = this.enhancedStatementExpression();
 						}
 						break;
 					}
 					}
 				}
-				this.state = 1788;
+				this.state = 1728;
 				this._errHandler.sync(this);
-				_alt = this.interpreter.adaptivePredict(this._input, 177, this._ctx);
+				_alt = this.interpreter.adaptivePredict(this._input, 172, this._ctx);
 			}
 			}
 		}
@@ -8434,19 +8068,19 @@ export class NextflowScriptParser extends Parser {
 	// @RuleVersion(0)
 	public castOperandExpression(): ExpressionContext {
 		let _localctx: ExpressionContext = new ExpressionContext(this._ctx, this.state);
-		this.enterRule(_localctx, 294, NextflowScriptParser.RULE_castOperandExpression);
+		this.enterRule(_localctx, 282, NextflowScriptParser.RULE_castOperandExpression);
 		let _la: number;
 		try {
-			this.state = 1799;
+			this.state = 1739;
 			this._errHandler.sync(this);
-			switch ( this.interpreter.adaptivePredict(this._input, 178, this._ctx) ) {
+			switch ( this.interpreter.adaptivePredict(this._input, 173, this._ctx) ) {
 			case 1:
 				_localctx = new CastExprAltContext(_localctx);
 				this.enterOuterAlt(_localctx, 1);
 				{
-				this.state = 1789;
+				this.state = 1729;
 				this.castParExpression();
-				this.state = 1790;
+				this.state = 1730;
 				this.castOperandExpression();
 				}
 				break;
@@ -8455,7 +8089,7 @@ export class NextflowScriptParser extends Parser {
 				_localctx = new PostfixExprAltContext(_localctx);
 				this.enterOuterAlt(_localctx, 2);
 				{
-				this.state = 1792;
+				this.state = 1732;
 				this.postfixExpression();
 				}
 				break;
@@ -8464,7 +8098,7 @@ export class NextflowScriptParser extends Parser {
 				_localctx = new UnaryNotExprAltContext(_localctx);
 				this.enterOuterAlt(_localctx, 3);
 				{
-				this.state = 1793;
+				this.state = 1733;
 				_la = this._input.LA(1);
 				if (!(_la === NextflowScriptParser.NOT || _la === NextflowScriptParser.BITNOT)) {
 				this._errHandler.recoverInline(this);
@@ -8476,9 +8110,9 @@ export class NextflowScriptParser extends Parser {
 					this._errHandler.reportMatch(this);
 					this.consume();
 				}
-				this.state = 1794;
+				this.state = 1734;
 				this.nls();
-				this.state = 1795;
+				this.state = 1735;
 				this.castOperandExpression();
 				}
 				break;
@@ -8487,10 +8121,10 @@ export class NextflowScriptParser extends Parser {
 				_localctx = new UnaryAddExprAltContext(_localctx);
 				this.enterOuterAlt(_localctx, 4);
 				{
-				this.state = 1797;
+				this.state = 1737;
 				(_localctx as UnaryAddExprAltContext)._op = this._input.LT(1);
 				_la = this._input.LA(1);
-				if (!(((((_la - 108)) & ~0x1F) === 0 && ((1 << (_la - 108)) & ((1 << (NextflowScriptParser.INC - 108)) | (1 << (NextflowScriptParser.DEC - 108)) | (1 << (NextflowScriptParser.ADD - 108)) | (1 << (NextflowScriptParser.SUB - 108)))) !== 0))) {
+				if (!(((((_la - 100)) & ~0x1F) === 0 && ((1 << (_la - 100)) & ((1 << (NextflowScriptParser.INC - 100)) | (1 << (NextflowScriptParser.DEC - 100)) | (1 << (NextflowScriptParser.ADD - 100)) | (1 << (NextflowScriptParser.SUB - 100)))) !== 0))) {
 					(_localctx as UnaryAddExprAltContext)._op = this._errHandler.recoverInline(this);
 				} else {
 					if (this._input.LA(1) === Token.EOF) {
@@ -8500,7 +8134,7 @@ export class NextflowScriptParser extends Parser {
 					this._errHandler.reportMatch(this);
 					this.consume();
 				}
-				this.state = 1798;
+				this.state = 1738;
 				this.castOperandExpression();
 				}
 				break;
@@ -8523,23 +8157,23 @@ export class NextflowScriptParser extends Parser {
 	// @RuleVersion(0)
 	public commandExpression(): CommandExpressionContext {
 		let _localctx: CommandExpressionContext = new CommandExpressionContext(this._ctx, this.state);
-		this.enterRule(_localctx, 296, NextflowScriptParser.RULE_commandExpression);
+		this.enterRule(_localctx, 284, NextflowScriptParser.RULE_commandExpression);
 		try {
 			let _alt: number;
 			this.enterOuterAlt(_localctx, 1);
 			{
-			this.state = 1801;
+			this.state = 1741;
 			_localctx._expression = this.expression(0);
-			this.state = 1805;
+			this.state = 1745;
 			this._errHandler.sync(this);
-			switch ( this.interpreter.adaptivePredict(this._input, 179, this._ctx) ) {
+			switch ( this.interpreter.adaptivePredict(this._input, 174, this._ctx) ) {
 			case 1:
 				{
-				this.state = 1802;
+				this.state = 1742;
 				if (!( !GroovyParser.isFollowingArgumentsOrClosure(_localctx._expression) )) {
 					throw this.createFailedPredicateException(" !GroovyParser.isFollowingArgumentsOrClosure($expression.ctx) ");
 				}
-				this.state = 1803;
+				this.state = 1743;
 				this.argumentList();
 				}
 				break;
@@ -8550,21 +8184,21 @@ export class NextflowScriptParser extends Parser {
 				}
 				break;
 			}
-			this.state = 1810;
+			this.state = 1750;
 			this._errHandler.sync(this);
-			_alt = this.interpreter.adaptivePredict(this._input, 180, this._ctx);
+			_alt = this.interpreter.adaptivePredict(this._input, 175, this._ctx);
 			while (_alt !== 2 && _alt !== ATN.INVALID_ALT_NUMBER) {
 				if (_alt === 1) {
 					{
 					{
-					this.state = 1807;
+					this.state = 1747;
 					this.commandArgument();
 					}
 					}
 				}
-				this.state = 1812;
+				this.state = 1752;
 				this._errHandler.sync(this);
-				_alt = this.interpreter.adaptivePredict(this._input, 180, this._ctx);
+				_alt = this.interpreter.adaptivePredict(this._input, 175, this._ctx);
 			}
 			}
 		}
@@ -8585,19 +8219,19 @@ export class NextflowScriptParser extends Parser {
 	// @RuleVersion(0)
 	public commandArgument(): CommandArgumentContext {
 		let _localctx: CommandArgumentContext = new CommandArgumentContext(this._ctx, this.state);
-		this.enterRule(_localctx, 298, NextflowScriptParser.RULE_commandArgument);
+		this.enterRule(_localctx, 286, NextflowScriptParser.RULE_commandArgument);
 		try {
 			let _alt: number;
 			this.enterOuterAlt(_localctx, 1);
 			{
-			this.state = 1813;
+			this.state = 1753;
 			this.commandPrimary();
-			this.state = 1820;
+			this.state = 1760;
 			this._errHandler.sync(this);
-			switch ( this.interpreter.adaptivePredict(this._input, 182, this._ctx) ) {
+			switch ( this.interpreter.adaptivePredict(this._input, 177, this._ctx) ) {
 			case 1:
 				{
-				this.state = 1815;
+				this.state = 1755;
 				this._errHandler.sync(this);
 				_alt = 1;
 				do {
@@ -8605,7 +8239,7 @@ export class NextflowScriptParser extends Parser {
 					case 1:
 						{
 						{
-						this.state = 1814;
+						this.state = 1754;
 						this.pathElement();
 						}
 						}
@@ -8613,16 +8247,16 @@ export class NextflowScriptParser extends Parser {
 					default:
 						throw new NoViableAltException(this);
 					}
-					this.state = 1817;
+					this.state = 1757;
 					this._errHandler.sync(this);
-					_alt = this.interpreter.adaptivePredict(this._input, 181, this._ctx);
+					_alt = this.interpreter.adaptivePredict(this._input, 176, this._ctx);
 				} while (_alt !== 2 && _alt !== ATN.INVALID_ALT_NUMBER);
 				}
 				break;
 
 			case 2:
 				{
-				this.state = 1819;
+				this.state = 1759;
 				this.argumentList();
 				}
 				break;
@@ -8646,48 +8280,48 @@ export class NextflowScriptParser extends Parser {
 	// @RuleVersion(0)
 	public pathExpression(): PathExpressionContext {
 		let _localctx: PathExpressionContext = new PathExpressionContext(this._ctx, this.state);
-		this.enterRule(_localctx, 300, NextflowScriptParser.RULE_pathExpression);
+		this.enterRule(_localctx, 288, NextflowScriptParser.RULE_pathExpression);
 		try {
 			let _alt: number;
 			this.enterOuterAlt(_localctx, 1);
 			{
-			this.state = 1825;
+			this.state = 1765;
 			this._errHandler.sync(this);
-			switch ( this.interpreter.adaptivePredict(this._input, 183, this._ctx) ) {
+			switch ( this.interpreter.adaptivePredict(this._input, 178, this._ctx) ) {
 			case 1:
 				{
-				this.state = 1822;
+				this.state = 1762;
 				this.primary();
 				}
 				break;
 
 			case 2:
 				{
-				this.state = 1823;
+				this.state = 1763;
 				if (!( this._input.LT(2).type == GroovyParser.DOT )) {
 					throw this.createFailedPredicateException(" this._input.LT(2).type == GroovyParser.DOT ");
 				}
-				this.state = 1824;
+				this.state = 1764;
 				this.match(NextflowScriptParser.STATIC);
 				}
 				break;
 			}
-			this.state = 1832;
+			this.state = 1772;
 			this._errHandler.sync(this);
-			_alt = this.interpreter.adaptivePredict(this._input, 184, this._ctx);
+			_alt = this.interpreter.adaptivePredict(this._input, 179, this._ctx);
 			while (_alt !== 2 && _alt !== ATN.INVALID_ALT_NUMBER) {
 				if (_alt === 1) {
 					{
 					{
-					this.state = 1827;
+					this.state = 1767;
 					_localctx._pathElement = this.pathElement();
 					 _localctx.t =  _localctx._pathElement.t; 
 					}
 					}
 				}
-				this.state = 1834;
+				this.state = 1774;
 				this._errHandler.sync(this);
-				_alt = this.interpreter.adaptivePredict(this._input, 184, this._ctx);
+				_alt = this.interpreter.adaptivePredict(this._input, 179, this._ctx);
 			}
 			}
 		}
@@ -8708,29 +8342,29 @@ export class NextflowScriptParser extends Parser {
 	// @RuleVersion(0)
 	public pathElement(): PathElementContext {
 		let _localctx: PathElementContext = new PathElementContext(this._ctx, this.state);
-		this.enterRule(_localctx, 302, NextflowScriptParser.RULE_pathElement);
+		this.enterRule(_localctx, 290, NextflowScriptParser.RULE_pathElement);
 		let _la: number;
 		try {
-			this.state = 1871;
+			this.state = 1811;
 			this._errHandler.sync(this);
-			switch ( this.interpreter.adaptivePredict(this._input, 188, this._ctx) ) {
+			switch ( this.interpreter.adaptivePredict(this._input, 183, this._ctx) ) {
 			case 1:
 				this.enterOuterAlt(_localctx, 1);
 				{
-				this.state = 1835;
+				this.state = 1775;
 				this.nls();
-				this.state = 1860;
+				this.state = 1800;
 				this._errHandler.sync(this);
-				switch ( this.interpreter.adaptivePredict(this._input, 187, this._ctx) ) {
+				switch ( this.interpreter.adaptivePredict(this._input, 182, this._ctx) ) {
 				case 1:
 					{
-					this.state = 1836;
+					this.state = 1776;
 					this.match(NextflowScriptParser.DOT);
-					this.state = 1837;
+					this.state = 1777;
 					this.nls();
-					this.state = 1838;
+					this.state = 1778;
 					this.match(NextflowScriptParser.NEW);
-					this.state = 1839;
+					this.state = 1779;
 					this.creator(1);
 					 _localctx.t =  6; 
 					}
@@ -8738,7 +8372,7 @@ export class NextflowScriptParser extends Parser {
 
 				case 2:
 					{
-					this.state = 1852;
+					this.state = 1792;
 					this._errHandler.sync(this);
 					switch (this._input.LA(1)) {
 					case NextflowScriptParser.SPREAD_DOT:
@@ -8746,9 +8380,9 @@ export class NextflowScriptParser extends Parser {
 					case NextflowScriptParser.SAFE_CHAIN_DOT:
 					case NextflowScriptParser.DOT:
 						{
-						this.state = 1842;
+						this.state = 1782;
 						_la = this._input.LA(1);
-						if (!(((((_la - 69)) & ~0x1F) === 0 && ((1 << (_la - 69)) & ((1 << (NextflowScriptParser.SPREAD_DOT - 69)) | (1 << (NextflowScriptParser.SAFE_DOT - 69)) | (1 << (NextflowScriptParser.SAFE_CHAIN_DOT - 69)) | (1 << (NextflowScriptParser.DOT - 69)))) !== 0))) {
+						if (!(((((_la - 62)) & ~0x1F) === 0 && ((1 << (_la - 62)) & ((1 << (NextflowScriptParser.SPREAD_DOT - 62)) | (1 << (NextflowScriptParser.SAFE_DOT - 62)) | (1 << (NextflowScriptParser.SAFE_CHAIN_DOT - 62)) | (1 << (NextflowScriptParser.DOT - 62)))) !== 0))) {
 						this._errHandler.recoverInline(this);
 						} else {
 							if (this._input.LA(1) === Token.EOF) {
@@ -8758,20 +8392,20 @@ export class NextflowScriptParser extends Parser {
 							this._errHandler.reportMatch(this);
 							this.consume();
 						}
-						this.state = 1843;
+						this.state = 1783;
 						this.nls();
-						this.state = 1846;
+						this.state = 1786;
 						this._errHandler.sync(this);
 						switch (this._input.LA(1)) {
 						case NextflowScriptParser.AT:
 							{
-							this.state = 1844;
+							this.state = 1784;
 							this.match(NextflowScriptParser.AT);
 							}
 							break;
 						case NextflowScriptParser.LT:
 							{
-							this.state = 1845;
+							this.state = 1785;
 							this.nonWildcardTypeArguments();
 							}
 							break;
@@ -8787,7 +8421,6 @@ export class NextflowScriptParser extends Parser {
 						case NextflowScriptParser.ABSTRACT:
 						case NextflowScriptParser.ASSERT:
 						case NextflowScriptParser.BREAK:
-						case NextflowScriptParser.YIELD:
 						case NextflowScriptParser.CASE:
 						case NextflowScriptParser.CATCH:
 						case NextflowScriptParser.CLASS:
@@ -8809,15 +8442,11 @@ export class NextflowScriptParser extends Parser {
 						case NextflowScriptParser.INTERFACE:
 						case NextflowScriptParser.NATIVE:
 						case NextflowScriptParser.NEW:
-						case NextflowScriptParser.NON_SEALED:
 						case NextflowScriptParser.PACKAGE:
-						case NextflowScriptParser.PERMITS:
 						case NextflowScriptParser.PRIVATE:
 						case NextflowScriptParser.PROTECTED:
 						case NextflowScriptParser.PUBLIC:
-						case NextflowScriptParser.RECORD:
 						case NextflowScriptParser.RETURN:
-						case NextflowScriptParser.SEALED:
 						case NextflowScriptParser.STATIC:
 						case NextflowScriptParser.STRICTFP:
 						case NextflowScriptParser.SUPER:
@@ -8844,24 +8473,24 @@ export class NextflowScriptParser extends Parser {
 						break;
 					case NextflowScriptParser.METHOD_POINTER:
 						{
-						this.state = 1848;
+						this.state = 1788;
 						this.match(NextflowScriptParser.METHOD_POINTER);
-						this.state = 1849;
+						this.state = 1789;
 						this.nls();
 						}
 						break;
 					case NextflowScriptParser.METHOD_REFERENCE:
 						{
-						this.state = 1850;
+						this.state = 1790;
 						this.match(NextflowScriptParser.METHOD_REFERENCE);
-						this.state = 1851;
+						this.state = 1791;
 						this.nls();
 						}
 						break;
 					default:
 						throw new NoViableAltException(this);
 					}
-					this.state = 1854;
+					this.state = 1794;
 					this.namePart();
 					 _localctx.t =  1; 
 					}
@@ -8869,7 +8498,7 @@ export class NextflowScriptParser extends Parser {
 
 				case 3:
 					{
-					this.state = 1857;
+					this.state = 1797;
 					this.closureOrLambdaExpression();
 					 _localctx.t =  3; 
 					}
@@ -8881,7 +8510,7 @@ export class NextflowScriptParser extends Parser {
 			case 2:
 				this.enterOuterAlt(_localctx, 2);
 				{
-				this.state = 1862;
+				this.state = 1802;
 				this.arguments();
 				 _localctx.t =  2; 
 				}
@@ -8890,7 +8519,7 @@ export class NextflowScriptParser extends Parser {
 			case 3:
 				this.enterOuterAlt(_localctx, 3);
 				{
-				this.state = 1865;
+				this.state = 1805;
 				this.indexPropertyArgs();
 				 _localctx.t =  4; 
 				}
@@ -8899,7 +8528,7 @@ export class NextflowScriptParser extends Parser {
 			case 4:
 				this.enterOuterAlt(_localctx, 4);
 				{
-				this.state = 1868;
+				this.state = 1808;
 				this.namedPropertyArgs();
 				 _localctx.t =  5; 
 				}
@@ -8923,37 +8552,37 @@ export class NextflowScriptParser extends Parser {
 	// @RuleVersion(0)
 	public namePart(): NamePartContext {
 		let _localctx: NamePartContext = new NamePartContext(this._ctx, this.state);
-		this.enterRule(_localctx, 304, NextflowScriptParser.RULE_namePart);
+		this.enterRule(_localctx, 292, NextflowScriptParser.RULE_namePart);
 		try {
 			this.enterOuterAlt(_localctx, 1);
 			{
-			this.state = 1877;
+			this.state = 1817;
 			this._errHandler.sync(this);
-			switch ( this.interpreter.adaptivePredict(this._input, 189, this._ctx) ) {
+			switch ( this.interpreter.adaptivePredict(this._input, 184, this._ctx) ) {
 			case 1:
 				{
-				this.state = 1873;
+				this.state = 1813;
 				this.identifier();
 				}
 				break;
 
 			case 2:
 				{
-				this.state = 1874;
+				this.state = 1814;
 				this.stringLiteral();
 				}
 				break;
 
 			case 3:
 				{
-				this.state = 1875;
+				this.state = 1815;
 				this.dynamicMemberName();
 				}
 				break;
 
 			case 4:
 				{
-				this.state = 1876;
+				this.state = 1816;
 				this.keywords();
 				}
 				break;
@@ -8977,22 +8606,22 @@ export class NextflowScriptParser extends Parser {
 	// @RuleVersion(0)
 	public dynamicMemberName(): DynamicMemberNameContext {
 		let _localctx: DynamicMemberNameContext = new DynamicMemberNameContext(this._ctx, this.state);
-		this.enterRule(_localctx, 306, NextflowScriptParser.RULE_dynamicMemberName);
+		this.enterRule(_localctx, 294, NextflowScriptParser.RULE_dynamicMemberName);
 		try {
-			this.state = 1881;
+			this.state = 1821;
 			this._errHandler.sync(this);
 			switch (this._input.LA(1)) {
 			case NextflowScriptParser.LPAREN:
 				this.enterOuterAlt(_localctx, 1);
 				{
-				this.state = 1879;
+				this.state = 1819;
 				this.parExpression();
 				}
 				break;
 			case NextflowScriptParser.GStringBegin:
 				this.enterOuterAlt(_localctx, 2);
 				{
-				this.state = 1880;
+				this.state = 1820;
 				this.gstring();
 				}
 				break;
@@ -9017,34 +8646,34 @@ export class NextflowScriptParser extends Parser {
 	// @RuleVersion(0)
 	public indexPropertyArgs(): IndexPropertyArgsContext {
 		let _localctx: IndexPropertyArgsContext = new IndexPropertyArgsContext(this._ctx, this.state);
-		this.enterRule(_localctx, 308, NextflowScriptParser.RULE_indexPropertyArgs);
+		this.enterRule(_localctx, 296, NextflowScriptParser.RULE_indexPropertyArgs);
 		let _la: number;
 		try {
 			this.enterOuterAlt(_localctx, 1);
 			{
-			this.state = 1883;
-			_la = this._input.LA(1);
-			if (!(_la === NextflowScriptParser.SAFE_INDEX || _la === NextflowScriptParser.LBRACK)) {
-			this._errHandler.recoverInline(this);
-			} else {
-				if (this._input.LA(1) === Token.EOF) {
-					this.matchedEOF = true;
-				}
-
-				this._errHandler.reportMatch(this);
-				this.consume();
-			}
-			this.state = 1885;
+			this.state = 1824;
 			this._errHandler.sync(this);
-			switch ( this.interpreter.adaptivePredict(this._input, 191, this._ctx) ) {
+			_la = this._input.LA(1);
+			if (_la === NextflowScriptParser.QUESTION) {
+				{
+				this.state = 1823;
+				this.match(NextflowScriptParser.QUESTION);
+				}
+			}
+
+			this.state = 1826;
+			this.match(NextflowScriptParser.LBRACK);
+			this.state = 1828;
+			this._errHandler.sync(this);
+			switch ( this.interpreter.adaptivePredict(this._input, 187, this._ctx) ) {
 			case 1:
 				{
-				this.state = 1884;
+				this.state = 1827;
 				this.expressionList(true);
 				}
 				break;
 			}
-			this.state = 1887;
+			this.state = 1830;
 			this.match(NextflowScriptParser.RBRACK);
 			}
 		}
@@ -9065,24 +8694,24 @@ export class NextflowScriptParser extends Parser {
 	// @RuleVersion(0)
 	public namedPropertyArgs(): NamedPropertyArgsContext {
 		let _localctx: NamedPropertyArgsContext = new NamedPropertyArgsContext(this._ctx, this.state);
-		this.enterRule(_localctx, 310, NextflowScriptParser.RULE_namedPropertyArgs);
+		this.enterRule(_localctx, 298, NextflowScriptParser.RULE_namedPropertyArgs);
 		let _la: number;
 		try {
 			this.enterOuterAlt(_localctx, 1);
 			{
-			this.state = 1889;
+			this.state = 1833;
+			this._errHandler.sync(this);
 			_la = this._input.LA(1);
-			if (!(_la === NextflowScriptParser.SAFE_INDEX || _la === NextflowScriptParser.LBRACK)) {
-			this._errHandler.recoverInline(this);
-			} else {
-				if (this._input.LA(1) === Token.EOF) {
-					this.matchedEOF = true;
+			if (_la === NextflowScriptParser.QUESTION) {
+				{
+				this.state = 1832;
+				this.match(NextflowScriptParser.QUESTION);
 				}
-
-				this._errHandler.reportMatch(this);
-				this.consume();
 			}
-			this.state = 1892;
+
+			this.state = 1835;
+			this.match(NextflowScriptParser.LBRACK);
+			this.state = 1838;
 			this._errHandler.sync(this);
 			switch (this._input.LA(1)) {
 			case NextflowScriptParser.StringLiteral:
@@ -9097,7 +8726,6 @@ export class NextflowScriptParser extends Parser {
 			case NextflowScriptParser.ABSTRACT:
 			case NextflowScriptParser.ASSERT:
 			case NextflowScriptParser.BREAK:
-			case NextflowScriptParser.YIELD:
 			case NextflowScriptParser.CASE:
 			case NextflowScriptParser.CATCH:
 			case NextflowScriptParser.CLASS:
@@ -9119,15 +8747,11 @@ export class NextflowScriptParser extends Parser {
 			case NextflowScriptParser.INTERFACE:
 			case NextflowScriptParser.NATIVE:
 			case NextflowScriptParser.NEW:
-			case NextflowScriptParser.NON_SEALED:
 			case NextflowScriptParser.PACKAGE:
-			case NextflowScriptParser.PERMITS:
 			case NextflowScriptParser.PRIVATE:
 			case NextflowScriptParser.PROTECTED:
 			case NextflowScriptParser.PUBLIC:
-			case NextflowScriptParser.RECORD:
 			case NextflowScriptParser.RETURN:
-			case NextflowScriptParser.SEALED:
 			case NextflowScriptParser.STATIC:
 			case NextflowScriptParser.STRICTFP:
 			case NextflowScriptParser.SUPER:
@@ -9146,24 +8770,25 @@ export class NextflowScriptParser extends Parser {
 			case NextflowScriptParser.BooleanLiteral:
 			case NextflowScriptParser.NullLiteral:
 			case NextflowScriptParser.LPAREN:
+			case NextflowScriptParser.LBRACK:
 			case NextflowScriptParser.MUL:
 			case NextflowScriptParser.CapitalizedIdentifier:
 			case NextflowScriptParser.Identifier:
 				{
-				this.state = 1890;
+				this.state = 1836;
 				this.namedPropertyArgList();
 				}
 				break;
 			case NextflowScriptParser.COLON:
 				{
-				this.state = 1891;
+				this.state = 1837;
 				this.match(NextflowScriptParser.COLON);
 				}
 				break;
 			default:
 				throw new NoViableAltException(this);
 			}
-			this.state = 1894;
+			this.state = 1840;
 			this.match(NextflowScriptParser.RBRACK);
 			}
 		}
@@ -9184,23 +8809,23 @@ export class NextflowScriptParser extends Parser {
 	// @RuleVersion(0)
 	public primary(): PrimaryContext {
 		let _localctx: PrimaryContext = new PrimaryContext(this._ctx, this.state);
-		this.enterRule(_localctx, 312, NextflowScriptParser.RULE_primary);
+		this.enterRule(_localctx, 300, NextflowScriptParser.RULE_primary);
 		try {
-			this.state = 1913;
+			this.state = 1859;
 			this._errHandler.sync(this);
-			switch ( this.interpreter.adaptivePredict(this._input, 194, this._ctx) ) {
+			switch ( this.interpreter.adaptivePredict(this._input, 191, this._ctx) ) {
 			case 1:
 				_localctx = new IdentifierPrmrAltContext(_localctx);
 				this.enterOuterAlt(_localctx, 1);
 				{
-				this.state = 1896;
+				this.state = 1842;
 				this.identifier();
-				this.state = 1898;
+				this.state = 1844;
 				this._errHandler.sync(this);
-				switch ( this.interpreter.adaptivePredict(this._input, 193, this._ctx) ) {
+				switch ( this.interpreter.adaptivePredict(this._input, 190, this._ctx) ) {
 				case 1:
 					{
-					this.state = 1897;
+					this.state = 1843;
 					this.typeArguments();
 					}
 					break;
@@ -9212,7 +8837,7 @@ export class NextflowScriptParser extends Parser {
 				_localctx = new LiteralPrmrAltContext(_localctx);
 				this.enterOuterAlt(_localctx, 2);
 				{
-				this.state = 1900;
+				this.state = 1846;
 				this.literal();
 				}
 				break;
@@ -9221,7 +8846,7 @@ export class NextflowScriptParser extends Parser {
 				_localctx = new GstringPrmrAltContext(_localctx);
 				this.enterOuterAlt(_localctx, 3);
 				{
-				this.state = 1901;
+				this.state = 1847;
 				this.gstring();
 				}
 				break;
@@ -9230,11 +8855,11 @@ export class NextflowScriptParser extends Parser {
 				_localctx = new NewPrmrAltContext(_localctx);
 				this.enterOuterAlt(_localctx, 4);
 				{
-				this.state = 1902;
+				this.state = 1848;
 				this.match(NextflowScriptParser.NEW);
-				this.state = 1903;
+				this.state = 1849;
 				this.nls();
-				this.state = 1904;
+				this.state = 1850;
 				this.creator(0);
 				}
 				break;
@@ -9243,7 +8868,7 @@ export class NextflowScriptParser extends Parser {
 				_localctx = new ThisPrmrAltContext(_localctx);
 				this.enterOuterAlt(_localctx, 5);
 				{
-				this.state = 1906;
+				this.state = 1852;
 				this.match(NextflowScriptParser.THIS);
 				}
 				break;
@@ -9252,7 +8877,7 @@ export class NextflowScriptParser extends Parser {
 				_localctx = new SuperPrmrAltContext(_localctx);
 				this.enterOuterAlt(_localctx, 6);
 				{
-				this.state = 1907;
+				this.state = 1853;
 				this.match(NextflowScriptParser.SUPER);
 				}
 				break;
@@ -9261,7 +8886,7 @@ export class NextflowScriptParser extends Parser {
 				_localctx = new ParenPrmrAltContext(_localctx);
 				this.enterOuterAlt(_localctx, 7);
 				{
-				this.state = 1908;
+				this.state = 1854;
 				this.parExpression();
 				}
 				break;
@@ -9270,7 +8895,7 @@ export class NextflowScriptParser extends Parser {
 				_localctx = new ClosureOrLambdaExpressionPrmrAltContext(_localctx);
 				this.enterOuterAlt(_localctx, 8);
 				{
-				this.state = 1909;
+				this.state = 1855;
 				this.closureOrLambdaExpression();
 				}
 				break;
@@ -9279,7 +8904,7 @@ export class NextflowScriptParser extends Parser {
 				_localctx = new ListPrmrAltContext(_localctx);
 				this.enterOuterAlt(_localctx, 9);
 				{
-				this.state = 1910;
+				this.state = 1856;
 				this.list();
 				}
 				break;
@@ -9288,7 +8913,7 @@ export class NextflowScriptParser extends Parser {
 				_localctx = new MapPrmrAltContext(_localctx);
 				this.enterOuterAlt(_localctx, 10);
 				{
-				this.state = 1911;
+				this.state = 1857;
 				this.map();
 				}
 				break;
@@ -9297,7 +8922,7 @@ export class NextflowScriptParser extends Parser {
 				_localctx = new BuiltInTypePrmrAltContext(_localctx);
 				this.enterOuterAlt(_localctx, 11);
 				{
-				this.state = 1912;
+				this.state = 1858;
 				this.builtInType();
 				}
 				break;
@@ -9320,57 +8945,64 @@ export class NextflowScriptParser extends Parser {
 	// @RuleVersion(0)
 	public namedPropertyArgPrimary(): PrimaryContext {
 		let _localctx: PrimaryContext = new PrimaryContext(this._ctx, this.state);
-		this.enterRule(_localctx, 314, NextflowScriptParser.RULE_namedPropertyArgPrimary);
+		this.enterRule(_localctx, 302, NextflowScriptParser.RULE_namedPropertyArgPrimary);
 		try {
-			this.state = 1919;
+			this.state = 1867;
 			this._errHandler.sync(this);
-			switch (this._input.LA(1)) {
-			case NextflowScriptParser.AS:
-			case NextflowScriptParser.IN:
-			case NextflowScriptParser.TRAIT:
-			case NextflowScriptParser.VAR:
-			case NextflowScriptParser.YIELD:
-			case NextflowScriptParser.PERMITS:
-			case NextflowScriptParser.RECORD:
-			case NextflowScriptParser.CapitalizedIdentifier:
-			case NextflowScriptParser.Identifier:
+			switch ( this.interpreter.adaptivePredict(this._input, 192, this._ctx) ) {
+			case 1:
 				_localctx = new IdentifierPrmrAltContext(_localctx);
 				this.enterOuterAlt(_localctx, 1);
 				{
-				this.state = 1915;
+				this.state = 1861;
 				this.identifier();
 				}
 				break;
-			case NextflowScriptParser.StringLiteral:
-			case NextflowScriptParser.IntegerLiteral:
-			case NextflowScriptParser.FloatingPointLiteral:
-			case NextflowScriptParser.BooleanLiteral:
-			case NextflowScriptParser.NullLiteral:
+
+			case 2:
 				_localctx = new LiteralPrmrAltContext(_localctx);
 				this.enterOuterAlt(_localctx, 2);
 				{
-				this.state = 1916;
+				this.state = 1862;
 				this.literal();
 				}
 				break;
-			case NextflowScriptParser.GStringBegin:
+
+			case 3:
 				_localctx = new GstringPrmrAltContext(_localctx);
 				this.enterOuterAlt(_localctx, 3);
 				{
-				this.state = 1917;
+				this.state = 1863;
 				this.gstring();
 				}
 				break;
-			case NextflowScriptParser.LPAREN:
+
+			case 4:
 				_localctx = new ParenPrmrAltContext(_localctx);
 				this.enterOuterAlt(_localctx, 4);
 				{
-				this.state = 1918;
+				this.state = 1864;
 				this.parExpression();
 				}
 				break;
-			default:
-				throw new NoViableAltException(this);
+
+			case 5:
+				_localctx = new ListPrmrAltContext(_localctx);
+				this.enterOuterAlt(_localctx, 5);
+				{
+				this.state = 1865;
+				this.list();
+				}
+				break;
+
+			case 6:
+				_localctx = new MapPrmrAltContext(_localctx);
+				this.enterOuterAlt(_localctx, 6);
+				{
+				this.state = 1866;
+				this.map();
+				}
+				break;
 			}
 		}
 		catch (re) {
@@ -9390,24 +9022,21 @@ export class NextflowScriptParser extends Parser {
 	// @RuleVersion(0)
 	public namedArgPrimary(): PrimaryContext {
 		let _localctx: PrimaryContext = new PrimaryContext(this._ctx, this.state);
-		this.enterRule(_localctx, 316, NextflowScriptParser.RULE_namedArgPrimary);
+		this.enterRule(_localctx, 304, NextflowScriptParser.RULE_namedArgPrimary);
 		try {
-			this.state = 1924;
+			this.state = 1872;
 			this._errHandler.sync(this);
 			switch (this._input.LA(1)) {
 			case NextflowScriptParser.AS:
 			case NextflowScriptParser.IN:
 			case NextflowScriptParser.TRAIT:
 			case NextflowScriptParser.VAR:
-			case NextflowScriptParser.YIELD:
-			case NextflowScriptParser.PERMITS:
-			case NextflowScriptParser.RECORD:
 			case NextflowScriptParser.CapitalizedIdentifier:
 			case NextflowScriptParser.Identifier:
 				_localctx = new IdentifierPrmrAltContext(_localctx);
 				this.enterOuterAlt(_localctx, 1);
 				{
-				this.state = 1921;
+				this.state = 1869;
 				this.identifier();
 				}
 				break;
@@ -9419,7 +9048,7 @@ export class NextflowScriptParser extends Parser {
 				_localctx = new LiteralPrmrAltContext(_localctx);
 				this.enterOuterAlt(_localctx, 2);
 				{
-				this.state = 1922;
+				this.state = 1870;
 				this.literal();
 				}
 				break;
@@ -9427,7 +9056,7 @@ export class NextflowScriptParser extends Parser {
 				_localctx = new GstringPrmrAltContext(_localctx);
 				this.enterOuterAlt(_localctx, 3);
 				{
-				this.state = 1923;
+				this.state = 1871;
 				this.gstring();
 				}
 				break;
@@ -9452,24 +9081,21 @@ export class NextflowScriptParser extends Parser {
 	// @RuleVersion(0)
 	public commandPrimary(): PrimaryContext {
 		let _localctx: PrimaryContext = new PrimaryContext(this._ctx, this.state);
-		this.enterRule(_localctx, 318, NextflowScriptParser.RULE_commandPrimary);
+		this.enterRule(_localctx, 306, NextflowScriptParser.RULE_commandPrimary);
 		try {
-			this.state = 1929;
+			this.state = 1877;
 			this._errHandler.sync(this);
 			switch (this._input.LA(1)) {
 			case NextflowScriptParser.AS:
 			case NextflowScriptParser.IN:
 			case NextflowScriptParser.TRAIT:
 			case NextflowScriptParser.VAR:
-			case NextflowScriptParser.YIELD:
-			case NextflowScriptParser.PERMITS:
-			case NextflowScriptParser.RECORD:
 			case NextflowScriptParser.CapitalizedIdentifier:
 			case NextflowScriptParser.Identifier:
 				_localctx = new IdentifierPrmrAltContext(_localctx);
 				this.enterOuterAlt(_localctx, 1);
 				{
-				this.state = 1926;
+				this.state = 1874;
 				this.identifier();
 				}
 				break;
@@ -9481,7 +9107,7 @@ export class NextflowScriptParser extends Parser {
 				_localctx = new LiteralPrmrAltContext(_localctx);
 				this.enterOuterAlt(_localctx, 2);
 				{
-				this.state = 1927;
+				this.state = 1875;
 				this.literal();
 				}
 				break;
@@ -9489,7 +9115,7 @@ export class NextflowScriptParser extends Parser {
 				_localctx = new GstringPrmrAltContext(_localctx);
 				this.enterOuterAlt(_localctx, 3);
 				{
-				this.state = 1928;
+				this.state = 1876;
 				this.gstring();
 				}
 				break;
@@ -9514,34 +9140,34 @@ export class NextflowScriptParser extends Parser {
 	// @RuleVersion(0)
 	public list(): ListContext {
 		let _localctx: ListContext = new ListContext(this._ctx, this.state);
-		this.enterRule(_localctx, 320, NextflowScriptParser.RULE_list);
+		this.enterRule(_localctx, 308, NextflowScriptParser.RULE_list);
 		let _la: number;
 		try {
 			this.enterOuterAlt(_localctx, 1);
 			{
-			this.state = 1931;
+			this.state = 1879;
 			this.match(NextflowScriptParser.LBRACK);
-			this.state = 1933;
+			this.state = 1881;
 			this._errHandler.sync(this);
-			switch ( this.interpreter.adaptivePredict(this._input, 198, this._ctx) ) {
+			switch ( this.interpreter.adaptivePredict(this._input, 195, this._ctx) ) {
 			case 1:
 				{
-				this.state = 1932;
+				this.state = 1880;
 				this.expressionList(true);
 				}
 				break;
 			}
-			this.state = 1936;
+			this.state = 1884;
 			this._errHandler.sync(this);
 			_la = this._input.LA(1);
 			if (_la === NextflowScriptParser.COMMA) {
 				{
-				this.state = 1935;
+				this.state = 1883;
 				this.match(NextflowScriptParser.COMMA);
 				}
 			}
 
-			this.state = 1938;
+			this.state = 1886;
 			this.match(NextflowScriptParser.RBRACK);
 			}
 		}
@@ -9562,14 +9188,14 @@ export class NextflowScriptParser extends Parser {
 	// @RuleVersion(0)
 	public map(): MapContext {
 		let _localctx: MapContext = new MapContext(this._ctx, this.state);
-		this.enterRule(_localctx, 322, NextflowScriptParser.RULE_map);
+		this.enterRule(_localctx, 310, NextflowScriptParser.RULE_map);
 		let _la: number;
 		try {
 			this.enterOuterAlt(_localctx, 1);
 			{
-			this.state = 1940;
+			this.state = 1888;
 			this.match(NextflowScriptParser.LBRACK);
-			this.state = 1946;
+			this.state = 1894;
 			this._errHandler.sync(this);
 			switch (this._input.LA(1)) {
 			case NextflowScriptParser.StringLiteral:
@@ -9584,7 +9210,6 @@ export class NextflowScriptParser extends Parser {
 			case NextflowScriptParser.ABSTRACT:
 			case NextflowScriptParser.ASSERT:
 			case NextflowScriptParser.BREAK:
-			case NextflowScriptParser.YIELD:
 			case NextflowScriptParser.CASE:
 			case NextflowScriptParser.CATCH:
 			case NextflowScriptParser.CLASS:
@@ -9606,15 +9231,11 @@ export class NextflowScriptParser extends Parser {
 			case NextflowScriptParser.INTERFACE:
 			case NextflowScriptParser.NATIVE:
 			case NextflowScriptParser.NEW:
-			case NextflowScriptParser.NON_SEALED:
 			case NextflowScriptParser.PACKAGE:
-			case NextflowScriptParser.PERMITS:
 			case NextflowScriptParser.PRIVATE:
 			case NextflowScriptParser.PROTECTED:
 			case NextflowScriptParser.PUBLIC:
-			case NextflowScriptParser.RECORD:
 			case NextflowScriptParser.RETURN:
-			case NextflowScriptParser.SEALED:
 			case NextflowScriptParser.STATIC:
 			case NextflowScriptParser.STRICTFP:
 			case NextflowScriptParser.SUPER:
@@ -9639,14 +9260,14 @@ export class NextflowScriptParser extends Parser {
 			case NextflowScriptParser.CapitalizedIdentifier:
 			case NextflowScriptParser.Identifier:
 				{
-				this.state = 1941;
+				this.state = 1889;
 				this.mapEntryList();
-				this.state = 1943;
+				this.state = 1891;
 				this._errHandler.sync(this);
 				_la = this._input.LA(1);
 				if (_la === NextflowScriptParser.COMMA) {
 					{
-					this.state = 1942;
+					this.state = 1890;
 					this.match(NextflowScriptParser.COMMA);
 					}
 				}
@@ -9655,14 +9276,14 @@ export class NextflowScriptParser extends Parser {
 				break;
 			case NextflowScriptParser.COLON:
 				{
-				this.state = 1945;
+				this.state = 1893;
 				this.match(NextflowScriptParser.COLON);
 				}
 				break;
 			default:
 				throw new NoViableAltException(this);
 			}
-			this.state = 1948;
+			this.state = 1896;
 			this.match(NextflowScriptParser.RBRACK);
 			}
 		}
@@ -9683,30 +9304,30 @@ export class NextflowScriptParser extends Parser {
 	// @RuleVersion(0)
 	public mapEntryList(): MapEntryListContext {
 		let _localctx: MapEntryListContext = new MapEntryListContext(this._ctx, this.state);
-		this.enterRule(_localctx, 324, NextflowScriptParser.RULE_mapEntryList);
+		this.enterRule(_localctx, 312, NextflowScriptParser.RULE_mapEntryList);
 		try {
 			let _alt: number;
 			this.enterOuterAlt(_localctx, 1);
 			{
-			this.state = 1950;
+			this.state = 1898;
 			this.mapEntry();
-			this.state = 1955;
+			this.state = 1903;
 			this._errHandler.sync(this);
-			_alt = this.interpreter.adaptivePredict(this._input, 202, this._ctx);
+			_alt = this.interpreter.adaptivePredict(this._input, 199, this._ctx);
 			while (_alt !== 2 && _alt !== ATN.INVALID_ALT_NUMBER) {
 				if (_alt === 1) {
 					{
 					{
-					this.state = 1951;
+					this.state = 1899;
 					this.match(NextflowScriptParser.COMMA);
-					this.state = 1952;
+					this.state = 1900;
 					this.mapEntry();
 					}
 					}
 				}
-				this.state = 1957;
+				this.state = 1905;
 				this._errHandler.sync(this);
-				_alt = this.interpreter.adaptivePredict(this._input, 202, this._ctx);
+				_alt = this.interpreter.adaptivePredict(this._input, 199, this._ctx);
 			}
 			}
 		}
@@ -9727,26 +9348,26 @@ export class NextflowScriptParser extends Parser {
 	// @RuleVersion(0)
 	public namedPropertyArgList(): MapEntryListContext {
 		let _localctx: MapEntryListContext = new MapEntryListContext(this._ctx, this.state);
-		this.enterRule(_localctx, 326, NextflowScriptParser.RULE_namedPropertyArgList);
+		this.enterRule(_localctx, 314, NextflowScriptParser.RULE_namedPropertyArgList);
 		let _la: number;
 		try {
 			this.enterOuterAlt(_localctx, 1);
 			{
-			this.state = 1958;
+			this.state = 1906;
 			this.namedPropertyArg();
-			this.state = 1963;
+			this.state = 1911;
 			this._errHandler.sync(this);
 			_la = this._input.LA(1);
 			while (_la === NextflowScriptParser.COMMA) {
 				{
 				{
-				this.state = 1959;
+				this.state = 1907;
 				this.match(NextflowScriptParser.COMMA);
-				this.state = 1960;
+				this.state = 1908;
 				this.namedPropertyArg();
 				}
 				}
-				this.state = 1965;
+				this.state = 1913;
 				this._errHandler.sync(this);
 				_la = this._input.LA(1);
 			}
@@ -9769,9 +9390,9 @@ export class NextflowScriptParser extends Parser {
 	// @RuleVersion(0)
 	public mapEntry(): MapEntryContext {
 		let _localctx: MapEntryContext = new MapEntryContext(this._ctx, this.state);
-		this.enterRule(_localctx, 328, NextflowScriptParser.RULE_mapEntry);
+		this.enterRule(_localctx, 316, NextflowScriptParser.RULE_mapEntry);
 		try {
-			this.state = 1976;
+			this.state = 1924;
 			this._errHandler.sync(this);
 			switch (this._input.LA(1)) {
 			case NextflowScriptParser.StringLiteral:
@@ -9786,7 +9407,6 @@ export class NextflowScriptParser extends Parser {
 			case NextflowScriptParser.ABSTRACT:
 			case NextflowScriptParser.ASSERT:
 			case NextflowScriptParser.BREAK:
-			case NextflowScriptParser.YIELD:
 			case NextflowScriptParser.CASE:
 			case NextflowScriptParser.CATCH:
 			case NextflowScriptParser.CLASS:
@@ -9808,15 +9428,11 @@ export class NextflowScriptParser extends Parser {
 			case NextflowScriptParser.INTERFACE:
 			case NextflowScriptParser.NATIVE:
 			case NextflowScriptParser.NEW:
-			case NextflowScriptParser.NON_SEALED:
 			case NextflowScriptParser.PACKAGE:
-			case NextflowScriptParser.PERMITS:
 			case NextflowScriptParser.PRIVATE:
 			case NextflowScriptParser.PROTECTED:
 			case NextflowScriptParser.PUBLIC:
-			case NextflowScriptParser.RECORD:
 			case NextflowScriptParser.RETURN:
-			case NextflowScriptParser.SEALED:
 			case NextflowScriptParser.STATIC:
 			case NextflowScriptParser.STRICTFP:
 			case NextflowScriptParser.SUPER:
@@ -9841,26 +9457,26 @@ export class NextflowScriptParser extends Parser {
 			case NextflowScriptParser.Identifier:
 				this.enterOuterAlt(_localctx, 1);
 				{
-				this.state = 1966;
+				this.state = 1914;
 				this.mapEntryLabel();
-				this.state = 1967;
+				this.state = 1915;
 				this.match(NextflowScriptParser.COLON);
-				this.state = 1968;
+				this.state = 1916;
 				this.nls();
-				this.state = 1969;
+				this.state = 1917;
 				this.expression(0);
 				}
 				break;
 			case NextflowScriptParser.MUL:
 				this.enterOuterAlt(_localctx, 2);
 				{
-				this.state = 1971;
+				this.state = 1919;
 				this.match(NextflowScriptParser.MUL);
-				this.state = 1972;
+				this.state = 1920;
 				this.match(NextflowScriptParser.COLON);
-				this.state = 1973;
+				this.state = 1921;
 				this.nls();
-				this.state = 1974;
+				this.state = 1922;
 				this.expression(0);
 				}
 				break;
@@ -9885,9 +9501,9 @@ export class NextflowScriptParser extends Parser {
 	// @RuleVersion(0)
 	public namedPropertyArg(): MapEntryContext {
 		let _localctx: MapEntryContext = new MapEntryContext(this._ctx, this.state);
-		this.enterRule(_localctx, 330, NextflowScriptParser.RULE_namedPropertyArg);
+		this.enterRule(_localctx, 318, NextflowScriptParser.RULE_namedPropertyArg);
 		try {
-			this.state = 1988;
+			this.state = 1936;
 			this._errHandler.sync(this);
 			switch (this._input.LA(1)) {
 			case NextflowScriptParser.StringLiteral:
@@ -9902,7 +9518,6 @@ export class NextflowScriptParser extends Parser {
 			case NextflowScriptParser.ABSTRACT:
 			case NextflowScriptParser.ASSERT:
 			case NextflowScriptParser.BREAK:
-			case NextflowScriptParser.YIELD:
 			case NextflowScriptParser.CASE:
 			case NextflowScriptParser.CATCH:
 			case NextflowScriptParser.CLASS:
@@ -9924,15 +9539,11 @@ export class NextflowScriptParser extends Parser {
 			case NextflowScriptParser.INTERFACE:
 			case NextflowScriptParser.NATIVE:
 			case NextflowScriptParser.NEW:
-			case NextflowScriptParser.NON_SEALED:
 			case NextflowScriptParser.PACKAGE:
-			case NextflowScriptParser.PERMITS:
 			case NextflowScriptParser.PRIVATE:
 			case NextflowScriptParser.PROTECTED:
 			case NextflowScriptParser.PUBLIC:
-			case NextflowScriptParser.RECORD:
 			case NextflowScriptParser.RETURN:
-			case NextflowScriptParser.SEALED:
 			case NextflowScriptParser.STATIC:
 			case NextflowScriptParser.STRICTFP:
 			case NextflowScriptParser.SUPER:
@@ -9951,30 +9562,31 @@ export class NextflowScriptParser extends Parser {
 			case NextflowScriptParser.BooleanLiteral:
 			case NextflowScriptParser.NullLiteral:
 			case NextflowScriptParser.LPAREN:
+			case NextflowScriptParser.LBRACK:
 			case NextflowScriptParser.CapitalizedIdentifier:
 			case NextflowScriptParser.Identifier:
 				this.enterOuterAlt(_localctx, 1);
 				{
-				this.state = 1978;
+				this.state = 1926;
 				this.namedPropertyArgLabel();
-				this.state = 1979;
+				this.state = 1927;
 				this.match(NextflowScriptParser.COLON);
-				this.state = 1980;
+				this.state = 1928;
 				this.nls();
-				this.state = 1981;
+				this.state = 1929;
 				this.expression(0);
 				}
 				break;
 			case NextflowScriptParser.MUL:
 				this.enterOuterAlt(_localctx, 2);
 				{
-				this.state = 1983;
+				this.state = 1931;
 				this.match(NextflowScriptParser.MUL);
-				this.state = 1984;
+				this.state = 1932;
 				this.match(NextflowScriptParser.COLON);
-				this.state = 1985;
+				this.state = 1933;
 				this.nls();
-				this.state = 1986;
+				this.state = 1934;
 				this.expression(0);
 				}
 				break;
@@ -9999,9 +9611,9 @@ export class NextflowScriptParser extends Parser {
 	// @RuleVersion(0)
 	public namedArg(): MapEntryContext {
 		let _localctx: MapEntryContext = new MapEntryContext(this._ctx, this.state);
-		this.enterRule(_localctx, 332, NextflowScriptParser.RULE_namedArg);
+		this.enterRule(_localctx, 320, NextflowScriptParser.RULE_namedArg);
 		try {
-			this.state = 2000;
+			this.state = 1948;
 			this._errHandler.sync(this);
 			switch (this._input.LA(1)) {
 			case NextflowScriptParser.StringLiteral:
@@ -10016,7 +9628,6 @@ export class NextflowScriptParser extends Parser {
 			case NextflowScriptParser.ABSTRACT:
 			case NextflowScriptParser.ASSERT:
 			case NextflowScriptParser.BREAK:
-			case NextflowScriptParser.YIELD:
 			case NextflowScriptParser.CASE:
 			case NextflowScriptParser.CATCH:
 			case NextflowScriptParser.CLASS:
@@ -10038,15 +9649,11 @@ export class NextflowScriptParser extends Parser {
 			case NextflowScriptParser.INTERFACE:
 			case NextflowScriptParser.NATIVE:
 			case NextflowScriptParser.NEW:
-			case NextflowScriptParser.NON_SEALED:
 			case NextflowScriptParser.PACKAGE:
-			case NextflowScriptParser.PERMITS:
 			case NextflowScriptParser.PRIVATE:
 			case NextflowScriptParser.PROTECTED:
 			case NextflowScriptParser.PUBLIC:
-			case NextflowScriptParser.RECORD:
 			case NextflowScriptParser.RETURN:
-			case NextflowScriptParser.SEALED:
 			case NextflowScriptParser.STATIC:
 			case NextflowScriptParser.STRICTFP:
 			case NextflowScriptParser.SUPER:
@@ -10068,26 +9675,26 @@ export class NextflowScriptParser extends Parser {
 			case NextflowScriptParser.Identifier:
 				this.enterOuterAlt(_localctx, 1);
 				{
-				this.state = 1990;
+				this.state = 1938;
 				this.namedArgLabel();
-				this.state = 1991;
+				this.state = 1939;
 				this.match(NextflowScriptParser.COLON);
-				this.state = 1992;
+				this.state = 1940;
 				this.nls();
-				this.state = 1993;
+				this.state = 1941;
 				this.expression(0);
 				}
 				break;
 			case NextflowScriptParser.MUL:
 				this.enterOuterAlt(_localctx, 2);
 				{
-				this.state = 1995;
+				this.state = 1943;
 				this.match(NextflowScriptParser.MUL);
-				this.state = 1996;
+				this.state = 1944;
 				this.match(NextflowScriptParser.COLON);
-				this.state = 1997;
+				this.state = 1945;
 				this.nls();
-				this.state = 1998;
+				this.state = 1946;
 				this.expression(0);
 				}
 				break;
@@ -10112,15 +9719,15 @@ export class NextflowScriptParser extends Parser {
 	// @RuleVersion(0)
 	public mapEntryLabel(): MapEntryLabelContext {
 		let _localctx: MapEntryLabelContext = new MapEntryLabelContext(this._ctx, this.state);
-		this.enterRule(_localctx, 334, NextflowScriptParser.RULE_mapEntryLabel);
+		this.enterRule(_localctx, 322, NextflowScriptParser.RULE_mapEntryLabel);
 		try {
-			this.state = 2004;
+			this.state = 1952;
 			this._errHandler.sync(this);
-			switch ( this.interpreter.adaptivePredict(this._input, 207, this._ctx) ) {
+			switch ( this.interpreter.adaptivePredict(this._input, 204, this._ctx) ) {
 			case 1:
 				this.enterOuterAlt(_localctx, 1);
 				{
-				this.state = 2002;
+				this.state = 1950;
 				this.keywords();
 				}
 				break;
@@ -10128,7 +9735,7 @@ export class NextflowScriptParser extends Parser {
 			case 2:
 				this.enterOuterAlt(_localctx, 2);
 				{
-				this.state = 2003;
+				this.state = 1951;
 				this.primary();
 				}
 				break;
@@ -10151,15 +9758,15 @@ export class NextflowScriptParser extends Parser {
 	// @RuleVersion(0)
 	public namedPropertyArgLabel(): MapEntryLabelContext {
 		let _localctx: MapEntryLabelContext = new MapEntryLabelContext(this._ctx, this.state);
-		this.enterRule(_localctx, 336, NextflowScriptParser.RULE_namedPropertyArgLabel);
+		this.enterRule(_localctx, 324, NextflowScriptParser.RULE_namedPropertyArgLabel);
 		try {
-			this.state = 2008;
+			this.state = 1956;
 			this._errHandler.sync(this);
-			switch ( this.interpreter.adaptivePredict(this._input, 208, this._ctx) ) {
+			switch ( this.interpreter.adaptivePredict(this._input, 205, this._ctx) ) {
 			case 1:
 				this.enterOuterAlt(_localctx, 1);
 				{
-				this.state = 2006;
+				this.state = 1954;
 				this.keywords();
 				}
 				break;
@@ -10167,7 +9774,7 @@ export class NextflowScriptParser extends Parser {
 			case 2:
 				this.enterOuterAlt(_localctx, 2);
 				{
-				this.state = 2007;
+				this.state = 1955;
 				this.namedPropertyArgPrimary();
 				}
 				break;
@@ -10190,15 +9797,15 @@ export class NextflowScriptParser extends Parser {
 	// @RuleVersion(0)
 	public namedArgLabel(): MapEntryLabelContext {
 		let _localctx: MapEntryLabelContext = new MapEntryLabelContext(this._ctx, this.state);
-		this.enterRule(_localctx, 338, NextflowScriptParser.RULE_namedArgLabel);
+		this.enterRule(_localctx, 326, NextflowScriptParser.RULE_namedArgLabel);
 		try {
-			this.state = 2012;
+			this.state = 1960;
 			this._errHandler.sync(this);
-			switch ( this.interpreter.adaptivePredict(this._input, 209, this._ctx) ) {
+			switch ( this.interpreter.adaptivePredict(this._input, 206, this._ctx) ) {
 			case 1:
 				this.enterOuterAlt(_localctx, 1);
 				{
-				this.state = 2010;
+				this.state = 1958;
 				this.keywords();
 				}
 				break;
@@ -10206,7 +9813,7 @@ export class NextflowScriptParser extends Parser {
 			case 2:
 				this.enterOuterAlt(_localctx, 2);
 				{
-				this.state = 2011;
+				this.state = 1959;
 				this.namedArgPrimary();
 				}
 				break;
@@ -10229,28 +9836,28 @@ export class NextflowScriptParser extends Parser {
 	// @RuleVersion(0)
 	public creator(t: number): CreatorContext {
 		let _localctx: CreatorContext = new CreatorContext(this._ctx, this.state, t);
-		this.enterRule(_localctx, 340, NextflowScriptParser.RULE_creator);
+		this.enterRule(_localctx, 328, NextflowScriptParser.RULE_creator);
 		try {
 			let _alt: number;
 			this.enterOuterAlt(_localctx, 1);
 			{
-			this.state = 2014;
+			this.state = 1962;
 			this.createdName();
-			this.state = 2030;
+			this.state = 1978;
 			this._errHandler.sync(this);
-			switch ( this.interpreter.adaptivePredict(this._input, 213, this._ctx) ) {
+			switch ( this.interpreter.adaptivePredict(this._input, 210, this._ctx) ) {
 			case 1:
 				{
-				this.state = 2015;
+				this.state = 1963;
 				this.nls();
-				this.state = 2016;
+				this.state = 1964;
 				this.arguments();
-				this.state = 2018;
+				this.state = 1966;
 				this._errHandler.sync(this);
-				switch ( this.interpreter.adaptivePredict(this._input, 210, this._ctx) ) {
+				switch ( this.interpreter.adaptivePredict(this._input, 207, this._ctx) ) {
 				case 1:
 					{
-					this.state = 2017;
+					this.state = 1965;
 					this.anonymousInnerClassDeclaration(0);
 					}
 					break;
@@ -10260,7 +9867,7 @@ export class NextflowScriptParser extends Parser {
 
 			case 2:
 				{
-				this.state = 2021;
+				this.state = 1969;
 				this._errHandler.sync(this);
 				_alt = 1;
 				do {
@@ -10268,7 +9875,7 @@ export class NextflowScriptParser extends Parser {
 					case 1:
 						{
 						{
-						this.state = 2020;
+						this.state = 1968;
 						this.dim();
 						}
 						}
@@ -10276,18 +9883,18 @@ export class NextflowScriptParser extends Parser {
 					default:
 						throw new NoViableAltException(this);
 					}
-					this.state = 2023;
+					this.state = 1971;
 					this._errHandler.sync(this);
-					_alt = this.interpreter.adaptivePredict(this._input, 211, this._ctx);
+					_alt = this.interpreter.adaptivePredict(this._input, 208, this._ctx);
 				} while (_alt !== 2 && _alt !== ATN.INVALID_ALT_NUMBER);
-				this.state = 2028;
+				this.state = 1976;
 				this._errHandler.sync(this);
-				switch ( this.interpreter.adaptivePredict(this._input, 212, this._ctx) ) {
+				switch ( this.interpreter.adaptivePredict(this._input, 209, this._ctx) ) {
 				case 1:
 					{
-					this.state = 2025;
+					this.state = 1973;
 					this.nls();
-					this.state = 2026;
+					this.state = 1974;
 					this.arrayInitializer();
 					}
 					break;
@@ -10314,25 +9921,25 @@ export class NextflowScriptParser extends Parser {
 	// @RuleVersion(0)
 	public dim(): DimContext {
 		let _localctx: DimContext = new DimContext(this._ctx, this.state);
-		this.enterRule(_localctx, 342, NextflowScriptParser.RULE_dim);
+		this.enterRule(_localctx, 330, NextflowScriptParser.RULE_dim);
 		try {
 			this.enterOuterAlt(_localctx, 1);
 			{
-			this.state = 2032;
+			this.state = 1980;
 			this.annotationsOpt();
-			this.state = 2033;
+			this.state = 1981;
 			this.match(NextflowScriptParser.LBRACK);
-			this.state = 2035;
+			this.state = 1983;
 			this._errHandler.sync(this);
-			switch ( this.interpreter.adaptivePredict(this._input, 214, this._ctx) ) {
+			switch ( this.interpreter.adaptivePredict(this._input, 211, this._ctx) ) {
 			case 1:
 				{
-				this.state = 2034;
+				this.state = 1982;
 				this.expression(0);
 				}
 				break;
 			}
-			this.state = 2037;
+			this.state = 1985;
 			this.match(NextflowScriptParser.RBRACK);
 			}
 		}
@@ -10353,27 +9960,27 @@ export class NextflowScriptParser extends Parser {
 	// @RuleVersion(0)
 	public arrayInitializer(): ArrayInitializerContext {
 		let _localctx: ArrayInitializerContext = new ArrayInitializerContext(this._ctx, this.state);
-		this.enterRule(_localctx, 344, NextflowScriptParser.RULE_arrayInitializer);
+		this.enterRule(_localctx, 332, NextflowScriptParser.RULE_arrayInitializer);
 		try {
 			this.enterOuterAlt(_localctx, 1);
 			{
-			this.state = 2039;
+			this.state = 1987;
 			this.match(NextflowScriptParser.LBRACE);
-			this.state = 2040;
+			this.state = 1988;
 			this.nls();
-			this.state = 2044;
+			this.state = 1992;
 			this._errHandler.sync(this);
-			switch ( this.interpreter.adaptivePredict(this._input, 215, this._ctx) ) {
+			switch ( this.interpreter.adaptivePredict(this._input, 212, this._ctx) ) {
 			case 1:
 				{
-				this.state = 2041;
+				this.state = 1989;
 				this.variableInitializers();
-				this.state = 2042;
+				this.state = 1990;
 				this.nls();
 				}
 				break;
 			}
-			this.state = 2046;
+			this.state = 1994;
 			this.match(NextflowScriptParser.RBRACE);
 			}
 		}
@@ -10394,11 +10001,11 @@ export class NextflowScriptParser extends Parser {
 	// @RuleVersion(0)
 	public anonymousInnerClassDeclaration(t: number): AnonymousInnerClassDeclarationContext {
 		let _localctx: AnonymousInnerClassDeclarationContext = new AnonymousInnerClassDeclarationContext(this._ctx, this.state, t);
-		this.enterRule(_localctx, 346, NextflowScriptParser.RULE_anonymousInnerClassDeclaration);
+		this.enterRule(_localctx, 334, NextflowScriptParser.RULE_anonymousInnerClassDeclaration);
 		try {
 			this.enterOuterAlt(_localctx, 1);
 			{
-			this.state = 2048;
+			this.state = 1996;
 			this.classBody(0);
 			}
 		}
@@ -10419,18 +10026,18 @@ export class NextflowScriptParser extends Parser {
 	// @RuleVersion(0)
 	public createdName(): CreatedNameContext {
 		let _localctx: CreatedNameContext = new CreatedNameContext(this._ctx, this.state);
-		this.enterRule(_localctx, 348, NextflowScriptParser.RULE_createdName);
+		this.enterRule(_localctx, 336, NextflowScriptParser.RULE_createdName);
 		try {
 			this.enterOuterAlt(_localctx, 1);
 			{
-			this.state = 2050;
+			this.state = 1998;
 			this.annotationsOpt();
-			this.state = 2056;
+			this.state = 2004;
 			this._errHandler.sync(this);
 			switch (this._input.LA(1)) {
 			case NextflowScriptParser.BuiltInPrimitiveType:
 				{
-				this.state = 2051;
+				this.state = 1999;
 				this.primitiveType();
 				}
 				break;
@@ -10439,20 +10046,17 @@ export class NextflowScriptParser extends Parser {
 			case NextflowScriptParser.IN:
 			case NextflowScriptParser.TRAIT:
 			case NextflowScriptParser.VAR:
-			case NextflowScriptParser.YIELD:
-			case NextflowScriptParser.PERMITS:
-			case NextflowScriptParser.RECORD:
 			case NextflowScriptParser.CapitalizedIdentifier:
 			case NextflowScriptParser.Identifier:
 				{
-				this.state = 2052;
+				this.state = 2000;
 				this.qualifiedClassName();
-				this.state = 2054;
+				this.state = 2002;
 				this._errHandler.sync(this);
-				switch ( this.interpreter.adaptivePredict(this._input, 216, this._ctx) ) {
+				switch ( this.interpreter.adaptivePredict(this._input, 213, this._ctx) ) {
 				case 1:
 					{
-					this.state = 2053;
+					this.state = 2001;
 					this.typeArgumentsOrDiamond();
 					}
 					break;
@@ -10481,19 +10085,19 @@ export class NextflowScriptParser extends Parser {
 	// @RuleVersion(0)
 	public nonWildcardTypeArguments(): NonWildcardTypeArgumentsContext {
 		let _localctx: NonWildcardTypeArgumentsContext = new NonWildcardTypeArgumentsContext(this._ctx, this.state);
-		this.enterRule(_localctx, 350, NextflowScriptParser.RULE_nonWildcardTypeArguments);
+		this.enterRule(_localctx, 338, NextflowScriptParser.RULE_nonWildcardTypeArguments);
 		try {
 			this.enterOuterAlt(_localctx, 1);
 			{
-			this.state = 2058;
+			this.state = 2006;
 			this.match(NextflowScriptParser.LT);
-			this.state = 2059;
+			this.state = 2007;
 			this.nls();
-			this.state = 2060;
+			this.state = 2008;
 			this.typeList();
-			this.state = 2061;
+			this.state = 2009;
 			this.nls();
-			this.state = 2062;
+			this.state = 2010;
 			this.match(NextflowScriptParser.GT);
 			}
 		}
@@ -10514,17 +10118,17 @@ export class NextflowScriptParser extends Parser {
 	// @RuleVersion(0)
 	public typeArgumentsOrDiamond(): TypeArgumentsOrDiamondContext {
 		let _localctx: TypeArgumentsOrDiamondContext = new TypeArgumentsOrDiamondContext(this._ctx, this.state);
-		this.enterRule(_localctx, 352, NextflowScriptParser.RULE_typeArgumentsOrDiamond);
+		this.enterRule(_localctx, 340, NextflowScriptParser.RULE_typeArgumentsOrDiamond);
 		try {
-			this.state = 2067;
+			this.state = 2015;
 			this._errHandler.sync(this);
-			switch ( this.interpreter.adaptivePredict(this._input, 218, this._ctx) ) {
+			switch ( this.interpreter.adaptivePredict(this._input, 215, this._ctx) ) {
 			case 1:
 				this.enterOuterAlt(_localctx, 1);
 				{
-				this.state = 2064;
+				this.state = 2012;
 				this.match(NextflowScriptParser.LT);
-				this.state = 2065;
+				this.state = 2013;
 				this.match(NextflowScriptParser.GT);
 				}
 				break;
@@ -10532,7 +10136,7 @@ export class NextflowScriptParser extends Parser {
 			case 2:
 				this.enterOuterAlt(_localctx, 2);
 				{
-				this.state = 2066;
+				this.state = 2014;
 				this.typeArguments();
 				}
 				break;
@@ -10555,34 +10159,34 @@ export class NextflowScriptParser extends Parser {
 	// @RuleVersion(0)
 	public arguments(): ArgumentsContext {
 		let _localctx: ArgumentsContext = new ArgumentsContext(this._ctx, this.state);
-		this.enterRule(_localctx, 354, NextflowScriptParser.RULE_arguments);
+		this.enterRule(_localctx, 342, NextflowScriptParser.RULE_arguments);
 		let _la: number;
 		try {
 			this.enterOuterAlt(_localctx, 1);
 			{
-			this.state = 2069;
+			this.state = 2017;
 			this.match(NextflowScriptParser.LPAREN);
-			this.state = 2071;
+			this.state = 2019;
 			this._errHandler.sync(this);
-			switch ( this.interpreter.adaptivePredict(this._input, 219, this._ctx) ) {
+			switch ( this.interpreter.adaptivePredict(this._input, 216, this._ctx) ) {
 			case 1:
 				{
-				this.state = 2070;
+				this.state = 2018;
 				this.enhancedArgumentListInPar();
 				}
 				break;
 			}
-			this.state = 2074;
+			this.state = 2022;
 			this._errHandler.sync(this);
 			_la = this._input.LA(1);
 			if (_la === NextflowScriptParser.COMMA) {
 				{
-				this.state = 2073;
+				this.state = 2021;
 				this.match(NextflowScriptParser.COMMA);
 				}
 			}
 
-			this.state = 2076;
+			this.state = 2024;
 			this.rparen();
 			}
 		}
@@ -10603,32 +10207,76 @@ export class NextflowScriptParser extends Parser {
 	// @RuleVersion(0)
 	public argumentList(): EnhancedArgumentListInParContext {
 		let _localctx: EnhancedArgumentListInParContext = new EnhancedArgumentListInParContext(this._ctx, this.state);
-		this.enterRule(_localctx, 356, NextflowScriptParser.RULE_argumentList);
+		this.enterRule(_localctx, 344, NextflowScriptParser.RULE_argumentList);
 		try {
 			let _alt: number;
 			this.enterOuterAlt(_localctx, 1);
 			{
-			this.state = 2078;
+			this.state = 2026;
 			this.firstArgumentListElement();
-			this.state = 2085;
+			this.state = 2033;
 			this._errHandler.sync(this);
-			_alt = this.interpreter.adaptivePredict(this._input, 221, this._ctx);
+			_alt = this.interpreter.adaptivePredict(this._input, 218, this._ctx);
 			while (_alt !== 2 && _alt !== ATN.INVALID_ALT_NUMBER) {
 				if (_alt === 1) {
 					{
 					{
-					this.state = 2079;
+					this.state = 2027;
 					this.match(NextflowScriptParser.COMMA);
-					this.state = 2080;
+					this.state = 2028;
 					this.nls();
-					this.state = 2081;
+					this.state = 2029;
 					this.argumentListElement();
 					}
 					}
 				}
-				this.state = 2087;
+				this.state = 2035;
 				this._errHandler.sync(this);
-				_alt = this.interpreter.adaptivePredict(this._input, 221, this._ctx);
+				_alt = this.interpreter.adaptivePredict(this._input, 218, this._ctx);
+			}
+			}
+		}
+		catch (re) {
+			if (re instanceof RecognitionException) {
+				_localctx.exception = re;
+				this._errHandler.reportError(this, re);
+				this._errHandler.recover(this, re);
+			} else {
+				throw re;
+			}
+		}
+		finally {
+			this.exitRule();
+		}
+		return _localctx;
+	}
+	// @RuleVersion(0)
+	public enhancedArgumentList(): EnhancedArgumentListInParContext {
+		let _localctx: EnhancedArgumentListInParContext = new EnhancedArgumentListInParContext(this._ctx, this.state);
+		this.enterRule(_localctx, 346, NextflowScriptParser.RULE_enhancedArgumentList);
+		let _la: number;
+		try {
+			this.enterOuterAlt(_localctx, 1);
+			{
+			this.state = 2036;
+			this.firstEnhancedArgumentListElement();
+			this.state = 2043;
+			this._errHandler.sync(this);
+			_la = this._input.LA(1);
+			while (_la === NextflowScriptParser.COMMA) {
+				{
+				{
+				this.state = 2037;
+				this.match(NextflowScriptParser.COMMA);
+				this.state = 2038;
+				this.nls();
+				this.state = 2039;
+				this.enhancedArgumentListElement();
+				}
+				}
+				this.state = 2045;
+				this._errHandler.sync(this);
+				_la = this._input.LA(1);
 			}
 			}
 		}
@@ -10649,32 +10297,32 @@ export class NextflowScriptParser extends Parser {
 	// @RuleVersion(0)
 	public enhancedArgumentListInPar(): EnhancedArgumentListInParContext {
 		let _localctx: EnhancedArgumentListInParContext = new EnhancedArgumentListInParContext(this._ctx, this.state);
-		this.enterRule(_localctx, 358, NextflowScriptParser.RULE_enhancedArgumentListInPar);
+		this.enterRule(_localctx, 348, NextflowScriptParser.RULE_enhancedArgumentListInPar);
 		try {
 			let _alt: number;
 			this.enterOuterAlt(_localctx, 1);
 			{
-			this.state = 2088;
+			this.state = 2046;
 			this.enhancedArgumentListElement();
-			this.state = 2095;
+			this.state = 2053;
 			this._errHandler.sync(this);
-			_alt = this.interpreter.adaptivePredict(this._input, 222, this._ctx);
+			_alt = this.interpreter.adaptivePredict(this._input, 220, this._ctx);
 			while (_alt !== 2 && _alt !== ATN.INVALID_ALT_NUMBER) {
 				if (_alt === 1) {
 					{
 					{
-					this.state = 2089;
+					this.state = 2047;
 					this.match(NextflowScriptParser.COMMA);
-					this.state = 2090;
+					this.state = 2048;
 					this.nls();
-					this.state = 2091;
+					this.state = 2049;
 					this.enhancedArgumentListElement();
 					}
 					}
 				}
-				this.state = 2097;
+				this.state = 2055;
 				this._errHandler.sync(this);
-				_alt = this.interpreter.adaptivePredict(this._input, 222, this._ctx);
+				_alt = this.interpreter.adaptivePredict(this._input, 220, this._ctx);
 			}
 			}
 		}
@@ -10695,15 +10343,15 @@ export class NextflowScriptParser extends Parser {
 	// @RuleVersion(0)
 	public firstArgumentListElement(): EnhancedArgumentListElementContext {
 		let _localctx: EnhancedArgumentListElementContext = new EnhancedArgumentListElementContext(this._ctx, this.state);
-		this.enterRule(_localctx, 360, NextflowScriptParser.RULE_firstArgumentListElement);
+		this.enterRule(_localctx, 350, NextflowScriptParser.RULE_firstArgumentListElement);
 		try {
-			this.state = 2100;
+			this.state = 2058;
 			this._errHandler.sync(this);
-			switch ( this.interpreter.adaptivePredict(this._input, 223, this._ctx) ) {
+			switch ( this.interpreter.adaptivePredict(this._input, 221, this._ctx) ) {
 			case 1:
 				this.enterOuterAlt(_localctx, 1);
 				{
-				this.state = 2098;
+				this.state = 2056;
 				this.expressionListElement(true);
 				}
 				break;
@@ -10711,7 +10359,7 @@ export class NextflowScriptParser extends Parser {
 			case 2:
 				this.enterOuterAlt(_localctx, 2);
 				{
-				this.state = 2099;
+				this.state = 2057;
 				this.namedArg();
 				}
 				break;
@@ -10734,15 +10382,15 @@ export class NextflowScriptParser extends Parser {
 	// @RuleVersion(0)
 	public argumentListElement(): EnhancedArgumentListElementContext {
 		let _localctx: EnhancedArgumentListElementContext = new EnhancedArgumentListElementContext(this._ctx, this.state);
-		this.enterRule(_localctx, 362, NextflowScriptParser.RULE_argumentListElement);
+		this.enterRule(_localctx, 352, NextflowScriptParser.RULE_argumentListElement);
 		try {
-			this.state = 2104;
+			this.state = 2062;
 			this._errHandler.sync(this);
-			switch ( this.interpreter.adaptivePredict(this._input, 224, this._ctx) ) {
+			switch ( this.interpreter.adaptivePredict(this._input, 222, this._ctx) ) {
 			case 1:
 				this.enterOuterAlt(_localctx, 1);
 				{
-				this.state = 2102;
+				this.state = 2060;
 				this.expressionListElement(true);
 				}
 				break;
@@ -10750,8 +10398,55 @@ export class NextflowScriptParser extends Parser {
 			case 2:
 				this.enterOuterAlt(_localctx, 2);
 				{
-				this.state = 2103;
+				this.state = 2061;
 				this.namedPropertyArg();
+				}
+				break;
+			}
+		}
+		catch (re) {
+			if (re instanceof RecognitionException) {
+				_localctx.exception = re;
+				this._errHandler.reportError(this, re);
+				this._errHandler.recover(this, re);
+			} else {
+				throw re;
+			}
+		}
+		finally {
+			this.exitRule();
+		}
+		return _localctx;
+	}
+	// @RuleVersion(0)
+	public firstEnhancedArgumentListElement(): EnhancedArgumentListElementContext {
+		let _localctx: EnhancedArgumentListElementContext = new EnhancedArgumentListElementContext(this._ctx, this.state);
+		this.enterRule(_localctx, 354, NextflowScriptParser.RULE_firstEnhancedArgumentListElement);
+		try {
+			this.state = 2067;
+			this._errHandler.sync(this);
+			switch ( this.interpreter.adaptivePredict(this._input, 223, this._ctx) ) {
+			case 1:
+				this.enterOuterAlt(_localctx, 1);
+				{
+				this.state = 2064;
+				this.expressionListElement(true);
+				}
+				break;
+
+			case 2:
+				this.enterOuterAlt(_localctx, 2);
+				{
+				this.state = 2065;
+				this.standardLambdaExpression();
+				}
+				break;
+
+			case 3:
+				this.enterOuterAlt(_localctx, 3);
+				{
+				this.state = 2066;
+				this.namedArg();
 				}
 				break;
 			}
@@ -10773,15 +10468,15 @@ export class NextflowScriptParser extends Parser {
 	// @RuleVersion(0)
 	public enhancedArgumentListElement(): EnhancedArgumentListElementContext {
 		let _localctx: EnhancedArgumentListElementContext = new EnhancedArgumentListElementContext(this._ctx, this.state);
-		this.enterRule(_localctx, 364, NextflowScriptParser.RULE_enhancedArgumentListElement);
+		this.enterRule(_localctx, 356, NextflowScriptParser.RULE_enhancedArgumentListElement);
 		try {
-			this.state = 2109;
+			this.state = 2072;
 			this._errHandler.sync(this);
-			switch ( this.interpreter.adaptivePredict(this._input, 225, this._ctx) ) {
+			switch ( this.interpreter.adaptivePredict(this._input, 224, this._ctx) ) {
 			case 1:
 				this.enterOuterAlt(_localctx, 1);
 				{
-				this.state = 2106;
+				this.state = 2069;
 				this.expressionListElement(true);
 				}
 				break;
@@ -10789,7 +10484,7 @@ export class NextflowScriptParser extends Parser {
 			case 2:
 				this.enterOuterAlt(_localctx, 2);
 				{
-				this.state = 2107;
+				this.state = 2070;
 				this.standardLambdaExpression();
 				}
 				break;
@@ -10797,7 +10492,7 @@ export class NextflowScriptParser extends Parser {
 			case 3:
 				this.enterOuterAlt(_localctx, 3);
 				{
-				this.state = 2108;
+				this.state = 2071;
 				this.namedPropertyArg();
 				}
 				break;
@@ -10820,11 +10515,11 @@ export class NextflowScriptParser extends Parser {
 	// @RuleVersion(0)
 	public stringLiteral(): StringLiteralContext {
 		let _localctx: StringLiteralContext = new StringLiteralContext(this._ctx, this.state);
-		this.enterRule(_localctx, 366, NextflowScriptParser.RULE_stringLiteral);
+		this.enterRule(_localctx, 358, NextflowScriptParser.RULE_stringLiteral);
 		try {
 			this.enterOuterAlt(_localctx, 1);
 			{
-			this.state = 2111;
+			this.state = 2074;
 			this.match(NextflowScriptParser.StringLiteral);
 			}
 		}
@@ -10845,11 +10540,11 @@ export class NextflowScriptParser extends Parser {
 	// @RuleVersion(0)
 	public className(): ClassNameContext {
 		let _localctx: ClassNameContext = new ClassNameContext(this._ctx, this.state);
-		this.enterRule(_localctx, 368, NextflowScriptParser.RULE_className);
+		this.enterRule(_localctx, 360, NextflowScriptParser.RULE_className);
 		try {
 			this.enterOuterAlt(_localctx, 1);
 			{
-			this.state = 2113;
+			this.state = 2076;
 			this.match(NextflowScriptParser.CapitalizedIdentifier);
 			}
 		}
@@ -10870,14 +10565,14 @@ export class NextflowScriptParser extends Parser {
 	// @RuleVersion(0)
 	public identifier(): IdentifierContext {
 		let _localctx: IdentifierContext = new IdentifierContext(this._ctx, this.state);
-		this.enterRule(_localctx, 370, NextflowScriptParser.RULE_identifier);
+		this.enterRule(_localctx, 362, NextflowScriptParser.RULE_identifier);
 		let _la: number;
 		try {
 			this.enterOuterAlt(_localctx, 1);
 			{
-			this.state = 2115;
+			this.state = 2078;
 			_la = this._input.LA(1);
-			if (!((((_la) & ~0x1F) === 0 && ((1 << _la) & ((1 << NextflowScriptParser.AS) | (1 << NextflowScriptParser.IN) | (1 << NextflowScriptParser.TRAIT) | (1 << NextflowScriptParser.VAR) | (1 << NextflowScriptParser.YIELD))) !== 0) || _la === NextflowScriptParser.PERMITS || _la === NextflowScriptParser.RECORD || _la === NextflowScriptParser.CapitalizedIdentifier || _la === NextflowScriptParser.Identifier)) {
+			if (!((((_la) & ~0x1F) === 0 && ((1 << _la) & ((1 << NextflowScriptParser.AS) | (1 << NextflowScriptParser.IN) | (1 << NextflowScriptParser.TRAIT) | (1 << NextflowScriptParser.VAR))) !== 0) || _la === NextflowScriptParser.CapitalizedIdentifier || _la === NextflowScriptParser.Identifier)) {
 			this._errHandler.recoverInline(this);
 			} else {
 				if (this._input.LA(1) === Token.EOF) {
@@ -10906,12 +10601,12 @@ export class NextflowScriptParser extends Parser {
 	// @RuleVersion(0)
 	public builtInType(): BuiltInTypeContext {
 		let _localctx: BuiltInTypeContext = new BuiltInTypeContext(this._ctx, this.state);
-		this.enterRule(_localctx, 372, NextflowScriptParser.RULE_builtInType);
+		this.enterRule(_localctx, 364, NextflowScriptParser.RULE_builtInType);
 		let _la: number;
 		try {
 			this.enterOuterAlt(_localctx, 1);
 			{
-			this.state = 2117;
+			this.state = 2080;
 			_la = this._input.LA(1);
 			if (!(_la === NextflowScriptParser.BuiltInPrimitiveType || _la === NextflowScriptParser.VOID)) {
 			this._errHandler.recoverInline(this);
@@ -10942,14 +10637,14 @@ export class NextflowScriptParser extends Parser {
 	// @RuleVersion(0)
 	public keywords(): KeywordsContext {
 		let _localctx: KeywordsContext = new KeywordsContext(this._ctx, this.state);
-		this.enterRule(_localctx, 374, NextflowScriptParser.RULE_keywords);
+		this.enterRule(_localctx, 366, NextflowScriptParser.RULE_keywords);
 		let _la: number;
 		try {
 			this.enterOuterAlt(_localctx, 1);
 			{
-			this.state = 2119;
+			this.state = 2082;
 			_la = this._input.LA(1);
-			if (!(((((_la - 7)) & ~0x1F) === 0 && ((1 << (_la - 7)) & ((1 << (NextflowScriptParser.AS - 7)) | (1 << (NextflowScriptParser.DEF - 7)) | (1 << (NextflowScriptParser.IN - 7)) | (1 << (NextflowScriptParser.TRAIT - 7)) | (1 << (NextflowScriptParser.THREADSAFE - 7)) | (1 << (NextflowScriptParser.VAR - 7)) | (1 << (NextflowScriptParser.BuiltInPrimitiveType - 7)) | (1 << (NextflowScriptParser.ABSTRACT - 7)) | (1 << (NextflowScriptParser.ASSERT - 7)) | (1 << (NextflowScriptParser.BREAK - 7)) | (1 << (NextflowScriptParser.YIELD - 7)) | (1 << (NextflowScriptParser.CASE - 7)) | (1 << (NextflowScriptParser.CATCH - 7)) | (1 << (NextflowScriptParser.CLASS - 7)) | (1 << (NextflowScriptParser.CONST - 7)) | (1 << (NextflowScriptParser.CONTINUE - 7)) | (1 << (NextflowScriptParser.DEFAULT - 7)) | (1 << (NextflowScriptParser.DO - 7)) | (1 << (NextflowScriptParser.ELSE - 7)) | (1 << (NextflowScriptParser.ENUM - 7)) | (1 << (NextflowScriptParser.EXTENDS - 7)) | (1 << (NextflowScriptParser.FINAL - 7)) | (1 << (NextflowScriptParser.FINALLY - 7)) | (1 << (NextflowScriptParser.FOR - 7)) | (1 << (NextflowScriptParser.IF - 7)) | (1 << (NextflowScriptParser.GOTO - 7)) | (1 << (NextflowScriptParser.IMPLEMENTS - 7)) | (1 << (NextflowScriptParser.IMPORT - 7)) | (1 << (NextflowScriptParser.INSTANCEOF - 7)) | (1 << (NextflowScriptParser.INTERFACE - 7)) | (1 << (NextflowScriptParser.NATIVE - 7)) | (1 << (NextflowScriptParser.NEW - 7)))) !== 0) || ((((_la - 39)) & ~0x1F) === 0 && ((1 << (_la - 39)) & ((1 << (NextflowScriptParser.NON_SEALED - 39)) | (1 << (NextflowScriptParser.PACKAGE - 39)) | (1 << (NextflowScriptParser.PERMITS - 39)) | (1 << (NextflowScriptParser.PRIVATE - 39)) | (1 << (NextflowScriptParser.PROTECTED - 39)) | (1 << (NextflowScriptParser.PUBLIC - 39)) | (1 << (NextflowScriptParser.RECORD - 39)) | (1 << (NextflowScriptParser.RETURN - 39)) | (1 << (NextflowScriptParser.SEALED - 39)) | (1 << (NextflowScriptParser.STATIC - 39)) | (1 << (NextflowScriptParser.STRICTFP - 39)) | (1 << (NextflowScriptParser.SUPER - 39)) | (1 << (NextflowScriptParser.SWITCH - 39)) | (1 << (NextflowScriptParser.SYNCHRONIZED - 39)) | (1 << (NextflowScriptParser.THIS - 39)) | (1 << (NextflowScriptParser.THROW - 39)) | (1 << (NextflowScriptParser.THROWS - 39)) | (1 << (NextflowScriptParser.TRANSIENT - 39)) | (1 << (NextflowScriptParser.TRY - 39)) | (1 << (NextflowScriptParser.VOID - 39)) | (1 << (NextflowScriptParser.VOLATILE - 39)) | (1 << (NextflowScriptParser.WHILE - 39)) | (1 << (NextflowScriptParser.BooleanLiteral - 39)) | (1 << (NextflowScriptParser.NullLiteral - 39)))) !== 0))) {
+			if (!((((_la) & ~0x1F) === 0 && ((1 << _la) & ((1 << NextflowScriptParser.AS) | (1 << NextflowScriptParser.DEF) | (1 << NextflowScriptParser.IN) | (1 << NextflowScriptParser.TRAIT) | (1 << NextflowScriptParser.THREADSAFE) | (1 << NextflowScriptParser.VAR) | (1 << NextflowScriptParser.BuiltInPrimitiveType) | (1 << NextflowScriptParser.ABSTRACT) | (1 << NextflowScriptParser.ASSERT) | (1 << NextflowScriptParser.BREAK) | (1 << NextflowScriptParser.CASE) | (1 << NextflowScriptParser.CATCH) | (1 << NextflowScriptParser.CLASS) | (1 << NextflowScriptParser.CONST) | (1 << NextflowScriptParser.CONTINUE) | (1 << NextflowScriptParser.DEFAULT) | (1 << NextflowScriptParser.DO) | (1 << NextflowScriptParser.ELSE) | (1 << NextflowScriptParser.ENUM) | (1 << NextflowScriptParser.EXTENDS) | (1 << NextflowScriptParser.FINAL) | (1 << NextflowScriptParser.FINALLY) | (1 << NextflowScriptParser.FOR) | (1 << NextflowScriptParser.IF) | (1 << NextflowScriptParser.GOTO))) !== 0) || ((((_la - 32)) & ~0x1F) === 0 && ((1 << (_la - 32)) & ((1 << (NextflowScriptParser.IMPLEMENTS - 32)) | (1 << (NextflowScriptParser.IMPORT - 32)) | (1 << (NextflowScriptParser.INSTANCEOF - 32)) | (1 << (NextflowScriptParser.INTERFACE - 32)) | (1 << (NextflowScriptParser.NATIVE - 32)) | (1 << (NextflowScriptParser.NEW - 32)) | (1 << (NextflowScriptParser.PACKAGE - 32)) | (1 << (NextflowScriptParser.PRIVATE - 32)) | (1 << (NextflowScriptParser.PROTECTED - 32)) | (1 << (NextflowScriptParser.PUBLIC - 32)) | (1 << (NextflowScriptParser.RETURN - 32)) | (1 << (NextflowScriptParser.STATIC - 32)) | (1 << (NextflowScriptParser.STRICTFP - 32)) | (1 << (NextflowScriptParser.SUPER - 32)) | (1 << (NextflowScriptParser.SWITCH - 32)) | (1 << (NextflowScriptParser.SYNCHRONIZED - 32)) | (1 << (NextflowScriptParser.THIS - 32)) | (1 << (NextflowScriptParser.THROW - 32)) | (1 << (NextflowScriptParser.THROWS - 32)) | (1 << (NextflowScriptParser.TRANSIENT - 32)) | (1 << (NextflowScriptParser.TRY - 32)) | (1 << (NextflowScriptParser.VOID - 32)) | (1 << (NextflowScriptParser.VOLATILE - 32)) | (1 << (NextflowScriptParser.WHILE - 32)) | (1 << (NextflowScriptParser.BooleanLiteral - 32)) | (1 << (NextflowScriptParser.NullLiteral - 32)))) !== 0))) {
 			this._errHandler.recoverInline(this);
 			} else {
 				if (this._input.LA(1) === Token.EOF) {
@@ -10978,11 +10673,11 @@ export class NextflowScriptParser extends Parser {
 	// @RuleVersion(0)
 	public rparen(): RparenContext {
 		let _localctx: RparenContext = new RparenContext(this._ctx, this.state);
-		this.enterRule(_localctx, 376, NextflowScriptParser.RULE_rparen);
+		this.enterRule(_localctx, 368, NextflowScriptParser.RULE_rparen);
 		try {
 			this.enterOuterAlt(_localctx, 1);
 			{
-			this.state = 2121;
+			this.state = 2084;
 			this.match(NextflowScriptParser.RPAREN);
 			}
 		}
@@ -11003,26 +10698,26 @@ export class NextflowScriptParser extends Parser {
 	// @RuleVersion(0)
 	public nls(): NlsContext {
 		let _localctx: NlsContext = new NlsContext(this._ctx, this.state);
-		this.enterRule(_localctx, 378, NextflowScriptParser.RULE_nls);
+		this.enterRule(_localctx, 370, NextflowScriptParser.RULE_nls);
 		try {
 			let _alt: number;
 			this.enterOuterAlt(_localctx, 1);
 			{
-			this.state = 2126;
+			this.state = 2089;
 			this._errHandler.sync(this);
-			_alt = this.interpreter.adaptivePredict(this._input, 226, this._ctx);
+			_alt = this.interpreter.adaptivePredict(this._input, 225, this._ctx);
 			while (_alt !== 2 && _alt !== ATN.INVALID_ALT_NUMBER) {
 				if (_alt === 1) {
 					{
 					{
-					this.state = 2123;
+					this.state = 2086;
 					this.match(NextflowScriptParser.NL);
 					}
 					}
 				}
-				this.state = 2128;
+				this.state = 2091;
 				this._errHandler.sync(this);
-				_alt = this.interpreter.adaptivePredict(this._input, 226, this._ctx);
+				_alt = this.interpreter.adaptivePredict(this._input, 225, this._ctx);
 			}
 			}
 		}
@@ -11043,13 +10738,13 @@ export class NextflowScriptParser extends Parser {
 	// @RuleVersion(0)
 	public sep(): SepContext {
 		let _localctx: SepContext = new SepContext(this._ctx, this.state);
-		this.enterRule(_localctx, 380, NextflowScriptParser.RULE_sep);
+		this.enterRule(_localctx, 372, NextflowScriptParser.RULE_sep);
 		let _la: number;
 		try {
 			let _alt: number;
 			this.enterOuterAlt(_localctx, 1);
 			{
-			this.state = 2130;
+			this.state = 2093;
 			this._errHandler.sync(this);
 			_alt = 1;
 			do {
@@ -11057,7 +10752,7 @@ export class NextflowScriptParser extends Parser {
 				case 1:
 					{
 					{
-					this.state = 2129;
+					this.state = 2092;
 					_la = this._input.LA(1);
 					if (!(_la === NextflowScriptParser.SEMI || _la === NextflowScriptParser.NL)) {
 					this._errHandler.recoverInline(this);
@@ -11075,9 +10770,9 @@ export class NextflowScriptParser extends Parser {
 				default:
 					throw new NoViableAltException(this);
 				}
-				this.state = 2132;
+				this.state = 2095;
 				this._errHandler.sync(this);
-				_alt = this.interpreter.adaptivePredict(this._input, 227, this._ctx);
+				_alt = this.interpreter.adaptivePredict(this._input, 226, this._ctx);
 			} while (_alt !== 2 && _alt !== ATN.INVALID_ALT_NUMBER);
 			}
 		}
@@ -11098,44 +10793,44 @@ export class NextflowScriptParser extends Parser {
 
 	public sempred(_localctx: RuleContext, ruleIndex: number, predIndex: number): boolean {
 		switch (ruleIndex) {
-		case 46:
+		case 2:
+			return this.scriptStatement_sempred(_localctx as ScriptStatementContext, predIndex);
+
+		case 45:
 			return this.classBody_sempred(_localctx as ClassBodyContext, predIndex);
 
-		case 107:
+		case 105:
 			return this.localVariableDeclaration_sempred(_localctx as LocalVariableDeclarationContext, predIndex);
 
-		case 121:
-			return this.statement_sempred(_localctx as StatementContext, predIndex);
-
-		case 146:
+		case 140:
 			return this.expression_sempred(_localctx as ExpressionContext, predIndex);
 
-		case 148:
+		case 142:
 			return this.commandExpression_sempred(_localctx as CommandExpressionContext, predIndex);
 
-		case 150:
+		case 144:
 			return this.pathExpression_sempred(_localctx as PathExpressionContext, predIndex);
+		}
+		return true;
+	}
+	private scriptStatement_sempred(_localctx: ScriptStatementContext, predIndex: number): boolean {
+		switch (predIndex) {
+		case 0:
+			return  !GroovyParser.isInvalidMethodDeclaration(this._input) ;
 		}
 		return true;
 	}
 	private classBody_sempred(_localctx: ClassBodyContext, predIndex: number): boolean {
 		switch (predIndex) {
-		case 0:
+		case 1:
 			return  2 == _localctx.t ;
 		}
 		return true;
 	}
 	private localVariableDeclaration_sempred(_localctx: LocalVariableDeclarationContext, predIndex: number): boolean {
 		switch (predIndex) {
-		case 1:
-			return  !GroovyParser.isInvalidLocalVariableDeclaration(this._input) ;
-		}
-		return true;
-	}
-	private statement_sempred(_localctx: StatementContext, predIndex: number): boolean {
-		switch (predIndex) {
 		case 2:
-			return  this.inSwitchExpressionLevel > 0 ;
+			return  !GroovyParser.isInvalidLocalVariableDeclaration(this._input) ;
 		}
 		return true;
 	}
@@ -11205,7 +10900,7 @@ export class NextflowScriptParser extends Parser {
 
 	private static readonly _serializedATNSegments: number = 4;
 	private static readonly _serializedATNSegment0: string =
-		"\x03\uC91D\uCABA\u058D\uAFBA\u4F53\u0607\uEA8B\uC241\x03\xA0\u0859\x04" +
+		"\x03\uC91D\uCABA\u058D\uAFBA\u4F53\u0607\uEA8B\uC241\x03\x98\u0834\x04" +
 		"\x02\t\x02\x04\x03\t\x03\x04\x04\t\x04\x04\x05\t\x05\x04\x06\t\x06\x04" +
 		"\x07\t\x07\x04\b\t\b\x04\t\t\t\x04\n\t\n\x04\v\t\v\x04\f\t\f\x04\r\t\r" +
 		"\x04\x0E\t\x0E\x04\x0F\t\x0F\x04\x10\t\x10\x04\x11\t\x11\x04\x12\t\x12" +
@@ -11234,1099 +10929,1081 @@ export class NextflowScriptParser extends Parser {
 		"\x04\xAA\t\xAA\x04\xAB\t\xAB\x04\xAC\t\xAC\x04\xAD\t\xAD\x04\xAE\t\xAE" +
 		"\x04\xAF\t\xAF\x04\xB0\t\xB0\x04\xB1\t\xB1\x04\xB2\t\xB2\x04\xB3\t\xB3" +
 		"\x04\xB4\t\xB4\x04\xB5\t\xB5\x04\xB6\t\xB6\x04\xB7\t\xB7\x04\xB8\t\xB8" +
-		"\x04\xB9\t\xB9\x04\xBA\t\xBA\x04\xBB\t\xBB\x04\xBC\t\xBC\x04\xBD\t\xBD" +
-		"\x04\xBE\t\xBE\x04\xBF\t\xBF\x04\xC0\t\xC0\x03\x02\x07\x02\u0182\n\x02" +
-		"\f\x02\x0E\x02\u0185\v\x02\x03\x02\x03\x02\x03\x03\x03\x03\x03\x03\x03" +
-		"\x03\x05\x03\u018D\n\x03\x03\x04\x03\x04\x03\x04\x03\x04\x03\x04\x03\x05" +
-		"\x03\x05\x03\x05\x03\x05\x03\x05\x07\x05\u0199\n\x05\f\x05\x0E\x05\u019C" +
-		"\v\x05\x03\x05\x03\x05\x05\x05\u01A0\n\x05\x03\x06\x03\x06\x03\x06\x03" +
-		"\x06\x05\x06\u01A6\n\x06\x03\x07\x03\x07\x03\x07\x03\x07\x07\x07\u01AC" +
-		"\n\x07\f\x07\x0E\x07\u01AF\v\x07\x03\x07\x03\x07\x03\b\x03\b\x03\b\x06" +
-		"\b\u01B6\n\b\r\b\x0E\b\u01B7\x03\b\x03\b\x06\b\u01BC\n\b\r\b\x0E\b\u01BD" +
-		"\x03\b\x03\b\x03\b\x03\b\x06\b\u01C4\n\b\r\b\x0E\b\u01C5\x03\b\x03\b\x06" +
-		"\b\u01CA\n\b\r\b\x0E\b\u01CB\x03\b\x03\b\x06\b\u01D0\n\b\r\b\x0E\b\u01D1" +
-		"\x03\b\x03\b\x06\b\u01D6\n\b\r\b\x0E\b\u01D7\x05\b\u01DA\n\b\x03\t\x03" +
-		"\t\x03\t\x03\t\x03\t\x03\t\x07\t\u01E2\n\t\f\t\x0E\t\u01E5\v\t\x03\n\x03" +
-		"\n\x05\n\u01E9\n\n\x03\n\x03\n\x03\n\x03\n\x07\n\u01EF\n\n\f\n\x0E\n\u01F2" +
-		"\v\n\x03\v\x03\v\x03\v\x03\v\x03\v\x05\v\u01F9\n\v\x03\f\x03\f\x03\f\x03" +
-		"\f\x03\f\x03\r\x03\r\x03\r\x03\r\x03\r\x03\x0E\x03\x0E\x03\x0E\x03\x0E" +
-		"\x03\x0E\x03\x0E\x03\x0E\x07\x0E\u020C\n\x0E\f\x0E\x0E\x0E\u020F\v\x0E" +
-		"\x03\x0E\x03\x0E\x03\x0F\x03\x0F\x03\x0F\x03\x0F\x03\x0F\x03\x0F\x03\x0F" +
-		"\x07\x0F\u021A\n\x0F\f\x0F\x0E\x0F\u021D\v\x0F\x03\x0F\x03\x0F\x03\x10" +
-		"\x03\x10\x03\x11\x03\x11\x03\x12\x03\x12\x03\x12\x03\x12\x03\x12\x07\x12" +
-		"\u022A\n\x12\f\x12\x0E\x12\u022D\v\x12\x03\x12\x03\x12\x03\x13\x03\x13" +
-		"\x05\x13\u0233\n\x13\x03\x13\x03\x13\x03\x13\x03\x13\x07\x13\u0239\n\x13" +
-		"\f\x13\x0E\x13\u023C\v\x13\x03\x14\x03\x14\x03\x14\x03\x14\x03\x14\x05" +
-		"\x14\u0243\n\x14\x03\x15\x03\x15\x03\x15\x03\x15\x03\x15\x03\x16\x03\x16" +
-		"\x03\x16\x03\x16\x03\x16\x03\x17\x03\x17\x03\x17\x03\x17\x03\x17\x03\x17" +
-		"\x03\x17\x07\x17\u0256\n\x17\f\x17\x0E\x17\u0259\v\x17\x03\x17\x03\x17" +
-		"\x03\x18\x03\x18\x03\x18\x03\x18\x03\x18\x03\x18\x03\x18\x07\x18\u0264" +
-		"\n\x18\f\x18\x0E\x18\u0267\v\x18\x03\x18\x03\x18\x03\x19\x03\x19\x03\x1A" +
-		"\x03\x1A\x03\x1B\x03\x1B\x03\x1B\x03\x1B\x03\x1B\x07\x1B\u0274\n\x1B\f" +
-		"\x1B\x0E\x1B\u0277\v\x1B\x03\x1B\x03\x1B\x03\x1C\x03\x1C\x05\x1C\u027D" +
-		"\n\x1C\x03\x1C\x03\x1C\x03\x1C\x07\x1C\u0282\n\x1C\f\x1C\x0E\x1C\u0285" +
-		"\v\x1C\x05\x1C\u0287\n\x1C\x03\x1C\x03\x1C\x03\x1D\x03\x1D\x06\x1D\u028D" +
-		"\n\x1D\r\x1D\x0E\x1D\u028E\x05\x1D\u0291\n\x1D\x03\x1D\x03\x1D\x06\x1D" +
-		"\u0295\n\x1D\r\x1D\x0E\x1D\u0296\x05\x1D\u0299\n\x1D\x03\x1D\x03\x1D\x06" +
-		"\x1D\u029D\n\x1D\r\x1D\x0E\x1D\u029E\x05\x1D\u02A1\n\x1D\x03\x1E\x03\x1E" +
-		"\x03\x1E\x03\x1E\x07\x1E\u02A7\n\x1E\f\x1E\x0E\x1E\u02AA\v\x1E\x03\x1E" +
-		"\x05\x1E\u02AD\n\x1E\x03\x1F\x03\x1F\x03\x1F\x03\x1F\x03 \x03 \x03 \x05" +
-		" \u02B6\n \x03 \x03 \x03 \x03 \x03 \x05 \u02BD\n \x03!\x03!\x03!\x03\"" +
-		"\x03\"\x05\"\u02C4\n\"\x03#\x03#\x03#\x05#\u02C9\n#\x03$\x03$\x03$\x03" +
-		"$\x07$\u02CF\n$\f$\x0E$\u02D2\v$\x03%\x03%\x07%\u02D6\n%\f%\x0E%\u02D9" +
-		"\v%\x05%\u02DB\n%\x03&\x03&\x03&\x03&\x07&\u02E1\n&\f&\x0E&\u02E4\v&\x03" +
-		"\'\x03\'\x05\'\u02E8\n\'\x03(\x03(\x05(\u02EC\n(\x03)\x03)\x03)\x05)\u02F1" +
-		"\n)\x03*\x03*\x03*\x03*\x07*\u02F7\n*\f*\x0E*\u02FA\v*\x03+\x03+\x03+" +
-		"\x03+\x03+\x03+\x03+\x07+\u0303\n+\f+\x0E+\u0306\v+\x03+\x03+\x03+\x03" +
-		",\x03,\x03,\x03,\x03,\x03,\x05,\u0311\n,\x03-\x03-\x03-\x03-\x03-\x07" +
-		"-\u0318\n-\f-\x0E-\u031B\v-\x03.\x03.\x03.\x03.\x03.\x07.\u0322\n.\f." +
-		"\x0E.\u0325\v.\x03/\x03/\x03/\x03/\x03/\x03/\x03/\x03/\x03/\x03/\x03/" +
-		"\x03/\x03/\x05/\u0334\n/\x03/\x03/\x03/\x03/\x05/\u033A\n/\x03/\x03/\x03" +
-		"/\x05/\u033F\n/\x03/\x03/\x03/\x03/\x03/\x05/\u0346\n/\x03/\x03/\x03/" +
-		"\x03/\x03/\x05/\u034D\n/\x03/\x03/\x03/\x03/\x03/\x05/\u0354\n/\x03/\x03" +
-		"/\x03/\x030\x030\x030\x030\x030\x030\x030\x050\u0360\n0\x030\x050\u0363" +
-		"\n0\x030\x050\u0366\n0\x030\x030\x030\x030\x070\u036C\n0\f0\x0E0\u036F" +
-		"\v0\x050\u0371\n0\x030\x050\u0374\n0\x030\x030\x031\x031\x031\x031\x03" +
-		"1\x031\x071\u037E\n1\f1\x0E1\u0381\v1\x032\x032\x032\x052\u0386\n2\x03" +
-		"2\x052\u0389\n2\x033\x033\x053\u038D\n3\x033\x033\x053\u0391\n3\x034\x03" +
-		"4\x034\x034\x034\x054\u0398\n4\x054\u039A\n4\x035\x035\x055\u039E\n5\x03" +
-		"5\x035\x035\x055\u03A3\n5\x035\x035\x035\x035\x035\x035\x035\x035\x03" +
-		"5\x035\x035\x055\u03B0\n5\x035\x035\x035\x055\u03B5\n5\x055\u03B7\n5\x03" +
-		"6\x036\x036\x036\x037\x037\x057\u03BF\n7\x038\x038\x058\u03C3\n8\x039" +
-		"\x039\x03:\x03:\x03:\x03:\x03:\x07:\u03CC\n:\f:\x0E:\u03CF\v:\x03;\x03" +
-		";\x03;\x03;\x03;\x03;\x05;\u03D7\n;\x03<\x03<\x03=\x03=\x03>\x03>\x03" +
-		">\x03>\x03>\x03>\x07>\u03E3\n>\f>\x0E>\u03E6\v>\x03>\x03>\x05>\u03EA\n" +
-		">\x03?\x03?\x03?\x03?\x06?\u03F0\n?\r?\x0E?\u03F1\x03@\x05@\u03F5\n@\x03" +
-		"A\x03A\x03A\x05A\u03FA\nA\x03A\x03A\x03B\x03B\x03B\x05B\u0401\nB\x03B" +
-		"\x05B\u0404\nB\x03B\x03B\x03C\x03C\x05C\u040A\nC\x03C\x05C\u040D\nC\x03" +
-		"D\x03D\x05D\u0411\nD\x03E\x03E\x05E\u0415\nE\x03F\x03F\x03G\x03G\x03G" +
-		"\x03G\x03G\x03G\x03G\x07G\u0420\nG\fG\x0EG\u0423\vG\x03G\x03G\x03G\x03" +
-		"H\x03H\x03H\x03H\x03H\x03H\x03H\x05H\u042F\nH\x05H\u0431\nH\x03I\x03I" +
-		"\x03I\x03J\x03J\x03J\x03J\x03J\x07J\u043B\nJ\fJ\x0EJ\u043E\vJ\x03K\x03" +
-		"K\x05K\u0442\nK\x03K\x03K\x03L\x03L\x05L\u0448\nL\x03L\x03L\x03L\x03L" +
-		"\x07L\u044E\nL\fL\x0EL\u0451\vL\x03M\x03M\x03M\x03N\x03N\x05N\u0458\n" +
-		"N\x03N\x05N\u045B\nN\x03N\x03N\x03N\x03N\x03N\x03N\x05N\u0463\nN\x03O" +
-		"\x03O\x03P\x03P\x03P\x07P\u046A\nP\fP\x0EP\u046D\vP\x03Q\x03Q\x03Q\x03" +
-		"Q\x03Q\x05Q\u0474\nQ\x03R\x03R\x03R\x07R\u0479\nR\fR\x0ER\u047C\vR\x03" +
-		"S\x03S\x03S\x03T\x03T\x03T\x03T\x07T\u0485\nT\fT\x0ET\u0488\vT\x03U\x03" +
-		"U\x03U\x03U\x03U\x05U\u048F\nU\x03V\x03V\x03V\x03V\x07V\u0495\nV\fV\x0E" +
-		"V\u0498\vV\x03V\x03V\x03W\x03W\x05W\u049E\nW\x03X\x03X\x07X\u04A2\nX\f" +
-		"X\x0EX\u04A5\vX\x03Y\x03Y\x03Y\x03Y\x03Y\x03Y\x03Z\x03Z\x03Z\x03Z\x03" +
-		"Z\x03Z\x03[\x03[\x03\\\x03\\\x05\\\u04B7\n\\\x03]\x03]\x05]\u04BB\n]\x03" +
-		"^\x03^\x03^\x03^\x03^\x05^\u04C2\n^\x03^\x03^\x05^\u04C6\n^\x03^\x05^" +
-		"\u04C9\n^\x03^\x03^\x03^\x03_\x03_\x05_\u04D0\n_\x03`\x05`\u04D3\n`\x03" +
-		"a\x03a\x03a\x03a\x07a\u04D9\na\fa\x0Ea\u04DC\va\x03a\x05a\u04DF\na\x03" +
-		"b\x03b\x03b\x03b\x07b\u04E5\nb\fb\x0Eb\u04E8\vb\x03b\x03b\x05b\u04EC\n" +
-		"b\x03c\x03c\x03c\x03c\x03c\x05c\u04F3\nc\x03c\x03c\x05c\u04F7\nc\x03d" +
-		"\x03d\x05d\u04FB\nd\x03e\x03e\x03f\x03f\x03f\x07f\u0502\nf\ff\x0Ef\u0505" +
-		"\vf\x03g\x03g\x03g\x03g\x03g\x03g\x03h\x03h\x05h\u050F\nh\x03i\x03i\x03" +
-		"i\x05i\u0514\ni\x03j\x03j\x03j\x03j\x07j\u051A\nj\fj\x0Ej\u051D\vj\x03" +
-		"j\x05j\u0520\nj\x05j\u0522\nj\x03j\x03j\x03k\x03k\x05k\u0528\nk\x03k\x03" +
-		"k\x03k\x03l\x03l\x05l\u052F\nl\x03m\x03m\x03m\x03n\x03n\x03n\x05n\u0537" +
-		"\nn\x03n\x03n\x03n\x03n\x03n\x03n\x03n\x05n\u0540\nn\x03n\x03n\x03n\x05" +
-		"n\u0545\nn\x03o\x03o\x03o\x03o\x07o\u054B\no\fo\x0Eo\u054E\vo\x03o\x03" +
-		"o\x03p\x05p\u0553\np\x03p\x03p\x03q\x03q\x03q\x03q\x06q\u055B\nq\rq\x0E" +
-		"q\u055C\x03q\x03q\x03r\x03r\x05r\u0563\nr\x03s\x03s\x03s\x03s\x03s\x03" +
-		"s\x05s\u056B\ns\x03s\x03s\x03s\x03s\x05s\u0571\ns\x03t\x03t\x03t\x03t" +
-		"\x03t\x03t\x06t\u0579\nt\rt\x0Et\u057A\x03t\x03t\x05t\u057F\nt\x03t\x03" +
-		"t\x03u\x03u\x03u\x03u\x03u\x03u\x03u\x03u\x03u\x03u\x03u\x03u\x03u\x03" +
-		"u\x03u\x03u\x03u\x03u\x03u\x05u\u0596\nu\x03v\x03v\x05v\u059A\nv\x03w" +
-		"\x03w\x05w\u059E\nw\x03x\x03x\x03x\x03y\x03y\x05y\u05A5\ny\x03y\x03y\x03" +
-		"y\x03y\x03y\x07y\u05AC\ny\fy\x0Ey\u05AF\vy\x03y\x03y\x03y\x05y\u05B4\n" +
-		"y\x03z\x03z\x03z\x03z\x03z\x03z\x03z\x05z\u05BD\nz\x03{\x03{\x03{\x03" +
-		"{\x03{\x03{\x03{\x03{\x03{\x03{\x03{\x05{\u05CA\n{\x03{\x03{\x03{\x03" +
-		"{\x03{\x03{\x03{\x03{\x03{\x03{\x03{\x03{\x03{\x03{\x03{\x05{\u05DB\n" +
-		"{\x03|\x03|\x03|\x03|\x05|\u05E1\n|\x03|\x03|\x03|\x03|\x03|\x03}\x03" +
-		"}\x03}\x07}\u05EB\n}\f}\x0E}\u05EE\v}\x03~\x03~\x03~\x03~\x03\x7F\x03" +
-		"\x7F\x03\x7F\x03\x7F\x05\x7F\u05F8\n\x7F\x03\x7F\x03\x7F\x03\x80\x03\x80" +
-		"\x03\x80\x03\x80\x07\x80\u0600\n\x80\f\x80\x0E\x80\u0603\v\x80\x03\x81" +
-		"\x03\x81\x05\x81\u0607\n\x81\x03\x82\x03\x82\x03\x82\x03\x82\x07\x82\u060D" +
-		"\n\x82\f\x82\x0E\x82\u0610\v\x82\x03\x82\x03\x82\x03\x82\x03\x83\x03\x83" +
-		"\x03\x83\x03\x83\x03\x83\x03\x83\x05\x83\u061B\n\x83\x03\x84\x03\x84\x05" +
-		"\x84\u061F\n\x84\x03\x85\x03\x85\x05\x85\u0623\n\x85\x03\x85\x03\x85\x03" +
-		"\x85\x03\x85\x03\x86\x05\x86\u062A\n\x86\x03\x86\x03\x86\x05\x86\u062E" +
-		"\n\x86\x03\x86\x03\x86\x05\x86\u0632\n\x86\x03\x87\x03\x87\x05\x87\u0636" +
-		"\n\x87\x03\x88\x03\x88\x03\x89\x03\x89\x03\x89\x03\x89\x03\x8A\x03\x8A" +
-		"\x03\x8B\x03\x8B\x03\x8B\x03\x8B\x03\x8C\x03\x8C\x03\x8C\x03\x8C\x03\x8C" +
-		"\x07\x8C\u0649\n\x8C\f\x8C\x0E\x8C\u064C\v\x8C\x03\x8D\x05\x8D\u064F\n" +
-		"\x8D\x03\x8D\x03\x8D\x03\x8E\x03\x8E\x05\x8E\u0655\n\x8E\x03\x8F\x03\x8F" +
-		"\x03\x90\x03\x90\x05\x90\u065B\n\x90\x03\x91\x03\x91\x03\x91\x03\x91\x03" +
-		"\x91\x03\x91\x07\x91\u0663\n\x91\f\x91\x0E\x91\u0666\v\x91\x03\x91\x03" +
-		"\x91\x03\x91\x03\x92\x03\x92\x03\x92\x06\x92\u066E\n\x92\r\x92\x0E\x92" +
-		"\u066F\x03\x92\x03\x92\x03\x93\x03\x93\x03\x93\x05\x93\u0677\n\x93\x03" +
-		"\x93\x03\x93\x03\x94\x03\x94\x03\x94\x03\x94\x03\x94\x03\x94\x03\x94\x03" +
-		"\x94\x03\x94\x03\x94\x03\x94\x03\x94\x03\x94\x03\x94\x03\x94\x03\x94\x03" +
-		"\x94\x03\x94\x05\x94\u068D\n\x94\x03\x94\x03\x94\x03\x94\x03\x94\x03\x94" +
-		"\x03\x94\x03\x94\x03\x94\x03\x94\x03\x94\x03\x94\x03\x94\x03\x94\x03\x94" +
-		"\x03\x94\x03\x94\x03\x94\x03\x94\x03\x94\x03\x94\x03\x94\x03\x94\x03\x94" +
-		"\x03\x94\x03\x94\x05\x94\u06A8\n\x94\x03\x94\x05\x94\u06AB\n\x94\x03\x94" +
-		"\x03\x94\x03\x94\x03\x94\x03\x94\x03\x94\x03\x94\x03\x94\x03\x94\x03\x94" +
-		"\x03\x94\x03\x94\x03\x94\x03\x94\x03\x94\x03\x94\x03\x94\x03\x94\x03\x94" +
-		"\x03\x94\x03\x94\x03\x94\x03\x94\x03\x94\x03\x94\x03\x94\x03\x94\x03\x94" +
-		"\x03\x94\x03\x94\x03\x94\x03\x94\x03\x94\x03\x94\x03\x94\x03\x94\x03\x94" +
-		"\x03\x94\x03\x94\x03\x94\x03\x94\x03\x94\x03\x94\x03\x94\x03\x94\x03\x94" +
-		"\x03\x94\x03\x94\x03\x94\x03\x94\x03\x94\x03\x94\x03\x94\x03\x94\x03\x94" +
-		"\x03\x94\x03\x94\x03\x94\x03\x94\x03\x94\x03\x94\x03\x94\x05\x94\u06EB" +
-		"\n\x94\x03\x94\x03\x94\x03\x94\x03\x94\x03\x94\x03\x94\x03\x94\x03\x94" +
-		"\x03\x94\x03\x94\x03\x94\x03\x94\x03\x94\x03\x94\x07\x94\u06FB\n\x94\f" +
-		"\x94\x0E\x94\u06FE\v\x94\x03\x95\x03\x95\x03\x95\x03\x95\x03\x95\x03\x95" +
-		"\x03\x95\x03\x95\x03\x95\x03\x95\x05\x95\u070A\n\x95\x03\x96\x03\x96\x03" +
-		"\x96\x03\x96\x05\x96\u0710\n\x96\x03\x96\x07\x96\u0713\n\x96\f\x96\x0E" +
-		"\x96\u0716\v\x96\x03\x97\x03\x97\x06\x97\u071A\n\x97\r\x97\x0E\x97\u071B" +
-		"\x03\x97\x05\x97\u071F\n\x97\x03\x98\x03\x98\x03\x98\x05\x98\u0724\n\x98" +
-		"\x03\x98\x03\x98\x03\x98\x07\x98\u0729\n\x98\f\x98\x0E\x98\u072C\v\x98" +
-		"\x03\x99\x03\x99\x03\x99\x03\x99\x03\x99\x03\x99\x03\x99\x03\x99\x03\x99" +
-		"\x03\x99\x03\x99\x05\x99\u0739\n\x99\x03\x99\x03\x99\x03\x99\x03\x99\x05" +
-		"\x99\u073F\n\x99\x03\x99\x03\x99\x03\x99\x03\x99\x03\x99\x03\x99\x05\x99" +
-		"\u0747\n\x99\x03\x99\x03\x99\x03\x99\x03\x99\x03\x99\x03\x99\x03\x99\x03" +
-		"\x99\x03\x99\x05\x99\u0752\n\x99\x03\x9A\x03\x9A\x03\x9A\x03\x9A\x05\x9A" +
-		"\u0758\n\x9A\x03\x9B\x03\x9B\x05\x9B\u075C\n\x9B\x03\x9C\x03\x9C\x05\x9C" +
-		"\u0760\n\x9C\x03\x9C\x03\x9C\x03\x9D\x03\x9D\x03\x9D\x05\x9D\u0767\n\x9D" +
-		"\x03\x9D\x03\x9D\x03\x9E\x03\x9E\x05\x9E\u076D\n\x9E\x03\x9E\x03\x9E\x03" +
-		"\x9E\x03\x9E\x03\x9E\x03\x9E\x03\x9E\x03\x9E\x03\x9E\x03\x9E\x03\x9E\x03" +
-		"\x9E\x03\x9E\x05\x9E\u077C\n\x9E\x03\x9F\x03\x9F\x03\x9F\x03\x9F\x05\x9F" +
-		"\u0782\n\x9F\x03\xA0\x03\xA0\x03\xA0\x05\xA0\u0787\n\xA0\x03\xA1\x03\xA1" +
-		"\x03\xA1\x05\xA1\u078C\n\xA1\x03\xA2\x03\xA2\x05\xA2\u0790\n\xA2\x03\xA2" +
-		"\x05\xA2\u0793\n\xA2\x03\xA2\x03\xA2\x03\xA3\x03\xA3\x03\xA3\x05\xA3\u079A" +
-		"\n\xA3\x03\xA3\x05\xA3\u079D\n\xA3\x03\xA3\x03\xA3\x03\xA4\x03\xA4\x03" +
-		"\xA4\x07\xA4\u07A4\n\xA4\f\xA4\x0E\xA4\u07A7\v\xA4\x03\xA5\x03\xA5\x03" +
-		"\xA5\x07\xA5\u07AC\n\xA5\f\xA5\x0E\xA5\u07AF\v\xA5\x03\xA6\x03\xA6\x03" +
-		"\xA6\x03\xA6\x03\xA6\x03\xA6\x03\xA6\x03\xA6\x03\xA6\x03\xA6\x05\xA6\u07BB" +
-		"\n\xA6\x03\xA7\x03\xA7\x03\xA7\x03\xA7\x03\xA7\x03\xA7\x03\xA7\x03\xA7" +
-		"\x03\xA7\x03\xA7\x05\xA7\u07C7\n\xA7\x03\xA8\x03\xA8\x03\xA8\x03\xA8\x03" +
-		"\xA8\x03\xA8\x03\xA8\x03\xA8\x03\xA8\x03\xA8\x05\xA8\u07D3\n\xA8\x03\xA9" +
-		"\x03\xA9\x05\xA9\u07D7\n\xA9\x03\xAA\x03\xAA\x05\xAA\u07DB\n\xAA\x03\xAB" +
-		"\x03\xAB\x05\xAB\u07DF\n\xAB\x03\xAC\x03\xAC\x03\xAC\x03\xAC\x05\xAC\u07E5" +
-		"\n\xAC\x03\xAC\x06\xAC\u07E8\n\xAC\r\xAC\x0E\xAC\u07E9\x03\xAC\x03\xAC" +
-		"\x03\xAC\x05\xAC\u07EF\n\xAC\x05\xAC\u07F1\n\xAC\x03\xAD\x03\xAD\x03\xAD" +
-		"\x05\xAD\u07F6\n\xAD\x03\xAD\x03\xAD\x03\xAE\x03\xAE\x03\xAE\x03\xAE\x03" +
-		"\xAE\x05\xAE\u07FF\n\xAE\x03\xAE\x03\xAE\x03\xAF\x03\xAF\x03\xB0\x03\xB0" +
-		"\x03\xB0\x03\xB0\x05\xB0\u0809\n\xB0\x05\xB0\u080B\n\xB0\x03\xB1\x03\xB1" +
-		"\x03\xB1\x03\xB1\x03\xB1\x03\xB1\x03\xB2\x03\xB2\x03\xB2\x05\xB2\u0816" +
-		"\n\xB2\x03\xB3\x03\xB3\x05\xB3\u081A\n\xB3\x03\xB3\x05\xB3\u081D\n\xB3" +
-		"\x03\xB3\x03\xB3\x03\xB4\x03\xB4\x03\xB4\x03\xB4\x03\xB4\x07\xB4\u0826" +
-		"\n\xB4\f\xB4\x0E\xB4\u0829\v\xB4\x03\xB5\x03\xB5\x03\xB5\x03\xB5\x03\xB5" +
-		"\x07\xB5\u0830\n\xB5\f\xB5\x0E\xB5\u0833\v\xB5\x03\xB6\x03\xB6\x05\xB6" +
-		"\u0837\n\xB6\x03\xB7\x03\xB7\x05\xB7\u083B\n\xB7\x03\xB8\x03\xB8\x03\xB8" +
-		"\x05\xB8\u0840\n\xB8\x03\xB9\x03\xB9\x03\xBA\x03\xBA\x03\xBB\x03\xBB\x03" +
-		"\xBC\x03\xBC\x03\xBD\x03\xBD\x03\xBE\x03\xBE\x03\xBF\x07\xBF\u084F\n\xBF" +
-		"\f\xBF\x0E\xBF\u0852\v\xBF\x03\xC0\x06\xC0\u0855\n\xC0\r\xC0\x0E\xC0\u0856" +
-		"\x03\xC0\x02\x02\x03\u0126\xC1\x02\x02\x04\x02\x06\x02\b\x02\n\x02\f\x02" +
-		"\x0E\x02\x10\x02\x12\x02\x14\x02\x16\x02\x18\x02\x1A\x02\x1C\x02\x1E\x02" +
-		" \x02\"\x02$\x02&\x02(\x02*\x02,\x02.\x020\x022\x024\x026\x028\x02:\x02" +
-		"<\x02>\x02@\x02B\x02D\x02F\x02H\x02J\x02L\x02N\x02P\x02R\x02T\x02V\x02" +
-		"X\x02Z\x02\\\x02^\x02`\x02b\x02d\x02f\x02h\x02j\x02l\x02n\x02p\x02r\x02" +
-		"t\x02v\x02x\x02z\x02|\x02~\x02\x80\x02\x82\x02\x84\x02\x86\x02\x88\x02" +
-		"\x8A\x02\x8C\x02\x8E\x02\x90\x02\x92\x02\x94\x02\x96\x02\x98\x02\x9A\x02" +
-		"\x9C\x02\x9E\x02\xA0\x02\xA2\x02\xA4\x02\xA6\x02\xA8\x02\xAA\x02\xAC\x02" +
-		"\xAE\x02\xB0\x02\xB2\x02\xB4\x02\xB6\x02\xB8\x02\xBA\x02\xBC\x02\xBE\x02" +
-		"\xC0\x02\xC2\x02\xC4\x02\xC6\x02\xC8\x02\xCA\x02\xCC\x02\xCE\x02\xD0\x02" +
-		"\xD2\x02\xD4\x02\xD6\x02\xD8\x02\xDA\x02\xDC\x02\xDE\x02\xE0\x02\xE2\x02" +
-		"\xE4\x02\xE6\x02\xE8\x02\xEA\x02\xEC\x02\xEE\x02\xF0\x02\xF2\x02\xF4\x02" +
-		"\xF6\x02\xF8\x02\xFA\x02\xFC\x02\xFE\x02\u0100\x02\u0102\x02\u0104\x02" +
-		"\u0106\x02\u0108\x02\u010A\x02\u010C\x02\u010E\x02\u0110\x02\u0112\x02" +
-		"\u0114\x02\u0116\x02\u0118\x02\u011A\x02\u011C\x02\u011E\x02\u0120\x02" +
-		"\u0122\x02\u0124\x02\u0126\x02\u0128\x02\u012A\x02\u012C\x02\u012E\x02" +
-		"\u0130\x02\u0132\x02\u0134\x02\u0136\x02\u0138\x02\u013A\x02\u013C\x02" +
-		"\u013E\x02\u0140\x02\u0142\x02\u0144\x02\u0146\x02\u0148\x02\u014A\x02" +
-		"\u014C\x02\u014E\x02\u0150\x02\u0152\x02\u0154\x02\u0156\x02\u0158\x02" +
-		"\u015A\x02\u015C\x02\u015E\x02\u0160\x02\u0162\x02\u0164\x02\u0166\x02" +
-		"\u0168\x02\u016A\x02\u016C\x02\u016E\x02\u0170\x02\u0172\x02\u0174\x02" +
-		"\u0176\x02\u0178\x02\u017A\x02\u017C\x02\u017E\x02\x02\x1C\x04\x02qq\x93" +
-		"\x93\x04\x02qq\x95\x95\b\x02\n\n\x0E\x0E\'\'66::==\b\x02\x10\x10\x19\x19" +
-		"\x1E\x1E";
+		"\x04\xB9\t\xB9\x04\xBA\t\xBA\x04\xBB\t\xBB\x04\xBC\t\xBC\x03\x02\x03\x02" +
+		"\x05\x02\u017B\n\x02\x03\x02\x03\x02\x03\x03\x03\x03\x03\x03\x03\x03\x07" +
+		"\x03\u0183\n\x03\f\x03\x0E\x03\u0186\v\x03\x03\x03\x05\x03\u0189\n\x03" +
+		"\x03\x04\x03\x04\x03\x04\x03\x04\x03\x04\x03\x04\x03\x04\x03\x04\x05\x04" +
+		"\u0193\n\x04\x03\x05\x03\x05\x03\x05\x03\x05\x03\x05\x03\x06\x03\x06\x03" +
+		"\x06\x03\x06\x03\x06\x07\x06\u019F\n\x06\f\x06\x0E\x06\u01A2\v\x06\x03" +
+		"\x06\x03\x06\x05\x06\u01A6\n\x06\x03\x07\x03\x07\x03\x07\x03\x07\x05\x07" +
+		"\u01AC\n\x07\x03\b\x03\b\x03\b\x03\b\x03\b\x05\b\u01B3\n\b\x03\b\x05\b" +
+		"\u01B6\n\b\x03\b\x03\b\x03\t\x03\t\x03\t\x03\t\x07\t\u01BE\n\t\f\t\x0E" +
+		"\t\u01C1\v\t\x03\t\x05\t\u01C4\n\t\x03\n\x03\n\x03\n\x06\n\u01C9\n\n\r" +
+		"\n\x0E\n\u01CA\x03\n\x03\n\x06\n\u01CF\n\n\r\n\x0E\n\u01D0\x03\n\x03\n" +
+		"\x03\n\x03\n\x06\n\u01D7\n\n\r\n\x0E\n\u01D8\x03\n\x03\n\x06\n\u01DD\n" +
+		"\n\r\n\x0E\n\u01DE\x03\n\x03\n\x06\n\u01E3\n\n\r\n\x0E\n\u01E4\x03\n\x03" +
+		"\n\x06\n\u01E9\n\n\r\n\x0E\n\u01EA\x05\n\u01ED\n\n\x03\v\x03\v\x03\v\x03" +
+		"\v\x03\v\x03\v\x07\v\u01F5\n\v\f\v\x0E\v\u01F8\v\v\x03\f\x03\f\x03\f\x03" +
+		"\f\x03\f\x07\f\u01FF\n\f\f\f\x0E\f\u0202\v\f\x03\r\x03\r\x03\r\x03\r\x03" +
+		"\r\x03\r\x05\r\u020A\n\r\x03\x0E\x03\x0E\x03\x0E\x03\x0E\x03\x0E\x03\x0F" +
+		"\x03\x0F\x03\x0F\x03\x0F\x03\x0F\x03\x10\x03\x10\x03\x10\x03\x10\x03\x10" +
+		"\x03\x10\x03\x10\x07\x10\u021D\n\x10\f\x10\x0E\x10\u0220\v\x10\x03\x10" +
+		"\x03\x10\x03\x11\x03\x11\x03\x11\x03\x11\x03\x11\x03\x11\x03\x11\x07\x11" +
+		"\u022B\n\x11\f\x11\x0E\x11\u022E\v\x11\x03\x11\x03\x11\x03\x12\x03\x12" +
+		"\x03\x13\x03\x13\x03\x13\x03\x13\x03\x13\x07\x13\u0239\n\x13\f\x13\x0E" +
+		"\x13\u023C\v\x13\x03\x13\x03\x13\x03\x14\x03\x14\x03\x14\x03\x14\x03\x14" +
+		"\x07\x14\u0245\n\x14\f\x14\x0E\x14\u0248\v\x14\x03\x15\x03\x15\x03\x15" +
+		"\x03\x15\x03\x15\x03\x15\x05\x15\u0250\n\x15\x03\x16\x03\x16\x03\x16\x03" +
+		"\x16\x03\x16\x03\x17\x03\x17\x03\x17\x03\x17\x03\x17\x03\x18\x03\x18\x03" +
+		"\x18\x03\x18\x03\x18\x03\x18\x03\x18\x07\x18\u0263\n\x18\f\x18\x0E\x18" +
+		"\u0266\v\x18\x03\x18\x03\x18\x03\x19\x03\x19\x03\x19\x03\x19\x03\x19\x03" +
+		"\x19\x03\x19\x07\x19\u0271\n\x19\f\x19\x0E\x19\u0274\v\x19\x03\x19\x03" +
+		"\x19\x03\x1A\x03\x1A\x03\x1B\x03\x1B\x03\x1B\x03\x1B\x03\x1B\x07\x1B\u027F" +
+		"\n\x1B\f\x1B\x0E\x1B\u0282\v\x1B\x03\x1B\x03\x1B\x03\x1C\x03\x1C\x05\x1C" +
+		"\u0288\n\x1C\x03\x1C\x03\x1C\x03\x1C\x07\x1C\u028D\n\x1C\f\x1C\x0E\x1C" +
+		"\u0290\v\x1C\x05\x1C\u0292\n\x1C\x03\x1C\x03\x1C\x03\x1D\x03\x1D\x06\x1D" +
+		"\u0298\n\x1D\r\x1D\x0E\x1D\u0299\x05\x1D\u029C\n\x1D\x03\x1D\x03\x1D\x06" +
+		"\x1D\u02A0\n\x1D\r\x1D\x0E\x1D\u02A1\x05\x1D\u02A4\n\x1D\x03\x1D\x03\x1D" +
+		"\x06\x1D\u02A8\n\x1D\r\x1D\x0E\x1D\u02A9\x05\x1D\u02AC\n\x1D\x03\x1E\x03" +
+		"\x1E\x03\x1E\x03\x1E\x03\x1F\x03\x1F\x03\x1F\x05\x1F\u02B5\n\x1F\x03\x1F" +
+		"\x03\x1F\x03\x1F\x03\x1F\x03\x1F\x05\x1F\u02BC\n\x1F\x03 \x03 \x03 \x03" +
+		"!\x03!\x05!\u02C3\n!\x03\"\x03\"\x03\"\x05\"\u02C8\n\"\x03#\x03#\x03#" +
+		"\x03#\x07#\u02CE\n#\f#\x0E#\u02D1\v#\x03$\x03$\x07$\u02D5\n$\f$\x0E$\u02D8" +
+		"\v$\x05$\u02DA\n$\x03%\x03%\x03%\x03%\x07%\u02E0\n%\f%\x0E%\u02E3\v%\x03" +
+		"&\x03&\x05&\u02E7\n&\x03\'\x03\'\x05\'\u02EB\n\'\x03(\x03(\x03(\x05(\u02F0" +
+		"\n(\x03)\x03)\x03)\x03)\x07)\u02F6\n)\f)\x0E)\u02F9\v)\x03*\x03*\x03*" +
+		"\x03*\x03*\x03*\x03*\x07*\u0302\n*\f*\x0E*\u0305\v*\x03*\x03*\x03*\x03" +
+		"+\x03+\x03+\x03+\x03+\x05+\u030F\n+\x03,\x03,\x03,\x03,\x03,\x07,\u0316" +
+		"\n,\f,\x0E,\u0319\v,\x03-\x03-\x03-\x03-\x03-\x07-\u0320\n-\f-\x0E-\u0323" +
+		"\v-\x03.\x03.\x03.\x03.\x03.\x03.\x03.\x03.\x03.\x03.\x03.\x05.\u0330" +
+		"\n.\x03.\x03.\x03.\x03.\x05.\u0336\n.\x03.\x03.\x03.\x03.\x03.\x05.\u033D" +
+		"\n.\x03.\x03.\x03.\x03.\x03.\x05.\u0344\n.\x03.\x03.\x03.\x03/\x03/\x03" +
+		"/\x03/\x03/\x03/\x03/\x05/\u0350\n/\x03/\x05/\u0353\n/\x03/\x05/\u0356" +
+		"\n/\x03/\x03/\x03/\x03/\x07/\u035C\n/\f/\x0E/\u035F\v/\x05/\u0361\n/\x03" +
+		"/\x05/\u0364\n/\x03/\x03/\x030\x030\x030\x030\x030\x030\x070\u036E\n0" +
+		"\f0\x0E0\u0371\v0\x031\x031\x031\x051\u0376\n1\x031\x051\u0379\n1\x03" +
+		"2\x032\x052\u037D\n2\x032\x032\x052\u0381\n2\x033\x033\x033\x033\x033" +
+		"\x053\u0388\n3\x034\x034\x054\u038C\n4\x034\x034\x034\x054\u0391\n4\x03" +
+		"4\x034\x034\x034\x034\x034\x034\x034\x034\x034\x034\x054\u039E\n4\x03" +
+		"4\x034\x034\x054\u03A3\n4\x054\u03A5\n4\x035\x035\x055\u03A9\n5\x036\x03" +
+		"6\x056\u03AD\n6\x037\x037\x038\x038\x038\x038\x038\x078\u03B6\n8\f8\x0E" +
+		"8\u03B9\v8\x039\x039\x039\x039\x039\x039\x059\u03C1\n9\x03:\x03:\x03;" +
+		"\x03;\x03<\x03<\x03<\x03<\x03<\x03<\x07<\u03CD\n<\f<\x0E<\u03D0\v<\x03" +
+		"<\x03<\x05<\u03D4\n<\x03=\x03=\x03=\x03=\x06=\u03DA\n=\r=\x0E=\u03DB\x03" +
+		">\x05>\u03DF\n>\x03?\x03?\x03?\x05?\u03E4\n?\x03?\x03?\x03@\x03@\x03@" +
+		"\x05@\u03EB\n@\x03@\x05@\u03EE\n@\x03@\x03@\x03A\x03A\x05A\u03F4\nA\x03" +
+		"A\x05A\u03F7\nA\x03B\x03B\x05B\u03FB\nB\x03C\x03C\x05C\u03FF\nC\x03D\x03" +
+		"D\x03E\x03E\x03E\x03E\x03E\x03E\x03E\x07E\u040A\nE\fE\x0EE\u040D\vE\x03" +
+		"E\x03E\x03E\x03F\x03F\x03F\x03F\x03F\x03F\x03F\x05F\u0419\nF\x05F\u041B" +
+		"\nF\x03G\x03G\x03G\x03H\x03H\x03H\x03H\x03H\x07H\u0425\nH\fH\x0EH\u0428" +
+		"\vH\x03I\x03I\x05I\u042C\nI\x03I\x03I\x03J\x03J\x05J\u0432\nJ\x03J\x03" +
+		"J\x03J\x03J\x07J\u0438\nJ\fJ\x0EJ\u043B\vJ\x03K\x03K\x03K\x03L\x03L\x05" +
+		"L\u0442\nL\x03L\x05L\u0445\nL\x03L\x03L\x03L\x03L\x03L\x03L\x05L\u044D" +
+		"\nL\x03M\x03M\x03N\x03N\x03N\x07N\u0454\nN\fN\x0EN\u0457\vN\x03O\x03O" +
+		"\x03O\x03O\x03O\x05O\u045E\nO\x03P\x03P\x03P\x07P\u0463\nP\fP\x0EP\u0466" +
+		"\vP\x03Q\x03Q\x03Q\x03R\x03R\x03R\x03R\x07R\u046F\nR\fR\x0ER\u0472\vR" +
+		"\x03S\x03S\x03S\x03S\x03S\x05S\u0479\nS\x03T\x03T\x03T\x03T\x07T\u047F" +
+		"\nT\fT\x0ET\u0482\vT\x03T\x03T\x03U\x03U\x05U\u0488\nU\x03V\x03V\x07V" +
+		"\u048C\nV\fV\x0EV\u048F\vV\x03W\x03W\x03W\x03W\x03W\x03W\x03X\x03X\x03" +
+		"X\x03X\x03X\x03X\x03Y\x03Y\x03Z\x03Z\x05Z\u04A1\nZ\x03[\x03[\x05[\u04A5" +
+		"\n[\x03\\\x03\\\x03\\\x03\\\x03\\\x05\\\u04AC\n\\\x03\\\x03\\\x05\\\u04B0" +
+		"\n\\\x03\\\x05\\\u04B3\n\\\x03\\\x03\\\x03\\\x03]\x03]\x05]\u04BA\n]\x03" +
+		"^\x05^\u04BD\n^\x03_\x03_\x03_\x03_\x07_\u04C3\n_\f_\x0E_\u04C6\v_\x03" +
+		"_\x05_\u04C9\n_\x03`\x03`\x03`\x03`\x07`\u04CF\n`\f`\x0E`\u04D2\v`\x03" +
+		"`\x03`\x05`\u04D6\n`\x03a\x03a\x03a\x03a\x03a\x05a\u04DD\na\x03a\x03a" +
+		"\x05a\u04E1\na\x03b\x03b\x05b\u04E5\nb\x03c\x03c\x03d\x03d\x03d\x07d\u04EC" +
+		"\nd\fd\x0Ed\u04EF\vd\x03e\x03e\x03e\x03e\x03e\x03e\x03f\x03f\x05f\u04F9" +
+		"\nf\x03g\x03g\x03g\x05g\u04FE\ng\x03h\x03h\x03h\x03h\x07h\u0504\nh\fh" +
+		"\x0Eh\u0507\vh\x03h\x05h\u050A\nh\x05h\u050C\nh\x03h\x03h\x03i\x03i\x05" +
+		"i\u0512\ni\x03i\x03i\x03i\x03j\x03j\x05j\u0519\nj\x03k\x03k\x03k\x03l" +
+		"\x03l\x03l\x05l\u0521\nl\x03l\x03l\x03l\x03l\x03l\x03l\x03l\x05l\u052A" +
+		"\nl\x03l\x03l\x03l\x05l\u052F\nl\x03m\x03m\x03m\x03m\x07m\u0535\nm\fm" +
+		"\x0Em\u0538\vm\x03m\x03m\x03n\x05n\u053D\nn\x03n\x03n\x03o\x03o\x03o\x03" +
+		"o\x06o\u0545\no\ro\x0Eo\u0546\x03o\x03o\x03p\x03p\x05p\u054D\np\x03q\x03" +
+		"q\x03q\x03q\x03q\x03q\x05q\u0555\nq\x03q\x03q\x03q\x03q\x05q\u055B\nq" +
+		"\x03r\x03r\x03r\x03r\x03r\x03r\x06r\u0563\nr\rr\x0Er\u0564\x03r\x03r\x05" +
+		"r\u0569\nr\x03r\x03r\x03s\x03s\x03s\x03s\x03s\x03s\x03s\x03s\x03s\x03" +
+		"s\x03s\x03s\x03s\x03s\x03s\x03s\x03s\x03s\x03s\x05s\u0580\ns\x03t\x03" +
+		"t\x05t\u0584\nt\x03u\x03u\x05u\u0588\nu\x03v\x03v\x05v\u058C\nv\x03v\x03" +
+		"v\x03v\x03v\x03v\x07v\u0593\nv\fv\x0Ev\u0596\vv\x03v\x03v\x03v\x05v\u059B" +
+		"\nv\x03w\x03w\x03w\x03w\x03w\x03w\x03w\x05w\u05A4\nw\x03x\x03x\x03x\x03" +
+		"x\x03x\x03x\x03x\x03x\x03x\x03x\x03x\x05x\u05B1\nx\x03x\x03x\x03x\x03" +
+		"x\x03x\x03x\x03x\x03x\x03x\x03x\x03x\x03x\x03x\x05x\u05C0\nx\x03y\x03" +
+		"y\x03y\x03y\x05y\u05C6\ny\x03y\x03y\x03y\x03y\x03y\x03z\x03z\x03z\x07" +
+		"z\u05D0\nz\fz\x0Ez\u05D3\vz\x03{\x03{\x03{\x03{\x03|\x03|\x03|\x03|\x05" +
+		"|\u05DD\n|\x03|\x03|\x03}\x03}\x03}\x03}\x07}\u05E5\n}\f}\x0E}\u05E8\v" +
+		"}\x03~\x03~\x05~\u05EC\n~\x03\x7F\x03\x7F\x03\x7F\x03\x7F\x07\x7F\u05F2" +
+		"\n\x7F\f\x7F\x0E\x7F\u05F5\v\x7F\x03\x7F\x03\x7F\x03\x7F\x03\x80\x03\x80" +
+		"\x03\x80\x03\x80\x03\x80\x03\x80\x05\x80\u0600\n\x80\x03\x81\x03\x81\x05" +
+		"\x81\u0604\n\x81\x03\x82\x03\x82\x05\x82\u0608\n\x82\x03\x82\x03\x82\x03" +
+		"\x82\x03\x82\x03\x83\x05\x83\u060F\n\x83\x03\x83\x03\x83\x05\x83\u0613" +
+		"\n\x83\x03\x83\x03\x83\x05\x83\u0617\n\x83\x03\x84\x03\x84\x05\x84\u061B" +
+		"\n\x84\x03\x85\x03\x85\x03\x86\x03\x86\x03\x86\x03\x86\x03\x87\x03\x87" +
+		"\x03\x88\x03\x88\x03\x88\x03\x88\x03\x89\x03\x89\x03\x89\x07\x89\u062C" +
+		"\n\x89\f\x89\x0E\x89\u062F\v\x89\x03\x8A\x05\x8A\u0632\n\x8A\x03\x8A\x03" +
+		"\x8A\x03\x8B\x03\x8B\x05\x8B\u0638\n\x8B\x03\x8C\x03\x8C\x03\x8D\x03\x8D" +
+		"\x05\x8D\u063E\n\x8D\x03\x8E\x03\x8E\x03\x8E\x03\x8E\x03\x8E\x03\x8E\x03" +
+		"\x8E\x03\x8E\x03\x8E\x03\x8E\x03\x8E\x03\x8E\x03\x8E\x03\x8E\x03\x8E\x03" +
+		"\x8E\x03\x8E\x05\x8E\u0651\n\x8E\x03\x8E\x03\x8E\x03\x8E\x03\x8E\x03\x8E" +
+		"\x03\x8E\x03\x8E\x03\x8E\x03\x8E\x03\x8E\x03\x8E\x03\x8E\x03\x8E\x03\x8E" +
+		"\x03\x8E\x03\x8E\x03\x8E\x03\x8E\x03\x8E\x03\x8E\x03\x8E\x03\x8E\x03\x8E" +
+		"\x03\x8E\x03\x8E\x05\x8E\u066C\n\x8E\x03\x8E\x05\x8E\u066F\n\x8E\x03\x8E" +
+		"\x03\x8E\x03\x8E\x03\x8E\x03\x8E\x03\x8E\x03\x8E\x03\x8E\x03\x8E\x03\x8E" +
+		"\x03\x8E\x03\x8E\x03\x8E\x03\x8E\x03\x8E\x03\x8E\x03\x8E\x03\x8E\x03\x8E" +
+		"\x03\x8E\x03\x8E\x03\x8E\x03\x8E\x03\x8E\x03\x8E\x03\x8E\x03\x8E\x03\x8E" +
+		"\x03\x8E\x03\x8E\x03\x8E\x03\x8E\x03\x8E\x03\x8E\x03\x8E\x03\x8E\x03\x8E" +
+		"\x03\x8E\x03\x8E\x03\x8E\x03\x8E\x03\x8E\x03\x8E\x03\x8E\x03\x8E\x03\x8E" +
+		"\x03\x8E\x03\x8E\x03\x8E\x03\x8E\x03\x8E\x03\x8E\x03\x8E\x03\x8E\x03\x8E" +
+		"\x03\x8E\x03\x8E\x03\x8E\x03\x8E\x03\x8E\x03\x8E\x03\x8E\x05\x8E\u06AF" +
+		"\n\x8E\x03\x8E\x03\x8E\x03\x8E\x03\x8E\x03\x8E\x03\x8E\x03\x8E\x03\x8E" +
+		"\x03\x8E\x03\x8E\x03\x8E\x03\x8E\x03\x8E\x03\x8E\x07\x8E\u06BF\n\x8E\f" +
+		"\x8E\x0E\x8E\u06C2\v\x8E\x03\x8F\x03\x8F\x03\x8F\x03\x8F\x03\x8F\x03\x8F" +
+		"\x03\x8F\x03\x8F\x03\x8F\x03\x8F\x05\x8F\u06CE\n\x8F\x03\x90\x03\x90\x03" +
+		"\x90\x03\x90\x05\x90\u06D4\n\x90\x03\x90\x07\x90\u06D7\n\x90\f\x90\x0E" +
+		"\x90\u06DA\v\x90\x03\x91\x03\x91\x06\x91\u06DE\n\x91\r\x91\x0E\x91\u06DF" +
+		"\x03\x91\x05\x91\u06E3\n\x91\x03\x92\x03\x92\x03\x92\x05\x92\u06E8\n\x92" +
+		"\x03\x92\x03\x92\x03\x92\x07\x92\u06ED\n\x92\f\x92\x0E\x92\u06F0\v\x92" +
+		"\x03\x93\x03\x93\x03\x93\x03\x93\x03\x93\x03\x93\x03\x93\x03\x93\x03\x93" +
+		"\x03\x93\x03\x93\x05\x93\u06FD\n\x93\x03\x93\x03\x93\x03\x93\x03\x93\x05" +
+		"\x93\u0703\n\x93\x03\x93\x03\x93\x03\x93\x03\x93\x03\x93\x03\x93\x05\x93" +
+		"\u070B\n\x93\x03\x93\x03\x93\x03\x93\x03\x93\x03\x93\x03\x93\x03\x93\x03" +
+		"\x93\x03\x93\x05\x93\u0716\n\x93\x03\x94\x03\x94\x03\x94\x03\x94\x05\x94" +
+		"\u071C\n\x94\x03\x95\x03\x95\x05\x95\u0720\n\x95\x03\x96\x05\x96\u0723" +
+		"\n\x96\x03\x96\x03\x96\x05\x96\u0727\n\x96\x03\x96\x03\x96\x03\x97\x05" +
+		"\x97\u072C\n\x97\x03\x97\x03\x97\x03\x97\x05\x97\u0731\n\x97\x03\x97\x03" +
+		"\x97\x03\x98\x03\x98\x05\x98\u0737\n\x98\x03\x98\x03\x98\x03\x98\x03\x98" +
+		"\x03\x98\x03\x98\x03\x98\x03\x98\x03\x98\x03\x98\x03\x98\x03\x98\x03\x98" +
+		"\x05\x98\u0746\n\x98\x03\x99\x03\x99\x03\x99\x03\x99\x03\x99\x03\x99\x05" +
+		"\x99\u074E\n\x99\x03\x9A\x03\x9A\x03\x9A\x05\x9A\u0753\n\x9A\x03\x9B\x03" +
+		"\x9B\x03\x9B\x05\x9B\u0758\n\x9B\x03\x9C\x03\x9C\x05\x9C\u075C\n\x9C\x03" +
+		"\x9C\x05\x9C\u075F\n\x9C\x03\x9C\x03\x9C\x03\x9D\x03\x9D\x03\x9D\x05\x9D" +
+		"\u0766\n\x9D\x03\x9D\x05\x9D\u0769\n\x9D\x03\x9D\x03\x9D\x03\x9E\x03\x9E" +
+		"\x03\x9E\x07\x9E\u0770\n\x9E\f\x9E\x0E\x9E\u0773\v\x9E\x03\x9F\x03\x9F" +
+		"\x03\x9F\x07\x9F\u0778\n\x9F\f\x9F\x0E\x9F\u077B\v\x9F\x03\xA0\x03\xA0" +
+		"\x03\xA0\x03\xA0\x03\xA0\x03\xA0\x03\xA0\x03\xA0\x03\xA0\x03\xA0\x05\xA0" +
+		"\u0787\n\xA0\x03\xA1\x03\xA1\x03\xA1\x03\xA1\x03\xA1\x03\xA1\x03\xA1\x03" +
+		"\xA1\x03\xA1\x03\xA1\x05\xA1\u0793\n\xA1\x03\xA2\x03\xA2\x03\xA2\x03\xA2" +
+		"\x03\xA2\x03\xA2\x03\xA2\x03\xA2\x03\xA2\x03\xA2\x05\xA2\u079F\n\xA2\x03" +
+		"\xA3\x03\xA3\x05\xA3\u07A3\n\xA3\x03\xA4\x03\xA4\x05\xA4\u07A7\n\xA4\x03" +
+		"\xA5\x03\xA5\x05\xA5\u07AB\n\xA5\x03\xA6\x03\xA6\x03\xA6\x03\xA6\x05\xA6" +
+		"\u07B1\n\xA6\x03\xA6\x06\xA6\u07B4\n\xA6\r\xA6\x0E\xA6\u07B5\x03\xA6\x03" +
+		"\xA6\x03\xA6\x05\xA6\u07BB\n\xA6\x05\xA6\u07BD\n\xA6\x03\xA7\x03\xA7\x03" +
+		"\xA7\x05\xA7\u07C2\n\xA7\x03\xA7\x03\xA7\x03\xA8\x03\xA8\x03\xA8\x03\xA8" +
+		"\x03\xA8\x05\xA8\u07CB\n\xA8\x03\xA8\x03\xA8\x03\xA9\x03\xA9\x03\xAA\x03" +
+		"\xAA\x03\xAA\x03\xAA\x05\xAA\u07D5\n\xAA\x05\xAA\u07D7\n\xAA\x03\xAB\x03" +
+		"\xAB\x03\xAB\x03\xAB\x03\xAB\x03\xAB\x03\xAC\x03\xAC\x03\xAC\x05\xAC\u07E2" +
+		"\n\xAC\x03\xAD\x03\xAD\x05\xAD\u07E6\n\xAD\x03\xAD\x05\xAD\u07E9\n\xAD" +
+		"\x03\xAD\x03\xAD\x03\xAE\x03\xAE\x03\xAE\x03\xAE\x03\xAE\x07\xAE\u07F2" +
+		"\n\xAE\f\xAE\x0E\xAE\u07F5\v\xAE\x03\xAF\x03\xAF\x03\xAF\x03\xAF\x03\xAF" +
+		"\x07\xAF\u07FC\n\xAF\f\xAF\x0E\xAF\u07FF\v\xAF\x03\xB0\x03\xB0\x03\xB0" +
+		"\x03\xB0\x03\xB0\x07\xB0\u0806\n\xB0\f\xB0\x0E\xB0\u0809\v\xB0\x03\xB1" +
+		"\x03\xB1\x05\xB1\u080D\n\xB1\x03\xB2\x03\xB2\x05\xB2\u0811\n\xB2\x03\xB3" +
+		"\x03\xB3\x03\xB3\x05\xB3\u0816\n\xB3\x03\xB4\x03\xB4\x03\xB4\x05\xB4\u081B" +
+		"\n\xB4\x03\xB5\x03\xB5\x03\xB6\x03\xB6\x03\xB7\x03\xB7\x03\xB8\x03\xB8" +
+		"\x03\xB9\x03\xB9\x03\xBA\x03\xBA\x03\xBB\x07\xBB\u082A\n\xBB\f\xBB\x0E" +
+		"\xBB\u082D\v\xBB\x03\xBC\x06\xBC\u0830\n\xBC\r\xBC\x0E\xBC\u0831\x03\xBC" +
+		"\x02\x02\x03\u011A\xBD\x02\x02\x04\x02\x06\x02\b\x02\n\x02\f\x02\x0E\x02" +
+		"\x10\x02\x12\x02\x14\x02\x16\x02\x18\x02\x1A\x02\x1C\x02\x1E\x02 \x02" +
+		"\"\x02$\x02&\x02(\x02*\x02,\x02.\x020\x022\x024\x026\x028\x02:\x02<\x02" +
+		">\x02@\x02B\x02D\x02F\x02H\x02J\x02L\x02N\x02P\x02R\x02T\x02V\x02X\x02" +
+		"Z\x02\\\x02^\x02`\x02b\x02d\x02f\x02h\x02j\x02l\x02n\x02p\x02r\x02t\x02" +
+		"v\x02x\x02z\x02|\x02~\x02\x80\x02\x82\x02\x84\x02\x86\x02\x88\x02\x8A" +
+		"\x02\x8C\x02\x8E\x02\x90\x02\x92\x02\x94\x02\x96\x02\x98\x02\x9A\x02\x9C" +
+		"\x02\x9E\x02\xA0\x02\xA2\x02\xA4\x02\xA6\x02\xA8\x02\xAA\x02\xAC\x02\xAE" +
+		"\x02\xB0\x02\xB2\x02\xB4\x02\xB6\x02\xB8\x02\xBA\x02\xBC\x02\xBE\x02\xC0" +
+		"\x02\xC2\x02\xC4\x02\xC6\x02\xC8\x02\xCA\x02\xCC\x02\xCE\x02\xD0\x02\xD2" +
+		"\x02\xD4\x02\xD6\x02\xD8\x02\xDA\x02\xDC\x02\xDE\x02\xE0\x02\xE2\x02\xE4" +
+		"\x02\xE6\x02\xE8\x02\xEA\x02\xEC\x02\xEE\x02\xF0\x02\xF2\x02\xF4\x02\xF6" +
+		"\x02\xF8\x02\xFA\x02\xFC\x02\xFE\x02\u0100\x02\u0102\x02\u0104\x02\u0106" +
+		"\x02\u0108\x02\u010A\x02\u010C\x02\u010E\x02\u0110\x02\u0112\x02\u0114" +
+		"\x02\u0116\x02\u0118\x02\u011A\x02\u011C\x02\u011E\x02\u0120\x02\u0122" +
+		"\x02\u0124\x02\u0126\x02\u0128\x02\u012A\x02\u012C\x02\u012E\x02\u0130" +
+		"\x02\u0132\x02\u0134\x02\u0136\x02\u0138\x02\u013A\x02\u013C\x02\u013E" +
+		"\x02\u0140\x02\u0142\x02\u0144\x02\u0146\x02\u0148\x02\u014A\x02\u014C" +
+		"\x02\u014E\x02\u0150\x02\u0152\x02\u0154\x02\u0156\x02\u0158\x02\u015A" +
+		"\x02\u015C\x02\u015E\x02\u0160\x02\u0162\x02\u0164\x02\u0166\x02\u0168" +
+		"\x02\u016A\x02\u016C\x02\u016E\x02\u0170\x02\u0172\x02\u0174\x02\u0176" +
+		"\x02\x02\x1A\x04\x02ii\x91\x91\x04\x02ii\x92\x92\b\x02\n\n\x0E\x0E&&1" +
+		"15588\x07\x02\x10\x10\x18\x18\x1D\x1D)+-.\b\x02\n\n\x0E\x0E\x10\x10\x1D" +
+		"\x1D)+-.\x04\x02\x1C\x1C//\x04\x02WW__\x04\x02\v\v__\x03\x02fg\x03\x02" +
+		"\\]\x03\x02fi\x04\x02jkoo\x03\x02hi\x03\x02>?\x06\x02\v\vOOZ[ab\x05\x02" +
+		"JL``cc\x03\x02FG\x05";
 	private static readonly _serializedATNSegment1: string =
-		")),.13\b\x02\n\n\x0E\x0E\x10\x10\x1E\x1E,.23\x04\x02\x1D\x1D44\x04\x02" +
-		"__gg\x04\x02\v\vgg\x03\x02no\x04\x02UUgg\x03\x02de\x03\x02nq\x04\x02r" +
-		"sww\x03\x02pq\x03\x02CF\x06\x02\v\vWWbcij\x05\x02RThhkk\x03\x02NO\x05" +
-		"\x02\t\t%%VV\x05\x02QQaax\x83\x05\x02GHJJ``\x04\x02II\\\\\t\x02\t\t\v" +
-		"\f\x0E\x0E\x13\x13++//\x84\x85\x04\x02\x0F\x0F<<\x04\x02\t>AB\x04\x02" +
-		"^^\x89\x89\x02\u08D1\x02\u0183\x03\x02\x02\x02\x04\u018C\x03\x02\x02\x02" +
-		"\x06\u018E\x03\x02\x02\x02\b\u019F\x03\x02\x02\x02\n\u01A5\x03\x02\x02" +
-		"\x02\f\u01A7\x03\x02\x02\x02\x0E\u01D9\x03\x02\x02\x02\x10\u01DB\x03\x02" +
-		"\x02\x02\x12\u01E8\x03\x02\x02\x02\x14\u01F8\x03\x02\x02\x02\x16\u01FA" +
-		"\x03\x02\x02\x02\x18\u01FF\x03\x02\x02\x02\x1A\u0204\x03\x02\x02\x02\x1C" +
-		"\u0212\x03\x02\x02\x02\x1E\u0220\x03\x02\x02\x02 \u0222\x03\x02\x02\x02" +
-		"\"\u0224\x03\x02\x02\x02$\u0232\x03\x02\x02\x02&\u0242\x03\x02\x02\x02" +
-		"(\u0244\x03\x02\x02\x02*\u0249\x03\x02\x02\x02,\u024E\x03\x02\x02\x02" +
-		".\u025C\x03\x02\x02\x020\u026A\x03\x02\x02\x022\u026C\x03\x02\x02\x02" +
-		"4\u026E\x03\x02\x02\x026\u027A\x03\x02\x02\x028\u0290\x03\x02\x02\x02" +
-		":\u02A2\x03\x02\x02\x02<\u02AE\x03\x02\x02\x02>\u02B2\x03\x02\x02\x02" +
-		"@\u02BE\x03\x02\x02\x02B\u02C3\x03\x02\x02\x02D\u02C8\x03\x02\x02\x02" +
-		"F\u02CA\x03\x02\x02\x02H\u02DA\x03\x02\x02\x02J\u02DC\x03\x02\x02\x02" +
-		"L\u02E7\x03\x02\x02\x02N\u02EB\x03\x02\x02\x02P\u02F0\x03\x02\x02\x02" +
-		"R\u02F2\x03\x02\x02\x02T\u02FB\x03\x02\x02\x02V\u030A\x03\x02\x02\x02" +
-		"X\u0312\x03\x02\x02\x02Z\u031C\x03\x02\x02\x02\\\u0333\x03\x02\x02\x02" +
-		"^\u0358\x03\x02\x02\x02`\u0377\x03\x02\x02\x02b\u0382\x03\x02\x02\x02" +
-		"d\u0390\x03\x02\x02\x02f\u0399\x03\x02\x02\x02h\u039B\x03\x02\x02\x02" +
-		"j\u03B8\x03\x02\x02\x02l\u03BE\x03\x02\x02\x02n\u03C2\x03\x02\x02\x02" +
-		"p\u03C4\x03\x02\x02\x02r\u03C6\x03\x02\x02\x02t\u03D0\x03\x02\x02\x02" +
-		"v\u03D8\x03\x02\x02\x02x\u03DA\x03\x02\x02\x02z\u03DC\x03\x02\x02\x02" +
-		"|\u03EF\x03\x02\x02\x02~\u03F4\x03\x02\x02\x02\x80\u03F6\x03\x02\x02\x02" +
-		"\x82\u03FD\x03\x02\x02\x02\x84\u0409\x03\x02\x02\x02\x86\u040E\x03\x02" +
-		"\x02\x02\x88\u0412\x03\x02\x02\x02\x8A\u0416\x03\x02\x02\x02\x8C\u0418" +
-		"\x03\x02\x02\x02\x8E\u0430\x03\x02\x02\x02\x90\u0432\x03\x02\x02\x02\x92" +
-		"\u0435\x03\x02\x02\x02\x94\u043F\x03\x02\x02\x02\x96\u0447\x03\x02\x02" +
-		"\x02\x98\u0452\x03\x02\x02\x02\x9A\u0455\x03\x02\x02\x02\x9C\u0464\x03" +
-		"\x02\x02\x02\x9E\u0466\x03\x02\x02\x02\xA0\u0473\x03\x02\x02\x02\xA2\u047A" +
-		"\x03\x02\x02\x02\xA4\u047D\x03\x02\x02\x02\xA6\u0480\x03\x02\x02\x02\xA8" +
-		"\u048E\x03\x02\x02\x02\xAA\u0490\x03\x02\x02\x02\xAC\u049D\x03\x02\x02" +
-		"\x02\xAE\u049F\x03\x02\x02\x02\xB0\u04A6\x03\x02\x02\x02\xB2\u04AC\x03" +
-		"\x02\x02\x02\xB4\u04B2\x03\x02\x02\x02\xB6\u04B6\x03\x02\x02\x02\xB8\u04BA" +
-		"\x03\x02\x02\x02\xBA\u04BC\x03\x02\x02\x02\xBC\u04CF\x03\x02\x02\x02\xBE" +
-		"\u04D2\x03\x02\x02\x02\xC0\u04D4\x03\x02\x02\x02\xC2\u04EB\x03\x02\x02" +
-		"\x02\xC4\u04ED\x03\x02\x02\x02\xC6\u04FA\x03\x02\x02\x02\xC8\u04FC\x03" +
-		"\x02\x02\x02\xCA\u04FE\x03\x02\x02\x02\xCC\u0506\x03\x02\x02\x02\xCE\u050E" +
-		"\x03\x02\x02\x02\xD0\u0513\x03\x02\x02\x02\xD2\u0515\x03\x02\x02\x02\xD4" +
-		"\u0525\x03\x02\x02\x02\xD6\u052E\x03\x02\x02\x02\xD8\u0530\x03\x02\x02" +
-		"\x02\xDA\u0544\x03\x02\x02\x02\xDC\u0546\x03\x02\x02\x02\xDE\u0552\x03" +
-		"\x02\x02\x02\xE0\u0556\x03\x02\x02\x02\xE2\u0562\x03\x02\x02\x02\xE4\u0564" +
-		"\x03\x02\x02\x02\xE6\u0572\x03\x02\x02\x02\xE8\u0595\x03\x02\x02\x02\xEA" +
-		"\u0597\x03\x02\x02\x02\xEC\u059B\x03\x02\x02\x02\xEE\u059F\x03\x02\x02" +
-		"\x02\xF0\u05A2\x03\x02\x02\x02\xF2\u05B5\x03\x02\x02\x02\xF4\u05DA\x03" +
-		"\x02\x02\x02\xF6\u05DC\x03\x02\x02\x02\xF8\u05E7\x03\x02\x02\x02\xFA\u05EF" +
-		"\x03\x02\x02\x02\xFC\u05F3\x03\x02\x02\x02\xFE\u05FB\x03\x02\x02\x02\u0100" +
-		"\u0606\x03\x02\x02\x02\u0102\u0608\x03\x02\x02\x02\u0104\u061A\x03\x02" +
-		"\x02\x02\u0106\u061E\x03\x02\x02\x02\u0108\u0620\x03\x02\x02\x02\u010A" +
-		"\u0629\x03\x02\x02\x02\u010C\u0635\x03\x02\x02\x02\u010E\u0637\x03\x02" +
-		"\x02\x02\u0110\u0639\x03\x02\x02\x02\u0112\u063D\x03\x02\x02\x02\u0114" +
-		"\u063F\x03\x02\x02\x02\u0116\u0643\x03\x02\x02\x02\u0118\u064E\x03\x02" +
-		"\x02\x02\u011A\u0654\x03\x02\x02\x02\u011C\u0656\x03\x02\x02\x02\u011E" +
-		"\u0658\x03\x02\x02\x02\u0120\u065C\x03\x02\x02\x02\u0122\u066D\x03\x02" +
-		"\x02\x02\u0124\u0676\x03\x02\x02\x02\u0126\u068C\x03\x02\x02\x02\u0128" +
-		"\u0709\x03\x02\x02\x02\u012A\u070B\x03\x02\x02\x02\u012C\u0717\x03\x02" +
-		"\x02\x02\u012E\u0723\x03\x02\x02\x02\u0130\u0751\x03\x02\x02\x02\u0132" +
-		"\u0757\x03\x02\x02\x02\u0134\u075B\x03\x02\x02\x02\u0136\u075D\x03\x02" +
-		"\x02\x02\u0138\u0763\x03\x02\x02\x02\u013A\u077B\x03\x02\x02\x02\u013C" +
-		"\u0781\x03\x02\x02\x02\u013E\u0786\x03\x02\x02\x02\u0140\u078B\x03\x02" +
-		"\x02\x02\u0142\u078D\x03\x02\x02\x02\u0144\u0796\x03\x02\x02\x02\u0146" +
-		"\u07A0\x03\x02\x02\x02\u0148\u07A8\x03\x02\x02\x02\u014A\u07BA\x03\x02" +
-		"\x02\x02\u014C\u07C6\x03\x02\x02\x02\u014E\u07D2\x03\x02\x02\x02\u0150" +
-		"\u07D6\x03\x02\x02\x02\u0152\u07DA\x03\x02\x02\x02\u0154\u07DE\x03\x02" +
-		"\x02\x02\u0156\u07E0\x03\x02\x02\x02\u0158\u07F2\x03\x02\x02\x02\u015A" +
-		"\u07F9\x03\x02\x02\x02\u015C\u0802\x03\x02\x02\x02\u015E\u0804\x03\x02" +
-		"\x02\x02\u0160\u080C\x03\x02\x02\x02\u0162\u0815\x03\x02\x02\x02\u0164" +
-		"\u0817\x03\x02\x02\x02\u0166\u0820\x03\x02\x02\x02\u0168\u082A\x03\x02" +
-		"\x02\x02\u016A\u0836\x03\x02\x02\x02\u016C\u083A\x03\x02\x02\x02\u016E" +
-		"\u083F\x03\x02\x02\x02\u0170\u0841\x03\x02\x02\x02\u0172\u0843\x03\x02" +
-		"\x02\x02\u0174\u0845\x03\x02\x02\x02\u0176\u0847\x03\x02\x02\x02\u0178" +
-		"\u0849\x03\x02\x02\x02\u017A\u084B\x03\x02\x02\x02\u017C\u0850\x03\x02" +
-		"\x02\x02\u017E\u0854\x03\x02\x02\x02\u0180\u0182\x05\x04\x03\x02\u0181" +
-		"\u0180\x03\x02\x02\x02\u0182\u0185\x03\x02\x02\x02\u0183\u0181\x03\x02" +
-		"\x02\x02\u0183\u0184\x03\x02\x02\x02\u0184\u0186\x03\x02\x02\x02\u0185" +
-		"\u0183\x03\x02\x02\x02\u0186\u0187\x07\x02\x02\x03\u0187\x03\x03\x02\x02" +
-		"\x02\u0188\u018D\x05\x06\x04\x02\u0189\u018D\x05h5\x02\u018A\u018D\x05" +
-		"\f\x07\x02\u018B\u018D\x056\x1C\x02\u018C\u0188\x03\x02\x02\x02\u018C" +
-		"\u0189\x03\x02\x02\x02\u018C\u018A\x03\x02\x02\x02\u018C\u018B\x03\x02" +
-		"\x02\x02\u018D\x05\x03\x02\x02\x02\u018E\u018F\x07\x8C\x02\x02\u018F\u0190" +
-		"\x05\b\x05\x02\u0190\u0191\x07\x8D\x02\x02\u0191\u0192\x05\u0126\x94\x02" +
-		"\u0192\x07\x03\x02\x02\x02\u0193\u01A0\x05\n\x06\x02\u0194\u0195\x07Z" +
-		"\x02\x02\u0195\u019A\x05\n\x06\x02\u0196\u0197\x07_\x02\x02\u0197\u0199" +
-		"\x05\n\x06\x02\u0198\u0196\x03\x02\x02\x02\u0199\u019C\x03\x02\x02\x02" +
-		"\u019A\u0198\x03\x02\x02\x02\u019A\u019B\x03\x02\x02\x02\u019B\u019D\x03" +
-		"\x02\x02\x02\u019C\u019A\x03\x02\x02\x02\u019D\u019E\x07[\x02\x02\u019E" +
-		"\u01A0\x03\x02\x02\x02\u019F\u0193\x03\x02\x02\x02\u019F\u0194\x03\x02" +
-		"\x02\x02\u01A0\t\x03\x02\x02\x02\u01A1\u01A6\x07\x85\x02\x02\u01A2\u01A3" +
-		"\x07\x85\x02\x02\u01A3\u01A4\x07\t\x02\x02\u01A4\u01A6\x07\x85\x02\x02" +
-		"\u01A5\u01A1\x03\x02\x02\x02\u01A5\u01A2\x03\x02\x02\x02\u01A6\v\x03\x02" +
-		"\x02\x02\u01A7\u01A8\x07\x8E\x02\x02\u01A8\u01A9\x07\x85\x02\x02\u01A9" +
-		"\u01AD\x07Z\x02\x02\u01AA\u01AC\x05\x0E\b\x02\u01AB\u01AA\x03\x02\x02" +
-		"\x02\u01AC\u01AF\x03\x02\x02\x02\u01AD\u01AB\x03\x02\x02\x02\u01AD\u01AE" +
-		"\x03\x02\x02\x02\u01AE\u01B0\x03\x02\x02\x02\u01AF\u01AD\x03\x02\x02\x02" +
-		"\u01B0\u01B1\x07[\x02\x02\u01B1\r\x03\x02\x02\x02\u01B2\u01DA\x05\x10" +
-		"\t\x02\u01B3\u01B5\x07\x9A\x02\x02\u01B4\u01B6\x05\x12\n\x02\u01B5\u01B4" +
-		"\x03\x02\x02\x02\u01B6\u01B7\x03\x02\x02\x02\u01B7\u01B5\x03\x02\x02\x02" +
-		"\u01B7\u01B8\x03\x02\x02\x02\u01B8\u01DA\x03\x02\x02\x02\u01B9\u01BB\x07" +
-		"\x9B\x02\x02\u01BA\u01BC\x05$\x13\x02\u01BB\u01BA\x03\x02\x02\x02\u01BC" +
-		"\u01BD\x03\x02\x02\x02\u01BD\u01BB\x03\x02\x02\x02\u01BD\u01BE\x03\x02" +
-		"\x02\x02\u01BE\u01DA\x03\x02\x02\x02\u01BF\u01C0\x07\x9C\x02\x02\u01C0" +
-		"\u01DA\x05\u0126\x94\x02\u01C1\u01C3\x07\x9D\x02\x02\u01C2\u01C4\x05\xF4" +
-		"{\x02\u01C3\u01C2\x03\x02\x02\x02\u01C4\u01C5\x03\x02\x02\x02\u01C5\u01C3" +
-		"\x03\x02\x02\x02\u01C5\u01C6\x03\x02\x02\x02\u01C6\u01DA\x03\x02\x02\x02" +
-		"\u01C7\u01C9\x07\x9E\x02\x02\u01C8\u01CA\x05\xF4{\x02\u01C9\u01C8\x03" +
-		"\x02\x02\x02\u01CA\u01CB\x03\x02\x02\x02\u01CB\u01C9\x03\x02\x02\x02\u01CB" +
-		"\u01CC\x03\x02\x02\x02\u01CC\u01DA\x03\x02\x02\x02\u01CD\u01CF\x07\x9F" +
-		"\x02\x02\u01CE\u01D0\x05\xF4{\x02\u01CF\u01CE\x03\x02\x02\x02\u01D0\u01D1" +
-		"\x03\x02\x02\x02\u01D1\u01CF\x03\x02\x02\x02\u01D1\u01D2\x03\x02\x02\x02" +
-		"\u01D2\u01DA\x03\x02\x02\x02\u01D3\u01D5\x07\xA0\x02\x02\u01D4\u01D6\x05" +
-		"\xF4{\x02\u01D5\u01D4\x03\x02\x02\x02\u01D6\u01D7\x03\x02\x02\x02\u01D7" +
-		"\u01D5\x03\x02\x02\x02\u01D7\u01D8\x03\x02\x02\x02\u01D8\u01DA\x03\x02" +
-		"\x02\x02\u01D9\u01B2\x03\x02\x02\x02\u01D9\u01B3\x03\x02\x02\x02\u01D9" +
-		"\u01B9\x03\x02\x02\x02\u01D9\u01BF\x03\x02\x02\x02\u01D9\u01C1\x03\x02" +
-		"\x02\x02\u01D9\u01C7\x03\x02\x02\x02\u01D9\u01CD\x03\x02\x02\x02\u01D9" +
-		"\u01D3\x03\x02\x02\x02\u01DA\x0F\x03\x02\x02\x02\u01DB\u01DC\x07\x85\x02" +
-		"\x02\u01DC\u01E3\x05\u0126\x94\x02\u01DD\u01DE\x07_\x02\x02\u01DE\u01DF" +
-		"\x07\x85\x02\x02\u01DF\u01E0\x07g\x02\x02\u01E0\u01E2\x05\u0126\x94\x02" +
-		"\u01E1\u01DD\x03\x02\x02\x02\u01E2\u01E5\x03\x02\x02\x02\u01E3\u01E1\x03" +
-		"\x02\x02\x02\u01E3\u01E4\x03\x02\x02\x02\u01E4\x11\x03\x02\x02\x02\u01E5" +
-		"\u01E3\x03\x02\x02\x02\u01E6\u01E9\x05\x14\v\x02\u01E7\u01E9\x05 \x11" +
-		"\x02\u01E8\u01E6\x03\x02\x02\x02\u01E8\u01E7\x03\x02\x02\x02\u01E9\u01F0" +
-		"\x03\x02\x02\x02\u01EA\u01EB\x07_\x02\x02\u01EB\u01EC\x07\x85\x02\x02" +
-		"\u01EC\u01ED\x07g\x02\x02\u01ED\u01EF\x05\u0126\x94\x02\u01EE\u01EA\x03" +
-		"\x02\x02\x02\u01EF\u01F2\x03\x02\x02\x02\u01F0\u01EE\x03\x02\x02\x02\u01F0" +
-		"\u01F1\x03\x02\x02\x02\u01F1\x13\x03\x02\x02\x02\u01F2\u01F0\x03\x02\x02" +
-		"\x02\u01F3\u01F9\x05\x16\f\x02\u01F4\u01F9\x05\x18\r\x02\u01F5\u01F9\x05" +
-		"\x1A\x0E\x02\u01F6\u01F9\x05\x1C\x0F\x02\u01F7\u01F9\x05\x1E\x10\x02\u01F8" +
-		"\u01F3\x03\x02\x02\x02\u01F8\u01F4\x03\x02\x02\x02\u01F8\u01F5\x03\x02" +
-		"\x02\x02\u01F8\u01F6\x03\x02\x02\x02\u01F8\u01F7\x03\x02\x02\x02\u01F9" +
-		"\x15\x03\x02\x02\x02\u01FA\u01FB\x07\x8F\x02\x02\u01FB\u01FC\x07X\x02" +
-		"\x02\u01FC\u01FD\x07\x85\x02\x02\u01FD\u01FE\x07Y\x02\x02\u01FE\x17\x03" +
-		"\x02\x02\x02\u01FF\u0200\x07\x91\x02\x02\u0200\u0201\x07X\x02\x02\u0201" +
-		"\u0202\x07\x85\x02\x02\u0202\u0203\x07Y\x02\x02\u0203\x19\x03\x02\x02" +
-		"\x02\u0204\u0205\x07\x90\x02\x02\u0205\u0206\x07X\x02\x02\u0206\u020D" +
-		"\x05\u0126\x94\x02\u0207\u0208\x07_\x02\x02\u0208\u0209\x07\x85\x02\x02" +
-		"\u0209\u020A\x07g\x02\x02\u020A\u020C\x05\u0126\x94\x02\u020B\u0207\x03" +
-		"\x02\x02\x02\u020C\u020F\x03\x02\x02\x02\u020D\u020B\x03\x02\x02\x02\u020D" +
-		"\u020E\x03\x02\x02\x02\u020E\u0210\x03\x02\x02\x02\u020F\u020D\x03\x02" +
-		"\x02\x02\u0210\u0211\x07Y\x02\x02\u0211\x1B\x03\x02\x02\x02\u0212\u0213" +
-		"\x07\x92\x02\x02\u0213\u0214\x07X\x02\x02\u0214\u021B\x05\u0126\x94\x02" +
-		"\u0215\u0216\x07_\x02\x02\u0216\u0217\x07\x85\x02\x02\u0217\u0218\x07" +
-		"g\x02\x02\u0218\u021A\x05\u0126\x94\x02\u0219\u0215\x03\x02\x02\x02\u021A" +
-		"\u021D\x03\x02\x02\x02\u021B\u0219\x03\x02\x02\x02\u021B\u021C\x03\x02" +
-		"\x02\x02\u021C\u021E\x03\x02\x02\x02\u021D\u021B\x03\x02\x02\x02\u021E" +
-		"\u021F\x07Y\x02\x02\u021F\x1D\x03\x02\x02\x02\u0220\u0221\t\x02\x02\x02" +
-		"\u0221\x1F\x03\x02\x02\x02\u0222\u0223\x05\"\x12\x02\u0223!\x03\x02\x02" +
-		"\x02\u0224\u0225\x07\x94\x02\x02\u0225\u0226\x07X\x02\x02\u0226\u022B" +
-		"\x05\x14\v\x02\u0227\u0228\x07_\x02\x02\u0228\u022A\x05\x14\v\x02\u0229" +
-		"\u0227\x03\x02\x02\x02\u022A\u022D\x03\x02\x02\x02\u022B\u0229\x03\x02" +
-		"\x02\x02\u022B\u022C\x03\x02\x02\x02\u022C\u022E\x03\x02\x02\x02\u022D" +
-		"\u022B\x03\x02\x02\x02\u022E\u022F\x07Y\x02\x02\u022F#\x03\x02\x02\x02" +
-		"\u0230\u0233\x05&\x14\x02\u0231\u0233\x052\x1A\x02\u0232\u0230\x03\x02" +
-		"\x02\x02\u0232\u0231\x03\x02\x02\x02\u0233\u023A\x03\x02\x02\x02\u0234" +
-		"\u0235\x07_\x02\x02\u0235\u0236\x07\x85\x02\x02\u0236\u0237\x07g\x02\x02" +
-		"\u0237\u0239\x05\u0126\x94\x02\u0238\u0234\x03\x02\x02\x02\u0239\u023C" +
-		"\x03\x02\x02\x02\u023A\u0238\x03\x02\x02\x02\u023A\u023B\x03\x02\x02\x02" +
-		"\u023B%\x03\x02\x02\x02\u023C\u023A\x03\x02\x02\x02\u023D\u0243\x05(\x15" +
-		"\x02\u023E\u0243\x05*\x16\x02\u023F\u0243\x05,\x17\x02\u0240\u0243\x05" +
-		".\x18\x02\u0241\u0243\x050\x19\x02\u0242\u023D\x03\x02\x02\x02\u0242\u023E" +
-		"\x03\x02\x02\x02\u0242\u023F\x03\x02\x02\x02\u0242\u0240\x03\x02\x02\x02" +
-		"\u0242\u0241\x03\x02\x02\x02\u0243\'\x03\x02\x02\x02\u0244\u0245\x07\x8F" +
-		"\x02\x02\u0245\u0246\x07X\x02\x02\u0246\u0247\x07\x85\x02\x02\u0247\u0248" +
-		"\x07Y\x02\x02\u0248)\x03\x02\x02\x02\u0249\u024A\x07\x91\x02\x02\u024A" +
-		"\u024B\x07X\x02\x02\u024B\u024C\x07\x85\x02\x02\u024C\u024D\x07Y\x02\x02" +
-		"\u024D+\x03\x02\x02\x02\u024E\u024F\x07\x90\x02\x02\u024F\u0250\x07X\x02" +
-		"\x02\u0250\u0257\x05\u0126\x94\x02\u0251\u0252\x07_\x02\x02\u0252\u0253" +
-		"\x07\x85\x02\x02\u0253\u0254\x07g\x02\x02\u0254\u0256\x05\u0126\x94\x02" +
-		"\u0255\u0251\x03\x02\x02\x02\u0256\u0259\x03\x02\x02\x02\u0257\u0255\x03" +
-		"\x02\x02\x02\u0257\u0258\x03\x02\x02\x02\u0258\u025A\x03\x02\x02\x02\u0259" +
-		"\u0257\x03\x02\x02\x02\u025A\u025B\x07Y\x02\x02\u025B-\x03\x02\x02\x02" +
-		"\u025C\u025D\x07\x92\x02\x02\u025D\u025E\x07X\x02\x02\u025E\u0265\x05" +
-		"\u0126\x94\x02\u025F\u0260\x07_\x02\x02\u0260\u0261\x07\x85\x02\x02\u0261" +
-		"\u0262\x07g\x02\x02\u0262\u0264\x05\u0126\x94\x02\u0263\u025F\x03\x02" +
-		"\x02\x02\u0264\u0267\x03\x02\x02\x02\u0265\u0263\x03\x02\x02\x02\u0265" +
-		"\u0266\x03\x02\x02\x02\u0266\u0268\x03\x02\x02\x02\u0267\u0265\x03\x02" +
-		"\x02\x02\u0268\u0269\x07Y\x02\x02\u0269/\x03\x02\x02\x02\u026A\u026B\t" +
-		"\x03\x02\x02\u026B1\x03\x02\x02\x02\u026C\u026D\x054\x1B\x02\u026D3\x03" +
-		"\x02\x02\x02\u026E\u026F\x07\x94\x02\x02\u026F\u0270\x07X\x02\x02\u0270" +
-		"\u0275\x05&\x14\x02\u0271\u0272\x07_\x02\x02\u0272\u0274\x05&\x14\x02" +
-		"\u0273\u0271\x03\x02\x02\x02\u0274\u0277\x03\x02\x02\x02\u0275\u0273\x03" +
-		"\x02\x02\x02\u0275\u0276\x03\x02\x02\x02\u0276\u0278\x03\x02\x02\x02\u0277" +
-		"\u0275\x03\x02\x02\x02\u0278\u0279\x07Y\x02\x02\u02795\x03\x02\x02\x02" +
-		"\u027A\u027C\x07\x96\x02\x02\u027B\u027D\x07\x85\x02\x02\u027C\u027B\x03" +
-		"\x02\x02\x02\u027C\u027D\x03\x02\x02\x02\u027D\u027E\x03\x02\x02\x02\u027E" +
-		"\u0286\x07Z\x02\x02\u027F\u0287\x058\x1D\x02\u0280\u0282\x05\xF4{\x02" +
-		"\u0281\u0280\x03\x02\x02\x02\u0282\u0285\x03\x02\x02\x02\u0283\u0281\x03" +
-		"\x02\x02\x02\u0283\u0284\x03\x02\x02\x02\u0284\u0287\x03\x02\x02\x02\u0285" +
-		"\u0283\x03\x02\x02\x02\u0286\u027F\x03\x02\x02\x02\u0286\u0283\x03\x02" +
-		"\x02\x02\u0287\u0288\x03\x02\x02\x02\u0288\u0289\x07[\x02\x02\u02897\x03" +
-		"\x02\x02\x02\u028A\u028C\x07\x97\x02\x02\u028B\u028D\x07\x85\x02\x02\u028C" +
-		"\u028B\x03\x02\x02\x02\u028D\u028E\x03\x02\x02\x02\u028E\u028C\x03\x02" +
-		"\x02\x02\u028E\u028F\x03\x02\x02\x02\u028F\u0291\x03\x02\x02\x02\u0290" +
-		"\u028A\x03\x02\x02\x02\u0290\u0291\x03\x02\x02\x02\u0291\u0298\x03\x02" +
-		"\x02\x02\u0292\u0294\x07\x98\x02\x02\u0293\u0295\x05\xF4{\x02\u0294\u0293" +
-		"\x03\x02\x02\x02\u0295\u0296\x03\x02\x02\x02\u0296\u0294\x03\x02\x02\x02" +
-		"\u0296\u0297\x03\x02\x02\x02\u0297\u0299\x03\x02\x02\x02\u0298\u0292\x03" +
-		"\x02\x02\x02\u0298\u0299\x03\x02\x02\x02\u0299\u02A0\x03\x02\x02\x02\u029A" +
-		"\u029C\x07\x99\x02\x02\u029B\u029D\x05\u0126\x94\x02\u029C\u029B\x03\x02" +
-		"\x02\x02\u029D\u029E\x03\x02\x02\x02\u029E\u029C\x03\x02\x02\x02\u029E" +
-		"\u029F\x03\x02\x02\x02\u029F\u02A1\x03\x02\x02\x02\u02A0\u029A\x03\x02" +
-		"\x02\x02\u02A0\u02A1\x03\x02\x02\x02\u02A19\x03\x02\x02\x02\u02A2\u02A8" +
-		"\x05\x04\x03\x02\u02A3\u02A4\x05\u017E\xC0\x02\u02A4\u02A5\x05\x04\x03" +
-		"\x02\u02A5\u02A7\x03\x02\x02\x02\u02A6\u02A3\x03\x02\x02\x02\u02A7\u02AA" +
-		"\x03\x02\x02\x02\u02A8\u02A6\x03\x02\x02\x02\u02A8\u02A9\x03\x02\x02\x02" +
-		"\u02A9\u02AC\x03\x02\x02\x02\u02AA\u02A8\x03\x02\x02\x02\u02AB\u02AD\x05" +
-		"\u017E\xC0\x02\u02AC\u02AB\x03\x02\x02\x02\u02AC\u02AD\x03\x02\x02\x02" +
-		"\u02AD;\x03\x02\x02\x02\u02AE\u02AF\x05\xC2b\x02\u02AF\u02B0\x07*\x02" +
-		"\x02\u02B0\u02B1\x05\x9EP\x02\u02B1=\x03\x02\x02\x02\u02B2\u02B3\x05\xC2" +
-		"b\x02\u02B3\u02B5\x07$\x02\x02\u02B4\u02B6\x072\x02\x02\u02B5\u02B4\x03" +
-		"\x02\x02\x02\u02B5\u02B6\x03\x02\x02\x02\u02B6\u02B7\x03\x02\x02\x02\u02B7" +
-		"\u02BC\x05\x9EP\x02\u02B8\u02B9\x07`\x02\x02\u02B9\u02BD\x07r\x02\x02" +
-		"\u02BA\u02BB\x07\t\x02\x02\u02BB\u02BD\x05\u0174\xBB\x02\u02BC\u02B8\x03" +
-		"\x02\x02\x02\u02BC\u02BA\x03\x02\x02\x02\u02BC\u02BD\x03\x02\x02\x02\u02BD" +
-		"?\x03\x02\x02\x02\u02BE\u02BF\x05H%\x02\u02BF\u02C0\x05\\/\x02\u02C0A" +
-		"\x03\x02\x02\x02\u02C1\u02C4\x05L\'\x02\u02C2\u02C4\t\x04\x02\x02\u02C3" +
-		"\u02C1\x03\x02\x02\x02\u02C3\u02C2\x03\x02\x02\x02\u02C4C\x03\x02\x02" +
-		"\x02\u02C5\u02C6\x05F$\x02\u02C6\u02C7\x05\u017C\xBF\x02\u02C7\u02C9\x03" +
-		"\x02\x02\x02\u02C8\u02C5\x03\x02\x02\x02\u02C8\u02C9\x03\x02\x02\x02\u02C9" +
-		"E\x03\x02\x02\x02\u02CA\u02D0\x05B\"\x02\u02CB\u02CC\x05\u017C\xBF\x02" +
-		"\u02CC\u02CD\x05B\"\x02\u02CD\u02CF\x03\x02\x02\x02\u02CE\u02CB\x03\x02" +
-		"\x02\x02\u02CF\u02D2\x03\x02\x02\x02\u02D0\u02CE\x03\x02\x02\x02\u02D0" +
-		"\u02D1\x03\x02\x02\x02\u02D1G\x03\x02\x02\x02\u02D2\u02D0\x03\x02\x02" +
-		"\x02\u02D3\u02D7\x05J&\x02\u02D4\u02D6\x07\x89\x02\x02\u02D5\u02D4\x03" +
-		"\x02\x02\x02\u02D6\u02D9\x03\x02\x02\x02\u02D7\u02D5\x03\x02\x02\x02\u02D7" +
-		"\u02D8\x03\x02\x02\x02\u02D8\u02DB\x03\x02\x02\x02\u02D9\u02D7\x03\x02" +
-		"\x02\x02\u02DA\u02D3\x03\x02\x02\x02\u02DA\u02DB\x03\x02\x02\x02\u02DB" +
-		"I\x03\x02\x02\x02\u02DC\u02E2\x05L\'\x02\u02DD\u02DE\x05\u017C\xBF\x02" +
-		"\u02DE\u02DF\x05L\'\x02\u02DF\u02E1\x03\x02\x02\x02\u02E0\u02DD\x03\x02" +
-		"\x02\x02\u02E1\u02E4\x03\x02\x02\x02\u02E2\u02E0\x03\x02\x02\x02\u02E2" +
-		"\u02E3\x03\x02\x02\x02\u02E3K\x03\x02\x02\x02\u02E4\u02E2\x03\x02\x02" +
-		"\x02\u02E5\u02E8\x05\xC4c\x02\u02E6\u02E8\t\x05\x02\x02\u02E7\u02E5\x03" +
-		"\x02\x02\x02\u02E7\u02E6\x03\x02\x02\x02\u02E8M\x03\x02\x02\x02\u02E9" +
-		"\u02EC\x05\xC4c\x02\u02EA\u02EC\t\x06\x02\x02\u02EB\u02E9\x03\x02\x02" +
-		"\x02\u02EB\u02EA\x03\x02\x02\x02\u02ECO\x03\x02\x02\x02\u02ED\u02EE\x05" +
-		"R*\x02\u02EE\u02EF\x05\u017C\xBF\x02\u02EF\u02F1\x03\x02\x02\x02\u02F0" +
-		"\u02ED\x03\x02\x02\x02\u02F0\u02F1\x03\x02\x02\x02\u02F1Q\x03\x02\x02" +
-		"\x02\u02F2\u02F8\x05N(\x02\u02F3\u02F4\x05\u017C\xBF\x02\u02F4\u02F5\x05" +
-		"N(\x02\u02F5\u02F7\x03\x02\x02\x02\u02F6\u02F3\x03\x02\x02\x02\u02F7\u02FA" +
-		"\x03\x02\x02\x02\u02F8\u02F6\x03\x02\x02\x02\u02F8\u02F9\x03\x02\x02\x02" +
-		"\u02F9S\x03\x02\x02\x02\u02FA\u02F8\x03\x02\x02\x02\u02FB\u02FC\x07c\x02" +
-		"\x02\u02FC\u02FD\x05\u017C\xBF\x02\u02FD\u0304\x05V,\x02\u02FE\u02FF\x07" +
-		"_\x02\x02\u02FF\u0300\x05\u017C\xBF\x02\u0300\u0301\x05V,\x02\u0301\u0303" +
-		"\x03\x02\x02\x02\u0302\u02FE\x03\x02\x02\x02\u0303\u0306\x03\x02\x02\x02" +
-		"\u0304\u0302\x03\x02\x02\x02\u0304\u0305\x03\x02\x02\x02\u0305\u0307\x03" +
-		"\x02\x02\x02\u0306\u0304\x03\x02\x02\x02\u0307\u0308\x05\u017C\xBF\x02" +
-		"\u0308\u0309\x07b\x02\x02\u0309U\x03\x02\x02\x02\u030A\u030B\x05\xC2b" +
-		"\x02\u030B\u0310\x05\u0172\xBA\x02\u030C\u030D\x07\x1D\x02\x02\u030D\u030E" +
-		"\x05\u017C\xBF\x02\u030E\u030F\x05X-\x02\u030F\u0311\x03\x02\x02\x02\u0310" +
-		"\u030C\x03\x02\x02\x02\u0310\u0311\x03\x02\x02\x02\u0311W\x03\x02\x02" +
-		"\x02\u0312\u0319\x05\x82B\x02\u0313\u0314\x07t\x02\x02\u0314\u0315\x05" +
-		"\u017C\xBF\x02\u0315\u0316\x05\x82B\x02\u0316\u0318\x03\x02\x02\x02\u0317" +
-		"\u0313\x03\x02\x02\x02\u0318\u031B\x03\x02\x02\x02\u0319\u0317\x03\x02" +
-		"\x02\x02\u0319\u031A\x03\x02\x02\x02\u031AY\x03\x02\x02\x02\u031B\u0319" +
-		"\x03\x02\x02\x02\u031C\u0323\x05\x82B\x02\u031D\u031E\x07_\x02\x02\u031E" +
-		"\u031F\x05\u017C\xBF\x02\u031F\u0320\x05\x82B\x02\u0320\u0322\x03\x02" +
-		"\x02\x02\u0321\u031D\x03\x02\x02\x02\u0322\u0325\x03\x02\x02\x02\u0323" +
-		"\u0321\x03\x02\x02\x02\u0323\u0324\x03\x02\x02\x02\u0324[\x03\x02\x02" +
-		"\x02\u0325\u0323\x03\x02\x02\x02\u0326\u0327\x07\x16\x02\x02\u0327\u0334" +
-		"\b/\x01\x02\u0328\u0329\x07&\x02\x02\u0329\u0334\b/\x01\x02\u032A\u032B" +
-		"\x07\x1C\x02\x02\u032B\u0334\b/\x01\x02\u032C\u032D\x07\x86\x02\x02\u032D" +
-		"\u032E\x07&\x02\x02\u032E\u0334\b/\x01\x02\u032F\u0330\x07\f\x02\x02\u0330" +
-		"\u0334\b/\x01\x02\u0331\u0332\x07/\x02\x02\u0332\u0334\b/\x01\x02\u0333" +
-		"\u0326\x03\x02\x02\x02\u0333\u0328\x03\x02\x02\x02\u0333\u032A\x03\x02" +
-		"\x02\x02\u0333\u032C\x03\x02\x02\x02\u0333\u032F\x03\x02\x02\x02\u0333" +
-		"\u0331\x03\x02\x02\x02\u0334\u0335\x03\x02\x02\x02\u0335\u0339\x05\u0174" +
-		"\xBB\x02\u0336\u0337\x05\u017C\xBF\x02\u0337\u0338\x05T+\x02\u0338\u033A" +
-		"\x03\x02\x02\x02\u0339\u0336\x03\x02\x02\x02\u0339\u033A\x03\x02\x02\x02" +
-		"\u033A\u033E\x03\x02\x02\x02\u033B\u033C\x05\u017C\xBF\x02\u033C\u033D" +
-		"\x05\x94K\x02\u033D\u033F\x03\x02\x02\x02\u033E\u033B\x03\x02\x02\x02" +
-		"\u033E\u033F\x03\x02\x02\x02\u033F\u0345\x03\x02\x02\x02\u0340\u0341\x05" +
-		"\u017C\xBF\x02\u0341\u0342\x07\x1D\x02\x02\u0342\u0343\x05\u017C\xBF\x02" +
-		"\u0343\u0344\x05Z.\x02\u0344\u0346\x03\x02\x02\x02\u0345\u0340\x03\x02" +
-		"\x02\x02\u0345\u0346\x03\x02\x02\x02\u0346\u034C\x03\x02\x02\x02\u0347" +
-		"\u0348\x05\u017C\xBF\x02\u0348\u0349\x07#\x02\x02\u0349\u034A\x05\u017C" +
-		"\xBF\x02\u034A\u034B\x05Z.\x02\u034B\u034D\x03\x02\x02\x02\u034C\u0347" +
-		"\x03\x02\x02\x02\u034C\u034D\x03\x02\x02\x02\u034D\u0353\x03\x02\x02\x02" +
-		"\u034E\u034F\x05\u017C\xBF\x02\u034F\u0350\x07+\x02\x02\u0350\u0351\x05" +
-		"\u017C\xBF\x02\u0351\u0352\x05Z.\x02\u0352\u0354\x03\x02\x02\x02\u0353" +
-		"\u034E\x03\x02\x02\x02\u0353\u0354\x03\x02\x02\x02\u0354\u0355\x03\x02" +
-		"\x02\x02\u0355\u0356\x05\u017C\xBF\x02\u0356\u0357\x05^0\x02\u0357]\x03" +
-		"\x02\x02\x02\u0358\u0359\x07Z\x02\x02\u0359\u0365\x05\u017C\xBF\x02\u035A" +
-		"\u035B\x060\x02\x03\u035B\u035F\x05`1\x02\u035C\u035D\x05\u017C\xBF\x02" +
-		"\u035D\u035E\x07_\x02\x02\u035E\u0360\x03\x02\x02\x02\u035F\u035C\x03" +
-		"\x02\x02\x02\u035F\u0360\x03\x02\x02\x02\u0360\u0362\x03\x02\x02\x02\u0361" +
-		"\u0363\x05\u017E\xC0\x02\u0362\u0361\x03\x02\x02\x02\u0362\u0363\x03\x02" +
-		"\x02\x02\u0363\u0366\x03\x02\x02\x02\u0364\u0366\x03\x02\x02\x02\u0365" +
-		"\u035A\x03\x02\x02\x02\u0365\u0364\x03\x02\x02\x02\u0366\u0370\x03\x02" +
-		"\x02\x02\u0367\u036D\x05d3\x02\u0368\u0369\x05\u017E\xC0\x02\u0369\u036A" +
-		"\x05d3\x02\u036A\u036C\x03\x02\x02\x02\u036B\u0368\x03\x02\x02\x02\u036C" +
-		"\u036F\x03\x02\x02\x02\u036D\u036B\x03\x02\x02\x02\u036D\u036E\x03\x02" +
-		"\x02\x02\u036E\u0371\x03\x02\x02\x02\u036F\u036D\x03\x02\x02\x02\u0370" +
-		"\u0367\x03\x02\x02\x02\u0370\u0371\x03\x02\x02\x02\u0371\u0373\x03\x02" +
-		"\x02\x02\u0372\u0374\x05\u017E\xC0\x02\u0373\u0372\x03\x02\x02\x02\u0373" +
-		"\u0374\x03\x02\x02\x02\u0374\u0375\x03\x02\x02\x02\u0375\u0376\x07[\x02" +
-		"\x02\u0376_\x03\x02\x02\x02\u0377\u037F\x05b2\x02\u0378\u0379\x05\u017C" +
-		"\xBF\x02\u0379\u037A\x07_\x02\x02\u037A\u037B\x05\u017C\xBF\x02\u037B" +
-		"\u037C\x05b2\x02\u037C\u037E\x03\x02\x02\x02\u037D\u0378\x03\x02\x02\x02" +
-		"\u037E\u0381\x03\x02\x02\x02\u037F\u037D\x03\x02\x02\x02\u037F\u0380\x03" +
-		"\x02\x02\x02\u0380a\x03\x02\x02\x02\u0381\u037F\x03\x02\x02\x02\u0382" +
-		"\u0383\x05\xC2b\x02\u0383\u0385\x05\u0174\xBB\x02\u0384\u0386\x05\u0164" +
-		"\xB3\x02\u0385\u0384\x03\x02\x02\x02\u0385\u0386\x03\x02\x02\x02\u0386" +
-		"\u0388\x03\x02\x02\x02\u0387\u0389\x05\u015C\xAF\x02\u0388\u0387\x03\x02" +
-		"\x02\x02\u0388\u0389\x03\x02\x02\x02\u0389c\x03\x02\x02\x02\u038A\u038B" +
-		"\x072\x02\x02\u038B\u038D\x05\u017C\xBF\x02\u038C\u038A\x03\x02\x02\x02" +
-		"\u038C\u038D\x03\x02\x02\x02\u038D\u038E\x03\x02\x02\x02\u038E\u0391\x05" +
-		"\xD4k\x02\u038F\u0391\x05f4\x02";
+		"\x02\t\t$$NN\x05\x02IIYYp{\x04\x02@BXX\x06\x02\t\t\v\f\x0E\x0E|}\x04\x02" +
+		"\x0F\x0F77\x04\x02\t9<=\x04\x02VV\x81\x81\x02\u08B4\x02\u0178\x03\x02" +
+		"\x02\x02\x04\u017E\x03\x02\x02\x02\x06\u0192\x03\x02\x02\x02\b\u0194\x03" +
+		"\x02\x02\x02\n\u01A5\x03\x02\x02\x02\f\u01AB\x03\x02\x02\x02\x0E\u01AD" +
+		"\x03\x02\x02\x02\x10\u01B9\x03\x02\x02\x02\x12\u01EC\x03\x02\x02\x02\x14" +
+		"\u01EE\x03\x02\x02\x02\x16\u01F9\x03\x02\x02\x02\x18\u0209\x03\x02\x02" +
+		"\x02\x1A\u020B\x03\x02\x02\x02\x1C\u0210\x03\x02\x02\x02\x1E\u0215\x03" +
+		"\x02\x02\x02 \u0223\x03\x02\x02\x02\"\u0231\x03\x02\x02\x02$\u0233\x03" +
+		"\x02\x02\x02&\u023F\x03\x02\x02\x02(\u024F\x03\x02\x02\x02*\u0251\x03" +
+		"\x02\x02\x02,\u0256\x03\x02\x02\x02.\u025B\x03\x02\x02\x020\u0269\x03" +
+		"\x02\x02\x022\u0277\x03\x02\x02\x024\u0279\x03\x02\x02\x026\u0285\x03" +
+		"\x02\x02\x028\u029B\x03\x02\x02\x02:\u02AD\x03\x02\x02\x02<\u02B1\x03" +
+		"\x02\x02\x02>\u02BD\x03\x02\x02\x02@\u02C2\x03\x02\x02\x02B\u02C7\x03" +
+		"\x02\x02\x02D\u02C9\x03\x02\x02\x02F\u02D9\x03\x02\x02\x02H\u02DB\x03" +
+		"\x02\x02\x02J\u02E6\x03\x02\x02\x02L\u02EA\x03\x02\x02\x02N\u02EF\x03" +
+		"\x02\x02\x02P\u02F1\x03\x02\x02\x02R\u02FA\x03\x02\x02\x02T\u0309\x03" +
+		"\x02\x02\x02V\u0310\x03\x02\x02\x02X\u031A\x03\x02\x02\x02Z\u032F\x03" +
+		"\x02\x02\x02\\\u0348\x03\x02\x02\x02^\u0367\x03\x02\x02\x02`\u0372\x03" +
+		"\x02\x02\x02b\u0380\x03\x02\x02\x02d\u0387\x03\x02\x02\x02f\u0389\x03" +
+		"\x02\x02\x02h\u03A8\x03\x02\x02\x02j\u03AC\x03\x02\x02\x02l\u03AE\x03" +
+		"\x02\x02\x02n\u03B0\x03\x02\x02\x02p\u03BA\x03\x02\x02\x02r\u03C2\x03" +
+		"\x02\x02\x02t\u03C4\x03\x02\x02\x02v\u03C6\x03\x02\x02\x02x\u03D9\x03" +
+		"\x02\x02\x02z\u03DE\x03\x02\x02\x02|\u03E0\x03\x02\x02\x02~\u03E7\x03" +
+		"\x02\x02\x02\x80\u03F3\x03\x02\x02\x02\x82\u03F8\x03\x02\x02\x02\x84\u03FC" +
+		"\x03\x02\x02\x02\x86\u0400\x03\x02\x02\x02\x88\u0402\x03\x02\x02\x02\x8A" +
+		"\u041A\x03\x02\x02\x02\x8C\u041C\x03\x02\x02\x02\x8E\u041F\x03\x02\x02" +
+		"\x02\x90\u0429\x03\x02\x02\x02\x92\u0431\x03\x02\x02\x02\x94\u043C\x03" +
+		"\x02\x02\x02\x96\u043F\x03\x02\x02\x02\x98\u044E\x03\x02\x02\x02\x9A\u0450" +
+		"\x03\x02\x02\x02\x9C\u045D\x03\x02\x02\x02\x9E\u0464\x03\x02\x02\x02\xA0" +
+		"\u0467\x03\x02\x02\x02\xA2\u046A\x03\x02\x02\x02\xA4\u0478\x03\x02\x02" +
+		"\x02\xA6\u047A\x03\x02\x02\x02\xA8\u0487\x03\x02\x02\x02\xAA\u0489\x03" +
+		"\x02\x02\x02\xAC\u0490\x03\x02\x02\x02\xAE\u0496\x03\x02\x02\x02\xB0\u049C" +
+		"\x03\x02\x02\x02\xB2\u04A0\x03\x02\x02\x02\xB4\u04A4\x03\x02\x02\x02\xB6" +
+		"\u04A6\x03\x02\x02\x02\xB8\u04B9\x03\x02\x02\x02\xBA\u04BC\x03\x02\x02" +
+		"\x02\xBC\u04BE\x03\x02\x02\x02\xBE\u04D5\x03\x02\x02\x02\xC0\u04D7\x03" +
+		"\x02\x02\x02\xC2\u04E4\x03\x02\x02\x02\xC4\u04E6\x03\x02\x02\x02\xC6\u04E8" +
+		"\x03\x02\x02\x02\xC8\u04F0\x03\x02\x02\x02\xCA\u04F8\x03\x02\x02\x02\xCC" +
+		"\u04FD\x03\x02\x02\x02\xCE\u04FF\x03\x02\x02\x02\xD0\u050F\x03\x02\x02" +
+		"\x02\xD2\u0518\x03\x02\x02\x02\xD4\u051A\x03\x02\x02\x02\xD6\u052E\x03" +
+		"\x02\x02\x02\xD8\u0530\x03\x02\x02\x02\xDA\u053C\x03\x02\x02\x02\xDC\u0540" +
+		"\x03\x02\x02\x02\xDE\u054C\x03\x02\x02\x02\xE0\u054E\x03\x02\x02\x02\xE2" +
+		"\u055C\x03\x02\x02\x02\xE4\u057F\x03\x02\x02\x02\xE6\u0581\x03\x02\x02" +
+		"\x02\xE8\u0585\x03\x02\x02\x02\xEA\u0589\x03\x02\x02\x02\xEC\u059C\x03" +
+		"\x02\x02\x02\xEE\u05BF\x03\x02\x02\x02\xF0\u05C1\x03\x02\x02\x02\xF2\u05CC" +
+		"\x03\x02\x02\x02\xF4\u05D4\x03\x02\x02\x02\xF6\u05D8\x03\x02\x02\x02\xF8" +
+		"\u05E0\x03\x02\x02\x02\xFA\u05EB\x03\x02\x02\x02\xFC\u05ED\x03\x02\x02" +
+		"\x02\xFE\u05FF\x03\x02\x02\x02\u0100\u0603\x03\x02\x02\x02\u0102\u0605" +
+		"\x03\x02\x02\x02\u0104\u060E\x03\x02\x02\x02\u0106\u061A\x03\x02\x02\x02" +
+		"\u0108\u061C\x03\x02\x02\x02\u010A\u061E\x03\x02\x02\x02\u010C\u0622\x03" +
+		"\x02\x02\x02\u010E\u0624\x03\x02\x02\x02\u0110\u0628\x03\x02\x02\x02\u0112" +
+		"\u0631\x03\x02\x02\x02\u0114\u0637\x03\x02\x02\x02\u0116\u0639\x03\x02" +
+		"\x02\x02\u0118\u063B\x03\x02\x02\x02\u011A\u0650\x03\x02\x02\x02\u011C" +
+		"\u06CD\x03\x02\x02\x02\u011E\u06CF\x03\x02\x02\x02\u0120\u06DB\x03\x02" +
+		"\x02\x02\u0122\u06E7\x03\x02\x02\x02\u0124\u0715\x03\x02\x02\x02\u0126" +
+		"\u071B\x03\x02\x02\x02\u0128\u071F\x03\x02\x02\x02\u012A\u0722\x03\x02" +
+		"\x02\x02\u012C\u072B\x03\x02\x02\x02\u012E\u0745\x03\x02\x02\x02\u0130" +
+		"\u074D\x03\x02\x02\x02\u0132\u0752\x03\x02\x02\x02\u0134\u0757\x03\x02" +
+		"\x02\x02\u0136\u0759\x03\x02\x02\x02\u0138\u0762\x03\x02\x02\x02\u013A" +
+		"\u076C\x03\x02\x02\x02\u013C\u0774\x03\x02\x02\x02\u013E\u0786\x03\x02" +
+		"\x02\x02\u0140\u0792\x03\x02\x02\x02\u0142\u079E\x03\x02\x02\x02\u0144" +
+		"\u07A2\x03\x02\x02\x02\u0146\u07A6\x03\x02\x02\x02\u0148\u07AA\x03\x02" +
+		"\x02\x02\u014A\u07AC\x03\x02\x02\x02\u014C\u07BE\x03\x02\x02\x02\u014E" +
+		"\u07C5\x03\x02\x02\x02\u0150\u07CE\x03\x02\x02\x02\u0152\u07D0\x03\x02" +
+		"\x02\x02\u0154\u07D8\x03\x02\x02\x02\u0156\u07E1\x03\x02\x02\x02\u0158" +
+		"\u07E3\x03\x02\x02\x02\u015A\u07EC\x03\x02\x02\x02\u015C\u07F6\x03\x02" +
+		"\x02\x02\u015E\u0800\x03\x02\x02\x02\u0160\u080C\x03\x02\x02\x02\u0162" +
+		"\u0810\x03\x02\x02\x02\u0164\u0815\x03\x02\x02\x02\u0166\u081A\x03\x02" +
+		"\x02\x02\u0168\u081C\x03\x02\x02\x02\u016A\u081E\x03\x02\x02\x02\u016C" +
+		"\u0820\x03\x02\x02\x02\u016E\u0822\x03\x02\x02\x02\u0170\u0824\x03\x02" +
+		"\x02\x02\u0172\u0826\x03\x02\x02\x02\u0174\u082B\x03\x02\x02\x02\u0176" +
+		"\u082F\x03\x02\x02\x02\u0178\u017A\x05\u0174\xBB\x02\u0179\u017B\x05\x04" +
+		"\x03\x02\u017A\u0179\x03\x02\x02\x02\u017A\u017B\x03\x02\x02\x02\u017B" +
+		"\u017C\x03\x02\x02\x02\u017C\u017D\x07\x02\x02\x03\u017D\x03\x03\x02\x02" +
+		"\x02\u017E\u0184\x05\x06\x04\x02\u017F\u0180\x05\u0176\xBC\x02\u0180\u0181" +
+		"\x05\x06\x04\x02\u0181\u0183\x03\x02\x02\x02\u0182\u017F\x03\x02\x02\x02" +
+		"\u0183\u0186\x03\x02\x02\x02\u0184\u0182\x03\x02\x02\x02\u0184\u0185\x03" +
+		"\x02\x02\x02\u0185\u0188\x03\x02\x02\x02\u0186\u0184\x03\x02\x02\x02\u0187" +
+		"\u0189\x05\u0176\xBC\x02\u0188\u0187\x03\x02\x02\x02\u0188\u0189\x03\x02" +
+		"\x02\x02\u0189\x05\x03\x02\x02\x02\u018A\u0193\x05\b\x05\x02\u018B\u0193" +
+		"\x05\x0E\b\x02\u018C\u0193\x056\x1C\x02\u018D\u0193\x05<\x1F\x02\u018E" +
+		"\u0193\x05> \x02\u018F\u0190\x06\x04\x02\x02\u0190\u0193\x05f4\x02\u0191" +
+		"\u0193\x05\xEEx\x02\u0192\u018A\x03\x02\x02\x02\u0192\u018B\x03\x02\x02" +
+		"\x02\u0192\u018C\x03\x02\x02\x02\u0192\u018D\x03\x02\x02\x02\u0192\u018E" +
+		"\x03\x02\x02\x02\u0192\u018F\x03\x02\x02\x02\u0192\u0191\x03\x02\x02\x02" +
+		"\u0193\x07\x03\x02\x02\x02\u0194\u0195\x07\x89\x02\x02\u0195\u0196\x05" +
+		"\n\x06\x02\u0196\u0197\x07\x88\x02\x02\u0197\u0198\x05\u011A\x8E\x02\u0198" +
+		"\t\x03\x02\x02\x02\u0199\u01A6\x05\f\x07\x02\u019A\u019B\x07R\x02\x02" +
+		"\u019B\u01A0\x05\f\x07\x02\u019C\u019D\x07W\x02\x02\u019D\u019F\x05\f" +
+		"\x07\x02\u019E\u019C\x03\x02\x02\x02\u019F\u01A2\x03\x02\x02\x02\u01A0" +
+		"\u019E\x03\x02\x02\x02\u01A0\u01A1\x03\x02\x02\x02\u01A1\u01A3\x03\x02" +
+		"\x02\x02\u01A2\u01A0\x03\x02\x02\x02\u01A3\u01A4\x07S\x02\x02\u01A4\u01A6" +
+		"\x03\x02\x02\x02\u01A5\u0199\x03\x02\x02\x02\u01A5\u019A\x03\x02\x02\x02" +
+		"\u01A6\v\x03\x02\x02\x02\u01A7\u01AC\x07}\x02\x02\u01A8\u01A9\x07}\x02" +
+		"\x02\u01A9\u01AA\x07\t\x02\x02\u01AA\u01AC\x07}\x02\x02\u01AB\u01A7\x03" +
+		"\x02\x02\x02\u01AB\u01A8\x03\x02\x02\x02\u01AC\r\x03\x02\x02\x02\u01AD" +
+		"\u01AE\x07\x8E\x02\x02\u01AE\u01AF\x07}\x02\x02\u01AF\u01B0\x05\u0174" +
+		"\xBB\x02\u01B0\u01B2\x07R\x02\x02\u01B1\u01B3\x05\u0176\xBC\x02\u01B2" +
+		"\u01B1\x03\x02\x02\x02\u01B2\u01B3\x03\x02\x02\x02\u01B3\u01B5\x03\x02" +
+		"\x02\x02\u01B4\u01B6\x05\x10\t\x02\u01B5\u01B4\x03\x02\x02\x02\u01B5\u01B6" +
+		"\x03\x02\x02\x02\u01B6\u01B7\x03\x02\x02\x02\u01B7\u01B8\x07S\x02\x02" +
+		"\u01B8\x0F\x03\x02\x02\x02\u01B9\u01BF\x05\x12\n\x02\u01BA\u01BB\x05\u0176" +
+		"\xBC\x02\u01BB\u01BC\x05\x12\n\x02\u01BC\u01BE\x03\x02\x02\x02\u01BD\u01BA" +
+		"\x03\x02\x02\x02\u01BE\u01C1\x03\x02\x02\x02\u01BF\u01BD\x03\x02\x02\x02" +
+		"\u01BF\u01C0\x03\x02\x02\x02\u01C0\u01C3\x03\x02\x02\x02\u01C1\u01BF\x03" +
+		"\x02\x02\x02\u01C2\u01C4\x05\u0176\xBC\x02\u01C3\u01C2\x03\x02\x02\x02" +
+		"\u01C3\u01C4\x03\x02\x02\x02\u01C4\x11\x03\x02\x02\x02\u01C5\u01ED\x05" +
+		"\x14\v\x02\u01C6\u01C8\x07\x8A\x02\x02\u01C7\u01C9\x05\x16\f\x02\u01C8" +
+		"\u01C7\x03\x02\x02\x02\u01C9\u01CA\x03\x02\x02\x02\u01CA\u01C8\x03\x02" +
+		"\x02\x02\u01CA\u01CB\x03\x02\x02\x02\u01CB\u01ED\x03\x02\x02\x02\u01CC" +
+		"\u01CE\x07\x8C\x02\x02\u01CD\u01CF\x05&\x14\x02\u01CE\u01CD\x03\x02\x02" +
+		"\x02\u01CF\u01D0\x03\x02\x02\x02\u01D0\u01CE\x03\x02\x02\x02\u01D0\u01D1" +
+		"\x03\x02\x02\x02\u01D1\u01ED\x03\x02\x02\x02\u01D2\u01D3\x07\x97\x02\x02" +
+		"\u01D3\u01ED\x05\u011A\x8E\x02\u01D4\u01D6\x07\x8F\x02\x02\u01D5\u01D7" +
+		"\x05\xEEx\x02\u01D6\u01D5\x03\x02\x02\x02\u01D7\u01D8\x03\x02\x02\x02" +
+		"\u01D8\u01D6\x03\x02\x02\x02\u01D8\u01D9\x03\x02\x02\x02\u01D9\u01ED\x03" +
+		"\x02\x02\x02\u01DA\u01DC\x07\x90\x02\x02\u01DB\u01DD\x05\xEEx\x02\u01DC" +
+		"\u01DB\x03\x02\x02\x02\u01DD\u01DE\x03\x02\x02\x02\u01DE\u01DC\x03\x02" +
+		"\x02\x02\u01DE\u01DF\x03\x02\x02\x02\u01DF\u01ED\x03\x02\x02\x02\u01E0" +
+		"\u01E2\x07\x86\x02\x02\u01E1\u01E3\x05\xEEx\x02\u01E2\u01E1\x03\x02\x02" +
+		"\x02\u01E3\u01E4\x03\x02\x02\x02\u01E4\u01E2\x03\x02\x02\x02\u01E4\u01E5" +
+		"\x03\x02\x02\x02\u01E5\u01ED\x03\x02\x02\x02\u01E6\u01E8\x07\x93\x02\x02" +
+		"\u01E7\u01E9\x05\xEEx\x02\u01E8\u01E7\x03\x02\x02\x02\u01E9\u01EA\x03" +
+		"\x02\x02\x02\u01EA\u01E8\x03\x02\x02\x02\u01EA\u01EB\x03\x02\x02\x02\u01EB" +
+		"\u01ED\x03\x02\x02\x02\u01EC\u01C5\x03\x02\x02\x02\u01EC\u01C6\x03\x02" +
+		"\x02\x02\u01EC\u01CC\x03\x02\x02\x02\u01EC\u01D2\x03\x02\x02\x02\u01EC" +
+		"\u01D4\x03\x02\x02\x02\u01EC\u01DA\x03\x02\x02\x02\u01EC\u01E0\x03\x02" +
+		"\x02\x02\u01EC\u01E6\x03\x02\x02\x02\u01ED\x13\x03\x02\x02\x02\u01EE\u01EF" +
+		"\x07}\x02\x02\u01EF\u01F6\x05\u011A\x8E\x02\u01F0\u01F1\x07W\x02\x02\u01F1" +
+		"\u01F2\x07}\x02\x02\u01F2\u01F3\x07_\x02\x02\u01F3\u01F5\x05\u011A\x8E" +
+		"\x02\u01F4\u01F0\x03\x02\x02\x02\u01F5\u01F8\x03\x02\x02\x02\u01F6\u01F4" +
+		"\x03\x02\x02\x02\u01F6\u01F7\x03\x02\x02\x02\u01F7\x15\x03\x02\x02\x02" +
+		"\u01F8\u01F6\x03\x02\x02\x02\u01F9\u0200\x05\x18\r\x02\u01FA\u01FB\x07" +
+		"W\x02\x02\u01FB\u01FC\x07}\x02\x02\u01FC\u01FD\x07_\x02\x02\u01FD\u01FF" +
+		"\x05\u011A\x8E\x02\u01FE\u01FA\x03\x02\x02\x02\u01FF\u0202\x03\x02\x02" +
+		"\x02\u0200\u01FE\x03\x02\x02\x02\u0200\u0201\x03\x02\x02\x02\u0201\x17" +
+		"\x03\x02\x02\x02\u0202\u0200\x03\x02\x02\x02\u0203\u020A\x05\x1A\x0E\x02" +
+		"\u0204\u020A\x05\x1C\x0F\x02\u0205\u020A\x05\x1E\x10\x02\u0206\u020A\x05" +
+		" \x11\x02\u0207\u020A\x05\"\x12\x02\u0208\u020A\x05$\x13\x02\u0209\u0203" +
+		"\x03\x02\x02\x02\u0209\u0204\x03\x02\x02\x02\u0209\u0205\x03\x02\x02\x02" +
+		"\u0209\u0206\x03\x02\x02\x02\u0209\u0207\x03\x02\x02\x02\u0209\u0208\x03" +
+		"\x02\x02\x02\u020A\x19\x03\x02\x02\x02\u020B\u020C\x07\x96\x02\x02\u020C" +
+		"\u020D\x07P\x02\x02\u020D\u020E\x07}\x02\x02\u020E\u020F\x07Q\x02\x02" +
+		"\u020F\x1B\x03\x02\x02\x02\u0210\u0211\x07\x85\x02\x02\u0211\u0212\x07" +
+		"P\x02\x02\u0212\u0213\x07}\x02\x02\u0213\u0214\x07Q\x02\x02\u0214\x1D" +
+		"\x03\x02\x02\x02\u0215\u0216\x07\x87\x02\x02\u0216\u0217\x07P\x02\x02" +
+		"\u0217\u021E\x05\u011A\x8E\x02\u0218\u0219\x07W\x02\x02\u0219\u021A\x07" +
+		"}\x02\x02\u021A\u021B\x07_\x02\x02\u021B\u021D\x05\u011A\x8E\x02\u021C" +
+		"\u0218\x03\x02\x02\x02\u021D\u0220\x03\x02\x02\x02\u021E\u021C\x03\x02" +
+		"\x02\x02\u021E\u021F\x03\x02\x02\x02\u021F\u0221\x03\x02\x02\x02\u0220" +
+		"\u021E\x03\x02\x02\x02\u0221\u0222\x07Q\x02\x02\u0222\x1F\x03\x02\x02" +
+		"\x02\u0223\u0224\x07\x8D\x02\x02\u0224\u0225\x07P\x02\x02\u0225\u022C" +
+		"\x05\u011A\x8E\x02\u0226\u0227\x07W\x02\x02\u0227\u0228\x07}\x02\x02\u0228" +
+		"\u0229\x07_\x02\x02\u0229\u022B\x05\u011A\x8E\x02\u022A\u0226\x03\x02" +
+		"\x02\x02\u022B\u022E\x03\x02\x02\x02\u022C\u022A\x03\x02\x02\x02\u022C" +
+		"\u022D\x03\x02\x02\x02\u022D\u022F\x03\x02\x02\x02\u022E\u022C\x03\x02" +
+		"\x02\x02\u022F\u0230\x07Q\x02\x02\u0230!\x03\x02\x02\x02\u0231\u0232\t" +
+		"\x02\x02\x02\u0232#\x03\x02\x02\x02\u0233\u0234\x07\x95\x02\x02\u0234" +
+		"\u0235\x07P\x02\x02\u0235\u023A\x05\x18\r\x02\u0236\u0237\x07W\x02\x02" +
+		"\u0237\u0239\x05\x18\r\x02\u0238\u0236\x03\x02\x02\x02\u0239\u023C\x03" +
+		"\x02\x02\x02\u023A\u0238\x03\x02\x02\x02\u023A\u023B\x03\x02\x02\x02\u023B" +
+		"\u023D\x03\x02\x02\x02\u023C\u023A\x03\x02\x02\x02\u023D\u023E\x07Q\x02" +
+		"\x02\u023E%\x03\x02\x02\x02\u023F\u0246\x05(\x15\x02\u0240\u0241\x07W" +
+		"\x02\x02\u0241\u0242\x07}\x02\x02\u0242\u0243\x07_\x02\x02\u0243\u0245" +
+		"\x05\u011A\x8E\x02\u0244\u0240\x03\x02\x02\x02\u0245\u0248\x03\x02\x02" +
+		"\x02\u0246\u0244\x03\x02\x02\x02\u0246\u0247\x03\x02\x02\x02\u0247\'\x03" +
+		"\x02\x02\x02\u0248\u0246\x03\x02\x02\x02\u0249\u0250\x05*\x16\x02\u024A" +
+		"\u0250\x05,\x17\x02\u024B\u0250\x05.\x18\x02\u024C\u0250\x050\x19\x02" +
+		"\u024D\u0250\x052\x1A\x02\u024E\u0250\x054\x1B\x02\u024F\u0249\x03\x02" +
+		"\x02\x02\u024F\u024A\x03\x02\x02\x02\u024F\u024B\x03\x02\x02\x02\u024F" +
+		"\u024C\x03\x02\x02\x02\u024F\u024D\x03\x02\x02\x02\u024F\u024E\x03\x02" +
+		"\x02\x02\u0250)\x03\x02\x02\x02\u0251\u0252\x07\x96\x02\x02\u0252\u0253" +
+		"\x07P\x02\x02\u0253\u0254\x07}\x02\x02\u0254\u0255\x07Q\x02\x02\u0255" +
+		"+\x03\x02\x02\x02\u0256\u0257\x07\x85\x02\x02\u0257\u0258\x07P\x02\x02" +
+		"\u0258\u0259\x07}\x02\x02\u0259\u025A\x07Q\x02\x02\u025A-\x03\x02\x02" +
+		"\x02\u025B\u025C\x07\x87\x02\x02\u025C\u025D\x07P\x02\x02\u025D\u0264" +
+		"\x05\u011A\x8E\x02\u025E\u025F\x07W\x02\x02\u025F\u0260\x07}\x02\x02\u0260" +
+		"\u0261\x07_\x02\x02\u0261\u0263\x05\u011A\x8E\x02\u0262\u025E\x03\x02" +
+		"\x02\x02\u0263\u0266\x03\x02\x02\x02\u0264\u0262\x03\x02\x02\x02\u0264" +
+		"\u0265\x03\x02\x02\x02\u0265\u0267\x03\x02\x02\x02\u0266\u0264\x03\x02" +
+		"\x02\x02\u0267\u0268\x07Q\x02\x02\u0268/\x03\x02\x02\x02\u0269\u026A\x07" +
+		"\x8D\x02\x02\u026A\u026B\x07P\x02\x02\u026B\u0272\x05\u011A\x8E\x02\u026C" +
+		"\u026D\x07W\x02\x02\u026D\u026E\x07}\x02\x02\u026E\u026F\x07_\x02\x02" +
+		"\u026F\u0271\x05\u011A\x8E\x02\u0270\u026C\x03\x02\x02\x02\u0271\u0274" +
+		"\x03\x02\x02\x02\u0272\u0270\x03\x02\x02\x02\u0272\u0273\x03\x02\x02\x02" +
+		"\u0273\u0275\x03\x02\x02\x02\u0274\u0272\x03\x02\x02\x02\u0275\u0276\x07" +
+		"Q\x02\x02\u02761\x03\x02\x02\x02\u0277\u0278\t\x03\x02\x02\u02783\x03" +
+		"\x02\x02\x02\u0279\u027A\x07\x95\x02\x02\u027A\u027B\x07P\x02\x02\u027B" +
+		"\u0280\x05(\x15\x02\u027C\u027D\x07W\x02\x02\u027D\u027F\x05(\x15\x02" +
+		"\u027E\u027C\x03\x02\x02\x02\u027F\u0282\x03\x02\x02\x02\u0280\u027E\x03" +
+		"\x02\x02\x02\u0280\u0281\x03\x02\x02\x02\u0281\u0283\x03\x02\x02\x02\u0282" +
+		"\u0280\x03\x02\x02\x02\u0283\u0284\x07Q\x02\x02\u02845\x03\x02\x02\x02" +
+		"\u0285\u0287\x07\x98\x02\x02\u0286\u0288\x07}\x02\x02\u0287\u0286\x03" +
+		"\x02\x02\x02\u0287\u0288\x03\x02\x02\x02\u0288\u0289\x03\x02\x02\x02\u0289" +
+		"\u0291\x07R\x02\x02\u028A\u0292\x058\x1D\x02\u028B\u028D\x05\xEEx\x02" +
+		"\u028C\u028B\x03\x02\x02\x02\u028D\u0290\x03\x02\x02\x02\u028E\u028C\x03" +
+		"\x02\x02\x02\u028E\u028F\x03\x02\x02\x02\u028F\u0292\x03\x02\x02\x02\u0290" +
+		"\u028E\x03\x02\x02\x02\u0291\u028A\x03\x02\x02\x02\u0291\u028E\x03\x02" +
+		"\x02\x02\u0292\u0293\x03\x02\x02\x02\u0293\u0294\x07S\x02\x02\u02947\x03" +
+		"\x02\x02\x02\u0295\u0297\x07\x94\x02\x02\u0296\u0298\x07}\x02\x02\u0297" +
+		"\u0296\x03\x02\x02\x02\u0298\u0299\x03\x02\x02\x02\u0299\u0297\x03\x02" +
+		"\x02\x02\u0299\u029A\x03\x02\x02\x02\u029A\u029C\x03\x02\x02\x02\u029B" +
+		"\u0295\x03\x02\x02\x02\u029B\u029C\x03\x02\x02\x02\u029C\u02A3\x03\x02" +
+		"\x02\x02\u029D\u029F\x07\x8B\x02\x02\u029E\u02A0\x05\xEEx\x02\u029F\u029E" +
+		"\x03\x02\x02\x02\u02A0\u02A1\x03\x02\x02\x02\u02A1\u029F\x03\x02\x02\x02" +
+		"\u02A1\u02A2\x03\x02\x02\x02\u02A2\u02A4\x03\x02\x02\x02\u02A3\u029D\x03" +
+		"\x02\x02\x02\u02A3\u02A4\x03\x02\x02\x02\u02A4\u02AB\x03\x02\x02\x02\u02A5" +
+		"\u02A7\x07\x84\x02\x02\u02A6\u02A8\x05\u011A\x8E\x02\u02A7\u02A6\x03\x02" +
+		"\x02\x02\u02A8\u02A9\x03\x02\x02\x02\u02A9\u02A7\x03\x02\x02\x02\u02A9" +
+		"\u02AA\x03\x02\x02\x02\u02AA\u02AC\x03\x02\x02\x02\u02AB\u02A5\x03\x02" +
+		"\x02\x02\u02AB\u02AC\x03\x02\x02\x02\u02AC9\x03\x02\x02\x02\u02AD\u02AE" +
+		"\x05\xBE`\x02\u02AE\u02AF\x07(\x02\x02\u02AF\u02B0\x05\x9AN\x02\u02B0" +
+		";\x03\x02\x02\x02\u02B1\u02B2\x05\xBE`\x02\u02B2\u02B4\x07#\x02\x02\u02B3" +
+		"\u02B5\x07-\x02\x02\u02B4\u02B3\x03\x02\x02\x02\u02B4\u02B5\x03\x02\x02" +
+		"\x02\u02B5\u02B6\x03\x02\x02\x02\u02B6\u02BB\x05\x9AN\x02\u02B7\u02B8" +
+		"\x07X\x02\x02\u02B8\u02BC\x07j\x02\x02\u02B9\u02BA\x07\t\x02\x02\u02BA" +
+		"\u02BC\x05\u016C\xB7\x02\u02BB\u02B7\x03\x02\x02\x02\u02BB\u02B9\x03\x02" +
+		"\x02\x02\u02BB\u02BC\x03\x02\x02\x02\u02BC=\x03\x02\x02\x02\u02BD\u02BE" +
+		"\x05F$\x02\u02BE\u02BF\x05Z.\x02\u02BF?\x03\x02\x02\x02\u02C0\u02C3\x05" +
+		"J&\x02\u02C1\u02C3\t\x04\x02\x02\u02C2\u02C0\x03\x02\x02\x02\u02C2\u02C1" +
+		"\x03\x02\x02\x02\u02C3A\x03\x02\x02\x02\u02C4\u02C5\x05D#\x02\u02C5\u02C6" +
+		"\x05\u0174\xBB\x02\u02C6\u02C8\x03\x02\x02\x02\u02C7\u02C4\x03\x02\x02" +
+		"\x02\u02C7\u02C8\x03\x02\x02\x02\u02C8C\x03\x02\x02\x02\u02C9\u02CF\x05" +
+		"@!\x02\u02CA\u02CB\x05\u0174\xBB\x02\u02CB\u02CC\x05@!\x02\u02CC\u02CE" +
+		"\x03\x02\x02\x02\u02CD\u02CA\x03\x02\x02\x02\u02CE\u02D1\x03\x02\x02\x02" +
+		"\u02CF\u02CD\x03\x02\x02\x02\u02CF\u02D0\x03\x02\x02\x02\u02D0E\x03\x02" +
+		"\x02\x02\u02D1\u02CF\x03\x02\x02\x02\u02D2\u02D6\x05H%\x02\u02D3\u02D5" +
+		"\x07\x81\x02\x02\u02D4\u02D3\x03\x02\x02\x02\u02D5\u02D8\x03\x02\x02\x02" +
+		"\u02D6\u02D4\x03\x02\x02\x02\u02D6\u02D7\x03\x02\x02\x02\u02D7\u02DA\x03" +
+		"\x02\x02\x02\u02D8\u02D6\x03\x02\x02\x02\u02D9\u02D2\x03\x02\x02\x02\u02D9" +
+		"\u02DA\x03\x02\x02\x02\u02DAG\x03\x02\x02\x02\u02DB\u02E1\x05J&\x02\u02DC" +
+		"\u02DD\x05\u0174\xBB\x02\u02DD\u02DE\x05J&\x02\u02DE\u02E0\x03\x02\x02" +
+		"\x02\u02DF\u02DC\x03\x02\x02\x02\u02E0\u02E3\x03\x02\x02\x02\u02E1\u02DF" +
+		"\x03\x02\x02\x02\u02E1\u02E2\x03\x02\x02\x02\u02E2I\x03\x02\x02\x02\u02E3" +
+		"\u02E1\x03\x02\x02\x02\u02E4\u02E7\x05\xC0a\x02\u02E5\u02E7\t\x05\x02" +
+		"\x02\u02E6\u02E4\x03\x02\x02\x02\u02E6\u02E5\x03\x02\x02\x02\u02E7K\x03" +
+		"\x02\x02\x02\u02E8\u02EB\x05\xC0a\x02\u02E9\u02EB\t\x06\x02\x02\u02EA" +
+		"\u02E8\x03\x02\x02\x02\u02EA\u02E9\x03\x02\x02\x02\u02EBM\x03\x02\x02" +
+		"\x02\u02EC\u02ED\x05P)\x02\u02ED\u02EE\x05\u0174\xBB\x02\u02EE\u02F0\x03" +
+		"\x02\x02\x02\u02EF\u02EC\x03\x02\x02\x02\u02EF\u02F0\x03\x02\x02\x02\u02F0" +
+		"O\x03\x02\x02\x02\u02F1\u02F7\x05L\'\x02\u02F2\u02F3\x05\u0174\xBB\x02" +
+		"\u02F3\u02F4\x05L\'\x02\u02F4\u02F6\x03\x02\x02\x02\u02F5\u02F2\x03\x02" +
+		"\x02\x02\u02F6\u02F9\x03\x02\x02\x02\u02F7\u02F5\x03\x02\x02\x02\u02F7" +
+		"\u02F8\x03\x02\x02\x02\u02F8Q\x03\x02\x02\x02\u02F9\u02F7\x03\x02\x02" +
+		"\x02\u02FA\u02FB\x07[\x02\x02\u02FB\u02FC\x05\u0174\xBB\x02\u02FC\u0303" +
+		"\x05T+\x02\u02FD\u02FE\x07W\x02\x02\u02FE\u02FF\x05\u0174\xBB\x02\u02FF" +
+		"\u0300\x05T+\x02\u0300\u0302\x03\x02\x02\x02\u0301\u02FD\x03\x02\x02\x02" +
+		"\u0302\u0305\x03\x02\x02\x02\u0303\u0301\x03\x02\x02\x02\u0303\u0304\x03" +
+		"\x02\x02\x02\u0304\u0306\x03\x02\x02\x02\u0305\u0303\x03\x02\x02\x02\u0306" +
+		"\u0307\x05\u0174\xBB\x02\u0307\u0308\x07Z\x02\x02\u0308S\x03\x02\x02\x02" +
+		"\u0309\u030E\x05\u016A\xB6\x02\u030A\u030B\x07\x1C\x02\x02\u030B\u030C" +
+		"\x05\u0174\xBB\x02\u030C\u030D\x05V,\x02\u030D\u030F\x03\x02\x02\x02\u030E" +
+		"\u030A\x03\x02\x02\x02\u030E\u030F\x03\x02\x02\x02\u030FU\x03\x02\x02" +
+		"\x02\u0310\u0317\x05~@\x02\u0311\u0312\x07l\x02\x02\u0312\u0313\x05\u0174" +
+		"\xBB\x02\u0313\u0314\x05~@\x02\u0314\u0316\x03\x02\x02\x02\u0315\u0311" +
+		"\x03\x02\x02\x02\u0316\u0319\x03\x02\x02\x02\u0317\u0315\x03\x02\x02\x02" +
+		"\u0317\u0318\x03\x02\x02\x02\u0318W\x03\x02\x02\x02\u0319\u0317\x03\x02" +
+		"\x02\x02\u031A\u0321\x05~@\x02\u031B\u031C\x07W\x02\x02\u031C\u031D\x05" +
+		"\u0174\xBB\x02\u031D\u031E\x05~@\x02\u031E\u0320\x03\x02\x02\x02\u031F" +
+		"\u031B\x03\x02\x02\x02\u0320\u0323\x03\x02\x02\x02\u0321\u031F\x03\x02" +
+		"\x02\x02\u0321\u0322\x03\x02\x02\x02\u0322Y\x03\x02\x02\x02\u0323\u0321" +
+		"\x03\x02\x02\x02\u0324\u0325\x07\x15\x02\x02\u0325\u0330\b.\x01\x02\u0326" +
+		"\u0327\x07%\x02\x02\u0327\u0330\b.\x01\x02\u0328\u0329\x07\x1B\x02\x02" +
+		"\u0329\u0330\b.\x01\x02\u032A\u032B\x07~\x02\x02\u032B\u032C\x07%\x02" +
+		"\x02\u032C\u0330\b.\x01\x02\u032D\u032E\x07\f\x02\x02\u032E\u0330\b.\x01" +
+		"\x02\u032F\u0324\x03\x02\x02\x02\u032F\u0326\x03\x02\x02\x02\u032F\u0328" +
+		"\x03\x02\x02\x02\u032F\u032A\x03\x02\x02\x02\u032F\u032D\x03\x02\x02\x02" +
+		"\u0330\u0331\x03\x02\x02\x02\u0331\u0335\x05\u016C\xB7\x02\u0332\u0333" +
+		"\x05\u0174\xBB\x02\u0333\u0334\x05R*\x02\u0334\u0336\x03\x02\x02\x02\u0335" +
+		"\u0332\x03\x02\x02\x02\u0335\u0336\x03\x02\x02\x02\u0336\u033C\x03\x02" +
+		"\x02\x02\u0337\u0338\x05\u0174\xBB\x02\u0338\u0339\x07\x1C\x02\x02\u0339" +
+		"\u033A\x05\u0174\xBB\x02\u033A\u033B\x05X-\x02\u033B\u033D\x03\x02\x02" +
+		"\x02\u033C\u0337\x03\x02\x02\x02\u033C\u033D\x03\x02\x02\x02\u033D\u0343" +
+		"\x03\x02\x02\x02\u033E\u033F\x05\u0174\xBB\x02\u033F\u0340\x07\"\x02\x02" +
+		"\u0340\u0341\x05\u0174\xBB\x02\u0341\u0342\x05X-\x02\u0342\u0344\x03\x02" +
+		"\x02\x02\u0343\u033E\x03\x02\x02\x02\u0343\u0344\x03\x02\x02\x02\u0344" +
+		"\u0345\x03\x02\x02\x02\u0345\u0346\x05\u0174\xBB\x02\u0346\u0347\x05\\" +
+		"/\x02\u0347[\x03\x02\x02\x02\u0348\u0349\x07R\x02\x02\u0349\u0355\x05" +
+		"\u0174\xBB\x02\u034A\u034B\x06/\x03\x03\u034B\u034F\x05^0\x02\u034C\u034D" +
+		"\x05\u0174\xBB\x02\u034D\u034E\x07W\x02\x02\u034E\u0350\x03\x02\x02\x02" +
+		"\u034F\u034C\x03\x02\x02\x02\u034F\u0350\x03\x02\x02\x02\u0350\u0352\x03" +
+		"\x02\x02\x02\u0351\u0353\x05\u0176\xBC\x02\u0352\u0351\x03\x02\x02\x02" +
+		"\u0352\u0353\x03\x02\x02\x02\u0353\u0356\x03\x02\x02\x02\u0354\u0356\x03" +
+		"\x02\x02\x02\u0355\u034A\x03\x02\x02\x02\u0355\u0354\x03\x02\x02\x02\u0356" +
+		"\u0360\x03\x02\x02\x02\u0357\u035D\x05b2\x02\u0358\u0359\x05\u0176\xBC" +
+		"\x02\u0359\u035A\x05b2\x02\u035A\u035C\x03\x02\x02\x02\u035B\u0358\x03" +
+		"\x02\x02\x02\u035C\u035F\x03\x02\x02\x02\u035D\u035B\x03\x02\x02\x02\u035D" +
+		"\u035E\x03\x02\x02\x02\u035E\u0361\x03\x02\x02\x02\u035F\u035D\x03\x02" +
+		"\x02\x02\u0360\u0357\x03\x02\x02\x02\u0360\u0361\x03\x02\x02\x02\u0361" +
+		"\u0363\x03\x02\x02\x02\u0362\u0364\x05\u0176\xBC\x02\u0363\u0362\x03\x02" +
+		"\x02\x02\u0363\u0364\x03\x02\x02\x02\u0364\u0365\x03\x02\x02\x02\u0365" +
+		"\u0366\x07S\x02\x02\u0366]\x03\x02\x02\x02\u0367\u036F\x05`1\x02\u0368" +
+		"\u0369\x05\u0174\xBB\x02\u0369\u036A\x07W\x02\x02\u036A\u036B\x05\u0174" +
+		"\xBB\x02\u036B\u036C\x05`1\x02\u036C\u036E\x03\x02\x02\x02\u036D\u0368" +
+		"\x03\x02\x02\x02\u036E\u0371\x03\x02\x02\x02\u036F\u036D\x03\x02\x02\x02" +
+		"\u036F\u0370\x03\x02\x02\x02\u0370_\x03\x02\x02\x02\u0371\u036F\x03\x02" +
+		"\x02\x02\u0372\u0373\x05\xBE`\x02\u0373\u0375\x05\u016C\xB7\x02\u0374" +
+		"\u0376\x05\u0158\xAD\x02\u0375\u0374\x03\x02\x02\x02\u0375\u0376\x03\x02" +
+		"\x02\x02\u0376\u0378\x03\x02\x02\x02\u0377\u0379\x05\u0150\xA9\x02\u0378" +
+		"\u0377\x03\x02\x02\x02\u0378\u0379\x03\x02\x02\x02\u0379a\x03\x02\x02" +
+		"\x02\u037A\u037B\x07-\x02\x02\u037B\u037D\x05\u0174\xBB\x02\u037C\u037A" +
+		"\x03\x02\x02\x02\u037C\u037D\x03\x02\x02\x02\u037D\u037E\x03\x02\x02\x02" +
+		"\u037E\u0381\x05\xD0i\x02\u037F\u0381\x05d3\x02\u0380\u037C\x03\x02\x02" +
+		"\x02\u0380\u037F\x03\x02\x02\x02\u0381c\x03\x02\x02\x02\u0382\u0388\x05" +
+		"f4\x02\u0383\u0388\x05l7\x02\u0384\u0385\x05B\"\x02\u0385\u0386\x05Z." +
+		"\x02\u0386\u0388\x03\x02\x02\x02\u0387\u0382\x03\x02\x02\x02\u0387\u0383" +
+		"\x03\x02\x02\x02\u0387\u0384\x03\x02\x02\x02\u0388e\x03\x02\x02\x02\u0389" +
+		"\u038B\x05B\"\x02\u038A\u038C\x05R*\x02\u038B\u038A\x03\x02\x02\x02\u038B" +
+		"\u038C\x03\x02\x02\x02\u038C\u0390\x03\x02\x02\x02\u038D\u038E\x05j6\x02" +
+		"\u038E\u038F\x05\u0174\xBB\x02\u038F\u0391\x03\x02\x02\x02\u0390\u038D" +
+		"\x03\x02\x02\x02\u0390\u0391\x03\x02\x02\x02\u0391\u0392\x03\x02\x02\x02" +
+		"\u0392\u0393\x05h5\x02\u0393\u03A4\x05\x90I\x02\u0394\u0395\x07\x18\x02" +
+		"\x02\u0395\u0396\x05\u0174\xBB";
 	private static readonly _serializedATNSegment2: string =
-		"\u0390\u038C\x03\x02\x02\x02\u0390\u038F\x03\x02\x02\x02\u0391e\x03\x02" +
-		"\x02\x02\u0392\u039A\x05h5\x02\u0393\u039A\x05p9\x02\u0394\u0397\x05D" +
-		"#\x02\u0395\u0398\x05\\/\x02\u0396\u0398\x05j6\x02\u0397\u0395\x03\x02" +
-		"\x02\x02\u0397\u0396\x03\x02\x02\x02\u0398\u039A\x03\x02\x02\x02\u0399" +
-		"\u0392\x03\x02\x02\x02\u0399\u0393\x03\x02\x02\x02\u0399\u0394\x03\x02" +
-		"\x02\x02\u039Ag\x03\x02\x02\x02\u039B\u039D\x05D#\x02\u039C\u039E\x05" +
-		"T+\x02\u039D\u039C\x03\x02\x02\x02\u039D\u039E\x03\x02\x02\x02\u039E\u03A2" +
-		"\x03\x02\x02\x02\u039F\u03A0\x05n8\x02\u03A0\u03A1\x05\u017C\xBF\x02\u03A1" +
-		"\u03A3\x03\x02\x02\x02\u03A2\u039F\x03\x02\x02\x02\u03A2\u03A3\x03\x02" +
-		"\x02\x02\u03A3\u03A4\x03\x02\x02\x02\u03A4\u03A5\x05l7\x02\u03A5\u03B6" +
-		"\x05\x94K\x02\u03A6\u03A7\x07\x19\x02\x02\u03A7\u03A8\x05\u017C\xBF\x02" +
-		"\u03A8\u03A9\x05\xD0i\x02\u03A9\u03B7\x03\x02\x02\x02\u03AA\u03AB\x05" +
-		"\u017C\xBF\x02\u03AB\u03AC\x079\x02\x02\u03AC\u03AD\x05\u017C\xBF\x02" +
-		"\u03AD\u03AE\x05\x92J\x02\u03AE\u03B0\x03\x02\x02\x02\u03AF\u03AA\x03" +
-		"\x02\x02\x02\u03AF\u03B0\x03\x02\x02\x02\u03B0\u03B4\x03\x02\x02\x02\u03B1" +
-		"\u03B2\x05\u017C\xBF\x02\u03B2\u03B3\x05\x9CO\x02\u03B3\u03B5\x03\x02" +
-		"\x02\x02\u03B4\u03B1\x03\x02\x02\x02\u03B4\u03B5\x03\x02\x02\x02\u03B5" +
-		"\u03B7\x03\x02\x02\x02\u03B6\u03A6\x03\x02\x02\x02\u03B6\u03AF\x03\x02" +
-		"\x02\x02\u03B6\u03B7\x03\x02\x02\x02\u03B7i\x03\x02\x02\x02\u03B8\u03B9" +
-		"\x05l7\x02\u03B9\u03BA\x05\u017C\xBF\x02\u03BA\u03BB\x05\x9CO\x02\u03BB" +
-		"k\x03\x02\x02\x02\u03BC\u03BF\x05\u0174\xBB\x02\u03BD\u03BF\x05\u0170" +
-		"\xB9\x02\u03BE\u03BC\x03\x02\x02\x02\u03BE\u03BD\x03\x02\x02\x02\u03BF" +
-		"m\x03\x02\x02\x02\u03C0\u03C3\x05\x80A\x02\u03C1\u03C3\x07<\x02\x02\u03C2" +
-		"\u03C0\x03\x02\x02\x02\u03C2\u03C1\x03\x02\x02\x02\u03C3o\x03\x02\x02" +
-		"\x02\u03C4\u03C5\x05\xDAn\x02\u03C5q\x03\x02\x02\x02\u03C6\u03CD\x05t" +
-		";\x02\u03C7\u03C8\x07_\x02\x02\u03C8\u03C9\x05\u017C\xBF\x02\u03C9\u03CA" +
-		"\x05t;\x02\u03CA\u03CC\x03\x02\x02\x02\u03CB\u03C7\x03\x02\x02\x02\u03CC" +
-		"\u03CF\x03\x02\x02\x02\u03CD\u03CB\x03\x02\x02\x02\u03CD\u03CE\x03\x02" +
-		"\x02\x02\u03CEs\x03\x02\x02\x02\u03CF\u03CD\x03\x02\x02\x02\u03D0\u03D6" +
-		"\x05v<\x02\u03D1\u03D2\x05\u017C\xBF\x02\u03D2\u03D3\x07a\x02\x02\u03D3" +
-		"\u03D4\x05\u017C\xBF\x02\u03D4\u03D5\x05x=\x02\u03D5\u03D7\x03\x02\x02" +
-		"\x02\u03D6\u03D1\x03\x02\x02\x02\u03D6\u03D7\x03\x02\x02\x02\u03D7u\x03" +
-		"\x02\x02\x02\u03D8\u03D9\x05\u0174\xBB\x02\u03D9w\x03\x02\x02\x02\u03DA" +
-		"\u03DB\x05\u011A\x8E\x02\u03DBy\x03\x02\x02\x02\u03DC\u03E4\x05x=\x02" +
-		"\u03DD\u03DE\x05\u017C\xBF\x02\u03DE\u03DF\x07_\x02\x02\u03DF\u03E0\x05" +
-		"\u017C\xBF\x02\u03E0\u03E1\x05x=\x02\u03E1\u03E3\x03\x02\x02\x02\u03E2" +
-		"\u03DD\x03\x02\x02\x02\u03E3\u03E6\x03\x02\x02\x02\u03E4\u03E2\x03\x02" +
-		"\x02\x02\u03E4\u03E5\x03\x02\x02\x02\u03E5\u03E7\x03\x02\x02\x02\u03E6" +
-		"\u03E4\x03\x02\x02\x02\u03E7\u03E9\x05\u017C\xBF\x02\u03E8\u03EA\x07_" +
-		"\x02\x02\u03E9\u03E8\x03\x02\x02\x02\u03E9\u03EA\x03\x02\x02\x02\u03EA" +
-		"{\x03\x02\x02\x02\u03EB\u03EC\x05\xC2b\x02\u03EC\u03ED\x07\\\x02\x02\u03ED" +
-		"\u03EE\x07]\x02\x02\u03EE\u03F0\x03\x02\x02\x02\u03EF\u03EB\x03\x02\x02" +
-		"\x02\u03F0\u03F1\x03\x02\x02\x02\u03F1\u03EF\x03\x02\x02\x02\u03F1\u03F2" +
-		"\x03\x02\x02\x02\u03F2}\x03\x02\x02\x02\u03F3\u03F5\x05|?\x02\u03F4\u03F3" +
-		"\x03\x02\x02\x02\u03F4\u03F5\x03\x02\x02\x02\u03F5\x7F\x03\x02\x02\x02" +
-		"\u03F6\u03F9\x05\xC2b\x02\u03F7\u03FA\x05\x8AF\x02\u03F8\u03FA\x05\x88" +
-		"E\x02\u03F9\u03F7\x03\x02\x02\x02\u03F9\u03F8\x03\x02\x02\x02\u03FA\u03FB" +
-		"\x03\x02\x02\x02\u03FB\u03FC\x05~@\x02\u03FC\x81\x03\x02\x02\x02\u03FD" +
-		"\u0403\x05\xC2b\x02\u03FE\u0401\x05\x8AF\x02\u03FF\u0401\x07<\x02\x02" +
-		"\u0400\u03FE\x03\x02\x02\x02\u0400\u03FF\x03\x02\x02\x02\u0401\u0404\x03" +
-		"\x02\x02\x02\u0402\u0404\x05\x86D\x02\u0403\u0400\x03\x02\x02\x02\u0403" +
-		"\u0402\x03\x02\x02\x02\u0404\u0405\x03\x02\x02\x02\u0405\u0406\x05~@\x02" +
-		"\u0406\x83\x03\x02\x02\x02\u0407\u040A\x05\xA4S\x02\u0408\u040A\x05\xA6" +
-		"T\x02\u0409\u0407\x03\x02\x02\x02\u0409\u0408\x03\x02\x02\x02\u040A\u040C" +
-		"\x03\x02\x02\x02\u040B\u040D\x05\x8CG\x02\u040C\u040B\x03\x02\x02\x02" +
-		"\u040C\u040D\x03\x02\x02\x02\u040D\x85\x03\x02\x02\x02\u040E\u0410\x05" +
-		"\xA4S\x02\u040F\u0411\x05\x8CG\x02\u0410\u040F\x03\x02\x02\x02\u0410\u0411" +
-		"\x03\x02\x02\x02\u0411\x87\x03\x02\x02\x02\u0412\u0414\x05\xA6T\x02\u0413" +
-		"\u0415\x05\x8CG\x02\u0414\u0413\x03\x02\x02\x02\u0414\u0415\x03\x02\x02" +
-		"\x02\u0415\x89\x03\x02\x02\x02\u0416\u0417\x07\x0F\x02\x02\u0417\x8B\x03" +
-		"\x02\x02\x02\u0418\u0419\x07c\x02\x02\u0419\u041A\x05\u017C\xBF\x02\u041A" +
-		"\u0421\x05\x8EH\x02\u041B\u041C\x07_\x02\x02\u041C\u041D\x05\u017C\xBF" +
-		"\x02\u041D\u041E\x05\x8EH\x02\u041E\u0420\x03\x02\x02\x02\u041F\u041B" +
-		"\x03\x02\x02\x02\u0420\u0423\x03\x02\x02\x02\u0421\u041F\x03\x02\x02\x02" +
-		"\u0421\u0422\x03\x02\x02\x02\u0422\u0424\x03\x02\x02\x02\u0423\u0421\x03" +
-		"\x02\x02\x02\u0424\u0425\x05\u017C\xBF\x02\u0425\u0426\x07b\x02\x02\u0426" +
-		"\x8D\x03\x02\x02\x02\u0427\u0431\x05\x82B\x02\u0428\u0429\x05\xC2b\x02" +
-		"\u0429\u042E\x07f\x02\x02\u042A\u042B\t\x07\x02\x02\u042B\u042C\x05\u017C" +
-		"\xBF\x02\u042C\u042D\x05\x82B\x02\u042D\u042F\x03\x02\x02\x02\u042E\u042A" +
-		"\x03\x02\x02\x02\u042E\u042F\x03\x02\x02\x02\u042F\u0431\x03\x02\x02\x02" +
-		"\u0430\u0427\x03\x02\x02\x02\u0430\u0428\x03\x02\x02\x02\u0431\x8F\x03" +
-		"\x02\x02\x02\u0432\u0433\x05\xC2b\x02\u0433\u0434\x05\xA4S\x02\u0434\x91" +
-		"\x03\x02\x02\x02\u0435\u043C\x05\x90I\x02\u0436\u0437\x07_\x02\x02\u0437" +
-		"\u0438\x05\u017C\xBF\x02\u0438\u0439\x05\x90I\x02\u0439\u043B\x03\x02" +
-		"\x02\x02\u043A\u0436\x03\x02\x02\x02\u043B\u043E\x03\x02\x02\x02\u043C" +
-		"\u043A\x03\x02\x02\x02\u043C\u043D\x03\x02\x02\x02\u043D\x93\x03\x02\x02" +
-		"\x02\u043E\u043C\x03\x02\x02\x02\u043F\u0441\x07X\x02\x02\u0440\u0442" +
-		"\x05\x96L\x02\u0441\u0440\x03\x02\x02\x02\u0441\u0442\x03\x02\x02\x02" +
-		"\u0442\u0443\x03\x02\x02\x02\u0443\u0444\x05\u017A\xBE\x02\u0444\x95\x03" +
-		"\x02\x02\x02\u0445\u0448\x05\x9AN\x02\u0446\u0448\x05\x98M\x02\u0447\u0445" +
-		"\x03\x02\x02\x02\u0447\u0446\x03\x02\x02\x02\u0448\u044F\x03\x02\x02\x02" +
-		"\u0449\u044A\x07_\x02\x02\u044A\u044B\x05\u017C\xBF\x02\u044B\u044C\x05" +
-		"\x9AN\x02\u044C\u044E\x03\x02\x02\x02\u044D\u0449\x03\x02\x02\x02\u044E" +
-		"\u0451\x03\x02\x02\x02\u044F\u044D\x03\x02\x02\x02\u044F\u0450\x03\x02" +
-		"\x02\x02\u0450\x97\x03\x02\x02\x02\u0451\u044F\x03\x02\x02\x02\u0452\u0453" +
-		"\x05\x82B\x02\u0453\u0454\x077\x02\x02\u0454\x99\x03\x02\x02\x02\u0455" +
-		"\u0457\x05P)\x02\u0456\u0458\x05\x82B\x02\u0457\u0456\x03\x02\x02\x02" +
-		"\u0457\u0458\x03\x02\x02\x02\u0458\u045A\x03\x02\x02\x02\u0459\u045B\x07" +
-		"\x87\x02\x02\u045A\u0459\x03\x02\x02\x02\u045A\u045B\x03\x02\x02\x02\u045B" +
-		"\u045C\x03\x02\x02\x02\u045C\u0462\x05v<\x02\u045D\u045E\x05\u017C\xBF" +
-		"\x02\u045E\u045F\x07a\x02\x02\u045F\u0460\x05\u017C\xBF\x02\u0460\u0461" +
-		"\x05\u0126\x94\x02\u0461\u0463\x03\x02\x02\x02\u0462\u045D\x03\x02\x02" +
-		"\x02\u0462\u0463\x03\x02\x02\x02\u0463\x9B\x03\x02\x02\x02\u0464\u0465" +
-		"\x05\xD4k\x02\u0465\x9D\x03\x02\x02\x02\u0466\u046B\x05\xA0Q\x02\u0467" +
-		"\u0468\x07`\x02\x02\u0468\u046A\x05\xA0Q\x02\u0469\u0467\x03\x02\x02\x02" +
-		"\u046A\u046D\x03\x02\x02\x02\u046B\u0469\x03\x02\x02\x02\u046B\u046C\x03" +
-		"\x02\x02\x02\u046C\x9F\x03\x02\x02\x02\u046D\u046B\x03\x02\x02\x02\u046E" +
-		"\u0474\x05\u0174\xBB\x02\u046F\u0474\x07\n\x02\x02\u0470\u0474\x07\v\x02" +
-		"\x02\u0471\u0474\x07\t\x02\x02\u0472\u0474\x07\f\x02\x02\u0473\u046E\x03" +
-		"\x02\x02\x02\u0473\u046F\x03\x02\x02\x02\u0473\u0470\x03\x02\x02\x02\u0473" +
-		"\u0471\x03\x02\x02\x02\u0473\u0472\x03\x02\x02\x02\u0474\xA1\x03\x02\x02" +
-		"\x02\u0475\u0476\x05\xA0Q\x02\u0476\u0477\x07`\x02\x02\u0477\u0479\x03" +
-		"\x02\x02\x02\u0478\u0475\x03\x02\x02\x02\u0479\u047C\x03\x02\x02\x02\u047A" +
-		"\u0478\x03\x02\x02\x02\u047A\u047B\x03\x02\x02\x02\u047B\xA3\x03\x02\x02" +
-		"\x02\u047C\u047A\x03\x02\x02\x02\u047D\u047E\x05\xA2R\x02\u047E\u047F" +
-		"\x05\u0174\xBB\x02\u047F\xA5\x03\x02\x02\x02\u0480\u0481\x05\xA2R\x02" +
-		"\u0481\u0486\x05\u0172\xBA\x02\u0482\u0483\x07`\x02\x02\u0483\u0485\x05" +
-		"\u0172\xBA\x02\u0484\u0482\x03\x02\x02\x02\u0485\u0488\x03\x02\x02\x02" +
-		"\u0486\u0484\x03\x02\x02\x02\u0486\u0487\x03\x02\x02\x02\u0487\xA7\x03" +
-		"\x02\x02\x02\u0488\u0486\x03\x02\x02\x02\u0489\u048F\x07?\x02\x02\u048A" +
-		"\u048F\x07@\x02\x02\u048B\u048F\x05\u0170\xB9\x02\u048C\u048F\x07A\x02" +
-		"\x02\u048D\u048F\x07B\x02\x02\u048E\u0489\x03\x02\x02\x02\u048E\u048A" +
-		"\x03\x02\x02\x02\u048E\u048B\x03\x02\x02\x02\u048E\u048C\x03\x02\x02\x02" +
-		"\u048E\u048D\x03\x02\x02\x02\u048F\xA9\x03\x02\x02\x02\u0490\u0491\x07" +
-		"\x04\x02\x02\u0491\u0496\x05\xACW\x02\u0492\u0493\x07\x06\x02\x02\u0493" +
-		"\u0495\x05\xACW\x02\u0494\u0492\x03\x02\x02\x02\u0495\u0498\x03\x02\x02" +
-		"\x02\u0496\u0494\x03\x02\x02\x02\u0496\u0497\x03\x02\x02\x02\u0497\u0499" +
-		"\x03\x02\x02\x02\u0498\u0496\x03\x02\x02\x02\u0499\u049A\x07\x05\x02\x02" +
-		"\u049A\xAB\x03\x02\x02\x02\u049B\u049E\x05\xAEX\x02\u049C\u049E\x05\xBA" +
-		"^\x02\u049D\u049B\x03\x02\x02\x02\u049D\u049C\x03\x02\x02\x02\u049E\xAD" +
-		"\x03\x02\x02\x02\u049F\u04A3\x05\u0174\xBB\x02\u04A0\u04A2\x07\x07\x02" +
-		"\x02\u04A1\u04A0\x03\x02\x02\x02\u04A2\u04A5\x03\x02\x02\x02\u04A3\u04A1" +
-		"\x03\x02\x02\x02\u04A3\u04A4\x03\x02\x02\x02\u04A4\xAF\x03\x02\x02\x02" +
-		"\u04A5\u04A3\x03\x02\x02\x02\u04A6\u04A7\x05\xB4[\x02\u04A7\u04A8\x05" +
-		"\u017C\xBF\x02\u04A8\u04A9\x07U\x02\x02\u04A9\u04AA\x05\u017C\xBF\x02" +
-		"\u04AA\u04AB\x05\xB8]\x02\u04AB\xB1\x03\x02\x02\x02\u04AC\u04AD\x05\xB6" +
-		"\\\x02\u04AD\u04AE\x05\u017C\xBF\x02\u04AE\u04AF\x07U\x02\x02\u04AF\u04B0" +
-		"\x05\u017C\xBF\x02\u04B0\u04B1\x05\xB8]\x02\u04B1\xB3\x03\x02\x02\x02" +
-		"\u04B2\u04B3\x05\x94K\x02\u04B3\xB5\x03\x02\x02\x02\u04B4\u04B7\x05\x94" +
-		"K\x02\u04B5\u04B7\x05v<\x02\u04B6\u04B4\x03\x02\x02\x02\u04B6\u04B5\x03" +
-		"\x02\x02\x02\u04B7\xB7\x03\x02\x02\x02\u04B8\u04BB\x05\xD4k\x02\u04B9" +
-		"\u04BB\x05\u011C\x8F\x02\u04BA\u04B8\x03\x02\x02\x02\u04BA\u04B9\x03\x02" +
-		"\x02\x02\u04BB\xB9\x03\x02\x02\x02\u04BC\u04C5\x07Z\x02\x02\u04BD\u04C1" +
-		"\x05\u017C\xBF\x02\u04BE\u04BF\x05\x96L\x02\u04BF\u04C0\x05\u017C\xBF" +
-		"\x02\u04C0\u04C2\x03\x02\x02\x02\u04C1\u04BE\x03\x02\x02\x02\u04C1\u04C2" +
-		"\x03\x02\x02\x02\u04C2\u04C3\x03\x02\x02\x02\u04C3\u04C4\x07U\x02\x02" +
-		"\u04C4\u04C6\x03\x02\x02\x02\u04C5\u04BD\x03\x02\x02\x02\u04C5\u04C6\x03" +
-		"\x02\x02\x02\u04C6\u04C8\x03\x02\x02\x02\u04C7\u04C9\x05\u017E\xC0\x02" +
-		"\u04C8\u04C7\x03\x02\x02\x02\u04C8\u04C9\x03\x02\x02\x02\u04C9\u04CA\x03" +
-		"\x02\x02\x02\u04CA\u04CB\x05\xBE`\x02\u04CB\u04CC\x07[\x02\x02\u04CC\xBB" +
-		"\x03\x02\x02\x02\u04CD\u04D0\x05\xBA^\x02\u04CE\u04D0\x05\xB0Y\x02\u04CF" +
-		"\u04CD\x03\x02\x02\x02\u04CF\u04CE\x03\x02\x02\x02\u04D0\xBD\x03\x02\x02" +
-		"\x02\u04D1\u04D3\x05\xC0a\x02\u04D2\u04D1\x03\x02\x02\x02\u04D2\u04D3" +
-		"\x03\x02\x02\x02\u04D3\xBF\x03\x02\x02\x02\u04D4\u04DA\x05\xD6l\x02\u04D5" +
-		"\u04D6\x05\u017E\xC0\x02\u04D6\u04D7\x05\xD6l\x02\u04D7\u04D9\x03\x02" +
-		"\x02\x02\u04D8\u04D5\x03\x02\x02\x02\u04D9\u04DC\x03\x02\x02\x02\u04DA" +
-		"\u04D8\x03\x02\x02\x02\u04DA\u04DB\x03\x02\x02\x02\u04DB\u04DE\x03\x02" +
-		"\x02\x02\u04DC\u04DA\x03\x02\x02\x02\u04DD\u04DF\x05\u017E\xC0\x02\u04DE" +
-		"\u04DD\x03\x02\x02\x02\u04DE\u04DF\x03\x02\x02\x02\u04DF\xC1\x03\x02\x02" +
-		"\x02\u04E0\u04E6\x05\xC4c\x02\u04E1\u04E2\x05\u017C\xBF\x02\u04E2\u04E3" +
-		"\x05\xC4c\x02\u04E3\u04E5\x03\x02\x02\x02\u04E4\u04E1\x03\x02\x02\x02" +
-		"\u04E5\u04E8\x03\x02\x02\x02\u04E6\u04E4\x03\x02\x02\x02\u04E6\u04E7\x03" +
-		"\x02\x02\x02\u04E7\u04E9\x03\x02\x02\x02\u04E8\u04E6\x03\x02\x02\x02\u04E9" +
-		"\u04EA\x05\u017C\xBF\x02\u04EA\u04EC\x03\x02\x02\x02\u04EB\u04E0\x03\x02" +
-		"\x02\x02\u04EB\u04EC\x03\x02\x02\x02\u04EC\xC3\x03\x02\x02\x02\u04ED\u04EE" +
-		"\x07\x86\x02\x02\u04EE\u04F6\x05\xC8e\x02\u04EF\u04F0\x05\u017C\xBF\x02" +
-		"\u04F0\u04F2\x07X\x02\x02\u04F1\u04F3\x05\xC6d\x02\u04F2\u04F1\x03\x02" +
-		"\x02\x02\u04F2\u04F3\x03\x02\x02\x02\u04F3\u04F4\x03\x02\x02\x02\u04F4" +
-		"\u04F5\x05\u017A\xBE\x02\u04F5\u04F7\x03\x02\x02\x02\u04F6\u04EF\x03\x02" +
-		"\x02\x02\u04F6\u04F7\x03\x02\x02\x02\u04F7\xC5\x03\x02\x02\x02\u04F8\u04FB" +
-		"\x05\xCAf\x02\u04F9\u04FB\x05\xD0i\x02\u04FA\u04F8\x03\x02\x02\x02\u04FA" +
-		"\u04F9\x03\x02\x02\x02\u04FB\xC7\x03\x02\x02\x02\u04FC\u04FD\x05\xA4S" +
-		"\x02\u04FD\xC9\x03\x02\x02\x02\u04FE\u0503\x05\xCCg\x02\u04FF\u0500\x07" +
-		"_\x02\x02\u0500\u0502\x05\xCCg\x02\u0501\u04FF\x03\x02\x02\x02\u0502\u0505" +
-		"\x03\x02\x02\x02\u0503\u0501\x03\x02\x02\x02\u0503\u0504\x03\x02\x02\x02" +
-		"\u0504\xCB\x03\x02\x02\x02\u0505\u0503\x03\x02\x02\x02\u0506\u0507\x05" +
-		"\xCEh\x02\u0507\u0508\x05\u017C\xBF\x02\u0508\u0509\x07a\x02\x02\u0509" +
-		"\u050A\x05\u017C\xBF\x02\u050A\u050B\x05\xD0i\x02\u050B\xCD\x03\x02\x02" +
-		"\x02\u050C\u050F\x05\u0174\xBB\x02\u050D\u050F\x05\u0178\xBD\x02\u050E" +
-		"\u050C\x03\x02\x02\x02\u050E\u050D\x03\x02\x02\x02\u050F\xCF\x03\x02\x02" +
-		"\x02\u0510\u0514\x05\xD2j\x02\u0511\u0514\x05\xC4c\x02\u0512\u0514\x05" +
-		"\u0126\x94\x02\u0513\u0510\x03\x02\x02\x02\u0513\u0511\x03\x02\x02\x02" +
-		"\u0513\u0512\x03\x02\x02\x02\u0514\xD1\x03\x02\x02\x02\u0515\u0521\x07" +
-		"\\\x02\x02\u0516\u051B\x05\xD0i\x02\u0517\u0518\x07_\x02\x02\u0518\u051A" +
-		"\x05\xD0i\x02\u0519\u0517\x03\x02\x02\x02\u051A\u051D\x03\x02\x02\x02" +
-		"\u051B\u0519\x03\x02\x02\x02\u051B\u051C\x03\x02\x02\x02\u051C\u051F\x03" +
-		"\x02\x02\x02\u051D\u051B\x03\x02\x02\x02\u051E\u0520\x07_\x02\x02\u051F" +
-		"\u051E\x03\x02\x02\x02\u051F\u0520\x03\x02\x02\x02\u0520\u0522\x03\x02" +
-		"\x02\x02\u0521\u0516\x03\x02\x02\x02\u0521\u0522\x03\x02\x02\x02\u0522" +
-		"\u0523\x03\x02\x02\x02\u0523\u0524\x07]\x02\x02\u0524\xD3\x03\x02\x02" +
-		"\x02\u0525\u0527\x07Z\x02\x02\u0526\u0528\x05\u017E\xC0\x02\u0527\u0526" +
-		"\x03\x02\x02\x02\u0527\u0528\x03\x02\x02\x02\u0528\u0529\x03\x02\x02\x02" +
-		"\u0529\u052A\x05\xBE`\x02\u052A\u052B\x07[\x02\x02\u052B\xD5\x03\x02\x02" +
-		"\x02\u052C\u052F\x05\xD8m\x02\u052D\u052F\x05\xF4{\x02\u052E\u052C\x03" +
-		"\x02\x02\x02\u052E\u052D\x03\x02\x02\x02\u052F\xD7\x03\x02\x02\x02\u0530" +
-		"\u0531\x06m\x03\x02\u0531\u0532\x05\xDAn\x02\u0532\xD9\x03\x02\x02\x02" +
-		"\u0533\u0534\x05F$\x02\u0534\u053F\x05\u017C\xBF\x02\u0535\u0537\x05\x82" +
-		"B\x02\u0536\u0535\x03\x02\x02\x02\u0536\u0537\x03\x02\x02\x02\u0537\u0538" +
-		"\x03\x02\x02\x02\u0538\u0540\x05r:\x02\u0539\u053A\x05\xDCo\x02\u053A" +
-		"\u053B\x05\u017C\xBF\x02\u053B\u053C\x07a\x02\x02\u053C\u053D\x05\u017C" +
-		"\xBF\x02\u053D\u053E\x05x=\x02\u053E\u0540\x03\x02\x02\x02\u053F\u0536" +
-		"\x03\x02\x02\x02\u053F\u0539\x03\x02\x02\x02\u0540\u0545\x03\x02\x02\x02" +
-		"\u0541\u0542\x05\x82B\x02\u0542\u0543\x05r:\x02\u0543\u0545\x03\x02\x02" +
-		"\x02\u0544\u0533\x03\x02\x02\x02\u0544\u0541\x03\x02\x02\x02\u0545\xDB" +
-		"\x03\x02\x02\x02\u0546\u0547\x07X\x02\x02\u0547\u054C\x05\xDEp\x02\u0548" +
-		"\u0549\x07_\x02\x02\u0549\u054B\x05\xDEp\x02\u054A\u0548\x03\x02\x02\x02" +
-		"\u054B\u054E\x03\x02\x02\x02\u054C\u054A\x03\x02\x02\x02\u054C\u054D\x03" +
-		"\x02\x02\x02\u054D\u054F\x03\x02\x02\x02\u054E\u054C\x03\x02\x02\x02\u054F" +
-		"\u0550\x05\u017A\xBE\x02\u0550\xDD\x03\x02\x02\x02\u0551\u0553\x05\x82" +
-		"B\x02\u0552\u0551\x03\x02\x02\x02\u0552\u0553\x03\x02\x02\x02\u0553\u0554" +
-		"\x03\x02\x02\x02\u0554\u0555\x05v<\x02\u0555\xDF\x03\x02\x02\x02\u0556" +
-		"\u0557\x07X\x02\x02\u0557\u055A\x05v<\x02\u0558\u0559\x07_\x02\x02\u0559" +
-		"\u055B\x05v<\x02\u055A\u0558\x03\x02\x02\x02\u055B\u055C\x03\x02\x02\x02" +
-		"\u055C\u055A\x03\x02\x02\x02\u055C\u055D\x03\x02\x02\x02\u055D\u055E\x03" +
-		"\x02\x02\x02\u055E\u055F\x05\u017A\xBE\x02\u055F\xE1\x03\x02\x02\x02\u0560" +
-		"\u0563\x05\xE4s\x02\u0561\u0563\x05\xE6t\x02\u0562\u0560\x03\x02\x02\x02" +
-		"\u0562\u0561\x03\x02\x02\x02\u0563\xE3\x03\x02\x02\x02\u0564\u0565\x07" +
-		"!\x02\x02\u0565\u0566\x05\u0114\x8B\x02\u0566\u0567\x05\u017C\xBF\x02" +
-		"\u0567\u0570\x05\xF4{\x02\u0568\u056B\x05\u017C\xBF\x02\u0569\u056B\x05" +
-		"\u017E\xC0\x02\u056A\u0568\x03\x02\x02\x02\u056A\u0569\x03\x02\x02\x02" +
-		"\u056B\u056C\x03\x02\x02\x02\u056C\u056D\x07\x1B\x02\x02\u056D\u056E\x05" +
-		"\u017C\xBF\x02\u056E\u056F\x05\xF4{\x02\u056F\u0571\x03\x02\x02\x02\u0570" +
-		"\u056A\x03\x02\x02\x02\u0570\u0571\x03\x02\x02\x02\u0571\xE5\x03\x02\x02" +
-		"\x02\u0572\u0573\x075\x02\x02\u0573\u0574\x05\u0114\x8B\x02\u0574\u0575" +
-		"\x05\u017C\xBF\x02\u0575\u0576\x07Z\x02\x02\u0576\u057E\x05\u017C\xBF" +
-		"\x02\u0577\u0579\x05\u0102\x82\x02\u0578\u0577\x03\x02\x02\x02\u0579\u057A" +
-		"\x03\x02\x02\x02\u057A\u0578\x03\x02\x02\x02\u057A\u057B\x03\x02\x02\x02" +
-		"\u057B\u057C\x03\x02\x02\x02\u057C\u057D\x05\u017C\xBF\x02\u057D\u057F" +
-		"\x03\x02\x02\x02\u057E\u0578\x03\x02\x02\x02\u057E\u057F\x03\x02\x02\x02" +
-		"\u057F\u0580\x03\x02\x02\x02\u0580\u0581\x07[\x02\x02\u0581\xE7\x03\x02" +
-		"\x02\x02\u0582\u0583\x07 \x02\x02\u0583\u0584\x07X\x02\x02\u0584\u0585" +
-		"\x05\u0106\x84\x02\u0585\u0586\x05\u017A\xBE\x02\u0586\u0587\x05\u017C" +
-		"\xBF\x02\u0587\u0588\x05\xF4{\x02\u0588\u0596\x03\x02\x02\x02\u0589\u058A" +
-		"\x07>\x02\x02\u058A\u058B\x05\u0114\x8B\x02\u058B\u058C\x05\u017C\xBF" +
-		"\x02\u058C\u058D\x05\xF4{\x02\u058D\u0596\x03\x02\x02\x02\u058E\u058F" +
-		"\x07\x1A\x02\x02\u058F\u0590\x05\u017C\xBF\x02\u0590\u0591\x05\xF4{\x02" +
-		"\u0591\u0592\x05\u017C\xBF\x02\u0592\u0593\x07>\x02\x02\u0593\u0594\x05" +
-		"\u0114\x8B\x02\u0594\u0596\x03\x02\x02\x02\u0595\u0582\x03\x02\x02\x02" +
-		"\u0595\u0589\x03\x02\x02\x02\u0595\u058E\x03\x02\x02\x02\u0596\xE9\x03" +
-		"\x02\x02\x02\u0597\u0599\x07\x18\x02\x02\u0598\u059A\x05\u0174\xBB\x02" +
-		"\u0599\u0598\x03\x02\x02\x02\u0599\u059A\x03\x02\x02\x02\u059A\xEB\x03" +
-		"\x02\x02\x02\u059B\u059D\x07\x12\x02\x02\u059C\u059E\x05\u0174\xBB\x02" +
-		"\u059D\u059C\x03\x02\x02\x02\u059D\u059E\x03\x02\x02\x02\u059E\xED\x03" +
-		"\x02\x02\x02\u059F\u05A0\x07\x13\x02\x02\u05A0\u05A1\x05\u0126\x94\x02" +
-		"\u05A1\xEF\x03\x02\x02\x02\u05A2\u05A4\x07;\x02\x02\u05A3\u05A5\x05\xFC" +
-		"\x7F\x02\u05A4\u05A3\x03\x02\x02\x02\u05A4\u05A5\x03\x02\x02\x02\u05A5" +
-		"\u05A6\x03\x02\x02\x02\u05A6\u05A7\x05\u017C\xBF\x02\u05A7\u05AD\x05\xD4" +
-		"k\x02\u05A8\u05A9\x05\u017C\xBF\x02\u05A9\u05AA\x05\xF6|\x02\u05AA\u05AC" +
-		"\x03\x02\x02\x02\u05AB\u05A8\x03\x02\x02\x02\u05AC\u05AF\x03\x02\x02\x02" +
-		"\u05AD\u05AB\x03\x02\x02\x02\u05AD\u05AE\x03\x02\x02\x02\u05AE\u05B3\x03" +
-		"\x02\x02\x02\u05AF\u05AD\x03\x02\x02\x02\u05B0\u05B1\x05\u017C\xBF\x02" +
-		"\u05B1\u05B2\x05\xFA~\x02\u05B2\u05B4\x03\x02\x02\x02\u05B3\u05B0\x03" +
-		"\x02\x02\x02\u05B3\u05B4\x03\x02\x02\x02\u05B4\xF1\x03\x02\x02\x02\u05B5" +
-		"\u05B6\x07\x11\x02\x02\u05B6\u05BC\x05\u0126\x94\x02\u05B7\u05B8\x05\u017C" +
-		"\xBF\x02\u05B8\u05B9\t\b\x02\x02\u05B9\u05BA\x05\u017C\xBF\x02\u05BA\u05BB" +
-		"\x05\u0126\x94\x02\u05BB\u05BD\x03\x02\x02\x02\u05BC\u05B7\x03\x02\x02" +
-		"\x02\u05BC\u05BD\x03\x02\x02\x02\u05BD\xF3\x03\x02\x02\x02\u05BE\u05DB" +
-		"\x05\xD4k\x02\u05BF\u05DB\x05\xE2r\x02\u05C0\u05DB\x05\xE8u\x02\u05C1" +
-		"\u05DB\x05\xF0y\x02\u05C2\u05C3\x076\x02\x02\u05C3\u05C4\x05\u0114\x8B" +
-		"\x02\u05C4\u05C5\x05\u017C\xBF\x02\u05C5\u05C6\x05\xD4k\x02\u05C6\u05DB" +
-		"\x03\x02\x02\x02\u05C7\u05C9\x070\x02\x02\u05C8\u05CA\x05\u0126\x94\x02" +
-		"\u05C9\u05C8\x03\x02\x02\x02\u05C9\u05CA\x03\x02\x02\x02\u05CA\u05DB\x03" +
-		"\x02\x02\x02\u05CB\u05CC\x078\x02\x02\u05CC\u05DB\x05\u0126\x94\x02\u05CD" +
-		"\u05DB\x05\xECw\x02\u05CE\u05DB\x05\xEAv\x02\u05CF\u05D0\x06{\x04\x02" +
-		"\u05D0\u05DB\x05\xEEx\x02\u05D1\u05D2\x05\u0174\xBB\x02\u05D2\u05D3\x07" +
-		"g\x02\x02\u05D3\u05D4\x05\u017C\xBF\x02\u05D4\u05D5\x05\xF4{\x02\u05D5" +
-		"\u05DB\x03\x02\x02\x02\u05D6\u05DB\x05\xF2z\x02\u05D7\u05DB\x05\xD8m\x02" +
-		"\u05D8\u05DB\x05\u011C\x8F\x02\u05D9\u05DB\x07^\x02\x02\u05DA\u05BE\x03" +
-		"\x02\x02\x02\u05DA\u05BF\x03\x02\x02\x02\u05DA\u05C0\x03\x02\x02\x02\u05DA" +
-		"\u05C1\x03\x02\x02\x02\u05DA\u05C2\x03\x02\x02\x02\u05DA\u05C7\x03\x02" +
-		"\x02\x02\u05DA\u05CB\x03\x02\x02\x02\u05DA\u05CD\x03\x02\x02\x02\u05DA" +
-		"\u05CE\x03\x02\x02\x02\u05DA\u05CF\x03\x02\x02\x02\u05DA\u05D1\x03\x02" +
-		"\x02\x02\u05DA\u05D6\x03\x02\x02\x02\u05DA\u05D7\x03\x02\x02\x02\u05DA" +
-		"\u05D8\x03\x02\x02\x02\u05DA\u05D9\x03\x02\x02\x02\u05DB\xF5\x03\x02\x02" +
-		"\x02\u05DC\u05DD\x07\x15\x02\x02\u05DD\u05DE\x07X\x02\x02\u05DE\u05E0" +
-		"\x05P)\x02\u05DF\u05E1\x05\xF8}\x02\u05E0\u05DF\x03\x02\x02\x02\u05E0" +
-		"\u05E1\x03\x02\x02\x02\u05E1\u05E2\x03\x02\x02\x02\u05E2\u05E3\x05\u0174" +
-		"\xBB\x02\u05E3\u05E4\x05\u017A\xBE\x02\u05E4\u05E5\x05\u017C\xBF\x02\u05E5" +
-		"\u05E6\x05\xD4k\x02\u05E6\xF7\x03\x02\x02\x02\u05E7\u05EC\x05\xA4S\x02" +
-		"\u05E8\u05E9\x07u\x02\x02\u05E9\u05EB\x05\xA4S\x02\u05EA\u05E8\x03\x02" +
-		"\x02\x02\u05EB\u05EE\x03\x02\x02\x02\u05EC\u05EA\x03\x02\x02\x02\u05EC" +
-		"\u05ED\x03\x02\x02\x02\u05ED\xF9\x03\x02\x02\x02\u05EE\u05EC\x03\x02\x02" +
-		"\x02\u05EF\u05F0\x07\x1F\x02\x02\u05F0\u05F1\x05\u017C\xBF\x02\u05F1\u05F2" +
-		"\x05\xD4k\x02\u05F2\xFB\x03\x02\x02\x02\u05F3\u05F4\x07X\x02\x02\u05F4" +
-		"\u05F5\x05\u017C\xBF\x02\u05F5\u05F7\x05\xFE\x80\x02\u05F6\u05F8\x05\u017E" +
-		"\xC0\x02\u05F7\u05F6\x03\x02\x02\x02\u05F7\u05F8\x03\x02\x02\x02\u05F8" +
-		"\u05F9\x03\x02\x02\x02\u05F9\u05FA\x05\u017A\xBE\x02\u05FA\xFD\x03\x02" +
-		"\x02\x02\u05FB\u0601\x05\u0100\x81\x02\u05FC\u05FD\x05\u017E\xC0\x02\u05FD" +
-		"\u05FE\x05\u0100\x81\x02\u05FE\u0600\x03\x02\x02\x02\u05FF\u05FC\x03\x02" +
-		"\x02\x02\u0600\u0603\x03\x02\x02\x02\u0601\u05FF\x03\x02\x02\x02\u0601" +
-		"\u0602\x03\x02\x02\x02\u0602\xFF\x03\x02\x02\x02\u0603\u0601\x03\x02\x02" +
-		"\x02\u0604\u0607\x05\xD8m\x02\u0605\u0607\x05\u0126\x94\x02\u0606\u0604" +
-		"\x03\x02\x02\x02\u0606\u0605\x03\x02\x02\x02\u0607\u0101\x03\x02\x02\x02" +
-		"\u0608\u060E\x05\u0104\x83\x02\u0609\u060A\x05\u017C\xBF\x02\u060A\u060B" +
-		"\x05\u0104\x83\x02\u060B\u060D\x03\x02\x02\x02\u060C\u0609\x03\x02\x02" +
-		"\x02\u060D\u0610\x03\x02\x02\x02\u060E\u060C\x03\x02\x02\x02\u060E\u060F" +
-		"\x03\x02\x02\x02\u060F\u0611\x03\x02\x02\x02\u0610\u060E\x03\x02\x02\x02" +
-		"\u0611\u0612\x05\u017C\xBF\x02\u0612\u0613\x05\xC0a\x02\u0613\u0103\x03" +
-		"\x02\x02\x02\u0614\u0615\x07\x14\x02\x02\u0615\u0616\x05\u0126\x94\x02" +
-		"\u0616\u0617\x07g\x02\x02\u0617\u061B\x03\x02\x02\x02\u0618\u0619\x07" +
-		"\x19\x02\x02\u0619\u061B\x07g\x02\x02\u061A\u0614\x03\x02\x02\x02\u061A" +
-		"\u0618\x03\x02\x02\x02\u061B\u0105\x03\x02\x02\x02\u061C\u061F\x05\u0108" +
-		"\x85\x02\u061D\u061F\x05\u010A\x86\x02\u061E\u061C\x03\x02\x02\x02\u061E" +
-		"\u061D\x03\x02\x02\x02\u061F\u0107\x03\x02\x02\x02\u0620\u0622\x05P)\x02" +
-		"\u0621\u0623\x05\x82B\x02\u0622\u0621\x03\x02\x02\x02\u0622\u0623\x03" +
-		"\x02\x02\x02\u0623\u0624\x03\x02\x02\x02\u0624\u0625\x05v<\x02\u0625\u0626" +
-		"\t\t\x02\x02\u0626\u0627\x05\u0126\x94\x02\u0627\u0109\x03\x02\x02\x02" +
-		"\u0628\u062A\x05\u010C\x87\x02\u0629\u0628\x03\x02\x02\x02\u0629\u062A" +
-		"\x03\x02\x02\x02\u062A\u062B\x03\x02\x02\x02\u062B\u062D\x07^\x02\x02" +
-		"\u062C\u062E\x05\u0126\x94\x02\u062D\u062C\x03\x02\x02\x02\u062D\u062E" +
-		"\x03\x02\x02\x02\u062E\u062F\x03\x02\x02\x02\u062F\u0631\x07^\x02\x02" +
-		"\u0630\u0632\x05\u010E\x88\x02\u0631\u0630\x03\x02\x02\x02\u0631\u0632" +
-		"\x03\x02\x02\x02\u0632\u010B\x03\x02\x02\x02\u0633\u0636\x05\xD8m\x02" +
-		"\u0634\u0636\x05\u0116\x8C\x02\u0635\u0633\x03\x02\x02\x02\u0635\u0634" +
-		"\x03\x02\x02\x02\u0636\u010D\x03\x02\x02\x02\u0637\u0638\x05\u0116\x8C" +
-		"\x02\u0638\u010F\x03\x02\x02\x02\u0639\u063A\x07X\x02\x02\u063A\u063B" +
-		"\x05\x82B\x02\u063B\u063C\x05\u017A\xBE\x02\u063C\u0111\x03\x02\x02\x02" +
-		"\u063D\u063E\x05\u0114\x8B\x02\u063E\u0113\x03\x02\x02\x02\u063F\u0640" +
-		"\x07X\x02\x02\u0640\u0641\x05\u011A\x8E\x02\u0641\u0642\x05\u017A\xBE" +
-		"\x02\u0642\u0115\x03\x02\x02\x02\u0643\u064A\x05\u0118\x8D\x02\u0644\u0645" +
-		"\x07_\x02\x02\u0645\u0646\x05\u017C\xBF\x02\u0646\u0647\x05\u0118\x8D" +
-		"\x02\u0647\u0649\x03\x02\x02\x02\u0648\u0644\x03\x02\x02\x02\u0649\u064C" +
-		"\x03\x02\x02\x02\u064A\u0648\x03\x02\x02\x02\u064A\u064B\x03\x02\x02\x02" +
-		"\u064B\u0117\x03\x02\x02\x02\u064C\u064A\x03\x02\x02\x02\u064D\u064F\x07" +
-		"r\x02\x02\u064E\u064D\x03\x02\x02\x02\u064E\u064F\x03\x02\x02\x02\u064F" +
-		"\u0650\x03\x02\x02\x02\u0650\u0651\x05\u0126\x94\x02\u0651\u0119\x03\x02" +
-		"\x02\x02\u0652\u0655\x05\u011C\x8F\x02\u0653\u0655\x05\xB2Z\x02\u0654" +
-		"\u0652\x03\x02\x02\x02\u0654\u0653\x03\x02\x02\x02\u0655\u011B\x03\x02" +
-		"\x02\x02\u0656\u0657\x05\u012A\x96\x02\u0657\u011D";
+		"\x02\u0396\u0397\x05\xCCg\x02\u0397\u03A5\x03\x02\x02\x02\u0398\u0399" +
+		"\x05\u0174\xBB\x02\u0399\u039A\x074\x02\x02\u039A\u039B\x05\u0174\xBB" +
+		"\x02\u039B\u039C\x05\x8EH\x02\u039C\u039E\x03\x02\x02\x02\u039D\u0398" +
+		"\x03\x02\x02\x02\u039D\u039E\x03\x02\x02\x02\u039E\u03A2\x03\x02\x02\x02" +
+		"\u039F\u03A0\x05\u0174\xBB\x02\u03A0\u03A1\x05\x98M\x02\u03A1\u03A3\x03" +
+		"\x02\x02\x02\u03A2\u039F\x03\x02\x02\x02\u03A2\u03A3\x03\x02\x02\x02\u03A3" +
+		"\u03A5\x03\x02\x02\x02\u03A4\u0394\x03\x02\x02\x02\u03A4\u039D\x03\x02" +
+		"\x02\x02\u03A4\u03A5\x03\x02\x02\x02\u03A5g\x03\x02\x02\x02\u03A6\u03A9" +
+		"\x05\u016C\xB7\x02\u03A7\u03A9\x05\u0168\xB5\x02\u03A8\u03A6\x03\x02\x02" +
+		"\x02\u03A8\u03A7\x03\x02\x02\x02\u03A9i\x03\x02\x02\x02\u03AA\u03AD\x05" +
+		"|?\x02\u03AB\u03AD\x077\x02\x02\u03AC\u03AA\x03\x02\x02\x02\u03AC\u03AB" +
+		"\x03\x02\x02\x02\u03ADk\x03\x02\x02\x02\u03AE\u03AF\x05\xD6l\x02\u03AF" +
+		"m\x03\x02\x02\x02\u03B0\u03B7\x05p9\x02\u03B1\u03B2\x07W\x02\x02\u03B2" +
+		"\u03B3\x05\u0174\xBB\x02\u03B3\u03B4\x05p9\x02\u03B4\u03B6\x03\x02\x02" +
+		"\x02\u03B5\u03B1\x03\x02\x02\x02\u03B6\u03B9\x03\x02\x02\x02\u03B7\u03B5" +
+		"\x03\x02\x02\x02\u03B7\u03B8\x03\x02\x02\x02\u03B8o\x03\x02\x02\x02\u03B9" +
+		"\u03B7\x03\x02\x02\x02\u03BA\u03C0\x05r:\x02\u03BB\u03BC\x05\u0174\xBB" +
+		"\x02\u03BC\u03BD\x07Y\x02\x02\u03BD\u03BE\x05\u0174\xBB\x02\u03BE\u03BF" +
+		"\x05t;\x02\u03BF\u03C1\x03\x02\x02\x02\u03C0\u03BB\x03\x02\x02\x02\u03C0" +
+		"\u03C1\x03\x02\x02\x02\u03C1q\x03\x02\x02\x02\u03C2\u03C3\x05\u016C\xB7" +
+		"\x02\u03C3s\x03\x02\x02\x02\u03C4\u03C5\x05\u0114\x8B\x02\u03C5u\x03\x02" +
+		"\x02\x02\u03C6\u03CE\x05t;\x02\u03C7\u03C8\x05\u0174\xBB\x02\u03C8\u03C9" +
+		"\x07W\x02\x02\u03C9\u03CA\x05\u0174\xBB\x02\u03CA\u03CB\x05t;\x02\u03CB" +
+		"\u03CD\x03\x02\x02\x02\u03CC\u03C7\x03\x02\x02\x02\u03CD\u03D0\x03\x02" +
+		"\x02\x02\u03CE\u03CC\x03\x02\x02\x02\u03CE\u03CF\x03\x02\x02\x02\u03CF" +
+		"\u03D1\x03\x02\x02\x02\u03D0\u03CE\x03\x02\x02\x02\u03D1\u03D3\x05\u0174" +
+		"\xBB\x02\u03D2\u03D4\x07W\x02\x02\u03D3\u03D2\x03\x02\x02\x02\u03D3\u03D4" +
+		"\x03\x02\x02\x02\u03D4w\x03\x02\x02\x02\u03D5\u03D6\x05\xBE`\x02\u03D6" +
+		"\u03D7\x07T\x02\x02\u03D7\u03D8\x07U\x02\x02\u03D8\u03DA\x03\x02\x02\x02" +
+		"\u03D9\u03D5\x03\x02\x02\x02\u03DA\u03DB\x03\x02\x02\x02\u03DB\u03D9\x03" +
+		"\x02\x02\x02\u03DB\u03DC\x03\x02\x02\x02\u03DCy\x03\x02\x02\x02\u03DD" +
+		"\u03DF\x05x=\x02\u03DE\u03DD\x03\x02\x02\x02\u03DE\u03DF\x03\x02\x02\x02" +
+		"\u03DF{\x03\x02\x02\x02\u03E0\u03E3\x05\xBE`\x02\u03E1\u03E4\x05\x86D" +
+		"\x02\u03E2\u03E4\x05\x84C\x02\u03E3\u03E1\x03\x02\x02\x02\u03E3\u03E2" +
+		"\x03\x02\x02\x02\u03E4\u03E5\x03\x02\x02\x02\u03E5\u03E6\x05z>\x02\u03E6" +
+		"}\x03\x02\x02\x02\u03E7\u03ED\x05\xBE`\x02\u03E8\u03EB\x05\x86D\x02\u03E9" +
+		"\u03EB\x077\x02\x02\u03EA\u03E8\x03\x02\x02\x02\u03EA\u03E9\x03\x02\x02" +
+		"\x02\u03EB\u03EE\x03\x02\x02\x02\u03EC\u03EE\x05\x82B\x02\u03ED\u03EA" +
+		"\x03\x02\x02\x02\u03ED\u03EC\x03\x02\x02\x02\u03EE\u03EF\x03\x02\x02\x02" +
+		"\u03EF\u03F0\x05z>\x02\u03F0\x7F\x03\x02\x02\x02\u03F1\u03F4\x05\xA0Q" +
+		"\x02\u03F2\u03F4\x05\xA2R\x02\u03F3\u03F1\x03\x02\x02\x02\u03F3\u03F2" +
+		"\x03\x02\x02\x02\u03F4\u03F6\x03\x02\x02\x02\u03F5\u03F7\x05\x88E\x02" +
+		"\u03F6\u03F5\x03\x02\x02\x02\u03F6\u03F7\x03\x02\x02\x02\u03F7\x81\x03" +
+		"\x02\x02\x02\u03F8\u03FA\x05\xA0Q\x02\u03F9\u03FB\x05\x88E\x02\u03FA\u03F9" +
+		"\x03\x02\x02\x02\u03FA\u03FB\x03\x02\x02\x02\u03FB\x83\x03\x02\x02\x02" +
+		"\u03FC\u03FE\x05\xA2R\x02\u03FD\u03FF\x05\x88E\x02\u03FE\u03FD\x03\x02" +
+		"\x02\x02\u03FE\u03FF\x03\x02\x02\x02\u03FF\x85\x03\x02\x02\x02\u0400\u0401" +
+		"\x07\x0F\x02\x02\u0401\x87\x03\x02\x02\x02\u0402\u0403\x07[\x02\x02\u0403" +
+		"\u0404\x05\u0174\xBB\x02\u0404\u040B\x05\x8AF\x02\u0405\u0406\x07W\x02" +
+		"\x02\u0406\u0407\x05\u0174\xBB\x02\u0407\u0408\x05\x8AF\x02\u0408\u040A" +
+		"\x03\x02\x02\x02\u0409\u0405\x03\x02\x02\x02\u040A\u040D\x03\x02\x02\x02" +
+		"\u040B\u0409\x03\x02\x02\x02\u040B\u040C\x03\x02\x02\x02\u040C\u040E\x03" +
+		"\x02\x02\x02\u040D\u040B\x03\x02\x02\x02\u040E\u040F\x05\u0174\xBB\x02" +
+		"\u040F\u0410\x07Z\x02\x02\u0410\x89\x03\x02\x02\x02\u0411\u041B\x05~@" +
+		"\x02\u0412\u0413\x05\xBE`\x02\u0413\u0418\x07^\x02\x02\u0414\u0415\t\x07" +
+		"\x02\x02\u0415\u0416\x05\u0174\xBB\x02\u0416\u0417\x05~@\x02\u0417\u0419" +
+		"\x03\x02\x02\x02\u0418\u0414\x03\x02\x02\x02\u0418\u0419\x03\x02\x02\x02" +
+		"\u0419\u041B\x03\x02\x02\x02\u041A\u0411\x03\x02\x02\x02\u041A\u0412\x03" +
+		"\x02\x02\x02\u041B\x8B\x03\x02\x02\x02\u041C\u041D\x05\xBE`\x02\u041D" +
+		"\u041E\x05\xA0Q\x02\u041E\x8D\x03\x02\x02\x02\u041F\u0426\x05\x8CG\x02" +
+		"\u0420\u0421\x07W\x02\x02\u0421\u0422\x05\u0174\xBB\x02\u0422\u0423\x05" +
+		"\x8CG\x02\u0423\u0425\x03\x02\x02\x02\u0424\u0420\x03\x02\x02\x02\u0425" +
+		"\u0428\x03\x02\x02\x02\u0426\u0424\x03\x02\x02\x02\u0426\u0427\x03\x02" +
+		"\x02\x02\u0427\x8F\x03\x02\x02\x02\u0428\u0426\x03\x02\x02\x02\u0429\u042B" +
+		"\x07P\x02\x02\u042A\u042C\x05\x92J\x02\u042B\u042A\x03\x02\x02\x02\u042B" +
+		"\u042C\x03\x02\x02\x02\u042C\u042D\x03\x02\x02\x02\u042D\u042E\x05\u0172" +
+		"\xBA\x02\u042E\x91\x03\x02\x02\x02\u042F\u0432\x05\x96L\x02\u0430\u0432" +
+		"\x05\x94K\x02\u0431\u042F\x03\x02\x02\x02\u0431\u0430\x03\x02\x02\x02" +
+		"\u0432\u0439\x03\x02\x02\x02\u0433\u0434\x07W\x02\x02\u0434\u0435\x05" +
+		"\u0174\xBB\x02\u0435\u0436\x05\x96L\x02\u0436\u0438\x03\x02\x02\x02\u0437" +
+		"\u0433\x03\x02\x02\x02\u0438\u043B\x03\x02\x02\x02\u0439\u0437\x03\x02" +
+		"\x02\x02\u0439\u043A\x03\x02\x02\x02\u043A\x93\x03\x02\x02\x02\u043B\u0439" +
+		"\x03\x02\x02\x02\u043C\u043D\x05~@\x02\u043D\u043E\x072\x02\x02\u043E" +
+		"\x95\x03\x02\x02\x02\u043F\u0441\x05N(\x02\u0440\u0442\x05~@\x02\u0441" +
+		"\u0440\x03\x02\x02\x02\u0441\u0442\x03\x02\x02\x02\u0442\u0444\x03\x02" +
+		"\x02\x02\u0443\u0445\x07\x7F\x02\x02\u0444\u0443\x03\x02\x02\x02\u0444" +
+		"\u0445\x03\x02\x02\x02\u0445\u0446\x03\x02\x02\x02\u0446\u044C\x05r:\x02" +
+		"\u0447\u0448\x05\u0174\xBB\x02\u0448\u0449\x07Y\x02\x02\u0449\u044A\x05" +
+		"\u0174\xBB\x02\u044A\u044B\x05\u011A\x8E\x02\u044B\u044D\x03\x02\x02\x02" +
+		"\u044C\u0447\x03\x02\x02\x02\u044C\u044D\x03\x02\x02\x02\u044D\x97\x03" +
+		"\x02\x02\x02\u044E\u044F\x05\xD0i\x02\u044F\x99\x03\x02\x02\x02\u0450" +
+		"\u0455\x05\x9CO\x02\u0451\u0452\x07X\x02\x02\u0452\u0454\x05\x9CO\x02" +
+		"\u0453\u0451\x03\x02\x02\x02\u0454\u0457\x03\x02\x02\x02\u0455\u0453\x03" +
+		"\x02\x02\x02\u0455\u0456\x03\x02\x02\x02\u0456\x9B\x03\x02\x02\x02\u0457" +
+		"\u0455\x03\x02\x02\x02\u0458\u045E\x05\u016C\xB7\x02\u0459\u045E\x07\n" +
+		"\x02\x02\u045A\u045E\x07\v\x02\x02\u045B\u045E\x07\t\x02\x02\u045C\u045E" +
+		"\x07\f\x02\x02\u045D\u0458\x03\x02\x02\x02\u045D\u0459\x03\x02\x02\x02" +
+		"\u045D\u045A\x03\x02\x02\x02\u045D\u045B\x03\x02\x02\x02\u045D\u045C\x03" +
+		"\x02\x02\x02\u045E\x9D\x03\x02\x02\x02\u045F\u0460\x05\x9CO\x02\u0460" +
+		"\u0461\x07X\x02\x02\u0461\u0463\x03\x02\x02\x02\u0462\u045F\x03\x02\x02" +
+		"\x02\u0463\u0466\x03\x02\x02\x02\u0464\u0462\x03\x02\x02\x02\u0464\u0465" +
+		"\x03\x02\x02\x02\u0465\x9F\x03\x02\x02\x02\u0466\u0464\x03\x02\x02\x02" +
+		"\u0467\u0468\x05\x9EP\x02\u0468\u0469\x05\u016C\xB7\x02\u0469\xA1\x03" +
+		"\x02\x02\x02\u046A\u046B\x05\x9EP\x02\u046B\u0470\x05\u016A\xB6\x02\u046C" +
+		"\u046D\x07X\x02\x02\u046D\u046F\x05\u016A\xB6\x02\u046E\u046C\x03\x02" +
+		"\x02\x02\u046F\u0472\x03\x02\x02\x02\u0470\u046E\x03\x02\x02\x02\u0470" +
+		"\u0471\x03\x02\x02\x02\u0471\xA3\x03\x02\x02\x02\u0472\u0470\x03\x02\x02" +
+		"\x02\u0473\u0479\x07:\x02\x02\u0474\u0479\x07;\x02\x02\u0475\u0479\x05" +
+		"\u0168\xB5\x02\u0476\u0479\x07<\x02\x02\u0477\u0479\x07=\x02\x02\u0478" +
+		"\u0473\x03\x02\x02\x02\u0478\u0474\x03\x02\x02\x02\u0478\u0475\x03\x02" +
+		"\x02\x02\u0478\u0476\x03\x02\x02\x02\u0478\u0477\x03\x02\x02\x02\u0479" +
+		"\xA5\x03\x02\x02\x02\u047A\u047B\x07\x04\x02\x02\u047B\u0480\x05\xA8U" +
+		"\x02\u047C\u047D\x07\x06\x02\x02\u047D\u047F\x05\xA8U\x02\u047E\u047C" +
+		"\x03\x02\x02\x02\u047F\u0482\x03\x02\x02\x02\u0480\u047E\x03\x02\x02\x02" +
+		"\u0480\u0481\x03\x02\x02\x02\u0481\u0483\x03\x02\x02\x02\u0482\u0480\x03" +
+		"\x02\x02\x02\u0483\u0484\x07\x05\x02\x02\u0484\xA7\x03\x02\x02\x02\u0485" +
+		"\u0488\x05\xAAV\x02\u0486\u0488\x05\xB6\\\x02\u0487\u0485\x03\x02\x02" +
+		"\x02\u0487\u0486\x03\x02\x02\x02\u0488\xA9\x03\x02\x02\x02\u0489\u048D" +
+		"\x05\u016C\xB7\x02\u048A\u048C\x07\x07\x02\x02\u048B\u048A\x03\x02\x02" +
+		"\x02\u048C\u048F\x03\x02\x02\x02\u048D\u048B\x03\x02\x02\x02\u048D\u048E" +
+		"\x03\x02\x02\x02\u048E\xAB\x03\x02\x02\x02\u048F\u048D\x03\x02\x02\x02" +
+		"\u0490\u0491\x05\xB0Y\x02\u0491\u0492\x05\u0174\xBB\x02\u0492\u0493\x07" +
+		"M\x02\x02\u0493\u0494\x05\u0174\xBB\x02\u0494\u0495\x05\xB4[\x02\u0495" +
+		"\xAD\x03\x02\x02\x02\u0496\u0497\x05\xB2Z\x02\u0497\u0498\x05\u0174\xBB" +
+		"\x02\u0498\u0499\x07M\x02\x02\u0499\u049A\x05\u0174\xBB\x02\u049A\u049B" +
+		"\x05\xB4[\x02\u049B\xAF\x03\x02\x02\x02\u049C\u049D\x05\x90I\x02\u049D" +
+		"\xB1\x03\x02\x02\x02\u049E\u04A1\x05\x90I\x02\u049F\u04A1\x05r:\x02\u04A0" +
+		"\u049E\x03\x02\x02\x02\u04A0\u049F\x03\x02\x02\x02\u04A1\xB3\x03\x02\x02" +
+		"\x02\u04A2\u04A5\x05\xD0i\x02\u04A3\u04A5\x05\u0116\x8C\x02\u04A4\u04A2" +
+		"\x03\x02\x02\x02\u04A4\u04A3\x03\x02\x02\x02\u04A5\xB5\x03\x02\x02\x02" +
+		"\u04A6\u04AF\x07R\x02\x02\u04A7\u04AB\x05\u0174\xBB\x02\u04A8\u04A9\x05" +
+		"\x92J\x02\u04A9\u04AA\x05\u0174\xBB\x02\u04AA\u04AC\x03\x02\x02\x02\u04AB" +
+		"\u04A8\x03\x02\x02\x02\u04AB\u04AC\x03\x02\x02\x02\u04AC\u04AD\x03\x02" +
+		"\x02\x02\u04AD\u04AE\x07M\x02\x02\u04AE\u04B0\x03\x02\x02\x02\u04AF\u04A7" +
+		"\x03\x02\x02\x02\u04AF\u04B0\x03\x02\x02\x02\u04B0\u04B2\x03\x02\x02\x02" +
+		"\u04B1\u04B3\x05\u0176\xBC\x02\u04B2\u04B1\x03\x02\x02\x02\u04B2\u04B3" +
+		"\x03\x02\x02\x02\u04B3\u04B4\x03\x02\x02\x02\u04B4\u04B5\x05\xBA^\x02" +
+		"\u04B5\u04B6\x07S\x02\x02\u04B6\xB7\x03\x02\x02\x02\u04B7\u04BA\x05\xB6" +
+		"\\\x02\u04B8\u04BA\x05\xACW\x02\u04B9\u04B7\x03\x02\x02\x02\u04B9\u04B8" +
+		"\x03\x02\x02\x02\u04BA\xB9\x03\x02\x02\x02\u04BB\u04BD\x05\xBC_\x02\u04BC" +
+		"\u04BB\x03\x02\x02\x02\u04BC\u04BD\x03\x02\x02\x02\u04BD\xBB\x03\x02\x02" +
+		"\x02\u04BE\u04C4\x05\xD2j\x02\u04BF\u04C0\x05\u0176\xBC\x02\u04C0\u04C1" +
+		"\x05\xD2j\x02\u04C1\u04C3\x03\x02\x02\x02\u04C2\u04BF\x03\x02\x02\x02" +
+		"\u04C3\u04C6\x03\x02\x02\x02\u04C4\u04C2\x03\x02\x02\x02\u04C4\u04C5\x03" +
+		"\x02\x02\x02\u04C5\u04C8\x03\x02\x02\x02\u04C6\u04C4\x03\x02\x02\x02\u04C7" +
+		"\u04C9\x05\u0176\xBC\x02\u04C8\u04C7\x03\x02\x02\x02\u04C8\u04C9\x03\x02" +
+		"\x02\x02\u04C9\xBD\x03\x02\x02\x02\u04CA\u04D0\x05\xC0a\x02\u04CB\u04CC" +
+		"\x05\u0174\xBB\x02\u04CC\u04CD\x05\xC0a\x02\u04CD\u04CF\x03\x02\x02\x02" +
+		"\u04CE\u04CB\x03\x02\x02\x02\u04CF\u04D2\x03\x02\x02\x02\u04D0\u04CE\x03" +
+		"\x02\x02\x02\u04D0\u04D1\x03\x02\x02\x02\u04D1\u04D3\x03\x02\x02\x02\u04D2" +
+		"\u04D0\x03\x02\x02\x02\u04D3\u04D4\x05\u0174\xBB\x02\u04D4\u04D6\x03\x02" +
+		"\x02\x02\u04D5\u04CA\x03\x02\x02\x02\u04D5\u04D6\x03\x02\x02\x02\u04D6" +
+		"\xBF\x03\x02\x02\x02\u04D7\u04D8\x07~\x02\x02\u04D8\u04E0\x05\xC4c\x02" +
+		"\u04D9\u04DA\x05\u0174\xBB\x02\u04DA\u04DC\x07P\x02\x02\u04DB\u04DD\x05" +
+		"\xC2b\x02\u04DC\u04DB\x03\x02\x02\x02\u04DC\u04DD\x03\x02\x02\x02\u04DD" +
+		"\u04DE\x03\x02\x02\x02\u04DE\u04DF\x05\u0172\xBA\x02\u04DF\u04E1\x03\x02" +
+		"\x02\x02\u04E0\u04D9\x03\x02\x02\x02\u04E0\u04E1\x03\x02\x02\x02\u04E1" +
+		"\xC1\x03\x02\x02\x02\u04E2\u04E5\x05\xC6d\x02\u04E3\u04E5\x05\xCCg\x02" +
+		"\u04E4\u04E2\x03\x02\x02\x02\u04E4\u04E3\x03\x02\x02\x02\u04E5\xC3\x03" +
+		"\x02\x02\x02\u04E6\u04E7\x05\xA0Q\x02\u04E7\xC5\x03\x02\x02\x02\u04E8" +
+		"\u04ED\x05\xC8e\x02\u04E9\u04EA\x07W\x02\x02\u04EA\u04EC\x05\xC8e\x02" +
+		"\u04EB\u04E9\x03\x02\x02\x02\u04EC\u04EF\x03\x02\x02\x02\u04ED\u04EB\x03" +
+		"\x02\x02\x02\u04ED\u04EE\x03\x02\x02\x02\u04EE\xC7\x03\x02\x02\x02\u04EF" +
+		"\u04ED\x03\x02\x02\x02\u04F0\u04F1\x05\xCAf\x02\u04F1\u04F2\x05\u0174" +
+		"\xBB\x02\u04F2\u04F3\x07Y\x02\x02\u04F3\u04F4\x05\u0174\xBB\x02\u04F4" +
+		"\u04F5\x05\xCCg\x02\u04F5\xC9\x03\x02\x02\x02\u04F6\u04F9\x05\u016C\xB7" +
+		"\x02\u04F7\u04F9\x05\u0170\xB9\x02\u04F8\u04F6\x03\x02\x02\x02\u04F8\u04F7" +
+		"\x03\x02\x02\x02\u04F9\xCB\x03\x02\x02\x02\u04FA\u04FE\x05\xCEh\x02\u04FB" +
+		"\u04FE\x05\xC0a\x02\u04FC\u04FE\x05\u011A\x8E\x02\u04FD\u04FA\x03\x02" +
+		"\x02\x02\u04FD\u04FB\x03\x02\x02\x02\u04FD\u04FC\x03\x02\x02\x02\u04FE" +
+		"\xCD\x03\x02\x02\x02\u04FF\u050B\x07T\x02\x02\u0500\u0505\x05\xCCg\x02" +
+		"\u0501\u0502\x07W\x02\x02\u0502\u0504\x05\xCCg\x02\u0503\u0501\x03\x02" +
+		"\x02\x02\u0504\u0507\x03\x02\x02\x02\u0505\u0503\x03\x02\x02\x02\u0505" +
+		"\u0506\x03\x02\x02\x02\u0506\u0509\x03\x02\x02\x02\u0507\u0505\x03\x02" +
+		"\x02\x02\u0508\u050A\x07W\x02\x02\u0509\u0508\x03\x02\x02\x02\u0509\u050A" +
+		"\x03\x02\x02\x02\u050A\u050C\x03\x02\x02\x02\u050B\u0500\x03\x02\x02\x02" +
+		"\u050B\u050C\x03\x02\x02\x02\u050C\u050D\x03\x02\x02\x02\u050D\u050E\x07" +
+		"U\x02\x02\u050E\xCF\x03\x02\x02\x02\u050F\u0511\x07R\x02\x02\u0510\u0512" +
+		"\x05\u0176\xBC\x02\u0511\u0510\x03\x02\x02\x02\u0511\u0512\x03\x02\x02" +
+		"\x02\u0512\u0513\x03\x02\x02\x02\u0513\u0514\x05\xBA^\x02\u0514\u0515" +
+		"\x07S\x02\x02\u0515\xD1\x03\x02\x02\x02\u0516\u0519\x05\xD4k\x02\u0517" +
+		"\u0519\x05\xEEx\x02\u0518\u0516\x03\x02\x02\x02\u0518\u0517\x03\x02\x02" +
+		"\x02\u0519\xD3\x03\x02\x02\x02\u051A\u051B\x06k\x04\x02\u051B\u051C\x05" +
+		"\xD6l\x02\u051C\xD5\x03\x02\x02\x02\u051D\u051E\x05D#\x02\u051E\u0529" +
+		"\x05\u0174\xBB\x02\u051F\u0521\x05~@\x02\u0520\u051F\x03\x02\x02\x02\u0520" +
+		"\u0521\x03\x02\x02\x02\u0521\u0522\x03\x02\x02\x02\u0522\u052A\x05n8\x02" +
+		"\u0523\u0524\x05\xD8m\x02\u0524\u0525\x05\u0174\xBB\x02\u0525\u0526\x07" +
+		"Y\x02\x02\u0526\u0527\x05\u0174\xBB\x02\u0527\u0528\x05t;\x02\u0528\u052A" +
+		"\x03\x02\x02\x02\u0529\u0520\x03\x02\x02\x02\u0529\u0523\x03\x02\x02\x02" +
+		"\u052A\u052F\x03\x02\x02\x02\u052B\u052C\x05~@\x02\u052C\u052D\x05n8\x02" +
+		"\u052D\u052F\x03\x02\x02\x02\u052E\u051D\x03\x02\x02\x02\u052E\u052B\x03" +
+		"\x02\x02\x02\u052F\xD7\x03\x02\x02\x02\u0530\u0531\x07P\x02\x02\u0531" +
+		"\u0536\x05\xDAn\x02\u0532\u0533\x07W\x02\x02\u0533\u0535\x05\xDAn\x02" +
+		"\u0534\u0532\x03\x02\x02\x02\u0535\u0538\x03\x02\x02\x02\u0536\u0534\x03" +
+		"\x02\x02\x02\u0536\u0537\x03\x02\x02\x02\u0537\u0539\x03\x02\x02\x02\u0538" +
+		"\u0536\x03\x02\x02\x02\u0539\u053A\x05\u0172\xBA\x02\u053A\xD9\x03\x02" +
+		"\x02\x02\u053B\u053D\x05~@\x02\u053C\u053B\x03\x02\x02\x02\u053C\u053D" +
+		"\x03\x02\x02\x02\u053D\u053E\x03\x02\x02\x02\u053E\u053F\x05r:\x02\u053F" +
+		"\xDB\x03\x02\x02\x02\u0540\u0541\x07P\x02\x02\u0541\u0544\x05r:\x02\u0542" +
+		"\u0543\x07W\x02\x02\u0543\u0545\x05r:\x02\u0544\u0542\x03\x02\x02\x02" +
+		"\u0545\u0546\x03\x02\x02\x02\u0546\u0544\x03\x02\x02\x02\u0546\u0547\x03" +
+		"\x02\x02\x02\u0547\u0548\x03\x02\x02\x02\u0548\u0549\x05\u0172\xBA\x02" +
+		"\u0549\xDD\x03\x02\x02\x02\u054A\u054D\x05\xE0q\x02\u054B\u054D\x05\xE2" +
+		"r\x02\u054C\u054A\x03\x02\x02\x02\u054C\u054B\x03\x02\x02\x02\u054D\xDF" +
+		"\x03\x02\x02\x02\u054E\u054F\x07 \x02\x02\u054F\u0550\x05\u010E\x88\x02" +
+		"\u0550\u0551\x05\u0174\xBB\x02\u0551\u055A\x05\xEEx\x02\u0552\u0555\x05" +
+		"\u0174\xBB\x02\u0553\u0555\x05\u0176\xBC\x02\u0554\u0552\x03\x02\x02\x02" +
+		"\u0554\u0553\x03\x02\x02\x02\u0555\u0556\x03\x02\x02\x02\u0556\u0557\x07" +
+		"\x1A\x02\x02\u0557\u0558\x05\u0174\xBB\x02\u0558\u0559\x05\xEEx\x02\u0559" +
+		"\u055B\x03\x02\x02\x02\u055A\u0554\x03\x02\x02\x02\u055A\u055B\x03\x02" +
+		"\x02\x02\u055B\xE1\x03\x02\x02\x02\u055C\u055D\x070\x02\x02\u055D\u055E" +
+		"\x05\u010E\x88\x02\u055E\u055F\x05\u0174\xBB\x02\u055F\u0560\x07R\x02" +
+		"\x02\u0560\u0568\x05\u0174\xBB\x02\u0561\u0563\x05\xFC\x7F\x02\u0562\u0561" +
+		"\x03\x02\x02\x02\u0563\u0564\x03\x02\x02\x02\u0564\u0562\x03\x02\x02\x02" +
+		"\u0564\u0565\x03\x02\x02\x02\u0565\u0566\x03\x02\x02\x02\u0566\u0567\x05" +
+		"\u0174\xBB\x02\u0567\u0569\x03\x02\x02\x02\u0568\u0562\x03\x02\x02\x02" +
+		"\u0568\u0569\x03\x02\x02\x02\u0569\u056A\x03\x02\x02\x02\u056A\u056B\x07" +
+		"S\x02\x02\u056B\xE3\x03\x02\x02\x02\u056C\u056D\x07\x1F\x02\x02\u056D" +
+		"\u056E\x07P\x02\x02\u056E\u056F\x05\u0100\x81\x02\u056F\u0570\x05\u0172" +
+		"\xBA\x02\u0570\u0571\x05\u0174\xBB\x02\u0571\u0572\x05\xEEx\x02\u0572" +
+		"\u0580\x03\x02\x02\x02\u0573\u0574\x079\x02\x02\u0574\u0575\x05\u010E" +
+		"\x88\x02\u0575\u0576\x05\u0174\xBB\x02\u0576\u0577\x05\xEEx\x02\u0577" +
+		"\u0580\x03\x02\x02\x02\u0578\u0579\x07\x19\x02\x02\u0579\u057A\x05\u0174" +
+		"\xBB\x02\u057A\u057B\x05\xEEx\x02\u057B\u057C\x05\u0174\xBB\x02\u057C" +
+		"\u057D\x079\x02\x02\u057D\u057E\x05\u010E\x88\x02\u057E\u0580\x03\x02" +
+		"\x02\x02\u057F\u056C\x03\x02\x02\x02\u057F\u0573\x03\x02\x02\x02\u057F" +
+		"\u0578\x03\x02\x02\x02\u0580\xE5\x03\x02\x02\x02\u0581\u0583\x07\x17\x02" +
+		"\x02\u0582\u0584\x05\u016C\xB7\x02\u0583\u0582\x03\x02\x02\x02\u0583\u0584" +
+		"\x03\x02\x02\x02\u0584\xE7\x03\x02\x02\x02\u0585\u0587\x07\x12\x02\x02" +
+		"\u0586\u0588\x05\u016C\xB7\x02\u0587\u0586\x03\x02\x02\x02\u0587\u0588" +
+		"\x03\x02\x02\x02\u0588\xE9\x03\x02\x02\x02\u0589\u058B\x076\x02\x02\u058A" +
+		"\u058C\x05\xF6|\x02\u058B\u058A\x03\x02\x02\x02\u058B\u058C\x03\x02\x02" +
+		"\x02\u058C\u058D\x03\x02\x02\x02\u058D\u058E\x05\u0174\xBB\x02\u058E\u0594" +
+		"\x05\xD0i\x02\u058F\u0590\x05\u0174\xBB\x02\u0590\u0591\x05\xF0y\x02\u0591" +
+		"\u0593\x03\x02\x02\x02\u0592\u058F\x03\x02\x02\x02\u0593\u0596\x03\x02" +
+		"\x02\x02\u0594\u0592\x03\x02\x02\x02\u0594\u0595\x03\x02\x02\x02\u0595" +
+		"\u059A\x03\x02\x02\x02\u0596\u0594\x03\x02\x02\x02\u0597\u0598\x05\u0174" +
+		"\xBB\x02\u0598\u0599\x05\xF4{\x02\u0599\u059B\x03\x02\x02\x02\u059A\u0597" +
+		"\x03\x02\x02\x02\u059A\u059B\x03\x02\x02\x02\u059B\xEB\x03\x02\x02\x02" +
+		"\u059C\u059D\x07\x11\x02\x02\u059D\u05A3\x05\u011A\x8E\x02\u059E\u059F" +
+		"\x05\u0174\xBB\x02\u059F\u05A0\t\b\x02\x02\u05A0\u05A1\x05\u0174\xBB\x02" +
+		"\u05A1\u05A2\x05\u011A\x8E\x02\u05A2\u05A4\x03\x02\x02\x02\u05A3\u059E" +
+		"\x03\x02\x02\x02\u05A3\u05A4\x03\x02\x02\x02\u05A4\xED\x03\x02\x02\x02" +
+		"\u05A5\u05C0\x05\xD0i\x02\u05A6\u05C0\x05\xDEp\x02\u05A7\u05C0\x05\xE4" +
+		"s\x02\u05A8\u05C0\x05\xEAv\x02\u05A9\u05AA\x071\x02\x02\u05AA\u05AB\x05" +
+		"\u010E\x88\x02\u05AB\u05AC\x05\u0174\xBB\x02\u05AC\u05AD\x05\xD0i\x02" +
+		"\u05AD\u05C0\x03\x02\x02\x02\u05AE\u05B0\x07,\x02\x02\u05AF\u05B1\x05" +
+		"\u011A\x8E\x02\u05B0\u05AF\x03\x02\x02\x02\u05B0\u05B1\x03\x02\x02\x02" +
+		"\u05B1\u05C0\x03\x02\x02\x02\u05B2\u05B3\x073\x02\x02\u05B3\u05C0\x05" +
+		"\u011A\x8E\x02\u05B4\u05C0\x05\xE8u\x02\u05B5\u05C0\x05\xE6t\x02\u05B6" +
+		"\u05B7\x05\u016C\xB7\x02\u05B7\u05B8\x07_\x02\x02\u05B8\u05B9\x05\u0174" +
+		"\xBB\x02\u05B9\u05BA\x05\xEEx\x02\u05BA\u05C0\x03\x02\x02\x02\u05BB\u05C0" +
+		"\x05\xECw\x02\u05BC\u05C0\x05\xD4k\x02\u05BD\u05C0\x05\u0116\x8C\x02\u05BE" +
+		"\u05C0\x07V\x02\x02\u05BF\u05A5\x03\x02\x02\x02\u05BF\u05A6\x03\x02\x02" +
+		"\x02\u05BF\u05A7\x03\x02\x02\x02\u05BF\u05A8\x03\x02\x02\x02\u05BF\u05A9" +
+		"\x03\x02\x02\x02\u05BF\u05AE\x03\x02\x02\x02\u05BF\u05B2\x03\x02\x02\x02" +
+		"\u05BF\u05B4\x03\x02\x02\x02\u05BF\u05B5\x03\x02\x02\x02\u05BF\u05B6\x03" +
+		"\x02\x02\x02\u05BF\u05BB\x03\x02\x02\x02\u05BF\u05BC\x03\x02\x02\x02\u05BF" +
+		"\u05BD\x03\x02\x02\x02\u05BF\u05BE\x03\x02\x02\x02\u05C0\xEF\x03\x02\x02" +
+		"\x02\u05C1\u05C2\x07\x14\x02\x02\u05C2\u05C3\x07P\x02\x02\u05C3\u05C5" +
+		"\x05N(\x02\u05C4\u05C6\x05\xF2z\x02\u05C5\u05C4\x03\x02\x02\x02\u05C5" +
+		"\u05C6\x03\x02\x02\x02\u05C6\u05C7\x03\x02\x02\x02\u05C7\u05C8\x05\u016C" +
+		"\xB7\x02\u05C8\u05C9\x05\u0172\xBA\x02\u05C9\u05CA\x05\u0174\xBB\x02\u05CA" +
+		"\u05CB\x05\xD0i\x02\u05CB\xF1\x03\x02\x02\x02\u05CC\u05D1\x05\xA0Q\x02" +
+		"\u05CD\u05CE\x07m\x02\x02\u05CE\u05D0\x05\xA0Q\x02\u05CF\u05CD\x03\x02" +
+		"\x02\x02\u05D0\u05D3\x03\x02\x02\x02\u05D1\u05CF\x03\x02\x02\x02\u05D1" +
+		"\u05D2\x03\x02\x02\x02\u05D2\xF3\x03\x02\x02\x02\u05D3\u05D1\x03\x02\x02" +
+		"\x02\u05D4\u05D5\x07\x1E\x02\x02\u05D5\u05D6\x05\u0174\xBB\x02\u05D6\u05D7" +
+		"\x05\xD0i\x02\u05D7\xF5\x03\x02\x02\x02\u05D8\u05D9\x07P\x02\x02\u05D9" +
+		"\u05DA\x05\u0174\xBB\x02\u05DA\u05DC\x05\xF8}\x02\u05DB\u05DD\x05\u0176" +
+		"\xBC\x02\u05DC\u05DB\x03\x02\x02\x02\u05DC\u05DD\x03\x02\x02\x02\u05DD" +
+		"\u05DE\x03\x02\x02\x02\u05DE\u05DF\x05\u0172\xBA\x02\u05DF\xF7\x03\x02" +
+		"\x02\x02\u05E0\u05E6\x05\xFA~\x02\u05E1\u05E2\x05\u0176\xBC\x02\u05E2" +
+		"\u05E3\x05\xFA~\x02\u05E3\u05E5\x03\x02\x02\x02\u05E4\u05E1\x03\x02\x02" +
+		"\x02\u05E5\u05E8\x03\x02\x02\x02\u05E6\u05E4\x03\x02\x02\x02\u05E6\u05E7" +
+		"\x03\x02\x02\x02\u05E7\xF9\x03\x02\x02\x02\u05E8\u05E6\x03\x02\x02\x02" +
+		"\u05E9\u05EC\x05\xD4k\x02\u05EA\u05EC\x05\u011A\x8E\x02\u05EB\u05E9\x03" +
+		"\x02\x02\x02\u05EB\u05EA\x03\x02\x02\x02\u05EC\xFB\x03\x02\x02\x02\u05ED" +
+		"\u05F3\x05\xFE\x80\x02\u05EE\u05EF\x05\u0174\xBB\x02\u05EF\u05F0\x05\xFE" +
+		"\x80\x02\u05F0\u05F2\x03\x02\x02\x02\u05F1\u05EE\x03\x02\x02\x02\u05F2" +
+		"\u05F5\x03\x02\x02\x02\u05F3\u05F1\x03\x02\x02\x02\u05F3\u05F4\x03\x02" +
+		"\x02\x02\u05F4\u05F6\x03\x02\x02\x02\u05F5\u05F3\x03\x02\x02\x02\u05F6" +
+		"\u05F7\x05\u0174\xBB\x02\u05F7\u05F8\x05\xBC_\x02\u05F8\xFD\x03\x02\x02" +
+		"\x02\u05F9\u05FA\x07\x13\x02\x02\u05FA\u05FB\x05\u011A\x8E\x02\u05FB\u05FC" +
+		"\x07_\x02\x02\u05FC\u0600\x03\x02\x02\x02\u05FD\u05FE\x07\x18\x02\x02" +
+		"\u05FE\u0600\x07_\x02\x02\u05FF\u05F9\x03\x02\x02\x02\u05FF\u05FD\x03" +
+		"\x02\x02\x02\u0600\xFF\x03\x02\x02\x02\u0601\u0604\x05\u0102\x82\x02\u0602" +
+		"\u0604\x05\u0104\x83\x02\u0603\u0601\x03\x02\x02\x02\u0603\u0602\x03\x02" +
+		"\x02\x02\u0604\u0101\x03\x02\x02\x02\u0605\u0607\x05N(\x02\u0606\u0608" +
+		"\x05~@\x02\u0607\u0606\x03\x02\x02\x02\u0607\u0608\x03\x02\x02\x02\u0608" +
+		"\u0609\x03\x02\x02\x02\u0609\u060A\x05r:\x02\u060A\u060B\t\t\x02\x02\u060B" +
+		"\u060C\x05\u011A\x8E\x02\u060C\u0103\x03\x02\x02\x02\u060D\u060F\x05\u0106" +
+		"\x84\x02\u060E\u060D\x03\x02\x02\x02\u060E\u060F\x03\x02\x02\x02\u060F" +
+		"\u0610\x03\x02\x02\x02\u0610\u0612\x07V\x02\x02\u0611\u0613\x05\u011A" +
+		"\x8E\x02\u0612\u0611\x03\x02\x02\x02\u0612\u0613\x03\x02\x02\x02\u0613" +
+		"\u0614\x03\x02\x02\x02\u0614\u0616\x07V\x02\x02\u0615\u0617\x05\u0108" +
+		"\x85\x02\u0616\u0615\x03\x02\x02\x02\u0616\u0617\x03\x02\x02\x02\u0617" +
+		"\u0105\x03\x02\x02\x02\u0618\u061B\x05\xD4k\x02\u0619\u061B\x05\u0110" +
+		"\x89\x02\u061A\u0618\x03\x02\x02\x02\u061A\u0619\x03\x02\x02\x02\u061B" +
+		"\u0107\x03\x02\x02\x02\u061C\u061D\x05\u0110\x89\x02\u061D\u0109\x03\x02" +
+		"\x02\x02\u061E\u061F\x07P\x02\x02\u061F\u0620\x05~@\x02\u0620\u0621\x05" +
+		"\u0172\xBA\x02\u0621\u010B\x03\x02\x02\x02\u0622\u0623\x05\u010E\x88\x02" +
+		"\u0623\u010D\x03\x02\x02\x02\u0624\u0625\x07P\x02\x02\u0625\u0626\x05" +
+		"\u0114\x8B\x02\u0626\u0627\x05\u0172\xBA\x02\u0627\u010F\x03\x02\x02\x02" +
+		"\u0628\u062D\x05\u0112\x8A\x02\u0629\u062A\x07W\x02\x02\u062A\u062C\x05" +
+		"\u0112\x8A\x02\u062B\u0629\x03\x02\x02\x02\u062C\u062F\x03\x02\x02\x02" +
+		"\u062D\u062B\x03\x02\x02\x02\u062D\u062E\x03\x02\x02\x02\u062E\u0111\x03" +
+		"\x02\x02\x02\u062F\u062D\x03\x02\x02\x02\u0630\u0632\x07j\x02\x02\u0631" +
+		"\u0630\x03\x02\x02\x02\u0631\u0632\x03\x02\x02\x02\u0632\u0633\x03\x02" +
+		"\x02\x02\u0633\u0634\x05\u011A\x8E\x02\u0634\u0113\x03\x02\x02\x02\u0635" +
+		"\u0638\x05\u0116\x8C\x02\u0636\u0638\x05\xAEX\x02\u0637\u0635\x03\x02" +
+		"\x02\x02\u0637\u0636\x03\x02\x02\x02\u0638\u0115\x03\x02\x02\x02\u0639" +
+		"\u063A\x05\u011E\x90\x02\u063A\u0117\x03\x02\x02\x02\u063B\u063D\x05\u0122" +
+		"\x92\x02\u063C\u063E\t\n\x02\x02\u063D\u063C\x03\x02\x02\x02\u063D\u063E" +
+		"\x03\x02\x02\x02\u063E\u0119\x03\x02\x02\x02\u063F\u0640\b\x8E\x01\x02" +
+		"\u0640\u0641\x05\u010A\x86\x02\u0641\u0642\x05\u011C\x8F\x02\u0642\u0651" +
+		"\x03\x02\x02\x02\u0643\u0651\x05\u0118\x8D\x02\u0644\u0645\t\v\x02\x02" +
+		"\u0645\u0646\x05\u0174\xBB\x02\u0646\u0647\x05\u011A\x8E\x14\u0647\u0651" +
+		"\x03\x02\x02\x02\u0648\u0649\t\f\x02\x02\u0649\u0651\x05\u011A\x8E\x12" +
+		"\u064A\u064B\x05\xDCo\x02\u064B\u064C\x05\u0174\xBB\x02\u064C\u064D\x07" +
+		"Y\x02\x02\u064D\u064E\x05\u0174\xBB\x02\u064E\u064F\x05\u0116\x8C\x02" +
+		"\u064F\u0651\x03\x02\x02\x02\u0650\u063F\x03\x02\x02\x02\u0650\u0643\x03" +
+		"\x02\x02\x02\u0650\u0644\x03\x02\x02\x02\u0650\u0648\x03\x02\x02\x02\u0650" +
+		"\u064A\x03\x02\x02\x02\u0651\u06C0\x03\x02\x02\x02\u0652\u0653\f\x13\x02" +
+		"\x02\u0653\u0654\x07H\x02\x02\u0654\u0655\x05\u0174\xBB\x02\u0655\u0656" +
+		"\x05\u011A\x8E\x14\u0656\u06BF\x03\x02\x02\x02\u0657\u0658\f\x11\x02\x02" +
+		"\u0658\u0659\x05\u0174\xBB\x02\u0659\u065A\t\r\x02\x02\u065A\u065B\x05" +
+		"\u0174\xBB\x02\u065B\u065C\x05\u011A\x8E\x12\u065C\u06BF\x03\x02\x02\x02" +
+		"\u065D\u065E\f\x10\x02\x02\u065E\u065F\t\x0E\x02\x02\u065F";
 	private static readonly _serializedATNSegment3: string =
-		"\x03\x02\x02\x02\u0658\u065A\x05\u012E\x98\x02\u0659\u065B\t\n\x02\x02" +
-		"\u065A\u0659\x03\x02\x02\x02\u065A\u065B\x03\x02\x02\x02\u065B\u011F\x03" +
-		"\x02\x02\x02\u065C\u065D\x075\x02\x02\u065D\u065E\x05\u0114\x8B\x02\u065E" +
-		"\u065F\x05\u017C\xBF\x02\u065F\u0660\x07Z\x02\x02\u0660\u0664\x05\u017C" +
-		"\xBF\x02\u0661\u0663\x05\u0122\x92\x02\u0662\u0661\x03\x02\x02\x02\u0663" +
-		"\u0666\x03\x02\x02\x02\u0664\u0662\x03\x02\x02\x02\u0664\u0665\x03\x02" +
-		"\x02\x02\u0665\u0667\x03\x02\x02\x02\u0666\u0664\x03\x02\x02\x02\u0667" +
-		"\u0668\x05\u017C\xBF\x02\u0668\u0669\x07[\x02\x02\u0669\u0121\x03\x02" +
-		"\x02\x02\u066A\u066B\x05\u0124\x93\x02\u066B\u066C\x05\u017C\xBF\x02\u066C" +
-		"\u066E\x03\x02\x02\x02\u066D\u066A\x03\x02\x02\x02\u066E\u066F\x03\x02" +
-		"\x02\x02\u066F\u066D\x03\x02\x02\x02\u066F\u0670\x03\x02\x02\x02\u0670" +
-		"\u0671\x03\x02\x02\x02\u0671\u0672\x05\xC0a\x02\u0672\u0123\x03\x02\x02" +
-		"\x02\u0673\u0674\x07\x14\x02\x02\u0674\u0677\x05\u0116\x8C\x02\u0675\u0677" +
-		"\x07\x19\x02\x02\u0676\u0673\x03\x02\x02\x02\u0676\u0675\x03\x02\x02\x02" +
-		"\u0677\u0678\x03\x02\x02\x02\u0678\u0679\t\v\x02\x02\u0679\u0125\x03\x02" +
-		"\x02\x02\u067A\u067B\b\x94\x01\x02\u067B\u067C\x05\u0110\x89\x02\u067C" +
-		"\u067D\x05\u0128\x95\x02\u067D\u068D\x03\x02\x02\x02\u067E\u068D\x05\u011E" +
-		"\x90\x02\u067F\u068D\x05\u0120\x91\x02\u0680\u0681\t\f\x02\x02\u0681\u0682" +
-		"\x05\u017C\xBF\x02\u0682\u0683\x05\u0126\x94\x14\u0683\u068D\x03\x02\x02" +
-		"\x02\u0684\u0685\t\r\x02\x02\u0685\u068D\x05\u0126\x94\x12\u0686\u0687" +
-		"\x05\xE0q\x02\u0687\u0688\x05\u017C\xBF\x02\u0688\u0689\x07a\x02\x02\u0689" +
-		"\u068A\x05\u017C\xBF\x02\u068A\u068B\x05\u011C\x8F\x02\u068B\u068D\x03" +
-		"\x02\x02\x02\u068C\u067A\x03\x02\x02\x02\u068C\u067E\x03\x02\x02\x02\u068C" +
-		"\u067F\x03\x02\x02\x02\u068C\u0680\x03\x02\x02\x02\u068C\u0684\x03\x02" +
-		"\x02\x02\u068C\u0686\x03\x02\x02\x02\u068D\u06FC\x03\x02\x02\x02\u068E" +
-		"\u068F\f\x13\x02\x02\u068F\u0690\x07P\x02\x02\u0690\u0691\x05\u017C\xBF" +
-		"\x02\u0691\u0692\x05\u0126\x94\x14\u0692\u06FB\x03\x02\x02\x02\u0693\u0694" +
-		"\f\x11\x02\x02\u0694\u0695\x05\u017C\xBF\x02\u0695\u0696\t\x0E\x02\x02" +
-		"\u0696\u0697\x05\u017C\xBF\x02\u0697\u0698\x05\u0126\x94\x12\u0698\u06FB" +
-		"\x03\x02\x02\x02\u0699\u069A\f\x10\x02\x02\u069A\u069B\t\x0F\x02\x02\u069B" +
-		"\u069C\x05\u017C\xBF\x02\u069C\u069D\x05\u0126\x94\x11\u069D\u06FB\x03" +
-		"\x02\x02\x02\u069E\u069F\f\x0F\x02\x02\u069F\u06AA\x05\u017C\xBF\x02\u06A0" +
-		"\u06A1\x07c\x02\x02\u06A1\u06A8\x07c\x02\x02\u06A2\u06A3\x07b\x02\x02" +
-		"\u06A3\u06A4\x07b\x02\x02\u06A4\u06A8\x07b\x02\x02\u06A5\u06A6\x07b\x02" +
-		"\x02\u06A6\u06A8\x07b\x02\x02\u06A7\u06A0\x03\x02\x02\x02\u06A7\u06A2" +
-		"\x03\x02\x02\x02\u06A7\u06A5\x03\x02\x02\x02\u06A8\u06AB\x03\x02\x02\x02" +
-		"\u06A9\u06AB\t\x10\x02\x02\u06AA\u06A7\x03\x02\x02\x02\u06AA\u06A9\x03" +
-		"\x02\x02\x02\u06AB\u06AC\x03\x02\x02\x02\u06AC\u06AD\x05\u017C\xBF\x02" +
-		"\u06AD\u06AE\x05\u0126\x94\x10\u06AE\u06FB\x03\x02\x02\x02\u06AF\u06B0" +
-		"\f\r\x02\x02\u06B0\u06B1\x05\u017C\xBF\x02\u06B1\u06B2\t\x11\x02\x02\u06B2" +
-		"\u06B3\x05\u017C\xBF\x02\u06B3\u06B4\x05\u0126\x94\x0E\u06B4\u06FB\x03" +
-		"\x02\x02\x02\u06B5\u06B6\f\f\x02\x02\u06B6\u06B7\x05\u017C\xBF\x02\u06B7" +
-		"\u06B8\t\x12\x02\x02\u06B8\u06B9\x05\u017C\xBF\x02\u06B9\u06BA\x05\u0126" +
-		"\x94\r\u06BA\u06FB\x03\x02\x02\x02\u06BB\u06BC\f\v\x02\x02\u06BC\u06BD" +
-		"\x05\u017C\xBF\x02\u06BD\u06BE\t\x13\x02\x02\u06BE\u06BF\x05\u017C\xBF" +
-		"\x02\u06BF\u06C0\x05\u0126\x94\f\u06C0\u06FB\x03\x02\x02\x02\u06C1\u06C2" +
-		"\f\n\x02\x02\u06C2\u06C3\x05\u017C\xBF\x02\u06C3\u06C4\x07t\x02\x02\u06C4" +
-		"\u06C5\x05\u017C\xBF\x02\u06C5\u06C6\x05\u0126\x94\v\u06C6\u06FB\x03\x02" +
-		"\x02\x02\u06C7\u06C8\f\t\x02\x02\u06C8\u06C9\x05\u017C\xBF\x02\u06C9\u06CA" +
-		"\x07v\x02\x02\u06CA\u06CB\x05\u017C\xBF\x02\u06CB\u06CC\x05\u0126\x94" +
-		"\n\u06CC\u06FB\x03\x02\x02\x02\u06CD\u06CE\f\b\x02\x02\u06CE\u06CF\x05" +
-		"\u017C\xBF\x02\u06CF\u06D0\x07u\x02\x02\u06D0\u06D1\x05\u017C\xBF\x02" +
-		"\u06D1\u06D2\x05\u0126\x94\t\u06D2\u06FB\x03\x02\x02\x02\u06D3\u06D4\f" +
-		"\x07\x02\x02\u06D4\u06D5\x05\u017C\xBF\x02\u06D5\u06D6\x07l\x02\x02\u06D6" +
-		"\u06D7\x05\u017C\xBF\x02\u06D7\u06D8\x05\u0126\x94\b\u06D8\u06FB\x03\x02" +
-		"\x02\x02\u06D9\u06DA\f\x06\x02\x02\u06DA\u06DB\x05\u017C\xBF\x02\u06DB" +
-		"\u06DC\x07m\x02\x02\u06DC\u06DD\x05\u017C\xBF\x02\u06DD\u06DE\x05\u0126" +
-		"\x94\x07\u06DE\u06FB\x03\x02\x02\x02\u06DF\u06E0\f\x05\x02\x02\u06E0\u06EA" +
-		"\x05\u017C\xBF\x02\u06E1\u06E2\x07f\x02\x02\u06E2\u06E3\x05\u017C\xBF" +
-		"\x02\u06E3\u06E4\x05\u0126\x94\x02\u06E4\u06E5\x05\u017C\xBF\x02\u06E5" +
-		"\u06E6\x07g\x02\x02\u06E6\u06E7\x05\u017C\xBF\x02\u06E7\u06EB\x03\x02" +
-		"\x02\x02\u06E8\u06E9\x07K\x02\x02\u06E9\u06EB\x05\u017C\xBF\x02\u06EA" +
-		"\u06E1\x03\x02\x02\x02\u06EA\u06E8\x03\x02\x02\x02\u06EB\u06EC\x03\x02" +
-		"\x02\x02\u06EC\u06ED\x05\u0126\x94\x05\u06ED\u06FB\x03\x02\x02\x02\u06EE" +
-		"\u06EF\f\x0E\x02\x02\u06EF\u06F0\x05\u017C\xBF\x02\u06F0\u06F1\t\x14\x02" +
-		"\x02\u06F1\u06F2\x05\u017C\xBF\x02\u06F2\u06F3\x05\x82B\x02\u06F3\u06FB" +
-		"\x03\x02\x02\x02\u06F4\u06F5\f\x03\x02\x02\u06F5\u06F6\x05\u017C\xBF\x02" +
-		"\u06F6\u06F7\t\x15\x02\x02\u06F7\u06F8\x05\u017C\xBF\x02\u06F8\u06F9\x05" +
-		"\u011A\x8E\x02\u06F9\u06FB\x03\x02\x02\x02\u06FA\u068E\x03\x02\x02\x02" +
-		"\u06FA\u0693\x03\x02\x02\x02\u06FA\u0699\x03\x02\x02\x02\u06FA\u069E\x03" +
-		"\x02\x02\x02\u06FA\u06AF\x03\x02\x02\x02\u06FA\u06B5\x03\x02\x02\x02\u06FA" +
-		"\u06BB\x03\x02\x02\x02\u06FA\u06C1\x03\x02\x02\x02\u06FA\u06C7\x03\x02" +
-		"\x02\x02\u06FA\u06CD\x03\x02\x02\x02\u06FA\u06D3\x03\x02\x02\x02\u06FA" +
-		"\u06D9\x03\x02\x02\x02\u06FA\u06DF\x03\x02\x02\x02\u06FA\u06EE\x03\x02" +
-		"\x02\x02\u06FA\u06F4\x03\x02\x02\x02\u06FB\u06FE\x03\x02\x02\x02\u06FC" +
-		"\u06FA\x03\x02\x02\x02\u06FC\u06FD\x03\x02\x02\x02\u06FD\u0127\x03\x02" +
-		"\x02\x02\u06FE\u06FC\x03\x02\x02\x02\u06FF\u0700\x05\u0110\x89\x02\u0700" +
-		"\u0701\x05\u0128\x95\x02\u0701\u070A\x03\x02\x02\x02\u0702\u070A\x05\u011E" +
-		"\x90\x02\u0703\u0704\t\f\x02\x02\u0704\u0705\x05\u017C\xBF\x02\u0705\u0706" +
-		"\x05\u0128\x95\x02\u0706\u070A\x03\x02\x02\x02\u0707\u0708\t\r\x02\x02" +
-		"\u0708\u070A\x05\u0128\x95\x02\u0709\u06FF\x03\x02\x02\x02\u0709\u0702" +
-		"\x03\x02\x02\x02\u0709\u0703\x03\x02\x02\x02\u0709\u0707\x03\x02\x02\x02" +
-		"\u070A\u0129\x03\x02\x02\x02\u070B\u070F\x05\u0126\x94\x02\u070C\u070D" +
-		"\x06\x96\x14\x03\u070D\u0710\x05\u0166\xB4\x02\u070E\u0710\x03\x02\x02" +
-		"\x02\u070F\u070C\x03\x02\x02\x02\u070F\u070E\x03\x02\x02\x02\u0710\u0714" +
-		"\x03\x02\x02\x02\u0711\u0713\x05\u012C\x97\x02\u0712\u0711\x03\x02\x02" +
-		"\x02\u0713\u0716\x03\x02\x02\x02\u0714\u0712\x03\x02\x02\x02\u0714\u0715" +
-		"\x03\x02\x02\x02\u0715\u012B\x03\x02\x02\x02\u0716\u0714\x03\x02\x02\x02" +
-		"\u0717\u071E\x05\u0140\xA1\x02\u0718\u071A\x05\u0130\x99\x02\u0719\u0718" +
-		"\x03\x02\x02\x02\u071A\u071B\x03\x02\x02\x02\u071B\u0719\x03\x02\x02\x02" +
-		"\u071B\u071C\x03\x02\x02\x02\u071C\u071F\x03\x02\x02\x02\u071D\u071F\x05" +
-		"\u0166\xB4\x02\u071E\u0719\x03\x02\x02\x02\u071E\u071D\x03\x02\x02\x02" +
-		"\u071E\u071F\x03\x02\x02\x02\u071F\u012D\x03\x02\x02\x02\u0720\u0724\x05" +
-		"\u013A\x9E\x02\u0721\u0722\x06\x98\x15\x02\u0722\u0724\x072\x02\x02\u0723" +
-		"\u0720\x03\x02\x02\x02\u0723\u0721\x03\x02\x02\x02\u0724\u072A\x03\x02" +
-		"\x02\x02\u0725\u0726\x05\u0130\x99\x02\u0726\u0727\b\x98\x01\x02\u0727" +
-		"\u0729\x03\x02\x02\x02\u0728\u0725\x03\x02\x02\x02\u0729\u072C\x03\x02" +
-		"\x02\x02\u072A\u0728\x03\x02\x02\x02\u072A\u072B\x03\x02\x02\x02\u072B" +
-		"\u012F\x03\x02\x02\x02\u072C\u072A\x03\x02\x02\x02\u072D\u0746\x05\u017C" +
-		"\xBF\x02\u072E\u072F\x07`\x02\x02\u072F\u0730\x05\u017C\xBF\x02\u0730" +
-		"\u0731\x07(\x02\x02\u0731\u0732\x05\u0156\xAC\x02\u0732\u0733\b\x99\x01" +
-		"\x02\u0733\u0747\x03\x02\x02\x02\u0734\u0735\t\x16\x02\x02\u0735\u0738" +
-		"\x05\u017C\xBF\x02\u0736\u0739\x07\x86\x02\x02\u0737\u0739\x05\u0160\xB1" +
-		"\x02\u0738\u0736\x03\x02\x02\x02\u0738\u0737\x03\x02\x02\x02\u0738\u0739" +
-		"\x03\x02\x02\x02\u0739\u073F\x03\x02\x02\x02\u073A\u073B\x07L\x02\x02" +
-		"\u073B\u073F\x05\u017C\xBF\x02\u073C\u073D\x07M\x02\x02\u073D\u073F\x05" +
-		"\u017C\xBF\x02\u073E\u0734\x03\x02\x02\x02\u073E\u073A\x03\x02\x02\x02" +
-		"\u073E\u073C\x03\x02\x02\x02\u073F\u0740\x03\x02\x02\x02\u0740\u0741\x05" +
-		"\u0132\x9A\x02\u0741\u0742\b\x99\x01\x02\u0742\u0747\x03\x02\x02\x02\u0743" +
-		"\u0744\x05\xBC_\x02\u0744\u0745\b\x99\x01\x02\u0745\u0747\x03\x02\x02" +
-		"\x02\u0746\u072E\x03\x02\x02\x02\u0746\u073E\x03\x02\x02\x02\u0746\u0743" +
-		"\x03\x02\x02\x02\u0747\u0752\x03\x02\x02\x02\u0748\u0749\x05\u0164\xB3" +
-		"\x02\u0749\u074A\b\x99\x01\x02\u074A\u0752\x03\x02\x02\x02\u074B\u074C" +
-		"\x05\u0136\x9C\x02\u074C\u074D\b\x99\x01\x02\u074D\u0752\x03\x02\x02\x02" +
-		"\u074E\u074F\x05\u0138\x9D\x02\u074F\u0750\b\x99\x01\x02\u0750\u0752\x03" +
-		"\x02\x02\x02\u0751\u072D\x03\x02\x02\x02\u0751\u0748\x03\x02\x02\x02\u0751" +
-		"\u074B\x03\x02\x02\x02\u0751\u074E\x03\x02\x02\x02\u0752\u0131\x03\x02" +
-		"\x02\x02\u0753\u0758\x05\u0174\xBB\x02\u0754\u0758\x05\u0170\xB9\x02\u0755" +
-		"\u0758\x05\u0134\x9B\x02\u0756\u0758\x05\u0178\xBD\x02\u0757\u0753\x03" +
-		"\x02\x02\x02\u0757\u0754\x03\x02\x02\x02\u0757\u0755\x03\x02\x02\x02\u0757" +
-		"\u0756\x03\x02\x02\x02\u0758\u0133\x03\x02\x02\x02\u0759\u075C\x05\u0112" +
-		"\x8A\x02\u075A\u075C\x05\xAAV\x02\u075B\u0759\x03\x02\x02\x02\u075B\u075A" +
-		"\x03\x02\x02\x02\u075C\u0135\x03\x02\x02\x02\u075D\u075F\t\x17\x02\x02" +
-		"\u075E\u0760\x05\u0116\x8C\x02\u075F\u075E\x03\x02\x02\x02\u075F\u0760" +
-		"\x03\x02\x02\x02\u0760\u0761\x03\x02\x02\x02\u0761\u0762\x07]\x02\x02" +
-		"\u0762\u0137\x03\x02\x02\x02\u0763\u0766\t\x17\x02\x02\u0764\u0767\x05" +
-		"\u0148\xA5\x02\u0765\u0767\x07g\x02\x02\u0766\u0764\x03\x02\x02\x02\u0766" +
-		"\u0765\x03\x02\x02\x02\u0767\u0768\x03\x02\x02\x02\u0768\u0769\x07]\x02" +
-		"\x02\u0769\u0139\x03\x02\x02\x02\u076A\u076C\x05\u0174\xBB\x02\u076B\u076D" +
-		"\x05\x8CG\x02\u076C\u076B\x03\x02\x02\x02\u076C\u076D\x03\x02\x02\x02" +
-		"\u076D\u077C\x03\x02\x02\x02\u076E\u077C\x05\xA8U\x02\u076F\u077C\x05" +
-		"\xAAV\x02\u0770\u0771\x07(\x02\x02\u0771\u0772\x05\u017C\xBF\x02\u0772" +
-		"\u0773\x05\u0156\xAC\x02\u0773\u077C\x03\x02\x02\x02\u0774\u077C\x077" +
-		"\x02\x02\u0775\u077C\x074\x02\x02\u0776\u077C\x05\u0112\x8A\x02\u0777" +
-		"\u077C\x05\xBC_\x02\u0778\u077C\x05\u0142\xA2\x02\u0779\u077C\x05\u0144" +
-		"\xA3\x02\u077A\u077C\x05\u0176\xBC\x02\u077B\u076A\x03\x02\x02\x02\u077B" +
-		"\u076E\x03\x02\x02\x02\u077B\u076F\x03\x02\x02\x02\u077B\u0770\x03\x02" +
-		"\x02\x02\u077B\u0774\x03\x02\x02\x02\u077B\u0775\x03\x02\x02\x02\u077B" +
-		"\u0776\x03\x02\x02\x02\u077B\u0777\x03\x02\x02\x02\u077B\u0778\x03\x02" +
-		"\x02\x02\u077B\u0779\x03\x02\x02\x02\u077B\u077A\x03\x02\x02\x02\u077C" +
-		"\u013B\x03\x02\x02\x02\u077D\u0782\x05\u0174\xBB\x02\u077E\u0782\x05\xA8" +
-		"U\x02\u077F\u0782\x05\xAAV\x02\u0780\u0782\x05\u0112\x8A\x02\u0781\u077D" +
-		"\x03\x02\x02\x02\u0781\u077E\x03\x02\x02\x02\u0781\u077F\x03\x02\x02\x02" +
-		"\u0781\u0780\x03\x02\x02\x02\u0782\u013D\x03\x02\x02\x02\u0783\u0787\x05" +
-		"\u0174\xBB\x02\u0784\u0787\x05\xA8U\x02\u0785\u0787\x05\xAAV\x02\u0786" +
-		"\u0783\x03\x02\x02\x02\u0786\u0784\x03\x02\x02\x02\u0786\u0785\x03\x02" +
-		"\x02\x02\u0787\u013F\x03\x02\x02\x02\u0788\u078C\x05\u0174\xBB\x02\u0789" +
-		"\u078C\x05\xA8U\x02\u078A\u078C\x05\xAAV\x02\u078B\u0788\x03\x02\x02\x02" +
-		"\u078B\u0789\x03\x02\x02\x02\u078B\u078A\x03\x02\x02\x02\u078C\u0141\x03" +
-		"\x02\x02\x02\u078D\u078F\x07\\\x02\x02\u078E\u0790\x05\u0116\x8C\x02\u078F" +
-		"\u078E\x03\x02\x02\x02\u078F\u0790\x03\x02\x02\x02\u0790\u0792\x03\x02" +
-		"\x02\x02\u0791\u0793\x07_\x02\x02\u0792\u0791\x03\x02\x02\x02\u0792\u0793" +
-		"\x03\x02\x02\x02\u0793\u0794\x03\x02\x02\x02\u0794\u0795\x07]\x02\x02" +
-		"\u0795\u0143\x03\x02\x02\x02\u0796\u079C\x07\\\x02\x02\u0797\u0799\x05" +
-		"\u0146\xA4\x02\u0798\u079A\x07_\x02\x02\u0799\u0798\x03\x02\x02\x02\u0799" +
-		"\u079A\x03\x02\x02\x02\u079A\u079D\x03\x02\x02\x02\u079B\u079D\x07g\x02" +
-		"\x02\u079C\u0797\x03\x02\x02\x02\u079C\u079B\x03\x02\x02\x02\u079D\u079E" +
-		"\x03\x02\x02\x02\u079E\u079F\x07]\x02\x02\u079F\u0145\x03\x02\x02\x02" +
-		"\u07A0\u07A5\x05\u014A\xA6\x02\u07A1\u07A2\x07_\x02\x02\u07A2\u07A4\x05" +
-		"\u014A\xA6\x02\u07A3\u07A1\x03\x02\x02\x02\u07A4\u07A7\x03\x02\x02\x02" +
-		"\u07A5\u07A3\x03\x02\x02\x02\u07A5\u07A6\x03\x02\x02\x02\u07A6\u0147\x03" +
-		"\x02\x02\x02\u07A7\u07A5\x03\x02\x02\x02\u07A8\u07AD\x05\u014C\xA7\x02" +
-		"\u07A9\u07AA\x07_\x02\x02\u07AA\u07AC\x05\u014C\xA7\x02\u07AB\u07A9\x03" +
-		"\x02\x02\x02\u07AC\u07AF\x03\x02\x02\x02\u07AD\u07AB\x03\x02\x02\x02\u07AD" +
-		"\u07AE\x03\x02\x02\x02\u07AE\u0149\x03\x02\x02\x02\u07AF\u07AD\x03\x02" +
-		"\x02\x02\u07B0\u07B1\x05\u0150\xA9\x02\u07B1\u07B2\x07g\x02\x02\u07B2" +
-		"\u07B3\x05\u017C\xBF\x02\u07B3\u07B4\x05\u0126\x94\x02\u07B4\u07BB\x03" +
-		"\x02\x02\x02\u07B5\u07B6\x07r\x02\x02\u07B6\u07B7\x07g\x02\x02\u07B7\u07B8" +
-		"\x05\u017C\xBF\x02\u07B8\u07B9\x05\u0126\x94\x02\u07B9\u07BB\x03\x02\x02" +
-		"\x02\u07BA\u07B0\x03\x02\x02\x02\u07BA\u07B5\x03\x02\x02\x02\u07BB\u014B" +
-		"\x03\x02\x02\x02\u07BC\u07BD\x05\u0152\xAA\x02\u07BD\u07BE\x07g\x02\x02" +
-		"\u07BE\u07BF\x05\u017C\xBF\x02\u07BF\u07C0\x05\u0126\x94\x02\u07C0\u07C7" +
-		"\x03\x02\x02\x02\u07C1\u07C2\x07r\x02\x02\u07C2\u07C3\x07g\x02\x02\u07C3" +
-		"\u07C4\x05\u017C\xBF\x02\u07C4\u07C5\x05\u0126\x94\x02\u07C5\u07C7\x03" +
-		"\x02\x02\x02\u07C6\u07BC\x03\x02\x02\x02\u07C6\u07C1\x03\x02\x02\x02\u07C7" +
-		"\u014D\x03\x02\x02\x02\u07C8\u07C9\x05\u0154\xAB\x02\u07C9\u07CA\x07g" +
-		"\x02\x02\u07CA\u07CB\x05\u017C\xBF\x02\u07CB\u07CC\x05\u0126\x94\x02\u07CC" +
-		"\u07D3\x03\x02\x02\x02\u07CD\u07CE\x07r\x02\x02\u07CE\u07CF\x07g\x02\x02" +
-		"\u07CF\u07D0\x05\u017C\xBF\x02\u07D0\u07D1\x05\u0126\x94\x02\u07D1\u07D3" +
-		"\x03\x02\x02\x02\u07D2\u07C8\x03\x02\x02\x02\u07D2\u07CD\x03\x02\x02\x02" +
-		"\u07D3\u014F\x03\x02\x02\x02\u07D4\u07D7\x05\u0178\xBD\x02\u07D5\u07D7" +
-		"\x05\u013A\x9E\x02\u07D6\u07D4\x03\x02\x02\x02\u07D6\u07D5\x03\x02\x02" +
-		"\x02\u07D7\u0151\x03\x02\x02\x02\u07D8\u07DB\x05\u0178\xBD\x02\u07D9\u07DB" +
-		"\x05\u013C\x9F\x02\u07DA\u07D8\x03\x02\x02\x02\u07DA\u07D9\x03\x02\x02" +
-		"\x02\u07DB\u0153\x03\x02\x02\x02\u07DC\u07DF\x05\u0178\xBD\x02\u07DD\u07DF" +
-		"\x05\u013E\xA0\x02\u07DE\u07DC\x03\x02\x02\x02\u07DE\u07DD\x03\x02\x02" +
-		"\x02\u07DF\u0155\x03\x02\x02\x02\u07E0\u07F0\x05\u015E\xB0\x02\u07E1\u07E2" +
-		"\x05\u017C\xBF\x02\u07E2\u07E4\x05\u0164\xB3\x02\u07E3\u07E5\x05\u015C" +
-		"\xAF\x02\u07E4\u07E3\x03\x02\x02\x02\u07E4\u07E5\x03\x02\x02\x02\u07E5" +
-		"\u07F1\x03\x02\x02\x02\u07E6\u07E8\x05\u0158\xAD\x02\u07E7\u07E6\x03\x02" +
-		"\x02\x02\u07E8\u07E9\x03\x02\x02\x02\u07E9\u07E7\x03\x02\x02\x02\u07E9" +
-		"\u07EA\x03\x02\x02\x02\u07EA\u07EE\x03\x02\x02\x02\u07EB\u07EC\x05\u017C" +
-		"\xBF\x02\u07EC\u07ED\x05\u015A\xAE\x02\u07ED\u07EF\x03\x02\x02\x02\u07EE" +
-		"\u07EB\x03\x02\x02\x02\u07EE\u07EF\x03\x02\x02\x02\u07EF\u07F1\x03\x02" +
-		"\x02\x02\u07F0\u07E1\x03\x02\x02\x02\u07F0\u07E7\x03\x02\x02\x02\u07F1" +
-		"\u0157\x03\x02\x02\x02\u07F2\u07F3\x05\xC2b\x02\u07F3\u07F5\x07\\\x02" +
-		"\x02\u07F4\u07F6\x05\u0126\x94\x02\u07F5\u07F4\x03\x02\x02\x02\u07F5\u07F6" +
-		"\x03\x02\x02\x02\u07F6\u07F7\x03\x02\x02\x02\u07F7\u07F8\x07]\x02\x02" +
-		"\u07F8\u0159\x03\x02\x02\x02\u07F9\u07FA\x07Z\x02\x02\u07FA\u07FE\x05" +
-		"\u017C\xBF\x02\u07FB\u07FC\x05z>\x02\u07FC\u07FD\x05\u017C\xBF\x02\u07FD" +
-		"\u07FF\x03\x02\x02\x02\u07FE\u07FB\x03\x02\x02\x02\u07FE\u07FF\x03\x02" +
-		"\x02\x02\u07FF\u0800\x03\x02\x02\x02\u0800\u0801\x07[\x02\x02\u0801\u015B" +
-		"\x03\x02\x02\x02\u0802\u0803\x05^0\x02\u0803\u015D\x03\x02\x02\x02\u0804" +
-		"\u080A\x05\xC2b\x02\u0805\u080B\x05\x8AF\x02\u0806\u0808\x05\xA4S\x02" +
-		"\u0807\u0809\x05\u0162\xB2\x02\u0808\u0807\x03\x02\x02\x02\u0808\u0809" +
-		"\x03\x02\x02\x02\u0809\u080B\x03\x02\x02\x02\u080A\u0805\x03\x02\x02\x02" +
-		"\u080A\u0806\x03\x02\x02\x02\u080B\u015F\x03\x02\x02\x02\u080C\u080D\x07" +
-		"c\x02\x02\u080D\u080E\x05\u017C\xBF\x02\u080E\u080F\x05Z.\x02\u080F\u0810" +
-		"\x05\u017C\xBF\x02\u0810\u0811\x07b\x02\x02\u0811\u0161\x03\x02\x02\x02" +
-		"\u0812\u0813\x07c\x02\x02\u0813\u0816\x07b\x02\x02\u0814\u0816\x05\x8C" +
-		"G\x02\u0815\u0812\x03\x02\x02\x02\u0815\u0814\x03\x02\x02\x02\u0816\u0163" +
-		"\x03\x02\x02\x02\u0817\u0819\x07X\x02\x02\u0818\u081A\x05\u0168\xB5\x02" +
-		"\u0819\u0818\x03\x02\x02\x02\u0819\u081A\x03\x02\x02\x02\u081A\u081C\x03" +
-		"\x02\x02\x02\u081B\u081D\x07_\x02\x02\u081C\u081B\x03\x02\x02\x02\u081C" +
-		"\u081D\x03\x02\x02\x02\u081D\u081E\x03\x02\x02\x02\u081E\u081F\x05\u017A" +
-		"\xBE\x02\u081F\u0165\x03\x02\x02\x02\u0820\u0827\x05\u016A\xB6\x02\u0821" +
-		"\u0822\x07_\x02\x02\u0822\u0823\x05\u017C\xBF\x02\u0823\u0824\x05\u016C" +
-		"\xB7\x02\u0824\u0826\x03\x02\x02\x02\u0825\u0821\x03\x02\x02\x02\u0826" +
-		"\u0829\x03\x02\x02\x02\u0827\u0825\x03\x02\x02\x02\u0827\u0828\x03\x02" +
-		"\x02\x02\u0828\u0167\x03\x02\x02\x02\u0829\u0827\x03\x02\x02\x02\u082A" +
-		"\u0831\x05\u016E\xB8\x02\u082B\u082C\x07_\x02\x02\u082C\u082D\x05\u017C" +
-		"\xBF\x02\u082D\u082E\x05\u016E\xB8\x02\u082E\u0830\x03\x02\x02\x02\u082F" +
-		"\u082B\x03\x02\x02\x02\u0830\u0833\x03\x02\x02\x02\u0831\u082F\x03\x02" +
-		"\x02\x02\u0831\u0832\x03\x02\x02\x02\u0832\u0169\x03\x02\x02\x02\u0833" +
-		"\u0831\x03\x02\x02\x02\u0834\u0837\x05\u0118\x8D\x02\u0835\u0837\x05\u014E" +
-		"\xA8\x02\u0836\u0834\x03\x02\x02\x02\u0836\u0835\x03\x02\x02\x02\u0837" +
-		"\u016B\x03\x02\x02\x02\u0838\u083B\x05\u0118\x8D\x02\u0839\u083B\x05\u014C" +
-		"\xA7\x02\u083A\u0838\x03\x02\x02\x02\u083A\u0839\x03\x02\x02\x02\u083B" +
-		"\u016D\x03\x02\x02\x02\u083C\u0840\x05\u0118\x8D\x02\u083D\u0840\x05\xB2" +
-		"Z\x02\u083E\u0840\x05\u014C\xA7\x02\u083F\u083C\x03\x02\x02\x02\u083F" +
-		"\u083D\x03\x02\x02\x02\u083F\u083E\x03\x02\x02\x02\u0840\u016F\x03\x02" +
-		"\x02\x02\u0841\u0842\x07\x03\x02\x02\u0842\u0171\x03\x02\x02\x02\u0843" +
-		"\u0844\x07\x84\x02\x02\u0844\u0173\x03\x02\x02\x02\u0845\u0846\t\x18\x02" +
-		"\x02\u0846\u0175\x03\x02\x02\x02\u0847\u0848\t\x19\x02\x02\u0848\u0177" +
-		"\x03\x02\x02\x02\u0849\u084A\t\x1A\x02\x02\u084A\u0179\x03\x02\x02\x02" +
-		"\u084B\u084C\x07Y\x02\x02\u084C\u017B\x03\x02\x02\x02\u084D\u084F\x07" +
-		"\x89\x02\x02\u084E\u084D\x03\x02\x02\x02\u084F\u0852\x03\x02\x02\x02\u0850" +
-		"\u084E\x03\x02\x02\x02\u0850\u0851\x03\x02\x02\x02\u0851\u017D\x03\x02" +
-		"\x02\x02\u0852\u0850\x03\x02\x02\x02\u0853\u0855\t\x1B\x02\x02\u0854\u0853" +
-		"\x03\x02\x02\x02\u0855\u0856\x03\x02\x02\x02\u0856\u0854\x03\x02\x02\x02" +
-		"\u0856\u0857\x03\x02\x02\x02\u0857\u017F\x03\x02\x02\x02\xE6\u0183\u018C" +
-		"\u019A\u019F\u01A5\u01AD\u01B7\u01BD\u01C5\u01CB\u01D1\u01D7\u01D9\u01E3" +
-		"\u01E8\u01F0\u01F8\u020D\u021B\u022B\u0232\u023A\u0242\u0257\u0265\u0275" +
-		"\u027C\u0283\u0286\u028E\u0290\u0296\u0298\u029E\u02A0\u02A8\u02AC\u02B5" +
-		"\u02BC\u02C3\u02C8\u02D0\u02D7\u02DA\u02E2\u02E7\u02EB\u02F0\u02F8\u0304" +
-		"\u0310\u0319\u0323\u0333\u0339\u033E\u0345\u034C\u0353\u035F\u0362\u0365" +
-		"\u036D\u0370\u0373\u037F\u0385\u0388\u038C\u0390\u0397\u0399\u039D\u03A2" +
-		"\u03AF\u03B4\u03B6\u03BE\u03C2\u03CD\u03D6\u03E4\u03E9\u03F1\u03F4\u03F9" +
-		"\u0400\u0403\u0409\u040C\u0410\u0414\u0421\u042E\u0430\u043C\u0441\u0447" +
-		"\u044F\u0457\u045A\u0462\u046B\u0473\u047A\u0486\u048E\u0496\u049D\u04A3" +
-		"\u04B6\u04BA\u04C1\u04C5\u04C8\u04CF\u04D2\u04DA\u04DE\u04E6\u04EB\u04F2" +
-		"\u04F6\u04FA\u0503\u050E\u0513\u051B\u051F\u0521\u0527\u052E\u0536\u053F" +
-		"\u0544\u054C\u0552\u055C\u0562\u056A\u0570\u057A\u057E\u0595\u0599\u059D" +
-		"\u05A4\u05AD\u05B3\u05BC\u05C9\u05DA\u05E0\u05EC\u05F7\u0601\u0606\u060E" +
-		"\u061A\u061E\u0622\u0629\u062D\u0631\u0635\u064A\u064E\u0654\u065A\u0664" +
-		"\u066F\u0676\u068C\u06A7\u06AA\u06EA\u06FA\u06FC\u0709\u070F\u0714\u071B" +
-		"\u071E\u0723\u072A\u0738\u073E\u0746\u0751\u0757\u075B\u075F\u0766\u076C" +
-		"\u077B\u0781\u0786\u078B\u078F\u0792\u0799\u079C\u07A5\u07AD\u07BA\u07C6" +
-		"\u07D2\u07D6\u07DA\u07DE\u07E4\u07E9\u07EE\u07F0\u07F5\u07FE\u0808\u080A" +
-		"\u0815\u0819\u081C\u0827\u0831\u0836\u083A\u083F\u0850\u0856";
+		"\u0660\x05\u0174\xBB\x02\u0660\u0661\x05\u011A\x8E\x11\u0661\u06BF\x03" +
+		"\x02\x02\x02\u0662\u0663\f\x0F\x02\x02\u0663\u066E\x05\u0174\xBB\x02\u0664" +
+		"\u0665\x07[\x02\x02\u0665\u066C\x07[\x02\x02\u0666\u0667\x07Z\x02\x02" +
+		"\u0667\u0668\x07Z\x02\x02\u0668\u066C\x07Z\x02\x02\u0669\u066A\x07Z\x02" +
+		"\x02\u066A\u066C\x07Z\x02\x02\u066B\u0664\x03\x02\x02\x02\u066B\u0666" +
+		"\x03\x02\x02\x02\u066B\u0669\x03\x02\x02\x02\u066C\u066F\x03\x02\x02\x02" +
+		"\u066D\u066F\t\x0F\x02\x02\u066E\u066B\x03\x02\x02\x02\u066E\u066D\x03" +
+		"\x02\x02\x02\u066F\u0670\x03\x02\x02\x02\u0670\u0671\x05\u0174\xBB\x02" +
+		"\u0671\u0672\x05\u011A\x8E\x10\u0672\u06BF\x03\x02\x02\x02\u0673\u0674" +
+		"\f\r\x02\x02\u0674\u0675\x05\u0174\xBB\x02\u0675\u0676\t\x10\x02\x02\u0676" +
+		"\u0677\x05\u0174\xBB\x02\u0677\u0678\x05\u011A\x8E\x0E\u0678\u06BF\x03" +
+		"\x02\x02\x02\u0679\u067A\f\f\x02\x02\u067A\u067B\x05\u0174\xBB\x02\u067B" +
+		"\u067C\t\x11\x02\x02\u067C\u067D\x05\u0174\xBB\x02\u067D\u067E\x05\u011A" +
+		"\x8E\r\u067E\u06BF\x03\x02\x02\x02\u067F\u0680\f\v\x02\x02\u0680\u0681" +
+		"\x05\u0174\xBB\x02\u0681\u0682\t\x12\x02\x02\u0682\u0683\x05\u0174\xBB" +
+		"\x02\u0683\u0684\x05\u011A\x8E\f\u0684\u06BF\x03\x02\x02\x02\u0685\u0686" +
+		"\f\n\x02\x02\u0686\u0687\x05\u0174\xBB\x02\u0687\u0688\x07l\x02\x02\u0688" +
+		"\u0689\x05\u0174\xBB\x02\u0689\u068A\x05\u011A\x8E\v\u068A\u06BF\x03\x02" +
+		"\x02\x02\u068B\u068C\f\t\x02\x02\u068C\u068D\x05\u0174\xBB\x02\u068D\u068E" +
+		"\x07n\x02\x02\u068E\u068F\x05\u0174\xBB\x02\u068F\u0690\x05\u011A\x8E" +
+		"\n\u0690\u06BF\x03\x02\x02\x02\u0691\u0692\f\b\x02\x02\u0692\u0693\x05" +
+		"\u0174\xBB\x02\u0693\u0694\x07m\x02\x02\u0694\u0695\x05\u0174\xBB\x02" +
+		"\u0695\u0696\x05\u011A\x8E\t\u0696\u06BF\x03\x02\x02\x02\u0697\u0698\f" +
+		"\x07\x02\x02\u0698\u0699\x05\u0174\xBB\x02\u0699\u069A\x07d\x02\x02\u069A" +
+		"\u069B\x05\u0174\xBB\x02\u069B\u069C\x05\u011A\x8E\b\u069C\u06BF\x03\x02" +
+		"\x02\x02\u069D\u069E\f\x06\x02\x02\u069E\u069F\x05\u0174\xBB\x02\u069F" +
+		"\u06A0\x07e\x02\x02\u06A0\u06A1\x05\u0174\xBB\x02\u06A1\u06A2\x05\u011A" +
+		"\x8E\x07\u06A2\u06BF\x03\x02\x02\x02\u06A3\u06A4\f\x05\x02\x02\u06A4\u06AE" +
+		"\x05\u0174\xBB\x02\u06A5\u06A6\x07^\x02\x02\u06A6\u06A7\x05\u0174\xBB" +
+		"\x02\u06A7\u06A8\x05\u011A\x8E\x02\u06A8\u06A9\x05\u0174\xBB\x02\u06A9" +
+		"\u06AA\x07_\x02\x02\u06AA\u06AB\x05\u0174\xBB\x02\u06AB\u06AF\x03\x02" +
+		"\x02\x02\u06AC\u06AD\x07C\x02\x02\u06AD\u06AF\x05\u0174\xBB\x02\u06AE" +
+		"\u06A5\x03\x02\x02\x02\u06AE\u06AC\x03\x02\x02\x02\u06AF\u06B0\x03\x02" +
+		"\x02\x02\u06B0\u06B1\x05\u011A\x8E\x05\u06B1\u06BF\x03\x02\x02\x02\u06B2" +
+		"\u06B3\f\x0E\x02\x02\u06B3\u06B4\x05\u0174\xBB\x02\u06B4\u06B5\t\x13\x02" +
+		"\x02\u06B5\u06B6\x05\u0174\xBB\x02\u06B6\u06B7\x05~@\x02\u06B7\u06BF\x03" +
+		"\x02\x02\x02\u06B8\u06B9\f\x03\x02\x02\u06B9\u06BA\x05\u0174\xBB\x02\u06BA" +
+		"\u06BB\t\x14\x02\x02\u06BB\u06BC\x05\u0174\xBB\x02\u06BC\u06BD\x05\u0114" +
+		"\x8B\x02\u06BD\u06BF\x03\x02\x02\x02\u06BE\u0652\x03\x02\x02\x02\u06BE" +
+		"\u0657\x03\x02\x02\x02\u06BE\u065D\x03\x02\x02\x02\u06BE\u0662\x03\x02" +
+		"\x02\x02\u06BE\u0673\x03\x02\x02\x02\u06BE\u0679\x03\x02\x02\x02\u06BE" +
+		"\u067F\x03\x02\x02\x02\u06BE\u0685\x03\x02\x02\x02\u06BE\u068B\x03\x02" +
+		"\x02\x02\u06BE\u0691\x03\x02\x02\x02\u06BE\u0697\x03\x02\x02\x02\u06BE" +
+		"\u069D\x03\x02\x02\x02\u06BE\u06A3\x03\x02\x02\x02\u06BE\u06B2\x03\x02" +
+		"\x02\x02\u06BE\u06B8\x03\x02\x02\x02\u06BF\u06C2\x03\x02\x02\x02\u06C0" +
+		"\u06BE\x03\x02\x02\x02\u06C0\u06C1\x03\x02\x02\x02\u06C1\u011B\x03\x02" +
+		"\x02\x02\u06C2\u06C0\x03\x02\x02\x02\u06C3\u06C4\x05\u010A\x86\x02\u06C4" +
+		"\u06C5\x05\u011C\x8F\x02\u06C5\u06CE\x03\x02\x02\x02\u06C6\u06CE\x05\u0118" +
+		"\x8D\x02\u06C7\u06C8\t\v\x02\x02\u06C8\u06C9\x05\u0174\xBB\x02\u06C9\u06CA" +
+		"\x05\u011C\x8F\x02\u06CA\u06CE\x03\x02\x02\x02\u06CB\u06CC\t\f\x02\x02" +
+		"\u06CC\u06CE\x05\u011C\x8F\x02\u06CD\u06C3\x03\x02\x02\x02\u06CD\u06C6" +
+		"\x03\x02\x02\x02\u06CD\u06C7\x03\x02\x02\x02\u06CD\u06CB\x03\x02\x02\x02" +
+		"\u06CE\u011D\x03\x02\x02\x02\u06CF\u06D3\x05\u011A\x8E\x02\u06D0\u06D1" +
+		"\x06\x90\x14\x03\u06D1\u06D4\x05\u015A\xAE\x02\u06D2\u06D4\x03\x02\x02" +
+		"\x02\u06D3\u06D0\x03\x02\x02\x02\u06D3\u06D2\x03\x02\x02\x02\u06D4\u06D8" +
+		"\x03\x02\x02\x02\u06D5\u06D7\x05\u0120\x91\x02\u06D6\u06D5\x03\x02\x02" +
+		"\x02\u06D7\u06DA\x03\x02\x02\x02\u06D8\u06D6\x03\x02\x02\x02\u06D8\u06D9" +
+		"\x03\x02\x02\x02\u06D9\u011F\x03\x02\x02\x02\u06DA\u06D8\x03\x02\x02\x02" +
+		"\u06DB\u06E2\x05\u0134\x9B\x02\u06DC\u06DE\x05\u0124\x93\x02\u06DD\u06DC" +
+		"\x03\x02\x02\x02\u06DE\u06DF\x03\x02\x02\x02\u06DF\u06DD\x03\x02\x02\x02" +
+		"\u06DF\u06E0\x03\x02\x02\x02\u06E0\u06E3\x03\x02\x02\x02\u06E1\u06E3\x05" +
+		"\u015A\xAE\x02\u06E2\u06DD\x03\x02\x02\x02\u06E2\u06E1\x03\x02\x02\x02" +
+		"\u06E2\u06E3\x03\x02\x02\x02\u06E3\u0121\x03\x02\x02\x02\u06E4\u06E8\x05" +
+		"\u012E\x98\x02\u06E5\u06E6\x06\x92\x15\x02\u06E6\u06E8\x07-\x02\x02\u06E7" +
+		"\u06E4\x03\x02\x02\x02\u06E7\u06E5\x03\x02\x02\x02\u06E8\u06EE\x03\x02" +
+		"\x02\x02\u06E9\u06EA\x05\u0124\x93\x02\u06EA\u06EB\b\x92\x01\x02\u06EB" +
+		"\u06ED\x03\x02\x02\x02\u06EC\u06E9\x03\x02\x02\x02\u06ED\u06F0\x03\x02" +
+		"\x02\x02\u06EE\u06EC\x03\x02\x02\x02\u06EE\u06EF\x03\x02\x02\x02\u06EF" +
+		"\u0123\x03\x02\x02\x02\u06F0\u06EE\x03\x02\x02\x02\u06F1\u070A\x05\u0174" +
+		"\xBB\x02\u06F2\u06F3\x07X\x02\x02\u06F3\u06F4\x05\u0174\xBB\x02\u06F4" +
+		"\u06F5\x07\'\x02\x02\u06F5\u06F6\x05\u014A\xA6\x02\u06F6\u06F7\b\x93\x01" +
+		"\x02\u06F7\u070B\x03\x02\x02\x02\u06F8\u06F9\t\x15\x02\x02\u06F9\u06FC" +
+		"\x05\u0174\xBB\x02\u06FA\u06FD\x07~\x02\x02\u06FB\u06FD\x05\u0154\xAB" +
+		"\x02\u06FC\u06FA\x03\x02\x02\x02\u06FC\u06FB\x03\x02\x02\x02\u06FC\u06FD" +
+		"\x03\x02\x02\x02\u06FD\u0703\x03\x02\x02\x02\u06FE\u06FF\x07D\x02\x02" +
+		"\u06FF\u0703\x05\u0174\xBB\x02\u0700\u0701\x07E\x02\x02\u0701\u0703\x05" +
+		"\u0174\xBB\x02\u0702\u06F8\x03\x02\x02\x02\u0702\u06FE\x03\x02\x02\x02" +
+		"\u0702\u0700\x03\x02\x02\x02\u0703\u0704\x03\x02\x02\x02\u0704\u0705\x05" +
+		"\u0126\x94\x02\u0705\u0706\b\x93\x01\x02\u0706\u070B\x03\x02\x02\x02\u0707" +
+		"\u0708\x05\xB8]\x02\u0708\u0709\b\x93\x01\x02\u0709\u070B\x03\x02\x02" +
+		"\x02\u070A\u06F2\x03\x02\x02\x02\u070A\u0702\x03\x02\x02\x02\u070A\u0707" +
+		"\x03\x02\x02\x02\u070B\u0716\x03\x02\x02\x02\u070C\u070D\x05\u0158\xAD" +
+		"\x02\u070D\u070E\b\x93\x01\x02\u070E\u0716\x03\x02\x02\x02\u070F\u0710" +
+		"\x05\u012A\x96\x02\u0710\u0711\b\x93\x01\x02\u0711\u0716\x03\x02\x02\x02" +
+		"\u0712\u0713\x05\u012C\x97\x02\u0713\u0714\b\x93\x01\x02\u0714\u0716\x03" +
+		"\x02\x02\x02\u0715\u06F1\x03\x02\x02\x02\u0715\u070C\x03\x02\x02\x02\u0715" +
+		"\u070F\x03\x02\x02\x02\u0715\u0712\x03\x02\x02\x02\u0716\u0125\x03\x02" +
+		"\x02\x02\u0717\u071C\x05\u016C\xB7\x02\u0718\u071C\x05\u0168\xB5\x02\u0719" +
+		"\u071C\x05\u0128\x95\x02\u071A\u071C\x05\u0170\xB9\x02\u071B\u0717\x03" +
+		"\x02\x02\x02\u071B\u0718\x03\x02\x02\x02\u071B\u0719\x03\x02\x02\x02\u071B" +
+		"\u071A\x03\x02\x02\x02\u071C\u0127\x03\x02\x02\x02\u071D\u0720\x05\u010C" +
+		"\x87\x02\u071E\u0720\x05\xA6T\x02\u071F\u071D\x03\x02\x02\x02\u071F\u071E" +
+		"\x03\x02\x02\x02\u0720\u0129\x03\x02\x02\x02\u0721\u0723\x07^\x02\x02" +
+		"\u0722\u0721\x03\x02\x02\x02\u0722\u0723\x03\x02\x02\x02\u0723\u0724\x03" +
+		"\x02\x02\x02\u0724\u0726\x07T\x02\x02\u0725\u0727\x05\u0110\x89\x02\u0726" +
+		"\u0725\x03\x02\x02\x02\u0726\u0727\x03\x02\x02\x02\u0727\u0728\x03\x02" +
+		"\x02\x02\u0728\u0729\x07U\x02\x02\u0729\u012B\x03\x02\x02\x02\u072A\u072C" +
+		"\x07^\x02\x02\u072B\u072A\x03\x02\x02\x02\u072B\u072C\x03\x02\x02\x02" +
+		"\u072C\u072D\x03\x02\x02\x02\u072D\u0730\x07T\x02\x02\u072E\u0731\x05" +
+		"\u013C\x9F\x02\u072F\u0731\x07_\x02\x02\u0730\u072E\x03\x02\x02\x02\u0730" +
+		"\u072F\x03\x02\x02\x02\u0731\u0732\x03\x02\x02\x02\u0732\u0733\x07U\x02" +
+		"\x02\u0733\u012D\x03\x02\x02\x02\u0734\u0736\x05\u016C\xB7\x02\u0735\u0737" +
+		"\x05\x88E\x02\u0736\u0735\x03\x02\x02\x02\u0736\u0737\x03\x02\x02\x02" +
+		"\u0737\u0746\x03\x02\x02\x02\u0738\u0746\x05\xA4S\x02\u0739\u0746\x05" +
+		"\xA6T\x02\u073A\u073B\x07\'\x02\x02\u073B\u073C\x05\u0174\xBB\x02\u073C" +
+		"\u073D\x05\u014A\xA6\x02\u073D\u0746\x03\x02\x02\x02\u073E\u0746\x072" +
+		"\x02\x02\u073F\u0746\x07/\x02\x02\u0740\u0746\x05\u010C\x87\x02\u0741" +
+		"\u0746\x05\xB8]\x02\u0742\u0746\x05\u0136\x9C\x02\u0743\u0746\x05\u0138" +
+		"\x9D\x02\u0744\u0746\x05\u016E\xB8\x02\u0745\u0734\x03\x02\x02\x02\u0745" +
+		"\u0738\x03\x02\x02\x02\u0745\u0739\x03\x02\x02\x02\u0745\u073A\x03\x02" +
+		"\x02\x02\u0745\u073E\x03\x02\x02\x02\u0745\u073F\x03\x02\x02\x02\u0745" +
+		"\u0740\x03\x02\x02\x02\u0745\u0741\x03\x02\x02\x02\u0745\u0742\x03\x02" +
+		"\x02\x02\u0745\u0743\x03\x02\x02\x02\u0745\u0744\x03\x02\x02\x02\u0746" +
+		"\u012F\x03\x02\x02\x02\u0747\u074E\x05\u016C\xB7\x02\u0748\u074E\x05\xA4" +
+		"S\x02\u0749\u074E\x05\xA6T\x02\u074A\u074E\x05\u010C\x87\x02\u074B\u074E" +
+		"\x05\u0136\x9C\x02\u074C\u074E\x05\u0138\x9D\x02\u074D\u0747\x03\x02\x02" +
+		"\x02\u074D\u0748\x03\x02\x02\x02\u074D\u0749\x03\x02\x02\x02\u074D\u074A" +
+		"\x03\x02\x02\x02\u074D\u074B\x03\x02\x02\x02\u074D\u074C\x03\x02\x02\x02" +
+		"\u074E\u0131\x03\x02\x02\x02\u074F\u0753\x05\u016C\xB7\x02\u0750\u0753" +
+		"\x05\xA4S\x02\u0751\u0753\x05\xA6T\x02\u0752\u074F\x03\x02\x02\x02\u0752" +
+		"\u0750\x03\x02\x02\x02\u0752\u0751\x03\x02\x02\x02\u0753\u0133\x03\x02" +
+		"\x02\x02\u0754\u0758\x05\u016C\xB7\x02\u0755\u0758\x05\xA4S\x02\u0756" +
+		"\u0758\x05\xA6T\x02\u0757\u0754\x03\x02\x02\x02\u0757\u0755\x03\x02\x02" +
+		"\x02\u0757\u0756\x03\x02\x02\x02\u0758\u0135\x03\x02\x02\x02\u0759\u075B" +
+		"\x07T\x02\x02\u075A\u075C\x05\u0110\x89\x02\u075B\u075A\x03\x02\x02\x02" +
+		"\u075B\u075C\x03\x02\x02\x02\u075C\u075E\x03\x02\x02\x02\u075D\u075F\x07" +
+		"W\x02\x02\u075E\u075D\x03\x02\x02\x02\u075E\u075F\x03\x02\x02\x02\u075F" +
+		"\u0760\x03\x02\x02\x02\u0760\u0761\x07U\x02\x02\u0761\u0137\x03\x02\x02" +
+		"\x02\u0762\u0768\x07T\x02\x02\u0763\u0765\x05\u013A\x9E\x02\u0764\u0766" +
+		"\x07W\x02\x02\u0765\u0764\x03\x02\x02\x02\u0765\u0766\x03\x02\x02\x02" +
+		"\u0766\u0769\x03\x02\x02\x02\u0767\u0769\x07_\x02\x02\u0768\u0763\x03" +
+		"\x02\x02\x02\u0768\u0767\x03\x02\x02\x02\u0769\u076A\x03\x02\x02\x02\u076A" +
+		"\u076B\x07U\x02\x02\u076B\u0139\x03\x02\x02\x02\u076C\u0771\x05\u013E" +
+		"\xA0\x02\u076D\u076E\x07W\x02\x02\u076E\u0770\x05\u013E\xA0\x02\u076F" +
+		"\u076D\x03\x02\x02\x02\u0770\u0773\x03\x02\x02\x02\u0771\u076F\x03\x02" +
+		"\x02\x02\u0771\u0772\x03\x02\x02\x02\u0772\u013B\x03\x02\x02\x02\u0773" +
+		"\u0771\x03\x02\x02\x02\u0774\u0779\x05\u0140\xA1\x02\u0775\u0776\x07W" +
+		"\x02\x02\u0776\u0778\x05\u0140\xA1\x02\u0777\u0775\x03\x02\x02\x02\u0778" +
+		"\u077B\x03\x02\x02\x02\u0779\u0777\x03\x02\x02\x02\u0779\u077A\x03\x02" +
+		"\x02\x02\u077A\u013D\x03\x02\x02\x02\u077B\u0779\x03\x02\x02\x02\u077C" +
+		"\u077D\x05\u0144\xA3\x02\u077D\u077E\x07_\x02\x02\u077E\u077F\x05\u0174" +
+		"\xBB\x02\u077F\u0780\x05\u011A\x8E\x02\u0780\u0787\x03\x02\x02\x02\u0781" +
+		"\u0782\x07j\x02\x02\u0782\u0783\x07_\x02\x02\u0783\u0784\x05\u0174\xBB" +
+		"\x02\u0784\u0785\x05\u011A\x8E\x02\u0785\u0787\x03\x02\x02\x02\u0786\u077C" +
+		"\x03\x02\x02\x02\u0786\u0781\x03\x02\x02\x02\u0787\u013F\x03\x02\x02\x02" +
+		"\u0788\u0789\x05\u0146\xA4\x02\u0789\u078A\x07_\x02\x02\u078A\u078B\x05" +
+		"\u0174\xBB\x02\u078B\u078C\x05\u011A\x8E\x02\u078C\u0793\x03\x02\x02\x02" +
+		"\u078D\u078E\x07j\x02\x02\u078E\u078F\x07_\x02\x02\u078F\u0790\x05\u0174" +
+		"\xBB\x02\u0790\u0791\x05\u011A\x8E\x02\u0791\u0793\x03\x02\x02\x02\u0792" +
+		"\u0788\x03\x02\x02\x02\u0792\u078D\x03\x02\x02\x02\u0793\u0141\x03\x02" +
+		"\x02\x02\u0794\u0795\x05\u0148\xA5\x02\u0795\u0796\x07_\x02\x02\u0796" +
+		"\u0797\x05\u0174\xBB\x02\u0797\u0798\x05\u011A\x8E\x02\u0798\u079F\x03" +
+		"\x02\x02\x02\u0799\u079A\x07j\x02\x02\u079A\u079B\x07_\x02\x02\u079B\u079C" +
+		"\x05\u0174\xBB\x02\u079C\u079D\x05\u011A\x8E\x02\u079D\u079F\x03\x02\x02" +
+		"\x02\u079E\u0794\x03\x02\x02\x02\u079E\u0799\x03\x02\x02\x02\u079F\u0143" +
+		"\x03\x02\x02\x02\u07A0\u07A3\x05\u0170\xB9\x02\u07A1\u07A3\x05\u012E\x98" +
+		"\x02\u07A2\u07A0\x03\x02\x02\x02\u07A2\u07A1\x03\x02\x02\x02\u07A3\u0145" +
+		"\x03\x02\x02\x02\u07A4\u07A7\x05\u0170\xB9\x02\u07A5\u07A7\x05\u0130\x99" +
+		"\x02\u07A6\u07A4\x03\x02\x02\x02\u07A6\u07A5\x03\x02\x02\x02\u07A7\u0147" +
+		"\x03\x02\x02\x02\u07A8\u07AB\x05\u0170\xB9\x02\u07A9\u07AB\x05\u0132\x9A" +
+		"\x02\u07AA\u07A8\x03\x02\x02\x02\u07AA\u07A9\x03\x02\x02\x02\u07AB\u0149" +
+		"\x03\x02\x02\x02\u07AC\u07BC\x05\u0152\xAA\x02\u07AD\u07AE\x05\u0174\xBB" +
+		"\x02\u07AE\u07B0\x05\u0158\xAD\x02\u07AF\u07B1\x05\u0150\xA9\x02\u07B0" +
+		"\u07AF\x03\x02\x02\x02\u07B0\u07B1\x03\x02\x02\x02\u07B1\u07BD\x03\x02" +
+		"\x02\x02\u07B2\u07B4\x05\u014C\xA7\x02\u07B3\u07B2\x03\x02\x02\x02\u07B4" +
+		"\u07B5\x03\x02\x02\x02\u07B5\u07B3\x03\x02\x02\x02\u07B5\u07B6\x03\x02" +
+		"\x02\x02\u07B6\u07BA\x03\x02\x02\x02\u07B7\u07B8\x05\u0174\xBB\x02\u07B8" +
+		"\u07B9\x05\u014E\xA8\x02\u07B9\u07BB\x03\x02\x02\x02\u07BA\u07B7\x03\x02" +
+		"\x02\x02\u07BA\u07BB\x03\x02\x02\x02\u07BB\u07BD\x03\x02\x02\x02\u07BC" +
+		"\u07AD\x03\x02\x02\x02\u07BC\u07B3\x03\x02\x02\x02\u07BD\u014B\x03\x02" +
+		"\x02\x02\u07BE\u07BF\x05\xBE`\x02\u07BF\u07C1\x07T\x02\x02\u07C0\u07C2" +
+		"\x05\u011A\x8E\x02\u07C1\u07C0\x03\x02\x02\x02\u07C1\u07C2\x03\x02\x02" +
+		"\x02\u07C2\u07C3\x03\x02\x02\x02\u07C3\u07C4\x07U\x02\x02\u07C4\u014D" +
+		"\x03\x02\x02\x02\u07C5\u07C6\x07R\x02\x02\u07C6\u07CA\x05\u0174\xBB\x02" +
+		"\u07C7\u07C8\x05v<\x02\u07C8\u07C9\x05\u0174\xBB\x02\u07C9\u07CB\x03\x02" +
+		"\x02\x02\u07CA\u07C7\x03\x02\x02\x02\u07CA\u07CB\x03\x02\x02\x02\u07CB" +
+		"\u07CC\x03\x02\x02\x02\u07CC\u07CD\x07S\x02\x02\u07CD\u014F\x03\x02\x02" +
+		"\x02\u07CE\u07CF\x05\\/\x02\u07CF\u0151\x03\x02\x02\x02\u07D0\u07D6\x05" +
+		"\xBE`\x02\u07D1\u07D7\x05\x86D\x02\u07D2\u07D4\x05\xA0Q\x02\u07D3\u07D5" +
+		"\x05\u0156\xAC\x02\u07D4\u07D3\x03\x02\x02\x02\u07D4\u07D5\x03\x02\x02" +
+		"\x02\u07D5\u07D7\x03\x02\x02\x02\u07D6\u07D1\x03\x02\x02\x02\u07D6\u07D2" +
+		"\x03\x02\x02\x02\u07D7\u0153\x03\x02\x02\x02\u07D8\u07D9\x07[\x02\x02" +
+		"\u07D9\u07DA\x05\u0174\xBB\x02\u07DA\u07DB\x05X-\x02\u07DB\u07DC\x05\u0174" +
+		"\xBB\x02\u07DC\u07DD\x07Z\x02\x02\u07DD\u0155\x03\x02\x02\x02\u07DE\u07DF" +
+		"\x07[\x02\x02\u07DF\u07E2\x07Z\x02\x02\u07E0\u07E2\x05\x88E\x02\u07E1" +
+		"\u07DE\x03\x02\x02\x02\u07E1\u07E0\x03\x02\x02\x02\u07E2\u0157\x03\x02" +
+		"\x02\x02\u07E3\u07E5\x07P\x02\x02\u07E4\u07E6\x05\u015E\xB0\x02\u07E5" +
+		"\u07E4\x03\x02\x02\x02\u07E5\u07E6\x03\x02\x02\x02\u07E6\u07E8\x03\x02" +
+		"\x02\x02\u07E7\u07E9\x07W\x02\x02\u07E8\u07E7\x03\x02\x02\x02\u07E8\u07E9" +
+		"\x03\x02\x02\x02\u07E9\u07EA\x03\x02\x02\x02\u07EA\u07EB\x05\u0172\xBA" +
+		"\x02\u07EB\u0159\x03\x02\x02\x02\u07EC\u07F3\x05\u0160\xB1\x02\u07ED\u07EE" +
+		"\x07W\x02\x02\u07EE\u07EF\x05\u0174\xBB\x02\u07EF\u07F0\x05\u0162\xB2" +
+		"\x02\u07F0\u07F2\x03\x02\x02\x02\u07F1\u07ED\x03\x02\x02\x02\u07F2\u07F5" +
+		"\x03\x02\x02\x02\u07F3\u07F1\x03\x02\x02\x02\u07F3\u07F4\x03\x02\x02\x02" +
+		"\u07F4\u015B\x03\x02\x02\x02\u07F5\u07F3\x03\x02\x02\x02\u07F6\u07FD\x05" +
+		"\u0164\xB3\x02\u07F7\u07F8\x07W\x02\x02\u07F8\u07F9\x05\u0174\xBB\x02" +
+		"\u07F9\u07FA\x05\u0166\xB4\x02\u07FA\u07FC\x03\x02\x02\x02\u07FB\u07F7" +
+		"\x03\x02\x02\x02\u07FC\u07FF\x03\x02\x02\x02\u07FD\u07FB\x03\x02\x02\x02" +
+		"\u07FD\u07FE\x03\x02\x02\x02\u07FE\u015D\x03\x02\x02\x02\u07FF\u07FD\x03" +
+		"\x02\x02\x02\u0800\u0807\x05\u0166\xB4\x02\u0801\u0802\x07W\x02\x02\u0802" +
+		"\u0803\x05\u0174\xBB\x02\u0803\u0804\x05\u0166\xB4\x02\u0804\u0806\x03" +
+		"\x02\x02\x02\u0805\u0801\x03\x02\x02\x02\u0806\u0809\x03\x02\x02\x02\u0807" +
+		"\u0805\x03\x02\x02\x02\u0807\u0808\x03\x02\x02\x02\u0808\u015F\x03\x02" +
+		"\x02\x02\u0809\u0807\x03\x02\x02\x02\u080A\u080D\x05\u0112\x8A\x02\u080B" +
+		"\u080D\x05\u0142\xA2\x02\u080C\u080A\x03\x02\x02\x02\u080C\u080B\x03\x02" +
+		"\x02\x02\u080D\u0161\x03\x02\x02\x02\u080E\u0811\x05\u0112\x8A\x02\u080F" +
+		"\u0811\x05\u0140\xA1\x02\u0810\u080E\x03\x02\x02\x02\u0810\u080F\x03\x02" +
+		"\x02\x02\u0811\u0163\x03\x02\x02\x02\u0812\u0816\x05\u0112\x8A\x02\u0813" +
+		"\u0816\x05\xAEX\x02\u0814\u0816\x05\u0142\xA2\x02\u0815\u0812\x03\x02" +
+		"\x02\x02\u0815\u0813\x03\x02\x02\x02\u0815\u0814\x03\x02\x02\x02\u0816" +
+		"\u0165\x03\x02\x02\x02\u0817\u081B\x05\u0112\x8A\x02\u0818\u081B\x05\xAE" +
+		"X\x02\u0819\u081B\x05\u0140\xA1\x02\u081A\u0817\x03\x02\x02\x02\u081A" +
+		"\u0818\x03\x02\x02\x02\u081A\u0819\x03\x02\x02\x02\u081B\u0167\x03\x02" +
+		"\x02\x02\u081C\u081D\x07\x03\x02\x02\u081D\u0169\x03\x02\x02\x02\u081E" +
+		"\u081F\x07|\x02\x02\u081F\u016B\x03\x02\x02\x02\u0820\u0821\t\x16\x02" +
+		"\x02\u0821\u016D\x03\x02\x02\x02\u0822\u0823\t\x17\x02\x02\u0823\u016F" +
+		"\x03\x02\x02\x02\u0824\u0825\t\x18\x02\x02\u0825\u0171\x03\x02\x02\x02" +
+		"\u0826\u0827\x07Q\x02\x02\u0827\u0173\x03\x02\x02\x02\u0828\u082A\x07" +
+		"\x81\x02\x02\u0829\u0828\x03\x02\x02\x02\u082A\u082D\x03\x02\x02\x02\u082B" +
+		"\u0829\x03\x02\x02\x02\u082B\u082C\x03\x02\x02\x02\u082C\u0175\x03\x02" +
+		"\x02\x02\u082D\u082B\x03\x02\x02\x02\u082E\u0830\t\x19\x02\x02\u082F\u082E" +
+		"\x03\x02\x02\x02\u0830\u0831\x03\x02\x02\x02\u0831\u082F\x03\x02\x02\x02" +
+		"\u0831\u0832\x03\x02\x02\x02\u0832\u0177\x03\x02\x02\x02\xE5\u017A\u0184" +
+		"\u0188\u0192\u01A0\u01A5\u01AB\u01B2\u01B5\u01BF\u01C3\u01CA\u01D0\u01D8" +
+		"\u01DE\u01E4\u01EA\u01EC\u01F6\u0200\u0209\u021E\u022C\u023A\u0246\u024F" +
+		"\u0264\u0272\u0280\u0287\u028E\u0291\u0299\u029B\u02A1\u02A3\u02A9\u02AB" +
+		"\u02B4\u02BB\u02C2\u02C7\u02CF\u02D6\u02D9\u02E1\u02E6\u02EA\u02EF\u02F7" +
+		"\u0303\u030E\u0317\u0321\u032F\u0335\u033C\u0343\u034F\u0352\u0355\u035D" +
+		"\u0360\u0363\u036F\u0375\u0378\u037C\u0380\u0387\u038B\u0390\u039D\u03A2" +
+		"\u03A4\u03A8\u03AC\u03B7\u03C0\u03CE\u03D3\u03DB\u03DE\u03E3\u03EA\u03ED" +
+		"\u03F3\u03F6\u03FA\u03FE\u040B\u0418\u041A\u0426\u042B\u0431\u0439\u0441" +
+		"\u0444\u044C\u0455\u045D\u0464\u0470\u0478\u0480\u0487\u048D\u04A0\u04A4" +
+		"\u04AB\u04AF\u04B2\u04B9\u04BC\u04C4\u04C8\u04D0\u04D5\u04DC\u04E0\u04E4" +
+		"\u04ED\u04F8\u04FD\u0505\u0509\u050B\u0511\u0518\u0520\u0529\u052E\u0536" +
+		"\u053C\u0546\u054C\u0554\u055A\u0564\u0568\u057F\u0583\u0587\u058B\u0594" +
+		"\u059A\u05A3\u05B0\u05BF\u05C5\u05D1\u05DC\u05E6\u05EB\u05F3\u05FF\u0603" +
+		"\u0607\u060E\u0612\u0616\u061A\u062D\u0631\u0637\u063D\u0650\u066B\u066E" +
+		"\u06AE\u06BE\u06C0\u06CD\u06D3\u06D8\u06DF\u06E2\u06E7\u06EE\u06FC\u0702" +
+		"\u070A\u0715\u071B\u071F\u0722\u0726\u072B\u0730\u0736\u0745\u074D\u0752" +
+		"\u0757\u075B\u075E\u0765\u0768\u0771\u0779\u0786\u0792\u079E\u07A2\u07A6" +
+		"\u07AA\u07B0\u07B5\u07BA\u07BC\u07C1\u07CA\u07D4\u07D6\u07E1\u07E5\u07E8" +
+		"\u07F3\u07FD\u0807\u080C\u0810\u0815\u081A\u082B\u0831";
 	public static readonly _serializedATN: string = Utils.join(
 		[
 			NextflowScriptParser._serializedATNSegment0,
@@ -12348,15 +12025,12 @@ export class NextflowScriptParser extends Parser {
 }
 
 export class CompilationUnitContext extends ParserRuleContext {
+	public nls(): NlsContext {
+		return this.getRuleContext(0, NlsContext);
+	}
 	public EOF(): TerminalNode { return this.getToken(NextflowScriptParser.EOF, 0); }
-	public scriptStatement(): ScriptStatementContext[];
-	public scriptStatement(i: number): ScriptStatementContext;
-	public scriptStatement(i?: number): ScriptStatementContext | ScriptStatementContext[] {
-		if (i === undefined) {
-			return this.getRuleContexts(ScriptStatementContext);
-		} else {
-			return this.getRuleContext(i, ScriptStatementContext);
-		}
+	public scriptStatements(): ScriptStatementsContext | undefined {
+		return this.tryGetRuleContext(0, ScriptStatementsContext);
 	}
 	constructor(parent: ParserRuleContext | undefined, invokingState: number) {
 		super(parent, invokingState);
@@ -12386,18 +12060,74 @@ export class CompilationUnitContext extends ParserRuleContext {
 }
 
 
+export class ScriptStatementsContext extends ParserRuleContext {
+	public scriptStatement(): ScriptStatementContext[];
+	public scriptStatement(i: number): ScriptStatementContext;
+	public scriptStatement(i?: number): ScriptStatementContext | ScriptStatementContext[] {
+		if (i === undefined) {
+			return this.getRuleContexts(ScriptStatementContext);
+		} else {
+			return this.getRuleContext(i, ScriptStatementContext);
+		}
+	}
+	public sep(): SepContext[];
+	public sep(i: number): SepContext;
+	public sep(i?: number): SepContext | SepContext[] {
+		if (i === undefined) {
+			return this.getRuleContexts(SepContext);
+		} else {
+			return this.getRuleContext(i, SepContext);
+		}
+	}
+	constructor(parent: ParserRuleContext | undefined, invokingState: number) {
+		super(parent, invokingState);
+	}
+	// @Override
+	public get ruleIndex(): number { return NextflowScriptParser.RULE_scriptStatements; }
+	// @Override
+	public enterRule(listener: NextflowScriptParserListener): void {
+		if (listener.enterScriptStatements) {
+			listener.enterScriptStatements(this);
+		}
+	}
+	// @Override
+	public exitRule(listener: NextflowScriptParserListener): void {
+		if (listener.exitScriptStatements) {
+			listener.exitScriptStatements(this);
+		}
+	}
+	// @Override
+	public accept<Result>(visitor: NextflowScriptParserVisitor<Result>): Result {
+		if (visitor.visitScriptStatements) {
+			return visitor.visitScriptStatements(this);
+		} else {
+			return visitor.visitChildren(this);
+		}
+	}
+}
+
+
 export class ScriptStatementContext extends ParserRuleContext {
 	public includeStatement(): IncludeStatementContext | undefined {
 		return this.tryGetRuleContext(0, IncludeStatementContext);
-	}
-	public methodDeclaration(): MethodDeclarationContext | undefined {
-		return this.tryGetRuleContext(0, MethodDeclarationContext);
 	}
 	public processDef(): ProcessDefContext | undefined {
 		return this.tryGetRuleContext(0, ProcessDefContext);
 	}
 	public workflowDef(): WorkflowDefContext | undefined {
 		return this.tryGetRuleContext(0, WorkflowDefContext);
+	}
+	public importDeclaration(): ImportDeclarationContext | undefined {
+		return this.tryGetRuleContext(0, ImportDeclarationContext);
+	}
+	public typeDeclaration(): TypeDeclarationContext | undefined {
+		return this.tryGetRuleContext(0, TypeDeclarationContext);
+	}
+	public methodDeclaration(): MethodDeclarationContext | undefined {
+		return this.tryGetRuleContext(0, MethodDeclarationContext);
+	}
+	public statement(): StatementContext | undefined {
+		return this.tryGetRuleContext(0, StatementContext);
 	}
 	constructor(parent: ParserRuleContext | undefined, invokingState: number) {
 		super(parent, invokingState);
@@ -12555,16 +12285,16 @@ export class IncludeNameContext extends ParserRuleContext {
 export class ProcessDefContext extends ParserRuleContext {
 	public PROCESS(): TerminalNode { return this.getToken(NextflowScriptParser.PROCESS, 0); }
 	public Identifier(): TerminalNode { return this.getToken(NextflowScriptParser.Identifier, 0); }
+	public nls(): NlsContext {
+		return this.getRuleContext(0, NlsContext);
+	}
 	public LBRACE(): TerminalNode { return this.getToken(NextflowScriptParser.LBRACE, 0); }
 	public RBRACE(): TerminalNode { return this.getToken(NextflowScriptParser.RBRACE, 0); }
-	public processStatement(): ProcessStatementContext[];
-	public processStatement(i: number): ProcessStatementContext;
-	public processStatement(i?: number): ProcessStatementContext | ProcessStatementContext[] {
-		if (i === undefined) {
-			return this.getRuleContexts(ProcessStatementContext);
-		} else {
-			return this.getRuleContext(i, ProcessStatementContext);
-		}
+	public sep(): SepContext | undefined {
+		return this.tryGetRuleContext(0, SepContext);
+	}
+	public processStatements(): ProcessStatementsContext | undefined {
+		return this.tryGetRuleContext(0, ProcessStatementsContext);
 	}
 	constructor(parent: ParserRuleContext | undefined, invokingState: number) {
 		super(parent, invokingState);
@@ -12594,11 +12324,58 @@ export class ProcessDefContext extends ParserRuleContext {
 }
 
 
+export class ProcessStatementsContext extends ParserRuleContext {
+	public processStatement(): ProcessStatementContext[];
+	public processStatement(i: number): ProcessStatementContext;
+	public processStatement(i?: number): ProcessStatementContext | ProcessStatementContext[] {
+		if (i === undefined) {
+			return this.getRuleContexts(ProcessStatementContext);
+		} else {
+			return this.getRuleContext(i, ProcessStatementContext);
+		}
+	}
+	public sep(): SepContext[];
+	public sep(i: number): SepContext;
+	public sep(i?: number): SepContext | SepContext[] {
+		if (i === undefined) {
+			return this.getRuleContexts(SepContext);
+		} else {
+			return this.getRuleContext(i, SepContext);
+		}
+	}
+	constructor(parent: ParserRuleContext | undefined, invokingState: number) {
+		super(parent, invokingState);
+	}
+	// @Override
+	public get ruleIndex(): number { return NextflowScriptParser.RULE_processStatements; }
+	// @Override
+	public enterRule(listener: NextflowScriptParserListener): void {
+		if (listener.enterProcessStatements) {
+			listener.enterProcessStatements(this);
+		}
+	}
+	// @Override
+	public exitRule(listener: NextflowScriptParserListener): void {
+		if (listener.exitProcessStatements) {
+			listener.exitProcessStatements(this);
+		}
+	}
+	// @Override
+	public accept<Result>(visitor: NextflowScriptParserVisitor<Result>): Result {
+		if (visitor.visitProcessStatements) {
+			return visitor.visitProcessStatements(this);
+		} else {
+			return visitor.visitChildren(this);
+		}
+	}
+}
+
+
 export class ProcessStatementContext extends ParserRuleContext {
 	public processDirective(): ProcessDirectiveContext | undefined {
 		return this.tryGetRuleContext(0, ProcessDirectiveContext);
 	}
-	public INPUT(): TerminalNode | undefined { return this.tryGetToken(NextflowScriptParser.INPUT, 0); }
+	public INPUT_GUARD(): TerminalNode | undefined { return this.tryGetToken(NextflowScriptParser.INPUT_GUARD, 0); }
 	public processInput(): ProcessInputContext[];
 	public processInput(i: number): ProcessInputContext;
 	public processInput(i?: number): ProcessInputContext | ProcessInputContext[] {
@@ -12608,7 +12385,7 @@ export class ProcessStatementContext extends ParserRuleContext {
 			return this.getRuleContext(i, ProcessInputContext);
 		}
 	}
-	public OUTPUT(): TerminalNode | undefined { return this.tryGetToken(NextflowScriptParser.OUTPUT, 0); }
+	public OUTPUT_GUARD(): TerminalNode | undefined { return this.tryGetToken(NextflowScriptParser.OUTPUT_GUARD, 0); }
 	public processOutput(): ProcessOutputContext[];
 	public processOutput(i: number): ProcessOutputContext;
 	public processOutput(i?: number): ProcessOutputContext | ProcessOutputContext[] {
@@ -12618,11 +12395,11 @@ export class ProcessStatementContext extends ParserRuleContext {
 			return this.getRuleContext(i, ProcessOutputContext);
 		}
 	}
-	public WHEN(): TerminalNode | undefined { return this.tryGetToken(NextflowScriptParser.WHEN, 0); }
+	public WHEN_GUARD(): TerminalNode | undefined { return this.tryGetToken(NextflowScriptParser.WHEN_GUARD, 0); }
 	public expression(): ExpressionContext | undefined {
 		return this.tryGetRuleContext(0, ExpressionContext);
 	}
-	public SCRIPT(): TerminalNode | undefined { return this.tryGetToken(NextflowScriptParser.SCRIPT, 0); }
+	public SCRIPT_GUARD(): TerminalNode | undefined { return this.tryGetToken(NextflowScriptParser.SCRIPT_GUARD, 0); }
 	public statement(): StatementContext[];
 	public statement(i: number): StatementContext;
 	public statement(i?: number): StatementContext | StatementContext[] {
@@ -12632,9 +12409,9 @@ export class ProcessStatementContext extends ParserRuleContext {
 			return this.getRuleContext(i, StatementContext);
 		}
 	}
-	public SHELL(): TerminalNode | undefined { return this.tryGetToken(NextflowScriptParser.SHELL, 0); }
-	public EXEC(): TerminalNode | undefined { return this.tryGetToken(NextflowScriptParser.EXEC, 0); }
-	public STUB(): TerminalNode | undefined { return this.tryGetToken(NextflowScriptParser.STUB, 0); }
+	public SHELL_GUARD(): TerminalNode | undefined { return this.tryGetToken(NextflowScriptParser.SHELL_GUARD, 0); }
+	public EXEC_GUARD(): TerminalNode | undefined { return this.tryGetToken(NextflowScriptParser.EXEC_GUARD, 0); }
+	public STUB_GUARD(): TerminalNode | undefined { return this.tryGetToken(NextflowScriptParser.STUB_GUARD, 0); }
 	constructor(parent: ParserRuleContext | undefined, invokingState: number) {
 		super(parent, invokingState);
 	}
@@ -12729,11 +12506,8 @@ export class ProcessDirectiveContext extends ParserRuleContext {
 
 
 export class ProcessInputContext extends ParserRuleContext {
-	public processInputType(): ProcessInputTypeContext | undefined {
-		return this.tryGetRuleContext(0, ProcessInputTypeContext);
-	}
-	public processInputExpr(): ProcessInputExprContext | undefined {
-		return this.tryGetRuleContext(0, ProcessInputExprContext);
+	public processInputType(): ProcessInputTypeContext {
+		return this.getRuleContext(0, ProcessInputTypeContext);
 	}
 	public COMMA(): TerminalNode[];
 	public COMMA(i: number): TerminalNode;
@@ -12814,6 +12588,9 @@ export class ProcessInputTypeContext extends ParserRuleContext {
 	}
 	public processInputStdin(): ProcessInputStdinContext | undefined {
 		return this.tryGetRuleContext(0, ProcessInputStdinContext);
+	}
+	public processInputTuple(): ProcessInputTupleContext | undefined {
+		return this.tryGetRuleContext(0, ProcessInputTupleContext);
 	}
 	constructor(parent: ParserRuleContext | undefined, invokingState: number) {
 		super(parent, invokingState);
@@ -13076,38 +12853,6 @@ export class ProcessInputStdinContext extends ParserRuleContext {
 }
 
 
-export class ProcessInputExprContext extends ParserRuleContext {
-	public processInputTuple(): ProcessInputTupleContext {
-		return this.getRuleContext(0, ProcessInputTupleContext);
-	}
-	constructor(parent: ParserRuleContext | undefined, invokingState: number) {
-		super(parent, invokingState);
-	}
-	// @Override
-	public get ruleIndex(): number { return NextflowScriptParser.RULE_processInputExpr; }
-	// @Override
-	public enterRule(listener: NextflowScriptParserListener): void {
-		if (listener.enterProcessInputExpr) {
-			listener.enterProcessInputExpr(this);
-		}
-	}
-	// @Override
-	public exitRule(listener: NextflowScriptParserListener): void {
-		if (listener.exitProcessInputExpr) {
-			listener.exitProcessInputExpr(this);
-		}
-	}
-	// @Override
-	public accept<Result>(visitor: NextflowScriptParserVisitor<Result>): Result {
-		if (visitor.visitProcessInputExpr) {
-			return visitor.visitProcessInputExpr(this);
-		} else {
-			return visitor.visitChildren(this);
-		}
-	}
-}
-
-
 export class ProcessInputTupleContext extends ParserRuleContext {
 	public TUPLE(): TerminalNode { return this.getToken(NextflowScriptParser.TUPLE, 0); }
 	public LPAREN(): TerminalNode { return this.getToken(NextflowScriptParser.LPAREN, 0); }
@@ -13159,11 +12904,8 @@ export class ProcessInputTupleContext extends ParserRuleContext {
 
 
 export class ProcessOutputContext extends ParserRuleContext {
-	public processOutputType(): ProcessOutputTypeContext | undefined {
-		return this.tryGetRuleContext(0, ProcessOutputTypeContext);
-	}
-	public processOutputExpr(): ProcessOutputExprContext | undefined {
-		return this.tryGetRuleContext(0, ProcessOutputExprContext);
+	public processOutputType(): ProcessOutputTypeContext {
+		return this.getRuleContext(0, ProcessOutputTypeContext);
 	}
 	public COMMA(): TerminalNode[];
 	public COMMA(i: number): TerminalNode;
@@ -13244,6 +12986,9 @@ export class ProcessOutputTypeContext extends ParserRuleContext {
 	}
 	public processOutputStdout(): ProcessOutputStdoutContext | undefined {
 		return this.tryGetRuleContext(0, ProcessOutputStdoutContext);
+	}
+	public processOutputTuple(): ProcessOutputTupleContext | undefined {
+		return this.tryGetRuleContext(0, ProcessOutputTupleContext);
 	}
 	constructor(parent: ParserRuleContext | undefined, invokingState: number) {
 		super(parent, invokingState);
@@ -13506,38 +13251,6 @@ export class ProcessOutputStdoutContext extends ParserRuleContext {
 }
 
 
-export class ProcessOutputExprContext extends ParserRuleContext {
-	public processOutputTuple(): ProcessOutputTupleContext {
-		return this.getRuleContext(0, ProcessOutputTupleContext);
-	}
-	constructor(parent: ParserRuleContext | undefined, invokingState: number) {
-		super(parent, invokingState);
-	}
-	// @Override
-	public get ruleIndex(): number { return NextflowScriptParser.RULE_processOutputExpr; }
-	// @Override
-	public enterRule(listener: NextflowScriptParserListener): void {
-		if (listener.enterProcessOutputExpr) {
-			listener.enterProcessOutputExpr(this);
-		}
-	}
-	// @Override
-	public exitRule(listener: NextflowScriptParserListener): void {
-		if (listener.exitProcessOutputExpr) {
-			listener.exitProcessOutputExpr(this);
-		}
-	}
-	// @Override
-	public accept<Result>(visitor: NextflowScriptParserVisitor<Result>): Result {
-		if (visitor.visitProcessOutputExpr) {
-			return visitor.visitProcessOutputExpr(this);
-		} else {
-			return visitor.visitChildren(this);
-		}
-	}
-}
-
-
 export class ProcessOutputTupleContext extends ParserRuleContext {
 	public TUPLE(): TerminalNode { return this.getToken(NextflowScriptParser.TUPLE, 0); }
 	public LPAREN(): TerminalNode { return this.getToken(NextflowScriptParser.LPAREN, 0); }
@@ -13634,9 +13347,9 @@ export class WorkflowDefContext extends ParserRuleContext {
 
 
 export class WorkflowBodyContext extends ParserRuleContext {
-	public TAKE(): TerminalNode | undefined { return this.tryGetToken(NextflowScriptParser.TAKE, 0); }
-	public MAIN(): TerminalNode | undefined { return this.tryGetToken(NextflowScriptParser.MAIN, 0); }
-	public EMIT(): TerminalNode | undefined { return this.tryGetToken(NextflowScriptParser.EMIT, 0); }
+	public TAKE_GUARD(): TerminalNode | undefined { return this.tryGetToken(NextflowScriptParser.TAKE_GUARD, 0); }
+	public MAIN_GUARD(): TerminalNode | undefined { return this.tryGetToken(NextflowScriptParser.MAIN_GUARD, 0); }
+	public EMIT_GUARD(): TerminalNode | undefined { return this.tryGetToken(NextflowScriptParser.EMIT_GUARD, 0); }
 	public Identifier(): TerminalNode[];
 	public Identifier(i: number): TerminalNode;
 	public Identifier(i?: number): TerminalNode | TerminalNode[] {
@@ -13685,53 +13398,6 @@ export class WorkflowBodyContext extends ParserRuleContext {
 	public accept<Result>(visitor: NextflowScriptParserVisitor<Result>): Result {
 		if (visitor.visitWorkflowBody) {
 			return visitor.visitWorkflowBody(this);
-		} else {
-			return visitor.visitChildren(this);
-		}
-	}
-}
-
-
-export class ScriptStatementsContext extends ParserRuleContext {
-	public scriptStatement(): ScriptStatementContext[];
-	public scriptStatement(i: number): ScriptStatementContext;
-	public scriptStatement(i?: number): ScriptStatementContext | ScriptStatementContext[] {
-		if (i === undefined) {
-			return this.getRuleContexts(ScriptStatementContext);
-		} else {
-			return this.getRuleContext(i, ScriptStatementContext);
-		}
-	}
-	public sep(): SepContext[];
-	public sep(i: number): SepContext;
-	public sep(i?: number): SepContext | SepContext[] {
-		if (i === undefined) {
-			return this.getRuleContexts(SepContext);
-		} else {
-			return this.getRuleContext(i, SepContext);
-		}
-	}
-	constructor(parent: ParserRuleContext | undefined, invokingState: number) {
-		super(parent, invokingState);
-	}
-	// @Override
-	public get ruleIndex(): number { return NextflowScriptParser.RULE_scriptStatements; }
-	// @Override
-	public enterRule(listener: NextflowScriptParserListener): void {
-		if (listener.enterScriptStatements) {
-			listener.enterScriptStatements(this);
-		}
-	}
-	// @Override
-	public exitRule(listener: NextflowScriptParserListener): void {
-		if (listener.exitScriptStatements) {
-			listener.exitScriptStatements(this);
-		}
-	}
-	// @Override
-	public accept<Result>(visitor: NextflowScriptParserVisitor<Result>): Result {
-		if (visitor.visitScriptStatements) {
-			return visitor.visitScriptStatements(this);
 		} else {
 			return visitor.visitChildren(this);
 		}
@@ -14073,8 +13739,6 @@ export class ClassOrInterfaceModifierContext extends ParserRuleContext {
 	public PRIVATE(): TerminalNode | undefined { return this.tryGetToken(NextflowScriptParser.PRIVATE, 0); }
 	public STATIC(): TerminalNode | undefined { return this.tryGetToken(NextflowScriptParser.STATIC, 0); }
 	public ABSTRACT(): TerminalNode | undefined { return this.tryGetToken(NextflowScriptParser.ABSTRACT, 0); }
-	public SEALED(): TerminalNode | undefined { return this.tryGetToken(NextflowScriptParser.SEALED, 0); }
-	public NON_SEALED(): TerminalNode | undefined { return this.tryGetToken(NextflowScriptParser.NON_SEALED, 0); }
 	public FINAL(): TerminalNode | undefined { return this.tryGetToken(NextflowScriptParser.FINAL, 0); }
 	public STRICTFP(): TerminalNode | undefined { return this.tryGetToken(NextflowScriptParser.STRICTFP, 0); }
 	public DEFAULT(): TerminalNode | undefined { return this.tryGetToken(NextflowScriptParser.DEFAULT, 0); }
@@ -14289,9 +13953,6 @@ export class TypeParametersContext extends ParserRuleContext {
 
 
 export class TypeParameterContext extends ParserRuleContext {
-	public annotationsOpt(): AnnotationsOptContext {
-		return this.getRuleContext(0, AnnotationsOptContext);
-	}
 	public className(): ClassNameContext {
 		return this.getRuleContext(0, ClassNameContext);
 	}
@@ -14446,7 +14107,6 @@ export class ClassDeclarationContext extends ParserRuleContext {
 	public t: number | undefined;
 	public _scs!: TypeListContext;
 	public _is!: TypeListContext;
-	public _ps!: TypeListContext;
 	public identifier(): IdentifierContext {
 		return this.getRuleContext(0, IdentifierContext);
 	}
@@ -14467,16 +14127,11 @@ export class ClassDeclarationContext extends ParserRuleContext {
 	public ENUM(): TerminalNode | undefined { return this.tryGetToken(NextflowScriptParser.ENUM, 0); }
 	public AT(): TerminalNode | undefined { return this.tryGetToken(NextflowScriptParser.AT, 0); }
 	public TRAIT(): TerminalNode | undefined { return this.tryGetToken(NextflowScriptParser.TRAIT, 0); }
-	public RECORD(): TerminalNode | undefined { return this.tryGetToken(NextflowScriptParser.RECORD, 0); }
 	public typeParameters(): TypeParametersContext | undefined {
 		return this.tryGetRuleContext(0, TypeParametersContext);
 	}
-	public formalParameters(): FormalParametersContext | undefined {
-		return this.tryGetRuleContext(0, FormalParametersContext);
-	}
 	public EXTENDS(): TerminalNode | undefined { return this.tryGetToken(NextflowScriptParser.EXTENDS, 0); }
 	public IMPLEMENTS(): TerminalNode | undefined { return this.tryGetToken(NextflowScriptParser.IMPLEMENTS, 0); }
-	public PERMITS(): TerminalNode | undefined { return this.tryGetToken(NextflowScriptParser.PERMITS, 0); }
 	public typeList(): TypeListContext[];
 	public typeList(i: number): TypeListContext;
 	public typeList(i?: number): TypeListContext | TypeListContext[] {
@@ -14730,9 +14385,6 @@ export class MemberDeclarationContext extends ParserRuleContext {
 	public classDeclaration(): ClassDeclarationContext | undefined {
 		return this.tryGetRuleContext(0, ClassDeclarationContext);
 	}
-	public compactConstructorDeclaration(): CompactConstructorDeclarationContext | undefined {
-		return this.tryGetRuleContext(0, CompactConstructorDeclarationContext);
-	}
 	constructor(parent: ParserRuleContext | undefined, invokingState: number, t: number) {
 		super(parent, invokingState);
 		this.t = t;
@@ -14823,44 +14475,6 @@ export class MethodDeclarationContext extends ParserRuleContext {
 	public accept<Result>(visitor: NextflowScriptParserVisitor<Result>): Result {
 		if (visitor.visitMethodDeclaration) {
 			return visitor.visitMethodDeclaration(this);
-		} else {
-			return visitor.visitChildren(this);
-		}
-	}
-}
-
-
-export class CompactConstructorDeclarationContext extends ParserRuleContext {
-	public methodName(): MethodNameContext {
-		return this.getRuleContext(0, MethodNameContext);
-	}
-	public nls(): NlsContext {
-		return this.getRuleContext(0, NlsContext);
-	}
-	public methodBody(): MethodBodyContext {
-		return this.getRuleContext(0, MethodBodyContext);
-	}
-	constructor(parent: ParserRuleContext | undefined, invokingState: number) {
-		super(parent, invokingState);
-	}
-	// @Override
-	public get ruleIndex(): number { return NextflowScriptParser.RULE_compactConstructorDeclaration; }
-	// @Override
-	public enterRule(listener: NextflowScriptParserListener): void {
-		if (listener.enterCompactConstructorDeclaration) {
-			listener.enterCompactConstructorDeclaration(this);
-		}
-	}
-	// @Override
-	public exitRule(listener: NextflowScriptParserListener): void {
-		if (listener.exitCompactConstructorDeclaration) {
-			listener.exitCompactConstructorDeclaration(this);
-		}
-	}
-	// @Override
-	public accept<Result>(visitor: NextflowScriptParserVisitor<Result>): Result {
-		if (visitor.visitCompactConstructorDeclaration) {
-			return visitor.visitCompactConstructorDeclaration(this);
 		} else {
 			return visitor.visitChildren(this);
 		}
@@ -17579,39 +17193,6 @@ export class BreakStatementContext extends ParserRuleContext {
 }
 
 
-export class YieldStatementContext extends ParserRuleContext {
-	public YIELD(): TerminalNode { return this.getToken(NextflowScriptParser.YIELD, 0); }
-	public expression(): ExpressionContext {
-		return this.getRuleContext(0, ExpressionContext);
-	}
-	constructor(parent: ParserRuleContext | undefined, invokingState: number) {
-		super(parent, invokingState);
-	}
-	// @Override
-	public get ruleIndex(): number { return NextflowScriptParser.RULE_yieldStatement; }
-	// @Override
-	public enterRule(listener: NextflowScriptParserListener): void {
-		if (listener.enterYieldStatement) {
-			listener.enterYieldStatement(this);
-		}
-	}
-	// @Override
-	public exitRule(listener: NextflowScriptParserListener): void {
-		if (listener.exitYieldStatement) {
-			listener.exitYieldStatement(this);
-		}
-	}
-	// @Override
-	public accept<Result>(visitor: NextflowScriptParserVisitor<Result>): Result {
-		if (visitor.visitYieldStatement) {
-			return visitor.visitYieldStatement(this);
-		} else {
-			return visitor.visitChildren(this);
-		}
-	}
-}
-
-
 export class TryCatchStatementContext extends ParserRuleContext {
 	public TRY(): TerminalNode { return this.getToken(NextflowScriptParser.TRY, 0); }
 	public nls(): NlsContext[];
@@ -17996,35 +17577,6 @@ export class ContinueStmtAltContext extends StatementContext {
 	public accept<Result>(visitor: NextflowScriptParserVisitor<Result>): Result {
 		if (visitor.visitContinueStmtAlt) {
 			return visitor.visitContinueStmtAlt(this);
-		} else {
-			return visitor.visitChildren(this);
-		}
-	}
-}
-export class YieldStmtAltContext extends StatementContext {
-	public yieldStatement(): YieldStatementContext {
-		return this.getRuleContext(0, YieldStatementContext);
-	}
-	constructor(ctx: StatementContext) {
-		super(ctx.parent, ctx.invokingState);
-		this.copyFrom(ctx);
-	}
-	// @Override
-	public enterRule(listener: NextflowScriptParserListener): void {
-		if (listener.enterYieldStmtAlt) {
-			listener.enterYieldStmtAlt(this);
-		}
-	}
-	// @Override
-	public exitRule(listener: NextflowScriptParserListener): void {
-		if (listener.exitYieldStmtAlt) {
-			listener.exitYieldStmtAlt(this);
-		}
-	}
-	// @Override
-	public accept<Result>(visitor: NextflowScriptParserVisitor<Result>): Result {
-		if (visitor.visitYieldStmtAlt) {
-			return visitor.visitYieldStmtAlt(this);
 		} else {
 			return visitor.visitChildren(this);
 		}
@@ -18839,15 +18391,6 @@ export class ExpressionListContext extends ParserRuleContext {
 			return this.getToken(NextflowScriptParser.COMMA, i);
 		}
 	}
-	public nls(): NlsContext[];
-	public nls(i: number): NlsContext;
-	public nls(i?: number): NlsContext | NlsContext[] {
-		if (i === undefined) {
-			return this.getRuleContexts(NlsContext);
-		} else {
-			return this.getRuleContext(i, NlsContext);
-		}
-	}
 	constructor(parent: ParserRuleContext | undefined, invokingState: number, canSpread: boolean) {
 		super(parent, invokingState);
 		this.canSpread = canSpread;
@@ -19023,146 +18566,6 @@ export class PostfixExpressionContext extends ParserRuleContext {
 }
 
 
-export class SwitchExpressionContext extends ParserRuleContext {
-	public SWITCH(): TerminalNode { return this.getToken(NextflowScriptParser.SWITCH, 0); }
-	public expressionInPar(): ExpressionInParContext {
-		return this.getRuleContext(0, ExpressionInParContext);
-	}
-	public nls(): NlsContext[];
-	public nls(i: number): NlsContext;
-	public nls(i?: number): NlsContext | NlsContext[] {
-		if (i === undefined) {
-			return this.getRuleContexts(NlsContext);
-		} else {
-			return this.getRuleContext(i, NlsContext);
-		}
-	}
-	public LBRACE(): TerminalNode { return this.getToken(NextflowScriptParser.LBRACE, 0); }
-	public RBRACE(): TerminalNode { return this.getToken(NextflowScriptParser.RBRACE, 0); }
-	public switchBlockStatementExpressionGroup(): SwitchBlockStatementExpressionGroupContext[];
-	public switchBlockStatementExpressionGroup(i: number): SwitchBlockStatementExpressionGroupContext;
-	public switchBlockStatementExpressionGroup(i?: number): SwitchBlockStatementExpressionGroupContext | SwitchBlockStatementExpressionGroupContext[] {
-		if (i === undefined) {
-			return this.getRuleContexts(SwitchBlockStatementExpressionGroupContext);
-		} else {
-			return this.getRuleContext(i, SwitchBlockStatementExpressionGroupContext);
-		}
-	}
-	constructor(parent: ParserRuleContext | undefined, invokingState: number) {
-		super(parent, invokingState);
-	}
-	// @Override
-	public get ruleIndex(): number { return NextflowScriptParser.RULE_switchExpression; }
-	// @Override
-	public enterRule(listener: NextflowScriptParserListener): void {
-		if (listener.enterSwitchExpression) {
-			listener.enterSwitchExpression(this);
-		}
-	}
-	// @Override
-	public exitRule(listener: NextflowScriptParserListener): void {
-		if (listener.exitSwitchExpression) {
-			listener.exitSwitchExpression(this);
-		}
-	}
-	// @Override
-	public accept<Result>(visitor: NextflowScriptParserVisitor<Result>): Result {
-		if (visitor.visitSwitchExpression) {
-			return visitor.visitSwitchExpression(this);
-		} else {
-			return visitor.visitChildren(this);
-		}
-	}
-}
-
-
-export class SwitchBlockStatementExpressionGroupContext extends ParserRuleContext {
-	public blockStatements(): BlockStatementsContext {
-		return this.getRuleContext(0, BlockStatementsContext);
-	}
-	public switchExpressionLabel(): SwitchExpressionLabelContext[];
-	public switchExpressionLabel(i: number): SwitchExpressionLabelContext;
-	public switchExpressionLabel(i?: number): SwitchExpressionLabelContext | SwitchExpressionLabelContext[] {
-		if (i === undefined) {
-			return this.getRuleContexts(SwitchExpressionLabelContext);
-		} else {
-			return this.getRuleContext(i, SwitchExpressionLabelContext);
-		}
-	}
-	public nls(): NlsContext[];
-	public nls(i: number): NlsContext;
-	public nls(i?: number): NlsContext | NlsContext[] {
-		if (i === undefined) {
-			return this.getRuleContexts(NlsContext);
-		} else {
-			return this.getRuleContext(i, NlsContext);
-		}
-	}
-	constructor(parent: ParserRuleContext | undefined, invokingState: number) {
-		super(parent, invokingState);
-	}
-	// @Override
-	public get ruleIndex(): number { return NextflowScriptParser.RULE_switchBlockStatementExpressionGroup; }
-	// @Override
-	public enterRule(listener: NextflowScriptParserListener): void {
-		if (listener.enterSwitchBlockStatementExpressionGroup) {
-			listener.enterSwitchBlockStatementExpressionGroup(this);
-		}
-	}
-	// @Override
-	public exitRule(listener: NextflowScriptParserListener): void {
-		if (listener.exitSwitchBlockStatementExpressionGroup) {
-			listener.exitSwitchBlockStatementExpressionGroup(this);
-		}
-	}
-	// @Override
-	public accept<Result>(visitor: NextflowScriptParserVisitor<Result>): Result {
-		if (visitor.visitSwitchBlockStatementExpressionGroup) {
-			return visitor.visitSwitchBlockStatementExpressionGroup(this);
-		} else {
-			return visitor.visitChildren(this);
-		}
-	}
-}
-
-
-export class SwitchExpressionLabelContext extends ParserRuleContext {
-	public _ac!: Token;
-	public CASE(): TerminalNode | undefined { return this.tryGetToken(NextflowScriptParser.CASE, 0); }
-	public expressionList(): ExpressionListContext | undefined {
-		return this.tryGetRuleContext(0, ExpressionListContext);
-	}
-	public DEFAULT(): TerminalNode | undefined { return this.tryGetToken(NextflowScriptParser.DEFAULT, 0); }
-	public ARROW(): TerminalNode | undefined { return this.tryGetToken(NextflowScriptParser.ARROW, 0); }
-	public COLON(): TerminalNode | undefined { return this.tryGetToken(NextflowScriptParser.COLON, 0); }
-	constructor(parent: ParserRuleContext | undefined, invokingState: number) {
-		super(parent, invokingState);
-	}
-	// @Override
-	public get ruleIndex(): number { return NextflowScriptParser.RULE_switchExpressionLabel; }
-	// @Override
-	public enterRule(listener: NextflowScriptParserListener): void {
-		if (listener.enterSwitchExpressionLabel) {
-			listener.enterSwitchExpressionLabel(this);
-		}
-	}
-	// @Override
-	public exitRule(listener: NextflowScriptParserListener): void {
-		if (listener.exitSwitchExpressionLabel) {
-			listener.exitSwitchExpressionLabel(this);
-		}
-	}
-	// @Override
-	public accept<Result>(visitor: NextflowScriptParserVisitor<Result>): Result {
-		if (visitor.visitSwitchExpressionLabel) {
-			return visitor.visitSwitchExpressionLabel(this);
-		} else {
-			return visitor.visitChildren(this);
-		}
-	}
-}
-
-
 export class ExpressionContext extends ParserRuleContext {
 	constructor(parent: ParserRuleContext | undefined, invokingState: number) {
 		super(parent, invokingState);
@@ -19229,35 +18632,6 @@ export class PostfixExprAltContext extends ExpressionContext {
 	public accept<Result>(visitor: NextflowScriptParserVisitor<Result>): Result {
 		if (visitor.visitPostfixExprAlt) {
 			return visitor.visitPostfixExprAlt(this);
-		} else {
-			return visitor.visitChildren(this);
-		}
-	}
-}
-export class SwitchExprAltContext extends ExpressionContext {
-	public switchExpression(): SwitchExpressionContext {
-		return this.getRuleContext(0, SwitchExpressionContext);
-	}
-	constructor(ctx: ExpressionContext) {
-		super(ctx.parent, ctx.invokingState);
-		this.copyFrom(ctx);
-	}
-	// @Override
-	public enterRule(listener: NextflowScriptParserListener): void {
-		if (listener.enterSwitchExprAlt) {
-			listener.enterSwitchExprAlt(this);
-		}
-	}
-	// @Override
-	public exitRule(listener: NextflowScriptParserListener): void {
-		if (listener.exitSwitchExprAlt) {
-			listener.exitSwitchExprAlt(this);
-		}
-	}
-	// @Override
-	public accept<Result>(visitor: NextflowScriptParserVisitor<Result>): Result {
-		if (visitor.visitSwitchExprAlt) {
-			return visitor.visitSwitchExprAlt(this);
 		} else {
 			return visitor.visitChildren(this);
 		}
@@ -19510,9 +18884,7 @@ export class ShiftExprAltContext extends ExpressionContext {
 		}
 	}
 	public RANGE_INCLUSIVE(): TerminalNode | undefined { return this.tryGetToken(NextflowScriptParser.RANGE_INCLUSIVE, 0); }
-	public RANGE_EXCLUSIVE_LEFT(): TerminalNode | undefined { return this.tryGetToken(NextflowScriptParser.RANGE_EXCLUSIVE_LEFT, 0); }
-	public RANGE_EXCLUSIVE_RIGHT(): TerminalNode | undefined { return this.tryGetToken(NextflowScriptParser.RANGE_EXCLUSIVE_RIGHT, 0); }
-	public RANGE_EXCLUSIVE_FULL(): TerminalNode | undefined { return this.tryGetToken(NextflowScriptParser.RANGE_EXCLUSIVE_FULL, 0); }
+	public RANGE_EXCLUSIVE(): TerminalNode | undefined { return this.tryGetToken(NextflowScriptParser.RANGE_EXCLUSIVE, 0); }
 	constructor(ctx: ExpressionContext) {
 		super(ctx.parent, ctx.invokingState);
 		this.copyFrom(ctx);
@@ -20373,9 +19745,9 @@ export class DynamicMemberNameContext extends ParserRuleContext {
 
 
 export class IndexPropertyArgsContext extends ParserRuleContext {
+	public LBRACK(): TerminalNode { return this.getToken(NextflowScriptParser.LBRACK, 0); }
 	public RBRACK(): TerminalNode { return this.getToken(NextflowScriptParser.RBRACK, 0); }
-	public SAFE_INDEX(): TerminalNode | undefined { return this.tryGetToken(NextflowScriptParser.SAFE_INDEX, 0); }
-	public LBRACK(): TerminalNode | undefined { return this.tryGetToken(NextflowScriptParser.LBRACK, 0); }
+	public QUESTION(): TerminalNode | undefined { return this.tryGetToken(NextflowScriptParser.QUESTION, 0); }
 	public expressionList(): ExpressionListContext | undefined {
 		return this.tryGetRuleContext(0, ExpressionListContext);
 	}
@@ -20408,13 +19780,13 @@ export class IndexPropertyArgsContext extends ParserRuleContext {
 
 
 export class NamedPropertyArgsContext extends ParserRuleContext {
+	public LBRACK(): TerminalNode { return this.getToken(NextflowScriptParser.LBRACK, 0); }
 	public RBRACK(): TerminalNode { return this.getToken(NextflowScriptParser.RBRACK, 0); }
-	public SAFE_INDEX(): TerminalNode | undefined { return this.tryGetToken(NextflowScriptParser.SAFE_INDEX, 0); }
-	public LBRACK(): TerminalNode | undefined { return this.tryGetToken(NextflowScriptParser.LBRACK, 0); }
 	public mapEntryList(): MapEntryListContext | undefined {
 		return this.tryGetRuleContext(0, MapEntryListContext);
 	}
 	public COLON(): TerminalNode | undefined { return this.tryGetToken(NextflowScriptParser.COLON, 0); }
+	public QUESTION(): TerminalNode | undefined { return this.tryGetToken(NextflowScriptParser.QUESTION, 0); }
 	constructor(parent: ParserRuleContext | undefined, invokingState: number) {
 		super(parent, invokingState);
 	}
@@ -21312,6 +20684,8 @@ export class ArgumentsContext extends ParserRuleContext {
 
 
 
+
+
 export class EnhancedArgumentListInParContext extends ParserRuleContext {
 	public enhancedArgumentListElement(): EnhancedArgumentListElementContext[];
 	public enhancedArgumentListElement(i: number): EnhancedArgumentListElementContext;
@@ -21366,6 +20740,8 @@ export class EnhancedArgumentListInParContext extends ParserRuleContext {
 		}
 	}
 }
+
+
 
 
 
@@ -21477,9 +20853,6 @@ export class IdentifierContext extends ParserRuleContext {
 	public IN(): TerminalNode | undefined { return this.tryGetToken(NextflowScriptParser.IN, 0); }
 	public TRAIT(): TerminalNode | undefined { return this.tryGetToken(NextflowScriptParser.TRAIT, 0); }
 	public AS(): TerminalNode | undefined { return this.tryGetToken(NextflowScriptParser.AS, 0); }
-	public YIELD(): TerminalNode | undefined { return this.tryGetToken(NextflowScriptParser.YIELD, 0); }
-	public PERMITS(): TerminalNode | undefined { return this.tryGetToken(NextflowScriptParser.PERMITS, 0); }
-	public RECORD(): TerminalNode | undefined { return this.tryGetToken(NextflowScriptParser.RECORD, 0); }
 	constructor(parent: ParserRuleContext | undefined, invokingState: number) {
 		super(parent, invokingState);
 	}
@@ -21567,12 +20940,8 @@ export class KeywordsContext extends ParserRuleContext {
 	public INTERFACE(): TerminalNode | undefined { return this.tryGetToken(NextflowScriptParser.INTERFACE, 0); }
 	public NATIVE(): TerminalNode | undefined { return this.tryGetToken(NextflowScriptParser.NATIVE, 0); }
 	public NEW(): TerminalNode | undefined { return this.tryGetToken(NextflowScriptParser.NEW, 0); }
-	public NON_SEALED(): TerminalNode | undefined { return this.tryGetToken(NextflowScriptParser.NON_SEALED, 0); }
 	public PACKAGE(): TerminalNode | undefined { return this.tryGetToken(NextflowScriptParser.PACKAGE, 0); }
-	public PERMITS(): TerminalNode | undefined { return this.tryGetToken(NextflowScriptParser.PERMITS, 0); }
-	public RECORD(): TerminalNode | undefined { return this.tryGetToken(NextflowScriptParser.RECORD, 0); }
 	public RETURN(): TerminalNode | undefined { return this.tryGetToken(NextflowScriptParser.RETURN, 0); }
-	public SEALED(): TerminalNode | undefined { return this.tryGetToken(NextflowScriptParser.SEALED, 0); }
 	public STATIC(): TerminalNode | undefined { return this.tryGetToken(NextflowScriptParser.STATIC, 0); }
 	public STRICTFP(): TerminalNode | undefined { return this.tryGetToken(NextflowScriptParser.STRICTFP, 0); }
 	public SUPER(): TerminalNode | undefined { return this.tryGetToken(NextflowScriptParser.SUPER, 0); }
@@ -21588,7 +20957,6 @@ export class KeywordsContext extends ParserRuleContext {
 	public VAR(): TerminalNode | undefined { return this.tryGetToken(NextflowScriptParser.VAR, 0); }
 	public VOLATILE(): TerminalNode | undefined { return this.tryGetToken(NextflowScriptParser.VOLATILE, 0); }
 	public WHILE(): TerminalNode | undefined { return this.tryGetToken(NextflowScriptParser.WHILE, 0); }
-	public YIELD(): TerminalNode | undefined { return this.tryGetToken(NextflowScriptParser.YIELD, 0); }
 	public NullLiteral(): TerminalNode | undefined { return this.tryGetToken(NextflowScriptParser.NullLiteral, 0); }
 	public BooleanLiteral(): TerminalNode | undefined { return this.tryGetToken(NextflowScriptParser.BooleanLiteral, 0); }
 	public BuiltInPrimitiveType(): TerminalNode | undefined { return this.tryGetToken(NextflowScriptParser.BuiltInPrimitiveType, 0); }

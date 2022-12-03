@@ -1,5 +1,7 @@
 node_modules
-.vsix
+.antlr
 .vscode
-server/out
+.vscode-test
+.vsix
 client/out
+server/out

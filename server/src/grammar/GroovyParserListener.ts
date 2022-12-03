@@ -1,6 +1,4 @@
-// Generated from src/grammar/GroovyParser.g4 by ANTLR 4.9.0-SNAPSHOT
-
-
+// Generated from server/src/grammar/GroovyParser.g4 by ANTLR 4.9.0-SNAPSHOT
 
 
 import { ParseTreeListener } from "antlr4ts/tree/ParseTreeListener";
@@ -23,7 +21,6 @@ import { BooleanLiteralAltContext } from "./GroovyParser";
 import { NullLiteralAltContext } from "./GroovyParser";
 import { CastExprAltContext } from "./GroovyParser";
 import { PostfixExprAltContext } from "./GroovyParser";
-import { SwitchExprAltContext } from "./GroovyParser";
 import { UnaryNotExprAltContext } from "./GroovyParser";
 import { PowerExprAltContext } from "./GroovyParser";
 import { UnaryAddExprAltContext } from "./GroovyParser";
@@ -50,7 +47,6 @@ import { ReturnStmtAltContext } from "./GroovyParser";
 import { ThrowStmtAltContext } from "./GroovyParser";
 import { BreakStmtAltContext } from "./GroovyParser";
 import { ContinueStmtAltContext } from "./GroovyParser";
-import { YieldStmtAltContext } from "./GroovyParser";
 import { LabeledStmtAltContext } from "./GroovyParser";
 import { AssertStmtAltContext } from "./GroovyParser";
 import { LocalVariableDeclarationStmtAltContext } from "./GroovyParser";
@@ -86,7 +82,6 @@ import { EnumConstantContext } from "./GroovyParser";
 import { ClassBodyDeclarationContext } from "./GroovyParser";
 import { MemberDeclarationContext } from "./GroovyParser";
 import { MethodDeclarationContext } from "./GroovyParser";
-import { CompactConstructorDeclarationContext } from "./GroovyParser";
 import { MethodNameContext } from "./GroovyParser";
 import { ReturnTypeContext } from "./GroovyParser";
 import { FieldDeclarationContext } from "./GroovyParser";
@@ -147,7 +142,6 @@ import { SwitchStatementContext } from "./GroovyParser";
 import { LoopStatementContext } from "./GroovyParser";
 import { ContinueStatementContext } from "./GroovyParser";
 import { BreakStatementContext } from "./GroovyParser";
-import { YieldStatementContext } from "./GroovyParser";
 import { TryCatchStatementContext } from "./GroovyParser";
 import { AssertStatementContext } from "./GroovyParser";
 import { StatementContext } from "./GroovyParser";
@@ -172,9 +166,6 @@ import { ExpressionListElementContext } from "./GroovyParser";
 import { EnhancedStatementExpressionContext } from "./GroovyParser";
 import { StatementExpressionContext } from "./GroovyParser";
 import { PostfixExpressionContext } from "./GroovyParser";
-import { SwitchExpressionContext } from "./GroovyParser";
-import { SwitchBlockStatementExpressionGroupContext } from "./GroovyParser";
-import { SwitchExpressionLabelContext } from "./GroovyParser";
 import { ExpressionContext } from "./GroovyParser";
 import { CommandExpressionContext } from "./GroovyParser";
 import { CommandArgumentContext } from "./GroovyParser";
@@ -321,26 +312,26 @@ export interface GroovyParserListener extends ParseTreeListener {
 
 	/**
 	 * Enter a parse tree produced by the `listPrmrAlt`
-	 * labeled alternative in `GroovyParser.primary`.
+	 * labeled alternative in `GroovyParser.namedPropertyArgPrimary`.
 	 * @param ctx the parse tree
 	 */
 	enterListPrmrAlt?: (ctx: ListPrmrAltContext) => void;
 	/**
 	 * Exit a parse tree produced by the `listPrmrAlt`
-	 * labeled alternative in `GroovyParser.primary`.
+	 * labeled alternative in `GroovyParser.namedPropertyArgPrimary`.
 	 * @param ctx the parse tree
 	 */
 	exitListPrmrAlt?: (ctx: ListPrmrAltContext) => void;
 
 	/**
 	 * Enter a parse tree produced by the `mapPrmrAlt`
-	 * labeled alternative in `GroovyParser.primary`.
+	 * labeled alternative in `GroovyParser.namedPropertyArgPrimary`.
 	 * @param ctx the parse tree
 	 */
 	enterMapPrmrAlt?: (ctx: MapPrmrAltContext) => void;
 	/**
 	 * Exit a parse tree produced by the `mapPrmrAlt`
-	 * labeled alternative in `GroovyParser.primary`.
+	 * labeled alternative in `GroovyParser.namedPropertyArgPrimary`.
 	 * @param ctx the parse tree
 	 */
 	exitMapPrmrAlt?: (ctx: MapPrmrAltContext) => void;
@@ -448,19 +439,6 @@ export interface GroovyParserListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	exitPostfixExprAlt?: (ctx: PostfixExprAltContext) => void;
-
-	/**
-	 * Enter a parse tree produced by the `switchExprAlt`
-	 * labeled alternative in `GroovyParser.expression`.
-	 * @param ctx the parse tree
-	 */
-	enterSwitchExprAlt?: (ctx: SwitchExprAltContext) => void;
-	/**
-	 * Exit a parse tree produced by the `switchExprAlt`
-	 * labeled alternative in `GroovyParser.expression`.
-	 * @param ctx the parse tree
-	 */
-	exitSwitchExprAlt?: (ctx: SwitchExprAltContext) => void;
 
 	/**
 	 * Enter a parse tree produced by the `unaryNotExprAlt`
@@ -799,19 +777,6 @@ export interface GroovyParserListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	exitContinueStmtAlt?: (ctx: ContinueStmtAltContext) => void;
-
-	/**
-	 * Enter a parse tree produced by the `yieldStmtAlt`
-	 * labeled alternative in `GroovyParser.statement`.
-	 * @param ctx the parse tree
-	 */
-	enterYieldStmtAlt?: (ctx: YieldStmtAltContext) => void;
-	/**
-	 * Exit a parse tree produced by the `yieldStmtAlt`
-	 * labeled alternative in `GroovyParser.statement`.
-	 * @param ctx the parse tree
-	 */
-	exitYieldStmtAlt?: (ctx: YieldStmtAltContext) => void;
 
 	/**
 	 * Enter a parse tree produced by the `labeledStmtAlt`
@@ -1215,17 +1180,6 @@ export interface GroovyParserListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	exitMethodDeclaration?: (ctx: MethodDeclarationContext) => void;
-
-	/**
-	 * Enter a parse tree produced by `GroovyParser.compactConstructorDeclaration`.
-	 * @param ctx the parse tree
-	 */
-	enterCompactConstructorDeclaration?: (ctx: CompactConstructorDeclarationContext) => void;
-	/**
-	 * Exit a parse tree produced by `GroovyParser.compactConstructorDeclaration`.
-	 * @param ctx the parse tree
-	 */
-	exitCompactConstructorDeclaration?: (ctx: CompactConstructorDeclarationContext) => void;
 
 	/**
 	 * Enter a parse tree produced by `GroovyParser.methodName`.
@@ -1888,17 +1842,6 @@ export interface GroovyParserListener extends ParseTreeListener {
 	exitBreakStatement?: (ctx: BreakStatementContext) => void;
 
 	/**
-	 * Enter a parse tree produced by `GroovyParser.yieldStatement`.
-	 * @param ctx the parse tree
-	 */
-	enterYieldStatement?: (ctx: YieldStatementContext) => void;
-	/**
-	 * Exit a parse tree produced by `GroovyParser.yieldStatement`.
-	 * @param ctx the parse tree
-	 */
-	exitYieldStatement?: (ctx: YieldStatementContext) => void;
-
-	/**
 	 * Enter a parse tree produced by `GroovyParser.tryCatchStatement`.
 	 * @param ctx the parse tree
 	 */
@@ -2161,39 +2104,6 @@ export interface GroovyParserListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	exitPostfixExpression?: (ctx: PostfixExpressionContext) => void;
-
-	/**
-	 * Enter a parse tree produced by `GroovyParser.switchExpression`.
-	 * @param ctx the parse tree
-	 */
-	enterSwitchExpression?: (ctx: SwitchExpressionContext) => void;
-	/**
-	 * Exit a parse tree produced by `GroovyParser.switchExpression`.
-	 * @param ctx the parse tree
-	 */
-	exitSwitchExpression?: (ctx: SwitchExpressionContext) => void;
-
-	/**
-	 * Enter a parse tree produced by `GroovyParser.switchBlockStatementExpressionGroup`.
-	 * @param ctx the parse tree
-	 */
-	enterSwitchBlockStatementExpressionGroup?: (ctx: SwitchBlockStatementExpressionGroupContext) => void;
-	/**
-	 * Exit a parse tree produced by `GroovyParser.switchBlockStatementExpressionGroup`.
-	 * @param ctx the parse tree
-	 */
-	exitSwitchBlockStatementExpressionGroup?: (ctx: SwitchBlockStatementExpressionGroupContext) => void;
-
-	/**
-	 * Enter a parse tree produced by `GroovyParser.switchExpressionLabel`.
-	 * @param ctx the parse tree
-	 */
-	enterSwitchExpressionLabel?: (ctx: SwitchExpressionLabelContext) => void;
-	/**
-	 * Exit a parse tree produced by `GroovyParser.switchExpressionLabel`.
-	 * @param ctx the parse tree
-	 */
-	exitSwitchExpressionLabel?: (ctx: SwitchExpressionLabelContext) => void;
 
 	/**
 	 * Enter a parse tree produced by `GroovyParser.expression`.

@@ -1,9 +1,7 @@
-// Generated from src/grammar/NextflowScriptParser.g4 by ANTLR 4.9.0-SNAPSHOT
+// Generated from server/src/grammar/NextflowScriptParser.g4 by ANTLR 4.9.0-SNAPSHOT
 
 
 import { GroovyParser } from './GroovyParser';
-
-
 
 
 import { ParseTreeListener } from "antlr4ts/tree/ParseTreeListener";
@@ -26,7 +24,6 @@ import { BooleanLiteralAltContext } from "./NextflowScriptParser";
 import { NullLiteralAltContext } from "./NextflowScriptParser";
 import { CastExprAltContext } from "./NextflowScriptParser";
 import { PostfixExprAltContext } from "./NextflowScriptParser";
-import { SwitchExprAltContext } from "./NextflowScriptParser";
 import { UnaryNotExprAltContext } from "./NextflowScriptParser";
 import { PowerExprAltContext } from "./NextflowScriptParser";
 import { UnaryAddExprAltContext } from "./NextflowScriptParser";
@@ -53,7 +50,6 @@ import { ReturnStmtAltContext } from "./NextflowScriptParser";
 import { ThrowStmtAltContext } from "./NextflowScriptParser";
 import { BreakStmtAltContext } from "./NextflowScriptParser";
 import { ContinueStmtAltContext } from "./NextflowScriptParser";
-import { YieldStmtAltContext } from "./NextflowScriptParser";
 import { LabeledStmtAltContext } from "./NextflowScriptParser";
 import { AssertStmtAltContext } from "./NextflowScriptParser";
 import { LocalVariableDeclarationStmtAltContext } from "./NextflowScriptParser";
@@ -64,11 +60,13 @@ import { ForStmtAltContext } from "./NextflowScriptParser";
 import { WhileStmtAltContext } from "./NextflowScriptParser";
 import { DoWhileStmtAltContext } from "./NextflowScriptParser";
 import { CompilationUnitContext } from "./NextflowScriptParser";
+import { ScriptStatementsContext } from "./NextflowScriptParser";
 import { ScriptStatementContext } from "./NextflowScriptParser";
 import { IncludeStatementContext } from "./NextflowScriptParser";
 import { IncludeNamesContext } from "./NextflowScriptParser";
 import { IncludeNameContext } from "./NextflowScriptParser";
 import { ProcessDefContext } from "./NextflowScriptParser";
+import { ProcessStatementsContext } from "./NextflowScriptParser";
 import { ProcessStatementContext } from "./NextflowScriptParser";
 import { ProcessDirectiveContext } from "./NextflowScriptParser";
 import { ProcessInputContext } from "./NextflowScriptParser";
@@ -78,7 +76,6 @@ import { ProcessInputEnvContext } from "./NextflowScriptParser";
 import { ProcessInputFileContext } from "./NextflowScriptParser";
 import { ProcessInputPathContext } from "./NextflowScriptParser";
 import { ProcessInputStdinContext } from "./NextflowScriptParser";
-import { ProcessInputExprContext } from "./NextflowScriptParser";
 import { ProcessInputTupleContext } from "./NextflowScriptParser";
 import { ProcessOutputContext } from "./NextflowScriptParser";
 import { ProcessOutputTypeContext } from "./NextflowScriptParser";
@@ -87,11 +84,9 @@ import { ProcessOutputEnvContext } from "./NextflowScriptParser";
 import { ProcessOutputFileContext } from "./NextflowScriptParser";
 import { ProcessOutputPathContext } from "./NextflowScriptParser";
 import { ProcessOutputStdoutContext } from "./NextflowScriptParser";
-import { ProcessOutputExprContext } from "./NextflowScriptParser";
 import { ProcessOutputTupleContext } from "./NextflowScriptParser";
 import { WorkflowDefContext } from "./NextflowScriptParser";
 import { WorkflowBodyContext } from "./NextflowScriptParser";
-import { ScriptStatementsContext } from "./NextflowScriptParser";
 import { PackageDeclarationContext } from "./NextflowScriptParser";
 import { ImportDeclarationContext } from "./NextflowScriptParser";
 import { TypeDeclarationContext } from "./NextflowScriptParser";
@@ -115,7 +110,6 @@ import { EnumConstantContext } from "./NextflowScriptParser";
 import { ClassBodyDeclarationContext } from "./NextflowScriptParser";
 import { MemberDeclarationContext } from "./NextflowScriptParser";
 import { MethodDeclarationContext } from "./NextflowScriptParser";
-import { CompactConstructorDeclarationContext } from "./NextflowScriptParser";
 import { MethodNameContext } from "./NextflowScriptParser";
 import { ReturnTypeContext } from "./NextflowScriptParser";
 import { FieldDeclarationContext } from "./NextflowScriptParser";
@@ -176,7 +170,6 @@ import { SwitchStatementContext } from "./NextflowScriptParser";
 import { LoopStatementContext } from "./NextflowScriptParser";
 import { ContinueStatementContext } from "./NextflowScriptParser";
 import { BreakStatementContext } from "./NextflowScriptParser";
-import { YieldStatementContext } from "./NextflowScriptParser";
 import { TryCatchStatementContext } from "./NextflowScriptParser";
 import { AssertStatementContext } from "./NextflowScriptParser";
 import { StatementContext } from "./NextflowScriptParser";
@@ -201,9 +194,6 @@ import { ExpressionListElementContext } from "./NextflowScriptParser";
 import { EnhancedStatementExpressionContext } from "./NextflowScriptParser";
 import { StatementExpressionContext } from "./NextflowScriptParser";
 import { PostfixExpressionContext } from "./NextflowScriptParser";
-import { SwitchExpressionContext } from "./NextflowScriptParser";
-import { SwitchBlockStatementExpressionGroupContext } from "./NextflowScriptParser";
-import { SwitchExpressionLabelContext } from "./NextflowScriptParser";
 import { ExpressionContext } from "./NextflowScriptParser";
 import { CommandExpressionContext } from "./NextflowScriptParser";
 import { CommandArgumentContext } from "./NextflowScriptParser";
@@ -350,26 +340,26 @@ export interface NextflowScriptParserListener extends ParseTreeListener {
 
 	/**
 	 * Enter a parse tree produced by the `listPrmrAlt`
-	 * labeled alternative in `NextflowScriptParser.primary`.
+	 * labeled alternative in `NextflowScriptParser.namedPropertyArgPrimary`.
 	 * @param ctx the parse tree
 	 */
 	enterListPrmrAlt?: (ctx: ListPrmrAltContext) => void;
 	/**
 	 * Exit a parse tree produced by the `listPrmrAlt`
-	 * labeled alternative in `NextflowScriptParser.primary`.
+	 * labeled alternative in `NextflowScriptParser.namedPropertyArgPrimary`.
 	 * @param ctx the parse tree
 	 */
 	exitListPrmrAlt?: (ctx: ListPrmrAltContext) => void;
 
 	/**
 	 * Enter a parse tree produced by the `mapPrmrAlt`
-	 * labeled alternative in `NextflowScriptParser.primary`.
+	 * labeled alternative in `NextflowScriptParser.namedPropertyArgPrimary`.
 	 * @param ctx the parse tree
 	 */
 	enterMapPrmrAlt?: (ctx: MapPrmrAltContext) => void;
 	/**
 	 * Exit a parse tree produced by the `mapPrmrAlt`
-	 * labeled alternative in `NextflowScriptParser.primary`.
+	 * labeled alternative in `NextflowScriptParser.namedPropertyArgPrimary`.
 	 * @param ctx the parse tree
 	 */
 	exitMapPrmrAlt?: (ctx: MapPrmrAltContext) => void;
@@ -477,19 +467,6 @@ export interface NextflowScriptParserListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	exitPostfixExprAlt?: (ctx: PostfixExprAltContext) => void;
-
-	/**
-	 * Enter a parse tree produced by the `switchExprAlt`
-	 * labeled alternative in `NextflowScriptParser.expression`.
-	 * @param ctx the parse tree
-	 */
-	enterSwitchExprAlt?: (ctx: SwitchExprAltContext) => void;
-	/**
-	 * Exit a parse tree produced by the `switchExprAlt`
-	 * labeled alternative in `NextflowScriptParser.expression`.
-	 * @param ctx the parse tree
-	 */
-	exitSwitchExprAlt?: (ctx: SwitchExprAltContext) => void;
 
 	/**
 	 * Enter a parse tree produced by the `unaryNotExprAlt`
@@ -830,19 +807,6 @@ export interface NextflowScriptParserListener extends ParseTreeListener {
 	exitContinueStmtAlt?: (ctx: ContinueStmtAltContext) => void;
 
 	/**
-	 * Enter a parse tree produced by the `yieldStmtAlt`
-	 * labeled alternative in `NextflowScriptParser.statement`.
-	 * @param ctx the parse tree
-	 */
-	enterYieldStmtAlt?: (ctx: YieldStmtAltContext) => void;
-	/**
-	 * Exit a parse tree produced by the `yieldStmtAlt`
-	 * labeled alternative in `NextflowScriptParser.statement`.
-	 * @param ctx the parse tree
-	 */
-	exitYieldStmtAlt?: (ctx: YieldStmtAltContext) => void;
-
-	/**
 	 * Enter a parse tree produced by the `labeledStmtAlt`
 	 * labeled alternative in `NextflowScriptParser.statement`.
 	 * @param ctx the parse tree
@@ -971,6 +935,17 @@ export interface NextflowScriptParserListener extends ParseTreeListener {
 	exitCompilationUnit?: (ctx: CompilationUnitContext) => void;
 
 	/**
+	 * Enter a parse tree produced by `NextflowScriptParser.scriptStatements`.
+	 * @param ctx the parse tree
+	 */
+	enterScriptStatements?: (ctx: ScriptStatementsContext) => void;
+	/**
+	 * Exit a parse tree produced by `NextflowScriptParser.scriptStatements`.
+	 * @param ctx the parse tree
+	 */
+	exitScriptStatements?: (ctx: ScriptStatementsContext) => void;
+
+	/**
 	 * Enter a parse tree produced by `NextflowScriptParser.scriptStatement`.
 	 * @param ctx the parse tree
 	 */
@@ -1024,6 +999,17 @@ export interface NextflowScriptParserListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	exitProcessDef?: (ctx: ProcessDefContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `NextflowScriptParser.processStatements`.
+	 * @param ctx the parse tree
+	 */
+	enterProcessStatements?: (ctx: ProcessStatementsContext) => void;
+	/**
+	 * Exit a parse tree produced by `NextflowScriptParser.processStatements`.
+	 * @param ctx the parse tree
+	 */
+	exitProcessStatements?: (ctx: ProcessStatementsContext) => void;
 
 	/**
 	 * Enter a parse tree produced by `NextflowScriptParser.processStatement`.
@@ -1125,17 +1111,6 @@ export interface NextflowScriptParserListener extends ParseTreeListener {
 	exitProcessInputStdin?: (ctx: ProcessInputStdinContext) => void;
 
 	/**
-	 * Enter a parse tree produced by `NextflowScriptParser.processInputExpr`.
-	 * @param ctx the parse tree
-	 */
-	enterProcessInputExpr?: (ctx: ProcessInputExprContext) => void;
-	/**
-	 * Exit a parse tree produced by `NextflowScriptParser.processInputExpr`.
-	 * @param ctx the parse tree
-	 */
-	exitProcessInputExpr?: (ctx: ProcessInputExprContext) => void;
-
-	/**
 	 * Enter a parse tree produced by `NextflowScriptParser.processInputTuple`.
 	 * @param ctx the parse tree
 	 */
@@ -1224,17 +1199,6 @@ export interface NextflowScriptParserListener extends ParseTreeListener {
 	exitProcessOutputStdout?: (ctx: ProcessOutputStdoutContext) => void;
 
 	/**
-	 * Enter a parse tree produced by `NextflowScriptParser.processOutputExpr`.
-	 * @param ctx the parse tree
-	 */
-	enterProcessOutputExpr?: (ctx: ProcessOutputExprContext) => void;
-	/**
-	 * Exit a parse tree produced by `NextflowScriptParser.processOutputExpr`.
-	 * @param ctx the parse tree
-	 */
-	exitProcessOutputExpr?: (ctx: ProcessOutputExprContext) => void;
-
-	/**
 	 * Enter a parse tree produced by `NextflowScriptParser.processOutputTuple`.
 	 * @param ctx the parse tree
 	 */
@@ -1266,17 +1230,6 @@ export interface NextflowScriptParserListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	exitWorkflowBody?: (ctx: WorkflowBodyContext) => void;
-
-	/**
-	 * Enter a parse tree produced by `NextflowScriptParser.scriptStatements`.
-	 * @param ctx the parse tree
-	 */
-	enterScriptStatements?: (ctx: ScriptStatementsContext) => void;
-	/**
-	 * Exit a parse tree produced by `NextflowScriptParser.scriptStatements`.
-	 * @param ctx the parse tree
-	 */
-	exitScriptStatements?: (ctx: ScriptStatementsContext) => void;
 
 	/**
 	 * Enter a parse tree produced by `NextflowScriptParser.packageDeclaration`.
@@ -1530,17 +1483,6 @@ export interface NextflowScriptParserListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	exitMethodDeclaration?: (ctx: MethodDeclarationContext) => void;
-
-	/**
-	 * Enter a parse tree produced by `NextflowScriptParser.compactConstructorDeclaration`.
-	 * @param ctx the parse tree
-	 */
-	enterCompactConstructorDeclaration?: (ctx: CompactConstructorDeclarationContext) => void;
-	/**
-	 * Exit a parse tree produced by `NextflowScriptParser.compactConstructorDeclaration`.
-	 * @param ctx the parse tree
-	 */
-	exitCompactConstructorDeclaration?: (ctx: CompactConstructorDeclarationContext) => void;
 
 	/**
 	 * Enter a parse tree produced by `NextflowScriptParser.methodName`.
@@ -2203,17 +2145,6 @@ export interface NextflowScriptParserListener extends ParseTreeListener {
 	exitBreakStatement?: (ctx: BreakStatementContext) => void;
 
 	/**
-	 * Enter a parse tree produced by `NextflowScriptParser.yieldStatement`.
-	 * @param ctx the parse tree
-	 */
-	enterYieldStatement?: (ctx: YieldStatementContext) => void;
-	/**
-	 * Exit a parse tree produced by `NextflowScriptParser.yieldStatement`.
-	 * @param ctx the parse tree
-	 */
-	exitYieldStatement?: (ctx: YieldStatementContext) => void;
-
-	/**
 	 * Enter a parse tree produced by `NextflowScriptParser.tryCatchStatement`.
 	 * @param ctx the parse tree
 	 */
@@ -2476,39 +2407,6 @@ export interface NextflowScriptParserListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	exitPostfixExpression?: (ctx: PostfixExpressionContext) => void;
-
-	/**
-	 * Enter a parse tree produced by `NextflowScriptParser.switchExpression`.
-	 * @param ctx the parse tree
-	 */
-	enterSwitchExpression?: (ctx: SwitchExpressionContext) => void;
-	/**
-	 * Exit a parse tree produced by `NextflowScriptParser.switchExpression`.
-	 * @param ctx the parse tree
-	 */
-	exitSwitchExpression?: (ctx: SwitchExpressionContext) => void;
-
-	/**
-	 * Enter a parse tree produced by `NextflowScriptParser.switchBlockStatementExpressionGroup`.
-	 * @param ctx the parse tree
-	 */
-	enterSwitchBlockStatementExpressionGroup?: (ctx: SwitchBlockStatementExpressionGroupContext) => void;
-	/**
-	 * Exit a parse tree produced by `NextflowScriptParser.switchBlockStatementExpressionGroup`.
-	 * @param ctx the parse tree
-	 */
-	exitSwitchBlockStatementExpressionGroup?: (ctx: SwitchBlockStatementExpressionGroupContext) => void;
-
-	/**
-	 * Enter a parse tree produced by `NextflowScriptParser.switchExpressionLabel`.
-	 * @param ctx the parse tree
-	 */
-	enterSwitchExpressionLabel?: (ctx: SwitchExpressionLabelContext) => void;
-	/**
-	 * Exit a parse tree produced by `NextflowScriptParser.switchExpressionLabel`.
-	 * @param ctx the parse tree
-	 */
-	exitSwitchExpressionLabel?: (ctx: SwitchExpressionLabelContext) => void;
 
 	/**
 	 * Enter a parse tree produced by `NextflowScriptParser.expression`.
