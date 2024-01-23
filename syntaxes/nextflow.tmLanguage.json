@@ -141,7 +141,7 @@
 			"end": "}",
 			"patterns": [{
 				"include": "#workflow-body"
-			}]	
+			}]
 		},
 		"workflow-body": {
 			"patterns": [

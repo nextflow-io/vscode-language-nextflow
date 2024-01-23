@@ -1,0 +1,24 @@
+{
+	"$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+	"name": "Nextflow Injection",
+	"scopeName": "nextflow-bash.injection",
+    "injectionSelector": "L:source.nextflow",
+	"patterns": [
+		{
+            "begin": "(\"\"\")",
+            "end": "(\"\"\")",
+            "patterns": [
+                {
+                    "begin": "(^|\\G)(\\s*)(.*)",
+                    "end": "^\\s*}}}\\s*$",
+                    "contentName": "meta.embedded.block.bash",
+                    "patterns": [
+                        {
+                            "include": "source.bash"
+                        }
+                    ]
+                }
+            ]
+        }
+	]
+}

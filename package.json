@@ -48,10 +48,19 @@
             "language": "nextflow-config",
             "scopeName": "source.nextflow-config",
             "path": "./syntaxes/nextflow-config.tmLanguage.json"
-        },  
+        },
         {
             "scopeName": "source.nextflow-groovy",
             "path": "./syntaxes/groovy.tmLanguage.json"
+        },
+        {
+            "path": "./syntaxes/bash-injection.json",
+            "scopeName": "nextflow-bash.injection",
+            "injectTo": ["source.nextflow"],
+            "embeddedLanguages": {
+                "source.bash": "bash",
+                "meta.embedded.block.bash": "bash"
+            }
         }],
         "snippets": [
             {
