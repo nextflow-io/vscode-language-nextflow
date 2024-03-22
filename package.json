@@ -29,40 +29,52 @@
         "Programming Languages"
     ],
     "contributes": {
-        "languages": [{
-            "id": "nextflow",
-            "aliases": ["Nextflow", "nextflow"],
-            "extensions": [".nf", ".nf.test"],
-            "firstLine": "^#!.*\\bnextflow\\b",
-            "configuration": "./language-configuration.json",
-            "icon": {
-                "light": "./images/nextflow-icon-128x128.png",
-                "dark": "./images/nextflow-icon-128x128.png"
+        "languages": [
+            {
+                "id": "nextflow",
+                "aliases": [
+                    "Nextflow",
+                    "nextflow"
+                ],
+                "extensions": [
+                    ".nf",
+                    ".nf.test"
+                ],
+                "firstLine": "^#!.*\\bnextflow\\b",
+                "configuration": "./language-configuration.json",
+                "icon": {
+                    "light": "./images/nextflow-icon-128x128.png",
+                    "dark": "./images/nextflow-icon-128x128.png"
                 }
-        },
-        {
-            "id": "nextflow-config",
-            "extensions": [".config"],
-            "configuration": "./language-configuration.json",
-            "icon": {
-                "light": "./images/nextflow-icon-128x128-light.png",
-                "dark": "./images/nextflow-icon-128x128-dark.png"
+            },
+            {
+                "id": "nextflow-config",
+                "extensions": [
+                    ".config"
+                ],
+                "configuration": "./language-configuration.json",
+                "icon": {
+                    "light": "./images/nextflow-icon-128x128-light.png",
+                    "dark": "./images/nextflow-icon-128x128-dark.png"
                 }
-        }],
-        "grammars": [{
-            "language": "nextflow",
-            "scopeName": "source.nextflow",
-            "path": "./syntaxes/nextflow.tmLanguage.json"
-        },
-        {
-            "language": "nextflow-config",
-            "scopeName": "source.nextflow-config",
-            "path": "./syntaxes/nextflow-config.tmLanguage.json"
-        },
-        {
-            "scopeName": "source.nextflow-groovy",
-            "path": "./syntaxes/groovy.tmLanguage.json"
-        }],
+            }
+        ],
+        "grammars": [
+            {
+                "language": "nextflow",
+                "scopeName": "source.nextflow",
+                "path": "./syntaxes/nextflow.tmLanguage.json"
+            },
+            {
+                "language": "nextflow-config",
+                "scopeName": "source.nextflow-config",
+                "path": "./syntaxes/nextflow-config.tmLanguage.json"
+            },
+            {
+                "scopeName": "source.nextflow-groovy",
+                "path": "./syntaxes/groovy.tmLanguage.json"
+            }
+        ],
         "snippets": [
             {
                 "language": "nextflow",
