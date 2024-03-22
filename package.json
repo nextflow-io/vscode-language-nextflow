@@ -8,10 +8,20 @@
         "type": "git",
         "url": "https://github.com/nextflow-io/vscode-language-nextflow.git"
     },
-    "homepage": "https://github.com/nextflow-io/vscode-language-nextflow/blob/master/README.md",
+    "homepage": "https://nextflow.io",
     "bugs": {
         "url": "https://github.com/nextflow-io/vscode-language-nextflow/issues"
     },
+    "icon": "images/nextflow-icon-128x128.png",
+    "keywords": [
+        "bioinformatics",
+        "nextflow",
+        "nf-core",
+        "pipelines",
+        "computational biology",
+        "scientific",
+        "workflows"
+    ],
     "engines": {
         "vscode": "^1.19.0"
     },
