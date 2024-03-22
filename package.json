@@ -35,8 +35,8 @@
             "extensions": [".config"],
             "configuration": "./language-configuration.json",
             "icon": {
-                "light": "./images/nextflow-icon-128x128_grayscale.png",
-                "dark": "./images/nextflow-icon-128x128_grayscale.png"
+                "light": "./images/nextflow-icon-128x128-light.png",
+                "dark": "./images/nextflow-icon-128x128-dark.png"
                 }
         }],
         "grammars": [{
