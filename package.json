@@ -2,16 +2,26 @@
     "name": "nextflow",
     "displayName": "Nextflow",
     "description": "Nextflow language support",
-    "version": "0.1.1",
+    "version": "0.3.2",
     "publisher": "nextflow",
     "repository": {
         "type": "git",
         "url": "https://github.com/nextflow-io/vscode-language-nextflow.git"
     },
-    "homepage": "https://github.com/nextflow-io/vscode-language-nextflow/blob/master/README.md",
+    "homepage": "https://nextflow.io",
     "bugs": {
         "url": "https://github.com/nextflow-io/vscode-language-nextflow/issues"
     },
+    "icon": "images/nextflow-icon-128x128.png",
+    "keywords": [
+        "bioinformatics",
+        "nextflow",
+        "nf-core",
+        "pipelines",
+        "computational biology",
+        "scientific",
+        "workflows"
+    ],
     "engines": {
         "vscode": "^1.19.0"
     },
@@ -19,40 +29,52 @@
         "Programming Languages"
     ],
     "contributes": {
-        "languages": [{
-            "id": "nextflow",
-            "aliases": ["Nextflow", "nextflow"],
-            "extensions": [".nf", ".nf.test"],
-            "firstLine": "^#!.*\\bnextflow\\b",
-            "configuration": "./language-configuration.json",
-            "icon": {
-                "light": "./images/nextflow-icon-128x128.png",
-                "dark": "./images/nextflow-icon-128x128.png"
+        "languages": [
+            {
+                "id": "nextflow",
+                "aliases": [
+                    "Nextflow",
+                    "nextflow"
+                ],
+                "extensions": [
+                    ".nf",
+                    ".nf.test"
+                ],
+                "firstLine": "^#!.*\\bnextflow\\b",
+                "configuration": "./language-configuration.json",
+                "icon": {
+                    "light": "./images/nextflow-icon-128x128.png",
+                    "dark": "./images/nextflow-icon-128x128.png"
                 }
-        },
-        {
-            "id": "nextflow-config",
-            "extensions": [".config"],
-            "configuration": "./language-configuration.json",
-            "icon": {
-                "light": "./images/nextflow-icon-128x128_grayscale.png",
-                "dark": "./images/nextflow-icon-128x128_grayscale.png"
+            },
+            {
+                "id": "nextflow-config",
+                "extensions": [
+                    ".config"
+                ],
+                "configuration": "./language-configuration.json",
+                "icon": {
+                    "light": "./images/nextflow-icon-128x128-light.png",
+                    "dark": "./images/nextflow-icon-128x128-dark.png"
                 }
-        }],
-        "grammars": [{
-            "language": "nextflow",
-            "scopeName": "source.nextflow",
-            "path": "./syntaxes/nextflow.tmLanguage.json"
-        },
-        {
-            "language": "nextflow-config",
-            "scopeName": "source.nextflow-config",
-            "path": "./syntaxes/nextflow-config.tmLanguage.json"
-        },  
-        {
-            "scopeName": "source.nextflow-groovy",
-            "path": "./syntaxes/groovy.tmLanguage.json"
-        }],
+            }
+        ],
+        "grammars": [
+            {
+                "language": "nextflow",
+                "scopeName": "source.nextflow",
+                "path": "./syntaxes/nextflow.tmLanguage.json"
+            },
+            {
+                "language": "nextflow-config",
+                "scopeName": "source.nextflow-config",
+                "path": "./syntaxes/nextflow-config.tmLanguage.json"
+            },
+            {
+                "scopeName": "source.nextflow-groovy",
+                "path": "./syntaxes/groovy.tmLanguage.json"
+            }
+        ],
         "snippets": [
             {
                 "language": "nextflow",
