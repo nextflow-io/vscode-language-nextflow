@@ -5,12 +5,15 @@
 	"keyEquivalent": "^~N",
 	"patterns": [
 		{
-			"include": "#nfl-rules"
+			"include": "#nextflow"
 		}
 	],
 	"repository": {
-		"nfl-rules": {
+		"nextflow": {
 			"patterns": [
+				{
+					"include": "#function-def"
+				},
 				{
 					"include": "#process-def"
 				},
@@ -18,33 +21,117 @@
 					"include": "#workflow-def"
 				},
 				{
-					"include": "#code-block"
-				},
-				{
 					"include": "#include-statement"
 				},
 				{
-					"include": "#implicit-variables"
+					"include": "source.nextflow-groovy"
+				}
+			]
+		},
+		"function-def": {
+			"applyEndPatternLast": 1,
+			"begin": "(?x:(?<=;|^|{)(?=\\s*\n  (?:\n  (?:def)\n  |\n  (?:\n  (?:\n  (?:boolean|byte|char|short|int|float|long|double)\n  |\n  (?:@?(?:[a-zA-Z]\\w*\\.)*[A-Z]+\\w*) # object type\n  )\n  [\\[\\]]*\n  (?:<.*>)?\n  ) \n  n  )\n  \\s+\n  ([^=]+\\s+)?\\w+\\s*\\(\n  ))",
+			"end": "}|(?=[^{])",
+			"name": "meta.definition.method.groovy",
+			"patterns": [
+				{
+					"include": "#function-body"
+				}
+			]
+		},
+		"function-body": {
+			"patterns": [
+				{
+					"match": "\\s"
 				},
 				{
-					"comment": "method call and parens",
-					"begin": "(\\w*\\()",
+					"begin": "(?=(?:\\w|<)[^\\(]*\\s+(?:[\\w$]|<)+\\s*\\()",
+					"end": "(?=[\\w$]+\\s*\\()",
+					"name": "meta.method.return-type.java",
+					"patterns": [
+						{
+							"include": "source.nextflow-groovy#types"
+						}
+					]
+				},
+				{
+					"begin": "([\\w$]+)\\s*\\(",
 					"beginCaptures": {
 						"1": {
-							"patterns": [{"include": "source.nextflow-groovy"}]
+							"name": "entity.name.function.java"
 						}
 					},
 					"end": "\\)",
-					"patterns": [{"include": "#nfl-rules"}]
+					"name": "meta.definition.method.signature.java",
+					"patterns": [
+						{
+							"begin": "(?=[^)])",
+							"end": "(?=\\))",
+							"name": "meta.method.parameters.groovy",
+							"patterns": [
+								{
+									"begin": "(?=[^,)])",
+									"end": "(?=,|\\))",
+									"name": "meta.method.parameter.groovy",
+									"patterns": [
+										{
+											"match": ",",
+											"name": "punctuation.definition.separator.groovy"
+										},
+										{
+											"begin": "=",
+											"beginCaptures": {
+												"0": {
+													"name": "keyword.operator.assignment.groovy"
+												}
+											},
+											"end": "(?=,|\\))",
+											"name": "meta.parameter.default.groovy",
+											"patterns": [
+												{
+													"include": "source.nextflow-groovy#groovy-code"
+												}
+											]
+										},
+										{
+											"include": "source.nextflow-groovy#parameters"
+										}
+									]
+								}
+							]
+						}
+					]
 				},
 				{
-					"comment": "braces",
+					"begin": "(?=<)",
+					"end": "(?=\\s)",
+					"name": "meta.method.paramerised-type.groovy",
+					"patterns": [
+						{
+							"begin": "<",
+							"end": ">",
+							"name": "storage.type.parameters.groovy",
+							"patterns": [
+								{
+									"include": "source.nextflow-groovy#types"
+								},
+								{
+									"match": ",",
+									"name": "punctuation.definition.seperator.groovy"
+								}
+							]
+						}
+					]
+				},
+				{
 					"begin": "{",
-					"end": "}",
-					"patterns": [{"include": "#nfl-rules"}]
-				},
-				{
-					"include": "source.nextflow-groovy"
+					"end": "(?=})",
+					"name": "meta.method.body.java",
+					"patterns": [
+						{
+							"include": "source.nextflow-groovy#groovy-code"
+						}
+					]
 				}
 			]
 		},
@@ -67,63 +154,15 @@
 		"process-body": {
 			"patterns": [
 				{
-					"name": "entity.name.function.nextflow",
-					"match": "(?:accelerator|afterScript|beforeScript|cache|cpus|conda|container|containerOptions|clusterOptions|debug|disk|echo|errorStrategy|executor|ext|label|machineType|maxErrors|maxForks|maxRetries|memory|module|penv|pod|publishDir|queue|resourceLabels|scratch|stageInMode|stageOutMode|storeDir|tag|time)\\b"
-				},
-				{
 					"name": "constant.block.nextflow",
 					"match": "(?:input|output|when|script|shell|exec):"
 				},
 				{
 					"name": "entity.name.function.nextflow",
-					"match": "\\b(tuple|set|path|file|val|stdout)(\\(|\\s)"
+					"match": "\\b(tuple|path|file|val|stdin|stdout)(\\(|\\s)"
 				},
 				{
-					"include": "#implicit-variables"
-				},
-				{
-					"comment": "method call and parens",
-					"begin": "(\\w*\\()",
-					"beginCaptures": {
-						"1": {
-							"patterns": [{"include": "source.nextflow-groovy"}]
-						}
-					},
-					"end": "\\)",
-					"patterns": [{"include": "#process-body"}]
-				},
-				{
-					"comment": "braces",
-					"begin": "{",
-					"end": "}",
-					"patterns": [{"include": "#process-body"}]
-				},
-				{
-					"include": "source.nextflow-groovy#comments"
-				},
-				{
-					"include": "source.nextflow-groovy#support-functions"
-				},
-				{
-					"include": "source.nextflow-groovy#keyword"
-				},
-				{
-					"include": "source.nextflow-groovy#values"
-				},
-				{
-					"include": "source.nextflow-groovy#anonymous-classes-and-new"
-				},
-				{
-					"include": "source.nextflow-groovy#types"
-				},
-				{
-					"include": "source.nextflow-groovy#parens"
-				},
-				{
-					"include": "source.nextflow-groovy#closures"
-				},
-				{
-					"include": "source.nextflow-groovy#braces"
+					"include": "source.nextflow-groovy#groovy"
 				}
 			]
 		},
@@ -146,82 +185,13 @@
 		"workflow-body": {
 			"patterns": [
 				{
-			      "include": "#implicit-variables"
+					"name": "constant.block.nextflow",
+					"match": "(?:take|main|emit):"
 				},
 				{
-				  "name": "constant.block.nextflow",
-				  "match": "(?:take|main|emit):"
-				},
-				{
-				  "name": "entity.name.function.nextflow",
-				  "match": "(?<=[\\s\\.])(branch|buffer|close|collate|collect|collectFile|combine|concat|count|countBy|cross|distinct|dump|filter|first|flatMap|flatten|groupTuple|ifEmpty|join|last|map|max|merge|min|mix|multiMap|randomSample|reduce|set|splitCsv|splitFasta|splitFastq|splitText|sum|take|tap|toInteger|toList|toSortedList|transpose|unique|until|view)(?=[{\\(\\s])"
-				},
-				{
-					"comment": "Channel factory single line",
-					"match": "\\b((?:C|c)hannel\\.)((fromList|fromPath|fromFilePairs|fromSRA|from|of|empty|value|watchPath)\\W)?",
-					"captures": {
-						"1": {"name": "keyword.nextflow"},
-						"2": {"name": "entity.name.function.nextflow"}
-					}
-				},
-				{
-					"comment": "Channel factory multi-line",
-					"begin": "\\b((?:C|c)hannel)\\s*$",
-					"beginCaptures": {
-						"1": {"name": "keyword.nextflow"}
-					},
-					"end": "(^\\s*)(?:(\\.)(fromList|fromPath|fromFilePairs|fromSRA|from|of|empty|value|watchPath)\\W)?",
-					"endCaptures": {
-						"1": {"name": "keyword.nextflow"},
-						"2": {"name": "keyword.nextflow"},
-						"3": {"name": "entity.name.function.nextflow"}
-					}
-				},
-				{
-					"comment": "method call and parens",
-					"begin": "(\\w*\\()",
-					"beginCaptures": {
-						"1": {
-							"patterns": [{"include": "source.nextflow-groovy"}]
-						}
-					},
-					"end": "\\)",
-					"patterns": [{"include": "#workflow-body"}]
-				},
-				{
-					"comment": "braces",
-					"begin": "{",
-					"end": "}",
-					"patterns": [{"include": "#workflow-body"}]
-				},
-				{
-				  "include": "source.nextflow-groovy#comments"
-				},
-				{
-				  "include": "source.nextflow-groovy#support-functions"
-				},
-				{
-				  "include": "source.nextflow-groovy#keyword"
-				},
-				{
-				  "include": "source.nextflow-groovy#values"
-				},
-				{
-				  "include": "source.nextflow-groovy#anonymous-classes-and-new"
-				},
-				{
-				  "include": "source.nextflow-groovy#types"
-				},
-				{
-				  "include": "source.nextflow-groovy#parens"
-				},
-				{
-				  "include": "source.nextflow-groovy#closures"
-				},
-				{
-				  "include": "source.nextflow-groovy#braces"
+					"include": "source.nextflow-groovy#groovy"
 				}
-			  ]
+			]
 		},
 		"include-statement": {
 			"patterns": [
@@ -232,14 +202,6 @@
 				{
 					"match": "\\b(from)\\b",
 					"name": "keyword.nextflow"
-				}
-			]
-		},
-		"implicit-variables": {
-			"patterns": [
-				{
-					"match": "(?<=[^\\.\\w]|^)(params|nextflow|workflow|launchDir|moduleDir|projectDir|workDir)\\b",
-					"name": "variable.language.nextflow"
 				}
 			]
 		}
