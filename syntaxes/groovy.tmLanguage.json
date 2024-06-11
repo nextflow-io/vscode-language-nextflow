@@ -237,7 +237,7 @@
 		"keyword-language": {
 			"patterns": [
 				{
-					"match": "\\b(try|catch)\\b",
+					"match": "\\b(try|catch|throw)\\b",
 					"name": "keyword.control.exception.groovy"
 				},
 				{

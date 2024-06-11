@@ -1,7 +1,0 @@
-{
-    "shebang": {
-        "prefix": ["#!", "shebang", "sh"],
-        "body": "#!/usr/bin/env nextflow\n\n",
-        "description": "Script shebang declaration"
-    }
-}

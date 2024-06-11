@@ -94,12 +94,6 @@
                 "path": "./syntaxes/groovy.tmLanguage.json"
             }
         ],
-        "snippets": [
-            {
-                "language": "nextflow",
-                "path": "./snippets/snippets.json"
-            }
-        ],
         "commands": [
             {
                 "command": "nextflow.restartServer",
