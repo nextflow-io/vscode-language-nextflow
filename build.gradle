@@ -1,0 +1,52 @@
+plugins {
+  id "com.moowork.node" version "1.3.1"
+}
+
+task copyJar(type: Copy) {
+  dependsOn ':language-server:build'
+  from "$projectDir/language-server/build/libs/language-server-all.jar"
+  into "$buildDir/bin"
+}
+
+task copyLocal(type: Copy) {
+  from "$projectDir"
+  include "images/**"
+  include "snippets/**"
+  include "syntaxes/**"
+  include "LICENSE.md"
+  include "language-configuration.json"
+  include "package.json"
+  into "$buildDir"
+}
+
+task webpack(type: Exec, dependsOn: [npmInstall]) {
+  inputs.file("package.json")
+  inputs.file("package-lock.json")
+  inputs.file("tsconfig.json")
+  inputs.file("webpack.config.js")
+  inputs.dir("src")
+  outputs.file("$buildDir/extension.js")
+  outputs.file("$buildDir/extension.js.map")
+  
+  def webpack = "$projectDir/node_modules/.bin/webpack"
+  if (System.getProperty("os.name").toLowerCase(Locale.ROOT).contains("windows")) {
+    webpack += ".cmd"
+  }
+  commandLine "$webpack", "--mode", "development"
+}
+
+task vsce(type: Exec, dependsOn: [copyJar, copyLocal, webpack]) {
+  inputs.dir("$buildDir")
+  outputs.file("$buildDir/nextflow-0.4.0.vsix")
+
+  def vsce = "$projectDir/node_modules/.bin/vsce"
+  if (System.getProperty("os.name").toLowerCase(Locale.ROOT).contains("windows")) {
+    vsce += ".cmd"
+  }
+  workingDir "$buildDir"
+  commandLine "$vsce", "package"
+}
+
+task build {
+  dependsOn vsce
+}
