@@ -105,6 +105,11 @@
             "type": "object",
             "description": "Configuration for Nextflow language support",
             "properties": {
+                "nextflow.debug": {
+                    "type": "boolean",
+                    "default": false,
+                    "description": "Enable debug logging and debug information in hover hints"
+                },
                 "nextflow.java.home": {
                     "type": [
                         "string",
