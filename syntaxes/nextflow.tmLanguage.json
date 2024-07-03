@@ -21,6 +21,9 @@
 					"include": "#workflow-def"
 				},
 				{
+					"include": "#output-def"
+				},
+				{
 					"include": "#include-statement"
 				},
 				{
@@ -192,6 +195,22 @@
 					"include": "source.nextflow-groovy#groovy"
 				}
 			]
+		},
+		"output-def": {
+			"name": "output.nextflow",
+			"begin": "^\\s*(output)(?:\\s+(\\w+|\"[^\"]+\"|'[^']+'))?\\s*{",
+			"beginCaptures": {
+				"1": {
+					"name": "keyword.nextflow"
+				},
+				"2": {
+					"name": "constant.nextflow"
+				}
+			},
+			"end": "}",
+			"patterns": [{
+				"include": "source.nextflow-groovy#groovy"
+			}]	
 		},
 		"include-statement": {
 			"patterns": [
