@@ -110,6 +110,11 @@
                     "default": false,
                     "description": "Enable debug logging and debug information in hover hints"
                 },
+                "nextflow.harshilAlignment": {
+                    "type": "boolean",
+                    "default": false,
+                    "markdownDescription": "Use the [Harshil Alignment™️](https://nf-co.re/docs/contributing/code_editors_and_styling/harshil_alignment) when formatting Nextflow scripts and config files"
+                },
                 "nextflow.java.home": {
                     "type": [
                         "string",
