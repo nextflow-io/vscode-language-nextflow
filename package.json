@@ -110,6 +110,18 @@
                     "default": false,
                     "description": "Enable debug logging and debug information in hover hints"
                 },
+                "nextflow.files.exclude": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "default": [
+                        ".git",
+                        ".nf-test",
+                        "work"
+                    ],
+                    "description": "Configure glob patterns for excluding folders from being searched for Nextflow scripts and configuration files."
+                },
                 "nextflow.formatting.harshilAlignment": {
                     "type": "boolean",
                     "default": false,
