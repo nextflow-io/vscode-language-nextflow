@@ -12,6 +12,9 @@
 		"nextflow": {
 			"patterns": [
 				{
+					"include": "#enum-def"
+				},
+				{
 					"include": "#function-def"
 				},
 				{
@@ -28,6 +31,55 @@
 				},
 				{
 					"include": "source.nextflow-groovy"
+				}
+			]
+		},
+		"enum-def": {
+			"begin": "^\\s*(enum)\\s+(\\w+)\\s*{",
+			"beginCaptures": {
+				"1": {
+					"name": "keyword.nextflow"
+				},
+				"2": {
+					"name": "storage.type.groovy"
+				}
+			},
+			"end": "}",
+			"patterns": [
+				{
+					"include": "source.nextflow-groovy#comments"
+				},
+				{
+					"include": "#enum-values"
+				}
+			]
+		},
+		"enum-values": {
+			"patterns": [
+				{
+					"begin": "(?<=;|^)\\s*\\b([A-Z0-9_]+)(?=\\s*(?:,|}|\\(|$))",
+					"beginCaptures": {
+						"1": {
+							"name": "constant.enum.name.groovy"
+						}
+					},
+					"end": ",|(?=})|^(?!\\s*\\w+\\s*(?:,|$))",
+					"patterns": [
+						{
+							"begin": "\\(",
+							"end": "\\)",
+							"name": "meta.enum.value.groovy",
+							"patterns": [
+								{
+									"match": ",",
+									"name": "punctuation.definition.seperator.parameter.groovy"
+								},
+								{
+									"include": "#groovy-code"
+								}
+							]
+						}
+					]
 				}
 			]
 		},
@@ -198,13 +250,10 @@
 		},
 		"output-def": {
 			"name": "output.nextflow",
-			"begin": "^\\s*(output)(?:\\s+(\\w+|\"[^\"]+\"|'[^']+'))?\\s*{",
+			"begin": "^\\s*(output)\\s*{",
 			"beginCaptures": {
 				"1": {
 					"name": "keyword.nextflow"
-				},
-				"2": {
-					"name": "constant.nextflow"
 				}
 			},
 			"end": "}",
