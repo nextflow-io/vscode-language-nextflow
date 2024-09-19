@@ -135,10 +135,10 @@
                     "default": null,
                     "description": "Specifies the folder path to the JDK. Use this setting if the extension cannot find Java automatically."
                 },
-                "nextflow.suppressWarnings": {
+                "nextflow.suppressFutureWarnings": {
                     "type": "boolean",
                     "default": true,
-                    "description": "Hide warnings (deprecations, linting, etc)"
+                    "description": "Hide warnings for future changes, deprecations, and removals"
                 }
             }
         }
