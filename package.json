@@ -76,6 +76,9 @@
                     "light": "./images/nextflow-icon-128x128.png",
                     "dark": "./images/nextflow-icon-128x128.png"
                 }
+            },
+            {
+                "id": "nextflow-markdown-injection"
             }
         ],
         "grammars": [
@@ -92,6 +95,17 @@
             {
                 "scopeName": "source.nextflow-groovy",
                 "path": "./syntaxes/groovy.tmLanguage.json"
+            },
+            {
+                "language": "nextflow-markdown-injection",
+                "scopeName": "markdown.nextflow.codeblock",
+                "path": "./syntaxes/nextflow-markdown-injection.json",
+                "injectTo": [
+                    "text.html.markdown"
+                ],
+                "embeddedLanguages": {
+                    "meta.embedded.block.nextflow": "nextflow"
+                }
             }
         ],
         "commands": [
