@@ -14,37 +14,46 @@ The following settings are available:
 
 - `nextflow.debug`: Enable debug logging and debug information in hover hints.
 
+- `nextflow.files.exclude`: Configure glob patterns for excluding folders from being searched for Nextflow scripts and configuration files.
+
 - `nextflow.harshilAlignment`: Use the [Harshil Alignment™️](https://nf-co.re/docs/contributing/code_editors_and_styling/harshil_alignment) when formatting Nextflow scripts and config files.
 
 - `nextflow.java.home`: Specifies the folder path to the JDK. Use this setting if the extension cannot find Java automatically.
 
+- `nextflow.suppressFutureWarnings`: Hide warnings for future changes, deprecations, and removals.
+
 ## Local development 
 
-Clone the project repository in your computer: 
+Clone the project repository: 
 
 ```bash
 git clone https://github.com/nextflow-io/vscode-language-nextflow
 ```
 
-Change in project directory and launch VS code: 
+Change to the project directory and launch VS Code: 
 
 ```bash
 cd vscode-language-nextflow
 code .
 ```
 
-Hack the grammar and the snippet definition files. To quickly test changes use the `F5` key.     
+Build the extension:
+
+```bash
+./gradlew build
+```
+
+You can press `F5` to launch a new VS Code window with the extension loaded. Alternatively, you can execute "Extension: Install from VSIX..." from the command pallete to install the extension into your environment (reload required).
 
 ## Publishing 
 
-Update the extension version number in the `package.json` file,
-then use the command: 
+Update the extension version number in the `package.json` file, then use the command: 
 
 ```bash
 vsce publish
 ```
 
-Read more at [this link](https://code.visualstudio.com/docs/extensions/publish-extension). 
+Refer to the VS Code [documentation](https://code.visualstudio.com/docs/extensions/publish-extension) for more information.
 
 ## Contribution 
 

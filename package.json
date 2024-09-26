@@ -122,7 +122,7 @@
                 "nextflow.debug": {
                     "type": "boolean",
                     "default": false,
-                    "description": "Enable debug logging and debug information in hover hints"
+                    "description": "Enable debug logging and debug information in hover hints."
                 },
                 "nextflow.files.exclude": {
                     "type": "array",
@@ -139,7 +139,7 @@
                 "nextflow.formatting.harshilAlignment": {
                     "type": "boolean",
                     "default": false,
-                    "markdownDescription": "Use the [Harshil Alignment™️](https://nf-co.re/docs/contributing/code_editors_and_styling/harshil_alignment) when formatting Nextflow scripts and config files\n\n*Note: not all rules are supported yet*"
+                    "markdownDescription": "Use the [Harshil Alignment™️](https://nf-co.re/docs/contributing/code_editors_and_styling/harshil_alignment) when formatting Nextflow scripts and config files.\n\n*Note: not all rules are supported yet*"
                 },
                 "nextflow.java.home": {
                     "type": [
@@ -152,7 +152,7 @@
                 "nextflow.suppressFutureWarnings": {
                     "type": "boolean",
                     "default": true,
-                    "description": "Hide warnings for future changes, deprecations, and removals"
+                    "description": "Hide warnings for future changes, deprecations, and removals."
                 }
             }
         }
