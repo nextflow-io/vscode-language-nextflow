@@ -144,6 +144,13 @@ function restartLanguageServer() {
   );
 }
 
+function stopLanguageServer() {
+  if (!languageClient) {
+    return;
+  }
+  languageClient.stop()
+}
+
 function onDidChangeConfiguration(event: vscode.ConfigurationChangeEvent) {
   if (event.affectsConfiguration("nextflow.java.home")) {
     javaPath = findJava();
@@ -157,6 +164,7 @@ export function activate(context: vscode.ExtensionContext) {
   vscode.workspace.onDidChangeConfiguration(onDidChangeConfiguration);
   vscode.commands.registerCommand("nextflow.previewDag", previewDag);
   vscode.commands.registerCommand("nextflow.restartServer", restartLanguageServer);
+  vscode.commands.registerCommand("nextflow.stopServer", stopLanguageServer);
   startLanguageServer();
 }
 

@@ -39,7 +39,8 @@
     },
     "activationEvents": [
       "onLanguage:nextflow",
-      "onCommand:nextflow.restartServer"
+      "onCommand:nextflow.restartServer",
+      "onCommand:nextflow.stopServer"
     ],
     "categories": [
         "Programming Languages"
@@ -111,7 +112,12 @@
         "commands": [
             {
                 "command": "nextflow.restartServer",
-                "title": "Restart Nextflow language server",
+                "title": "Restart language server",
+                "category": "Nextflow"
+            },
+            {
+                "command": "nextflow.stopServer",
+                "title": "Stop language server",
                 "category": "Nextflow"
             }
         ],
