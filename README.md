@@ -8,20 +8,6 @@ It provides syntax highlighting for the Nextflow language and quick shortcuts fo
 
 ![Nextflow syntax highlighting](images/vscode-nextflow.png)
 
-## Settings
-
-The following settings are available:
-
-- `nextflow.debug`: Enable debug logging and debug information in hover hints.
-
-- `nextflow.files.exclude`: Configure glob patterns for excluding folders from being searched for Nextflow scripts and configuration files.
-
-- `nextflow.harshilAlignment`: Use the [Harshil Alignment™️](https://nf-co.re/docs/contributing/code_editors_and_styling/harshil_alignment) when formatting Nextflow scripts and config files.
-
-- `nextflow.java.home`: Specifies the folder path to the JDK. Use this setting if the extension cannot find Java automatically.
-
-- `nextflow.suppressFutureWarnings`: Hide warnings for future changes, deprecations, and removals.
-
 ## Local development 
 
 Clone the project repository: 
