@@ -13,7 +13,9 @@ task copyLocal(type: Copy) {
   include "images/**"
   include "snippets/**"
   include "syntaxes/**"
+  include "CHANGELOG.md"
   include "LICENSE.md"
+  include "README.md"
   include "language-configuration.json"
   include "package.json"
   into "$buildDir"
@@ -37,7 +39,7 @@ task webpack(type: Exec, dependsOn: [npmInstall]) {
 
 task vsce(type: Exec, dependsOn: [copyJar, copyLocal, webpack]) {
   inputs.dir("$buildDir")
-  outputs.file("$buildDir/nextflow-0.4.0.vsix")
+  outputs.file("$buildDir/nextflow.vsix")
 
   def vsce = "$projectDir/node_modules/.bin/vsce"
   if (System.getProperty("os.name").toLowerCase(Locale.ROOT).contains("windows")) {
