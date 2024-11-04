@@ -1,5 +1,3 @@
-import findJava from "./utils/findJava";
-import * as path from "path";
 import * as vscode from "vscode";
 import {
   LanguageClient,
@@ -10,7 +8,6 @@ import {
 const LABEL_RELOAD_WINDOW = "Reload Window";
 let extensionContext: vscode.ExtensionContext | null = null;
 let languageClient: LanguageClient | null = null;
-let javaPath: string | null = null;
 
 function startLanguageServer() {
   vscode.window.withProgress(
@@ -20,18 +17,6 @@ function startLanguageServer() {
         if (!extensionContext) {
           resolve();
           vscode.window.showErrorMessage("The Nextflow extension failed to start.");
-          return;
-        }
-        if (!javaPath) {
-          resolve();
-          let settingsJavaHome = vscode.workspace
-            .getConfiguration("nextflow")
-            .get("java.home") as string;
-          if (settingsJavaHome) {
-            vscode.window.showErrorMessage("The nextflow.java.home setting does not point to a valid JDK.");
-          } else {
-            vscode.window.showErrorMessage("Could not locate valid JDK. To configure JDK manually, use the nextflow.java.home setting.");
-          }
           return;
         }
         progress.report({ message: "Initializing Nextflow language server..." });
@@ -56,19 +41,9 @@ function startLanguageServer() {
             protocol2Code: (value) => vscode.Uri.parse(value),
           },
         };
-        let args = [
-          "-jar",
-          path.resolve(
-            extensionContext.extensionPath,
-            "bin",
-            "language-server-all.jar"
-          ),
-        ];
-        // uncomment to allow a debugger to attach to the language server
-        // args.unshift("-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=5005,quiet=y");
         let executable: Executable = {
-          command: javaPath,
-          args: args,
+          command: "nextflow",
+          args: ["lsp"],
         };
         languageClient = new LanguageClient(
           "nextflow",
@@ -151,17 +126,8 @@ function stopLanguageServer() {
   languageClient.stop()
 }
 
-function onDidChangeConfiguration(event: vscode.ConfigurationChangeEvent) {
-  if (event.affectsConfiguration("nextflow.java.home")) {
-    javaPath = findJava();
-    restartLanguageServer();
-  }
-}
-
 export function activate(context: vscode.ExtensionContext) {
   extensionContext = context;
-  javaPath = findJava();
-  vscode.workspace.onDidChangeConfiguration(onDidChangeConfiguration);
   vscode.commands.registerCommand("nextflow.previewDag", previewDag);
   vscode.commands.registerCommand("nextflow.restartServer", restartLanguageServer);
   vscode.commands.registerCommand("nextflow.stopServer", stopLanguageServer);
