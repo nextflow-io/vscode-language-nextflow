@@ -46,9 +46,13 @@ task vsce(type: Exec, dependsOn: [copyJar, copyLocal, webpack]) {
     vsce += ".cmd"
   }
   workingDir "$buildDir"
-  commandLine "$vsce", "package"
+  commandLine "$vsce", "package", "-o", "$buildDir/nextflow.vsix"
 }
 
 task build {
   dependsOn vsce
+}
+
+task install(type: Exec, dependsOn: [build]) {
+  commandLine "code", "--install-extension", "$buildDir/nextflow.vsix"
 }

@@ -29,7 +29,13 @@ Build the extension:
 ./gradlew build
 ```
 
-You can press `F5` to launch a new VS Code window with the extension loaded. Alternatively, you can execute "Extension: Install from VSIX..." from the command pallete to install the extension into your environment (reload required).
+From VS Code, you can press `F5` to launch a new VS Code window with the extension loaded.
+
+Alternatively, you can install the extension into your environment (reload required):
+
+```bash
+./gradlew install
+```
 
 ## Publishing 
 
