@@ -49,7 +49,7 @@ From VS Code, you can press `F5` to launch a new VS Code window with the extensi
 Alternatively, you can install the extension into your environment (reload required):
 
 ```bash
-code --install-extension build/nextflow.vsix
+./gradlew install
 ```
 
 ## Publishing
