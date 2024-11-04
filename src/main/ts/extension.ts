@@ -100,6 +100,7 @@ async function previewDag(uri: string, name?: string) {
     "DAG Preview",
     vscode.ViewColumn.Beside,
     {
+      enableCommandUris: true,
       enableScripts: true
     }
   );
@@ -109,6 +110,8 @@ async function previewDag(uri: string, name?: string) {
     <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1, maximum-scale=1">
     </head>
     <body>
+    <a href="command:vscode.open?file:///home/bent/projects/nf-core_rnaseq/modules/nf-core/multiqc/main.nf" target="_blank">MULTIQC</a>
+    <a href="command:vscode.open?file:///home/bent/projects/nf-core_rnaseq/modules/nf-core/multiqc/main.nf#L3" target="_blank">MULTIQC</a>
     <pre class="mermaid" style="text-align: center;">
     ${content}
     </pre>
