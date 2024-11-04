@@ -114,8 +114,21 @@ async function previewDag(uri: string, name?: string) {
     </pre>
     <script type="module">
       import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
-      mermaid.initialize({ startOnLoad: true });
-    </script>
+      mermaid.initialize({
+        startOnLoad: true,
+        theme: 'base',
+        themeVariables: {
+          fontFamily: 'Inter',
+          primaryColor: '#0DC09D',
+          primaryTextColor: '#fff',
+          secondaryColor: '#3D95FD',
+          secondaryTextColor: '#000000',
+          tertiaryColor: '#fff',
+          noteTextColor: '#050505',
+          edgeLabelBackground: '#7B7B7B',
+        }
+      });
+      </script>
     </body>
     </html>
   `;
