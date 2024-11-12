@@ -6,6 +6,11 @@ VS Code extension for [Nextflow](https://www.nextflow.io/) that provides languag
 
 Read the [blog post](https://seqera.io/blog/modernizing-nextflow-developer-experience/) and the [docs](https://nextflow.io/docs/latest/vscode.html) for more information.
 
+See also:
+
+- [VSCode Marketplace](https://marketplace.visualstudio.com/items?itemName=nextflow.nextflow)
+- [Open VSX Registry](https://www.open-vsx.org/extension/nextflow/nextflow)
+
 ## Features
 
 The following language features are currently supported:
@@ -54,11 +59,7 @@ Alternatively, you can install the extension into your environment (reload requi
 
 ## Publishing
 
-Update the extension version number in `package.json` and `.vscode/launch.json`, then use the command:
-
-```bash
-vsce publish
-```
+Update the extension version number in `package.json` and `.vscode/launch.json`, then run the "Deploy Extension" action to publish the extension to the VSCode marketplace and Open VSX.
 
 ## Contributing
 
@@ -70,6 +71,5 @@ Contributions are welcome. Feel free to fork [this repository](https://github.co
 * https://code.visualstudio.com/docs/extensions/publish-extension
 * https://code.visualstudio.com/docs/extensions/yocode
 * https://code.visualstudio.com/docs/extensionAPI/extension-manifest
-* https://marketplace.visualstudio.com/items?itemName=nextflow.nextflow
 
 **Enjoy!**
