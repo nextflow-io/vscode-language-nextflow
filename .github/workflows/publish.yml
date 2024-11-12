@@ -21,6 +21,13 @@ jobs:
       - name: npm clean install
         run: npm ci
 
+      - uses: actions/setup-java@v4
+        with:
+          java-version: 17
+          distribution: 'temurin'
+          architecture: x64
+          cache: gradle
+
       - name: checkout language server
         run: |
           git clone -b ${{ github.event.inputs.version }} https://github.com/nextflow-io/language-server
