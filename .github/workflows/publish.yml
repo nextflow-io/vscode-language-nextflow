@@ -2,9 +2,10 @@ name: Deploy Extension
 
 on:
   workflow_dispatch:
-  push:
-    branches:
-      - master
+    inputs:
+      version:
+        description: 'Release version (should match package.json)'
+        required: true
 
 jobs:
   deploy:
@@ -20,6 +21,10 @@ jobs:
       - name: npm clean install
         run: npm ci
 
+      - name: checkout language server
+        run: |
+          git clone https://github.com/nextflow-io/language-server -b {{ github.event.inputs.version }}
+
       - name: build vscode extension
         run: ./gradlew build
 
@@ -34,4 +39,4 @@ jobs:
         with:
           pat: ${{ secrets.VSCE_TOKEN }}
           registryUrl: https://marketplace.visualstudio.com
-          extensionFile: ${{ steps.publishToOpenVSX.outputs.vsixPath }}
+          extensionFile: build/nextflow.vsix
