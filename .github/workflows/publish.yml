@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
     inputs:
       version:
-        description: 'Release version (should match package.json)'
+        description: 'Release version (e.g. v1.0.0)'
         required: true
 
 jobs:
@@ -21,9 +21,16 @@ jobs:
       - name: npm clean install
         run: npm ci
 
+      - uses: actions/setup-java@v4
+        with:
+          java-version: 17
+          distribution: 'temurin'
+          architecture: x64
+          cache: gradle
+
       - name: checkout language server
         run: |
-          git clone https://github.com/nextflow-io/language-server -b {{ github.event.inputs.version }}
+          git clone -b ${{ github.event.inputs.version }} https://github.com/nextflow-io/language-server
 
       - name: build vscode extension
         run: ./gradlew build
