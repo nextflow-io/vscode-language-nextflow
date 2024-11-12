@@ -23,7 +23,7 @@ jobs:
 
       - name: checkout language server
         run: |
-          git clone https://github.com/nextflow-io/language-server -b {{ github.event.inputs.version }}
+          git clone -b {{ github.event.inputs.version }} https://github.com/nextflow-io/language-server
 
       - name: build vscode extension
         run: ./gradlew build
