@@ -100,22 +100,81 @@ async function previewDag(uri: string, name?: string) {
     "DAG Preview",
     vscode.ViewColumn.Beside,
     {
-      enableScripts: true
+      enableScripts: true,
+      retainContextWhenHidden: true
     }
   );
   panel.webview.html = `
     <html>
     <head>
-    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1, maximum-scale=1">
+      <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1, maximum-scale=1">
+      <style type="text/css">
+        #svg-id {
+          height: 1024px;
+          width: 100%;
+        }
+      </style>
     </head>
     <body>
-    <pre class="mermaid" style="text-align: center;">
-    ${content}
-    </pre>
-    <script type="module">
-      import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
-      mermaid.initialize({ startOnLoad: true });
-    </script>
+      <div id="diagram"></div>
+      <script src="https://bumbu.me/svg-pan-zoom/dist/svg-pan-zoom.min.js"></script>
+      <script type="module">
+        import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+        mermaid.initialize({ startOnLoad: false, flowchart: { defaultRenderer: "elk" } });
+
+        const drawDiagram = async function () {
+          const element = document.querySelector('#diagram');
+          const graphDefinition = \`
+          ${content}
+          \`;
+          const { svg } = await mermaid.render('svg-id', graphDefinition);
+          element.innerHTML = svg.replace(/( )*max-width:( 0-9\.)*px;/i, '');
+
+          var doPan = false;
+          var eventsHandler;
+          var panZoom;
+          var mousepos;
+
+          eventsHandler = {
+            haltEventListeners: ['mousedown', 'mousemove', 'mouseup'],
+            mouseDownHandler: function (ev) {
+              if (event.target.className == "[object SVGAnimatedString]") {
+                doPan = true;
+                mousepos = { x: ev.clientX, y: ev.clientY }
+              };
+            },
+            mouseMoveHandler: function (ev) {
+              if (doPan) {
+                panZoom.panBy({ x: ev.clientX - mousepos.x, y: ev.clientY - mousepos.y });
+                mousepos = { x: ev.clientX, y: ev.clientY };
+                window.getSelection().removeAllRanges();
+              }
+            },
+            mouseUpHandler: function (ev) {
+              doPan = false;
+            },
+            init: function (options) {
+              options.svgElement.addEventListener('mousedown', this.mouseDownHandler, false);
+              options.svgElement.addEventListener('mousemove', this.mouseMoveHandler, false);
+              options.svgElement.addEventListener('mouseup', this.mouseUpHandler, false);
+            },
+            destroy: function (options) {
+              options.svgElement.removeEventListener('mousedown', this.mouseDownHandler, false);
+              options.svgElement.removeEventListener('mousemove', this.mouseMoveHandler, false);
+              options.svgElement.removeEventListener('mouseup', this.mouseUpHandler, false);
+            }
+          };
+
+          panZoom = svgPanZoom('#svg-id', {
+            zoomEnabled: true,
+            controlIconsEnabled: true,
+            fit: 1,
+            center: 1,
+            customEventsHandler: eventsHandler
+          })
+        };
+        await drawDiagram();
+      </script>
     </body>
     </html>
   `;
