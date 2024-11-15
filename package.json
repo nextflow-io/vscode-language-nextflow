@@ -2,7 +2,7 @@
     "name": "nextflow",
     "displayName": "Nextflow",
     "description": "Nextflow language support",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "publisher": "nextflow",
     "repository": {
         "type": "git",
@@ -153,12 +153,12 @@
                         "null"
                     ],
                     "default": null,
-                    "description": "Specifies the folder path to the JDK. Use this setting if the extension cannot find Java automatically."
+                    "markdownDescription": "Specify the folder path to the desired Java runtime. Equivalent to the `JAVA_HOME` environment variable, i.e. the Java binary should be located at `$JAVA_HOME/bin/java`. Use this setting if the extension cannot find Java automatically."
                 },
                 "nextflow.suppressFutureWarnings": {
                     "type": "boolean",
                     "default": true,
-                    "description": "Hide warnings for future changes, deprecations, and removals."
+                    "description": "Hide warnings for future deprecations and other paranoid warnings."
                 }
             }
         }

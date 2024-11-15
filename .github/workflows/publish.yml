@@ -2,9 +2,10 @@ name: Deploy Extension
 
 on:
   workflow_dispatch:
-  push:
-    branches:
-      - master
+    inputs:
+      version:
+        description: 'Release version (e.g. v1.0.0)'
+        required: true
 
 jobs:
   deploy:
@@ -20,13 +21,29 @@ jobs:
       - name: npm clean install
         run: npm ci
 
+      - uses: actions/setup-java@v4
+        with:
+          java-version: 17
+          distribution: 'temurin'
+          architecture: x64
+          cache: gradle
+
+      - name: checkout language server
+        run: |
+          git clone -b ${{ github.event.inputs.version }} https://github.com/nextflow-io/language-server
+
+      - name: build vscode extension
+        run: ./gradlew build
+
       - name: Publish to Open VSX Registry
         uses: HaaLeo/publish-vscode-extension@v1
         with:
           pat: ${{ secrets.OPEN_VSX_TOKEN }}
+          extensionFile: build/nextflow.vsix
 
       - name: Publish to Visual Studio Marketplace
         uses: HaaLeo/publish-vscode-extension@v1
         with:
           pat: ${{ secrets.VSCE_TOKEN }}
           registryUrl: https://marketplace.visualstudio.com
+          extensionFile: build/nextflow.vsix
