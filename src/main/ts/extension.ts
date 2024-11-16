@@ -110,8 +110,7 @@ async function previewDag(uri: string, name?: string) {
     <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1, maximum-scale=1">
     </head>
     <body>
-    <a href="command:vscode.open?file:///home/bent/projects/nf-core_rnaseq/modules/nf-core/multiqc/main.nf" target="_blank">MULTIQC</a>
-    <a href="command:vscode.open?file:///home/bent/projects/nf-core_rnaseq/modules/nf-core/multiqc/main.nf#L3" target="_blank">MULTIQC</a>
+    <a href='command:nextflow.openFileFromWebview?["file:///home/bent/projects/nextflow-io_rnaseq-nf/modules/multiqc/main.nf"]' target="_blank">MULTIQC</a>
     <pre class="mermaid" style="text-align: center;">
     ${content}
     </pre>
@@ -168,6 +167,14 @@ export function activate(context: vscode.ExtensionContext) {
   vscode.commands.registerCommand("nextflow.previewDag", previewDag);
   vscode.commands.registerCommand("nextflow.restartServer", restartLanguageServer);
   vscode.commands.registerCommand("nextflow.stopServer", stopLanguageServer);
+  vscode.commands.registerCommand("nextflow.openFileFromWebview", async (uriString: string) => {
+    if (!uriString) {
+      vscode.window.showErrorMessage("Missing file URI.");
+      return;
+    }
+    const uri = vscode.Uri.parse(uriString);
+    await vscode.window.showTextDocument(uri, { viewColumn: vscode.ViewColumn.One });
+  });
   startLanguageServer();
 }
 
