@@ -90,7 +90,7 @@ function startLanguageServer() {
 }
 
 async function previewDag(uri: string, name?: string) {
-  const content = await vscode.commands.executeCommand("nextflow.server.previewDag", uri, name);
+  const content: string = await vscode.commands.executeCommand("nextflow.server.previewDag", uri, name);
   if (!content) {
     vscode.window.showErrorMessage("Failed to render DAG preview.");
     return;
@@ -110,13 +110,12 @@ async function previewDag(uri: string, name?: string) {
     <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1, maximum-scale=1">
     </head>
     <body>
-    <a href='command:nextflow.openFileFromWebview?["file:///home/bent/projects/nextflow-io_rnaseq-nf/modules/multiqc/main.nf"]' target="_blank">MULTIQC</a>
     <pre class="mermaid" style="text-align: center;">
-    ${content}
+    ${content.replace(/href "([^"]+)"/g, 'href "command:nextflow.openFileFromWebview?%5B%22$1%22%5D"')}
     </pre>
     <script type="module">
       import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
-      mermaid.initialize({ startOnLoad: true });
+      mermaid.initialize({ startOnLoad: true, securityLevel: 'loose' });
     </script>
     </body>
     </html>
