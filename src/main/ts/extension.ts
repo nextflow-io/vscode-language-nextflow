@@ -90,7 +90,7 @@ function startLanguageServer() {
 }
 
 async function previewDag(uri: string, name?: string) {
-  const content = await vscode.commands.executeCommand("nextflow.server.previewDag", uri, name);
+  const content: string = await vscode.commands.executeCommand("nextflow.server.previewDag", uri, name);
   if (!content) {
     vscode.window.showErrorMessage("Failed to render DAG preview.");
     return;
@@ -100,6 +100,7 @@ async function previewDag(uri: string, name?: string) {
     "DAG Preview",
     vscode.ViewColumn.Beside,
     {
+      enableCommandUris: true,
       enableScripts: true
     }
   );
@@ -110,11 +111,11 @@ async function previewDag(uri: string, name?: string) {
     </head>
     <body>
     <pre class="mermaid" style="text-align: center;">
-    ${content}
+    ${content.replace(/href "([^"]+)"/g, 'href "command:nextflow.openFileFromWebview?%5B%22$1%22%5D"')}
     </pre>
     <script type="module">
       import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
-      mermaid.initialize({ startOnLoad: true });
+      mermaid.initialize({ startOnLoad: true, securityLevel: 'loose' });
     </script>
     </body>
     </html>
@@ -165,6 +166,14 @@ export function activate(context: vscode.ExtensionContext) {
   vscode.commands.registerCommand("nextflow.previewDag", previewDag);
   vscode.commands.registerCommand("nextflow.restartServer", restartLanguageServer);
   vscode.commands.registerCommand("nextflow.stopServer", stopLanguageServer);
+  vscode.commands.registerCommand("nextflow.openFileFromWebview", async (uriString: string) => {
+    if (!uriString) {
+      vscode.window.showErrorMessage("Missing file URI.");
+      return;
+    }
+    const uri = vscode.Uri.parse(uriString);
+    await vscode.window.showTextDocument(uri, { viewColumn: vscode.ViewColumn.One });
+  });
   startLanguageServer();
 }
 
