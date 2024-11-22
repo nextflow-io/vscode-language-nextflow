@@ -3,7 +3,6 @@ plugins {
 }
 
 task copyJar(type: Copy) {
-  dependsOn ':language-server:build'
   from "$projectDir/language-server/build/libs/language-server-all.jar"
   into "$buildDir/bin"
 }

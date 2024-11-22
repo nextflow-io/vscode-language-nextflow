@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
     inputs:
       version:
-        description: 'Release version (e.g. v1.0.0)'
+        description: 'Language server version'
         required: true
 
 jobs:
@@ -21,19 +21,12 @@ jobs:
       - name: npm clean install
         run: npm ci
 
-      - uses: actions/setup-java@v4
-        with:
-          java-version: 17
-          distribution: 'temurin'
-          architecture: x64
-          cache: gradle
-
-      - name: checkout language server
+      - name: Download language server JAR
         run: |
-          git clone -b ${{ github.event.inputs.version }} https://github.com/nextflow-io/language-server
-
-      - name: build vscode extension
-        run: ./gradlew build
+          mkdir -p language-server/build/libs
+          wget -P language-server/build/libs https://github.com/nextflow-io/language-server/releases/download/$VERSION/language-server-all.jar
+        env:
+          VERSION: ${{ github.event.inputs.version }}
 
       - name: Publish to Open VSX Registry
         uses: HaaLeo/publish-vscode-extension@v1
