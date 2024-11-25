@@ -1,4 +1,4 @@
-name: Deploy Extension
+name: Publish Extension
 
 on:
   workflow_dispatch:
@@ -27,6 +27,9 @@ jobs:
           wget -P language-server/build/libs https://github.com/nextflow-io/language-server/releases/download/$VERSION/language-server-all.jar
         env:
           VERSION: ${{ github.event.inputs.version }}
+
+      - name: Build vscode extension
+        run: ./gradlew build
 
       - name: Publish to Open VSX Registry
         uses: HaaLeo/publish-vscode-extension@v1
