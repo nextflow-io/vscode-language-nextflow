@@ -101,9 +101,8 @@ async function previewDag(uri: string, name?: string) {
       enableScripts: true
     }
   );
-  panel.webview.html = `
-  <html>
-  <head>
+  // Save HTML content into strings so that we can export a partial version without VSCode extras
+  const htmlHead = `<head>
     <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1, maximum-scale=1">
     <style>
       :root {
@@ -197,20 +196,33 @@ async function previewDag(uri: string, name?: string) {
         background: var(--vscode-button-secondaryHoverBackground);
       }
     </style>
-  </head>
-  <body>
-    <h3>${name} workflow</h3>
-    <pre class="mermaid">
-      ${content.replace(/href "([^"]+)"/g, 'href "command:nextflow.openFileFromWebview?%5B%22$1%22%5D"')}
-    </pre>
-    <div class="action-buttons">
-      <button onclick="copyContent()">Copy as markdown</button>
-    </div>
-    <script type="module">
+  </head>`;
+
+  // Title and description - VSCode only
+  const pageTitle = `<h3>${name} workflow</h3>`;
+  const vsCodeHelpText = '<p>Click a process / workflow name to navigate to it in the editor.</p>';
+
+  // Mermaid diagram + JS
+  const mermaidDiagram = `
+  <pre class="mermaid">
+    ${content.replace(/href "([^"]+)"/g, 'href "command:nextflow.openFileFromWebview?%5B%22$1%22%5D"')}
+  </pre>
+  <script type="module">
       import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
       mermaid.initialize({ startOnLoad: true, securityLevel: 'loose' });
-    </script>
-    <script>
+  <\/script>
+  `;
+
+  // Buttons + JS to download / Export - VSCode only
+  // Includes a stripped down version of the whole thing in a string, to be able to save
+  // a custom version as a HTML file. Very meta.
+  const actionButtons = (`
+  <div class="action-buttons">
+      <button onclick="copyContent()">Copy as markdown</button>
+      <button onclick="downloadMermaidPlot()">Export as SVG</button>
+      <button onclick="downloadWebviewHtml()">Save HTML</button>
+  </div>
+  <script>
       // Functionality to copy mermaid as markdown
       // Strips out VSCode code navigation links
       let text = \`
@@ -221,11 +233,50 @@ ${content.replace(/\n\s*click.+/g, '')}
       const copyContent = async () => {
         await navigator.clipboard.writeText(text);
       }
+      const downloadMermaidPlot = () => {
+        const svg = document.querySelector('.mermaid svg');
+        if (!svg) return console.error('Mermaid SVG not found');
+        const svgData = new XMLSerializer().serializeToString(svg);
+        const blob = new Blob([svgData], { type: 'image/svg+xml;charset=utf-8' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'DAG-${name}.svg';
+        a.click();
+        URL.revokeObjectURL(url);
+      };
+      const downloadWebviewHtml = () => {
+        const html = \`
+<html>
+  ${htmlHead}
+  <body>
+    ${mermaidDiagram.replace(/\n\s*click.+/g, '').replace('<\/script>', '<\\/script>')}
+  </body>
+</html>
+\`;
+        const blob = new Blob([html], { type: 'text/html;charset=utf-8' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'DAG-${name}.html';
+        a.click();
+        URL.revokeObjectURL(url);
+      };
     </script>
-    </body>
-    </html>
+  `);
+
+  // Set the panel HTML for VSCode
+  panel.webview.html = `
+  <html>
+  ${htmlHead}
+  <body>
+    ${pageTitle}
+    ${vsCodeHelpText}
+    ${mermaidDiagram}
+    ${actionButtons}
+  </body>
+  </html>
   `;
-  vscode.window.showErrorMessage(panel.webview.html);
 }
 function restartLanguageServer() {
   if (!languageClient) {
