@@ -161,15 +161,66 @@ async function previewDag(uri: string, name?: string) {
         fill: var(--mm-connector-lines) !important;
         stroke: var(--mm-connector-lines) !important;
       }
+
+      /* VSCode action buttons */
+      .action-buttons {
+        display: flex;
+        justify-content: center;
+      }
+      /* https://github.com/microsoft/vscode-extension-samples/blob/5ddd30fc052e03bbec52e5d84627eaa543fb0de8/webview-view-sample/media/vscode.css#L47 */
+      button {
+        display: block;
+        border: none;
+        padding: 6px 8px;
+        margin: 0 10px;
+        outline: 1px solid transparent;
+        outline-offset: 2px !important;
+        color: var(--vscode-button-foreground);
+        background: var(--vscode-button-background);
+      }
+
+      button:hover {
+        cursor: pointer;
+        background: var(--vscode-button-hoverBackground);
+      }
+
+      button:focus {
+        outline-color: var(--vscode-focusBorder);
+      }
+
+      button.secondary {
+        color: var(--vscode-button-secondaryForeground);
+        background: var(--vscode-button-secondaryBackground);
+      }
+
+      button.secondary:hover {
+        background: var(--vscode-button-secondaryHoverBackground);
+      }
     </style>
   </head>
   <body>
-  <pre class="mermaid">
-    ${content.replace(/href "([^"]+)"/g, 'href "command:nextflow.openFileFromWebview?%5B%22$1%22%5D"')}
+    <h3>${name} workflow</h3>
+    <pre class="mermaid">
+      ${content.replace(/href "([^"]+)"/g, 'href "command:nextflow.openFileFromWebview?%5B%22$1%22%5D"')}
     </pre>
+    <div class="action-buttons">
+      <button onclick="copyContent()">Copy as markdown</button>
+    </div>
     <script type="module">
       import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
       mermaid.initialize({ startOnLoad: true, securityLevel: 'loose' });
+    </script>
+    <script>
+      // Functionality to copy mermaid as markdown
+      // Strips out VSCode code navigation links
+      let text = \`
+\\\`\\\`\\\`mermaid
+${content.replace(/\n\s*click.+/g, '')}
+\\\`\\\`\\\`
+\`;
+      const copyContent = async () => {
+        await navigator.clipboard.writeText(text);
+      }
     </script>
     </body>
     </html>
