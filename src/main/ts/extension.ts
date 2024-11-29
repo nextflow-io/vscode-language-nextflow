@@ -251,7 +251,7 @@ ${content.replace(/\n\s*click.+/g, '')}
       const downloadMermaidPlot = () => {
         const svg = document.querySelector('.mermaid svg');
         if (!svg) return console.error('Mermaid SVG not found');
-        const svgData = new XMLSerializer().serializeToString(svg);
+        const svgData = new XMLSerializer().serializeToString(svg).replace('style="', 'style="background-color:white;');
         const blob = new Blob([svgData], { type: 'image/svg+xml;charset=utf-8' });
         const url = URL.createObjectURL(blob);
         const a = document.createElement('a');
