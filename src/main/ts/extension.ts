@@ -205,7 +205,22 @@ async function previewDag(uri: string, name?: string) {
   // Mermaid diagram + JS
   const mermaidDiagram = `
   <pre class="mermaid">
+    %%{
+      init: {
+        'theme': 'base',
+        'themeVariables': {
+          'primaryColor': '#B6ECE2',
+          'primaryTextColor': '#160F26',
+          'primaryBorderColor': '#065647',
+          'lineColor': '#545555',
+          'clusterBkg': '#BABCBD22',
+          'clusterBorder': '#DDDEDE',
+          'fontFamily': 'arial'
+        }
+      }
+    }%%
     ${content.replace(/href "([^"]+)"/g, 'href "command:nextflow.openFileFromWebview?%5B%22$1%22%5D"')}
+    classDef default stroke-width:3px
   </pre>
   <script type="module">
       import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
