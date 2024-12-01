@@ -1,7 +1,6 @@
-export default function buildMermaid(content:string, name?: string): string {
-
-    // Save HTML content into strings so that we can export a partial version without VSCode extras
-    const htmlHead = `<head>
+export default function buildMermaid(content: string, name?: string): string {
+  // Save HTML content into strings so that we can export a partial version without VSCode extras
+  const htmlHead = `<head>
     <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1, maximum-scale=1">
     <style>
       :root {
@@ -97,12 +96,13 @@ export default function buildMermaid(content:string, name?: string): string {
     </style>
   </head>`;
 
-    // Title and description - VSCode only
-    const pageTitle = `<h3>${name} workflow</h3>`;
-    const vsCodeHelpText = '<p>Click a process / workflow name to navigate to it in the editor.</p>';
+  // Title and description - VSCode only
+  const pageTitle = `<h3>${name} workflow</h3>`;
+  const vsCodeHelpText =
+    "<p>Click a process / workflow name to navigate to it in the editor.</p>";
 
-    // Mermaid diagram + JS
-    const mermaidDiagram = `
+  // Mermaid diagram + JS
+  const mermaidDiagram = `
   <pre class="mermaid">
     %%{
       init: {
@@ -127,10 +127,10 @@ export default function buildMermaid(content:string, name?: string): string {
   <\/script>
   `;
 
-    // Buttons + JS to download / Export - VSCode only
-    // Includes a stripped down version of the whole thing in a string, to be able to save
-    // a custom version as a HTML file. Very meta.
-    const actionButtons = (`
+  // Buttons + JS to download / Export - VSCode only
+  // Includes a stripped down version of the whole thing in a string, to be able to save
+  // a custom version as a HTML file. Very meta.
+  const actionButtons = `
   <div class="action-buttons">
       <button onclick="copyContent()">Copy as markdown</button>
       <button onclick="downloadMermaidPlot()">Export as SVG</button>
@@ -141,7 +141,7 @@ export default function buildMermaid(content:string, name?: string): string {
       // Strips out VSCode code navigation links
       let text = \`
 \\\`\\\`\\\`mermaid
-${content.replace(/\n\s*click.+/g, '')}
+${content.replace(/\n\s*click.+/g, "")}
 \\\`\\\`\\\`
 \`;
       const copyContent = async () => {
@@ -164,7 +164,7 @@ ${content.replace(/\n\s*click.+/g, '')}
 <html>
   ${htmlHead}
   <body>
-    ${mermaidDiagram.replace(/\n\s*click.+/g, '').replace('<\/script>', '<\\/script>')}
+    ${mermaidDiagram.replace(/\n\s*click.+/g, "").replace("</script>", "<\\/script>")}
   </body>
 </html>
 \`;
@@ -177,11 +177,11 @@ ${content.replace(/\n\s*click.+/g, '')}
         URL.revokeObjectURL(url);
       };
     </script>
-  `);
+  `;
 
-    // Set the panel HTML for VSCode
-    return `
-  <html>
+  // Set the panel HTML for VSCode
+  return `
+<html>
   ${htmlHead}
   <body>
     ${pageTitle}
@@ -189,7 +189,6 @@ ${content.replace(/\n\s*click.+/g, '')}
     ${mermaidDiagram}
     ${actionButtons}
   </body>
-  </html>
+</html>
   `;
-
 }
