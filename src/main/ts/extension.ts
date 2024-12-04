@@ -149,7 +149,7 @@ function stopLanguageServer() {
   if (!languageClient) {
     return;
   }
-  languageClient.stop()
+  languageClient.stop();
 }
 
 function onDidChangeConfiguration(event: vscode.ConfigurationChangeEvent) {
@@ -178,5 +178,6 @@ export function activate(context: vscode.ExtensionContext) {
 }
 
 export function deactivate() {
+  stopLanguageServer();
   extensionContext = null;
 }
