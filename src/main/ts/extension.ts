@@ -1,3 +1,4 @@
+import buildMermaid from "./utils/buildMermaid";
 import findJava from "./utils/findJava";
 import * as path from "path";
 import * as vscode from "vscode";
@@ -106,22 +107,7 @@ async function previewDag(uri: string, name?: string) {
       enableScripts: true
     }
   );
-  panel.webview.html = `
-    <html>
-    <head>
-    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1, maximum-scale=1">
-    </head>
-    <body>
-    <pre class="mermaid" style="text-align: center;">
-    ${content.replace(/href "([^"]+)"/g, 'href "command:nextflow.openFileFromWebview?%5B%22$1%22%5D"')}
-    </pre>
-    <script type="module">
-      import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
-      mermaid.initialize({ startOnLoad: true, securityLevel: 'loose' });
-    </script>
-    </body>
-    </html>
-  `;
+  panel.webview.html = buildMermaid(content, name ?? 'Entry')
 }
 
 function restartLanguageServer() {
