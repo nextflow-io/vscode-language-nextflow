@@ -107,7 +107,7 @@ async function previewDag(uri: string, name?: string) {
       enableScripts: true
     }
   );
-  panel.webview.html = buildMermaid(content, name)
+  panel.webview.html = buildMermaid(content, name ?? 'Entry')
 }
 
 function restartLanguageServer() {

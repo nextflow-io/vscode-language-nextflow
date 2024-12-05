@@ -1,4 +1,4 @@
-export default function buildMermaid(content: string, name?: string): string {
+export default function buildMermaid(content: string, name: string): string {
   // Save HTML content into strings so that we can export a partial version without VSCode extras
   const htmlHead = `<head>
     <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1, maximum-scale=1">
@@ -99,7 +99,7 @@ export default function buildMermaid(content: string, name?: string): string {
   // Title and description - VSCode only
   const pageTitle = `<h3>${name} workflow</h3>`;
   const vsCodeHelpText =
-    "<p>Click a process / workflow name to navigate to it in the editor.</p>";
+    "<p>Click on a process or workflow node to open it in the editor.</p>";
 
   // Mermaid diagram + JS
   const mermaidDiagram = `
@@ -155,7 +155,7 @@ ${content.replace(/\n\s*click.+/g, "")}
         const url = URL.createObjectURL(blob);
         const a = document.createElement('a');
         a.href = url;
-        a.download = 'DAG-${name}.svg';
+        a.download = 'dag-${name}.svg';
         a.click();
         URL.revokeObjectURL(url);
       };
@@ -172,7 +172,7 @@ ${content.replace(/\n\s*click.+/g, "")}
         const url = URL.createObjectURL(blob);
         const a = document.createElement('a');
         a.href = url;
-        a.download = 'DAG-${name}.html';
+        a.download = 'dag-${name}.html';
         a.click();
         URL.revokeObjectURL(url);
       };
