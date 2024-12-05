@@ -91,11 +91,13 @@ function startLanguageServer() {
 }
 
 async function previewDag(uri: string, name?: string) {
-  const content: string = await vscode.commands.executeCommand("nextflow.server.previewDag", uri, name);
-  if (!content) {
-    vscode.window.showErrorMessage("Failed to render DAG preview.");
+  const res: any = await vscode.commands.executeCommand("nextflow.server.previewDag", uri, name);
+  if (!res || !res.result) {
+    const message = res?.error ?? "Failed to render DAG preview.";
+    vscode.window.showErrorMessage(message);
     return;
   }
+  const content = res.result;
   const panel = vscode.window.createWebviewPanel(
     "dag-preview",
     "DAG Preview",
@@ -135,7 +137,7 @@ function stopLanguageServer() {
   if (!languageClient) {
     return;
   }
-  languageClient.stop()
+  languageClient.stop();
 }
 
 function onDidChangeConfiguration(event: vscode.ConfigurationChangeEvent) {
@@ -164,5 +166,6 @@ export function activate(context: vscode.ExtensionContext) {
 }
 
 export function deactivate() {
+  stopLanguageServer();
   extensionContext = null;
 }
