@@ -1,5 +1,5 @@
-import findJava from "./utils/findJava";
 import buildMermaid from "./utils/buildMermaid";
+import findJava from "./utils/findJava";
 import * as path from "path";
 import * as vscode from "vscode";
 import {
@@ -7,10 +7,12 @@ import {
   LanguageClientOptions,
   Executable,
 } from "vscode-languageclient/node";
+
 const LABEL_RELOAD_WINDOW = "Reload Window";
 let extensionContext: vscode.ExtensionContext | null = null;
 let languageClient: LanguageClient | null = null;
 let javaPath: string | null = null;
+
 function startLanguageServer() {
   vscode.window.withProgress(
     { location: vscode.ProgressLocation.Window },
@@ -87,6 +89,7 @@ function startLanguageServer() {
     }
   );
 }
+
 async function previewDag(uri: string, name?: string) {
   const content: string = await vscode.commands.executeCommand("nextflow.server.previewDag", uri, name);
   if (!content) {
@@ -104,6 +107,7 @@ async function previewDag(uri: string, name?: string) {
   );
   panel.webview.html = buildMermaid(content, name)
 }
+
 function restartLanguageServer() {
   if (!languageClient) {
     startLanguageServer();
@@ -126,18 +130,21 @@ function restartLanguageServer() {
     }
   );
 }
+
 function stopLanguageServer() {
   if (!languageClient) {
     return;
   }
   languageClient.stop()
 }
+
 function onDidChangeConfiguration(event: vscode.ConfigurationChangeEvent) {
   if (event.affectsConfiguration("nextflow.java.home")) {
     javaPath = findJava();
     restartLanguageServer();
   }
 }
+
 export function activate(context: vscode.ExtensionContext) {
   extensionContext = context;
   javaPath = findJava();
@@ -155,6 +162,7 @@ export function activate(context: vscode.ExtensionContext) {
   });
   startLanguageServer();
 }
+
 export function deactivate() {
   extensionContext = null;
 }
