@@ -157,10 +157,10 @@
                     "default": null,
                     "markdownDescription": "Specify the folder path to the desired Java runtime. Equivalent to the `JAVA_HOME` environment variable, i.e. the Java binary should be located at `$JAVA_HOME/bin/java`. Use this setting if the extension cannot find Java automatically."
                 },
-                "nextflow.suppressFutureWarnings": {
+                "nextflow.paranoidWarnings": {
                     "type": "boolean",
-                    "default": true,
-                    "description": "Hide warnings for future deprecations and other paranoid warnings."
+                    "default": false,
+                    "description": "Enable additional warnings for things like future deprecations, discouraged patterns, and so on."
                 }
             }
         }
