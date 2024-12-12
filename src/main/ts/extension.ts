@@ -1,3 +1,4 @@
+import buildMermaid from "./utils/buildMermaid";
 import findJava from "./utils/findJava";
 import * as path from "path";
 import * as vscode from "vscode";
@@ -90,12 +91,13 @@ function startLanguageServer() {
 }
 
 async function previewDag(uri: string, name?: string) {
-  const content = await vscode.commands.executeCommand("nextflow.server.previewDag", uri, name);
-  if (!content) {
-    vscode.window.showErrorMessage("Failed to render DAG preview.");
+  const res: any = await vscode.commands.executeCommand("nextflow.server.previewDag", uri, name);
+  if (!res || !res.result) {
+    const message = res?.error ?? "Failed to render DAG preview.";
+    vscode.window.showErrorMessage(message);
     return;
   }
-
+  const content = res.result;
   const panel = vscode.window.createWebviewPanel(
     "dag-preview",
     "DAG Preview",
@@ -159,7 +161,7 @@ function stopLanguageServer() {
   if (!languageClient) {
     return;
   }
-  languageClient.stop()
+  languageClient.stop();
 }
 
 function onDidChangeConfiguration(event: vscode.ConfigurationChangeEvent) {
@@ -176,9 +178,18 @@ export function activate(context: vscode.ExtensionContext) {
   vscode.commands.registerCommand("nextflow.previewDag", previewDag);
   vscode.commands.registerCommand("nextflow.restartServer", restartLanguageServer);
   vscode.commands.registerCommand("nextflow.stopServer", stopLanguageServer);
+  vscode.commands.registerCommand("nextflow.openFileFromWebview", async (uriString: string) => {
+    if (!uriString) {
+      vscode.window.showErrorMessage("Missing file URI.");
+      return;
+    }
+    const uri = vscode.Uri.parse(uriString);
+    await vscode.window.showTextDocument(uri, { viewColumn: vscode.ViewColumn.One });
+  });
   startLanguageServer();
 }
 
 export function deactivate() {
+  stopLanguageServer();
   extensionContext = null;
 }

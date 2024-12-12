@@ -1,7 +1,16 @@
-# Change Log
-All notable changes to the "nextflow" extension will be documented in this file.
+# Changelog
 
-Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how to structure this file.
+All notable changes to the Nextflow VS Code extension will be documented here.
+
+See [Keep a Changelog](http://keepachangelog.com/) for recommendations on how to structure this file.
+
+## [1.0.2] - 2024-11-25
+
+- Bump language server to [1.0.2](https://github.com/nextflow-io/language-server/releases/tag/v1.0.2)
+
+## [1.0.1] - 2024-11-12
+
+- Bump language server to [1.0.1](https://github.com/nextflow-io/language-server/releases/tag/v1.0.1)
 
 ## [1.0.0] - 2024-10-28
 
@@ -12,6 +21,7 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 - Update publishing automation to also push to the Open VSX Registry.
 
 ## [0.3.2] - 2024-03-25
+
 - Updated Nextflow logo
 
 ## [0.3.1] - 2022-04-13
@@ -27,4 +37,5 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 
 
 ## [0.1.0] - 2018-01-30
+
 - Initial release
