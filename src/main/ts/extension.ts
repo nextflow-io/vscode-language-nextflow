@@ -100,9 +100,19 @@ async function previewDag(uri: string, name?: string) {
     "DAG Preview",
     vscode.ViewColumn.Beside,
     {
-      enableScripts: true
+      enableScripts: true,
+      localResourceRoots: [
+        vscode.Uri.file(path.join(extensionContext!.extensionPath, 'media'))
+      ]
     }
   );
+
+  const mermaidScriptUri = panel.webview.asWebviewUri(
+    vscode.Uri.file(
+      path.join(extensionContext!.extensionPath, 'media', 'mermaid.esm.min.mjs')
+    )
+  );
+
   panel.webview.html = `
     <html>
     <head>
@@ -113,7 +123,7 @@ async function previewDag(uri: string, name?: string) {
     ${content}
     </pre>
     <script type="module">
-      import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+      import mermaid from '${mermaidScriptUri}';
       mermaid.initialize({ startOnLoad: true });
     </script>
     </body>
