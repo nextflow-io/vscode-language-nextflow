@@ -167,7 +167,6 @@ ${content.replace(/\n\s*click.+/g, "")}
 <html>
   <head>
     ${htmlHead}
-    <script src="${mermaidScriptUri}"></script>
   </head>
   <body>
     ${mermaidDiagram.replace(/\n\s*click.+/g, "").replace("</script>", "<\\/script>")}
