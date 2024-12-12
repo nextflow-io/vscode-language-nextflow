@@ -95,6 +95,7 @@ async function previewDag(uri: string, name?: string) {
     vscode.window.showErrorMessage("Failed to render DAG preview.");
     return;
   }
+
   const panel = vscode.window.createWebviewPanel(
     "dag-preview",
     "DAG Preview",
@@ -102,14 +103,14 @@ async function previewDag(uri: string, name?: string) {
     {
       enableScripts: true,
       localResourceRoots: [
-        vscode.Uri.file(path.join(extensionContext!.extensionPath, 'media'))
+        vscode.Uri.file(path.join(extensionContext!.extensionPath, 'build', 'media'))
       ]
     }
   );
 
   const mermaidScriptUri = panel.webview.asWebviewUri(
     vscode.Uri.file(
-      path.join(extensionContext!.extensionPath, 'media', 'mermaid.esm.min.mjs')
+      path.join(extensionContext!.extensionPath, 'build', 'media', 'mermaid.min.js')
     )
   );
 
@@ -117,13 +118,13 @@ async function previewDag(uri: string, name?: string) {
     <html>
     <head>
     <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1, maximum-scale=1">
+    <script src="${mermaidScriptUri}"></script>
     </head>
     <body>
     <pre class="mermaid" style="text-align: center;">
     ${content}
     </pre>
-    <script type="module">
-      import mermaid from '${mermaidScriptUri}';
+    <script>
       mermaid.initialize({ startOnLoad: true });
     </script>
     </body>
