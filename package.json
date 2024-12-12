@@ -163,5 +163,8 @@
                 }
             }
         }
+    },
+    "dependencies": {
+        "mermaid": "^11.4.1"
     }
 }
