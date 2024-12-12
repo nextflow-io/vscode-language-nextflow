@@ -47,8 +47,8 @@ const config = {
     new CopyWebpackPlugin({
       patterns: [
         { 
-          from: 'node_modules/mermaid/dist/mermaid.esm.min.mjs', 
-          to: 'media/mermaid.esm.min.mjs' 
+          from: 'node_modules/mermaid/dist/mermaid.min.js',
+          to: 'media/mermaid.min.js'
         }
       ]
     })
