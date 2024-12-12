@@ -104,10 +104,20 @@ async function previewDag(uri: string, name?: string) {
     vscode.ViewColumn.Beside,
     {
       enableCommandUris: true,
-      enableScripts: true
+      enableScripts: true,
+      localResourceRoots: [
+        vscode.Uri.file(path.join(extensionContext!.extensionPath, 'build', 'media'))
+      ]
     }
   );
-  panel.webview.html = buildMermaid(content, name ?? 'Entry')
+
+  const mermaidScriptUri = panel.webview.asWebviewUri(
+    vscode.Uri.file(
+      path.join(extensionContext!.extensionPath, 'build', 'media', 'mermaid.min.js')
+    )
+  );
+
+  panel.webview.html = buildMermaid(content, name ?? 'Entry', mermaidScriptUri);
 }
 
 function restartLanguageServer() {

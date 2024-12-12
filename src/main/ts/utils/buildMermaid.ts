@@ -1,4 +1,6 @@
-export default function buildMermaid(content: string, name: string): string {
+import * as vscode from "vscode";
+
+export default function buildMermaid(content: string, name: string, mermaidScriptUri: vscode.Uri): string {
   // Save HTML content into strings so that we can export a partial version without VSCode extras
   const htmlHead = `<head>
     <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1, maximum-scale=1">
@@ -94,6 +96,7 @@ export default function buildMermaid(content: string, name: string): string {
         background: var(--vscode-button-secondaryHoverBackground);
       }
     </style>
+    <script src="${mermaidScriptUri}"></script>
   </head>`;
 
   // Title and description - VSCode only
@@ -121,11 +124,10 @@ export default function buildMermaid(content: string, name: string): string {
     ${content.replace(/href "([^"]+)"/g, 'href "command:nextflow.openFileFromWebview?%5B%22$1%22%5D"')}
     classDef default stroke-width:3px
   </pre>
-  <script type="module">
-      import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
-      mermaid.initialize({ startOnLoad: true, securityLevel: 'loose' });
-  <\/script>
-  `;
+  <script>
+    mermaid.initialize({ startOnLoad: true, securityLevel: 'loose' });
+  </script>
+`;
 
   // Buttons + JS to download / Export - VSCode only
   // Includes a stripped down version of the whole thing in a string, to be able to save

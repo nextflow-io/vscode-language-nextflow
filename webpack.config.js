@@ -8,6 +8,7 @@
 "use strict";
 
 const path = require("path");
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 /**@type {import('webpack').Configuration}*/
 const config = {
@@ -42,5 +43,15 @@ const config = {
       },
     ],
   },
+  plugins: [
+    new CopyWebpackPlugin({
+      patterns: [
+        { 
+          from: 'node_modules/mermaid/dist/mermaid.min.js',
+          to: 'media/mermaid.min.js'
+        }
+      ]
+    })
+  ]
 };
 module.exports = config;
