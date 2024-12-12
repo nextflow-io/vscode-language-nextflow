@@ -103,6 +103,7 @@ async function previewDag(uri: string, name?: string) {
     "DAG Preview",
     vscode.ViewColumn.Beside,
     {
+      enableCommandUris: true,
       enableScripts: true,
       localResourceRoots: [
         vscode.Uri.file(path.join(extensionContext!.extensionPath, 'build', 'media'))
@@ -116,22 +117,7 @@ async function previewDag(uri: string, name?: string) {
     )
   );
 
-  panel.webview.html = `
-    <html>
-    <head>
-    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1, maximum-scale=1">
-    <script src="${mermaidScriptUri}"></script>
-    </head>
-    <body>
-    <pre class="mermaid" style="text-align: center;">
-    ${content}
-    </pre>
-    <script>
-      mermaid.initialize({ startOnLoad: true });
-    </script>
-    </body>
-    </html>
-  `;
+  panel.webview.html = buildMermaid(content, name ?? 'Entry', mermaidScriptUri);
 }
 
 function restartLanguageServer() {

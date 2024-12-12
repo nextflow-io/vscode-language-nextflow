@@ -1,4 +1,6 @@
-export default function buildMermaid(content: string, name: string): string {
+import * as vscode from "vscode";
+
+export default function buildMermaid(content: string, name: string, mermaidScriptUri: vscode.Uri): string {
   // Save HTML content into strings so that we can export a partial version without VSCode extras
   const htmlHead = `<head>
     <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1, maximum-scale=1">
@@ -94,6 +96,7 @@ export default function buildMermaid(content: string, name: string): string {
         background: var(--vscode-button-secondaryHoverBackground);
       }
     </style>
+    <script src="${mermaidScriptUri}"></script>
   </head>`;
 
   // Title and description - VSCode only
@@ -162,7 +165,10 @@ ${content.replace(/\n\s*click.+/g, "")}
       const downloadWebviewHtml = () => {
         const html = \`
 <html>
-  ${htmlHead}
+  <head>
+    ${htmlHead}
+    <script src="${mermaidScriptUri}"></script>
+  </head>
   <body>
     ${mermaidDiagram.replace(/\n\s*click.+/g, "").replace("</script>", "<\\/script>")}
   </body>
