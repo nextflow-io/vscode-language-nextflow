@@ -165,9 +165,7 @@ ${content.replace(/\n\s*click.+/g, "")}
       const downloadWebviewHtml = () => {
         const html = \`
 <html>
-  <head>
-    ${htmlHead}
-  </head>
+  ${htmlHead}
   <body>
     ${mermaidDiagram.replace(/\n\s*click.+/g, "").replace("</script>", "<\\/script>")}
   </body>
