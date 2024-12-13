@@ -124,7 +124,7 @@ export default function buildMermaid(content: string, name: string, mermaidScrip
     ${content.replace(/href "([^"]+)"/g, 'href "command:nextflow.openFileFromWebview?%5B%22$1%22%5D"')}
     classDef default stroke-width:3px
   </pre>
-  <script src="${mermaidScriptUri}"><\/script>
+  <script src="${mermaidScriptUri}"></script>
   <script>
     document.addEventListener('DOMContentLoaded', function() {
       mermaid.initialize({
@@ -133,33 +133,38 @@ export default function buildMermaid(content: string, name: string, mermaidScrip
         theme: 'base'
       });
     });
-  <\/script>
+  </script>
   `;
 
   // Buttons + JS to download / Export - VSCode only
   // Includes a stripped down version of the whole thing in a string, to be able to save
   // a custom version as a HTML file. Very meta.
+
+  // Pre-generate the HTML content and encode it as a data URL
+  const htmlForDownload = encodeURIComponent(`
+  <html>
+    ${htmlHead}
+    <body>
+      ${mermaidDiagram.replace(/\n\s*click.+/g, "").replace("</script>", "<\\/script>")}
+    </body>
+  </html>`);
+  
   const actionButtons = `
-  <div class="action-buttons">
+    <div class="action-buttons">
       <button onclick="copyContent()">Copy as markdown</button>
       <button onclick="downloadMermaidPlot()">Export as SVG</button>
       <button onclick="downloadWebviewHtml()">Save HTML</button>
-  </div>
-  <script>
-      // Functionality to copy mermaid as markdown
-      // Strips out VSCode code navigation links
-      let text = \`
-\\\`\\\`\\\`mermaid
-${content.replace(/\n\s*click.+/g, "")}
-\\\`\\\`\\\`
-\`;
-      const copyContent = async () => {
-        await navigator.clipboard.writeText(text);
+    </div>
+    <script>
+      function copyContent() {
+        const text = \`\\\`\\\`\\\`mermaid\\n${content.replace(/\n\s*click.+/g, "")}\\n\\\`\\\`\\\`\`;
+        navigator.clipboard.writeText(text);
       }
-      const downloadMermaidPlot = () => {
+  
+      function downloadMermaidPlot() {
         const svg = document.querySelector('.mermaid svg');
         if (!svg) return console.error('Mermaid SVG not found');
-        const svgData = new XMLSerializer().serializeToString(svg).replace('style="', 'style="background-color:white;');
+        const svgData = new XMLSerializer().serializeToString(svg).replace('style=""', 'style="background-color:white;"');
         const blob = new Blob([svgData], { type: 'image/svg+xml;charset=utf-8' });
         const url = URL.createObjectURL(blob);
         const a = document.createElement('a');
@@ -167,24 +172,14 @@ ${content.replace(/\n\s*click.+/g, "")}
         a.download = 'dag-${name}.svg';
         a.click();
         URL.revokeObjectURL(url);
-      };
-      const downloadWebviewHtml = () => {
-        const html = \`
-<html>
-  ${htmlHead}
-  <body>
-    ${mermaidDiagram.replace(/\n\s*click.+/g, "").replace("</script>", "<\\/script>")}
-  </body>
-</html>
-\`;
-        const blob = new Blob([html], { type: 'text/html;charset=utf-8' });
-        const url = URL.createObjectURL(blob);
+      }
+  
+      function downloadWebviewHtml() {
         const a = document.createElement('a');
-        a.href = url;
+        a.href = "data:text/html;charset=utf-8," + "${htmlForDownload}";
         a.download = 'dag-${name}.html';
         a.click();
-        URL.revokeObjectURL(url);
-      };
+      }
     </script>
   `;
 
