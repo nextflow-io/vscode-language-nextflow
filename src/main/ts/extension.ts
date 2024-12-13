@@ -12,6 +12,7 @@ const LABEL_RELOAD_WINDOW = "Reload Window";
 let extensionContext: vscode.ExtensionContext | null = null;
 let languageClient: LanguageClient | null = null;
 let javaPath: string | null = null;
+let mediaPath = vscode.Uri.file('.');
 
 function startLanguageServer() {
   vscode.window.withProgress(
@@ -90,6 +91,30 @@ function startLanguageServer() {
   );
 }
 
+async function previewDag(uri: string, name?: string) {
+  const res: any = await vscode.commands.executeCommand("nextflow.server.previewDag", uri, name);
+  if (!res || !res.result) {
+    const message = res?.error ?? "Failed to render DAG preview.";
+    vscode.window.showErrorMessage(message);
+    return;
+  }
+  const content = res.result;
+  const panel = vscode.window.createWebviewPanel(
+    "dag-preview",
+    "DAG Preview",
+    vscode.ViewColumn.Beside,
+    {
+      enableCommandUris: true,
+      enableScripts: true,
+      localResourceRoots: [mediaPath]
+    }
+  );
+  const mermaidLibUri = panel.webview.asWebviewUri(
+    vscode.Uri.joinPath(mediaPath, 'mermaid.min.js')
+  );
+  panel.webview.html = buildMermaid(content, name ?? 'Entry', mermaidLibUri);
+}
+
 function restartLanguageServer() {
   if (!languageClient) {
     startLanguageServer();
@@ -130,38 +155,11 @@ function onDidChangeConfiguration(event: vscode.ConfigurationChangeEvent) {
 export function activate(context: vscode.ExtensionContext) {
   extensionContext = context;
   javaPath = findJava();
-  const mediaPath = vscode.Uri.joinPath(context.extensionUri, 'media');
-
+  mediaPath = vscode.Uri.joinPath(context.extensionUri, 'media');
   vscode.workspace.onDidChangeConfiguration(onDidChangeConfiguration);
-
-  // Preview DAG
-  vscode.commands.registerCommand("nextflow.previewDag", async (uri: string, name?: string) => {
-    const res: any = await vscode.commands.executeCommand("nextflow.server.previewDag", uri, name);
-    if (!res || !res.result) {
-      const message = res?.error ?? "Failed to render DAG preview.";
-      vscode.window.showErrorMessage(message);
-      return;
-    }
-    const content = res.result;
-    
-    const panel = vscode.window.createWebviewPanel(
-      "dag-preview",
-      "DAG Preview",
-      vscode.ViewColumn.Beside,
-      {
-        enableCommandUris: true,
-        enableScripts: true,
-        localResourceRoots: [mediaPath]
-      }
-    );
-
-    const mermaidScriptUri = panel.webview.asWebviewUri(
-      vscode.Uri.joinPath(mediaPath, 'mermaid.min.js')
-    );
-
-    panel.webview.html = buildMermaid(content, name ?? 'Entry', mermaidScriptUri);
-  });
-  // Open file from webview
+  vscode.commands.registerCommand("nextflow.previewDag", previewDag);
+  vscode.commands.registerCommand("nextflow.restartServer", restartLanguageServer);
+  vscode.commands.registerCommand("nextflow.stopServer", stopLanguageServer);
   vscode.commands.registerCommand("nextflow.openFileFromWebview", async (uriString: string) => {
     if (!uriString) {
       vscode.window.showErrorMessage("Missing file URI.");
@@ -170,9 +168,6 @@ export function activate(context: vscode.ExtensionContext) {
     const uri = vscode.Uri.parse(uriString);
     await vscode.window.showTextDocument(uri, { viewColumn: vscode.ViewColumn.One });
   });
-  vscode.commands.registerCommand("nextflow.restartServer", restartLanguageServer);
-  vscode.commands.registerCommand("nextflow.stopServer", stopLanguageServer);
-
   startLanguageServer();
 }
 

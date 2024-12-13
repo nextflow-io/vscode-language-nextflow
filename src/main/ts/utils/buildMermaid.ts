@@ -1,6 +1,6 @@
 import * as vscode from "vscode";
 
-export default function buildMermaid(content: string, name: string, mermaidScriptUri: vscode.Uri): string {
+export default function buildMermaid(content: string, name: string, mermaidLibUri: vscode.Uri): string {
   // Save HTML content into strings so that we can export a partial version without VSCode extras
   const htmlHead = `<head>
     <meta charset="UTF-8">
@@ -124,7 +124,7 @@ export default function buildMermaid(content: string, name: string, mermaidScrip
     ${content.replace(/href "([^"]+)"/g, 'href "command:nextflow.openFileFromWebview?%5B%22$1%22%5D"')}
     classDef default stroke-width:3px
   </pre>
-  <script src="${mermaidScriptUri}"></script>
+  <script src="${mermaidLibUri}"></script>
   <script>
     document.addEventListener('DOMContentLoaded', function() {
       mermaid.initialize({
@@ -160,7 +160,6 @@ export default function buildMermaid(content: string, name: string, mermaidScrip
         const text = \`\\\`\\\`\\\`mermaid\\n${content.replace(/\n\s*click.+/g, "")}\\n\\\`\\\`\\\`\`;
         navigator.clipboard.writeText(text);
       }
-  
       function downloadMermaidPlot() {
         const svg = document.querySelector('.mermaid svg');
         if (!svg) return console.error('Mermaid SVG not found');
@@ -173,7 +172,6 @@ export default function buildMermaid(content: string, name: string, mermaidScrip
         a.click();
         URL.revokeObjectURL(url);
       }
-  
       function downloadWebviewHtml() {
         const a = document.createElement('a');
         a.href = "data:text/html;charset=utf-8," + "${htmlForDownload}";
