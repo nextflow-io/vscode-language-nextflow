@@ -124,7 +124,7 @@ export default function buildMermaid(content: string, name: string, mermaidScrip
     ${content.replace(/href "([^"]+)"/g, 'href "command:nextflow.openFileFromWebview?%5B%22$1%22%5D"')}
     classDef default stroke-width:3px
   </pre>
-  <script src="${mermaidScriptUri}"></script>
+  <script src="${mermaidScriptUri}"><\/script>
   <script>
     document.addEventListener('DOMContentLoaded', function() {
       mermaid.initialize({
@@ -133,7 +133,7 @@ export default function buildMermaid(content: string, name: string, mermaidScrip
         theme: 'base'
       });
     });
-  </script>
+  <\/script>
   `;
 
   // Buttons + JS to download / Export - VSCode only
