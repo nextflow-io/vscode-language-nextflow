@@ -1,7 +1,7 @@
 import * as vscode from "vscode";
 
 export default function buildMermaid(content: string, name: string, mermaidLibUri: vscode.Uri): string {
-  // Save HTML content into strings so that we can export a partial version without VSCode extras
+  // HTML boilerplate used by both VSCode and HTML export
   const htmlHead = `<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1, maximum-scale=1">
@@ -99,12 +99,7 @@ export default function buildMermaid(content: string, name: string, mermaidLibUr
     </style>
   </head>`;
 
-  // Title and description - VSCode only
-  const pageTitle = `<h3>${name} workflow</h3>`;
-  const vsCodeHelpText =
-    "<p>Click on a process or workflow node to open it in the editor.</p>";
-
-  // Mermaid diagram + JS
+  // Mermaid diagram
   const mermaidDiagram = `
   <pre class="mermaid">
     %%{
@@ -126,12 +121,8 @@ export default function buildMermaid(content: string, name: string, mermaidLibUr
   </pre>
   `;
 
-  // Buttons + JS to download / Export - VSCode only
-  // Includes a stripped down version of the whole thing in a string, to be able to save
-  // a custom version as a HTML file. Very meta.
-
-  // Pre-generate the HTML content and encode it as a data URL
-  const htmlForDownload = encodeURIComponent(`
+  // HTML export encoded as a data URL
+  const htmlExport = encodeURIComponent(`
   <html>
     ${htmlHead}
     <body>
@@ -142,8 +133,25 @@ export default function buildMermaid(content: string, name: string, mermaidLibUr
       </script>
     </body>
   </html>`);
-  
-  const actionButtons = `
+
+  // VSCode webview HTML
+  return `
+<html>
+  ${htmlHead}
+  <body>
+    <h3>${name} workflow</h3>
+    <p>Click on a process or workflow node to open it in the editor.</p>
+    ${mermaidDiagram}
+    <script src="${mermaidLibUri}"></script>
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        mermaid.initialize({
+          startOnLoad: true,
+          securityLevel: 'loose',
+          theme: 'base'
+        });
+      });
+    </script>
     <div class="action-buttons">
       <button onclick="copyContent()">Copy as Markdown</button>
       <button onclick="downloadMermaidSvg()">Export as SVG</button>
@@ -168,33 +176,11 @@ export default function buildMermaid(content: string, name: string, mermaidLibUr
       }
       function downloadMermaidHtml() {
         const a = document.createElement('a');
-        a.href = "data:text/html;charset=utf-8," + "${htmlForDownload}";
+        a.href = "data:text/html;charset=utf-8," + "${htmlExport}";
         a.download = 'dag-${name}.html';
         a.click();
       }
     </script>
-  `;
-
-  // Set the panel HTML for VSCode
-  return `
-<html>
-  ${htmlHead}
-  <body>
-    ${pageTitle}
-    ${vsCodeHelpText}
-    ${mermaidDiagram}
-    <script src="${mermaidLibUri}"></script>
-    <script>
-      document.addEventListener('DOMContentLoaded', function() {
-        mermaid.initialize({
-          startOnLoad: true,
-          securityLevel: 'loose',
-          theme: 'base'
-        });
-      });
-    </script>
-    ${actionButtons}
   </body>
-</html>
-  `;
+</html>`;
 }
