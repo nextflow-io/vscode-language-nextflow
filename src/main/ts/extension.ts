@@ -12,7 +12,7 @@ const LABEL_RELOAD_WINDOW = "Reload Window";
 let extensionContext: vscode.ExtensionContext | null = null;
 let languageClient: LanguageClient | null = null;
 let javaPath: string | null = null;
-let mediaPath = vscode.Uri.file('.');
+let mediaPath: vscode.Uri | null = null;
 
 function startLanguageServer() {
   vscode.window.withProgress(
@@ -92,6 +92,9 @@ function startLanguageServer() {
 }
 
 async function previewDag(uri: string, name?: string) {
+  if(!mediaPath) {
+    return;
+  }
   const res: any = await vscode.commands.executeCommand("nextflow.server.previewDag", uri, name);
   if (!res || !res.result) {
     const message = res?.error ?? "Failed to render DAG preview.";
