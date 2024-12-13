@@ -106,7 +106,7 @@ export default function buildMermaid(content: string, name: string, mermaidScrip
 
   // Mermaid diagram + JS
   const mermaidDiagram = `
-  <div class="mermaid">
+  <pre class="mermaid">
     %%{
       init: {
         'theme': 'base',
@@ -123,7 +123,18 @@ export default function buildMermaid(content: string, name: string, mermaidScrip
     }%%
     ${content.replace(/href "([^"]+)"/g, 'href "command:nextflow.openFileFromWebview?%5B%22$1%22%5D"')}
     classDef default stroke-width:3px
-  </div>`;
+  </pre>
+  <script src="${mermaidScriptUri}"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      mermaid.initialize({
+        startOnLoad: true,
+        securityLevel: 'loose',
+        theme: 'base'
+      });
+    });
+  </script>
+  `;
 
   // Buttons + JS to download / Export - VSCode only
   // Includes a stripped down version of the whole thing in a string, to be able to save
@@ -133,30 +144,19 @@ export default function buildMermaid(content: string, name: string, mermaidScrip
       <button onclick="copyContent()">Copy as markdown</button>
       <button onclick="downloadMermaidPlot()">Export as SVG</button>
       <button onclick="downloadWebviewHtml()">Save HTML</button>
-  </div>`;
-
-  const scripts = `
-    <script src="${mermaidScriptUri}"></script>
-    <script>
-      document.addEventListener('DOMContentLoaded', function() {
-        mermaid.initialize({
-          startOnLoad: true,
-          securityLevel: 'loose',
-          theme: 'base'
-        });
-      });
-
-      const text = \`
+  </div>
+  <script>
+      // Functionality to copy mermaid as markdown
+      // Strips out VSCode code navigation links
+      let text = \`
 \\\`\\\`\\\`mermaid
 ${content.replace(/\n\s*click.+/g, "")}
 \\\`\\\`\\\`
 \`;
-      
-      async function copyContent() {
+      const copyContent = async () => {
         await navigator.clipboard.writeText(text);
       }
-
-      function downloadMermaidPlot() {
+      const downloadMermaidPlot = () => {
         const svg = document.querySelector('.mermaid svg');
         if (!svg) return console.error('Mermaid SVG not found');
         const svgData = new XMLSerializer().serializeToString(svg).replace('style="', 'style="background-color:white;');
@@ -167,45 +167,37 @@ ${content.replace(/\n\s*click.+/g, "")}
         a.download = 'dag-${name}.svg';
         a.click();
         URL.revokeObjectURL(url);
-      }
-
-      function downloadWebviewHtml() {
-        const exportHtml = \`
-<!DOCTYPE html>
-<html lang="en">
+      };
+      const downloadWebviewHtml = () => {
+        const html = \`
+<html>
   ${htmlHead}
   <body>
-    ${mermaidDiagram.replace(/\n\s*click.+/g, "")}
-    <script src="${mermaidScriptUri}"><\/script>
-    <script>
-      mermaid.initialize({ startOnLoad: true, securityLevel: 'loose', theme: 'base' });
-    <\/script>
+    ${mermaidDiagram.replace(/\n\s*click.+/g, "").replace("</script>", "<\\/script>")}
   </body>
 </html>
 \`;
-        const blob = new Blob([exportHtml], { type: 'text/html;charset=utf-8' });
+        const blob = new Blob([html], { type: 'text/html;charset=utf-8' });
         const url = URL.createObjectURL(blob);
         const a = document.createElement('a');
         a.href = url;
         a.download = 'dag-${name}.html';
         a.click();
         URL.revokeObjectURL(url);
-      }
+      };
     </script>
   `;
 
   // Set the panel HTML for VSCode
   return `
-<!DOCTYPE html>
-<html lang="en">
+<html>
   ${htmlHead}
   <body>
     ${pageTitle}
     ${vsCodeHelpText}
     ${mermaidDiagram}
     ${actionButtons}
-    ${scripts}
   </body>
 </html>
-`;
+  `;
 }
