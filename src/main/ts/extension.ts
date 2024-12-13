@@ -90,36 +90,6 @@ function startLanguageServer() {
   );
 }
 
-async function previewDag(uri: string, name?: string) {
-  const res: any = await vscode.commands.executeCommand("nextflow.server.previewDag", uri, name);
-  if (!res || !res.result) {
-    const message = res?.error ?? "Failed to render DAG preview.";
-    vscode.window.showErrorMessage(message);
-    return;
-  }
-  const content = res.result;
-  const panel = vscode.window.createWebviewPanel(
-    "dag-preview",
-    "DAG Preview",
-    vscode.ViewColumn.Beside,
-    {
-      enableCommandUris: true,
-      enableScripts: true,
-      localResourceRoots: [
-        vscode.Uri.file(path.join(extensionContext!.extensionPath, 'build', 'media'))
-      ]
-    }
-  );
-
-  const mermaidScriptUri = panel.webview.asWebviewUri(
-    vscode.Uri.file(
-      path.join(extensionContext!.extensionPath, 'build', 'media', 'mermaid.min.js')
-    )
-  );
-
-  panel.webview.html = buildMermaid(content, name ?? 'Entry', mermaidScriptUri);
-}
-
 function restartLanguageServer() {
   if (!languageClient) {
     startLanguageServer();
@@ -160,6 +130,35 @@ function onDidChangeConfiguration(event: vscode.ConfigurationChangeEvent) {
 export function activate(context: vscode.ExtensionContext) {
   extensionContext = context;
   javaPath = findJava();
+  const mediaPath = vscode.Uri.joinPath(context.extensionUri, 'media');
+
+  async function previewDag(uri: string, name?: string) {
+    const res: any = await vscode.commands.executeCommand("nextflow.server.previewDag", uri, name);
+    if (!res || !res.result) {
+      const message = res?.error ?? "Failed to render DAG preview.";
+      vscode.window.showErrorMessage(message);
+      return;
+    }
+    const content = res.result;
+    
+    const panel = vscode.window.createWebviewPanel(
+      "dag-preview",
+      "DAG Preview",
+      vscode.ViewColumn.Beside,
+      {
+        enableCommandUris: true,
+        enableScripts: true,
+        localResourceRoots: [mediaPath]
+      }
+    );
+
+    const mermaidScriptUri = panel.webview.asWebviewUri(
+      vscode.Uri.joinPath(mediaPath, 'mermaid.min.js')
+    );
+
+    panel.webview.html = buildMermaid(content, name ?? 'Entry', mermaidScriptUri);
+  }
+
   vscode.workspace.onDidChangeConfiguration(onDidChangeConfiguration);
   vscode.commands.registerCommand("nextflow.previewDag", previewDag);
   vscode.commands.registerCommand("nextflow.restartServer", restartLanguageServer);
