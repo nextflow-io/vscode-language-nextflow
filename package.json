@@ -39,11 +39,7 @@
         "webpack": "^5.95.0",
         "webpack-cli": "^5.0.1"
     },
-    "activationEvents": [
-        "onLanguage:nextflow",
-        "onCommand:nextflow.restartServer",
-        "onCommand:nextflow.stopServer"
-    ],
+    "activationEvents": [],
     "categories": [
         "Programming Languages"
     ],
