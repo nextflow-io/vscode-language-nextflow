@@ -124,16 +124,6 @@ export default function buildMermaid(content: string, name: string, mermaidLibUr
     ${content.replace(/href "([^"]+)"/g, 'href "command:nextflow.openFileFromWebview?%5B%22$1%22%5D"')}
     classDef default stroke-width:3px
   </pre>
-  <script src="${mermaidLibUri}"></script>
-  <script>
-    document.addEventListener('DOMContentLoaded', function() {
-      mermaid.initialize({
-        startOnLoad: true,
-        securityLevel: 'loose',
-        theme: 'base'
-      });
-    });
-  </script>
   `;
 
   // Buttons + JS to download / Export - VSCode only
@@ -145,22 +135,26 @@ export default function buildMermaid(content: string, name: string, mermaidLibUr
   <html>
     ${htmlHead}
     <body>
-      ${mermaidDiagram.replace(/\n\s*click.+/g, "").replace("</script>", "<\\/script>")}
+      ${mermaidDiagram.replace(/\n\s*click.+/g, "")}
+      <script type="module">
+        import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+        mermaid.initialize({ startOnLoad: true, securityLevel: 'loose' });
+      </script>
     </body>
   </html>`);
   
   const actionButtons = `
     <div class="action-buttons">
-      <button onclick="copyContent()">Copy as markdown</button>
-      <button onclick="downloadMermaidPlot()">Export as SVG</button>
-      <button onclick="downloadWebviewHtml()">Save HTML</button>
+      <button onclick="copyContent()">Copy as Markdown</button>
+      <button onclick="downloadMermaidSvg()">Export as SVG</button>
+      <button onclick="downloadMermaidHtml()">Export as HTML</button>
     </div>
     <script>
       function copyContent() {
         const text = \`\\\`\\\`\\\`mermaid\\n${content.replace(/\n\s*click.+/g, "")}\\n\\\`\\\`\\\`\`;
         navigator.clipboard.writeText(text);
       }
-      function downloadMermaidPlot() {
+      function downloadMermaidSvg() {
         const svg = document.querySelector('.mermaid svg');
         if (!svg) return console.error('Mermaid SVG not found');
         const svgData = new XMLSerializer().serializeToString(svg).replace('style=""', 'style="background-color:white;"');
@@ -172,7 +166,7 @@ export default function buildMermaid(content: string, name: string, mermaidLibUr
         a.click();
         URL.revokeObjectURL(url);
       }
-      function downloadWebviewHtml() {
+      function downloadMermaidHtml() {
         const a = document.createElement('a');
         a.href = "data:text/html;charset=utf-8," + "${htmlForDownload}";
         a.download = 'dag-${name}.html';
@@ -189,6 +183,16 @@ export default function buildMermaid(content: string, name: string, mermaidLibUr
     ${pageTitle}
     ${vsCodeHelpText}
     ${mermaidDiagram}
+    <script src="${mermaidLibUri}"></script>
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        mermaid.initialize({
+          startOnLoad: true,
+          securityLevel: 'loose',
+          theme: 'base'
+        });
+      });
+    </script>
     ${actionButtons}
   </body>
 </html>
