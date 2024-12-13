@@ -146,14 +146,14 @@ export default function buildMermaid(content: string, name: string, mermaidScrip
         });
       });
 
-      const content = \`
+      const text = \`
 \\\`\\\`\\\`mermaid
 ${content.replace(/\n\s*click.+/g, "")}
 \\\`\\\`\\\`
 \`;
       
       async function copyContent() {
-        await navigator.clipboard.writeText(content);
+        await navigator.clipboard.writeText(text);
       }
 
       function downloadMermaidPlot() {
