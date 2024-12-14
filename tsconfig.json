@@ -1,10 +1,12 @@
 {
   "compilerOptions": {
     "module": "commonjs",
-    "target": "es6",
-    "outDir": "build",
-    "lib": ["es6"],
+    "target": "es2020",
+    "lib": ["es2020"],
     "sourceMap": true,
-    "strict": true
-  }
+    "strict": true,
+    "rootDir": "src",
+    "types": []
+  },
+  "exclude": ["node_modules", ".vscode-test"]
 }

@@ -1,4 +1,7 @@
-.vscode/**
-.vscode-test/**
-.gitignore
-vsc-extension-quickstart.md
+.vscode
+node_modules
+src/**
+package-lock.json
+tsconfig.json
+esbuild.js
+**/*.map
