@@ -144,6 +144,11 @@
                     "type": "boolean",
                     "default": false,
                     "description": "Enable additional warnings for things like future deprecations, discouraged patterns, and so on."
+                },
+                "nextflow.targetVersion": {
+                    "type": "string",
+                    "default": null,
+                    "markdownDescription": "Target version of Nextflow to be used by the language server."
                 }
             }
         }
@@ -154,6 +159,7 @@
         "package": "npm run check-types && node esbuild.js --production && (cd build ; vsce package -o nextflow.vsix)"
     },
     "devDependencies": {
+        "@microsoft/vscode-file-downloader-api": "^1.0.1",
         "@types/node": "^20",
         "@types/vscode": "^1.73.1",
         "@vscode/vsce": "^3.2.1",
@@ -163,5 +169,8 @@
         "typescript": "^5.7.2",
         "vscode-jsonrpc": "^8.0.2",
         "vscode-languageclient": "^8.0.2"
-    }
+    },
+    "extensionDependencies": [
+        "mindaro-dev.file-downloader"
+    ]
 }

@@ -1,7 +1,7 @@
 import buildMermaid from "./utils/buildMermaid";
 import findJava from "./utils/findJava";
-import * as path from "path";
 import * as vscode from "vscode";
+import { getApi } from "@microsoft/vscode-file-downloader-api";
 import {
   LanguageClient,
   LanguageClientOptions,
@@ -12,6 +12,10 @@ const LABEL_RELOAD_WINDOW = "Reload Window";
 let extensionContext: vscode.ExtensionContext | null = null;
 let languageClient: LanguageClient | null = null;
 let javaPath: string | null = null;
+
+function getDefaultVersion() {
+  return "1.0.3";
+}
 
 function startLanguageServer() {
   vscode.window.withProgress(
@@ -35,6 +39,16 @@ function startLanguageServer() {
           }
           return;
         }
+        progress.report({ message: "Downloading Nextflow language server..." });
+        const version = vscode.workspace
+          .getConfiguration("nextflow")
+          .get("targetVersion") as string ?? getDefaultVersion();
+        const fileDownloader = await getApi();
+        const serverUri = await fileDownloader.downloadFile(
+          vscode.Uri.parse(`https://github.com/nextflow-io/language-server/releases/download/v${version}/language-server-all.jar`),
+          "language-server-all.jar",
+          extensionContext
+        );
         progress.report({ message: "Initializing Nextflow language server..." });
         let clientOptions: LanguageClientOptions = {
           documentSelector: [
@@ -59,11 +73,7 @@ function startLanguageServer() {
         };
         let args = [
           "-jar",
-          path.resolve(
-            extensionContext.extensionPath,
-            "bin",
-            "language-server-all.jar"
-          ),
+          serverUri.fsPath,
         ];
         // uncomment to allow a debugger to attach to the language server
         // args.unshift("-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=5005,quiet=y");
