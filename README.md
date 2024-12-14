@@ -4,7 +4,7 @@ VS Code extension for [Nextflow](https://www.nextflow.io/) that provides languag
 
 ![nextflow vscode extension](images/vscode-nextflow.png)
 
-Read the [blog post](https://seqera.io/blog/modernizing-nextflow-developer-experience/) and the [docs](https://nextflow.io/docs/latest/vscode.html) for more information.
+Read the blog posts ([part 1](https://seqera.io/blog/modernizing-nextflow-developer-experience/), [part 2](https://seqera.io/blog/modernizing-nextflow-developer-experience-part-2/)) and the [docs](https://nextflow.io/docs/latest/vscode.html) for more information.
 
 See also:
 
@@ -34,32 +34,30 @@ Clone this repository:
 
 ```bash
 git clone https://github.com/nextflow-io/vscode-language-nextflow
-```
-
-Clone the language server into this repository:
-
-```bash
 cd vscode-language-nextflow
+```
+
+If you need to edit the language server, clone the repository and build it:
+
+```bash
 git clone https://github.com/nextflow-io/language-server
+make server
 ```
 
-Build the extension:
+Otherwise, you can simply download a language server release into the following subdirectory:
 
 ```bash
-./gradlew build
+mkdir -p language-server/build/libs
+wget -P language-server/build/libs https://github.com/nextflow-io/language-server/releases/download/$VERSION/language-server-all.jar
 ```
 
-From VS Code, you can press `F5` to launch a new VS Code window with the extension loaded.
-
-Alternatively, you can install the extension into your environment (reload required):
-
-```bash
-./gradlew install
-```
+Finally, press `F5` to build the extension and launch a new VS Code window with the extension loaded.
 
 ## Publishing
 
-Update the extension version number in `package.json` and `.vscode/launch.json`, then run the "Deploy Extension" action to publish the extension to the VSCode marketplace and Open VSX.
+1. Update the extension version number in `package.json`.
+2. Update the changelog in `CHANGELOG.md`.
+3. Run the "Deploy Extension" action to publish the extension to the VSCode marketplace and Open VSX.
 
 ## Contributing
 
