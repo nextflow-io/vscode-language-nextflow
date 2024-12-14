@@ -1,5 +1,7 @@
 import buildMermaid from "./utils/buildMermaid";
 import findJava from "./utils/findJava";
+import * as fs from 'fs';
+import * as path from "path";
 import * as vscode from "vscode";
 import { getApi } from "@microsoft/vscode-file-downloader-api";
 import {
@@ -15,6 +17,31 @@ let javaPath: string | null = null;
 
 function getDefaultVersion() {
   return "1.0.3";
+}
+
+async function getLanguageServerPath() {
+  if (!extensionContext) {
+    return null;
+  }
+  const devPath = path.resolve(
+    extensionContext.extensionPath,
+    "bin",
+    "language-server-all.jar"
+  );
+  if( fs.existsSync(devPath) ) {
+    vscode.window.showInformationMessage("Using local build of language server.");
+    return devPath;
+  }
+  const version = vscode.workspace
+    .getConfiguration("nextflow")
+    .get("targetVersion") as string ?? getDefaultVersion();
+  const fileDownloader = await getApi();
+  const serverUri = await fileDownloader.downloadFile(
+    vscode.Uri.parse(`https://github.com/nextflow-io/language-server/releases/download/v${version}/language-server-all.jar`),
+    "language-server-all.jar",
+    extensionContext
+  );
+  return serverUri.fsPath;
 }
 
 function startLanguageServer() {
@@ -39,16 +66,6 @@ function startLanguageServer() {
           }
           return;
         }
-        progress.report({ message: "Downloading Nextflow language server..." });
-        const version = vscode.workspace
-          .getConfiguration("nextflow")
-          .get("targetVersion") as string ?? getDefaultVersion();
-        const fileDownloader = await getApi();
-        const serverUri = await fileDownloader.downloadFile(
-          vscode.Uri.parse(`https://github.com/nextflow-io/language-server/releases/download/v${version}/language-server-all.jar`),
-          "language-server-all.jar",
-          extensionContext
-        );
         progress.report({ message: "Initializing Nextflow language server..." });
         let clientOptions: LanguageClientOptions = {
           documentSelector: [
@@ -71,9 +88,15 @@ function startLanguageServer() {
             protocol2Code: (value) => vscode.Uri.parse(value),
           },
         };
+        let serverPath = await getLanguageServerPath();
+        if (!serverPath) {
+          resolve();
+          vscode.window.showErrorMessage("Failed to retrieve language server.");
+          return;
+        }
         let args = [
           "-jar",
-          serverUri.fsPath,
+          serverPath,
         ];
         // uncomment to allow a debugger to attach to the language server
         // args.unshift("-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=5005,quiet=y");

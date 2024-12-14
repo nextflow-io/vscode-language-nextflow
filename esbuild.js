@@ -15,6 +15,8 @@ async function main() {
     'package.json': './package.json',
     'node_modules/mermaid/dist/mermaid.min.js': 'media',
   };
+  if( !production )
+      files['language-server/build/libs/language-server-all.jar'] = 'bin'
   await build({
     entryPoints: [
       'src/extension.ts'
