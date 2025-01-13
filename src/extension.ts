@@ -142,11 +142,11 @@ function restartLanguageServer() {
   );
 }
 
-function stopLanguageServer() {
+function stopLanguageServer(): Thenable<void> | undefined {
   if (!languageClient) {
-    return;
+    return undefined;
   }
-  languageClient.stop();
+  return languageClient.stop();
 }
 
 function onDidChangeConfiguration(event: vscode.ConfigurationChangeEvent) {
@@ -174,7 +174,6 @@ export function activate(context: vscode.ExtensionContext) {
   startLanguageServer();
 }
 
-export function deactivate() {
-  stopLanguageServer();
-  extensionContext = null;
+export function deactivate(): Thenable<void> | undefined {
+  return stopLanguageServer();
 }
