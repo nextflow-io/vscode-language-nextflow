@@ -434,35 +434,6 @@
 				}
 			]
 		},
-		"object-types-inherited": {
-			"patterns": [
-				{
-					"begin": "\\b((?:[a-zA-Z]\\w*\\.)*[A-Z]+\\w*[a-z]+\\w*)<",
-					"end": ">|[^\\w\\s,\\?<\\[\\]]",
-					"name": "entity.other.inherited-class.groovy",
-					"patterns": [
-						{
-							"include": "#object-types-inherited"
-						},
-						{
-							"begin": "<",
-							"comment": "This is just to support <>'s with no actual type prefix",
-							"end": ">|[^\\w\\s,\\[\\]<]",
-							"name": "storage.type.generic.groovy"
-						}
-					]
-				},
-				{
-					"captures": {
-						"1": {
-							"name": "keyword.operator.dereference.groovy"
-						}
-					},
-					"match": "\\b(?:[a-zA-Z]\\w*(\\.))*[A-Z]+\\w*[a-z]+\\w*\\b",
-					"name": "entity.other.inherited-class.groovy"
-				}
-			]
-		},
 		"parameters": {
 			"patterns": [
 				{
