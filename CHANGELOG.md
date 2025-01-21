@@ -4,6 +4,12 @@ All notable changes to the Nextflow VS Code extension will be documented here.
 
 See [Keep a Changelog](http://keepachangelog.com/) for recommendations on how to structure this file.
 
+## [1.0.4] - 2025-01-21
+
+- Bump language server to [1.0.4](https://github.com/nextflow-io/language-server/releases/tag/v1.0.4)
+- Await language server shutdown on deactivate (#58)
+- Cleanup TextMate grammars
+
 ## [1.0.3] - 2024-12-16
 
 - Bump language server to [1.0.3](https://github.com/nextflow-io/language-server/releases/tag/v1.0.3)
