@@ -104,6 +104,18 @@
                 "command": "nextflow.stopServer",
                 "title": "Stop language server",
                 "category": "Nextflow"
+            },
+            {
+                "command": "seqera-ai.openChat",
+                "title": "Seqera AI: Open Chat"
+            },
+            {
+                "command": "seqera-ai.writeTest",
+                "title": "Seqera AI: Test with nf-test"
+            },
+            {
+                "command": "seqera-ai.convertToDSL2",
+                "title": "Seqera AI: Convert to DSL2"
             }
         ],
         "configuration": {
@@ -146,7 +158,37 @@
                     "description": "Enable additional warnings for things like future deprecations, discouraged patterns, and so on."
                 }
             }
-        }
+        },
+		"chatParticipants": [
+			{
+				"id": "seqera-ai.chatbot",
+				"fullName": "Seqera AI",
+				"name": "SeqeraAI",
+				"description": "How can I help you with Nextflow?",
+				"isSticky": true,
+				"commands": [
+					{
+						"name": "nf-test",
+						"description": "Write an nf-test for the code that you see"
+					},
+					{
+						"name": "dsl2",
+						"description": "Convert code to DSL2"
+					}
+				]
+			}
+		],
+		"colors": [
+            {
+                "id": "chat.avatarForeground",
+                "description": "Foreground color used for chat avatars.",
+                "defaults": {
+                    "light": "#0DC09D",
+                    "dark": "#0DC09D",
+                    "highContrast": "#0DC09D"
+                }
+            }
+        ]
     },
     "scripts": {
         "check-types": "tsc --noEmit",
@@ -155,7 +197,7 @@
     },
     "devDependencies": {
         "@types/node": "^20",
-        "@types/vscode": "^1.73.1",
+        "@types/vscode": "^1.96.0",
         "@vscode/vsce": "^3.2.1",
         "esbuild": "^0.24.0",
         "esbuild-plugin-copy": "^2.1.1",
@@ -163,5 +205,8 @@
         "typescript": "^5.7.2",
         "vscode-jsonrpc": "^8.0.2",
         "vscode-languageclient": "^8.0.2"
-    }
+    },
+	"dependencies": {
+		"@vscode/chat-extension-utils": "^0.0.0-alpha.4"
+	}
 }
