@@ -2,7 +2,7 @@ import * as vscode from "vscode";
 import { createHandler } from "./chatbot";
 
 export function activateChatbot(context: vscode.ExtensionContext) {
-  console.log("🟢 SeqeraAI extension activated");
+  console.log("🟢 Seqera extension activated");
 
   // Create the chat participant
   const chatHandler = createHandler();
@@ -19,7 +19,7 @@ export function activateChatbot(context: vscode.ExtensionContext) {
     "seqera-ai.openChat",
     async () => {
       await vscode.commands.executeCommand("workbench.action.chat.open", {
-        query: "@SeqeraAI ",
+        query: "@Seqera ",
         isPartialQuery: true,
       });
     }
@@ -29,7 +29,7 @@ export function activateChatbot(context: vscode.ExtensionContext) {
     "seqera-ai.writeTest",
     async () => {
       await vscode.commands.executeCommand("workbench.action.chat.open", {
-        query: "@SeqeraAI /nf-test",
+        query: "@Seqera /nf-test",
       });
     }
   );
