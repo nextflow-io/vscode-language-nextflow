@@ -2,7 +2,7 @@
   "name": "nextflow",
   "displayName": "Nextflow",
   "description": "Nextflow language support",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "publisher": "nextflow",
   "repository": {
     "type": "git",
@@ -23,13 +23,13 @@
     "workflows"
   ],
   "engines": {
-    "vscode": "^1.73.1"
+    "vscode": "^1.96.0"
   },
   "categories": [
     "Programming Languages"
   ],
   "activationEvents": [],
-  "main": "extension",
+  "main": "./build/extension.js",
   "contributes": {
     "languages": [
       {
