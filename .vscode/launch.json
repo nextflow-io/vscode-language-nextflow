@@ -2,14 +2,28 @@
 {
     "version": "0.2.0",
     "configurations": [
-        {
-            "name": "Extension",
-            "type": "extensionHost",
-            "request": "launch",
-            "args": [
-                "--extensionDevelopmentPath=${workspaceRoot}/build"
-            ],
-            "preLaunchTask": "${defaultBuildTask}"
-        }
+      {
+        "name": "Run Extension",
+        "type": "extensionHost",
+        "request": "launch",
+        "args": [
+          "--extensionDevelopmentPath=${workspaceRoot}/build",
+          "${input:devWorkspace}",
+          "--goto",
+          "${input:devWorkspace}/main.nf"
+        ],
+        "outFiles": [
+          "${workspaceFolder}/out/**/*.js"
+        ],
+        "preLaunchTask": "${defaultBuildTask}"
+      }
+    ],
+    "inputs": [
+      {
+        "id": "devWorkspace",
+        "type": "promptString",
+        "description": "Path to your Nextflow workspace (relative)",
+        "default": "${workspaceFolder}/../test-workspace"
+      }
     ]
-}
+  }

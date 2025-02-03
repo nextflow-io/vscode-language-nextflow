@@ -107,15 +107,18 @@
       },
       {
         "command": "seqera-ai.openChat",
-        "title": "Seqera AI: Open Chat"
+        "title": "Open chat with Seqera AI",
+        "category": "Nextflow"
       },
       {
         "command": "seqera-ai.writeTest",
-        "title": "Seqera AI: Test with nf-test"
+        "title": "Test with nf-test",
+        "category": "Nextflow"
       },
       {
         "command": "seqera-ai.convertToDSL2",
-        "title": "Seqera AI: Convert to DSL2"
+        "title": "Convert to DSL2",
+        "category": "Nextflow"
       }
     ],
     "configuration": {
@@ -162,7 +165,7 @@
     "chatParticipants": [
       {
         "id": "seqera-ai.chatbot",
-        "fullName": "Seqera AI",
+        "fullName": "Seqera",
         "name": "Seqera",
         "description": "How can I help you with Nextflow?",
         "isSticky": true,
