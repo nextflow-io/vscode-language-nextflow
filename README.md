@@ -67,9 +67,9 @@ Contributions are welcome. Feel free to fork [this repository](https://github.co
 
 ## Useful links
 
-- https://manual.macromates.com/en/language_grammars
-- https://code.visualstudio.com/docs/extensions/publish-extension
-- https://code.visualstudio.com/docs/extensions/yocode
-- https://code.visualstudio.com/docs/extensionAPI/extension-manifest
+* https://manual.macromates.com/en/language_grammars
+* https://code.visualstudio.com/docs/extensions/publish-extension
+* https://code.visualstudio.com/docs/extensions/yocode
+* https://code.visualstudio.com/docs/extensionAPI/extension-manifest
 
 **Enjoy!**
