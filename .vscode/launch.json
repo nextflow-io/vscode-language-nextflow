@@ -7,7 +7,7 @@
         "type": "extensionHost",
         "request": "launch",
         "args": [
-          "--extensionDevelopmentPath=${workspaceRoot}/build",
+          "--extensionDevelopmentPath=${workspaceFolder}",
           "${input:devWorkspace}",
           "--goto",
           "${input:devWorkspace}/main.nf"
