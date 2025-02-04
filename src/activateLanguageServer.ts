@@ -176,7 +176,7 @@ function onDidChangeConfiguration(event: vscode.ConfigurationChangeEvent) {
   }
 }
 
-function activateLanguage(context: vscode.ExtensionContext) {
+function activateLanguageServer(context: vscode.ExtensionContext) {
   javaPath = findJava();
   extensionContext = context;
   vscode.workspace.onDidChangeConfiguration(onDidChangeConfiguration);
@@ -202,6 +202,4 @@ function activateLanguage(context: vscode.ExtensionContext) {
   startLanguageServer();
 }
 
-export { stopLanguageServer };
-
-export default activateLanguage;
+export { activateLanguageServer, stopLanguageServer };

@@ -1,9 +1,9 @@
 import * as vscode from "vscode";
-import activateLanguage, { stopLanguageServer } from "./activateLanguage";
-import activateChatbot from "./activateChatbot";
+import { activateLanguageServer, stopLanguageServer } from "./activateLanguageServer";
+import { activateChatbot } from "./activateChatbot";
 
 export function activate(context: vscode.ExtensionContext) {
-  activateLanguage(context);
+  activateLanguageServer(context);
   activateChatbot(context);
 }
 

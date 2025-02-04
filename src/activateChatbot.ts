@@ -38,4 +38,4 @@ export function activateChatbot(context: vscode.ExtensionContext) {
   context.subscriptions.push(writeTest);
 }
 
-export default activateChatbot;
+export default { activateChatbot };
