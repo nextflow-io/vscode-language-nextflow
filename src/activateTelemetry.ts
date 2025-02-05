@@ -1,6 +1,6 @@
 import * as vscode from "vscode";
 import { PostHog } from "posthog-node";
-import { randomUUID } from "crypto";
+import { randomBytes } from "crypto";
 
 export type TrackEvent = (
   eventName: string,
@@ -70,7 +70,7 @@ function createTrackEvent(context: vscode.ExtensionContext) {
 function getUserID(context: vscode.ExtensionContext): string {
   let anonId = context.globalState.get<string>("anonId");
   if (!anonId) {
-    anonId = randomUUID();
+    anonId = randomBytes(6).toString("hex");
     context.globalState.update("anonId", anonId);
   }
   return anonId;
