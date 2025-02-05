@@ -18,41 +18,48 @@ export function activateTelemetry(
 ): TrackEvent {
   const config = vscode.workspace.getConfiguration("telemetry");
   trackingAllowed = config.get<boolean>("enableTelemetry", true);
-  const trackEvent = createtrackEvent(context, trackingAllowed);
+  const vscodeVersion = vscode.version;
+  const osPlatform = process.platform;
+  const extension = vscode.extensions.getExtension("nextflow.nextflow");
+  const extensionVersion = extension?.packageJSON.version ?? "unknown";
 
-  if (!trackingAllowed) return trackEvent;
+  if (!trackingAllowed) return () => {};
+
+  const trackEvent = createTrackEvent(context);
 
   posthogClient = new PostHog(key, { host });
 
   trackEvent("extensionActivated", {
-    time: new Date().toISOString(),
+    extensionVersion,
+    vscodeVersion,
+    osPlatform,
   });
 
-  const hello = vscode.commands.registerCommand("seqera-ai.testEvent", () => {
-    trackEvent("testEvent", {
-      testProp: 123,
+  // Track file open events
+  // TODO: check privacy rules for vscode extensions (here we're storing the user's full file path)
+  const fileOpenEvent = vscode.workspace.onDidOpenTextDocument((document) => {
+    const filePath = document.fileName;
+    trackEvent("fileOpened", {
+      fileName: filePath,
     });
-    vscode.window.showInformationMessage("Hello World!");
   });
 
-  context.subscriptions.push(hello);
+  context.subscriptions.push(fileOpenEvent);
 
   return trackEvent;
 }
 
-function createtrackEvent(
-  context: vscode.ExtensionContext,
-  trackingAllowed: boolean
-) {
-  if (!trackingAllowed) return () => {};
-
-  return async (eventName: string, properties?: { [key: string]: any }) => {
+function createTrackEvent(context: vscode.ExtensionContext) {
+  return async (eventName: string, properties = {}) => {
     try {
       if (!posthogClient) return;
       posthogClient.capture({
         distinctId: getUserID(context),
         event: eventName,
-        properties,
+        properties: {
+          ...properties,
+          time: new Date().toISOString(),
+        },
       });
     } catch (err) {
       console.error("Track event failed", err);
@@ -69,8 +76,13 @@ function getUserID(context: vscode.ExtensionContext): string {
   return anonId;
 }
 
-export function deactivateTelemetry() {
-  if (trackingAllowed && posthogClient) {
-    return posthogClient.shutdown();
-  }
+export function deactivateTelemetry(context: vscode.ExtensionContext) {
+  if (trackingAllowed || !posthogClient) return;
+
+  posthogClient.capture({
+    distinctId: getUserID(context),
+    event: "extensionDeactivated",
+  });
+
+  return posthogClient.shutdown();
 }

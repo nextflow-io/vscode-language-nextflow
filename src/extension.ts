@@ -9,7 +9,9 @@ export function activate(context: vscode.ExtensionContext) {
   activateChatbot(context, trackEvent);
 }
 
-export function deactivate(): Thenable<void> | undefined {
-  deactivateTelemetry();
+export function deactivate(
+  context: vscode.ExtensionContext
+): Thenable<void> | undefined {
+  deactivateTelemetry(context);
   return stopLanguageServer();
 }
