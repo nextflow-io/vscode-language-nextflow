@@ -4,9 +4,9 @@ import activateChatbot from "./activateChatbot";
 import { activateTelemetry, deactivateTelemetry } from "./activateTelemetry";
 
 export function activate(context: vscode.ExtensionContext) {
-  activateLanguage(context);
-  activateChatbot(context);
-  activateTelemetry(context);
+  const trackEvent = activateTelemetry(context);
+  activateLanguage(context, trackEvent);
+  activateChatbot(context, trackEvent);
 }
 
 export function deactivate(): Thenable<void> | undefined {

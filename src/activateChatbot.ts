@@ -1,7 +1,11 @@
 import * as vscode from "vscode";
 import { createHandler } from "./chatbot";
+import type { TrackEvent } from "./activateTelemetry";
 
-export function activateChatbot(context: vscode.ExtensionContext) {
+export function activateChatbot(
+  context: vscode.ExtensionContext,
+  trackEvent: TrackEvent
+) {
   console.log("🟢 Seqera extension activated");
 
   // Create the chat participant
@@ -22,6 +26,7 @@ export function activateChatbot(context: vscode.ExtensionContext) {
         query: "@Seqera ",
         isPartialQuery: true,
       });
+      trackEvent("openChat", { someData: 123 });
     }
   );
 
@@ -31,6 +36,7 @@ export function activateChatbot(context: vscode.ExtensionContext) {
       await vscode.commands.executeCommand("workbench.action.chat.open", {
         query: "@Seqera /nf-test",
       });
+      trackEvent("writeTest", { someData: 123 });
     }
   );
 

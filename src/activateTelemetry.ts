@@ -2,21 +2,27 @@ import * as vscode from "vscode";
 import { PostHog } from "posthog-node";
 import { randomUUID } from "crypto";
 
+export type TrackEvent = (
+  eventName: string,
+  properties?: { [key: string]: any }
+) => void;
+
 const key = "phc_pCt2zPQylp5x5dEKMB3TLM2hKBp7aLajUBgAfysPnpd";
 const host = "https://eu.i.posthog.com";
 
 let posthogClient: PostHog | undefined;
 let trackingAllowed = false;
 
-export function activateTelemetry(context: vscode.ExtensionContext) {
+export function activateTelemetry(
+  context: vscode.ExtensionContext
+): TrackEvent {
   const config = vscode.workspace.getConfiguration("telemetry");
-
   trackingAllowed = config.get<boolean>("enableTelemetry", true);
-  if (!trackingAllowed) return;
+  const trackEvent = createtrackEvent(context, trackingAllowed);
+
+  if (!trackingAllowed) return trackEvent;
 
   posthogClient = new PostHog(key, { host });
-
-  const trackEvent = createTrackEvent(context);
 
   trackEvent("extensionActivated", {
     time: new Date().toISOString(),
@@ -30,9 +36,16 @@ export function activateTelemetry(context: vscode.ExtensionContext) {
   });
 
   context.subscriptions.push(hello);
+
+  return trackEvent;
 }
 
-function createTrackEvent(context: vscode.ExtensionContext) {
+function createtrackEvent(
+  context: vscode.ExtensionContext,
+  trackingAllowed: boolean
+) {
+  if (!trackingAllowed) return () => {};
+
   return async (eventName: string, properties?: { [key: string]: any }) => {
     try {
       if (!posthogClient) return;

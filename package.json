@@ -119,6 +119,11 @@
         "command": "seqera-ai.convertToDSL2",
         "title": "Convert to DSL2",
         "category": "Nextflow"
+      },
+      {
+        "command": "seqera-ai.testEvent",
+        "title": "Seqera test event",
+        "category": "Nextflow"
       }
     ],
     "configuration": {

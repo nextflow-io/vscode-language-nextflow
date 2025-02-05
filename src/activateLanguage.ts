@@ -8,6 +8,8 @@ import {
 } from "vscode-languageclient/node";
 import * as vscode from "vscode";
 
+import type { TrackEvent } from "./activateTelemetry";
+
 const LABEL_RELOAD_WINDOW = "Reload Window";
 let extensionContext: vscode.ExtensionContext | null = null;
 let languageClient: LanguageClient | null = null;
@@ -176,7 +178,10 @@ function onDidChangeConfiguration(event: vscode.ConfigurationChangeEvent) {
   }
 }
 
-function activateLanguage(context: vscode.ExtensionContext) {
+function activateLanguage(
+  context: vscode.ExtensionContext,
+  trackEvent: TrackEvent
+) {
   javaPath = findJava();
   extensionContext = context;
   vscode.workspace.onDidChangeConfiguration(onDidChangeConfiguration);
