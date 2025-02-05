@@ -8,21 +8,18 @@
             "request": "launch",
             "args": [
                 "--extensionDevelopmentPath=${workspaceFolder}",
-                "${input:devWorkspace}",
+                "${input:testWorkspace}",
                 "--goto",
-                "${input:devWorkspace}/main.nf"
-            ],
-            "outFiles": [
-                "${workspaceFolder}/out/**/*.js"
+                "${input:testWorkspace}/main.nf"
             ],
             "preLaunchTask": "${defaultBuildTask}"
         }
     ],
     "inputs": [
         {
-            "id": "devWorkspace",
+            "id": "testWorkspace",
             "type": "promptString",
-            "description": "Path to your Nextflow workspace (relative)",
+            "description": "Path to a Nextflow workspace",
             "default": "${workspaceFolder}/../test-workspace"
         }
     ]
