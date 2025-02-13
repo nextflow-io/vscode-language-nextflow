@@ -53,6 +53,8 @@ wget -P language-server/build/libs https://github.com/nextflow-io/language-serve
 
 Finally, press `F5` to build the extension and launch a new VS Code window with the extension loaded.
 
+You will be prompted to provide a path to your Nextflow workspace, which defaults to `test-workspace` in the codebase's parent directory.
+
 ## Publishing
 
 1. Update the extension version number in `package.json`.
