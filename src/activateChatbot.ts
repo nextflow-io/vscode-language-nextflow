@@ -7,7 +7,7 @@ export function activateChatbot(context: vscode.ExtensionContext) {
   // Create the chat participant
   const chatHandler = createHandler();
   const chatParticipant = vscode.chat.createChatParticipant(
-    "seqera-ai.chatbot",
+    "nextflow.chatbot",
     chatHandler
   );
   context.subscriptions.push(chatParticipant);
@@ -16,7 +16,7 @@ export function activateChatbot(context: vscode.ExtensionContext) {
   // Note: must match commands configured in package.json
 
   const openChat = vscode.commands.registerCommand(
-    "seqera-ai.openChat",
+    "nextflow.openChat",
     async () => {
       await vscode.commands.executeCommand("workbench.action.chat.open", {
         query: "@Seqera ",
@@ -26,7 +26,7 @@ export function activateChatbot(context: vscode.ExtensionContext) {
   );
 
   const writeTest = vscode.commands.registerCommand(
-    "seqera-ai.writeTest",
+    "nextflow.writeTest",
     async () => {
       await vscode.commands.executeCommand("workbench.action.chat.open", {
         query: "@Seqera /nf-test",
