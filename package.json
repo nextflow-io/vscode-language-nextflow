@@ -97,27 +97,27 @@
     "commands": [
       {
         "command": "nextflow.restartServer",
-        "title": "Nextflow: Restart language server",
+        "title": "Restart language server",
         "category": "Nextflow"
       },
       {
         "command": "nextflow.stopServer",
-        "title": "Nextflow: Stop language server",
+        "title": "Stop language server",
         "category": "Nextflow"
       },
       {
         "command": "nextflow.openChat",
-        "title": "Nextflow: Chat with Seqera",
+        "title": "Chat with Seqera",
         "category": "Nextflow"
       },
       {
         "command": "nextflow.writeTest",
-        "title": "Nextflow: Write nf-test with Seqera",
+        "title": "Write nf-test with Seqera",
         "category": "Nextflow"
       },
       {
         "command": "nextflow.convertToDSL2",
-        "title": "Nextflow: Convert to DSL2 with Seqera",
+        "title": "Convert to DSL2 with Seqera",
         "category": "Nextflow"
       }
     ],
