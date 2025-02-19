@@ -33,10 +33,12 @@ async function buildInitialMessages(
   messages.push(vscode.LanguageModelChatMessage.User(systemPrompt));
 
   // Add context from any referenced files
-  const fileContents = await getFileContext(request.references);
-  if (fileContents && fileContents.trim().length > 0) {
-    const filesPrompt = `Here are the files attached to this message:\n<open_files>\n${fileContents}\n</open_files>`;
-    messages.push(vscode.LanguageModelChatMessage.User(filesPrompt));
+  if (request.references && request.references.length > 0) {
+    const fileContents = await getFileContext(request.references);
+    if (fileContents && fileContents.trim().length > 0) {
+      const filesPrompt = `Here are the files attached to this message:\n<open_files>\n${fileContents}\n</open_files>`;
+      messages.push(vscode.LanguageModelChatMessage.User(filesPrompt));
+    }
   }
 
   // Add previous chat messages
