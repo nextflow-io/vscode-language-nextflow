@@ -1,6 +1,6 @@
 .vscode
 node_modules
-src/**
+src/**/*.ts
 package-lock.json
 tsconfig.json
 esbuild.js
