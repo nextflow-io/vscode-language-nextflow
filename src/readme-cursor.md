@@ -12,7 +12,7 @@ Open the command palette and type `Nextflow` to see the following commands:
 
 Cursor does not currently support custom AI functionality.
 
-To fully leverage Seqera workspaces & [https://ai.seqera.io/](Seqera AI), you can install it on VS Code.
+To fully leverage Seqera workspaces & [Seqera AI](https://ai.seqera.io/), you can install it on VS Code.
 
 ### Add the `@Nextflow` command to Cursor Chat
 
