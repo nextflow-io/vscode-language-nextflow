@@ -7,7 +7,7 @@ export function activateChatbot(context: vscode.ExtensionContext) {
 
   // Handle Cursor
   if (vscode.env.appName.includes("Cursor")) {
-    showPage("welcome-cursor.md");
+    // Do nothing
     return;
   }
 

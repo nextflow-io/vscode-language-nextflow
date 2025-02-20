@@ -96,6 +96,11 @@
     ],
     "commands": [
       {
+        "command": "nextflow.showReadme",
+        "title": "Show welcome page",
+        "category": "Nextflow"
+      },
+      {
         "command": "nextflow.restartServer",
         "title": "Restart language server",
         "category": "Nextflow"

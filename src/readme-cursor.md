@@ -1,9 +1,20 @@
 # Nextflow extension for Cursor
 
-Cursor does not currently support custom AI functionality.
-To fully leverage Seqera workspaces & [https://ai.seqera.io](Seqera AI), you can install it on VS Code.
+## Available commands
 
-## Add the `@Nextflow` command to Cursor Chat
+Open the command palette and type `Nextflow` to see the following commands:
+
+- `Show welcome page`
+- `Restart language server`
+- `Stop language server`
+
+## Seqera AI
+
+Cursor does not currently support custom AI functionality.
+
+To fully leverage Seqera workspaces & [https://ai.seqera.io/](Seqera AI), you can install it on VS Code.
+
+### Add the `@Nextflow` command to Cursor Chat
 
 In order for Cursor to have access to the Nextflow docs, perform the following steps:
 

@@ -1,6 +1,6 @@
 import * as vscode from "vscode";
 
-export function showPage(filename = "welcome-cursor.md") {
+export function showPage(filename = "readme-cursor.md") {
   const extension = vscode.extensions.getExtension("nextflow.nextflow");
 
   if (!extension) {
