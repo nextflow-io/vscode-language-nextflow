@@ -25,8 +25,3 @@ In order for Cursor to have access to the Nextflow docs, perform the following s
 
 Now you will be able to use the `@Nextflow` command in Cursor Chat.
 The same can be done for MultiQC or other products.
-
-## Workspace management (coming soon)
-
-Use the "Login to Seqera" command to connect your Seqera account to Cursor.
-You will then have an interace for managing your projects, workflows, and runs.
