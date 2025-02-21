@@ -1,221 +1,221 @@
 {
-  "name": "nextflow",
-  "displayName": "Nextflow",
-  "description": "Nextflow language support",
-  "version": "1.0.5",
-  "publisher": "nextflow",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/nextflow-io/vscode-language-nextflow.git"
-  },
-  "homepage": "https://nextflow.io",
-  "bugs": {
-    "url": "https://github.com/nextflow-io/vscode-language-nextflow/issues"
-  },
-  "icon": "images/nextflow-icon-128x128.png",
-  "keywords": [
-    "bioinformatics",
-    "nextflow",
-    "nf-core",
-    "pipelines",
-    "computational biology",
-    "scientific",
-    "workflows"
-  ],
-  "engines": {
-    "vscode": "^1.96.0"
-  },
-  "categories": [
-    "Programming Languages"
-  ],
-  "activationEvents": [],
-  "main": "./build/extension.js",
-  "contributes": {
-    "languages": [
-      {
-        "id": "nextflow",
-        "aliases": [
-          "Nextflow",
-          "nextflow"
-        ],
-        "extensions": [
-          ".nf",
-          ".nf.test"
-        ],
-        "firstLine": "^#!.*\\bnextflow\\b",
-        "configuration": "./language-configuration.json",
-        "icon": {
-          "light": "./images/nextflow-icon-128x128.png",
-          "dark": "./images/nextflow-icon-128x128.png"
-        }
-      },
-      {
-        "id": "nextflow-config",
-        "aliases": [
-          "Nextflow Config"
-        ],
-        "extensions": [
-          ".config"
-        ],
-        "configuration": "./language-configuration.json",
-        "icon": {
-          "light": "./images/nextflow-icon-128x128.png",
-          "dark": "./images/nextflow-icon-128x128.png"
-        }
-      },
-      {
-        "id": "nextflow-markdown-injection"
-      }
-    ],
-    "grammars": [
-      {
-        "language": "nextflow",
-        "scopeName": "source.nextflow",
-        "path": "./syntaxes/nextflow.tmLanguage.json"
-      },
-      {
-        "language": "nextflow-config",
-        "scopeName": "source.nextflow-config",
-        "path": "./syntaxes/nextflow-config.tmLanguage.json"
-      },
-      {
-        "scopeName": "source.nextflow-groovy",
-        "path": "./syntaxes/groovy.tmLanguage.json"
-      },
-      {
-        "language": "nextflow-markdown-injection",
-        "scopeName": "markdown.nextflow.codeblock",
-        "path": "./syntaxes/nextflow-markdown-injection.json",
-        "injectTo": [
-          "text.html.markdown"
-        ],
-        "embeddedLanguages": {
-          "meta.embedded.block.nextflow": "nextflow"
-        }
-      }
-    ],
-    "commands": [
-      {
-        "command": "nextflow.showReadme",
-        "title": "Show welcome page",
-        "category": "Nextflow"
-      },
-      {
-        "command": "nextflow.restartServer",
-        "title": "Restart language server",
-        "category": "Nextflow"
-      },
-      {
-        "command": "nextflow.stopServer",
-        "title": "Stop language server",
-        "category": "Nextflow"
-      },
-      {
-        "command": "nextflow.openChat",
-        "title": "Chat with Seqera",
-        "category": "Nextflow"
-      },
-      {
-        "command": "nextflow.writeTest",
-        "title": "Write nf-test with Seqera",
-        "category": "Nextflow"
-      },
-      {
-        "command": "nextflow.convertToDSL2",
-        "title": "Convert to DSL2 with Seqera",
-        "category": "Nextflow"
-      }
-    ],
-    "configuration": {
-      "type": "object",
-      "description": "Configuration for Nextflow language support",
-      "properties": {
-        "nextflow.debug": {
-          "type": "boolean",
-          "default": false,
-          "description": "Enable debug logging and debug information in hover hints."
-        },
-        "nextflow.files.exclude": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "default": [
-            ".git",
-            ".nf-test",
-            "work"
-          ],
-          "description": "Configure glob patterns for excluding folders from being searched for Nextflow scripts and configuration files."
-        },
-        "nextflow.formatting.harshilAlignment": {
-          "type": "boolean",
-          "default": false,
-          "markdownDescription": "Use the [Harshil Alignment™️](https://nf-co.re/docs/contributing/code_editors_and_styling/harshil_alignment) when formatting Nextflow scripts and config files.\n\n*Note: not all rules are supported yet*"
-        },
-        "nextflow.java.home": {
-          "type": [
-            "string",
-            "null"
-          ],
-          "default": null,
-          "markdownDescription": "Specify the folder path to the desired Java runtime. Equivalent to the `JAVA_HOME` environment variable, i.e. the Java binary should be located at `$JAVA_HOME/bin/java`. Use this setting if the extension cannot find Java automatically."
-        },
-        "nextflow.paranoidWarnings": {
-          "type": "boolean",
-          "default": false,
-          "description": "Enable additional warnings for things like future deprecations, discouraged patterns, and so on."
-        }
-      }
+    "name": "nextflow",
+    "displayName": "Nextflow",
+    "description": "Nextflow language support",
+    "version": "1.0.5",
+    "publisher": "nextflow",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/nextflow-io/vscode-language-nextflow.git"
     },
-    "chatParticipants": [
-      {
-        "id": "nextflow.chatbot",
-        "fullName": "Seqera",
-        "name": "Seqera",
-        "description": "How can I help you with Nextflow?",
-        "isSticky": true,
-        "commands": [
-          {
-            "name": "nf-test",
-            "description": "Write an nf-test for the code that you see"
-          },
-          {
-            "name": "dsl2",
-            "description": "Convert code to DSL2"
-          }
-        ]
-      }
+    "homepage": "https://nextflow.io",
+    "bugs": {
+        "url": "https://github.com/nextflow-io/vscode-language-nextflow/issues"
+    },
+    "icon": "images/nextflow-icon-128x128.png",
+    "keywords": [
+        "bioinformatics",
+        "nextflow",
+        "nf-core",
+        "pipelines",
+        "computational biology",
+        "scientific",
+        "workflows"
     ],
-    "colors": [
-      {
-        "id": "chat.avatarForeground",
-        "description": "Foreground color used for chat avatars.",
-        "defaults": {
-          "light": "#0DC09D",
-          "dark": "#0DC09D",
-          "highContrast": "#0DC09D"
-        }
-      }
-    ]
-  },
-  "scripts": {
-    "check-types": "tsc --noEmit",
-    "compile": "npm run check-types && node esbuild.js",
-    "package": "npm run check-types && node esbuild.js --production && vsce package -o build/nextflow.vsix"
-  },
-  "devDependencies": {
-    "@types/node": "^20",
-    "@types/vscode": "^1.96.0",
-    "@vscode/vsce": "^3.2.1",
-    "esbuild": "^0.24.0",
-    "esbuild-plugin-copy": "^2.1.1",
-    "mermaid": "^11.4.1",
-    "typescript": "^5.7.2",
-    "vscode-jsonrpc": "^8.0.2",
-    "vscode-languageclient": "^8.0.2"
-  },
-  "dependencies": {
-    "@vscode/chat-extension-utils": "^0.0.0-alpha.4",
-    "vsce": "^2.15.0"
-  }
+    "engines": {
+        "vscode": "^1.96.0"
+    },
+    "categories": [
+        "Programming Languages"
+    ],
+    "activationEvents": [],
+    "main": "./build/extension.js",
+    "contributes": {
+        "languages": [
+            {
+                "id": "nextflow",
+                "aliases": [
+                    "Nextflow",
+                    "nextflow"
+                ],
+                "extensions": [
+                    ".nf",
+                    ".nf.test"
+                ],
+                "firstLine": "^#!.*\\bnextflow\\b",
+                "configuration": "./language-configuration.json",
+                "icon": {
+                    "light": "./images/nextflow-icon-128x128.png",
+                    "dark": "./images/nextflow-icon-128x128.png"
+                }
+            },
+            {
+                "id": "nextflow-config",
+                "aliases": [
+                    "Nextflow Config"
+                ],
+                "extensions": [
+                    ".config"
+                ],
+                "configuration": "./language-configuration.json",
+                "icon": {
+                    "light": "./images/nextflow-icon-128x128.png",
+                    "dark": "./images/nextflow-icon-128x128.png"
+                }
+            },
+            {
+                "id": "nextflow-markdown-injection"
+            }
+        ],
+        "grammars": [
+            {
+                "language": "nextflow",
+                "scopeName": "source.nextflow",
+                "path": "./syntaxes/nextflow.tmLanguage.json"
+            },
+            {
+                "language": "nextflow-config",
+                "scopeName": "source.nextflow-config",
+                "path": "./syntaxes/nextflow-config.tmLanguage.json"
+            },
+            {
+                "scopeName": "source.nextflow-groovy",
+                "path": "./syntaxes/groovy.tmLanguage.json"
+            },
+            {
+                "language": "nextflow-markdown-injection",
+                "scopeName": "markdown.nextflow.codeblock",
+                "path": "./syntaxes/nextflow-markdown-injection.json",
+                "injectTo": [
+                    "text.html.markdown"
+                ],
+                "embeddedLanguages": {
+                    "meta.embedded.block.nextflow": "nextflow"
+                }
+            }
+        ],
+        "commands": [
+            {
+                "command": "nextflow.showReadme",
+                "title": "Show welcome page",
+                "category": "Nextflow"
+            },
+            {
+                "command": "nextflow.restartServer",
+                "title": "Restart language server",
+                "category": "Nextflow"
+            },
+            {
+                "command": "nextflow.stopServer",
+                "title": "Stop language server",
+                "category": "Nextflow"
+            },
+            {
+                "command": "nextflow.openChat",
+                "title": "Chat with Seqera",
+                "category": "Nextflow"
+            },
+            {
+                "command": "nextflow.writeTest",
+                "title": "Write nf-test with Seqera",
+                "category": "Nextflow"
+            },
+            {
+                "command": "nextflow.convertToDSL2",
+                "title": "Convert to DSL2 with Seqera",
+                "category": "Nextflow"
+            }
+        ],
+        "configuration": {
+            "type": "object",
+            "description": "Configuration for Nextflow language support",
+            "properties": {
+                "nextflow.debug": {
+                    "type": "boolean",
+                    "default": false,
+                    "description": "Enable debug logging and debug information in hover hints."
+                },
+                "nextflow.files.exclude": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "default": [
+                        ".git",
+                        ".nf-test",
+                        "work"
+                    ],
+                    "description": "Configure glob patterns for excluding folders from being searched for Nextflow scripts and configuration files."
+                },
+                "nextflow.formatting.harshilAlignment": {
+                    "type": "boolean",
+                    "default": false,
+                    "markdownDescription": "Use the [Harshil Alignment™️](https://nf-co.re/docs/contributing/code_editors_and_styling/harshil_alignment) when formatting Nextflow scripts and config files.\n\n*Note: not all rules are supported yet*"
+                },
+                "nextflow.java.home": {
+                    "type": [
+                        "string",
+                        "null"
+                    ],
+                    "default": null,
+                    "markdownDescription": "Specify the folder path to the desired Java runtime. Equivalent to the `JAVA_HOME` environment variable, i.e. the Java binary should be located at `$JAVA_HOME/bin/java`. Use this setting if the extension cannot find Java automatically."
+                },
+                "nextflow.paranoidWarnings": {
+                    "type": "boolean",
+                    "default": false,
+                    "description": "Enable additional warnings for things like future deprecations, discouraged patterns, and so on."
+                }
+            }
+        },
+        "chatParticipants": [
+            {
+                "id": "nextflow.chatbot",
+                "fullName": "Seqera",
+                "name": "Seqera",
+                "description": "How can I help you with Nextflow?",
+                "isSticky": true,
+                "commands": [
+                    {
+                        "name": "nf-test",
+                        "description": "Write an nf-test for the code that you see"
+                    },
+                    {
+                        "name": "dsl2",
+                        "description": "Convert code to DSL2"
+                    }
+                ]
+            }
+        ],
+        "colors": [
+            {
+                "id": "chat.avatarForeground",
+                "description": "Foreground color used for chat avatars.",
+                "defaults": {
+                    "light": "#0DC09D",
+                    "dark": "#0DC09D",
+                    "highContrast": "#0DC09D"
+                }
+            }
+        ]
+    },
+    "scripts": {
+        "check-types": "tsc --noEmit",
+        "compile": "npm run check-types && node esbuild.js",
+        "package": "npm run check-types && node esbuild.js --production && vsce package -o build/nextflow.vsix"
+    },
+    "devDependencies": {
+        "@types/node": "^20",
+        "@types/vscode": "^1.96.0",
+        "@vscode/vsce": "^3.2.1",
+        "esbuild": "^0.24.0",
+        "esbuild-plugin-copy": "^2.1.1",
+        "mermaid": "^11.4.1",
+        "typescript": "^5.7.2",
+        "vscode-jsonrpc": "^8.0.2",
+        "vscode-languageclient": "^8.0.2"
+    },
+    "dependencies": {
+        "@vscode/chat-extension-utils": "^0.0.0-alpha.4",
+        "vsce": "^2.15.0"
+    }
 }
