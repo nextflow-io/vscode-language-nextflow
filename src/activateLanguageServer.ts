@@ -69,6 +69,7 @@ function startLanguageServer() {
           "-jar",
           path.resolve(
             extensionContext.extensionPath,
+            "build",
             "bin",
             "language-server-all.jar"
           ),

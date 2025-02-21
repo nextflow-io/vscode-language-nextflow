@@ -5,3 +5,4 @@ build/
 language-server
 node_modules
 *.vsix
+.DS_Store
