@@ -29,7 +29,7 @@
         "Programming Languages"
     ],
     "activationEvents": [],
-    "main": "./build/extension.js",
+    "main": "./extension.js",
     "contributes": {
         "languages": [
             {
