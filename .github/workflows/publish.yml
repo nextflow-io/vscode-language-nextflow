@@ -18,7 +18,7 @@ jobs:
         run: npm ci
 
       - name: Build vscode extension
-        run: ./gradlew build
+        run: npm run package
 
       - name: Publish to Open VSX Registry
         uses: HaaLeo/publish-vscode-extension@v1

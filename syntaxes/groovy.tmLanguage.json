@@ -85,16 +85,6 @@
 				}
 			]
 		},
-		"comment-block": {
-			"begin": "/\\*",
-			"captures": {
-				"0": {
-					"name": "punctuation.definition.comment.groovy"
-				}
-			},
-			"end": "\\*/",
-			"name": "comment.block.groovy"
-		},
 		"comments": {
 			"patterns": [
 				{
@@ -110,7 +100,14 @@
 					"include": "text.html.javadoc"
 				},
 				{
-					"include": "#comment-block"
+					"begin": "/\\*",
+					"captures": {
+						"0": {
+							"name": "punctuation.definition.comment.groovy"
+						}
+					},
+					"end": "\\*/",
+					"name": "comment.block.groovy"
 				},
 				{
 					"captures": {
@@ -142,7 +139,7 @@
 					"name": "keyword.control.new.groovy"
 				}
 			},
-			"end": "(?<=\\)|\\])(?!\\s*{)|(?<=})|(?=[;])|$",
+			"end": "(?<=\\))|$",
 			"patterns": [
 				{
 					"begin": "(?=\\w.*\\(?)",
@@ -197,9 +194,6 @@
 			"patterns": [
 				{
 					"include": "#comments"
-				},
-				{
-					"include": "#support-functions"
 				},
 				{
 					"include": "#keyword-language"
@@ -278,10 +272,6 @@
 				{
 					"match": "\\?\\:",
 					"name": "keyword.operator.elvis.groovy"
-				},
-				{
-					"match": "\\*\\:",
-					"name": "keyword.operator.spreadmap.groovy"
 				},
 				{
 					"match": "\\.\\.",
@@ -444,40 +434,8 @@
 				}
 			]
 		},
-		"object-types-inherited": {
-			"patterns": [
-				{
-					"begin": "\\b((?:[a-zA-Z]\\w*\\.)*[A-Z]+\\w*[a-z]+\\w*)<",
-					"end": ">|[^\\w\\s,\\?<\\[\\]]",
-					"name": "entity.other.inherited-class.groovy",
-					"patterns": [
-						{
-							"include": "#object-types-inherited"
-						},
-						{
-							"begin": "<",
-							"comment": "This is just to support <>'s with no actual type prefix",
-							"end": ">|[^\\w\\s,\\[\\]<]",
-							"name": "storage.type.generic.groovy"
-						}
-					]
-				},
-				{
-					"captures": {
-						"1": {
-							"name": "keyword.operator.dereference.groovy"
-						}
-					},
-					"match": "\\b(?:[a-zA-Z]\\w*(\\.))*[A-Z]+\\w*[a-z]+\\w*\\b",
-					"name": "entity.other.inherited-class.groovy"
-				}
-			]
-		},
 		"parameters": {
 			"patterns": [
-				{
-					"include": "#storage-modifiers"
-				},
 				{
 					"include": "#types"
 				},
@@ -501,52 +459,6 @@
 				{
 					"match": "\\b(?:boolean|byte|char|short|int|float|long|double)\\b",
 					"name": "storage.type.primitive.groovy"
-				}
-			]
-		},
-		"regexp": {
-			"patterns": [
-				{
-					"begin": "/(?=[^/]+/([^>]|$))",
-					"beginCaptures": {
-						"0": {
-							"name": "punctuation.definition.string.regexp.begin.groovy"
-						}
-					},
-					"end": "/",
-					"endCaptures": {
-						"0": {
-							"name": "punctuation.definition.string.regexp.end.groovy"
-						}
-					},
-					"name": "string.regexp.groovy",
-					"patterns": [
-						{
-							"match": "\\\\.",
-							"name": "constant.character.escape.groovy"
-						}
-					]
-				},
-				{
-					"begin": "~\"",
-					"beginCaptures": {
-						"0": {
-							"name": "punctuation.definition.string.regexp.begin.groovy"
-						}
-					},
-					"end": "\"",
-					"endCaptures": {
-						"0": {
-							"name": "punctuation.definition.string.regexp.end.groovy"
-						}
-					},
-					"name": "string.regexp.compiled.groovy",
-					"patterns": [
-						{
-							"match": "\\\\.",
-							"name": "constant.character.escape.groovy"
-						}
-					]
 				}
 			]
 		},
@@ -677,6 +589,52 @@
 				}
 			]
 		},
+		"string-slashy": {
+			"patterns": [
+				{
+					"begin": "/(?=[^/]+/([^>]|$))",
+					"beginCaptures": {
+						"0": {
+							"name": "punctuation.definition.string.regexp.begin.groovy"
+						}
+					},
+					"end": "/",
+					"endCaptures": {
+						"0": {
+							"name": "punctuation.definition.string.regexp.end.groovy"
+						}
+					},
+					"name": "string.regexp.groovy",
+					"patterns": [
+						{
+							"match": "\\\\.",
+							"name": "constant.character.escape.groovy"
+						}
+					]
+				},
+				{
+					"begin": "~\"",
+					"beginCaptures": {
+						"0": {
+							"name": "punctuation.definition.string.regexp.begin.groovy"
+						}
+					},
+					"end": "\"",
+					"endCaptures": {
+						"0": {
+							"name": "punctuation.definition.string.regexp.end.groovy"
+						}
+					},
+					"name": "string.regexp.compiled.groovy",
+					"patterns": [
+						{
+							"match": "\\\\.",
+							"name": "constant.character.escape.groovy"
+						}
+					]
+				}
+			]
+		},
 		"strings": {
 			"patterns": [
 				{
@@ -692,7 +650,7 @@
 					"include": "#string-quoted-single"
 				},
 				{
-					"include": "#regexp"
+					"include": "#string-slashy"
 				}
 			]
 		},
@@ -717,14 +675,6 @@
 				{
 					"match": ",",
 					"name": "punctuation.definition.separator.groovy"
-				}
-			]
-		},
-		"support-functions": {
-			"patterns": [
-				{
-					"match": "(?x)\\b(?:sprintf|print(?:f|ln)?)\\b",
-					"name": "support.function.print.groovy"
 				}
 			]
 		},
