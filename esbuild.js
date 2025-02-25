@@ -13,9 +13,10 @@ async function main() {
     'README.md': './README.md',
     'language-configuration.json': './language-configuration.json',
     'package.json': './package.json',
-    'language-server/build/libs/language-server-all.jar': 'bin',
     'node_modules/mermaid/dist/mermaid.min.js': 'media',
   };
+  if( !production )
+    files['language-server/build/libs/language-server-all.jar'] = 'bin'
   await build({
     entryPoints: [
       'src/extension.ts'

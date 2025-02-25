@@ -44,20 +44,13 @@ git clone https://github.com/nextflow-io/language-server
 make server
 ```
 
-Otherwise, you can simply download a language server release into the following subdirectory:
-
-```bash
-mkdir -p language-server/build/libs
-wget -P language-server/build/libs https://github.com/nextflow-io/language-server/releases/download/$VERSION/language-server-all.jar
-```
-
 Finally, press `F5` to build the extension and launch a new VS Code window with the extension loaded.
 
 ## Publishing
 
 1. Update the extension version number in `package.json`.
 2. Update the changelog in `CHANGELOG.md`.
-3. Run the "Deploy Extension" action to publish the extension to the VSCode marketplace and Open VSX.
+3. Run the "Publish Extension" action to publish the extension to the VSCode marketplace and Open VSX.
 
 ## Contributing
 
