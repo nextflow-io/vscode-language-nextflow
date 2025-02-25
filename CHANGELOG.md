@@ -4,6 +4,11 @@ All notable changes to the Nextflow VS Code extension will be documented here.
 
 See [Keep a Changelog](http://keepachangelog.com/) for recommendations on how to structure this file.
 
+## [1.1.0] - 2025-02-25
+
+- Download language server on startup (#68)
+- Add Seqera chat participant (#77)
+
 ## [1.0.4] - 2025-01-21
 
 - Bump language server to [1.0.4](https://github.com/nextflow-io/language-server/releases/tag/v1.0.4)
