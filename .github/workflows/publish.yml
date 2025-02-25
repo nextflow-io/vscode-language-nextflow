@@ -1,11 +1,7 @@
 name: Publish Extension
 
 on:
-  workflow_dispatch:
-    inputs:
-      version:
-        description: 'Language server version'
-        required: true
+  workflow_dispatch
 
 jobs:
   deploy:
@@ -20,13 +16,6 @@ jobs:
 
       - name: npm clean install
         run: npm ci
-
-      - name: Download language server JAR
-        run: |
-          mkdir -p language-server/build/libs
-          wget -P language-server/build/libs https://github.com/nextflow-io/language-server/releases/download/$VERSION/language-server-all.jar
-        env:
-          VERSION: ${{ github.event.inputs.version }}
 
       - name: Build vscode extension
         run: ./gradlew build
