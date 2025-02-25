@@ -164,6 +164,14 @@
                     "type": "boolean",
                     "default": false,
                     "description": "Enable additional warnings for things like future deprecations, discouraged patterns, and so on."
+                },
+                "nextflow.targetVersion": {
+                    "type": "string",
+                    "enum": [
+                        "v24.10"
+                    ],
+                    "default": "v24.10",
+                    "markdownDescription": "Target version of Nextflow to be used by the language server."
                 }
             }
         },
@@ -207,9 +215,10 @@
         "@types/node": "^20",
         "@types/vscode": "^1.96.0",
         "@vscode/vsce": "^3.2.1",
-        "esbuild": "^0.24.0",
+        "esbuild": "^0.25.0",
         "esbuild-plugin-copy": "^2.1.1",
         "mermaid": "^11.4.1",
+        "node-fetch": "^3.3.2",
         "typescript": "^5.7.2",
         "vscode-jsonrpc": "^8.0.2",
         "vscode-languageclient": "^8.0.2"

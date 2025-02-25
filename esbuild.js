@@ -6,18 +6,18 @@ const production = process.argv.includes('--production');
 
 async function main() {
   const files = {
-    'images/**': 'images',
-    'snippets/**': 'snippets',
-    'syntaxes/**': 'syntaxes',
-    'CHANGELOG.md': 'CHANGELOG.md',
-    'LICENSE.md': 'LICENSE.md',
-    'README.md': 'README.md',
-    'language-configuration.json': 'language-configuration.json',
-    'package.json': 'package.json',
-    'language-server/build/libs/language-server-all.jar': 'bin/language-server-all.jar',
-    'node_modules/mermaid/dist/mermaid.min.js': 'media/mermaid.min.js'
+    'images/**': './images',
+    'snippets/**': './snippets',
+    'syntaxes/**': './syntaxes',
+    'CHANGELOG.md': './CHANGELOG.md',
+    'LICENSE.md': './LICENSE.md',
+    'README.md': './README.md',
+    'language-configuration.json': './language-configuration.json',
+    'package.json': './package.json',
+    'node_modules/mermaid/dist/mermaid.min.js': 'media',
   };
-
+  if( !production )
+    files['language-server/build/libs/language-server-all.jar'] = 'bin'
   await build({
     entryPoints: ['src/extension.ts'],
     bundle: true,

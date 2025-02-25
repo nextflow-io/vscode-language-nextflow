@@ -4,7 +4,7 @@ clean:
 	rm -rf build
 
 server:
-	cd language-server ; ./gradlew build
+	cd language-server ; make
 
 package:
 	npm run package
