@@ -4,4 +4,3 @@
 build/
 language-server
 node_modules
-*.vsix

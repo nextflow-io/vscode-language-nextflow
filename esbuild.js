@@ -5,6 +5,7 @@ const production = process.argv.includes('--production');
 
 async function main() {
   const files = {
+    'docs/**': './docs',
     'images/**': './images',
     'snippets/**': './snippets',
     'syntaxes/**': './syntaxes',

@@ -6,7 +6,7 @@ export function showPage(filename = "readme-vscode.md") {
     vscode.window.showErrorMessage("Extension not found!");
     return;
   }
-  const docUri = vscode.Uri.joinPath(extension.extensionUri, "src", filename);
+  const docUri = vscode.Uri.joinPath(extension.extensionUri, "docs", filename);
   vscode.commands.executeCommand("markdown.showPreview", docUri);
 }
 
