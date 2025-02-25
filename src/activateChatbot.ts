@@ -2,7 +2,7 @@ import * as vscode from "vscode";
 import { createHandler } from "./chatbot";
 
 export function activateChatbot(context: vscode.ExtensionContext) {
-  // DO nothing in Cursor
+  // Don't activate chatbot in Cursor
   if (vscode.env.appName.includes("Cursor")) {
     return;
   }

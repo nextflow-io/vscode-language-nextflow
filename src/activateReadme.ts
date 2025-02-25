@@ -2,8 +2,7 @@ import * as vscode from "vscode";
 import showPage from "./utils/showPage";
 
 function getReadme(): string {
-  const isCursor = vscode.env.appName.includes("Cursor");
-  return isCursor
+  return vscode.env.appName.includes("Cursor")
     ? "readme-cursor.md"
     : "readme-vscode.md";
 }
@@ -23,8 +22,9 @@ export function activateReadme(context: vscode.ExtensionContext) {
   const extension = vscode.extensions.getExtension("nextflow.nextflow");
   const currentVersion = extension?.packageJSON.version ?? "unknown";
   const storedVersion = context.globalState.get<string>(versionKey, "");
-  if (currentVersion === storedVersion)
+  if (currentVersion === storedVersion) {
     return;
+  }
   context.globalState.update(versionKey, currentVersion);
   showPage(getReadme());
 }
