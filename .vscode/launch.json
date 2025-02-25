@@ -3,13 +3,24 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "Extension",
+            "name": "Run Extension",
             "type": "extensionHost",
             "request": "launch",
             "args": [
-                "--extensionDevelopmentPath=${workspaceRoot}/build"
+                "--extensionDevelopmentPath=${workspaceRoot}",
+                "${input:testWorkspace}",
+                "--goto",
+                "${input:testWorkspace}/main.nf"
             ],
             "preLaunchTask": "${defaultBuildTask}"
+        }
+    ],
+    "inputs": [
+        {
+            "id": "testWorkspace",
+            "type": "promptString",
+            "description": "Path to a Nextflow workspace",
+            "default": "${workspaceFolder}/../test-workspace"
         }
     ]
 }

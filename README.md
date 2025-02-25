@@ -46,6 +46,8 @@ make server
 
 Finally, press `F5` to build the extension and launch a new VS Code window with the extension loaded.
 
+You will be prompted to enter a path to your Nextflow workspace, which defaults to `../test-workspace` relative to the project directory.
+
 ## Publishing
 
 1. Update the extension version number in `package.json`.

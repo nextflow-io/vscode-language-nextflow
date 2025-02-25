@@ -23,13 +23,13 @@
         "workflows"
     ],
     "engines": {
-        "vscode": "^1.73.1"
+        "vscode": "^1.96.0"
     },
     "categories": [
         "Programming Languages"
     ],
     "activationEvents": [],
-    "main": "extension",
+    "main": "./build/extension.js",
     "contributes": {
         "languages": [
             {
@@ -96,13 +96,33 @@
         ],
         "commands": [
             {
+                "command": "nextflow.convertToDSL2",
+                "title": "Convert to DSL2 with Seqera",
+                "category": "Nextflow"
+            },
+            {
+                "command": "nextflow.openChat",
+                "title": "Chat with Seqera",
+                "category": "Nextflow"
+            },
+            {
                 "command": "nextflow.restartServer",
                 "title": "Restart language server",
                 "category": "Nextflow"
             },
             {
+                "command": "nextflow.showReadme",
+                "title": "Show Welcome Page",
+                "category": "Nextflow"
+            },
+            {
                 "command": "nextflow.stopServer",
                 "title": "Stop language server",
+                "category": "Nextflow"
+            },
+            {
+                "command": "nextflow.writeTest",
+                "title": "Write nf-test with Seqera",
                 "category": "Nextflow"
             }
         ],
@@ -154,7 +174,37 @@
                     "markdownDescription": "Target version of Nextflow to be used by the language server."
                 }
             }
-        }
+        },
+        "chatParticipants": [
+            {
+                "id": "nextflow.chatbot",
+                "fullName": "Seqera",
+                "name": "Seqera",
+                "description": "How can I help you with Nextflow?",
+                "isSticky": true,
+                "commands": [
+                    {
+                        "name": "nf-test",
+                        "description": "Write an nf-test for the code that you see"
+                    },
+                    {
+                        "name": "dsl2",
+                        "description": "Convert code to DSL2"
+                    }
+                ]
+            }
+        ],
+        "colors": [
+            {
+                "id": "chat.avatarForeground",
+                "description": "Foreground color used for chat avatars.",
+                "defaults": {
+                    "light": "#0DC09D",
+                    "dark": "#0DC09D",
+                    "highContrast": "#0DC09D"
+                }
+            }
+        ]
     },
     "scripts": {
         "check-types": "tsc --noEmit",
@@ -163,7 +213,8 @@
     },
     "devDependencies": {
         "@types/node": "^20",
-        "@types/vscode": "^1.73.1",
+        "@types/vscode": "^1.96.0",
+        "@vscode/chat-extension-utils": "^0.0.0-alpha.4",
         "@vscode/vsce": "^3.2.1",
         "esbuild": "^0.25.0",
         "esbuild-plugin-copy": "^2.1.1",
