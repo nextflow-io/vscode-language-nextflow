@@ -13,16 +13,15 @@ See also:
 
 ## Features
 
-The following language features are currently supported:
-
-- syntax highlighting
-- code navigation (outline, go to definition, find references)
-- completion
-- diagnostics (errors, warnings)
-- formatting
-- hover hints
-- rename
+- Syntax highlighting
+- Code navigation (outline, go to definition, find references)
+- Code completion
+- Diagnostics (errors, warnings)
+- Formatting
+- Hover hints
+- Rename
 - DAG preview for workflows
+- Chat with Seqera AI
 
 ## Requirements
 
