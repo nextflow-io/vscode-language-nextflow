@@ -1,6 +1,5 @@
 const { build } = require('esbuild');
 const { copy } = require('esbuild-plugin-copy');
-const path = require('path');
 
 const production = process.argv.includes('--production');
 
@@ -19,7 +18,9 @@ async function main() {
   if( !production )
     files['language-server/build/libs/language-server-all.jar'] = 'bin'
   await build({
-    entryPoints: ['src/extension.ts'],
+    entryPoints: [
+      'src/extension.ts'
+    ],
     bundle: true,
     format: 'cjs',
     minify: production,
@@ -31,13 +32,11 @@ async function main() {
     logLevel: 'silent',
     plugins: [
       copy({
-        resolveFrom: 'cwd',
-        assets: Object.entries(files).map(([from, to]) => ({
-          from,
-          to: path.join('build', to)
-        }))
-      })
-    ]
+        assets: Object.entries(files).map(([from, to]) => {
+          return { from, to };
+        }),
+      }),
+    ],
   });
 }
 

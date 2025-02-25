@@ -4,9 +4,11 @@
 
 Open the command palette and type `Nextflow` to see the following commands:
 
-- `Show welcome page`
-- `Restart language server`
-- `Stop language server`
+- Show Welcome Page
+- Chat with Seqera
+- Convert to DSL2 with Seqera
+- Restart language server
+- Stop language server
 
 ## Seqera AI
 
@@ -18,10 +20,9 @@ To fully leverage Seqera workspaces & [Seqera AI](https://ai.seqera.io/), you ca
 
 In order for Cursor to have access to the Nextflow docs, perform the following steps:
 
-- Open the chat window
-- Type `@Docs`
-- Click `+ Add new doc`
-- Paste `https://www.nextflow.io/docs/latest/`
+1. Open the chat window
+2. Type `@Docs`
+3. Click `+ Add new doc`
+4. Paste `https://www.nextflow.io/docs/latest/`
 
-Now you will be able to use the `@Nextflow` command in Cursor Chat.
-The same can be done for MultiQC or other products.
+Now you will be able to use the `@Nextflow` command in Cursor Chat. The same can be done for MultiQC or other tools.

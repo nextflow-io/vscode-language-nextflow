@@ -4,12 +4,6 @@ All notable changes to the Nextflow VS Code extension will be documented here.
 
 See [Keep a Changelog](http://keepachangelog.com/) for recommendations on how to structure this file.
 
-## [1.0.5] - 2025-02-19
-
-- Bump extension version to `1.0.5`
-- Add Seqera chat participant for CoPilot
-- Add commands for chat utilities
-
 ## [1.0.4] - 2025-01-21
 
 - Bump language server to [1.0.4](https://github.com/nextflow-io/language-server/releases/tag/v1.0.4)
@@ -48,11 +42,15 @@ See [Keep a Changelog](http://keepachangelog.com/) for recommendations on how to
 
 ## [0.3.1] - 2022-04-13
 
+
 ## [0.3.0] - 2020-09-17
+
 
 ## [0.2.0] - 2020-02-22
 
+
 ## [0.1.1] - 2018-05-12
+
 
 ## [0.1.0] - 2018-01-30
 

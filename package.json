@@ -2,7 +2,7 @@
     "name": "nextflow",
     "displayName": "Nextflow",
     "description": "Nextflow language support",
-    "version": "1.0.5",
+    "version": "1.0.4",
     "publisher": "nextflow",
     "repository": {
         "type": "git",
@@ -96,18 +96,8 @@
         ],
         "commands": [
             {
-                "command": "nextflow.showReadme",
-                "title": "Show welcome page",
-                "category": "Nextflow"
-            },
-            {
-                "command": "nextflow.restartServer",
-                "title": "Restart language server",
-                "category": "Nextflow"
-            },
-            {
-                "command": "nextflow.stopServer",
-                "title": "Stop language server",
+                "command": "nextflow.convertToDSL2",
+                "title": "Convert to DSL2 with Seqera",
                 "category": "Nextflow"
             },
             {
@@ -116,13 +106,23 @@
                 "category": "Nextflow"
             },
             {
-                "command": "nextflow.writeTest",
-                "title": "Write nf-test with Seqera",
+                "command": "nextflow.restartServer",
+                "title": "Restart language server",
                 "category": "Nextflow"
             },
             {
-                "command": "nextflow.convertToDSL2",
-                "title": "Convert to DSL2 with Seqera",
+                "command": "nextflow.showReadme",
+                "title": "Show Welcome Page",
+                "category": "Nextflow"
+            },
+            {
+                "command": "nextflow.stopServer",
+                "title": "Stop language server",
+                "category": "Nextflow"
+            },
+            {
+                "command": "nextflow.writeTest",
+                "title": "Write nf-test with Seqera",
                 "category": "Nextflow"
             }
         ],
@@ -209,11 +209,12 @@
     "scripts": {
         "check-types": "tsc --noEmit",
         "compile": "npm run check-types && node esbuild.js",
-        "package": "npm run check-types && node esbuild.js --production && vsce package -o build/nextflow.vsix"
+        "package": "npm run check-types && node esbuild.js --production && (cd build ; vsce package -o nextflow.vsix)"
     },
     "devDependencies": {
         "@types/node": "^20",
         "@types/vscode": "^1.96.0",
+        "@vscode/chat-extension-utils": "^0.0.0-alpha.4",
         "@vscode/vsce": "^3.2.1",
         "esbuild": "^0.25.0",
         "esbuild-plugin-copy": "^2.1.1",
@@ -222,9 +223,5 @@
         "typescript": "^5.7.2",
         "vscode-jsonrpc": "^8.0.2",
         "vscode-languageclient": "^8.0.2"
-    },
-    "dependencies": {
-        "@vscode/chat-extension-utils": "^0.0.0-alpha.4",
-        "vsce": "^2.15.0"
     }
 }

@@ -1,13 +1,9 @@
 import * as vscode from "vscode";
 import { createHandler } from "./chatbot";
-import showPage from "./utils/showPage";
 
 export function activateChatbot(context: vscode.ExtensionContext) {
-  console.log("🟢 Seqera extension activated");
-
-  // Handle Cursor
+  // DO nothing in Cursor
   if (vscode.env.appName.includes("Cursor")) {
-    // Do nothing
     return;
   }
 

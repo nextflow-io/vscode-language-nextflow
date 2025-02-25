@@ -1,8 +1,7 @@
-.gradle
+.DS_Store
 .vscode
 .vsix
 build/
 language-server
 node_modules
 *.vsix
-.DS_Store
