@@ -37,8 +37,18 @@ export function activateChatbot(context: vscode.ExtensionContext) {
     }
   );
 
+  const convertToDSL2 = vscode.commands.registerCommand(
+    "nextflow.convertToDSL2",
+    async () => {
+      await vscode.commands.executeCommand("workbench.action.chat.open", {
+        query: "@Seqera /dsl2",
+      });
+    }
+  );
+
   context.subscriptions.push(openChat);
   context.subscriptions.push(writeTest);
+  context.subscriptions.push(convertToDSL2);
 }
 
 export default { activateChatbot };

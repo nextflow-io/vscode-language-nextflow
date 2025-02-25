@@ -1,7 +1,6 @@
 import buildMermaid from "./utils/buildMermaid";
 import findJava from "./utils/findJava";
 import * as fs from 'fs';
-import fetch from 'node-fetch';
 import * as os from "os";
 import * as path from "path";
 import * as vscode from "vscode";
