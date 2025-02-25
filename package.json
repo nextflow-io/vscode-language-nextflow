@@ -165,7 +165,7 @@
         "@types/node": "^20",
         "@types/vscode": "^1.73.1",
         "@vscode/vsce": "^3.2.1",
-        "esbuild": "^0.24.0",
+        "esbuild": "^0.25.0",
         "esbuild-plugin-copy": "^2.1.1",
         "mermaid": "^11.4.1",
         "node-fetch": "^3.3.2",
