@@ -42,7 +42,7 @@ The extension includes a GitHub Copilot extension specifically trained for Nextf
 
 ### VS Code Copilot Extension Features
 
-![VS Code Copilot Extension](images/20250214-Chat-Initation-101.gif)
+![VS Code Copilot Extension](https://cdn.sanity.io/images/o2y1bt2g/seqera/ce3b8ba1fe529bff2c836e2a243d6a5f57d57d84-1680x1080.gif)
 
 The extension includes an extension to GitHub Copilot specifically trained for Nextflow development:
 
