@@ -152,6 +152,11 @@
                     "default": false,
                     "markdownDescription": "Use the [Harshil Alignment™️](https://nf-co.re/docs/contributing/code_editors_and_styling/harshil_alignment) when formatting Nextflow scripts and config files.\n\n*Note: not all rules are supported yet*"
                 },
+                "nextflow.formatting.maheshForm": {
+                    "type": "boolean",
+                    "default": false,
+                    "markdownDescription": "Place process outputs at the end of the process body when formatting Nextflow scripts."
+                },
                 "nextflow.java.home": {
                     "type": [
                         "string",
