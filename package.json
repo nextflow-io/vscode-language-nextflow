@@ -211,7 +211,25 @@
           "highContrast": "#0DC09D"
         }
       }
-    ]
+    ],
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "seqera",
+          "title": "Seqera",
+          "icon": "images/seqera.svg"
+        }
+      ]
+    },
+    "views": {
+      "seqera": [
+        {
+          "id": "pipelines",
+          "name": "Pipelines",
+          "type": "webview"
+        }
+      ]
+    } 
   },
   "scripts": {
     "check-types": "tsc --noEmit",
