@@ -23,6 +23,20 @@ See also:
 - DAG preview for workflows
 - Chat with Seqera AI
 
+### VS Code Copilot Extension Features
+
+![VS Code Copilot Extension](https://cdn.sanity.io/images/o2y1bt2g/seqera/ce3b8ba1fe529bff2c836e2a243d6a5f57d57d84-1680x1080.gif)
+
+The extension includes an extension to GitHub Copilot specifically trained for Nextflow development:
+
+- Full support for Nextflow DSL2 grammar and syntax
+- Context-aware assistance that understands your specific codebase
+- Generates code following Nextflow best practices and patterns
+- Works with any LLM you have access to, e.g. OpenAI, Anthropic, Google through your Github Copilot. (Sonnet 3.5 is recommended by the Seqera team)
+- Special commands:
+  - `/dsl2` - Helps convert DSL1 scripts to DSL2 format
+  - `/nf-test` - Assists in generating nf-test test cases and improving test coverage
+
 ## Requirements
 
 The language server requires Java 17 or later.
