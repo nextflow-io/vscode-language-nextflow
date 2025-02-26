@@ -233,6 +233,7 @@
     "prettier": "3.5.2",
     "typescript": "^5.7.2",
     "vscode-jsonrpc": "^8.0.2",
-    "vscode-languageclient": "^8.0.2"
+    "vscode-languageclient": "^8.0.2",
+    "posthog-node": "^4.4.1"
   }
 }

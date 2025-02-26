@@ -62,6 +62,7 @@ async function getLanguageServerPath() {
   // use development build if present
   const devPath = path.resolve(
     extensionContext.extensionPath,
+    "build",
     "bin",
     "language-server-all.jar"
   );
