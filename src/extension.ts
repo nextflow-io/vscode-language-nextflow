@@ -5,13 +5,18 @@ import {
   stopLanguageServer
 } from "./activateLanguageServer";
 import { activateReadme } from "./activateReadme";
+import { activateTelemetry, deactivateTelemetry } from "./activateTelemetry";
 
-export function activate(context: vscode.ExtensionContext) {
+export async function activate(context: vscode.ExtensionContext) {
+  const trackEvent = await activateTelemetry(context);
   activateReadme(context);
-  activateChatbot(context);
-  activateLanguageServer(context);
+  activateLanguageServer(context, trackEvent);
+  activateChatbot(context, trackEvent);
 }
 
-export function deactivate(): Thenable<void> | undefined {
+export function deactivate(
+  context: vscode.ExtensionContext
+): Thenable<void> | undefined {
+  deactivateTelemetry(context);
   return stopLanguageServer();
 }

@@ -124,6 +124,11 @@
         "command": "nextflow.writeTest",
         "title": "Write nf-test with Seqera",
         "category": "Nextflow"
+      },
+      {
+        "command": "nextflow.updateTelemetryConsent",
+        "title": "Update telemetry consent",
+        "category": "Nextflow"
       }
     ],
     "configuration": {
