@@ -222,8 +222,8 @@
     "views": {
       "seqera": [
         {
-          "id": "pipelines",
-          "name": "Pipelines",
+          "id": "seqera",
+          "name": "Seqera",
           "type": "webview"
         }
       ]
