@@ -40,6 +40,20 @@ The extension includes a GitHub Copilot extension specifically trained for Nextf
   - `/dsl2` - Convert DSL1 scripts to DSL2
   - `/nf-test` - Assists in generating nf-test test cases and improving test coverage
 
+### VS Code Copilot Extension Features
+
+![VS Code Copilot Extension](images/20250214-Chat-Initation-101.gif)
+
+The extension includes an extension to GitHub Copilot specifically trained for Nextflow development:
+
+- Full support for Nextflow DSL2 grammar and syntax
+- Context-aware assistance that understands your specific codebase
+- Generates code following Nextflow best practices and patterns
+- Works with any LLM you have access to, e.g. OpenAI, Anthropic, Google through your Github Copilot. (Sonnet 3.5 is recommended by the Seqera team)
+- Special commands:
+  - `/dsl2` - Helps convert DSL1 scripts to DSL2 format
+  - `/nf-test` - Assists in generating nf-test test cases and improving test coverage
+
 ## Requirements
 
 The language server requires Java 17 or later.
@@ -58,6 +72,13 @@ If you need to edit the language server, clone the repository and build it:
 ```bash
 git clone https://github.com/nextflow-io/language-server
 make server
+```
+
+Otherwise, you can simply download a language server release into the following subdirectory:
+
+```bash
+mkdir -p language-server/build/libs
+wget -P language-server/build/libs https://github.com/nextflow-io/language-server/releases/download/$VERSION/language-server-all.jar
 ```
 
 Finally, press `F5` to build the extension and launch a new VS Code window with the extension loaded.
