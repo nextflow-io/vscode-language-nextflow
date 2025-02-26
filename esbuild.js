@@ -1,23 +1,23 @@
 const { build } = require('esbuild');
 const { copy } = require('esbuild-plugin-copy');
+const path = require("path");
 
 const production = process.argv.includes('--production');
 
 async function main() {
   const files = {
-    'docs/**': './docs',
-    'images/**': './images',
-    'snippets/**': './snippets',
-    'syntaxes/**': './syntaxes',
-    'CHANGELOG.md': './CHANGELOG.md',
-    'LICENSE.md': './LICENSE.md',
-    'README.md': './README.md',
-    'language-configuration.json': './language-configuration.json',
-    'package.json': './package.json',
-    'node_modules/mermaid/dist/mermaid.min.js': 'media',
+    'images/**': 'images',
+    'snippets/**': 'snippets',
+    'syntaxes/**': 'syntaxes',
+    'CHANGELOG.md': 'CHANGELOG.md',
+    'LICENSE.md': 'LICENSE.md',
+    'README.md': 'README.md',
+    'language-configuration.json': 'language-configuration.json',
+    'package.json': 'package.json',
+    'node_modules/mermaid/dist/mermaid.min.js': 'media/mermaid.min.js'
   };
-  if( !production )
-    files['language-server/build/libs/language-server-all.jar'] = 'bin'
+  if (!production)
+    files['language-server/build/libs/language-server-all.jar'] = 'bin/language-server-all.jar';
   await build({
     entryPoints: [
       'src/extension.ts'
@@ -33,10 +33,12 @@ async function main() {
     logLevel: 'silent',
     plugins: [
       copy({
-        assets: Object.entries(files).map(([from, to]) => {
-          return { from, to };
-        }),
-      }),
+        resolveFrom: 'cwd',
+        assets: Object.entries(files).map(([from, to]) => ({
+          from,
+          to: path.join('build', to)
+        }))
+      })
     ],
   });
 }

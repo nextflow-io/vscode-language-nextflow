@@ -29,7 +29,7 @@
         "Programming Languages"
     ],
     "activationEvents": [],
-    "main": "./extension.js",
+    "main": "./build/extension.js",
     "contributes": {
         "languages": [
             {
@@ -209,7 +209,7 @@
     "scripts": {
         "check-types": "tsc --noEmit",
         "compile": "npm run check-types && node esbuild.js",
-        "package": "npm run check-types && node esbuild.js --production && (cd build ; vsce package -o nextflow.vsix)"
+        "package": "npm run check-types && node esbuild.js --production && vsce package -o build/nextflow.vsix"
     },
     "devDependencies": {
         "@types/node": "^20",
