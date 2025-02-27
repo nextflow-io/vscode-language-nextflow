@@ -47,15 +47,11 @@ See [Keep a Changelog](http://keepachangelog.com/) for recommendations on how to
 
 ## [0.3.1] - 2022-04-13
 
-
 ## [0.3.0] - 2020-09-17
-
 
 ## [0.2.0] - 2020-02-22
 
-
 ## [0.1.1] - 2018-05-12
-
 
 ## [0.1.0] - 2018-01-30
 

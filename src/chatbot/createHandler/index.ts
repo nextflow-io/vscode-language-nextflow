@@ -9,7 +9,7 @@ type PromptKey = string;
 const prompts: Record<PromptKey, string> = {
   "nf-test": NF_TEST_PROMPT,
   dsl2: DSL2_PROMPT,
-  default: BASE_PROMPT,
+  default: BASE_PROMPT
 };
 
 /**
@@ -78,8 +78,8 @@ const createHandler = (): vscode.ChatRequestHandler => {
         responseStreamOptions: {
           stream,
           references: true,
-          responseText: true,
-        },
+          responseText: true
+        }
       },
       token
     );

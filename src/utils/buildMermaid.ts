@@ -1,6 +1,10 @@
 import * as vscode from "vscode";
 
-export default function buildMermaid(content: string, name: string, mermaidLibUri: vscode.Uri): string {
+export default function buildMermaid(
+  content: string,
+  name: string,
+  mermaidLibUri: vscode.Uri
+): string {
   // HTML boilerplate used by both VSCode and HTML export
   const htmlHead = `<head>
     <meta charset="UTF-8">

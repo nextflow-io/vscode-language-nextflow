@@ -2,7 +2,7 @@ import * as vscode from "vscode";
 import { activateChatbot } from "./activateChatbot";
 import {
   activateLanguageServer,
-  stopLanguageServer,
+  stopLanguageServer
 } from "./activateLanguageServer";
 import { activateReadme } from "./activateReadme";
 
