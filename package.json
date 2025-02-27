@@ -227,12 +227,14 @@
           "type": "webview"
         }
       ]
-    } 
+    }
   },
   "scripts": {
     "check-types": "tsc --noEmit",
     "compile": "npm run check-types && node esbuild.js",
-    "package": "npm run check-types && node esbuild.js --production && (cd build ; vsce package -o nextflow.vsix)"
+    "package": "npm run ui-build && npm run check-types && node esbuild.js --production && (cd build ; vsce package -o nextflow.vsix)",
+    "ui-dev": "cd src/webview-ui && npm run dev",
+    "ui-build": "cd src/webview-ui && npm run build"
   },
   "devDependencies": {
     "@types/node": "^20",
