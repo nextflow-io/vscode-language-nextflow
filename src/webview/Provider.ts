@@ -1,7 +1,7 @@
 import * as vscode from "vscode";
 import { getNonce } from "./getNonce";
 
-export class SidebarProvider implements vscode.WebviewViewProvider {
+class Provider implements vscode.WebviewViewProvider {
   constructor(private readonly _extensionUri: vscode.Uri) {}
 
   async resolveWebviewView(webviewView: vscode.WebviewView): Promise<void> {
@@ -87,3 +87,5 @@ export class SidebarProvider implements vscode.WebviewViewProvider {
       </html>`;
   }
 }
+
+export default Provider;
