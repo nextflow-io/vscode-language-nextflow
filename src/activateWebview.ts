@@ -1,8 +1,8 @@
 import * as vscode from "vscode";
-import { SidebarProvider } from "./webview/SidebarProvider";
+import WebviewProvider from "./webview/Provider";
 
 export function activateWebview(context: vscode.ExtensionContext) {
-  const sidebarProvider = new SidebarProvider(context.extensionUri);
+  const sidebarProvider = new WebviewProvider(context.extensionUri);
 
   const provider = vscode.window.registerWebviewViewProvider(
     "seqera",
