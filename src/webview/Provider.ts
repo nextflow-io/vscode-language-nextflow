@@ -1,15 +1,30 @@
 import * as vscode from "vscode";
+import * as fs from "fs";
+import * as path from "path";
 import { getNonce } from "./getNonce";
+
+interface PipelineFile {
+  filePath: string;
+  processes: string[];
+  includes: string[];
+}
 
 class Provider implements vscode.WebviewViewProvider {
   constructor(private readonly _extensionUri: vscode.Uri) {}
 
+  /**
+   * Entry point for the webview.
+   */
   async resolveWebviewView(webviewView: vscode.WebviewView): Promise<void> {
     webviewView.webview.options = {
       enableScripts: true,
       localResourceRoots: [this._extensionUri],
     };
 
+    // 1) Scan workspace for .nf files and build a pipeline tree
+    const pipelineTree = await this.buildPipelineTree();
+
+    // 2) Set up the webview HTML
     const styleResetUri = webviewView.webview.asWebviewUri(
       vscode.Uri.joinPath(
         this._extensionUri,
@@ -19,7 +34,6 @@ class Provider implements vscode.WebviewViewProvider {
         "reset.css"
       )
     );
-
     const styleVSCodeUri = webviewView.webview.asWebviewUri(
       vscode.Uri.joinPath(
         this._extensionUri,
@@ -36,15 +50,116 @@ class Provider implements vscode.WebviewViewProvider {
       webviewView.webview
     );
 
+    // 3) Once the HTML is set, send the pipeline tree to the webview
+    webviewView.webview.postMessage({
+      command: "initPipelineTree",
+      data: pipelineTree,
+    });
+
+    // 4) Handle messages from the webview
     webviewView.webview.onDidReceiveMessage(async (message) => {
       switch (message.command) {
         case "generateTest":
-          // Handle test generation
+          // (Future) handle test generation
+          break;
+        case "openFile":
+          // (Optional) If you want to handle file open requests from the webview
+          this.openFileInEditor(message.filePath);
           break;
       }
     });
   }
 
+  /**
+   * Builds a simple pipeline tree by scanning for .nf files, includes, and processes.
+   */
+  private async buildPipelineTree(): Promise<PipelineFile[]> {
+    const pipelineFiles: PipelineFile[] = [];
+
+    // Get the first workspace folder
+    const workspaceFolders = vscode.workspace.workspaceFolders;
+    if (!workspaceFolders || workspaceFolders.length === 0) {
+      return pipelineFiles; // No workspace open
+    }
+    const rootPath = workspaceFolders[0].uri.fsPath;
+
+    // Find all .nf files in the workspace (simple approach)
+    const nfFiles = await this.findNfFiles(rootPath);
+
+    // For each .nf file, parse includes and processes
+    for (const nfFile of nfFiles) {
+      const content = fs.readFileSync(nfFile, "utf8");
+      const includes = this.parseIncludes(content);
+      const processes = this.parseProcesses(content);
+      pipelineFiles.push({
+        filePath: nfFile,
+        processes,
+        includes,
+      });
+    }
+
+    // Return the scanned structure
+    return pipelineFiles;
+  }
+
+  /**
+   * Recursively find .nf files in the workspace folder.
+   */
+  private async findNfFiles(dir: string): Promise<string[]> {
+    const result: string[] = [];
+    const entries = fs.readdirSync(dir, { withFileTypes: true });
+    for (const entry of entries) {
+      const entryPath = path.join(dir, entry.name);
+      if (entry.isDirectory()) {
+        // Exclude node_modules or other folders if necessary
+        if (entry.name === "node_modules") continue;
+        result.push(...(await this.findNfFiles(entryPath)));
+      } else if (entry.isFile() && entry.name.endsWith(".nf")) {
+        result.push(entryPath);
+      }
+    }
+    return result;
+  }
+
+  /**
+   * Naively parse includes from a file's content.
+   * You may need to refine this regex or approach for your actual usage.
+   */
+  private parseIncludes(content: string): string[] {
+    const regex = /^\s*include\s+([\w\/.]+)/gm;
+    const result: string[] = [];
+    let match: RegExpExecArray | null;
+    while ((match = regex.exec(content)) !== null) {
+      result.push(match[1]);
+    }
+    return result;
+  }
+
+  /**
+   * Naively parse processes from a file's content.
+   * You can enhance this to match DSL2 syntax or other Nextflow quirks.
+   */
+  private parseProcesses(content: string): string[] {
+    const regex = /^\s*process\s+(\w+)/gm;
+    const result: string[] = [];
+    let match: RegExpExecArray | null;
+    while ((match = regex.exec(content)) !== null) {
+      result.push(match[1]);
+    }
+    return result;
+  }
+
+  /**
+   * Optionally open a file in the editor if requested from the webview.
+   */
+  private async openFileInEditor(filePath: string) {
+    const doc = await vscode.workspace.openTextDocument(filePath);
+    vscode.window.showTextDocument(doc);
+  }
+
+  /**
+   * The existing method that sets our webview content.
+   */
   private getWebviewContent(
     styleResetUri: vscode.Uri,
     styleVSCodeUri: vscode.Uri,
@@ -57,7 +172,9 @@ class Provider implements vscode.WebviewViewProvider {
         <head>
           <meta charset="UTF-8">
           <meta name="viewport" content="width=device-width, initial-scale=1.0">
-          <meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src ${webview.cspSource}; script-src 'nonce-${nonce}';">
+          <meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src ${
+            webview.cspSource
+          }; script-src 'nonce-${nonce}';">
           <link href="${styleResetUri}" rel="stylesheet">
           <link href="${styleVSCodeUri}" rel="stylesheet">
           <title>Nextflow Pipelines</title>
@@ -65,7 +182,65 @@ class Provider implements vscode.WebviewViewProvider {
         <body>
           <h1>Nextflow Pipelines</h1>
           <div id="error-container" style="color: red;"></div>
+          <div id="pipelineTreeContainer"></div>
           <script nonce="${nonce}">
+            const vscode = acquireVsCodeApi();
+
+            // Listen for messages from the extension
+            window.addEventListener('message', event => {
+              const message = event.data;
+              switch (message.command) {
+                case 'initPipelineTree':
+                  // We have a pipeline tree: message.data
+                  renderPipelineTree(message.data);
+                  break;
+              }
+            });
+
+            function renderPipelineTree(treeData) {
+              const container = document.getElementById('pipelineTreeContainer');
+              container.innerHTML = '';
+
+              treeData.forEach(fileObj => {
+                const fileDiv = document.createElement('div');
+                fileDiv.style.marginBottom = '8px';
+
+                const fileHeader = document.createElement('h3');
+                fileHeader.textContent = fileObj.filePath;
+                fileHeader.style.cursor = 'pointer';
+                fileHeader.onclick = () => {
+                  // Example: open file in editor if desired
+                  vscode.postMessage({ command: 'openFile', filePath: fileObj.filePath });
+                };
+                fileDiv.appendChild(fileHeader);
+
+                // Processes
+                if (fileObj.processes && fileObj.processes.length > 0) {
+                  const processList = document.createElement('ul');
+                  fileObj.processes.forEach(proc => {
+                    const li = document.createElement('li');
+                    li.textContent = 'Process: ' + proc;
+                    processList.appendChild(li);
+                  });
+                  fileDiv.appendChild(processList);
+                }
+
+                // Includes
+                if (fileObj.includes && fileObj.includes.length > 0) {
+                  const incList = document.createElement('ul');
+                  fileObj.includes.forEach(inc => {
+                    const li = document.createElement('li');
+                    li.textContent = 'Include: ' + inc;
+                    incList.appendChild(li);
+                  });
+                  fileDiv.appendChild(incList);
+                }
+
+                container.appendChild(fileDiv);
+              });
+            }
+
+            // Basic error handling
             window.onerror = function(msg, url, line, col, error) {
               const errorContainer = document.getElementById('error-container');
               errorContainer.innerHTML += \`<p>Error: \${msg}</p>\`;
