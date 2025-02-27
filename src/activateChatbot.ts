@@ -23,7 +23,7 @@ export function activateChatbot(context: vscode.ExtensionContext) {
     async () => {
       await vscode.commands.executeCommand("workbench.action.chat.open", {
         query: "@Seqera ",
-        isPartialQuery: true,
+        isPartialQuery: true
       });
     }
   );
@@ -32,7 +32,7 @@ export function activateChatbot(context: vscode.ExtensionContext) {
     "nextflow.writeTest",
     async () => {
       await vscode.commands.executeCommand("workbench.action.chat.open", {
-        query: "@Seqera /nf-test",
+        query: "@Seqera /nf-test"
       });
     }
   );
@@ -41,7 +41,7 @@ export function activateChatbot(context: vscode.ExtensionContext) {
     "nextflow.convertToDSL2",
     async () => {
       await vscode.commands.executeCommand("workbench.action.chat.open", {
-        query: "@Seqera /dsl2",
+        query: "@Seqera /dsl2"
       });
     }
   );

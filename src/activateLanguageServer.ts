@@ -1,13 +1,13 @@
 import buildMermaid from "./utils/buildMermaid";
 import findJava from "./utils/findJava";
-import * as fs from 'fs';
+import * as fs from "fs";
 import * as os from "os";
 import * as path from "path";
 import * as vscode from "vscode";
 import {
   LanguageClient,
   LanguageClientOptions,
-  Executable,
+  Executable
 } from "vscode-languageclient/node";
 
 const LABEL_RELOAD_WINDOW = "Reload Window";
@@ -15,11 +15,13 @@ let extensionContext: vscode.ExtensionContext | null = null;
 let languageClient: LanguageClient | null = null;
 let javaPath: string | null = null;
 
-async function getLatestRemoteVersion(versionPrefix: string): Promise<string | null> {
+async function getLatestRemoteVersion(
+  versionPrefix: string
+): Promise<string | null> {
   try {
     const url = `https://api.github.com/repos/nextflow-io/language-server/releases`;
     const response = await fetch(url, {
-      headers: { 'Accept': 'application/vnd.github.v3+json' }
+      headers: { Accept: "application/vnd.github.v3+json" }
     });
     if (!response.ok) {
       return null;
@@ -30,19 +32,22 @@ async function getLatestRemoteVersion(versionPrefix: string): Promise<string | n
       .filter((tag) => tag.startsWith(versionPrefix))
       .sort((a, b) => b.localeCompare(a, undefined, { numeric: true }));
     return matchingReleases.length > 0 ? matchingReleases[0] : null;
-  }
-  catch (error) {
-    return null
+  } catch (error) {
+    return null;
   }
 }
 
-async function getLatestLocalVersion(versionPrefix: string): Promise<string | null> {
+async function getLatestLocalVersion(
+  versionPrefix: string
+): Promise<string | null> {
   const targetDir = path.join(os.homedir(), ".nextflow", "lsp", versionPrefix);
-  const files = await vscode.workspace.fs.readDirectory(vscode.Uri.file(targetDir));
+  const files = await vscode.workspace.fs.readDirectory(
+    vscode.Uri.file(targetDir)
+  );
   const jarFiles = files
     .map(([name]) => name)
-    .filter(name => name.endsWith(".jar"))
-    .map(name => name.replace(".jar", ""))
+    .filter((name) => name.endsWith(".jar"))
+    .map((name) => name.replace(".jar", ""))
     .sort((a, b) => b.localeCompare(a, undefined, { numeric: true }));
   return jarFiles.length > 0 ? jarFiles[0] : null;
 }
@@ -59,7 +64,9 @@ async function getLanguageServerPath() {
     "language-server-all.jar"
   );
   if (fs.existsSync(devPath)) {
-    vscode.window.showInformationMessage("Using development build of language server.");
+    vscode.window.showInformationMessage(
+      "Using development build of language server."
+    );
     return devPath;
   }
 
@@ -71,7 +78,9 @@ async function getLanguageServerPath() {
   if (!resolvedVersion) {
     resolvedVersion = await getLatestLocalVersion(versionPrefix);
     if (resolvedVersion) {
-      vscode.window.showInformationMessage(`Failed to query latest version of language server from GitHub -- using version ${resolvedVersion} from local cache.`);
+      vscode.window.showInformationMessage(
+        `Failed to query latest version of language server from GitHub -- using version ${resolvedVersion} from local cache.`
+      );
     }
   }
   if (!resolvedVersion) {
@@ -86,7 +95,9 @@ async function getLanguageServerPath() {
   }
 
   // download latest patch release to local cache
-  const response = await fetch(`https://github.com/nextflow-io/language-server/releases/download/${resolvedVersion}/language-server-all.jar`);
+  const response = await fetch(
+    `https://github.com/nextflow-io/language-server/releases/download/${resolvedVersion}/language-server-all.jar`
+  );
   if (!response.ok) {
     return null;
   }
@@ -94,7 +105,9 @@ async function getLanguageServerPath() {
   await vscode.workspace.fs.createDirectory(vscode.Uri.file(targetDir));
   const fileUri = vscode.Uri.file(cachePath);
   await vscode.workspace.fs.writeFile(fileUri, new Uint8Array(arrayBuffer));
-  vscode.window.showInformationMessage(`Downloaded language server ${resolvedVersion}.`);
+  vscode.window.showInformationMessage(
+    `Downloaded language server ${resolvedVersion}.`
+  );
   return fileUri.fsPath;
 }
 
@@ -127,15 +140,15 @@ function startLanguageServer() {
           return;
         }
         progress.report({
-          message: "Initializing Nextflow language server...",
+          message: "Initializing Nextflow language server..."
         });
         const clientOptions: LanguageClientOptions = {
           documentSelector: [
             { scheme: "file", language: "nextflow" },
-            { scheme: "file", language: "nextflow-config" },
+            { scheme: "file", language: "nextflow-config" }
           ],
           synchronize: {
-            configurationSection: "nextflow",
+            configurationSection: "nextflow"
           },
           uriConverters: {
             code2Protocol: (value: vscode.Uri) => {
@@ -147,8 +160,8 @@ function startLanguageServer() {
                 return value.toString();
               }
             },
-            protocol2Code: (value) => vscode.Uri.parse(value),
-          },
+            protocol2Code: (value) => vscode.Uri.parse(value)
+          }
         };
         const serverPath = await getLanguageServerPath();
         if (!serverPath) {
@@ -156,15 +169,12 @@ function startLanguageServer() {
           vscode.window.showErrorMessage("Failed to retrieve language server.");
           return;
         }
-        const args = [
-          "-jar",
-          serverPath,
-        ];
+        const args = ["-jar", serverPath];
         // uncomment to allow a debugger to attach to the language server
         // args.unshift("-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=5005,quiet=y");
         const executable: Executable = {
           command: javaPath,
-          args: args,
+          args: args
         };
         languageClient = new LanguageClient(
           "nextflow",
@@ -214,7 +224,7 @@ async function previewDag(uri: string, name?: string) {
     {
       enableCommandUris: true,
       enableScripts: true,
-      localResourceRoots: [mediaPath],
+      localResourceRoots: [mediaPath]
     }
   );
   const mermaidLibUri = panel.webview.asWebviewUri(
@@ -282,7 +292,7 @@ function activateLanguageServer(context: vscode.ExtensionContext) {
       }
       const uri = vscode.Uri.parse(uriString);
       await vscode.window.showTextDocument(uri, {
-        viewColumn: vscode.ViewColumn.One,
+        viewColumn: vscode.ViewColumn.One
       });
     }
   );
