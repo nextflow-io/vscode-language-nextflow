@@ -11,6 +11,8 @@ export function activate(context: vscode.ExtensionContext) {
   const trackEvent = activateTelemetry(context);
   activateLanguageServer(context, trackEvent);
   activateChatbot(context, trackEvent);
+  console.log("🟣 extensionUri scheme:", context.extensionUri.scheme);
+  console.log("🟣 extensionUri:", context.extensionUri.toString());
   activateWebview(context);
 }
 
