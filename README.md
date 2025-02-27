@@ -2,8 +2,6 @@
 
 VS Code extension for [Nextflow](https://www.nextflow.io/) that provides language support for scripts and config files, using the [Nextflow language server](https://github.com/nextflow-io/language-server).
 
-![nextflow vscode extension](images/vscode-nextflow.png)
-
 Read the blog posts ([part 1](https://seqera.io/blog/modernizing-nextflow-developer-experience/), [part 2](https://seqera.io/blog/modernizing-nextflow-developer-experience-part-2/)) and the [docs](https://nextflow.io/docs/latest/vscode.html) for more information.
 
 See also:
@@ -13,6 +11,12 @@ See also:
 
 ## Features
 
+### Nextflow language server
+
+![nextflow vscode extension](images/vscode-nextflow.png)
+
+The extension uses the [Nextflow langauge server](https://github.com/nextflow-io/language-server) to provide code intelligence:
+
 - Syntax highlighting
 - Code navigation (outline, go to definition, find references)
 - Code completion
@@ -21,7 +25,20 @@ See also:
 - Hover hints
 - Rename
 - DAG preview for workflows
-- Chat with Seqera AI
+
+### Copilot for Nextflow
+
+![VS Code Copilot Extension](https://cdn.sanity.io/images/o2y1bt2g/seqera/ce3b8ba1fe529bff2c836e2a243d6a5f57d57d84-1680x1080.gif)
+
+The extension includes a GitHub Copilot extension specifically trained for Nextflow development:
+
+- Full support for Nextflow DSL2 syntax
+- Context-aware assistance that understands your specific codebase
+- Generates code following Nextflow best practices and patterns
+- Works with any LLM you have access to (e.g. OpenAI, Anthropic, Google) through Github Copilot (Sonnet 3.5 is recommended by the Seqera team)
+- Special commands:
+  - `/dsl2` - Convert DSL1 scripts to DSL2
+  - `/nf-test` - Assists in generating nf-test test cases and improving test coverage
 
 ## Requirements
 
