@@ -15,59 +15,57 @@ class Provider implements vscode.WebviewViewProvider {
   /**
    * Entry point for the webview.
    */
-  async resolveWebviewView(webviewView: vscode.WebviewView): Promise<void> {
+  public async resolveWebviewView(
+    webviewView: vscode.WebviewView
+  ): Promise<void> {
+    // 1) Allow webview to load local resources only from the dist folder
+    // (adjust to your actual dist path)
+    const distUri = vscode.Uri.joinPath(this._extensionUri, "..", "webview-ui", "dist");
     webviewView.webview.options = {
       enableScripts: true,
-      localResourceRoots: [this._extensionUri],
+      localResourceRoots: [distUri],
     };
 
-    // 1) Scan workspace for .nf files and build a pipeline tree
     const pipelineTree = await this.buildPipelineTree();
 
-    // 2) Set up the webview HTML
-    const styleResetUri = webviewView.webview.asWebviewUri(
-      vscode.Uri.joinPath(
-        this._extensionUri,
-        "src",
-        "webview",
-        "styles",
-        "reset.css"
-      )
-    );
-    const styleVSCodeUri = webviewView.webview.asWebviewUri(
-      vscode.Uri.joinPath(
-        this._extensionUri,
-        "src",
-        "webview",
-        "styles",
-        "vscode.css"
-      )
-    );
+    // 2) Read the index.html from dist
+    const indexHtmlPath = path.join(distUri.fsPath, "index.html");
+    let html = fs.readFileSync(indexHtmlPath, "utf8");
 
-    webviewView.webview.html = this.getWebviewContent(
-      styleResetUri,
-      styleVSCodeUri,
-      webviewView.webview
-    );
+    // 3) Fix up resource references. 
+    //    The React build might reference "./assets/..." or similar,
+    //    so we convert them to the proper webview URIs:
+    html = this.updateRefs(html, webviewView.webview, distUri);
 
-    // 3) Once the HTML is set, send the pipeline tree to the webview
-    webviewView.webview.postMessage({
-      command: "initPipelineTree",
-      data: pipelineTree,
+    // 4) Set the webview's HTML content
+    webviewView.webview.html = html;
+
+    // 5) Optionally, post data to React or handle messages, etc.
+    webviewView.webview.postMessage({ command: "initPipelineTree", data: pipelineTree });
+
+    webviewView.webview.onDidReceiveMessage((message) => {
+      // handle messages from React
     });
+  }
 
-    // 4) Handle messages from the webview
-    webviewView.webview.onDidReceiveMessage(async (message) => {
-      switch (message.command) {
-        case "generateTest":
-          // (Future) handle test generation
-          break;
-        case "openFile":
-          // (Optional) If you want to handle file open requests from the webview
-          this.openFileInEditor(message.filePath);
-          break;
-      }
-    });
+  /**
+   * Helper to rewrite local paths (like /assets/*) to vscode-resource URIs
+   * so the webview can load them.
+   */
+  private updateRefs(
+    html: string,
+    webview: vscode.Webview,
+    distUri: vscode.Uri
+  ): string {
+    // Example: find all src/href references in the HTML that start with
+    // something like "./assets" or "/assets", and replace them with webview URIs.
+    // The exact pattern depends on how your build outputs references.
+    const pth = html.replace(
+      /((src|href)=["'])(\.\/|\/)?assets\//g,
+      `$1${webview.asWebviewUri(vscode.Uri.joinPath(distUri, "assets"))}/`
+    );
+    console.log("🟣 path:", pth);
+    return pth;
   }
 
   /**
