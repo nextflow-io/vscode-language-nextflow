@@ -1,5 +1,5 @@
 import * as vscode from "vscode";
-import WebviewProvider from "./webview/Provider";
+import WebviewProvider from "./webview";
 
 export function activateWebview(context: vscode.ExtensionContext) {
   const sidebarProvider = new WebviewProvider(context.extensionUri);
