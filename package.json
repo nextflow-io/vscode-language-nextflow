@@ -96,6 +96,11 @@
     ],
     "commands": [
       {
+        "command": "nextflow.reloadWebView",
+        "title": "Reload Seqera Webview",
+        "category": "Nextflow"
+      },
+      {
         "command": "nextflow.convertToDSL2",
         "title": "Convert to DSL2 with Seqera",
         "category": "Nextflow"
@@ -234,6 +239,7 @@
     "compile": "npm run check-types && node esbuild.js",
     "package": "npm run ui-build && npm run check-types && node esbuild.js --production && (cd build ; vsce package -o nextflow.vsix)",
     "ui-dev": "cd webview-ui && npm run dev",
+    "ui-watch": "cd webview-ui && npm run build -- --watch",
     "ui-build": "cd webview-ui && npm run build"
   },
   "devDependencies": {
