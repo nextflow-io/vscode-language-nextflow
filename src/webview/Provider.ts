@@ -9,9 +9,9 @@ interface PipelineFile {
   includes: string[];
 }
 
-const isProduction = process.argv.includes("--production");
-
 class Provider implements vscode.WebviewViewProvider {
+  private _currentView?: vscode.WebviewView;
+
   constructor(private readonly _extensionUri: vscode.Uri) {}
 
   /**
@@ -20,36 +20,31 @@ class Provider implements vscode.WebviewViewProvider {
   public async resolveWebviewView(
     webviewView: vscode.WebviewView
   ): Promise<void> {
-    if (isProduction) {
-      // 1) Allow webview to load local resources only from the dist folder
-      // (adjust to your actual dist path)
-      const distUri = vscode.Uri.joinPath(
-        this._extensionUri,
-        "..",
-        "webview-ui",
-        "dist"
-      );
-      webviewView.webview.options = {
-        enableScripts: true,
-        localResourceRoots: [distUri]
-      };
+    this._currentView = webviewView;
+    // 1) Allow webview to load local resources only from the dist folder
+    // (adjust to your actual dist path)
+    const distUri = vscode.Uri.joinPath(
+      this._extensionUri,
+      "..",
+      "webview-ui",
+      "dist"
+    );
+    webviewView.webview.options = {
+      enableScripts: true,
+      localResourceRoots: [distUri]
+    };
 
-      // 2) Read the index.html from dist
-      const indexHtmlPath = path.join(distUri.fsPath, "index.html");
-      let html = fs.readFileSync(indexHtmlPath, "utf8");
+    // 2) Read the index.html from dist
+    const indexHtmlPath = path.join(distUri.fsPath, "index.html");
+    let html = fs.readFileSync(indexHtmlPath, "utf8");
 
-      // 3) Fix up resource references.
-      //    The React build might reference "./assets/..." or similar,
-      //    so we convert them to the proper webview URIs:
-      html = this.updateRefs(html, webviewView.webview, distUri);
+    // 3) Fix up resource references.
+    //    The React build might reference "./assets/..." or similar,
+    //    so we convert them to the proper webview URIs:
+    html = this.updateRefs(html, webviewView.webview, distUri);
 
-      // 4) Set the webview's HTML content
-      webviewView.webview.html = html;
-    } else {
-      webviewView.webview.html = this.getDevServerContent(
-        "http://localhost:5173"
-      );
-    }
+    // 4) Set the webview's HTML content
+    webviewView.webview.html = html;
 
     const pipelineTree = await this.buildPipelineTree();
 
@@ -62,35 +57,6 @@ class Provider implements vscode.WebviewViewProvider {
     webviewView.webview.onDidReceiveMessage((message) => {
       // handle messages from React
     });
-  }
-
-  private getDevServerContent(devServerUrl: string) {
-    // Because the webview is basically a sandbox, you can't just load external URLs
-    // unless you let them in the CSP. One approach is an iframe:
-    return `<!DOCTYPE html>
-  <html>
-    <head>
-      <!-- Adjust CSP to allow http/https, script, etc. for dev -->
-      <meta http-equiv="Content-Security-Policy" content="
-        default-src http: https: data: 'unsafe-inline' 'unsafe-eval';
-        style-src 'unsafe-inline' http: https:;
-        script-src http: https: 'unsafe-inline' 'unsafe-eval';
-        media-src *;
-        font-src *;
-      ">
-      <style>
-        /* Make iframe fill the view */
-        html, body, iframe { height: 100%; width: 100%; border: none; margin: 0; padding: 0;}
-      </style>
-    </head>
-    <body>
-      <iframe
-        src="${devServerUrl}"
-        sandbox="allow-scripts allow-same-origin allow-forms allow-popups"
-        frameborder="0" style="width: 100%; height: 100%;"
-      ></iframe>
-    </body>
-  </html>`;
   }
 
   /**
@@ -111,6 +77,23 @@ class Provider implements vscode.WebviewViewProvider {
     );
     console.log("🟣 path:", pth);
     return pth;
+  }
+
+  public reloadView() {
+    if (this._currentView) {
+      const distUri = vscode.Uri.joinPath(
+        this._extensionUri,
+        "..",
+        "webview-ui",
+        "dist"
+      );
+      let html = fs.readFileSync(
+        path.join(distUri.fsPath, "index.html"),
+        "utf8"
+      );
+      html = this.updateRefs(html, this._currentView.webview, distUri);
+      this._currentView.webview.html = html;
+    }
   }
 
   /**

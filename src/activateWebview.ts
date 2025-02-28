@@ -9,5 +9,9 @@ export function activateWebview(context: vscode.ExtensionContext) {
     sidebarProvider
   );
 
+  vscode.commands.registerCommand("nextflow.reloadWebView", () => {
+    sidebarProvider.reloadView();
+  });
+
   context.subscriptions.push(provider);
 }
