@@ -11,16 +11,19 @@ class Provider implements vscode.WebviewViewProvider {
 
   public async resolveWebviewView(view: vscode.WebviewView): Promise<void> {
     this.initializeView(view);
+    await this.initViewData(view);
 
+    view.webview.onDidReceiveMessage((message) => {
+      console.log("🟣 message:", message);
+    });
+  }
+
+  private async initViewData(view: vscode.WebviewView) {
     const pipelineTree = await buildPipelineTree();
 
     view.webview.postMessage({
       command: "initPipelineTree",
       data: pipelineTree
-    });
-
-    view.webview.onDidReceiveMessage((message) => {
-      console.log("🟣 message:", message);
     });
   }
 
@@ -38,10 +41,11 @@ class Provider implements vscode.WebviewViewProvider {
     view.webview.html = html;
   }
 
-  public reloadView() {
+  public async reloadView() {
     if (!this._currentView) return;
     const html = this.getWebviewHtml(this._currentView);
     this._currentView.webview.html = html;
+    await this.initViewData(this._currentView);
   }
 
   private getWebviewDistUri() {
