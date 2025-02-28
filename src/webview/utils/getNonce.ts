@@ -1,4 +1,4 @@
-export function getNonce() {
+function getNonce() {
   let text = "";
   const possible =
     "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
@@ -7,3 +7,5 @@ export function getNonce() {
   }
   return text;
 }
+
+export default getNonce;
