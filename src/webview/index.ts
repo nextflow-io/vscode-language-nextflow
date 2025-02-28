@@ -1,7 +1,6 @@
 import * as vscode from "vscode";
 import * as fs from "fs";
 import * as path from "path";
-import getNonce from "./utils/getNonce";
 import updateRefs from "./utils/updateRefs";
 
 interface PipelineFile {
