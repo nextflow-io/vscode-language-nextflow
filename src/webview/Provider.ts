@@ -1,7 +1,8 @@
 import * as vscode from "vscode";
 import * as fs from "fs";
 import * as path from "path";
-import { getNonce } from "./getNonce";
+import getNonce from "./utils/getNonce";
+import updateRefs from "./utils/updateRefs";
 
 interface PipelineFile {
   filePath: string;
@@ -14,86 +15,47 @@ class Provider implements vscode.WebviewViewProvider {
 
   constructor(private readonly _extensionUri: vscode.Uri) {}
 
-  /**
-   * Entry point for the webview.
-   */
-  public async resolveWebviewView(
-    webviewView: vscode.WebviewView
-  ): Promise<void> {
-    this._currentView = webviewView;
-    // 1) Allow webview to load local resources only from the dist folder
-    // (adjust to your actual dist path)
-    const distUri = vscode.Uri.joinPath(
-      this._extensionUri,
-      "..",
-      "webview-ui",
-      "dist"
-    );
-    webviewView.webview.options = {
+  public async resolveWebviewView(view: vscode.WebviewView): Promise<void> {
+    const distUri = this.getWebviewDistUri();
+
+    view.webview.options = {
       enableScripts: true,
       localResourceRoots: [distUri]
     };
 
-    // 2) Read the index.html from dist
-    const indexHtmlPath = path.join(distUri.fsPath, "index.html");
-    let html = fs.readFileSync(indexHtmlPath, "utf8");
+    this._currentView = view;
 
-    // 3) Fix up resource references.
-    //    The React build might reference "./assets/..." or similar,
-    //    so we convert them to the proper webview URIs:
-    html = this.updateRefs(html, webviewView.webview, distUri);
-
-    // 4) Set the webview's HTML content
-    webviewView.webview.html = html;
+    const html = this.getWebviewHtml(view);
+    view.webview.html = html;
 
     const pipelineTree = await this.buildPipelineTree();
 
     // 5) Optionally, post data to React or handle messages, etc.
-    webviewView.webview.postMessage({
+    view.webview.postMessage({
       command: "initPipelineTree",
       data: pipelineTree
     });
 
-    webviewView.webview.onDidReceiveMessage((message) => {
+    view.webview.onDidReceiveMessage((message) => {
       // handle messages from React
     });
   }
 
-  /**
-   * Helper to rewrite local paths (like /assets/*) to vscode-resource URIs
-   * so the webview can load them.
-   */
-  private updateRefs(
-    html: string,
-    webview: vscode.Webview,
-    distUri: vscode.Uri
-  ): string {
-    // Example: find all src/href references in the HTML that start with
-    // something like "./assets" or "/assets", and replace them with webview URIs.
-    // The exact pattern depends on how your build outputs references.
-    const pth = html.replace(
-      /((src|href)=["'])(\.\/|\/)?assets\//g,
-      `$1${webview.asWebviewUri(vscode.Uri.joinPath(distUri, "assets"))}/`
-    );
-    console.log("🟣 path:", pth);
-    return pth;
+  private getWebviewDistUri() {
+    return vscode.Uri.joinPath(this._extensionUri, "..", "webview-ui", "dist");
+  }
+
+  private getWebviewHtml(view: vscode.WebviewView) {
+    const distUri = this.getWebviewDistUri();
+    let html = fs.readFileSync(path.join(distUri.fsPath, "index.html"), "utf8");
+    html = updateRefs(html, view.webview, distUri);
+    return html;
   }
 
   public reloadView() {
-    if (this._currentView) {
-      const distUri = vscode.Uri.joinPath(
-        this._extensionUri,
-        "..",
-        "webview-ui",
-        "dist"
-      );
-      let html = fs.readFileSync(
-        path.join(distUri.fsPath, "index.html"),
-        "utf8"
-      );
-      html = this.updateRefs(html, this._currentView.webview, distUri);
-      this._currentView.webview.html = html;
-    }
+    if (!this._currentView) return;
+    const html = this.getWebviewHtml(this._currentView);
+    this._currentView.webview.html = html;
   }
 
   /**
@@ -181,111 +143,6 @@ class Provider implements vscode.WebviewViewProvider {
   private async openFileInEditor(filePath: string) {
     const doc = await vscode.workspace.openTextDocument(filePath);
     vscode.window.showTextDocument(doc);
-  }
-
-  /**
-   * The existing method that sets our webview content.
-   */
-  private getWebviewContent(
-    styleResetUri: vscode.Uri,
-    styleVSCodeUri: vscode.Uri,
-    webview: vscode.Webview
-  ) {
-    const nonce = getNonce();
-
-    return `<!DOCTYPE html>
-      <html lang="en">
-        <head>
-          <meta charset="UTF-8">
-          <meta name="viewport" content="width=device-width, initial-scale=1.0">
-          <meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src ${
-            webview.cspSource
-          }; script-src 'nonce-${nonce}';">
-          <link href="${styleResetUri}" rel="stylesheet">
-          <link href="${styleVSCodeUri}" rel="stylesheet">
-          <title>Nextflow Pipelines</title>
-        </head>
-        <body>
-          <h1>Nextflow Pipelines</h1>
-          <div id="error-container" style="color: red;"></div>
-          <div id="pipelineTreeContainer"></div>
-          <script nonce="${nonce}">
-            const vscode = acquireVsCodeApi();
-
-            // Listen for messages from the extension
-            window.addEventListener('message', event => {
-              const message = event.data;
-              switch (message.command) {
-                case 'initPipelineTree':
-                  // We have a pipeline tree: message.data
-                  renderPipelineTree(message.data);
-                  break;
-              }
-            });
-
-            function renderPipelineTree(treeData) {
-              const container = document.getElementById('pipelineTreeContainer');
-              container.innerHTML = '';
-
-              treeData.forEach(fileObj => {
-                const fileDiv = document.createElement('div');
-                fileDiv.style.marginBottom = '8px';
-
-                const fileHeader = document.createElement('h3');
-                fileHeader.textContent = fileObj.filePath;
-                fileHeader.style.cursor = 'pointer';
-                fileHeader.onclick = () => {
-                  // Example: open file in editor if desired
-                  vscode.postMessage({ command: 'openFile', filePath: fileObj.filePath });
-                };
-                fileDiv.appendChild(fileHeader);
-
-                // Processes
-                if (fileObj.processes && fileObj.processes.length > 0) {
-                  const processList = document.createElement('ul');
-                  fileObj.processes.forEach(proc => {
-                    const li = document.createElement('li');
-                    li.textContent = 'Process: ' + proc;
-                    processList.appendChild(li);
-                  });
-                  fileDiv.appendChild(processList);
-                }
-
-                // Includes
-                if (fileObj.includes && fileObj.includes.length > 0) {
-                  const incList = document.createElement('ul');
-                  fileObj.includes.forEach(inc => {
-                    const li = document.createElement('li');
-                    li.textContent = 'Include: ' + inc;
-                    incList.appendChild(li);
-                  });
-                  fileDiv.appendChild(incList);
-                }
-
-                container.appendChild(fileDiv);
-              });
-            }
-
-            // Basic error handling
-            window.onerror = function(msg, url, line, col, error) {
-              const errorContainer = document.getElementById('error-container');
-              errorContainer.innerHTML += \`<p>Error: \${msg}</p>\`;
-              console.error('Error:', msg, 'at', url, 'line:', line);
-              return false;
-            };
-            window.addEventListener('error', function(e) {
-              const errorContainer = document.getElementById('error-container');
-              errorContainer.innerHTML += \`<p>Error Event: \${e.message}</p>\`;
-              console.error('Error Event:', e);
-            });
-            try {
-              console.log('Webview initialized');
-            } catch (e) {
-              console.error('Initialization error:', e);
-            }
-          </script>
-        </body>
-      </html>`;
   }
 }
 
