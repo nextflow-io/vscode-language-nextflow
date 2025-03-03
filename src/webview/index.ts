@@ -2,7 +2,7 @@ import * as vscode from "vscode";
 import * as fs from "fs";
 import * as path from "path";
 import updateRefs from "./utils/updateRefs";
-import { buildPipelineTree, PipelineFile } from "./pipeline";
+import { buildPipelineTree } from "./pipeline";
 
 class Provider implements vscode.WebviewViewProvider {
   private _currentView?: vscode.WebviewView;
