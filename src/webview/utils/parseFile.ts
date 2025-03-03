@@ -3,13 +3,13 @@ import { FileInfo } from "../types";
 export function getImports(content: string): string[] {
   const rx =
     /include\s*(?:\{\s*([^}\s]+)[^}]*\}|([^{}\s]+))\s*from\s+['"][^'"]+['"]/gm;
-  const result: string[] = [];
+  const importSet = new Set<string>();
   let m: RegExpExecArray | null;
   while ((m = rx.exec(content)) !== null) {
     const importName = m[1] || m[2];
-    if (importName) result.push(importName);
+    if (importName) importSet.add(importName);
   }
-  return result;
+  return Array.from(importSet);
 }
 
 export function parseBody(content: string): FileInfo | null {
