@@ -19,7 +19,7 @@ const FileNodeChildren = ({
   const isOpen = isSelected(itemKey);
 
   return (
-    <div className={styles.children}>
+    <div className={styles.subItems}>
       <label onClick={() => selectItem(itemKey)}>
         {label} ({linkableFiles.length}) <span>{isOpen ? "▼" : "►"}</span>
       </label>

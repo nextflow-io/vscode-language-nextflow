@@ -4,12 +4,12 @@ type Type =
   | "nextflow_workflow"
   | "nextflow_process"
   | "subworkflow"
+  | "test"
   | undefined;
 
 export interface FileInfo {
   name: string;
   type: Type;
-  hasTest: boolean;
   testFilePath?: string;
 }
 

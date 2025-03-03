@@ -2,7 +2,7 @@ import * as vscode from "vscode";
 import * as fs from "fs";
 import * as path from "path";
 
-import { buildPipelineTree } from "./utils/buildTree";
+import buildTree from "./utils/buildTree";
 
 class Provider implements vscode.WebviewViewProvider {
   private _currentView?: vscode.WebviewView;
@@ -30,11 +30,11 @@ class Provider implements vscode.WebviewViewProvider {
   }
 
   private async initViewData(view: vscode.WebviewView) {
-    const pipelineTree = await buildPipelineTree();
+    const tree = await buildTree();
 
     view.webview.postMessage({
       command: "findFiles",
-      data: pipelineTree
+      data: tree
     });
   }
 
