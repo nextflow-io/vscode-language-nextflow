@@ -26,6 +26,16 @@
     }
     & > div {
       padding: 4px;
+      & > label {
+        color: #999;
+        display: block;
+        width: 100%;
+        padding: 0 4px;
+        cursor: pointer;
+        &:hover {
+          color: white;
+        }
+      }
     }
   }
 }

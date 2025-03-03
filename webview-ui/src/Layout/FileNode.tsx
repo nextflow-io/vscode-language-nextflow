@@ -1,15 +1,15 @@
+import { useProvider } from "../Provider";
 import FileNodeChildren from "./FileNodeChildren";
 import styles from "./styles.module.css";
 
-import { FileNode as FileNodeType } from "./types";
+import { FileNode as FileNodeType } from "../Provider/types";
 
-const FileNode = ({
-  node,
-  openFile
-}: {
+type Props = {
   node: FileNodeType;
-  openFile: (filePath: string) => void;
-}) => {
+};
+
+const FileNode = ({ node }: Props) => {
+  const { openFile } = useProvider();
   const handleFileClick = () => {
     openFile(node.filePath);
   };

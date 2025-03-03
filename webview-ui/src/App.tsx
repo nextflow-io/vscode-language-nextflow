@@ -1,7 +1,12 @@
 import Layout from "./Layout";
+import NextflowProvider from "./Provider";
 
 function App() {
-  return <Layout />;
+  return (
+    <NextflowProvider>
+      <Layout />
+    </NextflowProvider>
+  );
 }
 
 export default App;
