@@ -1,7 +1,7 @@
-import TreeView from "./TreeView";
+import Layout from "./Layout";
 
 function App() {
-  return <TreeView />;
+  return <Layout />;
 }
 
 export default App;

@@ -1,3 +1,4 @@
+import FileNodeChildren from "./FileNodeChildren";
 import styles from "./styles.module.css";
 
 import { FileNode as FileNodeType } from "./types";
@@ -18,13 +19,7 @@ const FileNode = ({
       <div className={styles.label} onClick={handleFileClick}>
         {node.name}
       </div>
-      {!!node.imports && (
-        <div className={styles.imports}>
-          {node.imports.map((importName) => (
-            <div key={importName}>{importName}</div>
-          ))}
-        </div>
-      )}
+      <FileNodeChildren label="Imports" items={node.imports} />
     </div>
   );
 };

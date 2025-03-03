@@ -1,9 +1,31 @@
 .item {
   cursor: pointer;
+  width: 100%;
+  padding: 4px;
   & .label {
     font-weight: bold;
+    &:hover {
+      color: white;
+    }
   }
-  &:hover {
-    background-color: rgba(0, 0, 0, 0.1);
+  & .children {
+    & > label {
+      text-transform: uppercase;
+      font-size: 12px;
+      color: #666;
+      padding: 4px 4px 0 4px;
+      display: block;
+      cursor: pointer;
+      &:hover {
+        color: #999;
+      }
+      & > span {
+        font-size: 8px;
+        margin-left: 8px;
+      }
+    }
+    & > div {
+      padding: 4px;
+    }
   }
 }
