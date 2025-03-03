@@ -10,19 +10,44 @@ type Props = {
 };
 
 const NextflowProvider = ({ children }: Props) => {
-  const [files, setFiles] = useState<FileNodeType[]>([]);
+  const state = vscode.getState();
+
+  const [files, setFiles] = useState<FileNodeType[]>(state?.files || []);
+  const [selectedItems, setSelectedItems] = useState<string[]>(
+    state?.selectedItems || []
+  );
+
+  useEffect(() => {
+    vscode.setState({ files });
+  }, [files]);
+
+  useEffect(() => {
+    vscode.setState({ selectedItems });
+  }, [selectedItems]);
 
   useEffect(() => {
     const handleMessage = (event: MessageEvent) => {
       const message = event.data;
       if (message.command === "findFiles") {
         setFiles(message.data || []);
-        console.log("🟢 Seqera", message.data);
+        console.log("🟢 message.data", message.data);
       }
     };
     window.addEventListener("message", handleMessage);
     return () => window.removeEventListener("message", handleMessage);
   }, []);
+
+  function selectItem(name: string) {
+    if (selectedItems.includes(name)) {
+      setSelectedItems(selectedItems.filter((item) => item !== name));
+    } else {
+      setSelectedItems([...selectedItems, name]);
+    }
+  }
+
+  function isSelected(name: string) {
+    return selectedItems.includes(name);
+  }
 
   function openFile(name: string) {
     const file = getFile(name);
@@ -35,7 +60,16 @@ const NextflowProvider = ({ children }: Props) => {
   }
 
   return (
-    <NextflowContext.Provider value={{ files, openFile, getFile }}>
+    <NextflowContext.Provider
+      value={{
+        files,
+        openFile,
+        getFile,
+        selectedItems,
+        selectItem,
+        isSelected
+      }}
+    >
       {children}
     </NextflowContext.Provider>
   );
@@ -45,6 +79,9 @@ interface NextflowContextType {
   files: FileNodeType[];
   openFile: (filePath: string) => void;
   getFile: (name: string) => FileNodeType | undefined;
+  selectedItems: string[];
+  selectItem: (name: string) => void;
+  isSelected: (name: string) => boolean;
 }
 
 const useProvider = () => useContext(NextflowContext) as NextflowContextType;
