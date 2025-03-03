@@ -10,6 +10,7 @@ export interface ProcessInfo {
 }
 
 export interface PipelineNode {
+  fileName: string;
   filePath: string;
   processes: ProcessInfo[];
   children: PipelineNode[];
@@ -74,7 +75,8 @@ async function buildNode(
   if (visited.has(filePath)) return visited.get(filePath)!;
   const content = fs.readFileSync(filePath, "utf8");
   const node: PipelineNode = {
-    filePath: path.relative(root, filePath),
+    fileName: path.relative(root, filePath),
+    filePath,
     processes: parseProcesses(content),
     children: []
   };

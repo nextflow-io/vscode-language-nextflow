@@ -15,6 +15,12 @@ class Provider implements vscode.WebviewViewProvider {
 
     view.webview.onDidReceiveMessage((message) => {
       console.log("🟣 message:", message);
+
+      switch (message.command) {
+        case "openFile":
+          this.openFile(message.filePath);
+          break;
+      }
     });
   }
 
@@ -60,6 +66,7 @@ class Provider implements vscode.WebviewViewProvider {
   }
 
   private async openFile(filePath: string) {
+    console.log("🟣 openFile:", filePath);
     const doc = await vscode.workspace.openTextDocument(filePath);
     vscode.window.showTextDocument(doc);
   }
