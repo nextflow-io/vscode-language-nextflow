@@ -1,13 +1,22 @@
-export interface ProcessInfo {
+type Type =
+  | "workflow"
+  | "process"
+  | "nextflow_workflow"
+  | "nextflow_process"
+  | "subworkflow"
+  | undefined;
+
+export interface FileInfo {
   name: string;
-  type: "process" | "subworkflow";
+  type: Type;
   hasTest: boolean;
   testFilePath?: string;
 }
 
-export interface PipelineNode {
+export interface FileNode {
+  name: string;
   fileName: string;
   filePath: string;
-  processes: ProcessInfo[];
-  children: PipelineNode[];
+  type: Type;
+  imports: string[];
 }

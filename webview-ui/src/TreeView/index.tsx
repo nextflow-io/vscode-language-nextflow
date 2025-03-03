@@ -2,29 +2,29 @@ import { useEffect, useState } from "react";
 
 import styles from "./styles.module.css";
 
-type ProcessInfo = {
+type FileInfo = {
   name: string;
   type: "process" | "subworkflow";
   hasTest: boolean;
   testFilePath?: string;
 };
 
-type PipelineNode = {
+type FileNode = {
   fileName: string;
   filePath: string;
-  processes: ProcessInfo[];
-  children: PipelineNode[];
+  processes: FileInfo[];
+  children: FileNode[];
 };
 
 // Initialize vscode api once at module level
 const vscode = (window as any).acquireVsCodeApi?.();
 
 // A small recursive component to render a node
-function PipelineNodeView({
+function FileNodeView({
   node,
   onOpenFile
 }: {
-  node: PipelineNode;
+  node: FileNode;
   onOpenFile: (filePath: string) => void;
 }) {
   const handleFileClick = () => {
@@ -50,7 +50,7 @@ function PipelineNodeView({
 
       {/* Children (included .nf files) */}
       {node.children?.map((child) => (
-        <PipelineNodeView
+        <FileNodeView
           key={child.filePath}
           node={child}
           onOpenFile={onOpenFile}
@@ -61,15 +61,14 @@ function PipelineNodeView({
 }
 
 const TreeView = () => {
-  const [pipeline, setPipeline] = useState<PipelineNode[]>([]);
+  const [pipeline, setPipeline] = useState<FileNode[]>([]);
 
   useEffect(() => {
-    console.log("🟢 Seqera: TreeView mounted");
     const handleMessage = (event: MessageEvent) => {
       const message = event.data;
-      console.log("🟢 Seqera: message:", message);
-      if (message.command === "initPipelineTree") {
+      if (message.command === "findFiles") {
         setPipeline(message.data || []);
+        console.log("🟢 Seqera", message.data);
       }
     };
     window.addEventListener("message", handleMessage);
@@ -83,7 +82,7 @@ const TreeView = () => {
   return (
     <div>
       {pipeline.map((node) => (
-        <PipelineNodeView
+        <FileNodeView
           key={node.filePath}
           node={node}
           onOpenFile={sendMessageToExtension}

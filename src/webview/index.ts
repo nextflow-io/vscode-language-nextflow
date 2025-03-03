@@ -28,7 +28,7 @@ class Provider implements vscode.WebviewViewProvider {
     const pipelineTree = await buildPipelineTree();
 
     view.webview.postMessage({
-      command: "initPipelineTree",
+      command: "findFiles",
       data: pipelineTree
     });
   }
