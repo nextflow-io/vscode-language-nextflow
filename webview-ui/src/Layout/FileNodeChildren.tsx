@@ -1,24 +1,26 @@
-import { useState } from "react";
 import styles from "./styles.module.css";
 import { useProvider } from "../Provider";
 
 const FileNodeChildren = ({
+  parent,
   label,
   items
 }: {
+  parent: string;
   label: string;
   items: string[];
 }) => {
-  const { getFile, openFile } = useProvider();
-  const [isOpen, setIsOpen] = useState(false);
+  const { getFile, openFile, isSelected, selectItem } = useProvider();
 
   if (!items.length) return null;
 
   const linkableFiles = items.map((label) => getFile(label)).filter(Boolean);
+  const itemKey = `${parent}.${label}`;
+  const isOpen = isSelected(itemKey);
 
   return (
     <div className={styles.children}>
-      <label onClick={() => setIsOpen(!isOpen)}>
+      <label onClick={() => selectItem(itemKey)}>
         {label} ({linkableFiles.length}) <span>{isOpen ? "▼" : "►"}</span>
       </label>
       {isOpen && (

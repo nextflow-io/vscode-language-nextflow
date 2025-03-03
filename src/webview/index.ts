@@ -22,6 +22,11 @@ class Provider implements vscode.WebviewViewProvider {
           break;
       }
     });
+
+    view.onDidChangeVisibility(() => {
+      if (!view.visible) return;
+      this.initViewData(view);
+    });
   }
 
   private async initViewData(view: vscode.WebviewView) {

@@ -19,7 +19,11 @@ const FileNode = ({ node }: Props) => {
       <div className={styles.label} onClick={handleFileClick}>
         {node.name}
       </div>
-      <FileNodeChildren label="Imports" items={node.imports} />
+      <FileNodeChildren
+        parent={node.name}
+        label="Imports"
+        items={node.imports}
+      />
     </div>
   );
 };
