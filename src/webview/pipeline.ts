@@ -1,88 +1,109 @@
 import * as fs from "fs";
 import * as path from "path";
 import * as vscode from "vscode";
-export interface PipelineFile {
-  filePath: string;
-  processes: string[];
-  includes: string[];
+
+export interface ProcessInfo {
+  name: string;
+  type: "process" | "subworkflow";
+  hasTest: boolean;
+  testFilePath?: string;
 }
 
-/**
- * Recursively find .nf files starting at `rootPath`.
- */
-async function findNfFiles(
+export interface PipelineNode {
+  filePath: string;
+  processes: ProcessInfo[];
+  children: PipelineNode[];
+}
+
+async function findAllNfFiles(
   dir: string,
-  results: string[] = []
+  found: string[] = []
 ): Promise<string[]> {
-  const entries = fs.readdirSync(dir, { withFileTypes: true });
-  for (const entry of entries) {
-    const entryPath = path.join(dir, entry.name);
-    if (entry.isDirectory()) {
-      // Exclude node_modules or other folders if necessary
-      if (entry.name === "node_modules") continue;
-      await findNfFiles(entryPath, results);
+  for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
+    const p = path.join(dir, entry.name);
+    if (entry.isDirectory() && !["node_modules", ".git"].includes(entry.name)) {
+      await findAllNfFiles(p, found);
     } else if (entry.isFile() && entry.name.endsWith(".nf")) {
-      results.push(entryPath);
+      found.push(p);
     }
   }
-  return results;
+  return found;
 }
 
-/**
- * Naively parse `include` statements from file content.
- * e.g. `include { FASTQC as FQ } from './modules/fastqc'`
- */
-function parseIncludes(content: string): string[] {
-  const regex = /^\s*include\s+([\w\/.]+)/gm;
+function parseIncludes(content: string, base: string): string[] {
+  const rx = /include\s*\{?[^\}]*\}?\s*from\s+['"]([^'"]+)['"]/gm;
   const result: string[] = [];
-  let match: RegExpExecArray | null;
-  while ((match = regex.exec(content)) !== null) {
-    result.push(match[1]);
+  let m: RegExpExecArray | null;
+  while ((m = rx.exec(content)) !== null) {
+    let rel = m[1];
+    if (!rel.endsWith(".nf")) rel += ".nf";
+    const abs = path.resolve(path.dirname(base), rel);
+    if (fs.existsSync(abs)) result.push(abs);
   }
   return result;
 }
 
-/**
- * Naively parse `process` definitions from file content.
- * e.g. `process MY_PROCESS { ... }`
- */
-function parseProcesses(content: string): string[] {
-  const regex = /^\s*process\s+(\w+)/gm;
-  const result: string[] = [];
-  let match: RegExpExecArray | null;
-  while ((match = regex.exec(content)) !== null) {
-    result.push(match[1]);
+function parseProcesses(content: string): ProcessInfo[] {
+  const out: ProcessInfo[] = [];
+  let rx = /^\s*process\s+(\w+)/gm;
+  let m: RegExpExecArray | null;
+  while ((m = rx.exec(content)) !== null) {
+    out.push({ name: m[1], type: "process", hasTest: false });
   }
-  return result;
+  rx = /^\s*subworkflow\s+(\w+)/gm;
+  while ((m = rx.exec(content)) !== null) {
+    out.push({ name: m[1], type: "subworkflow", hasTest: false });
+  }
+  return out;
 }
 
-/**
- * Builds a simple pipeline tree by scanning `.nf` files,
- * then parsing includes & processes for each file.
- */
-export async function buildPipelineTree(): Promise<PipelineFile[]> {
-  const workspaceFolders = vscode.workspace.workspaceFolders;
-  if (!workspaceFolders || workspaceFolders.length === 0) {
-    return [];
+function findTestFile(name: string, root: string) {
+  const checks = [
+    path.join(root, "tests", `${name}.nf.test`),
+    path.join(root, "tests", "modules", name, `${name}.nf.test`),
+    path.join(root, "tests", "nextflow", `${name}.nf.test`)
+  ];
+  return checks.find(fs.existsSync);
+}
+
+async function buildNode(
+  filePath: string,
+  visited: Map<string, PipelineNode>,
+  root: string
+): Promise<PipelineNode> {
+  if (visited.has(filePath)) return visited.get(filePath)!;
+  const content = fs.readFileSync(filePath, "utf8");
+  const node: PipelineNode = {
+    filePath: path.relative(root, filePath),
+    processes: parseProcesses(content),
+    children: []
+  };
+  visited.set(filePath, node);
+  for (const inc of parseIncludes(content, filePath)) {
+    node.children.push(await buildNode(inc, visited, root));
   }
-  const rootPath = workspaceFolders[0].uri.fsPath;
-  const pipelineFiles: PipelineFile[] = [];
-
-  // 1) Collect all .nf files
-  const nfFiles = await findNfFiles(rootPath);
-
-  // 2) Parse each .nf file for includes & processes
-  for (const nfFile of nfFiles) {
-    const content = fs.readFileSync(nfFile, "utf8");
-    const includes = parseIncludes(content);
-    const processes = parseProcesses(content);
-
-    pipelineFiles.push({
-      filePath: nfFile,
-      includes,
-      processes
-    });
+  for (const p of node.processes) {
+    const test = findTestFile(p.name, root);
+    if (test) {
+      p.hasTest = true;
+      p.testFilePath = path.relative(root, test);
+    }
   }
+  return node;
+}
 
-  return pipelineFiles;
+export async function buildPipelineTree(): Promise<PipelineNode[]> {
+  const folders = vscode.workspace.workspaceFolders;
+  if (!folders?.length) return [];
+  const root = folders[0].uri.fsPath;
+  const allFiles = await findAllNfFiles(root);
+  const visited = new Map<string, PipelineNode>();
+  const result: PipelineNode[] = [];
+
+  const mainNf = allFiles.find((f) => path.basename(f) === "main.nf");
+  if (mainNf) result.push(await buildNode(mainNf, visited, root));
+  for (const f of allFiles) {
+    if (!visited.has(f)) result.push(await buildNode(f, visited, root));
+  }
+  return result;
 }
