@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
 
+import styles from "./styles.module.css";
+
 type ProcessInfo = {
   name: string;
   type: "process" | "subworkflow";
@@ -8,10 +10,14 @@ type ProcessInfo = {
 };
 
 type PipelineNode = {
+  fileName: string;
   filePath: string;
   processes: ProcessInfo[];
   children: PipelineNode[];
 };
+
+// Initialize vscode api once at module level
+const vscode = (window as any).acquireVsCodeApi?.();
 
 // A small recursive component to render a node
 function PipelineNodeView({
@@ -26,18 +32,15 @@ function PipelineNodeView({
   };
 
   return (
-    <div style={{ marginLeft: "1rem" }}>
-      <div
-        style={{ fontWeight: "bold", cursor: "pointer" }}
-        onClick={handleFileClick}
-      >
-        {node.filePath}
+    <div className={styles.item}>
+      <div className={styles.label} onClick={handleFileClick}>
+        {node.fileName}
       </div>
 
       {/* Processes */}
       {node.processes?.map((proc) => (
         <div key={proc.name} style={{ marginLeft: "1rem" }}>
-          <span style={{ color: proc.hasTest ? "green" : "red" }}>
+          <span style={{ color: proc.hasTest ? "green" : "white" }}>
             {proc.type === "subworkflow" ? "Subworkflow" : "Process"}:{" "}
             {proc.name}
           </span>{" "}
@@ -62,7 +65,6 @@ const TreeView = () => {
 
   useEffect(() => {
     console.log("🟢 Seqera: TreeView mounted");
-    // Listen for messages from the extension
     const handleMessage = (event: MessageEvent) => {
       const message = event.data;
       console.log("🟢 Seqera: message:", message);
@@ -75,10 +77,7 @@ const TreeView = () => {
   }, []);
 
   function sendMessageToExtension(filePath: string) {
-    if ((window as any).acquireVsCodeApi) {
-      const vscode = (window as any).acquireVsCodeApi();
-      vscode.postMessage({ command: "openFile", filePath });
-    }
+    vscode.postMessage({ command: "openFile", filePath });
   }
 
   return (
