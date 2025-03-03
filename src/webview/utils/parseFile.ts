@@ -17,31 +17,37 @@ export function parseBody(content: string): FileInfo | null {
   let rx = /^\s*workflow\s+(\w+)/gm;
   let m: RegExpExecArray | null;
   if ((m = rx.exec(content)) !== null) {
-    return { name: m[1], type: "workflow", hasTest: false };
+    return { name: m[1], type: "workflow" };
+  }
+
+  // Test (process directive with quotes)
+  rx = /^\s*process\s+"(\w+)"/gm;
+  if ((m = rx.exec(content)) !== null) {
+    return { name: m[1], type: "test" };
   }
 
   // Process
   rx = /^\s*process\s+(\w+)/gm;
   if ((m = rx.exec(content)) !== null) {
-    return { name: m[1], type: "process", hasTest: false };
+    return { name: m[1], type: "process" };
   }
 
   // Subworkflow
   rx = /^\s*subworkflow\s+(\w+)/gm;
   if ((m = rx.exec(content)) !== null) {
-    return { name: m[1], type: "subworkflow", hasTest: false };
+    return { name: m[1], type: "subworkflow" };
   }
 
   // Nextflow Workflow
   rx = /^\s*nextflow\s+workflow\s+(\w+)/gm;
   if ((m = rx.exec(content)) !== null) {
-    return { name: m[1], type: "nextflow_workflow", hasTest: false };
+    return { name: m[1], type: "nextflow_workflow" };
   }
 
   // Nextflow Process
   rx = /^\s*nextflow\s+process\s+(\w+)/gm;
   if ((m = rx.exec(content)) !== null) {
-    return { name: m[1], type: "nextflow_process", hasTest: false };
+    return { name: m[1], type: "nextflow_process" };
   }
 
   return null;

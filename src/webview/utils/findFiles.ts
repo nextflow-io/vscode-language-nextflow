@@ -1,16 +1,16 @@
 import * as fs from "fs";
 import * as path from "path";
 
-async function findAllFiles(
+async function findFiles(
   dir: string,
+  extension: string,
   found: string[] = []
 ): Promise<string[]> {
   for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
     const p = path.join(dir, entry.name);
-    const extensions = [".nf", ".nf.test"];
-    const isValidExtension = extensions.some((e) => entry.name.endsWith(e));
+    const isValidExtension = entry.name.endsWith(extension);
     if (entry.isDirectory() && !["node_modules", ".git"].includes(entry.name)) {
-      await findAllFiles(p, found);
+      await findFiles(p, extension, found);
     } else if (entry.isFile() && isValidExtension) {
       found.push(p);
     }
@@ -18,18 +18,12 @@ async function findAllFiles(
   return found;
 }
 
-export { findAllFiles };
+const findNfFiles = (dir: string) => {
+  return findFiles(dir, ".nf");
+};
 
-// export async function findAllNfFiles(
-//   dir: string,
-//   found: string[] = []
-// ): Promise<string[]> {
-//   return findAllFiles(dir, found, ".nf");
-// }
+const findTestFiles = (dir: string) => {
+  return findFiles(dir, ".nf.test");
+};
 
-// export async function findAllTestFiles(
-//   dir: string,
-//   found: string[] = []
-// ): Promise<string[]> {
-//   return findAllFiles(dir, found, ".nf.test");
-// }
+export { findNfFiles, findTestFiles };

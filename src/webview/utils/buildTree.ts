@@ -4,15 +4,13 @@ import * as vscode from "vscode";
 
 import { FileNode } from "../types";
 
-import { findAllFiles } from "./findFiles";
+import { findNfFiles, findTestFiles } from "./findFiles";
 import { getImports, parseBody } from "./parseFile";
 
 async function getItem(
   filePath: string,
-  visited: Map<string, FileNode>,
   root: string
 ): Promise<FileNode | null> {
-  if (visited.has(filePath)) return visited.get(filePath)!;
   const content = fs.readFileSync(filePath, "utf8");
   const fileInfo = parseBody(content);
   if (!fileInfo) return null;
@@ -23,23 +21,32 @@ async function getItem(
     type: fileInfo?.type,
     imports: getImports(content)
   };
-  visited.set(filePath, node);
   return node;
 }
 
-export async function buildPipelineTree(): Promise<FileNode[]> {
+async function buildTree(): Promise<{
+  files: FileNode[];
+  tests: FileNode[];
+}> {
   const folders = vscode.workspace.workspaceFolders;
-  if (!folders?.length) return [];
+  if (!folders?.length) return { files: [], tests: [] };
   const root = folders[0].uri.fsPath;
-  const allFiles = await findAllFiles(root);
-  const visited = new Map<string, FileNode>();
-  const nodes: FileNode[] = [];
+  const nfFiles = await findNfFiles(root);
+  const testFiles = await findTestFiles(root);
+  const nfNodes: FileNode[] = [];
+  const testNodes: FileNode[] = [];
 
-  for (const f of allFiles) {
-    if (!visited.has(f)) {
-      const item = await getItem(f, visited, root);
-      if (item) nodes.push(item);
-    }
+  for (const filePath of nfFiles) {
+    const item = await getItem(filePath, root);
+    if (item) nfNodes.push(item);
   }
-  return nodes;
+
+  for (const filePath of testFiles) {
+    const item = await getItem(filePath, root);
+    if (item) testNodes.push(item);
+  }
+
+  return { files: nfNodes, tests: testNodes };
 }
+
+export default buildTree;

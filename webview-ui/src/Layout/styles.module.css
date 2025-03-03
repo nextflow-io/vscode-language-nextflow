@@ -2,40 +2,72 @@
   cursor: pointer;
   width: 100%;
   padding: 4px;
-  & .label {
-    font-weight: bold;
-    &:hover {
-      color: white;
+  & > label {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    & > span {
+      white-space: nowrap;
+      font-weight: bold;
+      cursor: pointer;
+      text-overflow: ellipsis;
+      overflow: hidden;
+      &:first-child {
+        flex: 1;
+        min-width: 100px;
+        max-width: 300px;
+      }
+      &:hover {
+        color: white;
+      }
+      &.disabled {
+        color: #666;
+        cursor: default;
+      }
     }
   }
   & .children {
-    & > label {
+    padding: 4px 0 0 0;
+    & label {
       text-transform: uppercase;
       font-size: 12px;
       color: #666;
       padding: 4px 4px 0 4px;
-      display: block;
-      cursor: pointer;
-      &:hover {
-        color: #999;
-      }
-      & > span {
-        font-size: 8px;
-        margin-left: 8px;
-      }
     }
-    & > div {
-      padding: 4px;
+    & .subItems {
       & > label {
-        color: #999;
         display: block;
-        width: 100%;
-        padding: 0 4px;
         cursor: pointer;
         &:hover {
-          color: white;
+          color: #999;
+        }
+        & > span {
+          font-size: 8px;
+          margin-left: 8px;
+        }
+      }
+      & > div {
+        padding: 4px;
+        & > label {
+          color: #999;
+          display: block;
+          width: 100%;
+          padding: 0 4px;
+          cursor: pointer;
+          &:hover {
+            color: white;
+          }
         }
       }
     }
+  }
+}
+.section {
+  width: 100%;
+  &:not(:last-child) {
+    padding-bottom: 16px;
+    margin-bottom: 16px;
+    border-bottom: 1px solid #333;
   }
 }

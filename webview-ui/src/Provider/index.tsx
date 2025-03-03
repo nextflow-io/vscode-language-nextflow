@@ -13,6 +13,7 @@ const NextflowProvider = ({ children }: Props) => {
   const state = vscode.getState();
 
   const [files, setFiles] = useState<FileNodeType[]>(state?.files || []);
+  const [tests, setTests] = useState<FileNodeType[]>(state?.tests || []);
   const [selectedItems, setSelectedItems] = useState<string[]>(
     state?.selectedItems || []
   );
@@ -22,6 +23,10 @@ const NextflowProvider = ({ children }: Props) => {
   }, [files]);
 
   useEffect(() => {
+    vscode.setState({ tests });
+  }, [tests]);
+
+  useEffect(() => {
     vscode.setState({ selectedItems });
   }, [selectedItems]);
 
@@ -29,8 +34,8 @@ const NextflowProvider = ({ children }: Props) => {
     const handleMessage = (event: MessageEvent) => {
       const message = event.data;
       if (message.command === "findFiles") {
-        setFiles(message.data || []);
-        console.log("🟢 message.data", message.data);
+        setFiles(message.data?.files || []);
+        setTests(message.data?.tests || []);
       }
     };
     window.addEventListener("message", handleMessage);
@@ -49,8 +54,8 @@ const NextflowProvider = ({ children }: Props) => {
     return selectedItems.includes(name);
   }
 
-  function openFile(name: string) {
-    const file = getFile(name);
+  function openFile(name: string, isTest?: boolean) {
+    const file = isTest ? getTest(name) : getFile(name);
     if (!file) return;
     vscode.postMessage({ command: "openFile", filePath: file.filePath });
   }
@@ -59,12 +64,18 @@ const NextflowProvider = ({ children }: Props) => {
     return files.find((file) => file.name === name);
   }
 
+  function getTest(name: string) {
+    return tests.find((test) => test.name === name);
+  }
+
   return (
     <NextflowContext.Provider
       value={{
         files,
+        tests,
         openFile,
         getFile,
+        getTest,
         selectedItems,
         selectItem,
         isSelected
@@ -77,8 +88,10 @@ const NextflowProvider = ({ children }: Props) => {
 
 interface NextflowContextType {
   files: FileNodeType[];
-  openFile: (filePath: string) => void;
+  tests: FileNodeType[];
+  openFile: (name: string, isTest?: boolean) => void;
   getFile: (name: string) => FileNodeType | undefined;
+  getTest: (name: string) => FileNodeType | undefined;
   selectedItems: string[];
   selectItem: (name: string) => void;
   isSelected: (name: string) => boolean;
