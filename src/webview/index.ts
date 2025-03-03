@@ -1,8 +1,8 @@
 import * as vscode from "vscode";
 import * as fs from "fs";
 import * as path from "path";
-import updateRefs from "./utils/updateRefs";
-import { buildPipelineTree } from "./pipeline";
+
+import { buildPipelineTree } from "./utils/buildTree";
 
 class Provider implements vscode.WebviewViewProvider {
   private _currentView?: vscode.WebviewView;
@@ -71,5 +71,15 @@ class Provider implements vscode.WebviewViewProvider {
     vscode.window.showTextDocument(doc);
   }
 }
+
+const updateRefs = (
+  html: string,
+  webview: vscode.Webview,
+  distUri: vscode.Uri
+): string =>
+  html.replace(
+    /((src|href)=["'])(\.\/|\/)?assets\//g,
+    `$1${webview.asWebviewUri(vscode.Uri.joinPath(distUri, "assets"))}/`
+  );
 
 export default Provider;
