@@ -17,8 +17,6 @@ class Provider implements vscode.WebviewViewProvider {
     await this.initViewData(view);
 
     view.webview.onDidReceiveMessage((message) => {
-      console.log("🟣 message:", message);
-
       switch (message.command) {
         case "openFile":
           this.openFile(message.filePath);
@@ -34,7 +32,6 @@ class Provider implements vscode.WebviewViewProvider {
 
   private async initViewData(view: vscode.WebviewView) {
     const tree = await buildTree();
-
     view.webview.postMessage({
       command: "findFiles",
       data: tree,
@@ -64,7 +61,7 @@ class Provider implements vscode.WebviewViewProvider {
   }
 
   private getWebviewDistUri() {
-    return vscode.Uri.joinPath(this._extensionUri, "..", "webview-ui", "dist");
+    return vscode.Uri.joinPath(this._extensionUri, "webview-ui", "dist");
   }
 
   private getWebviewHtml(view: vscode.WebviewView) {
@@ -75,7 +72,6 @@ class Provider implements vscode.WebviewViewProvider {
   }
 
   private async openFile(filePath: string) {
-    console.log("🟣 openFile:", filePath);
     const doc = await vscode.workspace.openTextDocument(filePath);
     vscode.window.showTextDocument(doc);
   }

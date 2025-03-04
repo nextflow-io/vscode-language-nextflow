@@ -6,4 +6,4 @@ tsconfig.json
 esbuild.js
 **/*.map
 webview-ui/**/*
-!webview-ui/dist
+!webview-ui/dist/**/*
