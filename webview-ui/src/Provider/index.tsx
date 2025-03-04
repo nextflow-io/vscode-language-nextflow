@@ -12,6 +12,7 @@ type Props = {
 const NextflowProvider = ({ children }: Props) => {
   const state = vscode.getState();
 
+  const [testCount, setTestCount] = useState(0);
   const [viewType, setViewType] = useState<"workflows" | "processes" | null>(
     state?.viewType || null
   );
@@ -83,7 +84,9 @@ const NextflowProvider = ({ children }: Props) => {
         selectedItems,
         selectItem,
         isSelected,
-        viewType
+        viewType,
+        testCount,
+        setTestCount
       }}
     >
       {children}
@@ -101,6 +104,8 @@ interface NextflowContextType {
   selectItem: (name: string) => void;
   isSelected: (name: string) => boolean;
   viewType: "workflows" | "processes" | null;
+  testCount: number;
+  setTestCount: React.Dispatch<React.SetStateAction<number>>;
 }
 
 const useProvider = () => useContext(NextflowContext) as NextflowContextType;
