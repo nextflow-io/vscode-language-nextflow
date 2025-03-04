@@ -1,19 +1,15 @@
-import { useProvider } from "../Provider";
 import FileNode from "./FileNode";
-
+import { FileNode as FileNodeType } from "../Provider/types";
 import styles from "./styles.module.css";
 
 type Props = {
-  type: "workflow" | "process";
+  files: FileNodeType[];
 };
 
-const FileTree = ({ type }: Props) => {
-  const { files } = useProvider();
-  const filteredFiles = files.filter((f) => f.type === type);
-
+const FileTree = ({ files }: Props) => {
   return (
     <div className={styles.section}>
-      {filteredFiles.map((node) => (
+      {files.map((node) => (
         <FileNode key={node.filePath} node={node} />
       ))}
     </div>

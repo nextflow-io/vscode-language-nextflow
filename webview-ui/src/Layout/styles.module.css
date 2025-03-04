@@ -1,7 +1,10 @@
+.header {
+  margin-top: 8px;
+  margin-bottom: 8px;
+}
 .item {
   cursor: pointer;
   width: 100%;
-  padding: 4px;
   & > label {
     display: flex;
     align-items: center;
