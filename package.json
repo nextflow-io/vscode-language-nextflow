@@ -227,8 +227,13 @@
     "views": {
       "seqera": [
         {
-          "id": "seqera",
-          "name": "Seqera",
+          "id": "workflows",
+          "name": "Workflows",
+          "type": "webview"
+        },
+        {
+          "id": "processes",
+          "name": "Processes",
           "type": "webview"
         }
       ]

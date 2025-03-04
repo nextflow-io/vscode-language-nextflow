@@ -7,7 +7,10 @@ import buildTree from "./utils/buildTree";
 class Provider implements vscode.WebviewViewProvider {
   private _currentView?: vscode.WebviewView;
 
-  constructor(private readonly _extensionUri: vscode.Uri) {}
+  constructor(
+    private readonly _extensionUri: vscode.Uri,
+    private readonly _type: "workflows" | "processes"
+  ) {}
 
   public async resolveWebviewView(view: vscode.WebviewView): Promise<void> {
     this.initializeView(view);
@@ -34,7 +37,8 @@ class Provider implements vscode.WebviewViewProvider {
 
     view.webview.postMessage({
       command: "findFiles",
-      data: tree
+      data: tree,
+      viewType: this._type
     });
   }
 

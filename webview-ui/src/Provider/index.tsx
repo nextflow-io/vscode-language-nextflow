@@ -12,6 +12,9 @@ type Props = {
 const NextflowProvider = ({ children }: Props) => {
   const state = vscode.getState();
 
+  const [viewType, setViewType] = useState<"workflows" | "processes" | null>(
+    state?.viewType || null
+  );
   const [files, setFiles] = useState<FileNodeType[]>(state?.files || []);
   const [tests, setTests] = useState<FileNodeType[]>(state?.tests || []);
   const [selectedItems, setSelectedItems] = useState<string[]>(
@@ -36,6 +39,7 @@ const NextflowProvider = ({ children }: Props) => {
       if (message.command === "findFiles") {
         setFiles(message.data?.files || []);
         setTests(message.data?.tests || []);
+        setViewType(message.viewType);
       }
     };
     window.addEventListener("message", handleMessage);
@@ -78,7 +82,8 @@ const NextflowProvider = ({ children }: Props) => {
         getTest,
         selectedItems,
         selectItem,
-        isSelected
+        isSelected,
+        viewType
       }}
     >
       {children}
@@ -95,6 +100,7 @@ interface NextflowContextType {
   selectedItems: string[];
   selectItem: (name: string) => void;
   isSelected: (name: string) => boolean;
+  viewType: "workflows" | "processes" | null;
 }
 
 const useProvider = () => useContext(NextflowContext) as NextflowContextType;
