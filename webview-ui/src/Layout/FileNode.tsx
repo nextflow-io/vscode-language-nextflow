@@ -10,7 +10,7 @@ type Props = {
 };
 
 const FileNode = ({ node }: Props) => {
-  const { openFile, getTest, setTestCount } = useProvider();
+  const { openFile, getTest, setTestCount, viewType } = useProvider();
   const testFile = getTest(node.name);
 
   useEffect(() => {
@@ -27,10 +27,21 @@ const FileNode = ({ node }: Props) => {
     <div className={styles.item}>
       <label>
         <span onClick={() => handleFileClick(node)}>{node.name}</span>
-        {!!testFile ? (
-          <span onClick={() => handleFileClick(testFile, true)}>✅ Tested</span>
-        ) : (
-          <span className={styles.disabled}>Not tested</span>
+        {viewType === "processes" && (
+          <>
+            {!!testFile ? (
+              <span
+                className={styles.metaLabel}
+                onClick={() => handleFileClick(testFile, true)}
+              >
+                Tested
+              </span>
+            ) : (
+              <span className={styles.metaLabel + " " + styles.disabled}>
+                Untested
+              </span>
+            )}
+          </>
         )}
       </label>
       <div className={styles.children}>
