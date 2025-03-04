@@ -3,23 +3,32 @@
   margin-bottom: 8px;
 }
 .item {
-  cursor: pointer;
   width: 100%;
+  &:hover {
+    background-color: rgba(0, 0, 0, 0.1);
+  }
   & > label {
     display: flex;
     align-items: center;
     justify-content: space-between;
     width: 100%;
-    & > span {
+    cursor: pointer;
+    &:hover {
+      color: #0dc09d;
+    }
+    & .metaLabel {
       white-space: nowrap;
-      font-weight: bold;
       cursor: pointer;
       text-overflow: ellipsis;
       overflow: hidden;
+      color: #0dc09d;
       &:first-child {
         flex: 1;
+        font-weight: bold;
         min-width: 100px;
         max-width: 300px;
+      }
+      &:last-child {
       }
       &:hover {
         color: white;
@@ -27,11 +36,13 @@
       &.disabled {
         color: #666;
         cursor: default;
+        &:hover {
+          color: #666;
+        }
       }
     }
   }
   & .children {
-    padding: 4px 0 0 0;
     & label {
       text-transform: uppercase;
       font-size: 12px;
@@ -39,9 +50,11 @@
       padding: 4px 4px 0 4px;
     }
     & .subItems {
+      padding: 0 0 4px 0;
       & > label {
         display: block;
         cursor: pointer;
+        padding: 0;
         &:hover {
           color: #999;
         }
