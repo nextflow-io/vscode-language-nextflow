@@ -7,6 +7,8 @@ export function activateChatbot(context: vscode.ExtensionContext) {
     return;
   }
 
+  console.log("🟢 Seqera: Activating Chatbot");
+
   // Create the chat participant
   const chatHandler = createHandler();
   const chatParticipant = vscode.chat.createChatParticipant(
