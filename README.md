@@ -28,7 +28,7 @@ The extension uses the [Nextflow langauge server](https://github.com/nextflow-io
 
 ### Copilot for Nextflow
 
-![VS Code Copilot Extension](https://cdn.sanity.io/images/o2y1bt2g/seqera/ce3b8ba1fe529bff2c836e2a243d6a5f57d57d84-1680x1080.gif)
+![VS Code Copilot Extension](images/chat-usage.gif)
 
 The extension includes a GitHub Copilot extension specifically trained for Nextflow development:
 
