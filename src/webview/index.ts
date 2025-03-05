@@ -54,6 +54,7 @@ class Provider implements vscode.WebviewViewProvider {
   }
 
   public async reloadView() {
+    console.log("🟣 reloadView", this._currentView);
     if (!this._currentView) return;
     const html = this.getWebviewHtml(this._currentView);
     this._currentView.webview.html = html;

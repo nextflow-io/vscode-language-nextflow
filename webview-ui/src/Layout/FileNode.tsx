@@ -4,13 +4,14 @@ import styles from "./styles.module.css";
 import { useEffect } from "react";
 
 import { FileNode as FileNodeType } from "../Provider/types";
+import clsx from "clsx";
 
 type Props = {
   node: FileNodeType;
 };
 
 const FileNode = ({ node }: Props) => {
-  const { openFile, getTest, setTestCount, viewType } = useProvider();
+  const { openFile, getTest, setTestCount, viewType: type } = useProvider();
   const testFile = getTest(node.name);
 
   useEffect(() => {
@@ -24,10 +25,10 @@ const FileNode = ({ node }: Props) => {
   };
 
   return (
-    <div className={styles.item}>
+    <div className={clsx(styles.item, { [styles[`${type}`]]: !!type })}>
       <label>
         <span onClick={() => handleFileClick(node)}>{node.name}</span>
-        {viewType === "processes" && (
+        {type === "processes" && (
           <>
             {!!testFile ? (
               <span
@@ -44,13 +45,13 @@ const FileNode = ({ node }: Props) => {
           </>
         )}
       </label>
-      <div className={styles.children}>
+      {type === "workflows" && (
         <FileNodeChildren
-          parent={node.name}
           label="Imports"
+          parent={node.name}
           items={node.imports}
         />
-      </div>
+      )}
     </div>
   );
 };

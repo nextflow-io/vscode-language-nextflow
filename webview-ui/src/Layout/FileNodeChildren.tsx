@@ -4,7 +4,7 @@ import { useProvider } from "../Provider";
 const FileNodeChildren = ({
   parent,
   label,
-  items
+  items = []
 }: {
   parent: string;
   label: string;
@@ -12,14 +12,12 @@ const FileNodeChildren = ({
 }) => {
   const { getFile, openFile, isSelected, selectItem } = useProvider();
 
-  if (!items.length) return null;
-
   const linkableFiles = items.map((label) => getFile(label)).filter(Boolean);
   const itemKey = `${parent}.${label}`;
   const isOpen = isSelected(itemKey);
 
   return (
-    <div className={styles.subItems}>
+    <div className={styles.children}>
       <label onClick={() => selectItem(itemKey)}>
         {label} ({linkableFiles.length}) <span>{isOpen ? "▼" : "►"}</span>
       </label>
