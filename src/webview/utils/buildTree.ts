@@ -5,14 +5,14 @@ import * as vscode from "vscode";
 import { FileNode } from "../types";
 
 import { findNfFiles, findTestFiles } from "./findFiles";
-import { getImports, parseBody } from "./parseFile";
+import { getImports, parseFile } from "./parseFile";
 
 async function getItem(
   filePath: string,
   root: string
 ): Promise<FileNode | null> {
   const content = fs.readFileSync(filePath, "utf8");
-  const fileInfo = parseBody(content);
+  const fileInfo = parseFile(content);
   if (!fileInfo) return null;
   const node: FileNode = {
     name: fileInfo.name,

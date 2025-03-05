@@ -12,7 +12,7 @@ export function getImports(content: string): string[] {
   return Array.from(importSet);
 }
 
-export function parseBody(content: string): FileInfo | null {
+export function parseFile(content: string): FileInfo | null {
   // Workflow
   let rx = /^\s*workflow\s+(\w+)/gm;
   let m: RegExpExecArray | null;
