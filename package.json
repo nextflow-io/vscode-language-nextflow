@@ -28,7 +28,9 @@
   "categories": [
     "Programming Languages"
   ],
-  "activationEvents": [],
+  "activationEvents": [
+    "onAuthenticationRequest:azuread"
+  ],
   "main": "./extension.js",
   "contributes": {
     "languages": [
@@ -96,6 +98,12 @@
     ],
     "commands": [
       {
+        "command": "nextflow.login",
+        "title": "Login to Seqera",
+        "category": "Nextflow",
+        "icon": "$(sign-in)"
+      },
+      {
         "command": "nextflow.convertToDSL2",
         "title": "Convert to DSL2 with Seqera",
         "category": "Nextflow"
@@ -126,6 +134,14 @@
         "category": "Nextflow"
       }
     ],
+    "menus": {
+      "view/title": [
+        {
+          "command": "nextflow.login",
+          "group": "navigation@10"
+        }
+      ]
+    },
     "configuration": {
       "type": "object",
       "description": "Configuration for Nextflow language support",
@@ -229,5 +245,8 @@
     "typescript": "^5.7.2",
     "vscode-jsonrpc": "^8.0.2",
     "vscode-languageclient": "^8.0.2"
+  },
+  "dependencies": {
+    "uuid": "^11.1.0"
   }
 }
