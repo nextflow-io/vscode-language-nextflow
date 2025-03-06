@@ -31,7 +31,7 @@ export function activateChatbot(
         query: "@Seqera ",
         isPartialQuery: true
       });
-      trackEvent("openChat", { someData: 123 });
+      trackEvent("openChat");
     }
   );
 
@@ -41,7 +41,7 @@ export function activateChatbot(
       await vscode.commands.executeCommand("workbench.action.chat.open", {
         query: "@Seqera /nf-test"
       });
-      trackEvent("writeTest", { someData: 123 });
+      trackEvent("writeTest");
     }
   );
 

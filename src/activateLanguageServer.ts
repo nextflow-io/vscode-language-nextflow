@@ -296,7 +296,7 @@ function activateLanguageServer(
         vscode.window.showErrorMessage("Missing file URI.");
         return;
       }
-      trackEvent("openFileFromWebview", { uri: uriString });
+      trackEvent("openFileFromWebview");
       const uri = vscode.Uri.parse(uriString);
       await vscode.window.showTextDocument(uri, {
         viewColumn: vscode.ViewColumn.One

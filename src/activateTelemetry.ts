@@ -61,7 +61,7 @@ export async function activateTelemetry(
   // Track consent change
   if (consentChanged) {
     trackEvent("telemetryConsent", {
-      accepted: hasUserAccepted,
+      accepted: hasUserAccepted
     });
   }
 
@@ -69,15 +69,12 @@ export async function activateTelemetry(
   trackEvent("extensionActivated", {
     extensionVersion,
     vscodeVersion,
-    osPlatform,
+    osPlatform
   });
 
   // Track file open
   const fileOpenEvent = vscode.workspace.onDidOpenTextDocument((document) => {
-    const filePath = document.fileName;
-    trackEvent("fileOpened", {
-      fileName: filePath,
-    });
+    trackEvent("fileOpened");
   });
 
   context.subscriptions.push(fileOpenEvent);
@@ -94,8 +91,8 @@ function createTrackEvent(context: vscode.ExtensionContext) {
         event: eventName,
         properties: {
           ...properties,
-          time: new Date().toISOString(),
-        },
+          time: new Date().toISOString()
+        }
       });
     } catch (err) {
       console.error("Track event failed", err);
@@ -117,7 +114,7 @@ export function deactivateTelemetry(context: vscode.ExtensionContext) {
 
   posthogClient.capture({
     distinctId: getUserID(context),
-    event: "extensionDeactivated",
+    event: "extensionDeactivated"
   });
 
   return posthogClient.shutdown();
