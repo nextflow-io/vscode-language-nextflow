@@ -73,7 +73,7 @@ export async function activateTelemetry(
   });
 
   // Track file open
-  const fileOpenEvent = vscode.workspace.onDidOpenTextDocument((document) => {
+  const fileOpenEvent = vscode.workspace.onDidOpenTextDocument(() => {
     trackEvent("fileOpened");
   });
 

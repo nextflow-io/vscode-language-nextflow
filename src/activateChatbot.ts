@@ -14,7 +14,7 @@ export function activateChatbot(
   }
 
   // Create the chat participant
-  const chatHandler = createHandler();
+  const chatHandler = createHandler(trackEvent);
   const chatParticipant = vscode.chat.createChatParticipant(
     "nextflow.chatbot",
     chatHandler
@@ -22,7 +22,6 @@ export function activateChatbot(
   context.subscriptions.push(chatParticipant);
 
   // Commands
-  // Note: must match commands configured in package.json
 
   const openChat = vscode.commands.registerCommand(
     "nextflow.openChat",
