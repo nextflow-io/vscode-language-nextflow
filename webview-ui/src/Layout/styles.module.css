@@ -1,0 +1,93 @@
+.header {
+  padding: 8px;
+}
+.item {
+  width: 100%;
+  & > label {
+    line-height: 1;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    cursor: pointer;
+    & > span {
+      padding: 6px 8px;
+      width: 100%;
+      &:hover {
+        background-color: var(--nf-item-bg-hover);
+      }
+    }
+  }
+  & .children {
+    padding: 0 0 4px 0;
+    & > label {
+      display: block;
+      cursor: pointer;
+      padding: 0 16px;
+      &:hover {
+        background-color: var(--nf-item-bg-hover);
+      }
+      & > span {
+        font-size: 8px;
+        margin-left: 8px;
+      }
+    }
+    & > div {
+      & > label {
+        padding: 4px 22px;
+        color: var(--nf-item-fg-active);
+        display: block;
+        width: 100%;
+        cursor: pointer;
+        line-height: 1;
+        &:hover {
+          background-color: var(--nf-item-bg-hover);
+        }
+      }
+    }
+  }
+}
+.item.workflows {
+  & > label {
+    & > span {
+      font-weight: bold;
+      width: 100%;
+    }
+  }
+}
+.item.processes {
+  & > label {
+    & > span {
+      width: 100%;
+      flex: 1;
+    }
+    & .metaLabel {
+      white-space: nowrap;
+      cursor: pointer;
+      text-overflow: ellipsis;
+      overflow: hidden;
+      color: var(--nf-item-fg-active);
+      width: auto;
+      flex: none;
+      &:hover {
+        color: var(--nf-item-fg-hover);
+      }
+      &.disabled {
+        color: #666;
+        cursor: default;
+        &:hover {
+          color: #666;
+        }
+      }
+    }
+  }
+}
+.section {
+  width: 100%;
+  box-sizing: border-box;
+  &:not(:last-child) {
+    padding-bottom: 16px;
+    margin-bottom: 16px;
+    border-bottom: 1px solid var(--nf-item-bg-hover);
+  }
+}
