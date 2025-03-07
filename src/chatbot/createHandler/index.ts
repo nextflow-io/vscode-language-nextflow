@@ -4,6 +4,8 @@ import { BASE_PROMPT, NF_TEST_PROMPT, DSL2_PROMPT } from "../prompts";
 import { getFileContext } from "../utils/getContext";
 import getChatHistory from "../utils/getChatHistory";
 
+import type { TrackEvent } from "../../activateTelemetry";
+
 type PromptKey = string;
 
 const prompts: Record<PromptKey, string> = {
@@ -56,13 +58,19 @@ async function buildInitialMessages(
  * Creates and returns a chat request handler for VS Code chat interactions.
  * It handles building context, managing chat history, and streaming responses.
  */
-const createHandler = (): vscode.ChatRequestHandler => {
+const createHandler = (trackEvent: TrackEvent): vscode.ChatRequestHandler => {
   return async (
     request: vscode.ChatRequest,
     context: vscode.ChatContext,
     stream: vscode.ChatResponseStream,
     token: vscode.CancellationToken
   ) => {
+    trackEvent("sentMessage", {
+      messageLength: request.prompt.length,
+      command: request.command || "default",
+      referencesCount: request.references?.length ?? 0
+    });
+
     const command = request.command || "default";
     const prompt = prompts[command] || prompts["default"];
     const messages = await buildInitialMessages(request, context, prompt);

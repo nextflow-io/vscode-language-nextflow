@@ -1,14 +1,18 @@
 import * as vscode from "vscode";
 import { createHandler } from "./chatbot";
+import type { TrackEvent } from "./activateTelemetry";
 
-export function activateChatbot(context: vscode.ExtensionContext) {
+export function activateChatbot(
+  context: vscode.ExtensionContext,
+  trackEvent: TrackEvent
+) {
   // Don't activate chatbot in Cursor
   if (vscode.env.appName.includes("Cursor")) {
     return;
   }
 
   // Create the chat participant
-  const chatHandler = createHandler();
+  const chatHandler = createHandler(trackEvent);
   const chatParticipant = vscode.chat.createChatParticipant(
     "nextflow.chatbot",
     chatHandler
@@ -16,7 +20,6 @@ export function activateChatbot(context: vscode.ExtensionContext) {
   context.subscriptions.push(chatParticipant);
 
   // Commands
-  // Note: must match commands configured in package.json
 
   const openChat = vscode.commands.registerCommand(
     "nextflow.openChat",
@@ -25,6 +28,7 @@ export function activateChatbot(context: vscode.ExtensionContext) {
         query: "@Seqera ",
         isPartialQuery: true
       });
+      trackEvent("openChat", { source: "commandPalette" });
     }
   );
 
@@ -34,6 +38,7 @@ export function activateChatbot(context: vscode.ExtensionContext) {
       await vscode.commands.executeCommand("workbench.action.chat.open", {
         query: "@Seqera /nf-test"
       });
+      trackEvent("writeTest", { source: "commandPalette" });
     }
   );
 
@@ -43,6 +48,7 @@ export function activateChatbot(context: vscode.ExtensionContext) {
       await vscode.commands.executeCommand("workbench.action.chat.open", {
         query: "@Seqera /dsl2"
       });
+      trackEvent("convertToDSL2", { source: "commandPalette" });
     }
   );
 

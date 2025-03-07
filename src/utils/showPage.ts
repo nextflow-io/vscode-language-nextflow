@@ -1,12 +1,16 @@
 import * as vscode from "vscode";
 
-export function showPage(filename = "readme-vscode.md") {
+function getReadme(): string {
+  return vscode.env.appName.includes("Cursor")
+    ? "readme-cursor.md"
+    : "readme-vscode.md";
+}
+
+export function showPage(filename?: string) {
   const extension = vscode.extensions.getExtension("nextflow.nextflow");
-  if (!extension) {
-    vscode.window.showErrorMessage("Extension not found!");
-    return;
-  }
-  const docUri = vscode.Uri.joinPath(extension.extensionUri, "docs", filename);
+  if (!extension) return;
+  const path = filename ?? getReadme();
+  const docUri = vscode.Uri.joinPath(extension.extensionUri, path);
   vscode.commands.executeCommand("markdown.showPreview", docUri);
 }
 

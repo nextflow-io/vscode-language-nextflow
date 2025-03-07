@@ -10,6 +10,8 @@ import {
   Executable
 } from "vscode-languageclient/node";
 
+import type { TrackEvent } from "./activateTelemetry";
+
 const LABEL_RELOAD_WINDOW = "Reload Window";
 let extensionContext: vscode.ExtensionContext | null = null;
 let languageClient: LanguageClient | null = null;
@@ -60,6 +62,7 @@ async function getLanguageServerPath() {
   // use development build if present
   const devPath = path.resolve(
     extensionContext.extensionPath,
+    "build",
     "bin",
     "language-server-all.jar"
   );
@@ -273,7 +276,10 @@ function onDidChangeConfiguration(event: vscode.ConfigurationChangeEvent) {
   }
 }
 
-function activateLanguageServer(context: vscode.ExtensionContext) {
+function activateLanguageServer(
+  context: vscode.ExtensionContext,
+  trackEvent: TrackEvent
+) {
   javaPath = findJava();
   extensionContext = context;
   vscode.workspace.onDidChangeConfiguration(onDidChangeConfiguration);
@@ -290,6 +296,7 @@ function activateLanguageServer(context: vscode.ExtensionContext) {
         vscode.window.showErrorMessage("Missing file URI.");
         return;
       }
+      trackEvent("openFileFromWebview");
       const uri = vscode.Uri.parse(uriString);
       await vscode.window.showTextDocument(uri, {
         viewColumn: vscode.ViewColumn.One
