@@ -2,7 +2,6 @@ import * as vscode from "vscode";
 import WebviewProvider from "./webview";
 
 export function activateWebview(context: vscode.ExtensionContext) {
-  // Todo: optimize / de-dupe logic
   const workflowProvider = new WebviewProvider(
     context.extensionUri,
     "workflows"
@@ -12,21 +11,37 @@ export function activateWebview(context: vscode.ExtensionContext) {
     "processes"
   );
 
-  const provider = vscode.window.registerWebviewViewProvider(
-    "workflows",
-    workflowProvider
-  );
+  const providers = [
+    vscode.window.registerWebviewViewProvider("workflows", workflowProvider),
+    vscode.window.registerWebviewViewProvider("processes", processesProvider)
+  ];
 
-  const provider2 = vscode.window.registerWebviewViewProvider(
-    "processes",
-    processesProvider
-  );
+  providers.forEach((provider) => {
+    context.subscriptions.push(provider);
+  });
 
   vscode.commands.registerCommand("nextflow.reloadWebView", () => {
     processesProvider.reloadView();
     workflowProvider.reloadView();
   });
 
-  context.subscriptions.push(provider);
-  context.subscriptions.push(provider2);
+  vscode.workspace.onDidSaveTextDocument(() => {
+    processesProvider.reloadView();
+    workflowProvider.reloadView();
+  });
+
+  vscode.workspace.onDidChangeTextDocument((event) => {
+    if (
+      event.document.uri.fsPath.endsWith(".nf") ||
+      event.document.uri.fsPath.endsWith(".nf.test")
+    ) {
+      processesProvider.reloadView();
+      workflowProvider.reloadView();
+    }
+  });
+
+  vscode.workspace.onDidDeleteFiles(() => {
+    processesProvider.reloadView();
+    workflowProvider.reloadView();
+  });
 }
