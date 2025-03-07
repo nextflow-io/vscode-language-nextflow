@@ -30,7 +30,7 @@ export function activateChatbot(
         query: "@Seqera ",
         isPartialQuery: true
       });
-      trackEvent("openChat");
+      trackEvent("openChat", { source: "commandPalette" });
     }
   );
 
@@ -40,7 +40,7 @@ export function activateChatbot(
       await vscode.commands.executeCommand("workbench.action.chat.open", {
         query: "@Seqera /nf-test"
       });
-      trackEvent("writeTest");
+      trackEvent("writeTest", { source: "commandPalette" });
     }
   );
 
@@ -50,6 +50,7 @@ export function activateChatbot(
       await vscode.commands.executeCommand("workbench.action.chat.open", {
         query: "@Seqera /dsl2"
       });
+      trackEvent("convertToDSL2", { source: "commandPalette" });
     }
   );
 
