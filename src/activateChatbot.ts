@@ -6,9 +6,7 @@ export function activateChatbot(
   context: vscode.ExtensionContext,
   trackEvent: TrackEvent
 ) {
-  console.log("🟢 Seqera extension activated");
-
-  // Handle Cursor
+  // Don't activate chatbot in Cursor
   if (vscode.env.appName.includes("Cursor")) {
     return;
   }
