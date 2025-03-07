@@ -12,6 +12,8 @@ async function main() {
     "CHANGELOG.md": "./CHANGELOG.md",
     "LICENSE.md": "./LICENSE.md",
     "README.md": "./README.md",
+    "src/readme-vscode.md": "./README-VSCODE.md",
+    "src/readme-cursor.md": "./README-CURSOR.md",
     "language-configuration.json": "./language-configuration.json",
     "package.json": "./package.json",
     "node_modules/mermaid/dist/mermaid.min.js": "media"

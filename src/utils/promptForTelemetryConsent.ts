@@ -1,5 +1,5 @@
 import * as vscode from "vscode";
-import showWelcomePage from "./showPage";
+import showPage from "./showPage";
 
 async function promptForTelemetryConsent(
   context: vscode.ExtensionContext
@@ -18,7 +18,7 @@ async function promptForTelemetryConsent(
     context.globalState.update("telemetryConsent", "declined");
     return false;
   } else if (choice === "More info") {
-    showWelcomePage();
+    showPage();
     return await promptForTelemetryConsent(context);
   } else {
     return undefined;

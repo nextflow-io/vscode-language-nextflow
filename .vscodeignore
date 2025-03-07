@@ -5,6 +5,3 @@ package-lock.json
 tsconfig.json
 esbuild.js
 **/*.map
-build
-!build/extension.js
-!build/bin
