@@ -23,6 +23,18 @@ const NextflowProvider = ({ children }: Props) => {
   );
 
   useEffect(() => {
+    let count = 0;
+    for (const file of files) {
+      const testFile = getTest(file.name);
+      if (testFile) count++;
+    }
+    setTestCount(count);
+  }, [files, tests]);
+
+  console.log("🟣", files.length, tests.length);
+  console.log("🟣", testCount);
+
+  useEffect(() => {
     vscode.setState({ files });
   }, [files]);
 
