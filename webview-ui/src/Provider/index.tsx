@@ -1,9 +1,34 @@
 import { createContext, useContext, useEffect, useState } from "react";
 
 import { FileNode as FileNodeType } from "./types";
+import { sortFiles } from "./utils";
 const vscode = (window as any).acquireVsCodeApi?.();
 
-const NextflowContext = createContext({});
+const NextflowContext = createContext<NextflowContextType>({
+  files: [],
+  tests: [],
+  openFile: () => {},
+  getFile: () => undefined,
+  getTest: () => undefined,
+  selectedItems: [],
+  selectItem: () => {},
+  isSelected: () => false,
+  viewType: null,
+  testCount: 0
+});
+
+interface NextflowContextType {
+  files: FileNodeType[];
+  tests: FileNodeType[];
+  openFile: (name: string, isTest?: boolean) => void;
+  getFile: (name: string) => FileNodeType | undefined;
+  getTest: (name: string) => FileNodeType | undefined;
+  selectedItems: string[];
+  selectItem: (name: string) => void;
+  isSelected: (name: string) => boolean;
+  viewType: "workflows" | "processes" | null;
+  testCount: number;
+}
 
 type Props = {
   children: React.ReactNode;
@@ -29,10 +54,7 @@ const NextflowProvider = ({ children }: Props) => {
       if (testFile) count++;
     }
     setTestCount(count);
-  }, [files, tests]);
-
-  console.log("🟣", files.length, tests.length);
-  console.log("🟣", testCount);
+  }, [files]);
 
   useEffect(() => {
     vscode.setState({ files });
@@ -50,8 +72,8 @@ const NextflowProvider = ({ children }: Props) => {
     const handleMessage = (event: MessageEvent) => {
       const message = event.data;
       if (message.command === "findFiles") {
-        setFiles(message.data?.files || []);
-        setTests(message.data?.tests || []);
+        setFiles(sortFiles(message.data?.files || []));
+        setTests(sortFiles(message.data?.tests || []));
         setViewType(message.viewType);
       }
     };
@@ -97,8 +119,7 @@ const NextflowProvider = ({ children }: Props) => {
         selectItem,
         isSelected,
         viewType,
-        testCount,
-        setTestCount
+        testCount
       }}
     >
       {children}
@@ -106,21 +127,7 @@ const NextflowProvider = ({ children }: Props) => {
   );
 };
 
-interface NextflowContextType {
-  files: FileNodeType[];
-  tests: FileNodeType[];
-  openFile: (name: string, isTest?: boolean) => void;
-  getFile: (name: string) => FileNodeType | undefined;
-  getTest: (name: string) => FileNodeType | undefined;
-  selectedItems: string[];
-  selectItem: (name: string) => void;
-  isSelected: (name: string) => boolean;
-  viewType: "workflows" | "processes" | null;
-  testCount: number;
-  setTestCount: React.Dispatch<React.SetStateAction<number>>;
-}
-
-const useProvider = () => useContext(NextflowContext) as NextflowContextType;
+const useProvider = () => useContext(NextflowContext);
 
 export { useProvider };
 

@@ -1,7 +1,6 @@
 import { useProvider } from "../Provider";
 import FileNodeChildren from "./FileNodeChildren";
 import styles from "./styles.module.css";
-import { useEffect } from "react";
 
 import { FileNode as FileNodeType } from "../Provider/types";
 import clsx from "clsx";
@@ -11,13 +10,8 @@ type Props = {
 };
 
 const FileNode = ({ node }: Props) => {
-  const { openFile, getTest, setTestCount, viewType: type } = useProvider();
+  const { openFile, getTest, viewType: type } = useProvider();
   const testFile = getTest(node.name);
-
-  useEffect(() => {
-    if (!testFile) return;
-    setTestCount((prev) => prev + 1);
-  }, [testFile]);
 
   const handleFileClick = (file: FileNodeType, isTest?: boolean) => {
     console.log("🟢 handleFileClick", file);
