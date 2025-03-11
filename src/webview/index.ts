@@ -2,6 +2,7 @@ import * as vscode from "vscode";
 import * as fs from "fs";
 import * as path from "path";
 
+import { FileNode } from "./types";
 import buildTree from "./utils/buildTree";
 
 class Provider implements vscode.WebviewViewProvider {
@@ -19,7 +20,7 @@ class Provider implements vscode.WebviewViewProvider {
     view.webview.onDidReceiveMessage((message) => {
       switch (message.command) {
         case "openFile":
-          this.openFile(message.filePath);
+          this.openFile(message.file);
           break;
       }
     });
@@ -72,9 +73,11 @@ class Provider implements vscode.WebviewViewProvider {
     return html;
   }
 
-  private async openFile(filePath: string) {
-    const doc = await vscode.workspace.openTextDocument(filePath);
-    vscode.window.showTextDocument(doc);
+  private async openFile(file: FileNode) {
+    const doc = await vscode.workspace.openTextDocument(file.filePath);
+    await vscode.window.showTextDocument(doc, {
+      selection: new vscode.Range(file.line || 0, 0, file.line || 0, 0)
+    });
   }
 }
 

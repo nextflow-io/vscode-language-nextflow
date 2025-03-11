@@ -26,7 +26,7 @@ const FileNodeChildren = ({
           {linkableFiles.map((file) => {
             if (!file) return null;
             return (
-              <label key={label} onClick={() => openFile(file.name)}>
+              <label key={label} onClick={() => openFile(file)}>
                 {file.name}
               </label>
             );

@@ -9,8 +9,7 @@ type Type =
 export interface FileInfo {
   name: string;
   type: Type;
-  hasTest: boolean;
-  testFilePath?: string;
+  line?: number;
 }
 
 export interface FileNode {

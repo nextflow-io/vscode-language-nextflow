@@ -19,7 +19,8 @@ async function getItem(
     fileName: path.relative(root, filePath),
     filePath,
     type: fileInfo?.type,
-    imports: getImports(content)
+    imports: getImports(content),
+    line: fileInfo.line
   };
   return node;
 }
