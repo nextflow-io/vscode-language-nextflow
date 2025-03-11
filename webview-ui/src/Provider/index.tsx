@@ -20,7 +20,7 @@ const NextflowContext = createContext<NextflowContextType>({
 interface NextflowContextType {
   files: FileNodeType[];
   tests: FileNodeType[];
-  openFile: (name: string, isTest?: boolean) => void;
+  openFile: (file: FileNodeType, isTest?: boolean) => void;
   getFile: (name: string) => FileNodeType | undefined;
   getTest: (name: string) => FileNodeType | undefined;
   selectedItems: string[];
@@ -93,10 +93,9 @@ const NextflowProvider = ({ children }: Props) => {
     return selectedItems.includes(name);
   }
 
-  function openFile(name: string, isTest?: boolean) {
-    const file = isTest ? getTest(name) : getFile(name);
+  function openFile(file: FileNodeType) {
     if (!file) return;
-    vscode.postMessage({ command: "openFile", filePath: file.filePath });
+    vscode.postMessage({ command: "openFile", file });
   }
 
   function getFile(name: string) {

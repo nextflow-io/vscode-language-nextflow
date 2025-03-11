@@ -10,7 +10,7 @@ type Type =
 export interface FileInfo {
   name: string;
   type: Type;
-  testFilePath?: string;
+  line?: number;
 }
 
 export interface FileNode {
@@ -19,4 +19,5 @@ export interface FileNode {
   filePath: string;
   type: Type;
   imports: string[];
+  line?: number;
 }

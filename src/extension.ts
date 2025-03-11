@@ -8,8 +8,6 @@ import { activateReadme } from "./activateReadme";
 import { activateWebview } from "./activateWebview";
 
 export function activate(context: vscode.ExtensionContext) {
-  console.log("🟣 extensionUri scheme:", context.extensionUri.scheme);
-  console.log("🟣 extensionUri:", context.extensionUri.toString());
   activateReadme(context);
   activateChatbot(context);
   activateLanguageServer(context);

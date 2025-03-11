@@ -13,21 +13,16 @@ const FileNode = ({ node }: Props) => {
   const { openFile, getTest, viewType: type } = useProvider();
   const testFile = getTest(node.name);
 
-  const handleFileClick = (file: FileNodeType, isTest?: boolean) => {
-    console.log("🟢 handleFileClick", file);
-    openFile(file.name, isTest);
-  };
-
   return (
     <div className={clsx(styles.item, { [styles[`${type}`]]: !!type })}>
       <label>
-        <span onClick={() => handleFileClick(node)}>{node.name}</span>
+        <span onClick={() => openFile(node)}>{node.name}</span>
         {type === "processes" && (
           <>
             {!!testFile ? (
               <span
                 className={styles.metaLabel}
-                onClick={() => handleFileClick(testFile, true)}
+                onClick={() => openFile(testFile)}
               >
                 Tested
               </span>
