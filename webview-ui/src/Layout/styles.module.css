@@ -1,29 +1,42 @@
 .header {
   padding: 8px;
 }
-.item {
+.row {
+  user-select: none;
   width: 100%;
-  & > label {
+  & .item {
     line-height: 1;
     display: flex;
     align-items: center;
     justify-content: space-between;
     width: 100%;
     cursor: pointer;
-    & > span {
+    color: var(--nf-item-fg-active);
+    &:hover {
+      background-color: var(--nf-item-bg-hover);
+    }
+    & .name {
       padding: 6px 8px;
       width: 100%;
-      &:hover {
-        background-color: var(--nf-item-bg-hover);
-      }
     }
+    & .icon {
+      width: 10px;
+      height: 10px;
+      margin-right: 6px;
+    }
+  }
+}
+.row.workflow {
+  & .name {
+    font-weight: bold;
+    width: 100%;
   }
   & .children {
     padding: 0 0 4px 0;
     & > label {
       display: block;
       cursor: pointer;
-      padding: 0 16px;
+      padding: 0 16px 0 28px;
       &:hover {
         background-color: var(--nf-item-bg-hover);
       }
@@ -34,7 +47,7 @@
     }
     & > div {
       & > label {
-        padding: 4px 22px;
+        padding: 4px 16px 4px 32px;
         color: var(--nf-item-fg-active);
         display: block;
         width: 100%;
@@ -47,38 +60,42 @@
     }
   }
 }
-.item.workflows {
-  & > label {
-    & > span {
-      font-weight: bold;
-      width: 100%;
+
+.row.process {
+  & .name {
+    width: 100%;
+    flex: 1 1 auto;
+    text-overflow: ellipsis;
+    overflow: hidden;
+  }
+  & .metaLabel {
+    white-space: nowrap;
+    cursor: pointer;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    width: auto;
+    flex: none;
+    padding-right: 6px;
+    opacity: 0.8;
+    &:hover {
+      opacity: 1;
+    }
+    &.disabled {
+      color: #666 !important;
+      cursor: default;
+    }
+    & .metaIcon {
+      width: 14px;
+      height: 12px;
+      margin-right: 4px;
+      opacity: 0;
+      top: 1px;
+      position: relative;
     }
   }
-}
-.item.processes {
-  & > label {
-    & > span {
-      width: 100%;
-      flex: 1;
-    }
-    & .metaLabel {
-      white-space: nowrap;
-      cursor: pointer;
-      text-overflow: ellipsis;
-      overflow: hidden;
-      color: var(--nf-item-fg-active);
-      width: auto;
-      flex: none;
-      &:hover {
-        color: var(--nf-item-fg-hover);
-      }
-      &.disabled {
-        color: #666;
-        cursor: default;
-        &:hover {
-          color: #666;
-        }
-      }
+  &:hover {
+    & .metaIcon {
+      opacity: 0.6;
     }
   }
 }
