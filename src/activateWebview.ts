@@ -10,10 +10,15 @@ export function activateWebview(context: vscode.ExtensionContext) {
     context.extensionUri,
     "processes"
   );
+  const userInfoProvider = new WebviewProvider(
+    context.extensionUri,
+    "userInfo"
+  );
 
   const providers = [
     vscode.window.registerWebviewViewProvider("workflows", workflowProvider),
-    vscode.window.registerWebviewViewProvider("processes", processesProvider)
+    vscode.window.registerWebviewViewProvider("processes", processesProvider),
+    vscode.window.registerWebviewViewProvider("userInfo", userInfoProvider)
   ];
 
   providers.forEach((provider) => {

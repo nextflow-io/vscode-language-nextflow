@@ -246,6 +246,11 @@
     "views": {
       "seqera": [
         {
+          "id": "userInfo",
+          "name": "Seqera Platform",
+          "type": "webview"
+        },
+        {
           "id": "workflows",
           "name": "Workflows",
           "type": "webview"

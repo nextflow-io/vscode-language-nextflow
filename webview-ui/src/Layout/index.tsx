@@ -1,6 +1,7 @@
 import FileTree from "./FileTree";
 import { useProvider } from "../Provider";
 import styles from "./styles.module.css";
+import UserInfo from "./UserInfo";
 
 const Layout = () => {
   const { viewType, files, testCount } = useProvider();
@@ -13,6 +14,8 @@ const Layout = () => {
   let color = "#0dc09d";
   if (coverage < 80) color = "orange";
   if (coverage < 20) color = "red";
+
+  if (viewType === "userInfo") return <UserInfo />;
 
   if (viewType === "workflows") return <FileTree files={workflows} />;
   if (viewType === "processes")

@@ -10,7 +10,7 @@ class Provider implements vscode.WebviewViewProvider {
 
   constructor(
     private readonly _extensionUri: vscode.Uri,
-    private readonly _type: "workflows" | "processes"
+    private readonly _type: "workflows" | "processes" | "userInfo"
   ) {}
 
   public async resolveWebviewView(view: vscode.WebviewView): Promise<void> {
@@ -32,10 +32,13 @@ class Provider implements vscode.WebviewViewProvider {
   }
 
   private async initViewData(view: vscode.WebviewView) {
-    const tree = await buildTree();
+    let data = {};
+    if (["workflows", "processes"].includes(this._type)) {
+      data = await buildTree();
+    }
     view.webview.postMessage({
       command: "findFiles",
-      data: tree,
+      data,
       viewType: this._type
     });
   }

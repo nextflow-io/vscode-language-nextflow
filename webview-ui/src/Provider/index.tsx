@@ -17,6 +17,8 @@ const NextflowContext = createContext<NextflowContextType>({
   testCount: 0
 });
 
+type ViewType = "workflows" | "processes" | "userInfo" | null;
+
 interface NextflowContextType {
   files: FileNodeType[];
   tests: FileNodeType[];
@@ -26,7 +28,7 @@ interface NextflowContextType {
   selectedItems: string[];
   selectItem: (name: string) => void;
   isSelected: (name: string) => boolean;
-  viewType: "workflows" | "processes" | null;
+  viewType: ViewType;
   testCount: number;
 }
 
@@ -38,9 +40,7 @@ const NextflowProvider = ({ children }: Props) => {
   const state = vscode.getState();
 
   const [testCount, setTestCount] = useState(0);
-  const [viewType, setViewType] = useState<"workflows" | "processes" | null>(
-    state?.viewType || null
-  );
+  const [viewType, setViewType] = useState<ViewType>(state?.viewType || null);
   const [files, setFiles] = useState<FileNodeType[]>(state?.files || []);
   const [tests, setTests] = useState<FileNodeType[]>(state?.tests || []);
   const [selectedItems, setSelectedItems] = useState<string[]>(
