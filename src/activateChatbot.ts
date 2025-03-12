@@ -1,6 +1,7 @@
 import * as vscode from "vscode";
-import { createHandler } from "./chatbot";
+
 import type { TrackEvent } from "./activateTelemetry";
+import { createHandler } from "./chatbot";
 
 export function activateChatbot(
   context: vscode.ExtensionContext,

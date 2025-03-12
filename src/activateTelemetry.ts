@@ -1,7 +1,9 @@
-import * as vscode from "vscode";
-import { PostHog } from "posthog-node";
 import { randomBytes } from "crypto";
+import { PostHog } from "posthog-node";
+import * as vscode from "vscode";
+
 import promptForTelemetryConsent from "./utils/promptForTelemetryConsent";
+
 export type TrackEvent = (
   eventName: string,
   properties?: { [key: string]: any }
@@ -109,13 +111,13 @@ function getUserID(context: vscode.ExtensionContext): string {
   return anonId;
 }
 
-export function deactivateTelemetry(context: vscode.ExtensionContext) {
-  if (!hasUserAccepted || !posthogClient) return;
-
+export function deactivateTelemetry(context: vscode.ExtensionContext): Thenable<void> {
+  if (!hasUserAccepted || !posthogClient) {
+    return Promise.resolve();
+  }
   posthogClient.capture({
     distinctId: getUserID(context),
     event: "extensionDeactivated"
   });
-
   return posthogClient.shutdown();
 }

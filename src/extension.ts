@@ -16,7 +16,9 @@ export async function activate(context: vscode.ExtensionContext) {
 
 export function deactivate(
   context: vscode.ExtensionContext
-): Thenable<void> | undefined {
-  deactivateTelemetry(context);
-  return stopLanguageServer();
+): Promise<[void, void]> {
+  return Promise.all([
+    deactivateTelemetry(context),
+    stopLanguageServer()
+  ]);
 }

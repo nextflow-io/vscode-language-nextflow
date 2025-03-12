@@ -1,5 +1,3 @@
-import buildMermaid from "./utils/buildMermaid";
-import findJava from "./utils/findJava";
 import * as fs from "fs";
 import * as os from "os";
 import * as path from "path";
@@ -11,6 +9,8 @@ import {
 } from "vscode-languageclient/node";
 
 import type { TrackEvent } from "./activateTelemetry";
+import buildMermaid from "./utils/buildMermaid";
+import findJava from "./utils/findJava";
 
 const LABEL_RELOAD_WINDOW = "Reload Window";
 let extensionContext: vscode.ExtensionContext | null = null;
@@ -262,9 +262,9 @@ function restartLanguageServer() {
   );
 }
 
-function stopLanguageServer(): Thenable<void> | undefined {
+function stopLanguageServer(): Thenable<void> {
   if (!languageClient) {
-    return undefined;
+    return Promise.resolve();
   }
   return languageClient.stop();
 }

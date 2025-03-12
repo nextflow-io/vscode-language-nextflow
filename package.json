@@ -121,13 +121,13 @@
         "category": "Nextflow"
       },
       {
-        "command": "nextflow.writeTest",
-        "title": "Write nf-test with Seqera",
+        "command": "nextflow.updateTelemetryConsent",
+        "title": "Update telemetry consent",
         "category": "Nextflow"
       },
       {
-        "command": "nextflow.updateTelemetryConsent",
-        "title": "Update telemetry consent",
+        "command": "nextflow.writeTest",
+        "title": "Write nf-test with Seqera",
         "category": "Nextflow"
       }
     ],
@@ -230,10 +230,10 @@
     "esbuild-plugin-copy": "^2.1.1",
     "mermaid": "^11.4.1",
     "node-fetch": "^3.3.2",
+    "posthog-node": "^4.4.1",
     "prettier": "3.5.2",
     "typescript": "^5.7.2",
     "vscode-jsonrpc": "^8.0.2",
-    "vscode-languageclient": "^8.0.2",
-    "posthog-node": "^4.4.1"
+    "vscode-languageclient": "^8.0.2"
   }
 }

@@ -5,15 +5,14 @@ const production = process.argv.includes("--production");
 
 async function main() {
   const files = {
-    "docs/**": "./docs",
     "images/**": "./images",
     "snippets/**": "./snippets",
     "syntaxes/**": "./syntaxes",
     "CHANGELOG.md": "./CHANGELOG.md",
     "LICENSE.md": "./LICENSE.md",
     "README.md": "./README.md",
-    "src/readme-vscode.md": "./README-VSCODE.md",
-    "src/readme-cursor.md": "./README-CURSOR.md",
+    "src/readme-vscode.md": "./readme-vscode.md",
+    "src/readme-cursor.md": "./readme-cursor.md",
     "language-configuration.json": "./language-configuration.json",
     "package.json": "./package.json",
     "node_modules/mermaid/dist/mermaid.min.js": "media"
