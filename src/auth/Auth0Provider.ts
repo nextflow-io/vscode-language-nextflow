@@ -1,21 +1,18 @@
-import {
-  authentication,
+import { authentication, env, window, EventEmitter, Disposable } from "vscode";
+import { v4 as uuid } from "uuid";
+
+import { PromiseAdapter, promiseFromEvent } from "./utils";
+
+import { UserInfo } from "./types";
+import type {
   AuthenticationProvider,
-  AuthenticationProviderAuthenticationSessionsChangeEvent,
+  AuthenticationProviderAuthenticationSessionsChangeEvent as ChangeEvent,
   AuthenticationSession,
-  Disposable,
-  env,
-  EventEmitter,
   ExtensionContext,
   ProgressLocation,
   Uri,
-  UriHandler,
-  window
+  UriHandler
 } from "vscode";
-import { v4 as uuid } from "uuid";
-import { PromiseAdapter, promiseFromEvent } from "./utils";
-import fetch from "node-fetch";
-import { UserInfo } from "./types";
 
 export const AUTH_TYPE = `auth0`;
 const AUTH_NAME = `Auth0`;
@@ -31,8 +28,7 @@ class UriEventHandler extends EventEmitter<Uri> implements UriHandler {
 export class Auth0AuthenticationProvider
   implements AuthenticationProvider, Disposable
 {
-  private _sessionChangeEmitter =
-    new EventEmitter<AuthenticationProviderAuthenticationSessionsChangeEvent>();
+  private _sessionChangeEmitter = new EventEmitter<ChangeEvent>();
   private _disposable: Disposable;
   private _pendingStates: string[] = [];
   private _codeExchangePromises = new Map<
@@ -63,16 +59,20 @@ export class Auth0AuthenticationProvider
     return `${env.uriScheme}://${publisher}.${name}`;
   }
 
-  public async getSessions(
-    scopes?: string[]
-  ): Promise<readonly AuthenticationSession[]> {
-    const allSessions = await this.context.secrets.get(SESSIONS_SECRET_KEY);
+  private async getUserInfo(token: string): Promise<UserInfo> {
+    // TODO: https surely?
+    const response = await fetch(`http://${PLATFORM_DOMAIN}/api/user-info`, {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    });
+    return (await response.json()) as UserInfo;
+  }
 
-    if (allSessions) {
-      return JSON.parse(allSessions) as AuthenticationSession[];
-    }
-
-    return [];
+  public async getSessions(): Promise<AuthenticationSession[]> {
+    const sessions = await this.context.secrets.get(SESSIONS_SECRET_KEY);
+    if (!sessions) return [];
+    return JSON.parse(sessions) as AuthenticationSession[];
   }
 
   public async createSession(scopes: string[]): Promise<AuthenticationSession> {
@@ -83,14 +83,14 @@ export class Auth0AuthenticationProvider
       }
 
       const response = await this.getUserInfo(token);
-      const userinfo: UserInfo = response.user;
+      const { user } = response;
 
       const session: AuthenticationSession = {
         id: uuid(),
         accessToken: token,
         account: {
-          label: userinfo.userName + "(id=" + userinfo.id + ")",
-          id: userinfo.email
+          label: user.userName + "(id=" + user.id + ")",
+          id: user.email
         },
         scopes: []
       };
@@ -217,13 +217,4 @@ export class Auth0AuthenticationProvider
 
       resolve(accessToken);
     };
-
-  private async getUserInfo(token: string): Promise<UserInfo> {
-    const response = await fetch(`http://${PLATFORM_DOMAIN}/api/user-info`, {
-      headers: {
-        Authorization: `Bearer ${token}`
-      }
-    });
-    return (await response.json()) as UserInfo;
-  }
 }
