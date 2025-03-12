@@ -104,12 +104,6 @@
         "category": "Nextflow"
       },
       {
-        "command": "nextflow.login",
-        "title": "Login to Seqera",
-        "category": "Nextflow",
-        "icon": "$(sign-in)"
-      },
-      {
         "command": "nextflow.convertToDSL2",
         "title": "Convert to DSL2 with Seqera",
         "category": "Nextflow"
@@ -138,6 +132,12 @@
         "command": "nextflow.writeTest",
         "title": "Write nf-test with Seqera",
         "category": "Nextflow"
+      },
+      {
+        "command": "nextflow.login",
+        "title": "Login to Seqera",
+        "category": "Nextflow",
+        "icon": "$(sign-in)"
       }
     ],
     "menus": {

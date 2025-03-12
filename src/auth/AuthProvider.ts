@@ -28,9 +28,9 @@ type ExchangePromise = {
 const TYPE = `auth0`;
 const NAME = `Seqera Platform`;
 const KEY_NAME = `${TYPE}.sessions`;
-const API_DOMAIN = `https://localhost:8000`;
+const API_DOMAIN = `https://dev-tower.net`;
 const USER_INFO_ENDPOINT = `${API_DOMAIN}/api/user-info`;
-const AUTH_ENDPOINT = `${API_DOMAIN}/oauth/login/auth0?scope=vscode`;
+const AUTH_ENDPOINT = `${API_DOMAIN}/oauth/login/auth0?source=vscode`;
 
 class UriEventHandler extends EventEmitter<Uri> implements UriHandler {
   public handleUri(uri: Uri) {

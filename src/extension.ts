@@ -5,12 +5,14 @@ import { activateLanguageServer, stopLanguageServer } from "./languageServer";
 import { activateWelcomePage } from "./welcomePage";
 import { activateTelemetry, deactivateTelemetry } from "./telemetry";
 import { activateWebview } from "./activateWebview";
+import { activateAuth } from "./activateAuth";
 
 export function activate(context: vscode.ExtensionContext) {
   activateWelcomePage(context);
   const trackEvent = activateTelemetry(context);
   activateLanguageServer(context, trackEvent);
   activateChatbot(context, trackEvent);
+  activateAuth(context);
   activateWebview(context);
 }
 

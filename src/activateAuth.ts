@@ -1,8 +1,8 @@
 import * as vscode from "vscode";
 
-import { Auth0AuthenticationProvider } from "./auth/Auth0Provider";
+import AuthProvider from "./auth/AuthProvider";
 
-export async function activate(context: vscode.ExtensionContext) {
+export async function activateAuth(context: vscode.ExtensionContext) {
   showWelcomeMessage();
 
   const handleLogin = async () => {
@@ -22,7 +22,7 @@ export async function activate(context: vscode.ExtensionContext) {
   const sessionChange =
     vscode.authentication.onDidChangeSessions(handleSessionChange);
 
-  const authProvider = new Auth0AuthenticationProvider(context);
+  const authProvider = new AuthProvider(context);
 
   context.subscriptions.push(authProvider);
   context.subscriptions.push(loginCommand);
