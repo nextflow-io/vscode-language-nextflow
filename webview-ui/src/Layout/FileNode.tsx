@@ -1,6 +1,8 @@
 import { useProvider } from "../Provider";
 import FileNodeChildren from "./FileNodeChildren";
 import styles from "./styles.module.css";
+import nextflowIcon from "../images/nextflow-icon.svg";
+import fileIcon from "../images/go-to-file.svg";
 
 import { FileNode as FileNodeType } from "../Provider/types";
 import clsx from "clsx";
@@ -13,10 +15,18 @@ const FileNode = ({ node }: Props) => {
   const { openFile, getTest, viewType: type } = useProvider();
   const testFile = getTest(node.name);
 
+  let typeStyleName = "workflow";
+  if (type === "processes") {
+    typeStyleName = "process";
+  }
+
   return (
-    <div className={clsx(styles.item, { [styles[`${type}`]]: !!type })}>
-      <label>
-        <span onClick={() => openFile(node)}>{node.name}</span>
+    <div className={clsx(styles.row, { [styles[typeStyleName]]: !!type })}>
+      <label className={clsx(styles.item)}>
+        <span className={styles.name} onClick={() => openFile(node)}>
+          <img className={styles.icon} src={nextflowIcon} />
+          {node.name}
+        </span>
         {type === "processes" && (
           <>
             {!!testFile ? (
@@ -24,6 +34,7 @@ const FileNode = ({ node }: Props) => {
                 className={styles.metaLabel}
                 onClick={() => openFile(testFile)}
               >
+                <img className={styles.metaIcon} src={fileIcon} />
                 Tested
               </span>
             ) : (
