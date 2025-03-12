@@ -75,8 +75,13 @@ export async function activateTelemetry(
   });
 
   // Track file open
-  const fileOpenEvent = vscode.workspace.onDidOpenTextDocument(() => {
-    trackEvent("fileOpened");
+  const fileOpenEvent = vscode.workspace.onDidOpenTextDocument((document) => {
+    const fileName = document.fileName.toLowerCase();
+    if (fileName.endsWith(".nf") || fileName.endsWith(".nf.test")) {
+      trackEvent("fileOpened", {
+        fileType: fileName.endsWith(".nf.test") ? ".nf.test" : ".nf"
+      });
+    }
   });
 
   context.subscriptions.push(fileOpenEvent);

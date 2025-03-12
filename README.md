@@ -82,3 +82,20 @@ Contributions are welcome. Feel free to fork [this repository](https://github.co
 - https://code.visualstudio.com/docs/extensionAPI/extension-manifest
 
 **Enjoy!**
+
+## Telemetry Notice
+
+This extension collects very limited usage data to help us understand which features are most valuable and improve your overall experience. Specifically:
+
+- Commands: When you invoke a command provided by this extension (e.g. openChat, writeTest, etc.), we record that command usage event.
+- File Opens: We track when you open a Nextflow file—but not the file name or its contents.
+- Environment Info: We collect the operating system type, your VS Code version, and the extension version to diagnose issues and guide future development.
+- No Chat Content: We do not capture any text you type into the chat panel.
+- No Personal Info: We do not record project names, file paths, or any personally identifiable information.
+
+Respecting User Privacy
+
+- If you have telemetry disabled in your VS Code settings (`"telemetry.enableTelemetry": false`), then no usage data is collected.
+- We never collect or transmit your code, chat messages, or other sensitive data.
+
+Our goal is simply to improve the extension by understanding which features are used and on which platforms. For any questions or concerns, feel free to open an issue in our repository. We appreciate your trust and feedback!

@@ -34,3 +34,7 @@ Now you will be able to use the `@Nextflow` command in Cursor Chat. The same can
 ## Documentation
 
 Read the [Nextflow documentation](https://nextflow.io/docs/latest/vscode.html) for more information about using the Nextflow extension.
+
+## Telemetry
+
+No personal information is collected. See [Telemetry Notice](https://github.com/nextflow-io/vscode-language-nextflow#telemetry-notice) in the main README for more information.
