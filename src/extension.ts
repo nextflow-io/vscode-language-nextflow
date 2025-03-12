@@ -6,8 +6,10 @@ import {
 } from "./activateLanguageServer";
 import { activateReadme } from "./activateReadme";
 import { activateWebview } from "./activateWebview";
+import { activateAuth } from "./activateAuth";
 
 export function activate(context: vscode.ExtensionContext) {
+  activateAuth(context);
   activateReadme(context);
   activateChatbot(context);
   activateLanguageServer(context);
