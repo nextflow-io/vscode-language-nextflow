@@ -22,6 +22,9 @@ class Provider implements vscode.WebviewViewProvider {
         case "openFile":
           this.openFile(message.file);
           break;
+        case "login":
+          this.login();
+          break;
       }
     });
 
@@ -29,6 +32,10 @@ class Provider implements vscode.WebviewViewProvider {
       if (!view.visible) return;
       this.initViewData(view);
     });
+  }
+
+  private async login() {
+    await vscode.commands.executeCommand("nextflow.login");
   }
 
   private async initViewData(view: vscode.WebviewView) {

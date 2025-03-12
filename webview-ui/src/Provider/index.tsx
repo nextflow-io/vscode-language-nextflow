@@ -14,7 +14,8 @@ const NextflowContext = createContext<NextflowContextType>({
   selectItem: () => {},
   isSelected: () => false,
   viewType: null,
-  testCount: 0
+  testCount: 0,
+  login: () => {}
 });
 
 type ViewType = "workflows" | "processes" | "userInfo" | null;
@@ -30,6 +31,7 @@ interface NextflowContextType {
   isSelected: (name: string) => boolean;
   viewType: ViewType;
   testCount: number;
+  login: () => void;
 }
 
 type Props = {
@@ -106,6 +108,10 @@ const NextflowProvider = ({ children }: Props) => {
     return tests.find((test) => test.name === name);
   }
 
+  function login() {
+    vscode.postMessage({ command: "login" });
+  }
+
   return (
     <NextflowContext.Provider
       value={{
@@ -118,7 +124,8 @@ const NextflowProvider = ({ children }: Props) => {
         selectItem,
         isSelected,
         viewType,
-        testCount
+        testCount,
+        login
       }}
     >
       {children}
