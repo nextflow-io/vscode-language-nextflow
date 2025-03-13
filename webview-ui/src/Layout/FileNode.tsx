@@ -47,7 +47,7 @@ const FileNode = ({ node }: Props) => {
       </label>
       {type === "workflows" && (
         <FileNodeChildren
-          label="Imports"
+          label="Includes"
           parent={node.name}
           items={node.imports}
         />
