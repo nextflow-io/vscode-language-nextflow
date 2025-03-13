@@ -30,6 +30,7 @@ class Provider implements vscode.WebviewViewProvider {
 
     view.onDidChangeVisibility(() => {
       if (!view.visible) return;
+
       this.initViewData(view);
     });
   }
@@ -39,14 +40,18 @@ class Provider implements vscode.WebviewViewProvider {
   }
 
   private async initViewData(view: vscode.WebviewView) {
-    let data = {};
+    let fileTree = {};
     if (["workflows", "processes"].includes(this._type)) {
-      data = await buildTree();
+      fileTree = await buildTree();
     }
+
+    const session = await vscode.authentication.getSession("auth0", []);
+
     view.webview.postMessage({
-      command: "findFiles",
-      data,
-      viewType: this._type
+      command: "setViewData",
+      fileTree,
+      viewType: this._type,
+      session
     });
   }
 

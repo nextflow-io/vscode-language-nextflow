@@ -2,6 +2,7 @@ import { createContext, useContext, useEffect, useState } from "react";
 
 import { FileNode as FileNodeType } from "./types";
 import { sortFiles } from "./utils";
+import { AuthenticationSession } from "vscode";
 const vscode = (window as any).acquireVsCodeApi?.();
 
 const NextflowContext = createContext<NextflowContextType>({
@@ -45,6 +46,9 @@ const NextflowProvider = ({ children }: Props) => {
   const [viewType, setViewType] = useState<ViewType>(state?.viewType || null);
   const [files, setFiles] = useState<FileNodeType[]>(state?.files || []);
   const [tests, setTests] = useState<FileNodeType[]>(state?.tests || []);
+  const [session, setSession] = useState<AuthenticationSession | null>(
+    state?.session || null
+  );
   const [selectedItems, setSelectedItems] = useState<string[]>(
     state?.selectedItems || []
   );
@@ -57,6 +61,10 @@ const NextflowProvider = ({ children }: Props) => {
     }
     setTestCount(count);
   }, [files]);
+
+  useEffect(() => {
+    vscode.setState({ session });
+  }, [session]);
 
   useEffect(() => {
     vscode.setState({ files });
@@ -73,10 +81,11 @@ const NextflowProvider = ({ children }: Props) => {
   useEffect(() => {
     const handleMessage = (event: MessageEvent) => {
       const message = event.data;
-      if (message.command === "findFiles") {
-        setFiles(sortFiles(message.data?.files || []));
-        setTests(sortFiles(message.data?.tests || []));
+      if (message.command === "setViewData") {
+        setFiles(sortFiles(message.fileTree?.files || []));
+        setTests(sortFiles(message.fileTree?.tests || []));
         setViewType(message.viewType);
+        setSession(message.session);
       }
     };
     window.addEventListener("message", handleMessage);
