@@ -1,13 +1,16 @@
 import type { Pipeline, ComputeEnv, WorkspaceID } from "./types";
 import type { FormData } from "./types";
+import type { AuthenticationSession } from "vscode";
+import { apiURL } from "./constants";
 
 const addPipeline = async (
-  apiURL: string,
+  session: AuthenticationSession | null,
   pipeline: Pipeline,
   workspaceID: WorkspaceID,
   computeEnv: ComputeEnv | undefined,
   formData: FormData
 ): Promise<Response> => {
+  const accessToken = session?.accessToken;
   const name = formData.name || pipeline.name;
   const description = formData.description;
 
@@ -23,7 +26,8 @@ const addPipeline = async (
     credentials: "include",
     method: "POST",
     headers: new Headers({
-      "Content-Type": "application/json"
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${accessToken}`
     }),
     body: JSON.stringify({
       name,

@@ -4,6 +4,7 @@ import fetchWorkspaces from "./fetchWorkspaces";
 import fetchcomputeEnvs from "./fetchComputeEnvs";
 import addPipeline from "./addPipeline";
 import parseResponse from "./parseResponse";
+import { baseURL, apiURL } from "./constants";
 
 import {
   WorkspaceID,
@@ -15,6 +16,7 @@ import {
   FormData
 } from "./types";
 import { useProvider } from "..";
+import fetchUserInfo from "./fetchUserInfo";
 
 const TowerContext = createContext<TowerContextType>(null as any);
 
@@ -24,9 +26,6 @@ type Props = {
 
 const TowerProvider: React.FC<Props> = ({ children }) => {
   const { session } = useProvider();
-
-  let baseURL = `https://dev-tower.net`;
-  let apiURL = `${baseURL}/api`;
 
   const [refreshKey, setRefreshKey] = useState(0);
   const [userInfo, setUserInfo] = useState<UserProfile | null>(null);
@@ -70,7 +69,7 @@ const TowerProvider: React.FC<Props> = ({ children }) => {
 
   async function handleFetchWorkspaces(userID: number) {
     setIsLoading(true);
-    const workspaces = await fetchWorkspaces(apiURL, userID);
+    const workspaces = await fetchWorkspaces(session, userID);
     setIsLoading(false);
     if (!workspaces || !workspaces.length) return;
     setOrgsAndWorkspaces(workspaces);
@@ -80,7 +79,7 @@ const TowerProvider: React.FC<Props> = ({ children }) => {
 
   async function handleFetchComputeEnvs(workspace: WorkspaceID) {
     setIsLoading(true);
-    let envs = await fetchcomputeEnvs(apiURL, workspace);
+    let envs = await fetchcomputeEnvs(session, workspace);
     envs = envs?.computeEnvs;
     setIsLoading(false);
     if (!envs || !envs.length) envs = [];
@@ -98,7 +97,7 @@ const TowerProvider: React.FC<Props> = ({ children }) => {
       setResponseMessage("");
       setIsAdding(true);
       const res = await addPipeline(
-        apiURL,
+        session,
         pipeline,
         selectedWorkspace,
         env,
@@ -116,6 +115,11 @@ const TowerProvider: React.FC<Props> = ({ children }) => {
     }
   }
 
+  async function handleFetchUserInfo() {
+    const userInfo = await fetchUserInfo(session);
+    if (userInfo) setUserInfo(userInfo);
+  }
+
   function refresh() {
     setRefreshKey(refreshKey + 1);
   }
@@ -123,6 +127,7 @@ const TowerProvider: React.FC<Props> = ({ children }) => {
   useEffect(() => {
     async function handleFetch() {
       if (!userID) return;
+      await handleFetchUserInfo();
       await handleFetchWorkspaces(userID);
       await handleFetchComputeEnvs(selectedWorkspace);
     }
