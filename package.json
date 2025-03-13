@@ -135,9 +135,15 @@
       },
       {
         "command": "nextflow.login",
-        "title": "Login to Seqera",
+        "title": "Login to Seqera Platform",
         "category": "Nextflow",
         "icon": "$(sign-in)"
+      },
+      {
+        "command": "nextflow.logout",
+        "title": "Logout from Seqera Platform",
+        "category": "Nextflow",
+        "icon": "$(sign-out)"
       }
     ],
     "menus": {

@@ -10,14 +10,15 @@ import {
 import { v4 as uuid } from "uuid";
 
 import { PromiseAdapter, promiseFromEvent } from "./utils";
+import UriEventHandler from "./UriEventHandler";
 
 import { UserInfo } from "./types";
+
 import type {
   AuthenticationProvider,
   AuthenticationProviderAuthenticationSessionsChangeEvent as ChangeEvent,
   AuthenticationSession,
-  ExtensionContext,
-  UriHandler
+  ExtensionContext
 } from "vscode";
 
 type ExchangePromise = {
@@ -32,18 +33,12 @@ const API_DOMAIN = `https://dev-tower.net`;
 const USER_INFO_ENDPOINT = `${API_DOMAIN}/api/user-info`;
 const AUTH_ENDPOINT = `${API_DOMAIN}/oauth/login/auth0?source=vscode`;
 
-class UriEventHandler extends EventEmitter<Uri> implements UriHandler {
-  public handleUri(uri: Uri) {
-    this.fire(uri);
-  }
-}
-
 class AuthProvider implements AuthenticationProvider, Disposable {
+  private uriHandler = new UriEventHandler();
   private eventEmitter = new EventEmitter<ChangeEvent>();
   private currentInstance: Disposable;
   private pendingIDs: string[] = []; // TODO: Does this do anything?
   private promises = new Map<string, ExchangePromise>();
-  private uriHandler = new UriEventHandler();
 
   constructor(private readonly context: ExtensionContext) {
     const { registerAuthenticationProvider: register } = vscodeAuth;
@@ -70,16 +65,19 @@ class AuthProvider implements AuthenticationProvider, Disposable {
       }
     });
     const userInfo = await response.json();
+    console.log("🟣 fetchUserInfo", userInfo);
     return userInfo as UserInfo;
   }
 
   public async getSessions(): Promise<AuthenticationSession[]> {
     const sessions = await this.context.secrets.get(KEY_NAME);
     if (!sessions) return [];
+    console.log("🟣 getSessions", JSON.parse(sessions));
     return JSON.parse(sessions) as AuthenticationSession[];
   }
 
   public async createSession(scopes: string[]): Promise<AuthenticationSession> {
+    console.log("🟣 createSession", scopes);
     try {
       const token = await this.login(scopes);
       if (!token) {
@@ -116,21 +114,20 @@ class AuthProvider implements AuthenticationProvider, Disposable {
 
   public async removeSession(sessionId: string): Promise<void> {
     const allSessions = await this.context.secrets.get(KEY_NAME);
-    if (allSessions) {
-      let sessions = JSON.parse(allSessions) as AuthenticationSession[];
-      const sessionIdx = sessions.findIndex((s) => s.id === sessionId);
-      const session = sessions[sessionIdx];
-      sessions.splice(sessionIdx, 1);
+    if (!allSessions) return;
+    let sessions = JSON.parse(allSessions) as AuthenticationSession[];
+    const sessionIdx = sessions.findIndex((s) => s.id === sessionId);
+    const session = sessions[sessionIdx];
+    sessions.splice(sessionIdx, 1);
 
-      await this.context.secrets.store(KEY_NAME, JSON.stringify(sessions));
+    await this.context.secrets.store(KEY_NAME, JSON.stringify(sessions));
 
-      if (session) {
-        this.eventEmitter.fire({
-          added: [],
-          removed: [session],
-          changed: []
-        });
-      }
+    if (session) {
+      this.eventEmitter.fire({
+        added: [],
+        removed: [session],
+        changed: []
+      });
     }
   }
 
@@ -139,6 +136,7 @@ class AuthProvider implements AuthenticationProvider, Disposable {
   }
 
   private async login(scopes: string[] = []) {
+    console.log("🟣 login", scopes);
     return await window.withProgress<string>(
       {
         location: ProgressLocation.Notification,
@@ -202,7 +200,7 @@ class AuthProvider implements AuthenticationProvider, Disposable {
     (scopes) => async (uri, resolve, reject) => {
       const query = new URLSearchParams(uri.fragment);
       const accessToken = query.get("access_token");
-      const state = query.get("state");
+      console.log("🟣 handleUri", accessToken);
 
       if (!accessToken) {
         reject(new Error("No token"));
