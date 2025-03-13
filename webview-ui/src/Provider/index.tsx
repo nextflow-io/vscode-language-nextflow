@@ -8,6 +8,7 @@ const vscode = (window as any).acquireVsCodeApi?.();
 const NextflowContext = createContext<NextflowContextType>({
   files: [],
   tests: [],
+  session: null,
   openFile: () => {},
   getFile: () => undefined,
   getTest: () => undefined,
@@ -24,6 +25,7 @@ type ViewType = "workflows" | "processes" | "userInfo" | null;
 interface NextflowContextType {
   files: FileNodeType[];
   tests: FileNodeType[];
+  session: AuthenticationSession | null;
   openFile: (file: FileNodeType, isTest?: boolean) => void;
   getFile: (name: string) => FileNodeType | undefined;
   getTest: (name: string) => FileNodeType | undefined;
@@ -126,6 +128,7 @@ const NextflowProvider = ({ children }: Props) => {
       value={{
         files,
         tests,
+        session,
         openFile,
         getFile,
         getTest,

@@ -2,11 +2,17 @@ import Button from "../../components/Button";
 import { useProvider } from "../../Provider";
 import styles from "./styles.module.css";
 const UserInfo = () => {
-  const { login } = useProvider();
+  const { login, session } = useProvider();
 
   return (
     <div className={styles.userInfo}>
-      <Button onClick={login}>Login to Seqera Platform</Button>
+      {!session ? (
+        <Button onClick={login}>Login to Seqera Platform</Button>
+      ) : (
+        <div>
+          <p>{session?.account?.label}</p>
+        </div>
+      )}
     </div>
   );
 };
