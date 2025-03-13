@@ -3,6 +3,7 @@ import { createContext, useContext, useEffect, useState } from "react";
 import { FileNode as FileNodeType } from "./types";
 import { sortFiles } from "./utils";
 import { AuthenticationSession } from "vscode";
+import TowerProvider from "./TowerContext";
 const vscode = (window as any).acquireVsCodeApi?.();
 
 const NextflowContext = createContext<NextflowContextType>({
@@ -83,6 +84,7 @@ const NextflowProvider = ({ children }: Props) => {
   useEffect(() => {
     const handleMessage = (event: MessageEvent) => {
       const message = event.data;
+      console.log(">> message", message);
       if (message.command === "setViewData") {
         setFiles(sortFiles(message.fileTree?.files || []));
         setTests(sortFiles(message.fileTree?.tests || []));
@@ -140,7 +142,7 @@ const NextflowProvider = ({ children }: Props) => {
         login
       }}
     >
-      {children}
+      <TowerProvider>{children}</TowerProvider>
     </NextflowContext.Provider>
   );
 };

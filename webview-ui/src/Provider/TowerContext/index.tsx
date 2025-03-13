@@ -115,9 +115,14 @@ const TowerProvider: React.FC<Props> = ({ children }) => {
     }
   }
 
-  async function handleFetchUserInfo() {
+  async function handleFetchUserInfo(): Promise<UserProfile | null> {
     const userInfo = await fetchUserInfo(session);
-    if (userInfo) setUserInfo(userInfo);
+    if (userInfo) {
+      setUserInfo(userInfo);
+      return userInfo;
+    }
+    console.error("Failed to fetch userInfo");
+    return null;
   }
 
   function refresh() {
@@ -125,14 +130,20 @@ const TowerProvider: React.FC<Props> = ({ children }) => {
   }
 
   useEffect(() => {
+    // console.log(">> userInfo", userInfo);
+    // console.log(">> workspaces", workspaces);
+    // console.log(">> computeEnvs", computeEnvs);
+  }, [userInfo, workspaces, computeEnvs]);
+
+  useEffect(() => {
     async function handleFetch() {
-      if (!userID) return;
-      await handleFetchUserInfo();
-      await handleFetchWorkspaces(userID);
+      const userInfo = await handleFetchUserInfo();
+      if (!userInfo) return;
+      await handleFetchWorkspaces(userInfo.user.id);
       await handleFetchComputeEnvs(selectedWorkspace);
     }
     handleFetch();
-  }, [userID, refreshKey]);
+  }, [refreshKey, session]);
 
   useEffect(() => {
     const ws = getWorkspaces()?.find(

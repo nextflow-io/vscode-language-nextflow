@@ -5,6 +5,7 @@ import type { AuthenticationSession } from "vscode";
 const fetchUserInfo = async (
   session: AuthenticationSession | null
 ): Promise<UserProfile | null> => {
+  console.log(">> fetchUserInfo", session);
   if (!session) return null;
   try {
     const accessToken = session.accessToken;
