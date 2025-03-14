@@ -74,31 +74,29 @@ You will be prompted to enter a path to your Nextflow workspace, which defaults 
 
 Contributions are welcome. Feel free to fork [this repository](https://github.com/nextflow-io/vscode-language-nextflow) and open a pull request to propose changes.
 
-## Useful links
+See also:
 
 - https://manual.macromates.com/en/language_grammars
 - https://code.visualstudio.com/docs/extensions/publish-extension
 - https://code.visualstudio.com/docs/extensions/yocode
 - https://code.visualstudio.com/docs/extensionAPI/extension-manifest
 
-**Enjoy!**
-
 ## Telemetry notice
 
-This extension collects limited usage data to help us understand which features are most valuable and improve your overall experience. Specifically:
+We (Seqera) collect limited usage data through this extension to help us understand which features are most valuable and improve your overall experience.
 
-- Commands: When you invoke a command provided by this extension (e.g. openChat, writeTest, etc.), we record that command usage event.
-- File open events: We track when you open a Nextflow file — but not the file name or its contents.
-- Environment info: We collect information about your operating system type, VS Code version, and the extension version to diagnose issues and guide future development.
+This telemetry is opt-in and can be disabled at any time using the "Update telemetry consent" command or by setting `"telemetry.enableTelemetry": false` in your VS Code settings.
 
-### Information we do not collect
+**Information we collect**
 
-- Chat content: We do not capture any text you type into the chat panel.
-- Opened filed: We never collect or transmit your code, file paths, or any or other data.
-- Personal info: We do not record project names, file paths, or any personally identifiable information.
+- Commands: We track when you invoke a command provided by this extension (e.g. openChat, writeTest, etc.), but not the contents of that command (e.g. user-supplied arguments).
+- File events: We track when you open a Nextflow file, but not the file name or its contents.
+- Environment info: We collect your operating system type, VS Code version, and the extension version to help diagnose issues and guide future development.
 
-### Respecting user privacy
+**Information we do not collect**
 
-If you have telemetry disabled in your VS Code settings (`"telemetry.enableTelemetry": false`), then no usage data is collected.
+- Chat contents: We do not collect any text you enter into the chat panel.
+- File contents: We do not collect any source code, file paths, or any other file contents.
+- Personal info: We do not collect project names, directory paths, or any personally identifiable information.
 
-Our goal is simply to improve the extension by understanding which features are used and on which platforms. For any questions or concerns, feel free to open an issue in our repository. We appreciate your trust and feedback!
+If you have any questions or concerns, feel free to open an issue in our repository. We appreciate your trust and feedback!
