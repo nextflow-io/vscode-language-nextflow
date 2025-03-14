@@ -85,7 +85,7 @@ See also:
 
 We (Seqera) collect limited usage data through this extension to help us understand which features are most valuable and improve your overall experience.
 
-This telemetry is opt-in and can be disabled at any time using the "Update telemetry consent" command or by setting `"telemetry.enableTelemetry": false` in your VS Code settings.
+This telemetry is opt-in and can be enabled or disabled at any time by toggling "Nextflow > Telemetry: Enabled" in your VS Code settings.
 
 **Information we collect**
 

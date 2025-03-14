@@ -121,11 +121,6 @@
         "category": "Nextflow"
       },
       {
-        "command": "nextflow.updateTelemetryConsent",
-        "title": "Update telemetry consent",
-        "category": "Nextflow"
-      },
-      {
         "command": "nextflow.writeTest",
         "title": "Write nf-test with Seqera",
         "category": "Nextflow"
@@ -182,6 +177,11 @@
           ],
           "default": "v24.10",
           "markdownDescription": "Target version of Nextflow to be used by the language server."
+        },
+        "nextflow.telemetry.enabled": {
+          "type": "boolean",
+          "default": false,
+          "markdownDescription": "Enable usage data to be sent to Seqera. Read our [data collection policy](vscode:extension/nextflow.nextflow)."
         }
       }
     },

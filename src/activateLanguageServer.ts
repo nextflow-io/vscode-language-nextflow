@@ -130,14 +130,14 @@ function startLanguageServer() {
           resolve();
           let settingsJavaHome = vscode.workspace
             .getConfiguration("nextflow")
-            .get("java.home") as string;
+            .get<string>("java.home");
           if (settingsJavaHome) {
             vscode.window.showErrorMessage(
-              "The nextflow.java.home setting does not point to a valid JDK."
+              "The `nextflow.java.home` setting does not point to a valid JDK."
             );
           } else {
             vscode.window.showErrorMessage(
-              "Could not locate valid JDK. To configure JDK manually, use the nextflow.java.home setting."
+              "Could not locate valid JDK. Use the `nextflow.java.home` setting to configure JDK manually."
             );
           }
           return;

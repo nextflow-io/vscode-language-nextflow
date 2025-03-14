@@ -2,80 +2,50 @@ import { randomBytes } from "crypto";
 import { PostHog } from "posthog-node";
 import * as vscode from "vscode";
 
-import promptForTelemetryConsent from "./utils/promptForTelemetryConsent";
+import showPage from "./utils/showPage";
+import { integer } from "vscode-languageclient";
 
 export type TrackEvent = (
   eventName: string,
   properties?: { [key: string]: any }
 ) => void;
 
-const key = "phc_pCt2zPQylp5x5dEKMB3TLM2hKBp7aLajUBgAfysPnpd";
-const host = "https://eu.i.posthog.com";
+const POSTHOG_API_KEY = "phc_pCt2zPQylp5x5dEKMB3TLM2hKBp7aLajUBgAfysPnpd";
+const POSTHOG_API_HOST = "https://eu.i.posthog.com";
 
 let posthogClient: PostHog | undefined;
-let hasGlobalConsent = false;
-let userConsentState: "accepted" | "declined" | undefined;
-let hasUserAccepted = false;
-let consentChanged = false;
 
 export async function activateTelemetry(
   context: vscode.ExtensionContext
 ): Promise<TrackEvent> {
-  // Get config & basic info
-  const config = vscode.workspace.getConfiguration("telemetry");
-  const vscodeVersion = vscode.version;
-  const osPlatform = process.platform;
-  const extension = vscode.extensions.getExtension("nextflow.nextflow");
-  const extensionVersion = extension?.packageJSON.version ?? "unknown";
-
-  // Get consent state
-  hasGlobalConsent = config.get<boolean>("enableTelemetry", true);
-  userConsentState = context.globalState.get("telemetryConsent");
-  hasUserAccepted = userConsentState === "accepted";
-
-  // Add command to update consent
-  const updateConsent = vscode.commands.registerCommand(
-    "nextflow.updateTelemetryConsent",
-    () => {
-      context.globalState.update("telemetryConsent", undefined);
-      promptForTelemetryConsent(context);
-    }
-  );
-  context.subscriptions.push(updateConsent);
-
-  // If declined already, return a noop
-  if (!hasGlobalConsent) return () => {};
-
-  // If unknown, show the prompt
-  if (!userConsentState) {
-    const consentGiven = await promptForTelemetryConsent(context);
-    hasUserAccepted = consentGiven === true;
-    consentChanged = true;
+  // Prompt for telemetry consent on the first time
+  const hasPromptedConsent = context.globalState.get("hasPromptedConsent");
+  if (!hasPromptedConsent) {
+    await promptTelemetryConsent();
+    context.globalState.update("hasPromptedConsent", true);
   }
 
-  // If declined, return a noop
-  if (!hasUserAccepted) return () => {};
-
-  // Otherwise proceed with tracking
-  posthogClient = new PostHog(key, { host });
+  // Create event tracker
   const trackEvent = createTrackEvent(context);
 
-  // Track consent change
-  if (consentChanged) {
-    trackEvent("telemetryConsent", {
-      accepted: hasUserAccepted
-    });
-  }
+  // Track consent if accepted
+  trackEvent("telemetryConsent", {
+    accepted: true
+  });
 
-  // Track extension activation
+  // Track environment info
+  const osPlatform = process.platform;
+  const vscodeVersion = vscode.version;
+  const extensionVersion = context.extension.packageJSON.version ?? "unknown";
+
   trackEvent("extensionActivated", {
     extensionVersion,
     vscodeVersion,
     osPlatform
   });
 
-  // Track file open
-  const fileOpenEvent = vscode.workspace.onDidOpenTextDocument((document) => {
+  // Track file open events
+  const trackFileOpens = vscode.workspace.onDidOpenTextDocument((document) => {
     const fileName = document.fileName.toLowerCase();
     if (fileName.endsWith(".nf") || fileName.endsWith(".nf.test")) {
       trackEvent("fileOpened", {
@@ -83,18 +53,49 @@ export async function activateTelemetry(
       });
     }
   });
-
-  context.subscriptions.push(fileOpenEvent);
+  context.subscriptions.push(trackFileOpens);
 
   return trackEvent;
 }
 
+async function promptTelemetryConsent(): Promise<void> {
+  const choice = await vscode.window.showInformationMessage(
+    "Nextflow: Enable telemetry to help us improve the extension?",
+    "Yes",
+    "No",
+    "More info"
+  );
+  const config = vscode.workspace.getConfiguration("nextflow");
+
+  if (choice === "Yes") {
+    await config.update("telemetry.enabled", true);
+  } else if (choice === "No") {
+    await config.update("telemetry.enabled", false);
+  } else if (choice === "More info") {
+    showPage();
+    await sleep(3000);
+    await promptTelemetryConsent();
+  }
+}
+
+function sleep(ms: integer) {
+  return new Promise((resolve) => setTimeout(resolve, ms));
+}
+
 function createTrackEvent(context: vscode.ExtensionContext) {
   return async (eventName: string, properties = {}) => {
+    // skip if telemetry is disabled
+    if (!isTelemetryEnabled()) return;
+
+    // create posthog client if needed
+    if (!posthogClient) {
+      posthogClient = new PostHog(POSTHOG_API_KEY, { host: POSTHOG_API_HOST });
+    }
+
+    // send telemtry event
     try {
-      if (!posthogClient) return;
       posthogClient.capture({
-        distinctId: getUserID(context),
+        distinctId: getUserId(context),
         event: eventName,
         properties: {
           ...properties,
@@ -102,12 +103,22 @@ function createTrackEvent(context: vscode.ExtensionContext) {
         }
       });
     } catch (err) {
-      console.error("Track event failed", err);
+      console.error("Failed to send telemetry event", err);
     }
   };
 }
 
-function getUserID(context: vscode.ExtensionContext): string {
+function isTelemetryEnabled(): boolean {
+    const globalTelemetryLevel = vscode.workspace
+      .getConfiguration("telemetry")
+      .get<string>("telemetryLevel", "all");
+    const enabled = vscode.workspace
+      .getConfiguration("nextflow")
+      .get<boolean>("telemetry.enabled", false);
+    return globalTelemetryLevel !== "off" && enabled;
+}
+
+function getUserId(context: vscode.ExtensionContext): string {
   let anonId = context.globalState.get<string>("anonId");
   if (!anonId) {
     anonId = randomBytes(6).toString("hex");
@@ -117,11 +128,11 @@ function getUserID(context: vscode.ExtensionContext): string {
 }
 
 export function deactivateTelemetry(context: vscode.ExtensionContext): Thenable<void> {
-  if (!hasUserAccepted || !posthogClient) {
+  if (!isTelemetryEnabled() || !posthogClient) {
     return Promise.resolve();
   }
   posthogClient.capture({
-    distinctId: getUserID(context),
+    distinctId: getUserId(context),
     event: "extensionDeactivated"
   });
   return posthogClient.shutdown();
