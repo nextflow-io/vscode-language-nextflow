@@ -93,7 +93,7 @@ This extension collects limited usage data to help us understand which features 
 - Chat content: We do not capture any text you type into the chat panel.
 - No Personal Info: We do not record project names, file paths, or any personally identifiable information.
 
-Respecting User Privacy
+Respecting user privacy
 
 - If you have telemetry disabled in your VS Code settings (`"telemetry.enableTelemetry": false`), then no usage data is collected.
 - We never collect or transmit your code, chat messages, or other sensitive data.
