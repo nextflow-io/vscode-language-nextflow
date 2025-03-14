@@ -1,15 +1,12 @@
 import * as vscode from "vscode";
-import { activateChatbot } from "./activateChatbot";
-import {
-  activateLanguageServer,
-  stopLanguageServer
-} from "./activateLanguageServer";
-import { activateReadme } from "./activateReadme";
-import { activateTelemetry, deactivateTelemetry } from "./activateTelemetry";
+import { activateChatbot } from "./chatbot";
+import { activateLanguageServer, stopLanguageServer } from "./languageServer";
+import { showReadme } from "./showReadme";
+import { activateTelemetry, deactivateTelemetry } from "./telemetry";
 
 export async function activate(context: vscode.ExtensionContext) {
+  showReadme(context);
   const trackEvent = await activateTelemetry(context);
-  activateReadme(context);
   activateLanguageServer(context, trackEvent);
   activateChatbot(context, trackEvent);
 }

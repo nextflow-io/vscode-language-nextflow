@@ -1,7 +1,7 @@
 import * as vscode from "vscode";
 import showPage from "./utils/showPage";
 
-export function activateReadme(context: vscode.ExtensionContext) {
+export function showReadme(context: vscode.ExtensionContext) {
   // Add command to show readme
   const showReadme = vscode.commands.registerCommand(
     "nextflow.showReadme",
@@ -20,4 +20,4 @@ export function activateReadme(context: vscode.ExtensionContext) {
   showPage();
 }
 
-export default { activateReadme };
+export default { showReadme };

@@ -8,7 +8,7 @@ import {
   Executable
 } from "vscode-languageclient/node";
 
-import type { TrackEvent } from "./activateTelemetry";
+import type { TrackEvent } from "./telemetry";
 import buildMermaid from "./utils/buildMermaid";
 import findJava from "./utils/findJava";
 

@@ -4,7 +4,7 @@ import { BASE_PROMPT, NF_TEST_PROMPT, DSL2_PROMPT } from "../prompts";
 import { getFileContext } from "../utils/getContext";
 import getChatHistory from "../utils/getChatHistory";
 
-import type { TrackEvent } from "../../activateTelemetry";
+import type { TrackEvent } from "../../telemetry";
 
 type PromptKey = string;
 

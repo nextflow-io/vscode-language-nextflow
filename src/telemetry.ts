@@ -47,10 +47,13 @@ export async function activateTelemetry(
   // Track file open events
   const trackFileOpens = vscode.workspace.onDidOpenTextDocument((document) => {
     const fileName = document.fileName.toLowerCase();
-    if (fileName.endsWith(".nf") || fileName.endsWith(".nf.test")) {
-      trackEvent("fileOpened", {
-        fileType: fileName.endsWith(".nf.test") ? ".nf.test" : ".nf"
-      });
+    const fileType = 
+      fileName.endsWith(".nf.test") ? ".nf.test"
+      : fileName.endsWith(".nf") ? ".nf"
+      : fileName.endsWith(".config") ? ".config"
+      : undefined;
+    if (fileType) {
+      trackEvent("fileOpened", { fileType });
     }
   });
   context.subscriptions.push(trackFileOpens);
