@@ -1,5 +1,5 @@
 import * as vscode from "vscode";
-import showPage from "./utils/showPage";
+import { showPage } from "./utils/showPage";
 
 export function showReadme(context: vscode.ExtensionContext) {
   // Add command to show readme
@@ -19,5 +19,3 @@ export function showReadme(context: vscode.ExtensionContext) {
   context.globalState.update(versionKey, currentVersion);
   showPage();
 }
-
-export default { showReadme };

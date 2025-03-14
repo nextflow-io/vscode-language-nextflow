@@ -13,5 +13,3 @@ export function showPage(filename?: string) {
   const docUri = vscode.Uri.joinPath(extension.extensionUri, path);
   vscode.commands.executeCommand("markdown.showPreview", docUri);
 }
-
-export default showPage;

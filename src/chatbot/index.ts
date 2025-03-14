@@ -56,5 +56,3 @@ export function activateChatbot(
   );
   context.subscriptions.push(convertToDSL2);
 }
-
-export default { activateChatbot };

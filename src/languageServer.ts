@@ -13,9 +13,8 @@ import buildMermaid from "./utils/buildMermaid";
 import findJava from "./utils/findJava";
 
 const LABEL_RELOAD_WINDOW = "Reload Window";
-let extensionContext: vscode.ExtensionContext | null = null;
+
 let languageClient: LanguageClient | null = null;
-let javaPath: string | null = null;
 
 async function getLatestRemoteVersion(
   versionPrefix: string
@@ -54,14 +53,10 @@ async function getLatestLocalVersion(
   return jarFiles.length > 0 ? jarFiles[0] : null;
 }
 
-async function getLanguageServerPath() {
-  if (!extensionContext) {
-    return null;
-  }
-
+async function getLanguageServerPath(context: vscode.ExtensionContext) {
   // use development build if present
   const devPath = path.resolve(
-    extensionContext.extensionPath,
+    context.extensionPath,
     "bin",
     "language-server-all.jar"
   );
@@ -113,18 +108,12 @@ async function getLanguageServerPath() {
   return fileUri.fsPath;
 }
 
-function startLanguageServer() {
+function startLanguageServer(context: vscode.ExtensionContext) {
   vscode.window.withProgress(
     { location: vscode.ProgressLocation.Window },
     (progress) => {
       return new Promise<void>(async (resolve, reject) => {
-        if (!extensionContext) {
-          resolve();
-          vscode.window.showErrorMessage(
-            "The Nextflow extension failed to start."
-          );
-          return;
-        }
+        const javaPath = findJava();
         if (!javaPath) {
           resolve();
           let settingsJavaHome = vscode.workspace
@@ -165,7 +154,7 @@ function startLanguageServer() {
             protocol2Code: (value) => vscode.Uri.parse(value)
           }
         };
-        const serverPath = await getLanguageServerPath();
+        const serverPath = await getLanguageServerPath(context);
         if (!serverPath) {
           resolve();
           vscode.window.showErrorMessage("Failed to retrieve language server.");
@@ -199,13 +188,9 @@ function startLanguageServer() {
   );
 }
 
-async function previewDag(uri: string, name?: string) {
-  if (!extensionContext) {
-    vscode.window.showErrorMessage("The Nextflow extension failed to start.");
-    return;
-  }
+async function previewDag(context: vscode.ExtensionContext, uri: string, name?: string) {
   const mediaPath = vscode.Uri.joinPath(
-    extensionContext?.extensionUri,
+    context.extensionUri,
     "media"
   );
   const res: any = await vscode.commands.executeCommand(
@@ -235,16 +220,16 @@ async function previewDag(uri: string, name?: string) {
   panel.webview.html = buildMermaid(content, name ?? "Entry", mermaidLibUri);
 }
 
-function restartLanguageServer() {
+function restartLanguageServer(context: vscode.ExtensionContext) {
   if (!languageClient) {
-    startLanguageServer();
+    startLanguageServer(context);
     return;
   }
   let oldLanguageClient = languageClient;
   languageClient = null;
   oldLanguageClient.stop().then(
     () => {
-      startLanguageServer();
+      startLanguageServer(context);
     },
     () => {
       vscode.window
@@ -261,31 +246,29 @@ function restartLanguageServer() {
   );
 }
 
-function stopLanguageServer(): Thenable<void> {
+export function stopLanguageServer(): Thenable<void> {
   if (!languageClient) {
     return Promise.resolve();
   }
   return languageClient.stop();
 }
 
-function onDidChangeConfiguration(event: vscode.ConfigurationChangeEvent) {
-  if (event.affectsConfiguration("nextflow.java.home")) {
-    javaPath = findJava();
-    restartLanguageServer();
-  }
-}
-
-function activateLanguageServer(
+export function activateLanguageServer(
   context: vscode.ExtensionContext,
   trackEvent: TrackEvent
 ) {
-  javaPath = findJava();
-  extensionContext = context;
-  vscode.workspace.onDidChangeConfiguration(onDidChangeConfiguration);
-  vscode.commands.registerCommand("nextflow.previewDag", previewDag);
+  vscode.workspace.onDidChangeConfiguration((event: vscode.ConfigurationChangeEvent) => {
+    if (event.affectsConfiguration("nextflow.java.home")) {
+      restartLanguageServer(context);
+    }
+  });
+  vscode.commands.registerCommand(
+    "nextflow.previewDag",
+    (uri, name) => { previewDag(context, uri, name); }
+  );
   vscode.commands.registerCommand(
     "nextflow.restartServer",
-    restartLanguageServer
+    () => { restartLanguageServer(context); }
   );
   vscode.commands.registerCommand("nextflow.stopServer", stopLanguageServer);
   vscode.commands.registerCommand(
@@ -302,7 +285,5 @@ function activateLanguageServer(
       });
     }
   );
-  startLanguageServer();
+  startLanguageServer(context);
 }
-
-export { activateLanguageServer, stopLanguageServer };

@@ -2,7 +2,7 @@ import { randomBytes } from "crypto";
 import { PostHog } from "posthog-node";
 import * as vscode from "vscode";
 
-import showPage from "./utils/showPage";
+import { showPage } from "./utils/showPage";
 import { integer } from "vscode-languageclient";
 
 export type TrackEvent = (
