@@ -90,10 +90,13 @@ This extension collects limited usage data to help us understand which features 
 - Commands: When you invoke a command provided by this extension (e.g. openChat, writeTest, etc.), we record that command usage event.
 - File opens: We track when you open a Nextflow file—but not the file name or its contents.
 - Environment info: We collect information about your operating system type, VS Code version, and the extension version to diagnose issues and guide future development.
+
+### Information we do not collect
+
 - Chat content: We do not capture any text you type into the chat panel.
 - Personal info: We do not record project names, file paths, or any personally identifiable information.
 
-Respecting user privacy
+### Respecting user privacy
 
 - If you have telemetry disabled in your VS Code settings (`"telemetry.enableTelemetry": false`), then no usage data is collected.
 - We never collect or transmit your code, chat messages, or other sensitive data.
