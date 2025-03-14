@@ -83,7 +83,7 @@ Contributions are welcome. Feel free to fork [this repository](https://github.co
 
 **Enjoy!**
 
-## Telemetry Notice
+## Telemetry notice
 
 This extension collects very limited usage data to help us understand which features are most valuable and improve your overall experience. Specifically:
 
