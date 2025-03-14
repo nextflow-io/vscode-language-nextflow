@@ -181,7 +181,7 @@
         "nextflow.telemetry.enabled": {
           "type": "boolean",
           "default": false,
-          "markdownDescription": "Enable usage data to be sent to Seqera. Read our [data collection policy](vscode:extension/nextflow.nextflow)."
+          "markdownDescription": "Enable usage data to be sent to Seqera. See the extension README for more information about what we do and do not collect."
         }
       }
     },

@@ -37,4 +37,4 @@ Read the [Nextflow documentation](https://nextflow.io/docs/latest/vscode.html) f
 
 ## Telemetry
 
-Telemetry is opt-in and can be enabled or disabled at any time. See our [Telemetry notice](https://github.com/nextflow-io/vscode-language-nextflow#telemetry-notice) on the extension page for more information about what we do and do not collect.
+Telemetry is opt-in and can be enabled or disabled at any time. See our [Telemetry notice](vscode:extension/nextflow.nextflow) on the extension page for more information about what we do and do not collect.
