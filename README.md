@@ -85,7 +85,7 @@ Contributions are welcome. Feel free to fork [this repository](https://github.co
 
 ## Telemetry notice
 
-This extension collects very limited usage data to help us understand which features are most valuable and improve your overall experience. Specifically:
+This extension collects limited usage data to help us understand which features are most valuable and improve your overall experience. Specifically:
 
 - Commands: When you invoke a command provided by this extension (e.g. openChat, writeTest, etc.), we record that command usage event.
 - File Opens: We track when you open a Nextflow file—but not the file name or its contents.
