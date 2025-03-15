@@ -3,7 +3,6 @@ import { PostHog } from "posthog-node";
 import * as vscode from "vscode";
 
 import { showPage } from "./utils/showPage";
-import { integer } from "vscode-languageclient";
 
 export type TrackEvent = (
   eventName: string,
@@ -15,14 +14,13 @@ const POSTHOG_API_HOST = "https://eu.i.posthog.com";
 
 let posthogClient: PostHog | undefined;
 
-export async function activateTelemetry(
-  context: vscode.ExtensionContext
-): Promise<TrackEvent> {
+export function activateTelemetry(context: vscode.ExtensionContext) {
   // Prompt for telemetry consent on the first time
   const hasPromptedConsent = context.globalState.get("hasPromptedConsent");
   if (!hasPromptedConsent) {
-    await promptTelemetryConsent();
-    context.globalState.update("hasPromptedConsent", true);
+    promptTelemetryConsent().then(() => {
+      context.globalState.update("hasPromptedConsent", true);
+    });
   }
 
   // Create event tracker
@@ -81,7 +79,7 @@ async function promptTelemetryConsent(): Promise<void> {
   }
 }
 
-function sleep(ms: integer) {
+function sleep(ms: number) {
   return new Promise((resolve) => setTimeout(resolve, ms));
 }
 

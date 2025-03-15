@@ -4,9 +4,9 @@ import { activateLanguageServer, stopLanguageServer } from "./languageServer";
 import { showReadme } from "./showReadme";
 import { activateTelemetry, deactivateTelemetry } from "./telemetry";
 
-export async function activate(context: vscode.ExtensionContext) {
+export function activate(context: vscode.ExtensionContext) {
   showReadme(context);
-  const trackEvent = await activateTelemetry(context);
+  const trackEvent = activateTelemetry(context);
   activateLanguageServer(context, trackEvent);
   activateChatbot(context, trackEvent);
 }
