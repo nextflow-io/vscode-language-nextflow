@@ -74,11 +74,9 @@ You will be prompted to enter a path to your Nextflow workspace, which defaults 
 
 Contributions are welcome. Feel free to fork [this repository](https://github.com/nextflow-io/vscode-language-nextflow) and open a pull request to propose changes.
 
-## Useful links
+See also:
 
 - https://manual.macromates.com/en/language_grammars
 - https://code.visualstudio.com/docs/extensions/publish-extension
 - https://code.visualstudio.com/docs/extensions/yocode
 - https://code.visualstudio.com/docs/extensionAPI/extension-manifest
-
-**Enjoy!**
