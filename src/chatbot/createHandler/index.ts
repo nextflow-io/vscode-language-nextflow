@@ -58,7 +58,7 @@ async function buildInitialMessages(
  * Creates and returns a chat request handler for VS Code chat interactions.
  * It handles building context, managing chat history, and streaming responses.
  */
-function createHandler(trackEvent: TrackEvent): vscode.ChatRequestHandler {
+export function createHandler(trackEvent: TrackEvent): vscode.ChatRequestHandler {
   return async (
     request: vscode.ChatRequest,
     context: vscode.ChatContext,
@@ -95,5 +95,3 @@ function createHandler(trackEvent: TrackEvent): vscode.ChatRequestHandler {
     return libResult.result;
   };
 };
-
-export default createHandler;
