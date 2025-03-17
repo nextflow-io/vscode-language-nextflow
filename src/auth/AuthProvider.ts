@@ -20,6 +20,7 @@ import type {
   AuthenticationSession,
   ExtensionContext
 } from "vscode";
+import fetchUserInfo from "./requests/fetchUserInfo";
 
 type ExchangePromise = {
   promise: Promise<string>;
@@ -30,7 +31,6 @@ const TYPE = `auth0`;
 const NAME = `Seqera Platform`;
 const KEY_NAME = `${TYPE}.sessions`;
 const API_DOMAIN = `https://dev-tower.net`;
-const USER_INFO_ENDPOINT = `${API_DOMAIN}/api/user-info`;
 const AUTH_ENDPOINT = `${API_DOMAIN}/oauth/login/auth0?source=vscode`;
 
 class AuthProvider implements AuthenticationProvider, Disposable {
@@ -58,17 +58,6 @@ class AuthProvider implements AuthenticationProvider, Disposable {
     return `${env.uriScheme}://${publisher}.${name}`;
   }
 
-  private async fetchUserInfo(token: string): Promise<UserInfo> {
-    const response = await fetch(USER_INFO_ENDPOINT, {
-      headers: {
-        Authorization: `Bearer ${token}`
-      }
-    });
-    const userInfo = await response.json();
-    console.log("🟣 fetchUserInfo", userInfo);
-    return userInfo as UserInfo;
-  }
-
   public async getSessions(): Promise<AuthenticationSession[]> {
     const sessions = await this.context.secrets.get(KEY_NAME);
     if (!sessions) return [];
@@ -84,8 +73,11 @@ class AuthProvider implements AuthenticationProvider, Disposable {
         throw new Error(`Platform login failure`);
       }
 
-      const response = await this.fetchUserInfo(token);
-      const { user } = response;
+      const userInfo = await fetchUserInfo(token);
+      const user = userInfo?.user;
+      if (!user) {
+        throw new Error(`Failed to fetch user info`);
+      }
 
       const session: AuthenticationSession = {
         id: uuid(),

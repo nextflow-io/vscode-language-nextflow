@@ -1,8 +1,8 @@
 import Button from "../../components/Button";
-import { useProvider } from "../../Provider";
+import { useWorkspaceContext } from "../../Context";
 import styles from "./styles.module.css";
 const UserInfo = () => {
-  const { login, session } = useProvider();
+  const { login, session } = useWorkspaceContext();
 
   return (
     <div className={styles.userInfo}>

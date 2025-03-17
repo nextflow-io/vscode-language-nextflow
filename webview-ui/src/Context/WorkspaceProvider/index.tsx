@@ -3,10 +3,9 @@ import { createContext, useContext, useEffect, useState } from "react";
 import { FileNode as FileNodeType } from "./types";
 import { sortFiles } from "./utils";
 import { AuthenticationSession } from "vscode";
-import TowerProvider from "./TowerContext";
 const vscode = (window as any).acquireVsCodeApi?.();
 
-const NextflowContext = createContext<NextflowContextType>({
+const WorkspaceContext = createContext<WorkspaceContextType>({
   files: [],
   tests: [],
   session: null,
@@ -23,7 +22,7 @@ const NextflowContext = createContext<NextflowContextType>({
 
 type ViewType = "workflows" | "processes" | "userInfo" | null;
 
-interface NextflowContextType {
+interface WorkspaceContextType {
   files: FileNodeType[];
   tests: FileNodeType[];
   session: AuthenticationSession | null;
@@ -126,7 +125,7 @@ const NextflowProvider = ({ children }: Props) => {
   }
 
   return (
-    <NextflowContext.Provider
+    <WorkspaceContext.Provider
       value={{
         files,
         tests,
@@ -142,13 +141,13 @@ const NextflowProvider = ({ children }: Props) => {
         login
       }}
     >
-      <TowerProvider>{children}</TowerProvider>
-    </NextflowContext.Provider>
+      {children}
+    </WorkspaceContext.Provider>
   );
 };
 
-const useProvider = () => useContext(NextflowContext);
+const useWorkspaceContext = () => useContext(WorkspaceContext);
 
-export { useProvider };
+export { useWorkspaceContext };
 
 export default NextflowProvider;

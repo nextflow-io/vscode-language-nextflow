@@ -1,9 +1,5 @@
 import { createContext, useContext, useEffect, useState } from "react";
 
-import fetchWorkspaces from "./fetchWorkspaces";
-import fetchcomputeEnvs from "./fetchComputeEnvs";
-import addPipeline from "./addPipeline";
-import parseResponse from "./parseResponse";
 import { baseURL, apiURL } from "./constants";
 
 import {
@@ -15,8 +11,7 @@ import {
   Pipeline,
   FormData
 } from "./types";
-import { useProvider } from "..";
-import fetchUserInfo from "./fetchUserInfo";
+import { useWorkspaceContext } from "..";
 
 const TowerContext = createContext<TowerContextType>(null as any);
 
@@ -25,7 +20,7 @@ type Props = {
 };
 
 const TowerProvider: React.FC<Props> = ({ children }) => {
-  const { session } = useProvider();
+  const { session } = useWorkspaceContext();
 
   const [refreshKey, setRefreshKey] = useState(0);
   const [userInfo, setUserInfo] = useState<UserProfile | null>(null);

@@ -2,9 +2,18 @@ import { authentication, commands, window } from "vscode";
 
 import AuthProvider from "./auth/AuthProvider";
 import type { ExtensionContext } from "vscode";
+import fetchUserInfo from "./auth/requests/fetchUserInfo";
 
 export async function activateAuth(context: ExtensionContext) {
   const authProvider = new AuthProvider(context);
+
+  const handleFetchUserInfo = async () => {
+    const session = await authentication.getSession("auth0", []);
+    if (!session) return;
+    const userInfo = await fetchUserInfo(session.accessToken);
+    console.log("🟣 handleFetchUserInfo", userInfo);
+    return userInfo;
+  };
 
   const handleLogin = async () => {
     const session = await authentication.getSession("auth0", [], {
@@ -22,7 +31,12 @@ export async function activateAuth(context: ExtensionContext) {
     await authProvider.removeSession(session.id);
   };
 
-  const loginCommand = commands.registerCommand("nextflow.login", handleLogin);
+  const { registerCommand } = commands;
+  const loginCommand = registerCommand("nextflow.login", handleLogin);
+  const fetchUserInfoCommand = registerCommand(
+    "nextflow.fetchUserInfo",
+    handleFetchUserInfo
+  );
 
   const logoutCommand = commands.registerCommand(
     "nextflow.logout",
@@ -34,6 +48,7 @@ export async function activateAuth(context: ExtensionContext) {
   context.subscriptions.push(authProvider);
   context.subscriptions.push(loginCommand);
   context.subscriptions.push(logoutCommand);
+  context.subscriptions.push(fetchUserInfoCommand);
   context.subscriptions.push(sessionChange);
 }
 

@@ -1,5 +1,5 @@
 import styles from "./styles.module.css";
-import { useProvider } from "../Provider";
+import { useWorkspaceContext } from "../Context";
 
 const FileNodeChildren = ({
   parent,
@@ -10,7 +10,7 @@ const FileNodeChildren = ({
   label: string;
   items: string[];
 }) => {
-  const { getFile, openFile, isSelected, selectItem } = useProvider();
+  const { getFile, openFile, isSelected, selectItem } = useWorkspaceContext();
 
   const linkableFiles = items.map((label) => getFile(label)).filter(Boolean);
   const itemKey = `${parent}.${label}`;

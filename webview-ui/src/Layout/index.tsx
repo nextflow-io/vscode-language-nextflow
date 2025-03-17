@@ -1,10 +1,10 @@
 import FileTree from "./FileTree";
-import { useProvider } from "../Provider";
+import { useWorkspaceContext } from "../Context";
 import styles from "./styles.module.css";
 import UserInfo from "./UserInfo";
 
 const Layout = () => {
-  const { viewType, files, testCount } = useProvider();
+  const { viewType, files, testCount } = useWorkspaceContext();
   const processes = files.filter((f) => f.type === "process");
   const workflows = files.filter((f) => f.type === "workflow");
 

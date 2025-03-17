@@ -1,5 +1,5 @@
 import FileNode from "./FileNode";
-import { FileNode as FileNodeType } from "../Provider/types";
+import { FileNode as FileNodeType } from "../Context/WorkspaceProvider/types";
 import styles from "./styles.module.css";
 
 type Props = {

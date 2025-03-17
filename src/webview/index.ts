@@ -4,6 +4,7 @@ import * as path from "path";
 
 import { FileNode } from "./types";
 import buildTree from "./utils/buildTree";
+import fetchUserInfo from "../auth/requests/fetchUserInfo";
 
 class Provider implements vscode.WebviewViewProvider {
   private _currentView?: vscode.WebviewView;
@@ -24,6 +25,9 @@ class Provider implements vscode.WebviewViewProvider {
           break;
         case "login":
           this.login();
+          break;
+        case "fetchUserInfo":
+          fetchUserInfo(message.token);
           break;
       }
     });
