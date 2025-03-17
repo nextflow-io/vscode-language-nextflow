@@ -111,7 +111,7 @@
         "category": "Nextflow"
       },
       {
-        "command": "nextflow.showReadme",
+        "command": "nextflow.showWelcomePage",
         "title": "Show Welcome Page",
         "category": "Nextflow"
       },
@@ -158,11 +158,8 @@
           "markdownDescription": "Place process outputs at the end of the process body when formatting Nextflow scripts."
         },
         "nextflow.java.home": {
-          "type": [
-            "string",
-            "null"
-          ],
-          "default": null,
+          "type": "string",
+          "default": "",
           "markdownDescription": "Specify the folder path to the desired Java runtime. Equivalent to the `JAVA_HOME` environment variable, i.e. the Java binary should be located at `$JAVA_HOME/bin/java`. Use this setting if the extension cannot find Java automatically."
         },
         "nextflow.paranoidWarnings": {

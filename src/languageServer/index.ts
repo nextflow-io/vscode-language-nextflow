@@ -8,8 +8,8 @@ import {
   Executable
 } from "vscode-languageclient/node";
 
-import buildMermaid from "./utils/buildMermaid";
-import findJava from "./utils/findJava";
+import { buildMermaid } from "./utils/buildMermaid";
+import { findJava } from "./utils/findJava";
 
 const LABEL_RELOAD_WINDOW = "Reload Window";
 

@@ -1,6 +1,6 @@
 import * as vscode from "vscode";
 
-export default function buildMermaid(
+export function buildMermaid(
   content: string,
   name: string,
   mermaidLibUri: vscode.Uri
