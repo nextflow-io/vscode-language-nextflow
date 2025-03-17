@@ -2,17 +2,16 @@ import * as fs from "fs";
 import * as path from "path";
 import * as vscode from "vscode";
 
-export default function findJava(): string | null {
-  var executableFile: string = "java";
-  if (process["platform"] === "win32") {
-    executableFile += ".exe";
-  }
+export function findJava(): string | null {
+  const executableFile: string = (process["platform"] === "win32")
+    ? "java.exe"
+    : "java";
 
-  let settingsJavaHome = vscode.workspace
+  const settingsJavaHome = vscode.workspace
     .getConfiguration("nextflow")
-    .get("java.home") as string;
+    .get<string>("java.home");
   if (settingsJavaHome) {
-    let javaPath = path.join(settingsJavaHome, "bin", executableFile);
+    const javaPath = path.join(settingsJavaHome, "bin", executableFile);
     if (validate(javaPath)) {
       return javaPath;
     }
@@ -20,19 +19,19 @@ export default function findJava(): string | null {
   }
 
   if ("JAVA_HOME" in process.env) {
-    let javaHome = process.env.JAVA_HOME as string;
-    let javaPath = path.join(javaHome, "bin", executableFile);
+    const javaHome = process.env.JAVA_HOME as string;
+    const javaPath = path.join(javaHome, "bin", executableFile);
     if (validate(javaPath)) {
       return javaPath;
     }
   }
 
   if ("PATH" in process.env) {
-    let PATH = process.env.PATH as string;
-    let paths = PATH.split(path.delimiter);
-    let pathCount = paths.length;
+    const PATH = process.env.PATH as string;
+    const paths = PATH.split(path.delimiter);
+    const pathCount = paths.length;
     for (let i = 0; i < pathCount; i++) {
-      let javaPath = path.join(paths[i], executableFile);
+      const javaPath = path.join(paths[i], executableFile);
       if (validate(javaPath)) {
         return javaPath;
       }

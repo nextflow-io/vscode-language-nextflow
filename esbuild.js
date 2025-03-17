@@ -11,8 +11,8 @@ async function main() {
     "CHANGELOG.md": "./CHANGELOG.md",
     "LICENSE.md": "./LICENSE.md",
     "README.md": "./README.md",
-    "src/readme-vscode.md": "./readme-vscode.md",
-    "src/readme-cursor.md": "./readme-cursor.md",
+    "src/welcomePage/welcome-vscode.md": "./welcome-vscode.md",
+    "src/welcomePage/welcome-cursor.md": "./welcome-cursor.md",
     "language-configuration.json": "./language-configuration.json",
     "package.json": "./package.json",
     "node_modules/mermaid/dist/mermaid.min.js": "media"
