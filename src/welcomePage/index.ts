@@ -6,7 +6,7 @@ function getWelcomePage(): string {
     : "welcome-vscode.md";
 }
 
-function showPage(filename?: string) {
+export function showPage(filename?: string) {
   const extension = vscode.extensions.getExtension("nextflow.nextflow");
   if (!extension) return;
   const path = filename ?? getWelcomePage();
