@@ -3,7 +3,17 @@ import { createContext, useContext, useEffect, useState } from "react";
 import { FileNode as FileNodeType } from "./types";
 import { sortFiles } from "./utils";
 import { AuthenticationSession } from "vscode";
-const vscode = (window as any).acquireVsCodeApi?.();
+let vscode: any;
+
+try {
+  if (!window.acquireVsCodeApi) {
+    throw new Error("VS Code API not available");
+  }
+  vscode = window.acquireVsCodeApi();
+} catch (error) {
+  console.warn("VS Code API could not be acquired:", error);
+  vscode = null;
+}
 
 const WorkspaceContext = createContext<WorkspaceContextType>({
   files: [],

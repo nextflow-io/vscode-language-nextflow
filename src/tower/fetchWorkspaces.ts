@@ -17,7 +17,9 @@ const fetchWorkspaces = async (
         Authorization: `Bearer ${accessToken}`
       })
     });
-    const res = await response.json();
+    const res = (await response.json()) as {
+      orgsAndWorkspaces: Workspace[];
+    };
     const workspaces = res.orgsAndWorkspaces || [];
     return workspaces.filter((ws: Workspace) => ws.orgName !== "community");
   } catch (e) {

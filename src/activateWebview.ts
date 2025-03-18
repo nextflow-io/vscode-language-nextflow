@@ -2,18 +2,9 @@ import * as vscode from "vscode";
 import WebviewProvider from "./webview";
 
 export function activateWebview(context: vscode.ExtensionContext) {
-  const workflowProvider = new WebviewProvider(
-    context.extensionUri,
-    "workflows"
-  );
-  const processesProvider = new WebviewProvider(
-    context.extensionUri,
-    "processes"
-  );
-  const userInfoProvider = new WebviewProvider(
-    context.extensionUri,
-    "userInfo"
-  );
+  const workflowProvider = new WebviewProvider(context, "workflows");
+  const processesProvider = new WebviewProvider(context, "processes");
+  const userInfoProvider = new WebviewProvider(context, "userInfo");
 
   const providers = [
     vscode.window.registerWebviewViewProvider("workflows", workflowProvider),

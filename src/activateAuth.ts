@@ -2,7 +2,7 @@ import { authentication, commands, window } from "vscode";
 
 import AuthProvider from "./auth/AuthProvider";
 import type { ExtensionContext } from "vscode";
-import fetchUserInfo from "./auth/requests/fetchUserInfo";
+import { fetchUserInfo } from "./tower";
 
 export async function activateAuth(context: ExtensionContext) {
   const authProvider = new AuthProvider(context);

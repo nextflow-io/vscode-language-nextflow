@@ -12,15 +12,13 @@ import { v4 as uuid } from "uuid";
 import { PromiseAdapter, promiseFromEvent } from "./utils";
 import UriEventHandler from "./UriEventHandler";
 
-import { UserInfo } from "./types";
-
 import type {
   AuthenticationProvider,
   AuthenticationProviderAuthenticationSessionsChangeEvent as ChangeEvent,
   AuthenticationSession,
   ExtensionContext
 } from "vscode";
-import fetchUserInfo from "./requests/fetchUserInfo";
+import { fetchUserInfo } from "../tower";
 
 type ExchangePromise = {
   promise: Promise<string>;

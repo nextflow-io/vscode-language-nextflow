@@ -15,7 +15,7 @@ async function parseResponse(response: Response): Promise<Result> {
   const result: Result = {};
   let res: PipelineResponse;
   try {
-    res = await response.json();
+    res = (await response.json()) as PipelineResponse;
   } catch (error) {
     console.error(error);
     result.error = "API did not return a valid response";

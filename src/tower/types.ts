@@ -91,7 +91,7 @@ export type User = {
   };
 };
 
-export type UserProfile = {
+export type UserInfo = {
   user: User;
   needConsent: boolean;
   defaultWorkspaceId: number;

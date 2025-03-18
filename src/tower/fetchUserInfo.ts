@@ -1,7 +1,7 @@
 import { apiURL } from "./constants";
-import type { UserProfile } from "./types";
+import type { UserInfo } from "./types";
 
-const fetchUserInfo = async (token: string): Promise<UserProfile | null> => {
+const fetchUserInfo = async (token: string): Promise<UserInfo | null> => {
   if (!token) return null;
   try {
     const response = await fetch(`${apiURL}/user-info`, {
@@ -14,7 +14,7 @@ const fetchUserInfo = async (token: string): Promise<UserProfile | null> => {
     if (response.status === 401) {
       throw new Error("Unauthorized");
     }
-    return (await response.json()) as UserProfile;
+    return (await response.json()) as UserInfo;
   } catch (error) {
     console.error(error);
     return null;

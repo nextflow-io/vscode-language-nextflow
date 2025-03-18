@@ -2,17 +2,21 @@ import * as vscode from "vscode";
 import * as fs from "fs";
 import * as path from "path";
 
-import { FileNode } from "./types";
 import buildTree from "./utils/buildTree";
-import fetchUserInfo from "../auth/requests/fetchUserInfo";
+import { fetchUserInfo, fetchWorkspaces, fetchComputeEnvs } from "../tower";
+
+import { FileNode } from "./types";
 
 class Provider implements vscode.WebviewViewProvider {
   private _currentView?: vscode.WebviewView;
+  private _extensionUri: vscode.Uri;
 
   constructor(
-    private readonly _extensionUri: vscode.Uri,
+    private readonly _context: vscode.ExtensionContext,
     private readonly _type: "workflows" | "processes" | "userInfo"
-  ) {}
+  ) {
+    this._extensionUri = _context.extensionUri;
+  }
 
   public async resolveWebviewView(view: vscode.WebviewView): Promise<void> {
     this.initializeView(view);
@@ -26,8 +30,8 @@ class Provider implements vscode.WebviewViewProvider {
         case "login":
           this.login();
           break;
-        case "fetchUserInfo":
-          fetchUserInfo(message.token);
+        case "fetchTowerData":
+          this.fetchTowerData();
           break;
       }
     });
@@ -37,6 +41,21 @@ class Provider implements vscode.WebviewViewProvider {
 
       this.initViewData(view);
     });
+  }
+
+  private async fetchTowerData() {
+    const token = await this._context.secrets.get("auth0.sessions");
+    console.log("🟣 token", token);
+    return;
+    // if (!token) {
+    //   throw new Error("No token found");
+    // }
+    // const user = await fetchUserInfo(token);
+    // if (!user) {
+    //   throw new Error("Could not fetch user info");
+    // }
+    // const workspaces = await fetchWorkspaces(token, user.user.id);
+    // const computeEnvs = await fetchComputeEnvs(token, user.user.id);
   }
 
   private async login() {
