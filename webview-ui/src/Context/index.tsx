@@ -1,5 +1,8 @@
 import WorkspaceProvider, { useWorkspaceContext } from "./WorkspaceProvider";
 import TowerProvider, { useTowerContext } from "./TowerProvider";
+import { getVscode } from "./utils";
+
+const vscode = getVscode();
 
 type Props = {
   children: React.ReactNode;
@@ -7,8 +10,8 @@ type Props = {
 
 const Context = ({ children }: Props) => {
   return (
-    <WorkspaceProvider>
-      <TowerProvider>{children}</TowerProvider>
+    <WorkspaceProvider vscode={vscode}>
+      <TowerProvider vscode={vscode}>{children}</TowerProvider>
     </WorkspaceProvider>
   );
 };

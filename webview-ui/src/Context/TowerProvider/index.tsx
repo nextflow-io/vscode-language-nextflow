@@ -1,15 +1,4 @@
 import { createContext, useContext, useEffect, useState } from "react";
-let vscode: any;
-
-try {
-  if (!window.acquireVsCodeApi) {
-    throw new Error("VS Code API not available");
-  }
-  vscode = window.acquireVsCodeApi();
-} catch (error) {
-  console.warn("VS Code API could not be acquired:", error);
-  vscode = null;
-}
 
 import { baseURL, apiURL } from "./constants";
 
@@ -27,9 +16,10 @@ const TowerContext = createContext<TowerContextType>(null as any);
 
 type Props = {
   children: React.ReactNode;
+  vscode: any;
 };
 
-const TowerProvider: React.FC<Props> = ({ children }) => {
+const TowerProvider: React.FC<Props> = ({ children, vscode }) => {
   const state = vscode.getState();
 
   const [responseMessage, setResponseMessage] = useState<string | null>(null);

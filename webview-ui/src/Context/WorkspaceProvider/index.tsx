@@ -3,17 +3,6 @@ import { createContext, useContext, useEffect, useState } from "react";
 import { FileNode as FileNodeType } from "./types";
 import { sortFiles } from "./utils";
 import { AuthenticationSession } from "vscode";
-let vscode: any;
-
-try {
-  if (!window.acquireVsCodeApi) {
-    throw new Error("VS Code API not available");
-  }
-  vscode = window.acquireVsCodeApi();
-} catch (error) {
-  console.warn("VS Code API could not be acquired:", error);
-  vscode = null;
-}
 
 const WorkspaceContext = createContext<WorkspaceContextType>({
   files: [],
@@ -49,9 +38,10 @@ interface WorkspaceContextType {
 
 type Props = {
   children: React.ReactNode;
+  vscode: any;
 };
 
-const NextflowProvider = ({ children }: Props) => {
+const WorkspaceProvider = ({ children, vscode }: Props) => {
   const state = vscode.getState();
 
   const [testCount, setTestCount] = useState(0);
@@ -160,4 +150,4 @@ const useWorkspaceContext = () => useContext(WorkspaceContext);
 
 export { useWorkspaceContext };
 
-export default NextflowProvider;
+export default WorkspaceProvider;
