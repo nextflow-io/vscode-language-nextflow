@@ -74,7 +74,6 @@ const WorkspaceProvider = ({ children, vscode }: Props) => {
     const handleMessage = (event: MessageEvent) => {
       const message = event.data;
       setViewType(message.viewType);
-      console.log(">> message", message);
       if (message.command === "setViewData") {
         setFiles(sortFiles(message.fileTree?.files || []));
         setTests(sortFiles(message.fileTree?.tests || []));

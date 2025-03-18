@@ -284,15 +284,14 @@
     "@vscode/vsce": "^3.2.1",
     "esbuild": "^0.25.0",
     "esbuild-plugin-copy": "^2.1.1",
+    "jwt-decode": "^4.0.0",
     "mermaid": "^11.4.1",
     "node-fetch": "^3.3.2",
     "posthog-node": "^4.4.1",
     "prettier": "3.5.2",
+    "uuid": "^11.1.0",
     "typescript": "^5.7.2",
     "vscode-jsonrpc": "^8.0.2",
     "vscode-languageclient": "^8.0.2"
-  },
-  "dependencies": {
-    "uuid": "^11.1.0"
   }
 }

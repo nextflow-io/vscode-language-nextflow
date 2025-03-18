@@ -19,7 +19,7 @@ export function activateWebview(context: vscode.ExtensionContext) {
   vscode.commands.registerCommand("nextflow.reloadWebView", () => {
     processesProvider.reloadView();
     workflowProvider.reloadView();
-    userInfoProvider.fetchTowerData();
+    // userInfoProvider.getAuthState();
   });
 
   vscode.workspace.onDidSaveTextDocument(() => {

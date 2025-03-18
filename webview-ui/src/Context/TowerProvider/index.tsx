@@ -31,6 +31,11 @@ const TowerProvider: React.FC<Props> = ({ children, vscode }) => {
     null
   );
   const [selectedOrg, setSelectedOrg] = useState<string>("");
+
+  const [isAuthenticated, setIsAuthenticated] = useState<boolean>(
+    state?.authState || false
+  );
+
   const [towerData, setTowerData] = useState<any>(state?.towerData || {});
   const { userInfo, workspaces, computeEnvs, organizations } = towerData;
 
@@ -39,20 +44,38 @@ const TowerProvider: React.FC<Props> = ({ children, vscode }) => {
   }, [towerData]);
 
   useEffect(() => {
+    vscode.setState({ authState: isAuthenticated });
+  }, [isAuthenticated]);
+
+  useEffect(() => {
     const handleMessage = (event: MessageEvent) => {
       const message = event.data;
-      console.log(">> message Tower", message);
-      if (message.command === "setTowerData") {
-        if (message.towerData) setTowerData(message.towerData);
-      }
+      const { towerData, authState, getAuthState } = message;
+      console.log(">> message", message);
+      if (authState) setIsAuthenticated(authState);
+      if (towerData) setTowerData(towerData);
+      if (getAuthState) fetchAuthState();
     };
     window.addEventListener("message", handleMessage);
     return () => window.removeEventListener("message", handleMessage);
   }, []);
 
   useEffect(() => {
-    fetchTowerData();
+    fetchAuthState();
   }, []);
+
+  useEffect(() => {
+    if (!isAuthenticated) {
+      setTowerData({});
+      return;
+    }
+    fetchTowerData();
+  }, [isAuthenticated]);
+
+  function fetchAuthState() {
+    console.log("🟠 fetchAuthState");
+    vscode.postMessage({ command: "fetchAuthState" });
+  }
 
   function fetchTowerData() {
     vscode.postMessage({ command: "fetchTowerData" });

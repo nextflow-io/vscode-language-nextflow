@@ -9,8 +9,8 @@ import {
 } from "vscode";
 import { v4 as uuid } from "uuid";
 
-import { PromiseAdapter, promiseFromEvent } from "./utils";
-import UriEventHandler from "./UriEventHandler";
+import { PromiseAdapter, promiseFromEvent } from "./utils/promiseFromEvent";
+import UriEventHandler from "./utils/UriEventHandler";
 
 import type {
   AuthenticationProvider,
@@ -27,9 +27,9 @@ type ExchangePromise = {
 
 const TYPE = `auth0`;
 const NAME = `Seqera Platform`;
-const KEY_NAME = `${TYPE}.sessions`;
 const API_DOMAIN = `https://dev-tower.net`;
 const AUTH_ENDPOINT = `${API_DOMAIN}/oauth/login/auth0?source=vscode`;
+export const STORAGE_KEY_NAME = `${TYPE}.sessions`;
 
 class AuthProvider implements AuthenticationProvider, Disposable {
   private uriHandler = new UriEventHandler();
@@ -57,7 +57,7 @@ class AuthProvider implements AuthenticationProvider, Disposable {
   }
 
   public async getSessions(): Promise<AuthenticationSession[]> {
-    const sessions = await this.context.secrets.get(KEY_NAME);
+    const sessions = await this.context.secrets.get(STORAGE_KEY_NAME);
     if (!sessions) return [];
     console.log("🟣 getSessions", JSON.parse(sessions));
     return JSON.parse(sessions) as AuthenticationSession[];
@@ -87,7 +87,10 @@ class AuthProvider implements AuthenticationProvider, Disposable {
         scopes: []
       };
 
-      await this.context.secrets.store(KEY_NAME, JSON.stringify([session]));
+      await this.context.secrets.store(
+        STORAGE_KEY_NAME,
+        JSON.stringify([session])
+      );
 
       this.eventEmitter.fire({
         added: [session],
@@ -103,14 +106,17 @@ class AuthProvider implements AuthenticationProvider, Disposable {
   }
 
   public async removeSession(sessionId: string): Promise<void> {
-    const allSessions = await this.context.secrets.get(KEY_NAME);
+    const allSessions = await this.context.secrets.get(STORAGE_KEY_NAME);
     if (!allSessions) return;
     let sessions = JSON.parse(allSessions) as AuthenticationSession[];
     const sessionIdx = sessions.findIndex((s) => s.id === sessionId);
     const session = sessions[sessionIdx];
     sessions.splice(sessionIdx, 1);
 
-    await this.context.secrets.store(KEY_NAME, JSON.stringify(sessions));
+    await this.context.secrets.store(
+      STORAGE_KEY_NAME,
+      JSON.stringify(sessions)
+    );
 
     if (session) {
       this.eventEmitter.fire({

@@ -1,5 +1,4 @@
 import type { Workspace } from "./types";
-import type { AuthenticationSession } from "vscode";
 import { apiURL } from "./constants";
 
 const fetchWorkspaces = async (

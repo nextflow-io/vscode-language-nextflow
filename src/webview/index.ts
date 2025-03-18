@@ -7,6 +7,8 @@ import { fetchUserInfo, fetchWorkspaces, fetchComputeEnvs } from "../tower";
 
 import { FileNode } from "./types";
 import { AuthenticationSession } from "vscode";
+import { STORAGE_KEY_NAME } from "../auth/AuthProvider";
+import jwtExpired from "../auth/utils/jwtExpired";
 class Provider implements vscode.WebviewViewProvider {
   private _currentView?: vscode.WebviewView;
   private _extensionUri: vscode.Uri;
@@ -33,6 +35,9 @@ class Provider implements vscode.WebviewViewProvider {
         case "fetchTowerData":
           this.fetchTowerData();
           break;
+        case "getAuthState":
+          this.getAuthState();
+          break;
       }
     });
 
@@ -43,13 +48,16 @@ class Provider implements vscode.WebviewViewProvider {
     });
   }
 
-  public async fetchTowerData(): Promise<any> {
-    console.log("🟣 fetchTowerData");
-    const sessionsValue = await this._context.secrets.get("auth0.sessions");
-    const sessions = sessionsValue ? JSON.parse(sessionsValue) : [];
-    console.log("🟣 sessions", sessions);
+  private async getAccessToken(): Promise<string | null> {
+    const sessionsStr = await this._context.secrets.get(STORAGE_KEY_NAME);
+    const sessions = sessionsStr ? JSON.parse(sessionsStr) : [];
     const session = sessions[0] as AuthenticationSession;
     const token = session?.accessToken;
+    return token;
+  }
+
+  public async fetchTowerData(): Promise<any> {
+    const token = await this.getAccessToken();
     console.log("🟣 token", token);
     if (!token) {
       throw new Error("No token found");
@@ -60,32 +68,49 @@ class Provider implements vscode.WebviewViewProvider {
     }
     const workspaces = await fetchWorkspaces(token, userInfo.user.id);
     const computeEnvs = await fetchComputeEnvs(token, userInfo.user.id);
-    return {
+    const towerData = {
       userInfo,
       workspaces,
       computeEnvs
     };
+    this._currentView?.webview.postMessage({
+      command: "setTowerData",
+      viewType: this._type,
+      towerData
+    });
   }
 
   private async login() {
     await vscode.commands.executeCommand("nextflow.login");
   }
 
+  private async getAuthState(): Promise<boolean> {
+    const token = await this.getAccessToken();
+    const isAuthenticated = !jwtExpired(token);
+    this._currentView?.webview.postMessage({
+      viewType: this._type,
+      command: "setAuthState",
+      authState: isAuthenticated
+    });
+    return isAuthenticated;
+  }
+
   private async initViewData(view: vscode.WebviewView) {
+    let fileTree;
     if (["workflows", "processes"].includes(this._type)) {
-      const fileTree = await buildTree();
-      view.webview.postMessage({
-        command: "setViewData",
-        fileTree,
-        viewType: this._type
-      });
-    } else if (this._type === "userInfo") {
-      const towerData = await this.fetchTowerData();
-      view.webview.postMessage({
-        command: "setTowerData",
-        viewType: this._type,
-        towerData
-      });
+      fileTree = await buildTree();
+    }
+    view.webview.postMessage({
+      command: "setViewData",
+      viewType: this._type,
+      fileTree
+    });
+
+    const authState = await this.getAuthState();
+
+    if (this._type === "userInfo") {
+      if (!authState) return;
+      await this.fetchTowerData();
     }
   }
 
