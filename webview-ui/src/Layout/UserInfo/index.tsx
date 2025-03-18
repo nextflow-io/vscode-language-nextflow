@@ -5,7 +5,8 @@ import styles from "./styles.module.css";
 
 const UserInfo = () => {
   const { login } = useWorkspaceContext();
-  const { workspaces, userInfo } = useTowerContext();
+  const { workspaces, userInfo, hasToken, tokenExpired, tokenExpiry } =
+    useTowerContext();
 
   console.log("🟣 userInfo", userInfo);
   return (
@@ -18,6 +19,10 @@ const UserInfo = () => {
             User: {userInfo.user.userName}
             <br />
             Email: {userInfo.user.email}
+            <br />
+            Token expires: {tokenExpiry}
+            <br />
+            Has token: {hasToken ? "Yes" : "No"}
           </div>
           <div>
             <p>Workspaces</p>

@@ -9,6 +9,7 @@ import { FileNode } from "./types";
 import { AuthenticationSession } from "vscode";
 import { STORAGE_KEY_NAME } from "../auth/AuthProvider";
 import jwtExpired from "../auth/utils/jwtExpired";
+import { jwtDecode } from "jwt-decode";
 class Provider implements vscode.WebviewViewProvider {
   private _currentView?: vscode.WebviewView;
   private _extensionUri: vscode.Uri;
@@ -58,7 +59,7 @@ class Provider implements vscode.WebviewViewProvider {
 
   public async fetchTowerData(): Promise<any> {
     const token = await this.getAccessToken();
-    console.log("🟣 token", token);
+    console.log("🟣 fetchTowerData", token);
     if (!token) {
       throw new Error("No token found");
     }
@@ -84,15 +85,32 @@ class Provider implements vscode.WebviewViewProvider {
     await vscode.commands.executeCommand("nextflow.login");
   }
 
-  private async getAuthState(): Promise<boolean> {
+  private async getAuthState(): Promise<{
+    hasToken: boolean;
+    tokenExpired: boolean;
+    tokenExpiry: number;
+    isAuthenticated: boolean;
+  }> {
     const token = await this.getAccessToken();
-    const isAuthenticated = !jwtExpired(token);
+    const hasToken = !!token;
+    let tokenExpired = false;
+    let tokenExpiry: any = 0;
+    if (hasToken) {
+      const decoded = jwtDecode(token);
+      tokenExpiry = decoded.exp;
+      tokenExpired = jwtExpired(token);
+    }
+    const isAuthenticated = hasToken && !tokenExpired;
     this._currentView?.webview.postMessage({
       viewType: this._type,
-      command: "setAuthState",
-      authState: isAuthenticated
+      authState: {
+        hasToken,
+        tokenExpired,
+        tokenExpiry,
+        isAuthenticated
+      }
     });
-    return isAuthenticated;
+    return { hasToken, tokenExpired, tokenExpiry, isAuthenticated };
   }
 
   private async initViewData(view: vscode.WebviewView) {
@@ -106,10 +124,10 @@ class Provider implements vscode.WebviewViewProvider {
       fileTree
     });
 
-    const authState = await this.getAuthState();
+    const { isAuthenticated } = await this.getAuthState();
 
     if (this._type === "userInfo") {
-      if (!authState) return;
+      if (!isAuthenticated) return;
       await this.fetchTowerData();
     }
   }

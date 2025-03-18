@@ -19,6 +19,13 @@ type Props = {
   vscode: any;
 };
 
+type AuthState = {
+  hasToken: boolean;
+  tokenExpired: boolean;
+  tokenExpiry: number;
+  isAuthenticated: boolean;
+};
+
 const TowerProvider: React.FC<Props> = ({ children, vscode }) => {
   const state = vscode.getState();
 
@@ -32,29 +39,27 @@ const TowerProvider: React.FC<Props> = ({ children, vscode }) => {
   );
   const [selectedOrg, setSelectedOrg] = useState<string>("");
 
-  const [isAuthenticated, setIsAuthenticated] = useState<boolean>(
-    state?.authState || false
-  );
-
   const [towerData, setTowerData] = useState<any>(state?.towerData || {});
   const { userInfo, workspaces, computeEnvs, organizations } = towerData;
+
+  const [authState, setAuthState] = useState<AuthState>(state?.authState || {});
+  const { hasToken, tokenExpired, tokenExpiry, isAuthenticated } = authState;
 
   useEffect(() => {
     vscode.setState({ towerData });
   }, [towerData]);
 
   useEffect(() => {
-    vscode.setState({ authState: isAuthenticated });
-  }, [isAuthenticated]);
+    vscode.setState({ authState });
+  }, [authState]);
 
   useEffect(() => {
     const handleMessage = (event: MessageEvent) => {
       const message = event.data;
-      const { towerData, authState, getAuthState } = message;
+      const { towerData, authState } = message;
       console.log(">> message", message);
-      if (authState) setIsAuthenticated(authState);
       if (towerData) setTowerData(towerData);
-      if (getAuthState) fetchAuthState();
+      if (authState) setAuthState(message.authState);
     };
     window.addEventListener("message", handleMessage);
     return () => window.removeEventListener("message", handleMessage);
@@ -65,6 +70,8 @@ const TowerProvider: React.FC<Props> = ({ children, vscode }) => {
   }, []);
 
   useEffect(() => {
+    // TODO: fix dupe calls
+    console.log("🟠 isAuthenticated", isAuthenticated);
     if (!isAuthenticated) {
       setTowerData({});
       return;
@@ -119,7 +126,11 @@ const TowerProvider: React.FC<Props> = ({ children, vscode }) => {
         setSelectedOrg,
         baseURL,
         apiURL,
-        refresh
+        refresh,
+        isAuthenticated,
+        hasToken,
+        tokenExpired,
+        tokenExpiry
       }}
     >
       {children}
@@ -151,6 +162,10 @@ type TowerContextType = {
   baseURL: string;
   apiURL: string;
   refresh: () => void;
+  isAuthenticated: boolean;
+  hasToken: boolean;
+  tokenExpired: boolean;
+  tokenExpiry: number;
 };
 
 const useTowerContext = () => {
