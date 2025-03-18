@@ -50,17 +50,18 @@ class Provider implements vscode.WebviewViewProvider {
     console.log("🟣 sessions", sessions);
     const session = sessions[0] as AuthenticationSession;
     const token = session?.accessToken;
+    console.log("🟣 token", token);
     if (!token) {
       throw new Error("No token found");
     }
-    const user = await fetchUserInfo(token);
-    if (!user) {
+    const userInfo = await fetchUserInfo(token);
+    if (!userInfo) {
       throw new Error("Could not fetch user info");
     }
-    const workspaces = await fetchWorkspaces(token, user.user.id);
-    const computeEnvs = await fetchComputeEnvs(token, user.user.id);
+    const workspaces = await fetchWorkspaces(token, userInfo.user.id);
+    const computeEnvs = await fetchComputeEnvs(token, userInfo.user.id);
     return {
-      user,
+      userInfo,
       workspaces,
       computeEnvs
     };

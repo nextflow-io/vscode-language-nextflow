@@ -39,15 +39,6 @@ const TowerProvider: React.FC<Props> = ({ children, vscode }) => {
   }, [towerData]);
 
   useEffect(() => {
-    vscode.setState({
-      workspaces,
-      computeEnvs,
-      organizations,
-      selectedOrg
-    });
-  }, [workspaces, computeEnvs, organizations, selectedOrg]);
-
-  useEffect(() => {
     const handleMessage = (event: MessageEvent) => {
       const message = event.data;
       console.log(">> message Tower", message);

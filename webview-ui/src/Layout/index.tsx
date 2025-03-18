@@ -14,6 +14,7 @@ const Layout = () => {
   let color = "#0dc09d";
   if (coverage < 80) color = "orange";
   if (coverage < 20) color = "red";
+  console.log("🟣 viewType", viewType);
 
   if (viewType === "userInfo") return <UserInfo />;
 

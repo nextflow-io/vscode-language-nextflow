@@ -9,12 +9,13 @@ const fetchUserInfo = async (token: string): Promise<UserInfo | null> => {
         Authorization: `Bearer ${token}`
       }
     });
-    console.log("🟣 fetchUserInfo 2 res", response.json());
     console.log("🟣 fetchUserInfo 2 token", token);
+    const res = await response.json();
+    console.log("🟣 fetchUserInfo 2 res", res);
     if (response.status === 401) {
       throw new Error("Unauthorized");
     }
-    return (await response.json()) as UserInfo;
+    return res as UserInfo;
   } catch (error) {
     console.error(error);
     return null;
