@@ -174,6 +174,11 @@
           ],
           "default": "v24.10",
           "markdownDescription": "Target version of Nextflow to be used by the language server."
+        },
+        "nextflow.telemetry.enabled": {
+          "type": "boolean",
+          "default": false,
+          "markdownDescription": "Enable usage data to be sent to Seqera. See the extension README for more information about what we do and do not collect."
         }
       }
     },
@@ -222,6 +227,7 @@
     "esbuild-plugin-copy": "^2.1.1",
     "mermaid": "^11.4.1",
     "node-fetch": "^3.3.2",
+    "posthog-node": "^4.4.1",
     "prettier": "3.5.2",
     "typescript": "^5.7.2",
     "vscode-jsonrpc": "^8.0.2",

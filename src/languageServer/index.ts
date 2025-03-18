@@ -10,6 +10,7 @@ import {
 
 import { buildMermaid } from "./utils/buildMermaid";
 import { findJava } from "./utils/findJava";
+import type { TrackEvent } from "../telemetry";
 
 const LABEL_RELOAD_WINDOW = "Reload Window";
 
@@ -252,7 +253,10 @@ export function stopLanguageServer(): Thenable<void> {
   return languageClient.stop();
 }
 
-export function activateLanguageServer(context: vscode.ExtensionContext) {
+export function activateLanguageServer(
+  context: vscode.ExtensionContext,
+  trackEvent: TrackEvent
+) {
   vscode.workspace.onDidChangeConfiguration((event: vscode.ConfigurationChangeEvent) => {
     if (event.affectsConfiguration("nextflow.java.home")) {
       restartLanguageServer(context);
@@ -274,6 +278,7 @@ export function activateLanguageServer(context: vscode.ExtensionContext) {
         vscode.window.showErrorMessage("Missing file URI.");
         return;
       }
+      trackEvent("openFileFromWebview");
       const uri = vscode.Uri.parse(uriString);
       await vscode.window.showTextDocument(uri, {
         viewColumn: vscode.ViewColumn.One

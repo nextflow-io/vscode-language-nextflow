@@ -80,3 +80,23 @@ See also:
 - https://code.visualstudio.com/docs/extensions/publish-extension
 - https://code.visualstudio.com/docs/extensions/yocode
 - https://code.visualstudio.com/docs/extensionAPI/extension-manifest
+
+## Telemetry notice
+
+We (Seqera) collect limited usage data through this extension to help us understand which features are most valuable and improve your overall experience.
+
+This telemetry is opt-in and can be enabled or disabled at any time by toggling "Nextflow > Telemetry: Enabled" in your VS Code settings.
+
+**Information we collect**
+
+- Commands: We track when you invoke a command provided by this extension (e.g. openChat, writeTest, etc.), but not the contents of that command (e.g. user-supplied arguments).
+- File events: We track when you open a Nextflow file, but not the file name or its contents.
+- Environment info: We collect your operating system type, VS Code version, and the extension version to help diagnose issues and guide future development.
+
+**Information we do not collect**
+
+- Chat contents: We do not collect any text you enter into the chat panel.
+- File contents: We do not collect any source code, file paths, or any other file contents.
+- Personal info: We do not collect project names, directory paths, or any personally identifiable information.
+
+If you have any questions or concerns, feel free to open an issue in our repository. We appreciate your trust and feedback!
