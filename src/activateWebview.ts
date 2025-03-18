@@ -19,13 +19,12 @@ export function activateWebview(context: vscode.ExtensionContext) {
   vscode.commands.registerCommand("nextflow.reloadWebView", () => {
     processesProvider.reloadView();
     workflowProvider.reloadView();
-    userInfoProvider.reloadView();
+    userInfoProvider.fetchTowerData();
   });
 
   vscode.workspace.onDidSaveTextDocument(() => {
     processesProvider.reloadView();
     workflowProvider.reloadView();
-    userInfoProvider.reloadView();
   });
 
   vscode.workspace.onDidChangeTextDocument((event) => {
@@ -35,13 +34,11 @@ export function activateWebview(context: vscode.ExtensionContext) {
     ) {
       processesProvider.reloadView();
       workflowProvider.reloadView();
-      userInfoProvider.reloadView();
     }
   });
 
   vscode.workspace.onDidDeleteFiles(() => {
     processesProvider.reloadView();
     workflowProvider.reloadView();
-    userInfoProvider.reloadView();
   });
 }

@@ -50,7 +50,7 @@ const TowerProvider: React.FC<Props> = ({ children, vscode }) => {
   useEffect(() => {
     const handleMessage = (event: MessageEvent) => {
       const message = event.data;
-      console.log(">> message", message);
+      console.log(">> message Tower", message);
       if (message.command === "setTowerData") {
         if (message.towerData) setTowerData(message.towerData);
       }

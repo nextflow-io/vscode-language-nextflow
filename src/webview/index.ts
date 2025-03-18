@@ -6,7 +6,7 @@ import buildTree from "./utils/buildTree";
 import { fetchUserInfo, fetchWorkspaces, fetchComputeEnvs } from "../tower";
 
 import { FileNode } from "./types";
-
+import { AuthenticationSession } from "vscode";
 class Provider implements vscode.WebviewViewProvider {
   private _currentView?: vscode.WebviewView;
   private _extensionUri: vscode.Uri;
@@ -43,19 +43,27 @@ class Provider implements vscode.WebviewViewProvider {
     });
   }
 
-  private async fetchTowerData() {
-    const token = await this._context.secrets.get("auth0.sessions");
-    console.log("🟣 token", token);
-    return;
-    // if (!token) {
-    //   throw new Error("No token found");
-    // }
-    // const user = await fetchUserInfo(token);
-    // if (!user) {
-    //   throw new Error("Could not fetch user info");
-    // }
-    // const workspaces = await fetchWorkspaces(token, user.user.id);
-    // const computeEnvs = await fetchComputeEnvs(token, user.user.id);
+  public async fetchTowerData(): Promise<any> {
+    console.log("🟣 fetchTowerData");
+    const sessionsValue = await this._context.secrets.get("auth0.sessions");
+    const sessions = sessionsValue ? JSON.parse(sessionsValue) : [];
+    console.log("🟣 sessions", sessions);
+    const session = sessions[0] as AuthenticationSession;
+    const token = session?.accessToken;
+    if (!token) {
+      throw new Error("No token found");
+    }
+    const user = await fetchUserInfo(token);
+    if (!user) {
+      throw new Error("Could not fetch user info");
+    }
+    const workspaces = await fetchWorkspaces(token, user.user.id);
+    const computeEnvs = await fetchComputeEnvs(token, user.user.id);
+    return {
+      user,
+      workspaces,
+      computeEnvs
+    };
   }
 
   private async login() {
@@ -63,19 +71,21 @@ class Provider implements vscode.WebviewViewProvider {
   }
 
   private async initViewData(view: vscode.WebviewView) {
-    let fileTree = {};
     if (["workflows", "processes"].includes(this._type)) {
-      fileTree = await buildTree();
+      const fileTree = await buildTree();
+      view.webview.postMessage({
+        command: "setViewData",
+        fileTree,
+        viewType: this._type
+      });
+    } else if (this._type === "userInfo") {
+      const towerData = await this.fetchTowerData();
+      view.webview.postMessage({
+        command: "setTowerData",
+        viewType: this._type,
+        towerData
+      });
     }
-
-    const session = await vscode.authentication.getSession("auth0", []);
-
-    view.webview.postMessage({
-      command: "setViewData",
-      fileTree,
-      viewType: this._type,
-      session
-    });
   }
 
   private initializeView(view: vscode.WebviewView) {

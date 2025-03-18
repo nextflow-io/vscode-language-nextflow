@@ -3,18 +3,17 @@ import type { AuthenticationSession } from "vscode";
 import { apiURL } from "./constants";
 
 const fetchWorkspaces = async (
-  session: AuthenticationSession | null,
+  token: string,
   userID: number
 ): Promise<Workspace[]> => {
-  if (!session) return [];
+  if (!token) return [];
   try {
-    const accessToken = session?.accessToken;
     const response = await fetch(`${apiURL}/user/${userID}/workspaces`, {
       credentials: "include",
       method: "GET",
       headers: new Headers({
         "Content-Type": "application/json",
-        Authorization: `Bearer ${accessToken}`
+        Authorization: `Bearer ${token}`
       })
     });
     const res = (await response.json()) as {
