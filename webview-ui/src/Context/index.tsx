@@ -10,18 +10,29 @@ type Props = {
   children: React.ReactNode;
 };
 
+export type AuthState = {
+  hasToken: boolean;
+  tokenExpired: boolean;
+  tokenExpiry: number;
+  isAuthenticated: boolean;
+};
+
 type viewID = "workflows" | "processes" | "userInfo" | null;
 
 const Context = ({ children }: Props) => {
   const state = vscode.getState();
   const [viewID, setViewID] = useState<viewID>(state?.viewID || null);
+  const [authState, setAuthState] = useState<AuthState>(state?.authState || {});
+
+  useEffect(() => {
+    vscode.setState({ authState });
+  }, [authState]);
 
   useEffect(() => {
     const handleMessage = (event: MessageEvent) => {
-      console.log("🟣 handleMessage", event.data);
-      if (viewID) return;
       const { data } = event;
       if (data.viewID) setViewID(data.viewID);
+      if (data.authState) setAuthState(data.authState);
     };
     window.addEventListener("message", handleMessage);
     return () => window.removeEventListener("message", handleMessage);
@@ -30,7 +41,9 @@ const Context = ({ children }: Props) => {
   return (
     <WorkspaceProvider vscode={vscode} viewID={viewID}>
       {viewID === "userInfo" ? (
-        <TowerProvider vscode={vscode}>{children}</TowerProvider>
+        <TowerProvider vscode={vscode} authState={authState}>
+          {children}
+        </TowerProvider>
       ) : (
         <>{children}</>
       )}

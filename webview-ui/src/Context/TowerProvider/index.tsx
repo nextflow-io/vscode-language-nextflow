@@ -11,19 +11,14 @@ import {
   Pipeline,
   FormData
 } from "./types";
+import { AuthState } from "..";
 
 const TowerContext = createContext<TowerContextType>(null as any);
 
 type Props = {
   children: React.ReactNode;
   vscode: any;
-};
-
-type AuthState = {
-  hasToken: boolean;
-  tokenExpired: boolean;
-  tokenExpiry: number;
-  isAuthenticated: boolean;
+  authState: AuthState;
 };
 
 type TowerData = {
@@ -63,7 +58,7 @@ type TowerContextType = {
   tokenExpiry: number;
 };
 
-const TowerProvider: React.FC<Props> = ({ children, vscode }) => {
+const TowerProvider: React.FC<Props> = ({ children, vscode, authState }) => {
   const state = vscode.getState();
 
   const [responseMessage, setResponseMessage] = useState<string | null>(null);
@@ -79,7 +74,6 @@ const TowerProvider: React.FC<Props> = ({ children, vscode }) => {
   const [towerData, setTowerData] = useState<TowerData>(state?.towerData || {});
   const { userInfo, workspaces, computeEnvs, organizations } = towerData;
 
-  const [authState, setAuthState] = useState<AuthState>(state?.authState || {});
   const { hasToken, tokenExpired, tokenExpiry, isAuthenticated } = authState;
 
   useEffect(() => {
@@ -87,16 +81,11 @@ const TowerProvider: React.FC<Props> = ({ children, vscode }) => {
   }, [towerData]);
 
   useEffect(() => {
-    vscode.setState({ authState });
-  }, [authState]);
-
-  useEffect(() => {
     const handleMessage = (event: MessageEvent) => {
       const message = event.data;
-      const { towerData, authState } = message;
+      const { towerData } = message;
       console.log(">> message", message);
       if (towerData) setTowerData(towerData);
-      if (authState) setAuthState(message.authState);
     };
     window.addEventListener("message", handleMessage);
     return () => window.removeEventListener("message", handleMessage);

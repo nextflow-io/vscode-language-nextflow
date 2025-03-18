@@ -5,16 +5,17 @@ import styles from "./styles.module.css";
 
 const UserInfo = () => {
   const { login } = useWorkspaceContext();
-  const { workspaces, userInfo, hasToken, tokenExpired, tokenExpiry } =
-    useTowerContext();
+  const { workspaces, userInfo, tokenExpiry, hasToken } = useTowerContext();
+  useTowerContext();
 
   console.log("🟣 UserInfo", {
     workspaces,
     userInfo,
-    hasToken,
-    tokenExpired,
     tokenExpiry
   });
+
+  let tokenExpired = false;
+  if (hasToken) tokenExpired = tokenExpiry < Date.now() / 1000;
 
   return (
     <div className={styles.userInfo}>
@@ -22,7 +23,14 @@ const UserInfo = () => {
         <div>
           {tokenExpired && (
             <div>
-              Token expired: {new Date(tokenExpiry * 1000).toLocaleString()}
+              Token expired:{" "}
+              {new Date(tokenExpiry * 1000).toLocaleString("en-US", {
+                month: "short",
+                day: "numeric",
+                hour: "numeric",
+                minute: "2-digit",
+                hour12: true
+              })}
             </div>
           )}
           <Button onClick={login}>Login to Seqera Platform</Button>
