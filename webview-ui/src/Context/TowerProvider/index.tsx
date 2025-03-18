@@ -26,6 +26,43 @@ type AuthState = {
   isAuthenticated: boolean;
 };
 
+type TowerData = {
+  userInfo?: UserInfo;
+  workspaces?: Workspace[];
+  computeEnvs?: ComputeEnv[];
+  organizations?: Workspace[];
+};
+
+type TowerContextType = {
+  responseMessage: string | null;
+  error: string | null;
+  setError: (n: string) => void;
+  isLoading: boolean;
+  isAdding: boolean;
+  setResponseMessage: (n: string) => void;
+  userInfo?: UserInfo;
+  addPipeline: (
+    pipeline: Pipeline,
+    formData: FormData
+  ) => Promise<PipelineResponse | undefined>;
+  selectedWorkspace: WorkspaceID;
+  setSelectedWorkspace: (n: WorkspaceID) => void;
+  selectedComputeEnv: string | null;
+  setSelectedComputeEnv: (n: string) => void;
+  computeEnvs?: ComputeEnv[];
+  workspaces?: Workspace[];
+  organizations?: Workspace[];
+  setSelectedOrg: (n: string) => void;
+  selectedOrg: string;
+  baseURL: string;
+  apiURL: string;
+  refresh: () => void;
+  isAuthenticated: boolean;
+  hasToken: boolean;
+  tokenExpired: boolean;
+  tokenExpiry: number;
+};
+
 const TowerProvider: React.FC<Props> = ({ children, vscode }) => {
   const state = vscode.getState();
 
@@ -39,7 +76,7 @@ const TowerProvider: React.FC<Props> = ({ children, vscode }) => {
   );
   const [selectedOrg, setSelectedOrg] = useState<string>("");
 
-  const [towerData, setTowerData] = useState<any>(state?.towerData || {});
+  const [towerData, setTowerData] = useState<TowerData>(state?.towerData || {});
   const { userInfo, workspaces, computeEnvs, organizations } = towerData;
 
   const [authState, setAuthState] = useState<AuthState>(state?.authState || {});
@@ -136,36 +173,6 @@ const TowerProvider: React.FC<Props> = ({ children, vscode }) => {
       {children}
     </TowerContext.Provider>
   );
-};
-
-type TowerContextType = {
-  responseMessage: string | null;
-  error: string | null;
-  setError: (n: string) => void;
-  isLoading: boolean;
-  isAdding: boolean;
-  setResponseMessage: (n: string) => void;
-  userInfo: UserInfo | null;
-  addPipeline: (
-    pipeline: Pipeline,
-    formData: FormData
-  ) => Promise<PipelineResponse | undefined>;
-  selectedWorkspace: WorkspaceID;
-  setSelectedWorkspace: (n: WorkspaceID) => void;
-  selectedComputeEnv: string | null;
-  setSelectedComputeEnv: (n: string) => void;
-  computeEnvs: ComputeEnv[];
-  workspaces: Workspace[];
-  organizations: Workspace[];
-  setSelectedOrg: (n: string) => void;
-  selectedOrg: string;
-  baseURL: string;
-  apiURL: string;
-  refresh: () => void;
-  isAuthenticated: boolean;
-  hasToken: boolean;
-  tokenExpired: boolean;
-  tokenExpiry: number;
 };
 
 const useTowerContext = () => {

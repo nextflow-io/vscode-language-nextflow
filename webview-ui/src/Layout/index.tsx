@@ -1,10 +1,11 @@
-import FileTree from "./FileTree";
 import { useWorkspaceContext } from "../Context";
-import styles from "./styles.module.css";
+import FileTree from "./FileTree";
 import UserInfo from "./UserInfo";
 
+import styles from "./styles.module.css";
+
 const Layout = () => {
-  const { viewType, files, testCount } = useWorkspaceContext();
+  const { viewID, files, testCount } = useWorkspaceContext();
   const processes = files.filter((f) => f.type === "process");
   const workflows = files.filter((f) => f.type === "workflow");
 
@@ -14,12 +15,12 @@ const Layout = () => {
   let color = "#0dc09d";
   if (coverage < 80) color = "orange";
   if (coverage < 20) color = "red";
-  console.log("🟣 viewType", viewType);
+  console.log("🟣 viewID", viewID);
 
-  if (viewType === "userInfo") return <UserInfo />;
+  if (viewID === "userInfo") return <UserInfo />;
 
-  if (viewType === "workflows") return <FileTree files={workflows} />;
-  if (viewType === "processes")
+  if (viewID === "workflows") return <FileTree files={workflows} />;
+  if (viewID === "processes")
     return (
       <div>
         <div className={styles.header}>

@@ -12,12 +12,10 @@ const WorkspaceContext = createContext<WorkspaceContextType>({
   selectedItems: [],
   selectItem: () => {},
   isSelected: () => false,
-  viewType: null,
+  viewID: null,
   testCount: 0,
   login: () => {}
 });
-
-type ViewType = "workflows" | "processes" | "userInfo" | null;
 
 interface WorkspaceContextType {
   files: FileNodeType[];
@@ -28,7 +26,7 @@ interface WorkspaceContextType {
   selectedItems: string[];
   selectItem: (name: string) => void;
   isSelected: (name: string) => boolean;
-  viewType: ViewType;
+  viewID: string | null;
   testCount: number;
   login: () => void;
 }
@@ -36,13 +34,13 @@ interface WorkspaceContextType {
 type Props = {
   children: React.ReactNode;
   vscode: any;
+  viewID: string | null;
 };
 
-const WorkspaceProvider = ({ children, vscode }: Props) => {
+const WorkspaceProvider = ({ children, vscode, viewID }: Props) => {
   const state = vscode.getState();
 
   const [testCount, setTestCount] = useState(0);
-  const [viewType, setViewType] = useState<ViewType>(state?.viewType || null);
   const [files, setFiles] = useState<FileNodeType[]>(state?.files || []);
   const [tests, setTests] = useState<FileNodeType[]>(state?.tests || []);
   const [selectedItems, setSelectedItems] = useState<string[]>(
@@ -73,7 +71,6 @@ const WorkspaceProvider = ({ children, vscode }: Props) => {
   useEffect(() => {
     const handleMessage = (event: MessageEvent) => {
       const message = event.data;
-      setViewType(message.viewType);
       if (message.command === "setViewData") {
         setFiles(sortFiles(message.fileTree?.files || []));
         setTests(sortFiles(message.fileTree?.tests || []));
@@ -123,9 +120,9 @@ const WorkspaceProvider = ({ children, vscode }: Props) => {
         selectedItems,
         selectItem,
         isSelected,
-        viewType,
         testCount,
-        login
+        login,
+        viewID
       }}
     >
       {children}

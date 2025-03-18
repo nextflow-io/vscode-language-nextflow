@@ -22,7 +22,7 @@ class Provider implements vscode.WebviewViewProvider {
   }
 
   public async resolveWebviewView(view: vscode.WebviewView): Promise<void> {
-    this.initializeView(view);
+    this.initHTML(view);
     await this.initViewData(view);
 
     view.webview.onDidReceiveMessage((message) => {
@@ -44,7 +44,6 @@ class Provider implements vscode.WebviewViewProvider {
 
     view.onDidChangeVisibility(() => {
       if (!view.visible) return;
-
       this.initViewData(view);
     });
   }
@@ -76,7 +75,7 @@ class Provider implements vscode.WebviewViewProvider {
     };
     this._currentView?.webview.postMessage({
       command: "setTowerData",
-      viewType: this._type,
+      viewID: this._type,
       towerData
     });
   }
@@ -101,8 +100,14 @@ class Provider implements vscode.WebviewViewProvider {
       tokenExpired = jwtExpired(token);
     }
     const isAuthenticated = hasToken && !tokenExpired;
+    console.log("🟣 getAuthState", {
+      hasToken,
+      tokenExpired,
+      tokenExpiry,
+      isAuthenticated
+    });
     this._currentView?.webview.postMessage({
-      viewType: this._type,
+      viewID: this._type,
       authState: {
         hasToken,
         tokenExpired,
@@ -120,7 +125,7 @@ class Provider implements vscode.WebviewViewProvider {
     }
     view.webview.postMessage({
       command: "setViewData",
-      viewType: this._type,
+      viewID: this._type,
       fileTree
     });
 
@@ -132,37 +137,12 @@ class Provider implements vscode.WebviewViewProvider {
     }
   }
 
-  private initializeView(view: vscode.WebviewView) {
-    this._currentView = view;
-
-    const distUri = this.getWebviewDistUri();
-
-    view.webview.options = {
-      enableScripts: true,
-      localResourceRoots: [distUri]
-    };
-
-    const html = this.getWebviewHtml(view);
-    view.webview.html = html;
-  }
-
   public async reloadView() {
     console.log("🟣 reloadView", this._currentView);
     if (!this._currentView) return;
-    const html = this.getWebviewHtml(this._currentView);
+    const html = this.getBuiltHTML(this._currentView);
     this._currentView.webview.html = html;
     await this.initViewData(this._currentView);
-  }
-
-  private getWebviewDistUri() {
-    return vscode.Uri.joinPath(this._extensionUri, "webview-ui", "dist");
-  }
-
-  private getWebviewHtml(view: vscode.WebviewView) {
-    const distUri = this.getWebviewDistUri();
-    let html = fs.readFileSync(path.join(distUri.fsPath, "index.html"), "utf8");
-    html = updateRefs(html, view.webview, distUri);
-    return html;
   }
 
   private async openFile(file: FileNode) {
@@ -170,6 +150,31 @@ class Provider implements vscode.WebviewViewProvider {
     await vscode.window.showTextDocument(doc, {
       selection: new vscode.Range(file.line || 0, 0, file.line || 0, 0)
     });
+  }
+
+  private initHTML(view: vscode.WebviewView) {
+    this._currentView = view;
+
+    const buildPath = this.getBuildPath();
+    const builtHTML = this.getBuiltHTML(view);
+
+    view.webview.options = {
+      enableScripts: true,
+      localResourceRoots: [buildPath]
+    };
+
+    view.webview.html = builtHTML;
+  }
+
+  private getBuildPath() {
+    return vscode.Uri.joinPath(this._extensionUri, "webview-ui", "dist");
+  }
+
+  private getBuiltHTML(view: vscode.WebviewView) {
+    const distUri = this.getBuildPath();
+    let html = fs.readFileSync(path.join(distUri.fsPath, "index.html"), "utf8");
+    html = updateRefs(html, view.webview, distUri);
+    return html;
   }
 }
 

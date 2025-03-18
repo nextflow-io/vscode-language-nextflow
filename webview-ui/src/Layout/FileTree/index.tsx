@@ -1,6 +1,8 @@
 import FileNode from "./FileNode";
-import { FileNode as FileNodeType } from "../Context/WorkspaceProvider/types";
+
 import styles from "./styles.module.css";
+
+import { FileNode as FileNodeType } from "../../Context/WorkspaceProvider/types";
 
 type Props = {
   files: FileNodeType[];

@@ -8,11 +8,25 @@ const UserInfo = () => {
   const { workspaces, userInfo, hasToken, tokenExpired, tokenExpiry } =
     useTowerContext();
 
-  console.log("🟣 userInfo", userInfo);
+  console.log("🟣 UserInfo", {
+    workspaces,
+    userInfo,
+    hasToken,
+    tokenExpired,
+    tokenExpiry
+  });
+
   return (
     <div className={styles.userInfo}>
       {!userInfo ? (
-        <Button onClick={login}>Login to Seqera Platform</Button>
+        <div>
+          {tokenExpired && (
+            <div>
+              Token expired: {new Date(tokenExpiry * 1000).toLocaleString()}
+            </div>
+          )}
+          <Button onClick={login}>Login to Seqera Platform</Button>
+        </div>
       ) : (
         <div>
           <div className={styles.userInfo}>
@@ -26,7 +40,7 @@ const UserInfo = () => {
           </div>
           <div>
             <p>Workspaces</p>
-            {workspaces.map((workspace) => (
+            {workspaces?.map((workspace) => (
               <div key={workspace.orgId}>{workspace.orgName}</div>
             ))}
           </div>

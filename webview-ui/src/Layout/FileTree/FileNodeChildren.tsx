@@ -1,5 +1,5 @@
 import styles from "./styles.module.css";
-import { useWorkspaceContext } from "../Context";
+import { useWorkspaceContext } from "../../Context";
 
 const FileNodeChildren = ({
   parent,
