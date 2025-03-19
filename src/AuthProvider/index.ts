@@ -224,7 +224,6 @@ class AuthProvider implements AuthenticationProvider, Disposable {
     };
 
   public setWebview(webview: any) {
-    console.log("🟣 setWebview", webview);
     this.webviewView = webview;
   }
 }

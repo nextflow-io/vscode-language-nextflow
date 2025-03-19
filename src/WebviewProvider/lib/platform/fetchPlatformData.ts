@@ -3,6 +3,7 @@ import getAccessToken from "./getAccessToken";
 import fetchUserInfo from "./utils/fetchUserInfo";
 import fetchWorkspaces from "./utils/fetchWorkspaces";
 import fetchComputeEnvs from "./utils/fetchComputeEnvs";
+import debounce from "../../../utils/debounce";
 
 const fetchPlatformData = async (
   context: ExtensionContext,
@@ -32,4 +33,6 @@ const fetchPlatformData = async (
   });
 };
 
-export default fetchPlatformData;
+const debouncedFetchPlatformData = debounce(fetchPlatformData, 100);
+
+export default debouncedFetchPlatformData;

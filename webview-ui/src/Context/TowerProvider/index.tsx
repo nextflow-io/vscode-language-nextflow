@@ -96,6 +96,7 @@ const TowerProvider: React.FC<Props> = ({ children, vscode, authState }) => {
     if (!isAuthenticated) {
       setPlatformData({});
     } else {
+      console.log("🟠 fetchPlatformData");
       fetchPlatformData();
     }
   }, [isAuthenticated]);

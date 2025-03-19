@@ -22,15 +22,17 @@ const getAuthState = async (
     tokenExpired = jwtExpired(token);
   }
   const isAuthenticated = hasToken && !tokenExpired;
-  view?.webview.postMessage({
-    viewID,
-    authState: {
-      hasToken,
-      tokenExpired,
-      tokenExpiry,
-      isAuthenticated
-    }
-  });
+  if (viewID === "userInfo") {
+    view?.webview.postMessage({
+      viewID,
+      authState: {
+        hasToken,
+        tokenExpired,
+        tokenExpiry,
+        isAuthenticated
+      }
+    });
+  }
   return { hasToken, tokenExpired, tokenExpiry, isAuthenticated };
 };
 

@@ -12,7 +12,7 @@ class WebviewProvider implements vscode.WebviewViewProvider {
 
   constructor(
     private readonly _context: vscode.ExtensionContext,
-    private readonly _type: "workflows" | "processes" | "userInfo",
+    private readonly viewID: "workflows" | "processes" | "userInfo",
     private readonly _authProvider?: AuthProvider
   ) {
     this._extensionUri = _context.extensionUri;
@@ -32,10 +32,10 @@ class WebviewProvider implements vscode.WebviewViewProvider {
           this.login();
           break;
         case "fetchPlatformData":
-          fetchPlatformData(this._context, this._type, this._currentView);
+          fetchPlatformData(this._context, this.viewID, this._currentView);
           break;
         case "getAuthState":
-          getAuthState(this._context, this._type, this._currentView);
+          getAuthState(this._context, this.viewID, this._currentView);
           break;
       }
     });
@@ -52,25 +52,35 @@ class WebviewProvider implements vscode.WebviewViewProvider {
 
   private async initViewData(view: vscode.WebviewView) {
     let fileTree;
-    if (["workflows", "processes"].includes(this._type)) {
+    let authState;
+
+    if (["workflows", "processes"].includes(this.viewID)) {
       fileTree = await buildTree();
+    } else if (this.viewID === "userInfo") {
+      authState = await getAuthState(
+        this._context,
+        this.viewID,
+        this._currentView
+      );
     }
+
     view.webview.postMessage({
       command: "setViewData",
-      viewID: this._type,
-      fileTree
+      viewID: this.viewID,
+      fileTree,
+      authState
     });
 
-    const { isAuthenticated } = await getAuthState(
-      this._context,
-      this._type,
-      this._currentView
-    );
+    // const { isAuthenticated } = await getAuthState(
+    //   this._context,
+    //   this.viewID,
+    //   this._currentView
+    // );
 
-    if (this._type === "userInfo") {
-      if (!isAuthenticated) return;
-      await fetchPlatformData(this._context, this._type, this._currentView);
-    }
+    // if (this.viewID === "userInfo") {
+    // if (!isAuthenticated) return;
+    // await fetchPlatformData(this._context, this.viewID, this._currentView);
+    // }
   }
 
   public async reloadView() {
