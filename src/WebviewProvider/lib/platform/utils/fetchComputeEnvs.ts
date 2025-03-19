@@ -3,9 +3,10 @@ import type { WorkspaceID, ComputeEnv } from "./types";
 
 const fetchComputeEnvs = async (
   token: string,
-  workspaceID: WorkspaceID
+  workspaceID?: WorkspaceID
 ): Promise<ComputeEnv[]> => {
   if (!token) return [];
+  if (!workspaceID) return [];
 
   const params = new URLSearchParams({
     workspaceId: `${workspaceID}`

@@ -52,23 +52,17 @@ class WebviewProvider implements vscode.WebviewViewProvider {
 
   private async initViewData(view: vscode.WebviewView) {
     let fileTree;
-    let authState;
 
     if (["workflows", "processes"].includes(this.viewID)) {
       fileTree = await buildTree();
     } else if (this.viewID === "userInfo") {
-      authState = await getAuthState(
-        this._context,
-        this.viewID,
-        this._currentView
-      );
+      await getAuthState(this._context, this.viewID, this._currentView);
     }
 
     view.webview.postMessage({
       command: "setViewData",
       viewID: this.viewID,
-      fileTree,
-      authState
+      fileTree
     });
 
     // const { isAuthenticated } = await getAuthState(

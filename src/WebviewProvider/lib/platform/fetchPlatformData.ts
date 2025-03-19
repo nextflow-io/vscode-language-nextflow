@@ -20,8 +20,11 @@ const fetchPlatformData = async (
     throw new Error("Could not fetch user info");
   }
   const workspaces = await fetchWorkspaces(token, userInfo.user.id);
-  const computeEnvs = await fetchComputeEnvs(token, userInfo.user.id);
-  const towerData = {
+  let computeEnvs;
+  if (workspaces.length) {
+    computeEnvs = await fetchComputeEnvs(token, workspaces[0].workspaceId);
+  }
+  const platformData = {
     userInfo,
     workspaces,
     computeEnvs
@@ -29,7 +32,7 @@ const fetchPlatformData = async (
   view?.webview.postMessage({
     command: "setPlatformData",
     viewID,
-    towerData
+    platformData
   });
 };
 

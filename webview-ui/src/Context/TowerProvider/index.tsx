@@ -21,7 +21,7 @@ type Props = {
   authState: AuthState;
 };
 
-type TowerData = {
+type PlatformData = {
   userInfo?: UserInfo;
   workspaces?: Workspace[];
   computeEnvs?: ComputeEnv[];
@@ -71,22 +71,22 @@ const TowerProvider: React.FC<Props> = ({ children, vscode, authState }) => {
   );
   const [selectedOrg, setSelectedOrg] = useState<string>("");
 
-  const [towerData, setPlatformData] = useState<TowerData>(
-    state?.towerData || {}
+  const [platformData, setPlatformData] = useState<PlatformData>(
+    state?.platformData || {}
   );
-  const { userInfo, workspaces, computeEnvs, organizations } = towerData;
+  const { userInfo, workspaces, computeEnvs, organizations } = platformData;
 
   const { hasToken, tokenExpired, tokenExpiry, isAuthenticated } = authState;
 
   useEffect(() => {
-    vscode.setState({ towerData });
-  }, [towerData]);
+    vscode.setState({ platformData });
+  }, [platformData]);
 
   useEffect(() => {
     const handleMessage = (event: MessageEvent) => {
       const message = event.data;
-      const { towerData } = message;
-      if (towerData) setPlatformData(towerData);
+      const { platformData } = message;
+      if (platformData) setPlatformData(platformData);
     };
     window.addEventListener("message", handleMessage);
     return () => window.removeEventListener("message", handleMessage);
@@ -94,9 +94,8 @@ const TowerProvider: React.FC<Props> = ({ children, vscode, authState }) => {
 
   useEffect(() => {
     if (!isAuthenticated) {
-      setPlatformData({});
+      // setPlatformData({});
     } else {
-      console.log("🟠 fetchPlatformData");
       fetchPlatformData();
     }
   }, [isAuthenticated]);
