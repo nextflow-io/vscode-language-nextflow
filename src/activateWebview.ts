@@ -1,10 +1,18 @@
 import * as vscode from "vscode";
-import WebviewProvider from "./webview";
+import WebviewProvider from "./WebviewProvider";
+import AuthProvider from "./AuthProvider";
 
-export function activateWebview(context: vscode.ExtensionContext) {
+export function activateWebview(
+  context: vscode.ExtensionContext,
+  authProvider: AuthProvider
+) {
   const workflowProvider = new WebviewProvider(context, "workflows");
   const processesProvider = new WebviewProvider(context, "processes");
-  const userInfoProvider = new WebviewProvider(context, "userInfo");
+  const userInfoProvider = new WebviewProvider(
+    context,
+    "userInfo",
+    authProvider
+  );
 
   const providers = [
     vscode.window.registerWebviewViewProvider("workflows", workflowProvider),

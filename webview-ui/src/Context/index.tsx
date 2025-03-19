@@ -11,10 +11,10 @@ type Props = {
 };
 
 export type AuthState = {
-  hasToken: boolean;
-  tokenExpired: boolean;
-  tokenExpiry: number;
-  isAuthenticated: boolean;
+  hasToken?: boolean;
+  tokenExpired?: boolean;
+  tokenExpiry?: number;
+  isAuthenticated?: boolean;
 };
 
 type viewID = "workflows" | "processes" | "userInfo" | null;
@@ -30,6 +30,7 @@ const Context = ({ children }: Props) => {
 
   useEffect(() => {
     const handleMessage = (event: MessageEvent) => {
+      console.log("🟠 handleMessage", event.data);
       const { data } = event;
       if (data.viewID) setViewID(data.viewID);
       if (data.authState) setAuthState(data.authState);

@@ -8,4 +8,8 @@ function jwtExpired(token: string | null): boolean {
   return decoded.exp < currentTime;
 }
 
-export default jwtExpired;
+function decodeJWT(token: string): any {
+  return jwtDecode(token);
+}
+
+export { jwtExpired, decodeJWT };

@@ -52,10 +52,10 @@ type TowerContextType = {
   baseURL: string;
   apiURL: string;
   refresh: () => void;
-  isAuthenticated: boolean;
-  hasToken: boolean;
-  tokenExpired: boolean;
-  tokenExpiry: number;
+  isAuthenticated?: boolean;
+  hasToken?: boolean;
+  tokenExpired?: boolean;
+  tokenExpiry?: number;
 };
 
 const TowerProvider: React.FC<Props> = ({ children, vscode, authState }) => {
@@ -86,7 +86,6 @@ const TowerProvider: React.FC<Props> = ({ children, vscode, authState }) => {
     const handleMessage = (event: MessageEvent) => {
       const message = event.data;
       const { towerData } = message;
-      console.log(">> message", message);
       if (towerData) setPlatformData(towerData);
     };
     window.addEventListener("message", handleMessage);
@@ -94,12 +93,11 @@ const TowerProvider: React.FC<Props> = ({ children, vscode, authState }) => {
   }, []);
 
   useEffect(() => {
-    // TODO: Use for refresh
     if (!isAuthenticated) {
       setPlatformData({});
-      return;
+    } else {
+      fetchPlatformData();
     }
-    fetchPlatformData();
   }, [isAuthenticated]);
 
   function fetchPlatformData() {

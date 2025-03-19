@@ -3,21 +3,23 @@ import * as fs from "fs";
 import * as path from "path";
 
 import { buildTree, fetchPlatformData, getAuthState } from "./lib";
-
+import AuthProvider from "../AuthProvider";
 import { FileNode } from "./lib/workspace/types";
 
-class Provider implements vscode.WebviewViewProvider {
-  private _currentView?: vscode.WebviewView;
+class WebviewProvider implements vscode.WebviewViewProvider {
+  _currentView?: vscode.WebviewView;
   private _extensionUri: vscode.Uri;
 
   constructor(
     private readonly _context: vscode.ExtensionContext,
-    private readonly _type: "workflows" | "processes" | "userInfo"
+    private readonly _type: "workflows" | "processes" | "userInfo",
+    private readonly _authProvider?: AuthProvider
   ) {
     this._extensionUri = _context.extensionUri;
   }
 
   public async resolveWebviewView(view: vscode.WebviewView): Promise<void> {
+    this._authProvider?.setWebview(view.webview);
     this.initHTML(view);
     await this.initViewData(view);
 
@@ -121,4 +123,4 @@ const updateRefs = (
     `$1${webview.asWebviewUri(vscode.Uri.joinPath(distUri, "assets"))}/`
   );
 
-export default Provider;
+export default WebviewProvider;

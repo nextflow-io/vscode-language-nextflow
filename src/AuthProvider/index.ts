@@ -18,7 +18,8 @@ import type {
   AuthenticationSession,
   ExtensionContext
 } from "vscode";
-import { fetchUserInfo } from "../webview/lib";
+import { fetchUserInfo } from "../WebviewProvider/lib";
+import { decodeJWT, jwtExpired } from "./utils/jwt";
 
 type ExchangePromise = {
   promise: Promise<string>;
@@ -37,6 +38,7 @@ class AuthProvider implements AuthenticationProvider, Disposable {
   private currentInstance: Disposable;
   private pendingIDs: string[] = []; // TODO: Does this do anything?
   private promises = new Map<string, ExchangePromise>();
+  private webviewView?: any;
 
   constructor(private readonly context: ExtensionContext) {
     const { registerAuthenticationProvider: register } = vscodeAuth;
@@ -92,6 +94,19 @@ class AuthProvider implements AuthenticationProvider, Disposable {
         JSON.stringify([session])
       );
 
+      const hasToken = !!token;
+      const decoded = decodeJWT(token);
+      const tokenExpired = jwtExpired(token);
+
+      this.webviewView?.postMessage({
+        authState: {
+          hasToken,
+          tokenExpired,
+          tokenExpiry: decoded.exp,
+          isAuthenticated: hasToken && !tokenExpired
+        }
+      });
+
       this.eventEmitter.fire({
         added: [session],
         removed: [],
@@ -117,6 +132,8 @@ class AuthProvider implements AuthenticationProvider, Disposable {
       STORAGE_KEY_NAME,
       JSON.stringify(sessions)
     );
+
+    this.webviewView?.postMessage({ authState: {} });
 
     if (session) {
       this.eventEmitter.fire({
@@ -205,6 +222,11 @@ class AuthProvider implements AuthenticationProvider, Disposable {
 
       resolve(accessToken);
     };
+
+  public setWebview(webview: any) {
+    console.log("🟣 setWebview", webview);
+    this.webviewView = webview;
+  }
 }
 
 export default AuthProvider;

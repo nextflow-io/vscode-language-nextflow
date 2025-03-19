@@ -1,7 +1,6 @@
 import { ExtensionContext, WebviewView } from "vscode";
 import { getAccessToken } from "..";
-import jwtExpired from "../../../AuthProvider/utils/jwtExpired";
-import { jwtDecode } from "jwt-decode";
+import { jwtExpired, decodeJWT } from "../../../AuthProvider/utils/jwt";
 
 const getAuthState = async (
   context: ExtensionContext,
@@ -18,7 +17,7 @@ const getAuthState = async (
   let tokenExpired = false;
   let tokenExpiry: any = 0;
   if (typeof token === "string") {
-    const decoded = jwtDecode(token);
+    const decoded = decodeJWT(token);
     tokenExpiry = decoded.exp;
     tokenExpired = jwtExpired(token);
   }

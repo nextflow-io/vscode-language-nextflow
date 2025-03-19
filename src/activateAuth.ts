@@ -5,9 +5,10 @@ import AuthProvider from "./AuthProvider";
 
 import type { ExtensionContext } from "vscode";
 
-export async function activateAuth(context: ExtensionContext) {
-  const authProvider = new AuthProvider(context);
-
+export async function activateAuth(
+  context: ExtensionContext,
+  authProvider: AuthProvider
+) {
   const handleLogin = async () =>
     await getSession("auth0", [], {
       forceNewSession: true
