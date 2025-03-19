@@ -7,8 +7,8 @@ import { fetchUserInfo, fetchWorkspaces, fetchComputeEnvs } from "../tower";
 
 import { FileNode } from "./types";
 import { AuthenticationSession } from "vscode";
-import { STORAGE_KEY_NAME } from "../auth/AuthProvider";
-import jwtExpired from "../auth/utils/jwtExpired";
+import { STORAGE_KEY_NAME } from "../AuthProvider";
+import jwtExpired from "../AuthProvider/utils/jwtExpired";
 import { jwtDecode } from "jwt-decode";
 class Provider implements vscode.WebviewViewProvider {
   private _currentView?: vscode.WebviewView;

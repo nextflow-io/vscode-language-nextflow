@@ -92,23 +92,13 @@ const TowerProvider: React.FC<Props> = ({ children, vscode, authState }) => {
   }, []);
 
   useEffect(() => {
-    fetchAuthState();
-  }, []);
-
-  useEffect(() => {
-    // TODO: fix dupe calls
-    console.log("🟠 isAuthenticated", isAuthenticated);
+    // TODO: Use for refresh
     if (!isAuthenticated) {
       setTowerData({});
       return;
     }
     fetchTowerData();
   }, [isAuthenticated]);
-
-  function fetchAuthState() {
-    console.log("🟠 fetchAuthState");
-    vscode.postMessage({ command: "fetchAuthState" });
-  }
 
   function fetchTowerData() {
     vscode.postMessage({ command: "fetchTowerData" });
