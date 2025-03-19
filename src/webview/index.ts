@@ -2,14 +2,10 @@ import * as vscode from "vscode";
 import * as fs from "fs";
 import * as path from "path";
 
-import buildTree from "./utils/buildTree";
-import { fetchUserInfo, fetchWorkspaces, fetchComputeEnvs } from "../tower";
+import { buildTree, fetchPlatformData, getAuthState } from "./lib";
 
-import { FileNode } from "./types";
-import { AuthenticationSession } from "vscode";
-import { STORAGE_KEY_NAME } from "../AuthProvider";
-import jwtExpired from "../AuthProvider/utils/jwtExpired";
-import { jwtDecode } from "jwt-decode";
+import { FileNode } from "./lib/workspace/types";
+
 class Provider implements vscode.WebviewViewProvider {
   private _currentView?: vscode.WebviewView;
   private _extensionUri: vscode.Uri;
@@ -33,11 +29,11 @@ class Provider implements vscode.WebviewViewProvider {
         case "login":
           this.login();
           break;
-        case "fetchTowerData":
-          this.fetchTowerData();
+        case "fetchPlatformData":
+          fetchPlatformData(this._context, this._type, this._currentView);
           break;
         case "getAuthState":
-          this.getAuthState();
+          getAuthState(this._context, this._type, this._currentView);
           break;
       }
     });
@@ -48,74 +44,8 @@ class Provider implements vscode.WebviewViewProvider {
     });
   }
 
-  private async getAccessToken(): Promise<string | null> {
-    const sessionsStr = await this._context.secrets.get(STORAGE_KEY_NAME);
-    const sessions = sessionsStr ? JSON.parse(sessionsStr) : [];
-    const session = sessions[0] as AuthenticationSession;
-    const token = session?.accessToken;
-    return token;
-  }
-
-  public async fetchTowerData(): Promise<any> {
-    const token = await this.getAccessToken();
-    console.log("🟣 fetchTowerData", token);
-    if (!token) {
-      throw new Error("No token found");
-    }
-    const userInfo = await fetchUserInfo(token);
-    if (!userInfo) {
-      throw new Error("Could not fetch user info");
-    }
-    const workspaces = await fetchWorkspaces(token, userInfo.user.id);
-    const computeEnvs = await fetchComputeEnvs(token, userInfo.user.id);
-    const towerData = {
-      userInfo,
-      workspaces,
-      computeEnvs
-    };
-    this._currentView?.webview.postMessage({
-      command: "setTowerData",
-      viewID: this._type,
-      towerData
-    });
-  }
-
   private async login() {
     await vscode.commands.executeCommand("nextflow.login");
-  }
-
-  private async getAuthState(): Promise<{
-    hasToken: boolean;
-    tokenExpired: boolean;
-    tokenExpiry: number;
-    isAuthenticated: boolean;
-  }> {
-    const token = await this.getAccessToken();
-    const hasToken = !!token;
-    let tokenExpired = false;
-    let tokenExpiry: any = 0;
-    if (hasToken) {
-      const decoded = jwtDecode(token);
-      tokenExpiry = decoded.exp;
-      tokenExpired = jwtExpired(token);
-    }
-    const isAuthenticated = hasToken && !tokenExpired;
-    console.log("🟣 getAuthState", {
-      hasToken,
-      tokenExpired,
-      tokenExpiry,
-      isAuthenticated
-    });
-    this._currentView?.webview.postMessage({
-      viewID: this._type,
-      authState: {
-        hasToken,
-        tokenExpired,
-        tokenExpiry,
-        isAuthenticated
-      }
-    });
-    return { hasToken, tokenExpired, tokenExpiry, isAuthenticated };
   }
 
   private async initViewData(view: vscode.WebviewView) {
@@ -129,16 +59,19 @@ class Provider implements vscode.WebviewViewProvider {
       fileTree
     });
 
-    const { isAuthenticated } = await this.getAuthState();
+    const { isAuthenticated } = await getAuthState(
+      this._context,
+      this._type,
+      this._currentView
+    );
 
     if (this._type === "userInfo") {
       if (!isAuthenticated) return;
-      await this.fetchTowerData();
+      await fetchPlatformData(this._context, this._type, this._currentView);
     }
   }
 
   public async reloadView() {
-    console.log("🟣 reloadView", this._currentView);
     if (!this._currentView) return;
     const html = this.getBuiltHTML(this._currentView);
     this._currentView.webview.html = html;

@@ -1,4 +1,4 @@
-import { FileInfo } from "../types";
+import { FileInfo } from "./types";
 
 export function getImports(content: string): string[] {
   const rx =

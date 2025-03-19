@@ -18,7 +18,7 @@ import type {
   AuthenticationSession,
   ExtensionContext
 } from "vscode";
-import { fetchUserInfo } from "../tower";
+import { fetchUserInfo } from "../webview/lib";
 
 type ExchangePromise = {
   promise: Promise<string>;

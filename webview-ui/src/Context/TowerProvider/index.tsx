@@ -71,7 +71,9 @@ const TowerProvider: React.FC<Props> = ({ children, vscode, authState }) => {
   );
   const [selectedOrg, setSelectedOrg] = useState<string>("");
 
-  const [towerData, setTowerData] = useState<TowerData>(state?.towerData || {});
+  const [towerData, setPlatformData] = useState<TowerData>(
+    state?.towerData || {}
+  );
   const { userInfo, workspaces, computeEnvs, organizations } = towerData;
 
   const { hasToken, tokenExpired, tokenExpiry, isAuthenticated } = authState;
@@ -85,7 +87,7 @@ const TowerProvider: React.FC<Props> = ({ children, vscode, authState }) => {
       const message = event.data;
       const { towerData } = message;
       console.log(">> message", message);
-      if (towerData) setTowerData(towerData);
+      if (towerData) setPlatformData(towerData);
     };
     window.addEventListener("message", handleMessage);
     return () => window.removeEventListener("message", handleMessage);
@@ -94,14 +96,14 @@ const TowerProvider: React.FC<Props> = ({ children, vscode, authState }) => {
   useEffect(() => {
     // TODO: Use for refresh
     if (!isAuthenticated) {
-      setTowerData({});
+      setPlatformData({});
       return;
     }
-    fetchTowerData();
+    fetchPlatformData();
   }, [isAuthenticated]);
 
-  function fetchTowerData() {
-    vscode.postMessage({ command: "fetchTowerData" });
+  function fetchPlatformData() {
+    vscode.postMessage({ command: "fetchPlatformData" });
   }
 
   function handleAddPipeline(
