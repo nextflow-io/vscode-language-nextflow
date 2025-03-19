@@ -435,7 +435,7 @@ Nextflow Runtime:
 Error: Nextflow Binary not found. Please check if Nextflow is in a directory accessible by your $PATH variable or set $NEXTFLOW_HOME.
 \`\`\`
 
-To solve this issue you have two possibilites:
+To solve this issue you have two possibilities:
 
 1. Move your Nextflow binary to a directory accessible by your $PATH variable.
 2. Set the environment variable NEXTFLOW_HOME to the directory that contains the Nextflow binary.

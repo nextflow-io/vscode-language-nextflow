@@ -15,7 +15,7 @@ See also:
 
 ![nextflow vscode extension](images/vscode-nextflow.png)
 
-The extension uses the [Nextflow langauge server](https://github.com/nextflow-io/language-server) to provide code intelligence:
+The extension uses the [Nextflow language server](https://github.com/nextflow-io/language-server) to provide code intelligence:
 
 - Syntax highlighting
 - Code navigation (outline, go to definition, find references)

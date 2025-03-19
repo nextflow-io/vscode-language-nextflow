@@ -93,7 +93,7 @@ function createTrackEvent(context: vscode.ExtensionContext) {
       posthogClient = new PostHog(POSTHOG_API_KEY, { host: POSTHOG_API_HOST });
     }
 
-    // send telemtry event
+    // send telemetry event
     try {
       posthogClient.capture({
         distinctId: getUserId(context),
