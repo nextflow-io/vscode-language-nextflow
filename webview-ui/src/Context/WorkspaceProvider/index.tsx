@@ -71,9 +71,10 @@ const WorkspaceProvider = ({ children, vscode, viewID }: Props) => {
   useEffect(() => {
     const handleMessage = (event: MessageEvent) => {
       const message = event.data;
-      if (message.command === "setViewData") {
-        setFiles(sortFiles(message.fileTree?.files || []));
-        setTests(sortFiles(message.fileTree?.tests || []));
+      if (message.fileTree) {
+        const { files, tests } = message.fileTree;
+        setFiles(sortFiles(files || []));
+        setTests(sortFiles(tests || []));
       }
     };
     window.addEventListener("message", handleMessage);

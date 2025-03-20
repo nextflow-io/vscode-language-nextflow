@@ -1,13 +1,14 @@
 import type { Workspace } from "./types";
-import { apiURL } from "./constants";
+import { API_URL } from "../../../../constants";
 
 const fetchWorkspaces = async (
   token: string,
   userID: number
 ): Promise<Workspace[]> => {
+  console.log("🟣 fetchWorkspaces", token, userID);
   if (!token) return [];
   try {
-    const response = await fetch(`${apiURL}/user/${userID}/workspaces`, {
+    const response = await fetch(`${API_URL}/user/${userID}/workspaces`, {
       credentials: "include",
       method: "GET",
       headers: new Headers({

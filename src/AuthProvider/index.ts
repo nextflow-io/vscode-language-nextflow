@@ -1,3 +1,4 @@
+import { v4 as uuid } from "uuid";
 import {
   authentication as vscodeAuth,
   env,
@@ -7,10 +8,12 @@ import {
   ProgressLocation,
   Uri
 } from "vscode";
-import { v4 as uuid } from "uuid";
 
 import { PromiseAdapter, promiseFromEvent } from "./utils/promiseFromEvent";
 import UriEventHandler from "./utils/UriEventHandler";
+import { fetchUserInfo } from "../WebviewProvider/lib";
+import { decodeJWT, jwtExpired } from "./utils/jwt";
+import { PLATFORM_URL } from "../constants";
 
 import type {
   AuthenticationProvider,
@@ -18,8 +21,6 @@ import type {
   AuthenticationSession,
   ExtensionContext
 } from "vscode";
-import { fetchUserInfo } from "../WebviewProvider/lib";
-import { decodeJWT, jwtExpired } from "./utils/jwt";
 
 type ExchangePromise = {
   promise: Promise<string>;
@@ -28,8 +29,7 @@ type ExchangePromise = {
 
 const TYPE = `auth0`;
 const NAME = `Seqera Platform`;
-const API_DOMAIN = `https://dev-tower.net`;
-const AUTH_ENDPOINT = `${API_DOMAIN}/oauth/login/auth0?source=vscode`;
+const AUTH_ENDPOINT = `${PLATFORM_URL}/oauth/login/auth0?source=vscode`;
 export const STORAGE_KEY_NAME = `${TYPE}.sessions`;
 
 class AuthProvider implements AuthenticationProvider, Disposable {
@@ -73,8 +73,22 @@ class AuthProvider implements AuthenticationProvider, Disposable {
         throw new Error(`Platform login failure`);
       }
 
-      const userInfo = await fetchUserInfo(token);
-      const user = userInfo?.user;
+      const userInfoResponse = await fetchUserInfo(token);
+      const user = userInfoResponse?.user;
+      const hasToken = !!token;
+      const decoded = decodeJWT(token);
+      const tokenExpired = jwtExpired(token);
+
+      this.webviewView?.postMessage({
+        authState: {
+          hasToken,
+          tokenExpired,
+          tokenExpiry: decoded.exp,
+          isAuthenticated: hasToken && !tokenExpired,
+          error: userInfoResponse?.message
+        }
+      });
+
       if (!user) {
         throw new Error(`Failed to fetch user info`);
       }
@@ -93,19 +107,6 @@ class AuthProvider implements AuthenticationProvider, Disposable {
         STORAGE_KEY_NAME,
         JSON.stringify([session])
       );
-
-      const hasToken = !!token;
-      const decoded = decodeJWT(token);
-      const tokenExpired = jwtExpired(token);
-
-      this.webviewView?.postMessage({
-        authState: {
-          hasToken,
-          tokenExpired,
-          tokenExpiry: decoded.exp,
-          isAuthenticated: hasToken && !tokenExpired
-        }
-      });
 
       this.eventEmitter.fire({
         added: [session],
@@ -213,7 +214,6 @@ class AuthProvider implements AuthenticationProvider, Disposable {
     (scopes) => async (uri, resolve, reject) => {
       const query = new URLSearchParams(uri.fragment);
       const accessToken = query.get("access_token");
-      console.log("🟣 handleUri", accessToken);
 
       if (!accessToken) {
         reject(new Error("No token"));

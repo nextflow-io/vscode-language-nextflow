@@ -1,7 +1,5 @@
 import { createContext, useContext, useEffect, useState } from "react";
 
-import { baseURL, apiURL } from "./constants";
-
 import {
   WorkspaceID,
   Workspace,
@@ -30,8 +28,7 @@ type PlatformData = {
 
 type TowerContextType = {
   responseMessage: string | null;
-  error: string | null;
-  setError: (n: string) => void;
+  error?: string | null;
   isLoading: boolean;
   isAdding: boolean;
   setResponseMessage: (n: string) => void;
@@ -49,8 +46,6 @@ type TowerContextType = {
   organizations?: Workspace[];
   setSelectedOrg: (n: string) => void;
   selectedOrg: string;
-  baseURL: string;
-  apiURL: string;
   refresh: () => void;
   isAuthenticated?: boolean;
   hasToken?: boolean;
@@ -62,7 +57,6 @@ const TowerProvider: React.FC<Props> = ({ children, vscode, authState }) => {
   const state = vscode.getState();
 
   const [responseMessage, setResponseMessage] = useState<string | null>(null);
-  const [error, setError] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [isAdding, setIsAdding] = useState<boolean>(false);
   const [selectedWorkspace, setSelectedWorkspace] = useState<WorkspaceID>(null);
@@ -76,7 +70,8 @@ const TowerProvider: React.FC<Props> = ({ children, vscode, authState }) => {
   );
   const { userInfo, workspaces, computeEnvs, organizations } = platformData;
 
-  const { hasToken, tokenExpired, tokenExpiry, isAuthenticated } = authState;
+  const { hasToken, tokenExpired, tokenExpiry, isAuthenticated, error } =
+    authState;
 
   useEffect(() => {
     vscode.setState({ platformData });
@@ -93,16 +88,14 @@ const TowerProvider: React.FC<Props> = ({ children, vscode, authState }) => {
   }, []);
 
   useEffect(() => {
-    if (!isAuthenticated) {
-      // setPlatformData({});
-    } else {
-      fetchPlatformData();
-    }
+    if (!isAuthenticated) return;
+    // console.log("🟠 fetchPlatformData");
+    // fetchPlatformData();
   }, [isAuthenticated]);
 
-  function fetchPlatformData() {
-    vscode.postMessage({ command: "fetchPlatformData" });
-  }
+  // function fetchPlatformData() {
+  //   vscode.postMessage({ command: "fetchPlatformData" });
+  // }
 
   function handleAddPipeline(
     pipeline: Pipeline,
@@ -116,7 +109,6 @@ const TowerProvider: React.FC<Props> = ({ children, vscode, authState }) => {
   function refresh() {
     setIsLoading(true);
     setIsAdding(false);
-    setError(null);
     setResponseMessage(null);
   }
 
@@ -126,7 +118,6 @@ const TowerProvider: React.FC<Props> = ({ children, vscode, authState }) => {
         responseMessage,
         setResponseMessage,
         error,
-        setError,
         isLoading,
         isAdding,
         userInfo,
@@ -140,8 +131,6 @@ const TowerProvider: React.FC<Props> = ({ children, vscode, authState }) => {
         organizations,
         selectedOrg,
         setSelectedOrg,
-        baseURL,
-        apiURL,
         refresh,
         isAuthenticated,
         hasToken,

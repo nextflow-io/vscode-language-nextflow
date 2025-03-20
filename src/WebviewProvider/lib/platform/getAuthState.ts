@@ -24,6 +24,7 @@ const getAuthState = async (
   const isAuthenticated = hasToken && !tokenExpired;
   if (viewID === "userInfo") {
     view?.webview.postMessage({
+      viewID,
       authState: {
         hasToken,
         tokenExpired,

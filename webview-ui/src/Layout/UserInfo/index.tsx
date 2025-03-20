@@ -6,7 +6,7 @@ import { formatTime } from "./utils";
 import styles from "./styles.module.css";
 const UserInfo = () => {
   const { login } = useWorkspaceContext();
-  const { workspaces, userInfo, tokenExpiry, hasToken, computeEnvs } =
+  const { workspaces, userInfo, tokenExpiry, hasToken, computeEnvs, error } =
     useTowerContext();
 
   let tokenExpired = false;
@@ -16,11 +16,27 @@ const UserInfo = () => {
     <>
       {!userInfo ? (
         <div className={clsx(styles.section, styles.centered)}>
-          {tokenExpired && <div>Token expired: {formatTime(tokenExpiry)}</div>}
-          <Button onClick={login}>Login to Seqera Platform</Button>
+          <div>
+            {error && (
+              <div>
+                <p>Error: {error}</p>
+              </div>
+            )}
+            {tokenExpired && (
+              <div>
+                <p>Token expired: {formatTime(tokenExpiry)}</p>
+              </div>
+            )}
+            <Button onClick={login}>Login to Seqera Platform</Button>
+          </div>
         </div>
       ) : (
         <div>
+          {error && (
+            <div className={styles.section}>
+              <p>Error:{error}</p>
+            </div>
+          )}
           <div className={styles.section}>
             User: {userInfo.user.userName}
             <br />

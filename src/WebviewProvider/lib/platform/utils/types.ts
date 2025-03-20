@@ -92,11 +92,13 @@ export type User = {
 };
 
 export type UserInfo = {
-  user: User;
-  needConsent: boolean;
-  defaultWorkspaceId: number;
-  enforceMessageLimit: boolean;
+  user?: User;
+  needConsent?: boolean;
+  defaultWorkspaceId?: number;
+  enforceMessageLimit?: boolean;
 };
+
+export type UserInfoResponse = UserInfo & { message?: string };
 
 export type FormData = {
   name: string;

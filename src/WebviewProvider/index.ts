@@ -34,7 +34,7 @@ class WebviewProvider implements vscode.WebviewViewProvider {
         case "fetchPlatformData":
           fetchPlatformData(this._context, this.viewID, this._currentView);
           break;
-        case "getAuthState":
+        case "getAuthState": // rm
           getAuthState(this._context, this.viewID, this._currentView);
           break;
       }
@@ -51,30 +51,17 @@ class WebviewProvider implements vscode.WebviewViewProvider {
   }
 
   private async initViewData(view: vscode.WebviewView) {
-    let fileTree;
-
-    if (["workflows", "processes"].includes(this.viewID)) {
-      fileTree = await buildTree();
-    } else if (this.viewID === "userInfo") {
-      await getAuthState(this._context, this.viewID, this._currentView);
+    const { viewID, _currentView, _context } = this;
+    if (viewID === "userInfo") {
+      const auth = await getAuthState(_context, viewID, _currentView);
+      if (!auth.isAuthenticated) return;
+      await fetchPlatformData(_context, viewID, _currentView);
+    } else {
+      view.webview.postMessage({
+        viewID: this.viewID,
+        fileTree: await buildTree()
+      });
     }
-
-    view.webview.postMessage({
-      command: "setViewData",
-      viewID: this.viewID,
-      fileTree
-    });
-
-    // const { isAuthenticated } = await getAuthState(
-    //   this._context,
-    //   this.viewID,
-    //   this._currentView
-    // );
-
-    // if (this.viewID === "userInfo") {
-    // if (!isAuthenticated) return;
-    // await fetchPlatformData(this._context, this.viewID, this._currentView);
-    // }
   }
 
   public async reloadView() {

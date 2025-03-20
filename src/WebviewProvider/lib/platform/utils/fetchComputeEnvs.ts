@@ -1,4 +1,4 @@
-import { apiURL } from "./constants";
+import { API_URL } from "../../../../constants";
 import type { WorkspaceID, ComputeEnv } from "./types";
 
 const fetchComputeEnvs = async (
@@ -11,7 +11,7 @@ const fetchComputeEnvs = async (
   const params = new URLSearchParams({
     workspaceId: `${workspaceID}`
   });
-  const url = `${apiURL}/compute-envs?${params}`;
+  const url = `${API_URL}/compute-envs?${params}`;
 
   try {
     const res = await fetch(url, {

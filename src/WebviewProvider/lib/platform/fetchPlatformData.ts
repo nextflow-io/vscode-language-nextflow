@@ -9,15 +9,24 @@ const fetchPlatformData = async (
   context: ExtensionContext,
   viewID: string,
   view?: WebviewView
-): Promise<any> => {
+) => {
   const token = await getAccessToken(context);
-  console.log("🟣 fetchPlatformData", token);
+  console.log("🟣 fetchPlatformData");
   if (!token) {
     throw new Error("No token found");
   }
   const userInfo = await fetchUserInfo(token);
-  if (!userInfo) {
-    throw new Error("Could not fetch user info");
+  console.log("🟣 userInfo", userInfo);
+  if (!userInfo.user) {
+    view?.webview.postMessage({
+      viewID,
+      authState: {
+        error: userInfo.message
+      },
+      platformData: {}
+    });
+    console.error("Could not fetch user info:", userInfo.message);
+    return;
   }
   const workspaces = await fetchWorkspaces(token, userInfo.user.id);
   let computeEnvs;
@@ -30,7 +39,6 @@ const fetchPlatformData = async (
     computeEnvs
   };
   view?.webview.postMessage({
-    command: "setPlatformData",
     viewID,
     platformData
   });

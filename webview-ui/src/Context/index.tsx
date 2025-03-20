@@ -15,6 +15,7 @@ export type AuthState = {
   tokenExpired?: boolean;
   tokenExpiry?: number;
   isAuthenticated?: boolean;
+  error?: string;
 };
 
 type viewID = "workflows" | "processes" | "userInfo" | null;
