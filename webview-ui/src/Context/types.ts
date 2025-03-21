@@ -34,6 +34,8 @@ export type Workspace = {
   roles?: string[];
 };
 
+export type Organization = Workspace;
+
 export type Pipeline = {
   pipelineId: number;
   name: string;
@@ -90,8 +92,6 @@ export type User = {
     hubspotId?: number;
   };
 };
-
-export type Organization = any;
 
 export type UserInfo = {
   user: User;

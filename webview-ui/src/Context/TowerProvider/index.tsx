@@ -10,6 +10,7 @@ import {
   FormData
 } from "../types";
 import { AuthState } from "..";
+import { getOrganizations, getWorkspaces } from "./utils";
 
 const TowerContext = createContext<TowerContextType>(null as any);
 
@@ -41,6 +42,7 @@ type TowerContextType = {
   computeEnvs?: ComputeEnv[];
   workspaces?: Workspace[];
   organizations?: Workspace[];
+  getWorkspaces: (orgId: string | number) => Workspace[];
   setSelectedOrg: (n: string) => void;
   selectedOrg: string;
   refresh: () => void;
@@ -62,7 +64,14 @@ const TowerProvider: React.FC<Props> = ({
   );
   const [selectedOrg, setSelectedOrg] = useState<string>("");
 
-  const { userInfo, workspaces, computeEnvs, organizations } = platformData;
+  const { userInfo, workspaces: orgsAndWorkspaces, computeEnvs } = platformData;
+
+  const organizations = getOrganizations(orgsAndWorkspaces);
+  const workspaces = getWorkspaces(orgsAndWorkspaces);
+
+  const getOrgWorkspaces = (orgId: string | number) => {
+    return getWorkspaces(orgsAndWorkspaces, orgId);
+  };
 
   let auth = authState;
   if (!auth) {
@@ -100,6 +109,7 @@ const TowerProvider: React.FC<Props> = ({
         setSelectedComputeEnv,
         computeEnvs,
         workspaces,
+        getWorkspaces: getOrgWorkspaces,
         organizations,
         selectedOrg,
         setSelectedOrg,

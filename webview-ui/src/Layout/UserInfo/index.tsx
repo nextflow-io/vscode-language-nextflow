@@ -1,14 +1,16 @@
 import clsx from "clsx";
 import Button from "../../components/Button";
 import { useWorkspaceContext, useTowerContext } from "../../Context";
-import { formatTime } from "./utils";
+import { formatTime, getWorkspaceURL } from "./utils";
 
 import styles from "./styles.module.css";
 
 const UserInfo = () => {
   const { login } = useWorkspaceContext();
   const {
+    getWorkspaces,
     workspaces,
+    organizations,
     userInfo,
     tokenExpiry,
     hasToken,
@@ -30,14 +32,11 @@ const UserInfo = () => {
                 <p>Error: {error}</p>
               </div>
             )}
-            {tokenExpired && (
+            {hasToken && tokenExpired && (
               <div>
                 <p>Token expired: {formatTime(tokenExpiry)}</p>
               </div>
             )}
-            <div>
-              <p>Has token: {hasToken ? "Yes" : "No"}</p>
-            </div>
             <Button onClick={login}>Login to Seqera Platform</Button>
           </div>
         </div>
@@ -53,28 +52,44 @@ const UserInfo = () => {
             User: {userInfo?.user?.userName}
             <br />
             Email: {userInfo?.user?.email}
-            <br />
-            Token expires: {formatTime(tokenExpiry)}
-            <br />
-            Has token: {hasToken ? "Yes" : "No"}
           </div>
           <div className={styles.section}>
-            <Button href="https://seqera.io/ask-ai">Talk to Seqera AI</Button>
+            <h3>Workspaces</h3>
+            {organizations?.length ? (
+              <>
+                {workspaces?.map((workspace) => (
+                  <div key={workspace.orgId} className={styles.row}>
+                    <span>{workspace.orgName}</span>
+                    <a href={getWorkspaceURL(workspace)}>
+                      {workspace.workspaceName}
+                    </a>
+                  </div>
+                ))}
+              </>
+            ) : (
+              <div>No organizations found</div>
+            )}
           </div>
           <div className={styles.section}>
-            <p>Workspaces</p>
-            {workspaces?.map((workspace) => (
-              <div key={workspace.orgId}>{workspace.orgName}</div>
-            ))}
-          </div>
-          <div className={styles.section}>
-            <p>Compute Envs</p>
-            {computeEnvs?.map((computeEnv) => (
-              <div key={computeEnv.id}>{computeEnv.name}</div>
-            ))}
+            <h3>Compute Environments</h3>
+            {computeEnvs?.length ? (
+              <>
+                {computeEnvs?.map((computeEnv) => (
+                  <div className={styles.row} key={computeEnv.id}>
+                    <span>{computeEnv.id}</span>
+                    <span>{computeEnv.name}</span>
+                  </div>
+                ))}
+              </>
+            ) : (
+              <div>No compute environments found</div>
+            )}
           </div>
         </div>
       )}
+      <div className={styles.section}>
+        <Button href="https://seqera.io/ask-ai">Talk to Seqera AI</Button>
+      </div>
     </>
   );
 };

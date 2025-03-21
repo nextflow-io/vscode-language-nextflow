@@ -35,24 +35,23 @@ const fetchPlatformData = async (
 ): Promise<PlatformData> => {
   const wsState = context.workspaceState;
   const savedState = wsState.get("platformData") as PlatformData | undefined;
-  let authState = savedState?.authState as AuthState | undefined;
-  const hasExpired = expired(authState?.tokenExpiry);
+  const savedAuth = savedState?.authState as AuthState | undefined;
+  let hasExpired = expired(savedAuth?.tokenExpiry);
 
   if (!hasExpired && !refresh) {
     view.postMessage(savedState);
     return savedState as PlatformData;
   }
 
-  if (hasExpired || !authState) {
-    authState = await getAuthState(accessToken);
-  }
+  const authState = await getAuthState(accessToken);
+  hasExpired = expired(authState?.tokenExpiry);
 
   let data: PlatformData = {
     viewID,
     authState
   };
 
-  if (!accessToken) {
+  if (hasExpired) {
     handleUpdate(data, context, view);
     return data;
   }
