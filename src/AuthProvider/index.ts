@@ -68,35 +68,26 @@ class AuthProvider implements AuthenticationProvider, Disposable {
   public async createSession(scopes: string[]): Promise<AuthenticationSession> {
     console.log("🟣 createSession", scopes);
     try {
-      const token = await this.login(scopes);
-      if (!token) {
+      const accessToken = await this.login(scopes);
+      if (!accessToken) {
         throw new Error(`Platform login failure`);
       }
 
-      const { platformData } = await fetchPlatformData(
+      const { userInfo } = await fetchPlatformData(
         this.context,
         "userInfo",
         this.webviewView
       );
 
-      if (!platformData) {
-        throw new Error(`Failed to fetch platform data`);
-      }
-
-      const { userInfo } = platformData;
-      const user = userInfo?.user;
-
-      if (!user) {
-        throw new Error(`Failed to fetch user info`);
-      }
+      const account = {
+        label: userInfo?.user?.userName || "Undefined",
+        id: userInfo?.user?.email || "undefined"
+      };
 
       const session: AuthenticationSession = {
         id: uuid(),
-        accessToken: token,
-        account: {
-          label: user.userName + "(id=" + user.id + ")",
-          id: user.email
-        },
+        accessToken,
+        account,
         scopes: []
       };
 

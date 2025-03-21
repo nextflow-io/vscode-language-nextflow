@@ -9,7 +9,17 @@ import { Workspace, UserInfoResponse, ComputeEnv } from "./utils/types";
 import { jwtExpired } from "../../../AuthProvider/utils/jwt";
 import { decodeJWT } from "../../../AuthProvider/utils/jwt";
 
+type AuthState = {
+  hasToken: boolean;
+  tokenExpired: boolean;
+  tokenExpiry: number;
+  isAuthenticated: boolean;
+  error: string;
+};
+
 type PlatformData = {
+  viewID: string;
+  authState: AuthState;
   userInfo?: UserInfoResponse;
   workspaces?: Workspace[];
   computeEnvs?: ComputeEnv[];
@@ -19,18 +29,15 @@ const fetchPlatformData = async (
   context: ExtensionContext,
   viewID: string,
   view?: WebviewView
-): Promise<{
-  viewID: string;
-  platformData?: PlatformData;
-  authState?: any;
-}> => {
+): Promise<PlatformData> => {
   const token = await getAccessToken(context);
   const hasToken = !!token;
   const decoded = decodeJWT(token);
   const tokenExpired = jwtExpired(token);
   const tokenExpiry = decoded?.exp;
   const isAuthenticated = hasToken && !tokenExpired;
-  const data = {
+
+  let data: PlatformData = {
     viewID,
     authState: {
       hasToken,
@@ -38,8 +45,7 @@ const fetchPlatformData = async (
       tokenExpiry,
       isAuthenticated,
       error: ""
-    },
-    platformData: {}
+    }
   };
 
   if (!hasToken) {
@@ -58,7 +64,8 @@ const fetchPlatformData = async (
   const workspaces = await fetchWorkspaces(token, userInfo.user.id);
   const computeEnvs = await fetchComputeEnvs(token, workspaces);
 
-  data.platformData = {
+  data = {
+    ...data,
     userInfo,
     workspaces,
     computeEnvs

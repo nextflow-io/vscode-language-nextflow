@@ -23,13 +23,7 @@ type viewID = "workflows" | "processes" | "userInfo" | null;
 const Context = ({ children }: Props) => {
   const state = vscode.getState();
   const [viewID, setViewID] = useState<viewID>(state?.viewID || null);
-  const [authState, setAuthState] = useState<AuthState>({});
-
-  useEffect(() => {
-    // vscode.setState({ authState });
-    if (viewID !== "userInfo") return;
-    console.log("🟠 authState", authState);
-  }, [authState]);
+  const [authState, setAuthState] = useState<AuthState>(state?.authState || {});
 
   useEffect(() => {
     const handleMessage = (event: MessageEvent) => {
@@ -41,6 +35,16 @@ const Context = ({ children }: Props) => {
     window.addEventListener("message", handleMessage);
     return () => window.removeEventListener("message", handleMessage);
   }, []);
+
+  useEffect(() => {
+    vscode.setState({ viewID });
+  }, [viewID]);
+
+  useEffect(() => {
+    if (viewID !== "userInfo") return;
+    vscode.setState({ authState });
+    console.log("🟠 authState", authState);
+  }, [authState]);
 
   return (
     <WorkspaceProvider vscode={vscode} viewID={viewID}>

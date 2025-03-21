@@ -79,9 +79,8 @@ const TowerProvider: React.FC<Props> = ({ children, vscode, authState }) => {
 
   useEffect(() => {
     const handleMessage = (event: MessageEvent) => {
-      const message = event.data;
-      const { platformData } = message;
-      if (platformData) setPlatformData(platformData);
+      console.log("🟠 handleMessage", event.data);
+      setPlatformData(event.data);
     };
     window.addEventListener("message", handleMessage);
     return () => window.removeEventListener("message", handleMessage);

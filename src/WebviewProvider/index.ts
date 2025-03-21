@@ -31,12 +31,6 @@ class WebviewProvider implements vscode.WebviewViewProvider {
         case "login":
           this.login();
           break;
-        // case "fetchPlatformData":
-        //   fetchPlatformData(this._context, this.viewID, this._currentView);
-        //   break;
-        // case "getAuthState": // rm
-        //   getAuthState(this._context, this.viewID, this._currentView);
-        //   break;
       }
     });
 
@@ -56,7 +50,6 @@ class WebviewProvider implements vscode.WebviewViewProvider {
       const authState = await getAuthState(_context, viewID, _currentView);
       view.webview.postMessage({ viewID, authState });
       if (!authState.isAuthenticated) return;
-
       await fetchPlatformData(_context, viewID, _currentView);
     } else {
       view.webview.postMessage({
