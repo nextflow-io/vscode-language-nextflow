@@ -24,6 +24,7 @@ const fetchComputeEnvs = async (
         Authorization: `Bearer ${token}`
       })
     });
+    console.log("🟣 fetchComputeEnvs", res.status);
     const data = await res.json();
     return data as ComputeEnv[];
   } catch (e) {

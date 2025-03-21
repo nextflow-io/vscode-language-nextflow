@@ -47,6 +47,7 @@ const Context = ({ children }: Props) => {
     <WorkspaceProvider vscode={vscode} viewID={viewID}>
       {viewID === "userInfo" ? (
         <TowerProvider
+          vscode={vscode}
           authState={authState}
           platformData={{ userInfo, workspaces, computeEnvs, organizations }}
         >

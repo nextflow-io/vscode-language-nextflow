@@ -15,6 +15,7 @@ const fetchWorkspaces = async (
         Authorization: `Bearer ${token}`
       })
     });
+    console.log("🟣 fetchWorkspaces", response.status);
     const res = (await response.json()) as {
       orgsAndWorkspaces: Workspace[];
     };

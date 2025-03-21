@@ -2,7 +2,6 @@ import { API_URL } from "../../../../constants";
 import type { UserInfoResponse } from "./types";
 
 const fetchUserInfo = async (token: string): Promise<UserInfoResponse> => {
-  // console.log("🟣 fetchUserInfo", token);
   if (!token) return { message: "No token found" } as UserInfoResponse;
   try {
     const response = await fetch(`${API_URL}/user-info`, {
@@ -10,6 +9,7 @@ const fetchUserInfo = async (token: string): Promise<UserInfoResponse> => {
         Authorization: `Bearer ${token}`
       }
     });
+    console.log("🟣 fetchUserInfo", response.status);
     if (response.status === 401) {
       throw new Error("Unauthorized");
     }

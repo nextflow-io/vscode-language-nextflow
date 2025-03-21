@@ -17,6 +17,7 @@ type Props = {
   children: React.ReactNode;
   authState?: AuthState;
   platformData: PlatformData;
+  vscode: any;
 };
 
 type PlatformData = {
@@ -27,11 +28,7 @@ type PlatformData = {
 };
 
 type TowerContextType = {
-  responseMessage: string | null;
   error?: string | null;
-  isLoading: boolean;
-  isAdding: boolean;
-  setResponseMessage: (n: string) => void;
   userInfo?: UserInfo;
   addPipeline: (
     pipeline: Pipeline,
@@ -56,11 +53,9 @@ type TowerContextType = {
 const TowerProvider: React.FC<Props> = ({
   children,
   authState,
-  platformData
+  platformData,
+  vscode
 }) => {
-  const [responseMessage, setResponseMessage] = useState<string | null>(null);
-  const [isLoading, setIsLoading] = useState<boolean>(false);
-  const [isAdding, setIsAdding] = useState<boolean>(false);
   const [selectedWorkspace, setSelectedWorkspace] = useState<WorkspaceID>(null);
   const [selectedComputeEnv, setSelectedComputeEnv] = useState<string | null>(
     null
@@ -90,19 +85,13 @@ const TowerProvider: React.FC<Props> = ({
   }
 
   function refresh() {
-    setIsLoading(true);
-    setIsAdding(false);
-    setResponseMessage(null);
+    vscode.postMessage({ command: "refresh" });
   }
 
   return (
     <TowerContext.Provider
       value={{
-        responseMessage,
-        setResponseMessage,
         error: auth.error,
-        isLoading,
-        isAdding,
         userInfo,
         addPipeline: handleAddPipeline,
         selectedWorkspace,

@@ -31,6 +31,9 @@ class WebviewProvider implements vscode.WebviewViewProvider {
         case "login":
           this.login();
           break;
+        case "refresh":
+          this.initViewData(view, true);
+          break;
       }
     });
 
@@ -44,7 +47,7 @@ class WebviewProvider implements vscode.WebviewViewProvider {
     await vscode.commands.executeCommand("nextflow.login");
   }
 
-  private async initViewData(view: vscode.WebviewView) {
+  private async initViewData(view: vscode.WebviewView, refresh?: boolean) {
     const { viewID, _currentView, _context } = this;
     if (viewID === "userInfo") {
       const accessToken = await getAccessToken(_context);
@@ -54,7 +57,8 @@ class WebviewProvider implements vscode.WebviewViewProvider {
         accessToken,
         viewID,
         _currentView.webview,
-        _context
+        _context,
+        refresh
       );
     } else {
       view.webview.postMessage({

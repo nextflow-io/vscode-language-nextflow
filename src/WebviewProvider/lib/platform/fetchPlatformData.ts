@@ -30,21 +30,22 @@ const fetchPlatformData = async (
   accessToken: string,
   viewID: string,
   view: WebviewView["webview"],
-  context: ExtensionContext
+  context: ExtensionContext,
+  refresh?: boolean
 ): Promise<PlatformData> => {
-  const vsCodeState = context.workspaceState;
-  const savedState = vsCodeState.get("platformData") as
-    | PlatformData
-    | undefined;
+  const wsState = context.workspaceState;
+  const savedState = wsState.get("platformData") as PlatformData | undefined;
   let authState = savedState?.authState as AuthState | undefined;
   const hasExpired = expired(authState?.tokenExpiry);
 
-  if (savedState && !hasExpired) {
+  if (!hasExpired && !refresh) {
     view.postMessage(savedState);
     return savedState as PlatformData;
   }
 
-  authState = await getAuthState(accessToken);
+  if (hasExpired || !authState) {
+    authState = await getAuthState(accessToken);
+  }
 
   let data: PlatformData = {
     viewID,

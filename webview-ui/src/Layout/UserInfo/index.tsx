@@ -7,8 +7,15 @@ import styles from "./styles.module.css";
 
 const UserInfo = () => {
   const { login } = useWorkspaceContext();
-  const { workspaces, userInfo, tokenExpiry, hasToken, computeEnvs, error } =
-    useTowerContext();
+  const {
+    workspaces,
+    userInfo,
+    tokenExpiry,
+    hasToken,
+    computeEnvs,
+    error,
+    refresh
+  } = useTowerContext();
 
   let tokenExpired = false;
   if (tokenExpiry) tokenExpired = tokenExpiry < Date.now() / 1000;
@@ -41,6 +48,7 @@ const UserInfo = () => {
               <p>Error:{error}</p>
             </div>
           )}
+          <Button onClick={refresh}>Refresh</Button>
           <div className={styles.section}>
             User: {userInfo?.user?.userName}
             <br />
