@@ -5,3 +5,5 @@ package-lock.json
 tsconfig.json
 esbuild.js
 **/*.map
+webview-ui/**/*
+!webview-ui/dist/**/*

@@ -15,7 +15,8 @@ async function main() {
     "src/welcomePage/welcome-cursor.md": "./welcome-cursor.md",
     "language-configuration.json": "./language-configuration.json",
     "package.json": "./package.json",
-    "node_modules/mermaid/dist/mermaid.min.js": "media"
+    "node_modules/mermaid/dist/mermaid.min.js": "media",
+    "webview-ui/dist/**": "webview-ui/dist"
   };
   if (!production)
     files["language-server/build/libs/language-server-all.jar"] = "bin";
