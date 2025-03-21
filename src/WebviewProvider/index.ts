@@ -2,7 +2,7 @@ import * as vscode from "vscode";
 import * as fs from "fs";
 import * as path from "path";
 
-import { buildTree, fetchPlatformData, getAuthState } from "./lib";
+import { buildTree, fetchPlatformData, getAccessToken } from "./lib";
 import AuthProvider from "../AuthProvider";
 import { FileNode } from "./lib/workspace/types";
 
@@ -47,10 +47,9 @@ class WebviewProvider implements vscode.WebviewViewProvider {
   private async initViewData(view: vscode.WebviewView) {
     const { viewID, _currentView, _context } = this;
     if (viewID === "userInfo") {
-      const authState = await getAuthState(_context);
-      view.webview.postMessage({ viewID, authState });
-      if (!authState.isAuthenticated) return;
-      await fetchPlatformData(_context, viewID, _currentView);
+      const accessToken = await getAccessToken(_context);
+      if (!accessToken) return;
+      await fetchPlatformData(accessToken, viewID, _currentView);
     } else {
       view.webview.postMessage({
         viewID,

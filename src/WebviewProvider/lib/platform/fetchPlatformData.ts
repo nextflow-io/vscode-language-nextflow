@@ -17,24 +17,23 @@ type PlatformData = {
 };
 
 const fetchPlatformData = async (
-  context: ExtensionContext,
+  accessToken: string,
   viewID: string,
   view?: WebviewView
 ): Promise<PlatformData> => {
-  const token = await getAccessToken(context);
-  const authState = await getAuthState(context);
+  const authState = await getAuthState(accessToken);
 
   let data: PlatformData = {
     viewID,
     authState
   };
 
-  if (!token) {
+  if (!accessToken) {
     view?.webview?.postMessage(data);
     return data;
   }
 
-  const userInfo = await fetchUserInfo(token);
+  const userInfo = await fetchUserInfo(accessToken);
 
   if (!userInfo.user) {
     if (userInfo.message) data.authState.error = userInfo.message;
@@ -42,8 +41,8 @@ const fetchPlatformData = async (
     return data;
   }
 
-  const workspaces = await fetchWorkspaces(token, userInfo.user.id);
-  const computeEnvs = await fetchComputeEnvs(token, workspaces);
+  const workspaces = await fetchWorkspaces(accessToken, userInfo.user.id);
+  const computeEnvs = await fetchComputeEnvs(accessToken, workspaces);
 
   data = {
     ...data,

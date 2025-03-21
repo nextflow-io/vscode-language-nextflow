@@ -91,6 +91,8 @@ export type User = {
   };
 };
 
+export type Organization = any;
+
 export type UserInfo = {
   user: User;
   needConsent: boolean;

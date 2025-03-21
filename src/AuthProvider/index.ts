@@ -67,16 +67,18 @@ class AuthProvider implements AuthenticationProvider, Disposable {
   public async createSession(scopes: string[]): Promise<AuthenticationSession> {
     try {
       const accessToken = await this.login(scopes);
+      console.log("🟣 createSession", accessToken);
       if (!accessToken) {
         throw new Error(`Platform login failure`);
       }
 
-      const { userInfo } = await fetchPlatformData(
-        this.context,
+      const data = await fetchPlatformData(
+        accessToken,
         "userInfo",
         this.webviewView
       );
-
+      console.log("🟣🟢 createSession", data);
+      const { userInfo } = data;
       const account = {
         label: userInfo?.user?.userName || "Undefined",
         id: userInfo?.user?.email || "undefined"

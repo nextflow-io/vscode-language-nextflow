@@ -8,7 +8,7 @@ import {
   UserInfo,
   Pipeline,
   FormData
-} from "./types";
+} from "../types";
 import { AuthState } from "..";
 
 const TowerContext = createContext<TowerContextType>(null as any);
@@ -17,6 +17,7 @@ type Props = {
   children: React.ReactNode;
   vscode: any;
   authState: AuthState;
+  platformData: PlatformData;
 };
 
 type PlatformData = {
@@ -53,9 +54,12 @@ type TowerContextType = {
   tokenExpiry?: number;
 };
 
-const TowerProvider: React.FC<Props> = ({ children, vscode, authState }) => {
-  const state = vscode.getState();
-
+const TowerProvider: React.FC<Props> = ({
+  children,
+  vscode,
+  authState,
+  platformData
+}) => {
   const [responseMessage, setResponseMessage] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [isAdding, setIsAdding] = useState<boolean>(false);
@@ -65,9 +69,6 @@ const TowerProvider: React.FC<Props> = ({ children, vscode, authState }) => {
   );
   const [selectedOrg, setSelectedOrg] = useState<string>("");
 
-  const [platformData, setPlatformData] = useState<PlatformData>(
-    state?.platformData || {}
-  );
   const { userInfo, workspaces, computeEnvs, organizations } = platformData;
 
   const { hasToken, tokenExpired, tokenExpiry, isAuthenticated, error } =
@@ -76,26 +77,6 @@ const TowerProvider: React.FC<Props> = ({ children, vscode, authState }) => {
   useEffect(() => {
     vscode.setState({ platformData });
   }, [platformData]);
-
-  useEffect(() => {
-    const handleMessage = (event: MessageEvent) => {
-      console.log("🟠 handleMessage", event.data);
-      setPlatformData(event.data);
-    };
-    window.addEventListener("message", handleMessage);
-    return () => window.removeEventListener("message", handleMessage);
-  }, []);
-
-  useEffect(() => {
-    console.log("🟠 platformData", platformData);
-    if (!isAuthenticated) return;
-    // console.log("🟠 fetchPlatformData");
-    // fetchPlatformData();
-  }, [platformData]);
-
-  // function fetchPlatformData() {
-  //   vscode.postMessage({ command: "fetchPlatformData" });
-  // }
 
   function handleAddPipeline(
     pipeline: Pipeline,

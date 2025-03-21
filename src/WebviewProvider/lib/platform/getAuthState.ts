@@ -1,5 +1,3 @@
-import { ExtensionContext, WebviewView } from "vscode";
-import { getAccessToken } from "..";
 import { jwtExpired, decodeJWT } from "../../../AuthProvider/utils/jwt";
 
 export type AuthState = {
@@ -10,8 +8,7 @@ export type AuthState = {
   error: string;
 };
 
-const getAuthState = async (context: ExtensionContext): Promise<AuthState> => {
-  const token = await getAccessToken(context);
+const getAuthState = async (token?: string): Promise<AuthState> => {
   const hasToken = !!token;
   let tokenExpired = false;
   let tokenExpiry: any = 0;
