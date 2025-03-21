@@ -44,6 +44,8 @@ The extension includes a GitHub Copilot extension specifically trained for Nextf
 
 The language server requires Java 17 or later.
 
+Note: Java 1.8 is legacy nomenclature for Java 8 (not to confused with Java 18). https://www.oracle.com/java/technologies/javase/jdk8-naming.html
+
 ## Development
 
 Clone this repository:
