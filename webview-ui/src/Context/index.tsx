@@ -23,18 +23,11 @@ type ViewID = "workflows" | "processes" | "userInfo" | null;
 
 const Context = ({ children }: Props) => {
   const viewID = window.initialData?.viewID as ViewID;
-  const state = vscode.getState();
-  const [authState, setAuthState] = useState<AuthState>(state?.authState || {});
-  const [userInfo, setUserInfo] = useState<UserInfo>(state?.userInfo || {});
-  const [workspaces, setWorkspaces] = useState<Workspace[]>(
-    state?.workspaces || []
-  );
-  const [computeEnvs, setComputeEnvs] = useState<ComputeEnv[]>(
-    state?.computeEnvs || []
-  );
-  const [organizations, setOrganizations] = useState<Organization[]>(
-    state?.organizations || []
-  );
+  const [authState, setAuthState] = useState<AuthState | undefined>(undefined);
+  const [userInfo, setUserInfo] = useState<UserInfo | undefined>(undefined);
+  const [workspaces, setWorkspaces] = useState<Workspace[]>([]);
+  const [computeEnvs, setComputeEnvs] = useState<ComputeEnv[]>([]);
+  const [organizations, setOrganizations] = useState<Organization[]>([]);
 
   useEffect(() => {
     const handleMessage = (event: MessageEvent) => {
@@ -50,38 +43,10 @@ const Context = ({ children }: Props) => {
     return () => window.removeEventListener("message", handleMessage);
   }, []);
 
-  useEffect(() => {
-    if (viewID !== "userInfo") return;
-    vscode.setState({ authState });
-  }, [authState]);
-
-  useEffect(() => {
-    if (viewID !== "userInfo") return;
-    vscode.setState({ userInfo });
-  }, [userInfo]);
-
-  useEffect(() => {
-    if (viewID !== "userInfo") return;
-    vscode.setState({ workspaces });
-  }, [workspaces]);
-
-  useEffect(() => {
-    if (viewID !== "userInfo") return;
-    vscode.setState({ computeEnvs });
-  }, [computeEnvs]);
-
-  useEffect(() => {
-    if (viewID !== "userInfo") return;
-    vscode.setState({ organizations });
-  }, [organizations]);
-
-  if (!viewID) return <div>No viewID</div>;
-
   return (
     <WorkspaceProvider vscode={vscode} viewID={viewID}>
       {viewID === "userInfo" ? (
         <TowerProvider
-          vscode={vscode}
           authState={authState}
           platformData={{ userInfo, workspaces, computeEnvs, organizations }}
         >

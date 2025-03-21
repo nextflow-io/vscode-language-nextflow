@@ -49,7 +49,13 @@ class WebviewProvider implements vscode.WebviewViewProvider {
     if (viewID === "userInfo") {
       const accessToken = await getAccessToken(_context);
       if (!accessToken) return;
-      await fetchPlatformData(accessToken, viewID, _currentView?.webview);
+      if (!_currentView) return;
+      await fetchPlatformData(
+        accessToken,
+        viewID,
+        _currentView.webview,
+        _context
+      );
     } else {
       view.webview.postMessage({
         viewID,

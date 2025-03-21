@@ -15,8 +15,7 @@ const TowerContext = createContext<TowerContextType>(null as any);
 
 type Props = {
   children: React.ReactNode;
-  vscode: any;
-  authState: AuthState;
+  authState?: AuthState;
   platformData: PlatformData;
 };
 
@@ -56,7 +55,6 @@ type TowerContextType = {
 
 const TowerProvider: React.FC<Props> = ({
   children,
-  vscode,
   authState,
   platformData
 }) => {
@@ -71,12 +69,16 @@ const TowerProvider: React.FC<Props> = ({
 
   const { userInfo, workspaces, computeEnvs, organizations } = platformData;
 
-  const { hasToken, tokenExpired, tokenExpiry, isAuthenticated, error } =
-    authState;
-
-  useEffect(() => {
-    vscode.setState({ platformData });
-  }, [platformData]);
+  let auth = authState;
+  if (!auth) {
+    auth = {
+      hasToken: false,
+      tokenExpired: false,
+      tokenExpiry: 0,
+      isAuthenticated: false,
+      error: ""
+    };
+  }
 
   function handleAddPipeline(
     pipeline: Pipeline,
@@ -98,7 +100,7 @@ const TowerProvider: React.FC<Props> = ({
       value={{
         responseMessage,
         setResponseMessage,
-        error,
+        error: auth.error,
         isLoading,
         isAdding,
         userInfo,
@@ -113,10 +115,10 @@ const TowerProvider: React.FC<Props> = ({
         selectedOrg,
         setSelectedOrg,
         refresh,
-        isAuthenticated,
-        hasToken,
-        tokenExpired,
-        tokenExpiry
+        isAuthenticated: auth.isAuthenticated,
+        hasToken: auth.hasToken,
+        tokenExpired: auth.tokenExpired,
+        tokenExpiry: auth.tokenExpiry
       }}
     >
       {children}

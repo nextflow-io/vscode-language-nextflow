@@ -3,9 +3,13 @@ import { jwtDecode } from "jwt-decode";
 function jwtExpired(token?: string): boolean {
   if (!token) return true;
   const decoded = jwtDecode(token);
+  return expired(decoded.exp);
+}
+
+function expired(timestamp?: number): boolean {
+  if (!timestamp) return true;
   const currentTime = Date.now() / 1000;
-  if (!decoded.exp) return true;
-  return decoded.exp < currentTime;
+  return timestamp < currentTime;
 }
 
 function decodeJWT(token?: string): any {
@@ -13,4 +17,4 @@ function decodeJWT(token?: string): any {
   return jwtDecode(token);
 }
 
-export { jwtExpired, decodeJWT };
+export { jwtExpired, decodeJWT, expired };

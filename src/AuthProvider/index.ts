@@ -75,7 +75,8 @@ class AuthProvider implements AuthenticationProvider, Disposable {
       const data = await fetchPlatformData(
         accessToken,
         "userInfo",
-        this.webviewView
+        this.webviewView,
+        this.context
       );
       const { userInfo } = data;
       const account = {
@@ -122,6 +123,8 @@ class AuthProvider implements AuthenticationProvider, Disposable {
     );
 
     this.webviewView?.postMessage({ authState: {} });
+    const vsCodeState = this.context.workspaceState;
+    vsCodeState.update("platformData", {});
 
     if (session) {
       this.eventEmitter.fire({

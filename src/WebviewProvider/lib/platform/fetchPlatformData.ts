@@ -1,5 +1,4 @@
 import { ExtensionContext, WebviewView } from "vscode";
-import getAccessToken from "./getAccessToken";
 import fetchUserInfo from "./utils/fetchUserInfo";
 import fetchWorkspaces from "./utils/fetchWorkspaces";
 import fetchComputeEnvs from "./utils/fetchComputeEnvs";
@@ -7,6 +6,7 @@ import debounce from "../../../utils/debounce";
 
 import { Workspace, UserInfoResponse, ComputeEnv } from "./utils/types";
 import getAuthState, { AuthState } from "./getAuthState";
+import { expired } from "../../../AuthProvider/utils/jwt";
 
 type PlatformData = {
   viewID: string;
@@ -16,12 +16,35 @@ type PlatformData = {
   computeEnvs?: ComputeEnv[];
 };
 
+function handleUpdate(
+  data: PlatformData,
+  context: ExtensionContext,
+  view: WebviewView["webview"]
+) {
+  const vsCodeState = context.workspaceState;
+  vsCodeState.update("platformData", data);
+  view.postMessage(data);
+}
+
 const fetchPlatformData = async (
   accessToken: string,
   viewID: string,
-  view?: WebviewView["webview"]
+  view: WebviewView["webview"],
+  context: ExtensionContext
 ): Promise<PlatformData> => {
-  const authState = await getAuthState(accessToken);
+  const vsCodeState = context.workspaceState;
+  const savedState = vsCodeState.get("platformData") as
+    | PlatformData
+    | undefined;
+  let authState = savedState?.authState as AuthState | undefined;
+  const hasExpired = expired(authState?.tokenExpiry);
+
+  if (savedState && !hasExpired) {
+    view.postMessage(savedState);
+    return savedState as PlatformData;
+  }
+
+  authState = await getAuthState(accessToken);
 
   let data: PlatformData = {
     viewID,
@@ -29,7 +52,7 @@ const fetchPlatformData = async (
   };
 
   if (!accessToken) {
-    view?.postMessage(data);
+    handleUpdate(data, context, view);
     return data;
   }
 
@@ -37,7 +60,7 @@ const fetchPlatformData = async (
 
   if (!userInfo.user) {
     if (userInfo.message) data.authState.error = userInfo.message;
-    view?.postMessage(data);
+    handleUpdate(data, context, view);
     return data;
   }
 
@@ -51,7 +74,7 @@ const fetchPlatformData = async (
     computeEnvs
   };
 
-  view?.postMessage(data);
+  handleUpdate(data, context, view);
 
   return data;
 };
