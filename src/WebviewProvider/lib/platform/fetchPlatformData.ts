@@ -6,16 +6,7 @@ import fetchComputeEnvs from "./utils/fetchComputeEnvs";
 import debounce from "../../../utils/debounce";
 
 import { Workspace, UserInfoResponse, ComputeEnv } from "./utils/types";
-import { jwtExpired } from "../../../AuthProvider/utils/jwt";
-import { decodeJWT } from "../../../AuthProvider/utils/jwt";
-
-type AuthState = {
-  hasToken: boolean;
-  tokenExpired: boolean;
-  tokenExpiry: number;
-  isAuthenticated: boolean;
-  error: string;
-};
+import getAuthState, { AuthState } from "./getAuthState";
 
 type PlatformData = {
   viewID: string;
@@ -31,24 +22,14 @@ const fetchPlatformData = async (
   view?: WebviewView
 ): Promise<PlatformData> => {
   const token = await getAccessToken(context);
-  const hasToken = !!token;
-  const decoded = decodeJWT(token);
-  const tokenExpired = jwtExpired(token);
-  const tokenExpiry = decoded?.exp;
-  const isAuthenticated = hasToken && !tokenExpired;
+  const authState = await getAuthState(context);
 
   let data: PlatformData = {
     viewID,
-    authState: {
-      hasToken,
-      tokenExpired,
-      tokenExpiry,
-      isAuthenticated,
-      error: ""
-    }
+    authState
   };
 
-  if (!hasToken) {
+  if (!token) {
     view?.webview?.postMessage(data);
     return data;
   }

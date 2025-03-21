@@ -2,18 +2,16 @@ import { ExtensionContext, WebviewView } from "vscode";
 import { getAccessToken } from "..";
 import { jwtExpired, decodeJWT } from "../../../AuthProvider/utils/jwt";
 
-const getAuthState = async (
-  context: ExtensionContext,
-  viewID: string,
-  view?: WebviewView
-): Promise<{
+export type AuthState = {
   hasToken: boolean;
   tokenExpired: boolean;
   tokenExpiry: number;
   isAuthenticated: boolean;
-}> => {
+  error: string;
+};
+
+const getAuthState = async (context: ExtensionContext): Promise<AuthState> => {
   const token = await getAccessToken(context);
-  console.log("token", token);
   const hasToken = !!token;
   let tokenExpired = false;
   let tokenExpiry: any = 0;
@@ -23,7 +21,8 @@ const getAuthState = async (
     tokenExpired = jwtExpired(token);
   }
   const isAuthenticated = hasToken && !tokenExpired;
-  return { hasToken, tokenExpired, tokenExpiry, isAuthenticated };
+  const error = "";
+  return { hasToken, tokenExpired, tokenExpiry, isAuthenticated, error };
 };
 
 export default getAuthState;

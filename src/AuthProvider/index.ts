@@ -61,12 +61,10 @@ class AuthProvider implements AuthenticationProvider, Disposable {
   public async getSessions(): Promise<AuthenticationSession[]> {
     const sessions = await this.context.secrets.get(STORAGE_KEY_NAME);
     if (!sessions) return [];
-    console.log("🟣 getSessions", JSON.parse(sessions));
     return JSON.parse(sessions) as AuthenticationSession[];
   }
 
   public async createSession(scopes: string[]): Promise<AuthenticationSession> {
-    console.log("🟣 createSession", scopes);
     try {
       const accessToken = await this.login(scopes);
       if (!accessToken) {
@@ -111,6 +109,7 @@ class AuthProvider implements AuthenticationProvider, Disposable {
 
   public async removeSession(sessionId: string): Promise<void> {
     const allSessions = await this.context.secrets.get(STORAGE_KEY_NAME);
+    console.log("🟣 removeSession", allSessions);
     if (!allSessions) return;
     let sessions = JSON.parse(allSessions) as AuthenticationSession[];
     const sessionIdx = sessions.findIndex((s) => s.id === sessionId);

@@ -43,7 +43,6 @@ const Context = ({ children }: Props) => {
   useEffect(() => {
     if (viewID !== "userInfo") return;
     vscode.setState({ authState });
-    console.log("🟠 authState", authState);
   }, [authState]);
 
   return (

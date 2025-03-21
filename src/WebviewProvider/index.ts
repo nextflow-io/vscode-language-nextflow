@@ -47,7 +47,7 @@ class WebviewProvider implements vscode.WebviewViewProvider {
   private async initViewData(view: vscode.WebviewView) {
     const { viewID, _currentView, _context } = this;
     if (viewID === "userInfo") {
-      const authState = await getAuthState(_context, viewID, _currentView);
+      const authState = await getAuthState(_context);
       view.webview.postMessage({ viewID, authState });
       if (!authState.isAuthenticated) return;
       await fetchPlatformData(_context, viewID, _currentView);
