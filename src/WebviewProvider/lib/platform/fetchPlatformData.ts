@@ -5,43 +5,68 @@ import fetchWorkspaces from "./utils/fetchWorkspaces";
 import fetchComputeEnvs from "./utils/fetchComputeEnvs";
 import debounce from "../../../utils/debounce";
 
+import { Workspace, UserInfoResponse, ComputeEnv } from "./utils/types";
+import { jwtExpired } from "../../../AuthProvider/utils/jwt";
+import { decodeJWT } from "../../../AuthProvider/utils/jwt";
+
+type PlatformData = {
+  userInfo?: UserInfoResponse;
+  workspaces?: Workspace[];
+  computeEnvs?: ComputeEnv[];
+};
+
 const fetchPlatformData = async (
   context: ExtensionContext,
   viewID: string,
   view?: WebviewView
-) => {
+): Promise<{
+  viewID: string;
+  platformData?: PlatformData;
+  authState?: any;
+}> => {
   const token = await getAccessToken(context);
-  console.log("🟣 fetchPlatformData");
-  if (!token) {
-    throw new Error("No token found");
+  const hasToken = !!token;
+  const decoded = decodeJWT(token);
+  const tokenExpired = jwtExpired(token);
+  const tokenExpiry = decoded?.exp;
+  const isAuthenticated = hasToken && !tokenExpired;
+  const data = {
+    viewID,
+    authState: {
+      hasToken,
+      tokenExpired,
+      tokenExpiry,
+      isAuthenticated,
+      error: ""
+    },
+    platformData: {}
+  };
+
+  if (!hasToken) {
+    view?.webview?.postMessage(data);
+    return data;
   }
+
   const userInfo = await fetchUserInfo(token);
-  console.log("🟣 userInfo", userInfo);
+
   if (!userInfo.user) {
-    view?.webview.postMessage({
-      viewID,
-      authState: {
-        error: userInfo.message
-      },
-      platformData: {}
-    });
-    console.error("Could not fetch user info:", userInfo.message);
-    return;
+    if (userInfo.message) data.authState.error = userInfo.message;
+    view?.webview?.postMessage(data);
+    return data;
   }
+
   const workspaces = await fetchWorkspaces(token, userInfo.user.id);
-  let computeEnvs;
-  if (workspaces.length) {
-    computeEnvs = await fetchComputeEnvs(token, workspaces[0].workspaceId);
-  }
-  const platformData = {
+  const computeEnvs = await fetchComputeEnvs(token, workspaces);
+
+  data.platformData = {
     userInfo,
     workspaces,
     computeEnvs
   };
-  view?.webview.postMessage({
-    viewID,
-    platformData
-  });
+
+  view?.webview.postMessage(data);
+
+  return data;
 };
 
 const debouncedFetchPlatformData = debounce(fetchPlatformData, 100);

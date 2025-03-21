@@ -11,7 +11,7 @@ import {
 
 import { PromiseAdapter, promiseFromEvent } from "./utils/promiseFromEvent";
 import UriEventHandler from "./utils/UriEventHandler";
-import { fetchUserInfo } from "../WebviewProvider/lib";
+import { fetchPlatformData } from "../WebviewProvider/lib";
 import { decodeJWT, jwtExpired } from "./utils/jwt";
 import { PLATFORM_URL } from "../constants";
 
@@ -73,21 +73,18 @@ class AuthProvider implements AuthenticationProvider, Disposable {
         throw new Error(`Platform login failure`);
       }
 
-      const userInfoResponse = await fetchUserInfo(token);
-      const user = userInfoResponse?.user;
-      const hasToken = !!token;
-      const decoded = decodeJWT(token);
-      const tokenExpired = jwtExpired(token);
+      const { platformData } = await fetchPlatformData(
+        this.context,
+        "userInfo",
+        this.webviewView
+      );
 
-      this.webviewView?.postMessage({
-        authState: {
-          hasToken,
-          tokenExpired,
-          tokenExpiry: decoded.exp,
-          isAuthenticated: hasToken && !tokenExpired,
-          error: userInfoResponse?.message
-        }
-      });
+      if (!platformData) {
+        throw new Error(`Failed to fetch platform data`);
+      }
+
+      const { userInfo } = platformData;
+      const user = userInfo?.user;
 
       if (!user) {
         throw new Error(`Failed to fetch user info`);
@@ -134,6 +131,7 @@ class AuthProvider implements AuthenticationProvider, Disposable {
       JSON.stringify(sessions)
     );
 
+    console.log("🟣 removeSession", session);
     this.webviewView?.postMessage({ authState: {} });
 
     if (session) {

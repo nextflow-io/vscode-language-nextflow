@@ -1,11 +1,13 @@
 import { API_URL } from "../../../../constants";
-import type { WorkspaceID, ComputeEnv } from "./types";
+import type { Workspace, ComputeEnv } from "./types";
 
 const fetchComputeEnvs = async (
   token: string,
-  workspaceID?: WorkspaceID
+  workspaces?: Workspace[]
 ): Promise<ComputeEnv[]> => {
   if (!token) return [];
+  if (!workspaces) return [];
+  const workspaceID = workspaces[0]?.workspaceId;
   if (!workspaceID) return [];
 
   const params = new URLSearchParams({

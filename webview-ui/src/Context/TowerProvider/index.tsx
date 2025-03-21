@@ -88,10 +88,11 @@ const TowerProvider: React.FC<Props> = ({ children, vscode, authState }) => {
   }, []);
 
   useEffect(() => {
+    console.log("🟠 platformData", platformData);
     if (!isAuthenticated) return;
     // console.log("🟠 fetchPlatformData");
     // fetchPlatformData();
-  }, [isAuthenticated]);
+  }, [platformData]);
 
   // function fetchPlatformData() {
   //   vscode.postMessage({ command: "fetchPlatformData" });

@@ -13,6 +13,7 @@ const getAuthState = async (
   isAuthenticated: boolean;
 }> => {
   const token = await getAccessToken(context);
+  console.log("token", token);
   const hasToken = !!token;
   let tokenExpired = false;
   let tokenExpiry: any = 0;
@@ -22,17 +23,6 @@ const getAuthState = async (
     tokenExpired = jwtExpired(token);
   }
   const isAuthenticated = hasToken && !tokenExpired;
-  if (viewID === "userInfo") {
-    view?.webview.postMessage({
-      viewID,
-      authState: {
-        hasToken,
-        tokenExpired,
-        tokenExpiry,
-        isAuthenticated
-      }
-    });
-  }
   return { hasToken, tokenExpired, tokenExpiry, isAuthenticated };
 };
 

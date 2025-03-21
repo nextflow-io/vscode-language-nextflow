@@ -27,6 +27,9 @@ const UserInfo = () => {
                 <p>Token expired: {formatTime(tokenExpiry)}</p>
               </div>
             )}
+            <div>
+              <p>Has token: {hasToken ? "Yes" : "No"}</p>
+            </div>
             <Button onClick={login}>Login to Seqera Platform</Button>
           </div>
         </div>

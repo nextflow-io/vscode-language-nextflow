@@ -11,6 +11,7 @@ const fetchUserInfo = async (token: string): Promise<UserInfoResponse> => {
       }
     });
     if (response.status === 401) {
+      console.log("🟣 response", response.json());
       throw new Error("Unauthorized");
     }
     const res = (await response.json()) as UserInfoResponse;
