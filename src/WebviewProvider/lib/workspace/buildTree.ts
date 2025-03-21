@@ -2,7 +2,7 @@ import * as fs from "fs";
 import * as path from "path";
 import * as vscode from "vscode";
 
-import { FileNode } from "../types";
+import { FileNode } from "./types";
 
 import { findNfFiles, findTestFiles } from "./findFiles";
 import { getImports, parseFile } from "./parseFile";

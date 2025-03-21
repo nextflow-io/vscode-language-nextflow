@@ -1,18 +1,20 @@
-import { useProvider } from "../Provider";
-import FileNodeChildren from "./FileNodeChildren";
-import styles from "./styles.module.css";
-import nextflowIcon from "../images/nextflow-icon.svg";
-import fileIcon from "../images/go-to-file.svg";
-
-import { FileNode as FileNodeType } from "../Provider/types";
 import clsx from "clsx";
+
+import { useWorkspaceContext } from "../../Context";
+import FileNodeChildren from "./FileNodeChildren";
+import nextflowIcon from "../../images/nextflow-icon.svg";
+import fileIcon from "../../images/go-to-file.svg";
+
+import styles from "./styles.module.css";
+
+import { FileNode as FileNodeType } from "../../Context/WorkspaceProvider/types";
 
 type Props = {
   node: FileNodeType;
 };
 
 const FileNode = ({ node }: Props) => {
-  const { openFile, getTest, viewType: type } = useProvider();
+  const { openFile, getTest, viewID: type } = useWorkspaceContext();
   const testFile = getTest(node.name);
 
   let typeStyleName = "workflow";

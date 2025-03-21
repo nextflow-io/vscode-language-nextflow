@@ -1,9 +1,11 @@
+import { useWorkspaceContext } from "../Context";
 import FileTree from "./FileTree";
-import { useProvider } from "../Provider";
+import UserInfo from "./UserInfo";
+
 import styles from "./styles.module.css";
 
 const Layout = () => {
-  const { viewType, files, testCount } = useProvider();
+  const { viewID, files, testCount } = useWorkspaceContext();
   const processes = files.filter((f) => f.type === "process");
   const workflows = files.filter((f) => f.type === "workflow");
 
@@ -14,8 +16,10 @@ const Layout = () => {
   if (coverage < 80) color = "orange";
   if (coverage < 20) color = "red";
 
-  if (viewType === "workflows") return <FileTree files={workflows} />;
-  if (viewType === "processes")
+  if (viewID === "userInfo") return <UserInfo />;
+
+  if (viewID === "workflows") return <FileTree files={workflows} />;
+  if (viewID === "processes")
     return (
       <div>
         <div className={styles.header}>

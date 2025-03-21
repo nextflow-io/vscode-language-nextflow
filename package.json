@@ -29,7 +29,8 @@
     "Programming Languages"
   ],
   "activationEvents": [
-    "onStartupFinished"
+    "onStartupFinished",
+    "onAuthenticationRequest:azuread"
   ],
   "main": "./extension.js",
   "contributes": {
@@ -131,8 +132,28 @@
         "command": "nextflow.writeTest",
         "title": "Write nf-test with Seqera",
         "category": "Nextflow"
+      },
+      {
+        "command": "nextflow.login",
+        "title": "Login to Seqera Platform",
+        "category": "Nextflow",
+        "icon": "$(sign-in)"
+      },
+      {
+        "command": "nextflow.logout",
+        "title": "Logout from Seqera Platform",
+        "category": "Nextflow",
+        "icon": "$(sign-out)"
       }
     ],
+    "menus": {
+      "view/title": [
+        {
+          "command": "nextflow.login",
+          "group": "navigation@10"
+        }
+      ]
+    },
     "configuration": {
       "type": "object",
       "description": "Configuration for Nextflow language support",
@@ -231,6 +252,11 @@
     "views": {
       "seqera": [
         {
+          "id": "userInfo",
+          "name": "Seqera Platform",
+          "type": "webview"
+        },
+        {
           "id": "workflows",
           "name": "Workflows",
           "type": "webview"
@@ -258,10 +284,12 @@
     "@vscode/vsce": "^3.2.1",
     "esbuild": "^0.25.0",
     "esbuild-plugin-copy": "^2.1.1",
+    "jwt-decode": "^4.0.0",
     "mermaid": "^11.4.1",
     "node-fetch": "^3.3.2",
     "posthog-node": "^4.4.1",
     "prettier": "3.5.2",
+    "uuid": "^11.1.0",
     "typescript": "^5.7.2",
     "vscode-jsonrpc": "^8.0.2",
     "vscode-languageclient": "^8.0.2"

@@ -2,9 +2,8 @@ import { createContext, useContext, useEffect, useState } from "react";
 
 import { FileNode as FileNodeType } from "./types";
 import { sortFiles } from "./utils";
-const vscode = (window as any).acquireVsCodeApi?.();
 
-const NextflowContext = createContext<NextflowContextType>({
+const WorkspaceContext = createContext<WorkspaceContextType>({
   files: [],
   tests: [],
   openFile: () => {},
@@ -13,11 +12,12 @@ const NextflowContext = createContext<NextflowContextType>({
   selectedItems: [],
   selectItem: () => {},
   isSelected: () => false,
-  viewType: null,
-  testCount: 0
+  viewID: null,
+  testCount: 0,
+  login: () => {}
 });
 
-interface NextflowContextType {
+interface WorkspaceContextType {
   files: FileNodeType[];
   tests: FileNodeType[];
   openFile: (file: FileNodeType, isTest?: boolean) => void;
@@ -26,21 +26,21 @@ interface NextflowContextType {
   selectedItems: string[];
   selectItem: (name: string) => void;
   isSelected: (name: string) => boolean;
-  viewType: "workflows" | "processes" | null;
+  viewID: string | null;
   testCount: number;
+  login: () => void;
 }
 
 type Props = {
   children: React.ReactNode;
+  vscode: any;
+  viewID: string | null;
 };
 
-const NextflowProvider = ({ children }: Props) => {
+const WorkspaceProvider = ({ children, vscode, viewID }: Props) => {
   const state = vscode.getState();
 
   const [testCount, setTestCount] = useState(0);
-  const [viewType, setViewType] = useState<"workflows" | "processes" | null>(
-    state?.viewType || null
-  );
   const [files, setFiles] = useState<FileNodeType[]>(state?.files || []);
   const [tests, setTests] = useState<FileNodeType[]>(state?.tests || []);
   const [selectedItems, setSelectedItems] = useState<string[]>(
@@ -71,10 +71,10 @@ const NextflowProvider = ({ children }: Props) => {
   useEffect(() => {
     const handleMessage = (event: MessageEvent) => {
       const message = event.data;
-      if (message.command === "findFiles") {
-        setFiles(sortFiles(message.data?.files || []));
-        setTests(sortFiles(message.data?.tests || []));
-        setViewType(message.viewType);
+      if (message.fileTree) {
+        const { files, tests } = message.fileTree;
+        setFiles(sortFiles(files || []));
+        setTests(sortFiles(tests || []));
       }
     };
     window.addEventListener("message", handleMessage);
@@ -106,8 +106,12 @@ const NextflowProvider = ({ children }: Props) => {
     return tests.find((test) => test.name === name);
   }
 
+  function login() {
+    vscode.postMessage({ command: "login" });
+  }
+
   return (
-    <NextflowContext.Provider
+    <WorkspaceContext.Provider
       value={{
         files,
         tests,
@@ -117,17 +121,18 @@ const NextflowProvider = ({ children }: Props) => {
         selectedItems,
         selectItem,
         isSelected,
-        viewType,
-        testCount
+        testCount,
+        login,
+        viewID
       }}
     >
       {children}
-    </NextflowContext.Provider>
+    </WorkspaceContext.Provider>
   );
 };
 
-const useProvider = () => useContext(NextflowContext);
+const useWorkspaceContext = () => useContext(WorkspaceContext);
 
-export { useProvider };
+export { useWorkspaceContext };
 
-export default NextflowProvider;
+export default WorkspaceProvider;

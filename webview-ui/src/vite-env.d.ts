@@ -4,8 +4,12 @@ export {};
 
 declare global {
   interface Window {
-    acquireVsCodeApi?: () => {
+    acquireVsCodeApi: () => {
       postMessage: (msg: any) => void;
+    };
+    vscode: any;
+    initialData: {
+      viewID: "workflows" | "processes" | "userInfo";
     };
   }
 }
