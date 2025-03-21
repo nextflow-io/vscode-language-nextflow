@@ -19,7 +19,7 @@ type PlatformData = {
 const fetchPlatformData = async (
   accessToken: string,
   viewID: string,
-  view?: WebviewView
+  view?: WebviewView["webview"]
 ): Promise<PlatformData> => {
   const authState = await getAuthState(accessToken);
 
@@ -29,7 +29,7 @@ const fetchPlatformData = async (
   };
 
   if (!accessToken) {
-    view?.webview?.postMessage(data);
+    view?.postMessage(data);
     return data;
   }
 
@@ -37,7 +37,7 @@ const fetchPlatformData = async (
 
   if (!userInfo.user) {
     if (userInfo.message) data.authState.error = userInfo.message;
-    view?.webview?.postMessage(data);
+    view?.postMessage(data);
     return data;
   }
 
@@ -51,7 +51,7 @@ const fetchPlatformData = async (
     computeEnvs
   };
 
-  view?.webview.postMessage(data);
+  view?.postMessage(data);
 
   return data;
 };

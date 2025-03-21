@@ -49,7 +49,7 @@ class WebviewProvider implements vscode.WebviewViewProvider {
     if (viewID === "userInfo") {
       const accessToken = await getAccessToken(_context);
       if (!accessToken) return;
-      await fetchPlatformData(accessToken, viewID, _currentView);
+      await fetchPlatformData(accessToken, viewID, _currentView?.webview);
     } else {
       view.webview.postMessage({
         viewID,
@@ -93,6 +93,12 @@ class WebviewProvider implements vscode.WebviewViewProvider {
   private getBuiltHTML(view: vscode.WebviewView) {
     const distUri = this.getBuildPath();
     let html = fs.readFileSync(path.join(distUri.fsPath, "index.html"), "utf8");
+
+    html = html.replace(
+      "</head>",
+      `<script>window.initialData = { viewID: "${this.viewID}" };</script></head>`
+    );
+
     html = updateRefs(html, view.webview, distUri);
     return html;
   }

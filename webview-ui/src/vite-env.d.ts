@@ -8,5 +8,8 @@ declare global {
       postMessage: (msg: any) => void;
     };
     vscode: any;
+    initialData: {
+      viewID: "workflows" | "processes" | "userInfo";
+    };
   }
 }

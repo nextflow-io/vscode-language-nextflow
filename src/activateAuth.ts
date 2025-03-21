@@ -19,7 +19,6 @@ export async function activateAuth(
   const handleLogout = async () => {
     const sessions = await authProvider.getSessions();
     const session = sessions[0];
-    console.log("🟣 handleLogout", session);
     if (!session) return;
     await authProvider.removeSession(session.id);
   };

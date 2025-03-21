@@ -19,11 +19,11 @@ export type AuthState = {
   error?: string;
 };
 
-type viewID = "workflows" | "processes" | "userInfo" | null;
+type ViewID = "workflows" | "processes" | "userInfo" | null;
 
 const Context = ({ children }: Props) => {
+  const viewID = window.initialData?.viewID as ViewID;
   const state = vscode.getState();
-  const [viewID, setViewID] = useState<viewID>(state?.viewID || null);
   const [authState, setAuthState] = useState<AuthState>(state?.authState || {});
   const [userInfo, setUserInfo] = useState<UserInfo>(state?.userInfo || {});
   const [workspaces, setWorkspaces] = useState<Workspace[]>(
@@ -40,7 +40,6 @@ const Context = ({ children }: Props) => {
     const handleMessage = (event: MessageEvent) => {
       console.log("🟠 message", event.data);
       const { data } = event;
-      if (data.viewID) setViewID(data.viewID);
       if (data.authState) setAuthState(data.authState);
       if (data.userInfo) setUserInfo(data.userInfo);
       if (data.workspaces) setWorkspaces(data.workspaces);
@@ -50,10 +49,6 @@ const Context = ({ children }: Props) => {
     window.addEventListener("message", handleMessage);
     return () => window.removeEventListener("message", handleMessage);
   }, []);
-
-  useEffect(() => {
-    vscode.setState({ viewID });
-  }, [viewID]);
 
   useEffect(() => {
     if (viewID !== "userInfo") return;
@@ -79,6 +74,8 @@ const Context = ({ children }: Props) => {
     if (viewID !== "userInfo") return;
     vscode.setState({ organizations });
   }, [organizations]);
+
+  if (!viewID) return <div>No viewID</div>;
 
   return (
     <WorkspaceProvider vscode={vscode} viewID={viewID}>

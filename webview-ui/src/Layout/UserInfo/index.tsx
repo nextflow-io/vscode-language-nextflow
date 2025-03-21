@@ -4,6 +4,7 @@ import { useWorkspaceContext, useTowerContext } from "../../Context";
 import { formatTime } from "./utils";
 
 import styles from "./styles.module.css";
+
 const UserInfo = () => {
   const { login } = useWorkspaceContext();
   const { workspaces, userInfo, tokenExpiry, hasToken, computeEnvs, error } =
@@ -14,7 +15,7 @@ const UserInfo = () => {
 
   return (
     <>
-      {!userInfo ? (
+      {!hasToken || tokenExpired ? (
         <div className={clsx(styles.section, styles.centered)}>
           <div>
             {error && (
@@ -41,9 +42,9 @@ const UserInfo = () => {
             </div>
           )}
           <div className={styles.section}>
-            User: {userInfo.user.userName}
+            User: {userInfo?.user?.userName}
             <br />
-            Email: {userInfo.user.email}
+            Email: {userInfo?.user?.email}
             <br />
             Token expires: {formatTime(tokenExpiry)}
             <br />

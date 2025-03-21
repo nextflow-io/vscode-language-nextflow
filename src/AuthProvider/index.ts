@@ -19,7 +19,8 @@ import type {
   AuthenticationProvider,
   AuthenticationProviderAuthenticationSessionsChangeEvent as ChangeEvent,
   AuthenticationSession,
-  ExtensionContext
+  ExtensionContext,
+  WebviewView
 } from "vscode";
 
 type ExchangePromise = {
@@ -38,7 +39,7 @@ class AuthProvider implements AuthenticationProvider, Disposable {
   private currentInstance: Disposable;
   private pendingIDs: string[] = []; // TODO: Does this do anything?
   private promises = new Map<string, ExchangePromise>();
-  private webviewView?: any;
+  private webviewView!: WebviewView["webview"];
 
   constructor(private readonly context: ExtensionContext) {
     const { registerAuthenticationProvider: register } = vscodeAuth;
@@ -67,7 +68,6 @@ class AuthProvider implements AuthenticationProvider, Disposable {
   public async createSession(scopes: string[]): Promise<AuthenticationSession> {
     try {
       const accessToken = await this.login(scopes);
-      console.log("🟣 createSession", accessToken);
       if (!accessToken) {
         throw new Error(`Platform login failure`);
       }
@@ -77,7 +77,6 @@ class AuthProvider implements AuthenticationProvider, Disposable {
         "userInfo",
         this.webviewView
       );
-      console.log("🟣🟢 createSession", data);
       const { userInfo } = data;
       const account = {
         label: userInfo?.user?.userName || "Undefined",
@@ -111,7 +110,6 @@ class AuthProvider implements AuthenticationProvider, Disposable {
 
   public async removeSession(sessionId: string): Promise<void> {
     const allSessions = await this.context.secrets.get(STORAGE_KEY_NAME);
-    console.log("🟣 removeSession", allSessions);
     if (!allSessions) return;
     let sessions = JSON.parse(allSessions) as AuthenticationSession[];
     const sessionIdx = sessions.findIndex((s) => s.id === sessionId);
@@ -123,7 +121,6 @@ class AuthProvider implements AuthenticationProvider, Disposable {
       JSON.stringify(sessions)
     );
 
-    console.log("🟣 removeSession", session);
     this.webviewView?.postMessage({ authState: {} });
 
     if (session) {
@@ -140,7 +137,6 @@ class AuthProvider implements AuthenticationProvider, Disposable {
   }
 
   private async login(scopes: string[] = []) {
-    console.log("🟣 login", scopes);
     return await window.withProgress<string>(
       {
         location: ProgressLocation.Notification,

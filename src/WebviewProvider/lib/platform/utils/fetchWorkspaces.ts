@@ -5,7 +5,6 @@ const fetchWorkspaces = async (
   token: string,
   userID: number
 ): Promise<Workspace[]> => {
-  console.log("🟣 fetchWorkspaces", token, userID);
   if (!token) return [];
   try {
     const response = await fetch(`${API_URL}/user/${userID}/workspaces`, {
