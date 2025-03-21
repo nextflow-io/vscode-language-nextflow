@@ -2,7 +2,7 @@ import { ExtensionContext, WebviewView } from "vscode";
 import fetchUserInfo from "./utils/fetchUserInfo";
 import fetchWorkspaces from "./utils/fetchWorkspaces";
 import fetchComputeEnvs from "./utils/fetchComputeEnvs";
-import debounce from "../../../utils/debounce";
+import debounce from "../debounce";
 
 import { Workspace, UserInfoResponse, ComputeEnv } from "./utils/types";
 import getAuthState, { AuthState } from "./getAuthState";

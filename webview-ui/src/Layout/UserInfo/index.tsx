@@ -8,7 +8,6 @@ import styles from "./styles.module.css";
 const UserInfo = () => {
   const { login } = useWorkspaceContext();
   const {
-    getWorkspaces,
     workspaces,
     organizations,
     userInfo,
