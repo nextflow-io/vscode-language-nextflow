@@ -13,6 +13,8 @@
       background-color: var(--nf-item-bg-hover);
     }
     & .name {
+      display: flex;
+      align-items: center;
       padding: 6px 8px;
       width: 100%;
     }

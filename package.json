@@ -99,6 +99,7 @@
     ],
     "commands": [
       {
+        "icon": "$(refresh)",
         "command": "nextflow.reloadWebView",
         "title": "Reload Seqera Webview",
         "category": "Nextflow"
@@ -149,7 +150,7 @@
     "menus": {
       "view/title": [
         {
-          "command": "nextflow.login",
+          "command": "nextflow.reloadWebView",
           "group": "navigation@10"
         }
       ]

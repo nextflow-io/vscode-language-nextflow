@@ -24,21 +24,26 @@ const UserInfo = () => {
   return (
     <>
       {!hasToken || tokenExpired ? (
-        <div className={clsx(styles.section, styles.centered)}>
-          <div>
-            {error && (
-              <div>
-                <p>Error: {error}</p>
-              </div>
-            )}
-            {hasToken && tokenExpired && (
-              <div>
-                <p>Token expired: {formatTime(tokenExpiry)}</p>
-              </div>
-            )}
-            <Button onClick={login}>Login to Seqera Platform</Button>
+        <>
+          <div className={clsx(styles.section, styles.centered)}>
+            <div>
+              {error && (
+                <div>
+                  <p>Error: {error}</p>
+                </div>
+              )}
+              {hasToken && tokenExpired && (
+                <div>
+                  <p>Token expired: {formatTime(tokenExpiry)}</p>
+                </div>
+              )}
+              <Button onClick={login}>Login to Seqera Platform</Button>
+            </div>
           </div>
-        </div>
+          <div className={clsx(styles.section, styles.centered)}>
+            <Button href="https://seqera.io/ask-ai">Talk to Seqera AI</Button>
+          </div>
+        </>
       ) : (
         <div>
           {error && (
@@ -46,11 +51,13 @@ const UserInfo = () => {
               <p>Error:{error}</p>
             </div>
           )}
-          <Button onClick={refresh}>Refresh</Button>
           <div className={styles.section}>
             User: {userInfo?.user?.userName}
             <br />
             Email: {userInfo?.user?.email}
+          </div>
+          <div className={clsx(styles.section)}>
+            <Button href="https://seqera.io/ask-ai">Talk to Seqera AI</Button>
           </div>
           <div className={styles.section}>
             <h3>Workspaces</h3>
@@ -86,9 +93,6 @@ const UserInfo = () => {
           </div>
         </div>
       )}
-      <div className={styles.section}>
-        <Button href="https://seqera.io/ask-ai">Talk to Seqera AI</Button>
-      </div>
     </>
   );
 };
