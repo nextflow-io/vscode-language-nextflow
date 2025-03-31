@@ -14,8 +14,7 @@ const UserInfo = () => {
     tokenExpiry,
     hasToken,
     computeEnvs,
-    error,
-    refresh
+    error
   } = useTowerContext();
 
   let tokenExpired = false;
