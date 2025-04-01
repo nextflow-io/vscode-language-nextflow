@@ -1,8 +1,16 @@
-import { createContext, useContext, useState } from "react";
+import {
+  createContext,
+  useCallback,
+  useContext,
+  useEffect,
+  useMemo,
+  useState
+} from "react";
 
 import {
   WorkspaceID,
   Workspace,
+  Organization,
   ComputeEnv,
   PipelineResponse,
   UserInfo,
@@ -41,7 +49,7 @@ type TowerContextType = {
   setSelectedComputeEnv: (n: string) => void;
   computeEnvs?: ComputeEnv[];
   workspaces?: Workspace[];
-  organizations?: Workspace[];
+  organizations?: Organization[];
   getWorkspaces: (orgId: string | number) => Workspace[];
   setSelectedOrg: (n: string) => void;
   selectedOrg: string;
@@ -58,16 +66,38 @@ const TowerProvider: React.FC<Props> = ({
   platformData,
   vscode
 }) => {
-  const [selectedWorkspace, setSelectedWorkspace] = useState<WorkspaceID>(null);
-  const [selectedComputeEnv, setSelectedComputeEnv] = useState<string | null>(
-    null
-  );
-  const [selectedOrg, setSelectedOrg] = useState<string>("");
-
   const { userInfo, workspaces: orgsAndWorkspaces, computeEnvs } = platformData;
 
-  const organizations = getOrganizations(orgsAndWorkspaces);
-  const workspaces = getWorkspaces(orgsAndWorkspaces);
+  const organizations: Organization[] = useMemo(
+    () => getOrganizations(orgsAndWorkspaces),
+    [orgsAndWorkspaces]
+  );
+
+  const workspaces: Workspace[] = useMemo(
+    () => getWorkspaces(orgsAndWorkspaces),
+    [orgsAndWorkspaces]
+  );
+
+  const [visibleEnvs, setVisibleEnvs] = useState<ComputeEnv[]>([]);
+  const [selectedWorkspace, setSelectedWorkspace] = useState<WorkspaceID>("");
+  const [selectedComputeEnv, setSelectedComputeEnv] = useState<string>("");
+  const [selectedOrg, setSelectedOrg] = useState<string>("");
+
+  useEffect(() => {
+    setSelectedWorkspace(workspaces[0]?.workspaceId ?? "");
+  }, [workspaces]);
+
+  useEffect(() => {
+    const selectedWorkspaceName = workspaces.find(
+      (w) => w.workspaceId === selectedWorkspace
+    )?.workspaceName;
+    if (!selectedWorkspaceName) return;
+    setVisibleEnvs(
+      computeEnvs?.filter((ce) => ce.workspaceName === selectedWorkspaceName) ??
+        []
+    );
+    setSelectedComputeEnv(visibleEnvs[0]?.id ?? "");
+  }, [selectedWorkspace]);
 
   const getOrgWorkspaces = (orgId: string | number) => {
     return getWorkspaces(orgsAndWorkspaces, orgId);
@@ -107,7 +137,7 @@ const TowerProvider: React.FC<Props> = ({
         setSelectedWorkspace,
         selectedComputeEnv,
         setSelectedComputeEnv,
-        computeEnvs,
+        computeEnvs: visibleEnvs,
         workspaces,
         getWorkspaces: getOrgWorkspaces,
         organizations,

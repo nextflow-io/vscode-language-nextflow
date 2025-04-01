@@ -1,13 +1,19 @@
 import clsx from "clsx";
 import Button from "../../../components/Button";
 import { useTowerContext } from "../../../Context";
-import { getWorkspaceURL } from "../utils";
+import Select from "../../../components/Select";
 
 import styles from "./styles.module.css";
 
 const UserInfo = () => {
-  const { workspaces, organizations, userInfo, computeEnvs, error } =
-    useTowerContext();
+  const {
+    workspaces,
+    selectedWorkspace,
+    setSelectedWorkspace,
+    userInfo,
+    computeEnvs,
+    error
+  } = useTowerContext();
 
   return (
     <div>
@@ -26,19 +32,17 @@ const UserInfo = () => {
       </div>
       <div className={styles.section}>
         <h3>Workspaces</h3>
-        {organizations?.length ? (
-          <>
-            {workspaces?.map((workspace) => (
-              <div key={workspace.orgId} className={styles.row}>
-                <span>{workspace.orgName}</span>
-                <a href={getWorkspaceURL(workspace)}>
-                  {workspace.workspaceName}
-                </a>
-              </div>
-            ))}
-          </>
+        {workspaces?.length ? (
+          <Select
+            options={workspaces.map((ws) => ({
+              label: ws.orgName + ": " + ws.workspaceName,
+              value: ws.workspaceId
+            }))}
+            value={selectedWorkspace}
+            onChange={setSelectedWorkspace}
+          />
         ) : (
-          <div>No organizations found</div>
+          <div>No workspaces found</div>
         )}
       </div>
       <div className={styles.section}>

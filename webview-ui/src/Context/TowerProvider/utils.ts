@@ -12,12 +12,6 @@ export function getWorkspaces(
   orgId?: string | number
 ): Workspace[] {
   if (!orgsAndWorkspaces) return [];
-  // const defaultWorkspace = {
-  //   orgId: "",
-  //   orgName: "User",
-  //   workspaceId: null,
-  //   workspaceName: "Personal Workspace"
-  // } as Workspace;
   const workspaces = orgsAndWorkspaces.filter((w) => !!w.workspaceId);
   if (orgId) {
     return workspaces.filter((w) => w.orgId === orgId);

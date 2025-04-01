@@ -19,11 +19,12 @@ export type ComputeEnv = {
   status: string;
   workDir: string;
   credentialsId: string;
+  workspaceName: string;
 };
 
-export type WorkspaceID = number | string | null;
+export type WorkspaceID = number | string;
 
-export type Workspace = {
+export type Organization = {
   orgId: number | string;
   orgName: string;
   orgLogoUrl?: string | null;
@@ -34,7 +35,16 @@ export type Workspace = {
   roles?: string[];
 };
 
-export type Organization = Workspace;
+export type Workspace = {
+  orgId: number | string;
+  orgName: string;
+  orgLogoUrl?: string;
+  workspaceId: WorkspaceID;
+  workspaceName: string;
+  workspaceFullName: string;
+  visibility?: string;
+  roles?: string[];
+};
 
 export type Pipeline = {
   pipelineId: number;

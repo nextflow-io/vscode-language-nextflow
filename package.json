@@ -152,6 +152,11 @@
         {
           "command": "nextflow.reloadWebView",
           "group": "navigation@10"
+        },
+        {
+          "command": "nextflow.logout",
+          "when": "view == userInfo",
+          "group": "navigation@10"
         }
       ]
     },

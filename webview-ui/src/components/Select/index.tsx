@@ -1,14 +1,14 @@
 import styles from "./styles.module.css";
 
 type Option = {
-  value: string;
-  label: string;
+  value: string | number;
+  label: string | number;
 };
 
 type Props = {
   options: Option[];
-  value: string;
-  onChange: (value: string) => void;
+  value: string | number;
+  onChange: (value: string | number) => void;
 };
 
 const Select: React.FC<Props> = ({ options, value, onChange }) => {

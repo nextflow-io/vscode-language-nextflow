@@ -3,31 +3,35 @@ import type { Workspace, ComputeEnv } from "./types";
 
 const fetchComputeEnvs = async (
   token: string,
-  workspaces: Workspace[]
+  orgsAndWorkspaces: Workspace[]
 ): Promise<ComputeEnv[]> => {
-  console.log("🟢🟣 fetchComputeEnvs", workspaces);
   if (!token) return [];
-  const workspace = workspaces.find((w) => !!w.workspaceId);
-  const workspaceID = workspace?.workspaceId;
-  if (!workspaceID) return [];
 
-  const params = new URLSearchParams({
-    workspaceId: `${workspaceID}`
-  });
-  const url = `${API_URL}/compute-envs?${params}`;
+  const workspaces = orgsAndWorkspaces.filter((w) => !!w.workspaceId);
+  if (workspaces.length === 0) return [];
 
   try {
-    const res = await fetch(url, {
-      credentials: "include",
-      method: "GET",
-      headers: new Headers({
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`
+    const results = await Promise.all(
+      workspaces.map(async (workspace) => {
+        const params = new URLSearchParams({
+          workspaceId: `${workspace.workspaceId}`
+        });
+        const url = `${API_URL}/compute-envs?${params}`;
+
+        const res = await fetch(url, {
+          credentials: "include",
+          method: "GET",
+          headers: new Headers({
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`
+          })
+        });
+        const data = (await res.json()) as { computeEnvs: ComputeEnv[] };
+        return data?.computeEnvs || ([] as ComputeEnv[]);
       })
-    });
-    console.log("🟣 fetchComputeEnvs", res.status);
-    const data = await res.json();
-    return data as ComputeEnv[];
+    );
+
+    return results.flat();
   } catch (e) {
     console.error(e);
     return [];
