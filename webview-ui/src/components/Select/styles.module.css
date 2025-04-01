@@ -1,0 +1,20 @@
+.select {
+  border: 1px solid var(--vscode-dropdown-border);
+  background: var(--vscode-dropdown-background);
+  border-radius: 2px;
+  cursor: pointer;
+}
+
+.option {
+  padding: 6px 8px;
+  transition: background-color 0.2s;
+}
+
+.option:hover {
+  background-color: var(--vscode-list-hoverBackground);
+}
+
+.selected {
+  background-color: var(--vscode-list-activeSelectionBackground);
+  color: var(--vscode-list-activeSelectionForeground);
+}
