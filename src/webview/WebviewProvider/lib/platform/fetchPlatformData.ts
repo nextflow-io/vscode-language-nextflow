@@ -6,7 +6,7 @@ import debounce from "../debounce";
 
 import { Workspace, UserInfoResponse, ComputeEnv } from "./utils/types";
 import getAuthState, { AuthState } from "./getAuthState";
-import { expired } from "../../../AuthProvider/utils/jwt";
+import { expired } from "../../../../auth/AuthProvider/utils/jwt";
 
 type PlatformData = {
   viewID: string;

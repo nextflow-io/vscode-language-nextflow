@@ -2,8 +2,8 @@ import * as vscode from "vscode";
 import * as fs from "fs";
 import * as path from "path";
 
-import { buildTree, fetchPlatformData, getAccessToken } from "./lib";
-import AuthProvider from "../AuthProvider";
+import { buildTree, fetchPlatformData } from "./lib";
+import { AuthProvider, getAccessToken } from "../../auth";
 import { FileNode } from "./lib/workspace/types";
 
 class WebviewProvider implements vscode.WebviewViewProvider {

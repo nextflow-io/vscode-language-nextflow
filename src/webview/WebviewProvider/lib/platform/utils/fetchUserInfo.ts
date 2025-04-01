@@ -1,4 +1,4 @@
-import { API_URL } from "../../../../constants";
+import { API_URL } from "../../../../../constants";
 import type { UserInfoResponse } from "./types";
 
 const fetchUserInfo = async (token: string): Promise<UserInfoResponse> => {

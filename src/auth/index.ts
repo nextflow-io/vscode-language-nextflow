@@ -1,11 +1,12 @@
 import { authentication, commands, window } from "vscode";
 const { getSession, onDidChangeSessions } = authentication;
 
+import getAccessToken from "./getAccessToken";
 import AuthProvider from "./AuthProvider";
 
 import type { ExtensionContext } from "vscode";
 
-export async function activateAuth(
+async function activateAuth(
   context: ExtensionContext,
   authProvider: AuthProvider
 ) {
@@ -40,3 +41,5 @@ const showWelcomeMessage = async () => {
   if (session) msg = `Logged in to Seqera Platform: ${session.account.label}`;
   window.showInformationMessage(msg);
 };
+
+export { activateAuth, AuthProvider, getAccessToken };

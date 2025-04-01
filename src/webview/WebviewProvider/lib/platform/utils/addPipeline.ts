@@ -1,7 +1,7 @@
 import type { Pipeline, ComputeEnv, WorkspaceID } from "./types";
 import type { FormData } from "./types";
 import type { AuthenticationSession } from "vscode";
-import { API_URL } from "../../../../constants";
+import { API_URL } from "../../../../../constants";
 
 const addPipeline = async (
   session: AuthenticationSession | null,

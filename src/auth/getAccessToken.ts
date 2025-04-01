@@ -1,6 +1,6 @@
 import { AuthenticationSession, ExtensionContext } from "vscode";
 
-import { STORAGE_KEY_NAME } from "../../../AuthProvider";
+import { STORAGE_KEY_NAME } from "./AuthProvider";
 
 const getAccessToken = async (
   context: ExtensionContext

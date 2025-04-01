@@ -11,9 +11,8 @@ import {
 
 import { PromiseAdapter, promiseFromEvent } from "./utils/promiseFromEvent";
 import UriEventHandler from "./utils/UriEventHandler";
-import { fetchPlatformData } from "../WebviewProvider/lib";
-import { decodeJWT, jwtExpired } from "./utils/jwt";
-import { PLATFORM_URL } from "../constants";
+import { fetchPlatformData } from "../../webview/WebviewProvider/lib";
+import { PLATFORM_URL } from "../../constants";
 
 import type {
   AuthenticationProvider,

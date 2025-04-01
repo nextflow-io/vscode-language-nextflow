@@ -1,4 +1,4 @@
-import { jwtExpired, decodeJWT } from "../../../AuthProvider/utils/jwt";
+import { jwtExpired, decodeJWT } from "../../../../auth/AuthProvider/utils/jwt";
 
 export type AuthState = {
   hasToken: boolean;

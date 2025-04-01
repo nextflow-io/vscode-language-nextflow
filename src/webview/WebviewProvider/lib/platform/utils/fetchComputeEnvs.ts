@@ -1,4 +1,4 @@
-import { API_URL } from "../../../../constants";
+import { API_URL } from "../../../../../constants";
 import type { Workspace, ComputeEnv } from "./types";
 
 const fetchComputeEnvs = async (

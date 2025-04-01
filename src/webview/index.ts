@@ -1,6 +1,6 @@
 import * as vscode from "vscode";
 import WebviewProvider from "./WebviewProvider";
-import AuthProvider from "./AuthProvider";
+import { AuthProvider } from "../auth";
 
 export function activateWebview(
   context: vscode.ExtensionContext,

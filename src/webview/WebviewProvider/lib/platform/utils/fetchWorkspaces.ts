@@ -1,5 +1,5 @@
 import type { Workspace } from "./types";
-import { API_URL } from "../../../../constants";
+import { API_URL } from "../../../../../constants";
 
 const fetchWorkspaces = async (
   token: string,
