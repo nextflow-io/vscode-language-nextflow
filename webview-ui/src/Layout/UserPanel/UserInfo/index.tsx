@@ -36,7 +36,7 @@ const UserInfo = () => {
         {workspaces?.length ? (
           <Select
             options={workspaces.map((ws) => ({
-              label: ws.orgName + ": " + ws.workspaceName,
+              label: ws.orgName + " / " + ws.workspaceName,
               value: ws.workspaceId
             }))}
             value={selectedWorkspace}

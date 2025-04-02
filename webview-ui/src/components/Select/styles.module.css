@@ -1,13 +1,53 @@
 .select {
+  position: relative;
+  width: 100%;
+}
+
+.selectButton {
   border: 1px solid var(--vscode-dropdown-border);
   background: var(--vscode-dropdown-background);
   border-radius: 2px;
+  padding: 6px 8px;
   cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.selectButton::after {
+  content: "";
+  width: 0;
+  height: 0;
+  border-left: 4px solid transparent;
+  border-right: 4px solid transparent;
+  border-top: 4px solid var(--vscode-foreground);
+  margin-left: 8px;
+  transition: transform 0.2s ease;
+}
+
+.selectButton[aria-expanded="true"]::after {
+  transform: rotate(180deg);
+}
+
+.dropdown {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background: var(--vscode-dropdown-background);
+  border: 1px solid var(--vscode-dropdown-border);
+  border-radius: 2px;
+  margin-top: 4px;
+  max-height: 200px;
+  overflow-y: auto;
+  z-index: 1000;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .option {
   padding: 6px 8px;
   transition: background-color 0.2s;
+  cursor: pointer;
 }
 
 .option:hover {
