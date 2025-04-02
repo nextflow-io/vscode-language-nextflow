@@ -25,7 +25,7 @@ async function getItem(
   return node;
 }
 
-async function buildTree(): Promise<{
+async function buildList(): Promise<{
   files: FileNode[];
   tests: FileNode[];
 }> {
@@ -50,4 +50,4 @@ async function buildTree(): Promise<{
   return { files: nfNodes, tests: testNodes };
 }
 
-export default buildTree;
+export default buildList;

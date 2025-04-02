@@ -71,8 +71,8 @@ const WorkspaceProvider = ({ children, vscode, viewID }: Props) => {
   useEffect(() => {
     const handleMessage = (event: MessageEvent) => {
       const message = event.data;
-      if (message.fileTree) {
-        const { files, tests } = message.fileTree;
+      if (message.fileList) {
+        const { files, tests } = message.fileList;
         setFiles(sortFiles(files || []));
         setTests(sortFiles(tests || []));
       }
