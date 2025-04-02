@@ -1,11 +1,4 @@
-import {
-  createContext,
-  useCallback,
-  useContext,
-  useEffect,
-  useMemo,
-  useState
-} from "react";
+import { createContext, useContext, useEffect, useMemo, useState } from "react";
 
 import {
   WorkspaceID,
@@ -31,9 +24,9 @@ type Props = {
 
 type PlatformData = {
   userInfo?: UserInfo;
-  workspaces?: Workspace[];
-  computeEnvs?: ComputeEnv[];
-  organizations?: Workspace[];
+  workspaces: Workspace[];
+  computeEnvs: ComputeEnv[];
+  organizations: Organization[];
 };
 
 type TowerContextType = {
@@ -47,8 +40,8 @@ type TowerContextType = {
   setSelectedWorkspace: (n: WorkspaceID) => void;
   selectedComputeEnv: string | null;
   setSelectedComputeEnv: (n: string) => void;
-  computeEnvs?: ComputeEnv[];
-  workspaces?: Workspace[];
+  computeEnvs: ComputeEnv[];
+  workspaces: Workspace[];
   organizations?: Organization[];
   getWorkspaces: (orgId: string | number) => Workspace[];
   setSelectedOrg: (n: string) => void;

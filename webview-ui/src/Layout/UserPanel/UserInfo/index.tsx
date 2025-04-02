@@ -4,6 +4,7 @@ import { useTowerContext } from "../../../Context";
 import Select from "../../../components/Select";
 
 import styles from "./styles.module.css";
+import { getComputeEnvURL } from "../utils";
 
 const UserInfo = () => {
   const {
@@ -51,8 +52,9 @@ const UserInfo = () => {
           <>
             {computeEnvs?.map((computeEnv) => (
               <div className={styles.row} key={computeEnv.id}>
-                <span>{computeEnv.id}</span>
-                <span>{computeEnv.name}</span>
+                <a href={getComputeEnvURL(workspaces, computeEnv)}>
+                  {computeEnv.name}
+                </a>
               </div>
             ))}
           </>
