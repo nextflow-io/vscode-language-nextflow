@@ -19,5 +19,6 @@ export interface FileNode {
   filePath: string;
   type: Type;
   imports: string[];
+  children?: FileNode[];
   line?: number;
 }

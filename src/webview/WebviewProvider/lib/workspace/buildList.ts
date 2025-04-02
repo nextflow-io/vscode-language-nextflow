@@ -1,29 +1,9 @@
-import * as fs from "fs";
-import * as path from "path";
 import * as vscode from "vscode";
 
 import { FileNode } from "./types";
 
 import { findNfFiles, findTestFiles } from "./findFiles";
-import { getImports, parseFile } from "./parseFile";
-
-async function getItem(
-  filePath: string,
-  root: string
-): Promise<FileNode | null> {
-  const content = fs.readFileSync(filePath, "utf8");
-  const fileInfo = parseFile(content);
-  if (!fileInfo) return null;
-  const node: FileNode = {
-    name: fileInfo.name,
-    fileName: path.relative(root, filePath),
-    filePath,
-    type: fileInfo?.type,
-    imports: getImports(content),
-    line: fileInfo.line
-  };
-  return node;
-}
+import getItem from "./getItem";
 
 async function buildList(): Promise<{
   files: FileNode[];
@@ -38,12 +18,12 @@ async function buildList(): Promise<{
   const testNodes: FileNode[] = [];
 
   for (const filePath of nfFiles) {
-    const item = await getItem(filePath, root);
+    const item = await getItem(filePath);
     if (item) nfNodes.push(item);
   }
 
   for (const filePath of testFiles) {
-    const item = await getItem(filePath, root);
+    const item = await getItem(filePath);
     if (item) testNodes.push(item);
   }
 

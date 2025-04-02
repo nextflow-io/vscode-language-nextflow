@@ -1,18 +1,6 @@
 import { FileInfo } from "./types";
 
-export function getImports(content: string): string[] {
-  const rx =
-    /include\s*(?:\{\s*([^}\s]+)[^}]*\}|([^{}\s]+))\s*from\s+['"][^'"]+['"]/gm;
-  const importSet = new Set<string>();
-  let m: RegExpExecArray | null;
-  while ((m = rx.exec(content)) !== null) {
-    const importName = m[1] || m[2];
-    if (importName) importSet.add(importName);
-  }
-  return Array.from(importSet);
-}
-
-export function parseFile(content: string): FileInfo | null {
+function parseFile(content: string): FileInfo | null {
   // Helper function to get line number from character index
   const getLineNumber = (text: string, index: number): number => {
     return text.slice(0, index).split("\n").length;
@@ -81,3 +69,5 @@ export function parseFile(content: string): FileInfo | null {
 
   return null;
 }
+
+export default parseFile;

@@ -2,7 +2,7 @@ import * as vscode from "vscode";
 import * as fs from "fs";
 import * as path from "path";
 
-import { buildList, fetchPlatformData } from "./lib";
+import { buildList, buildTree, fetchPlatformData } from "./lib";
 import { AuthProvider, getAccessToken } from "../../auth";
 import { FileNode } from "./lib/workspace/types";
 
@@ -61,9 +61,14 @@ class WebviewProvider implements vscode.WebviewViewProvider {
         refresh
       );
     } else {
+      const fileList = await buildList();
+      const mainFile = fileList.files.find(
+        (file) => file.fileName === "main.nf"
+      );
       view.webview.postMessage({
         viewID,
-        fileList: await buildList()
+        fileList,
+        tree: await buildTree(fileList.files, mainFile)
       });
     }
   }
