@@ -2,6 +2,7 @@ import clsx from "clsx";
 import Button from "../../../components/Button";
 import { useWorkspaceContext, useTowerContext } from "../../../Context";
 import { formatTime } from "../utils";
+import { Resources } from "../Resources";
 
 import styles from "./styles.module.css";
 
@@ -37,6 +38,9 @@ const Login = () => {
           Talk to Seqera AI
           <i className="codicon codicon-comment-discussion ml-2" />
         </Button>
+      </div>
+      <div className={styles.section}>
+        <Resources showIntro />
       </div>
     </div>
   );

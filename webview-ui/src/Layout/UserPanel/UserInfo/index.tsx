@@ -5,6 +5,7 @@ import Select from "../../../components/Select";
 
 import styles from "./styles.module.css";
 import { getComputeEnvURL } from "../utils";
+import { Resources } from "../Resources";
 
 const UserInfo = () => {
   const {
@@ -64,6 +65,9 @@ const UserInfo = () => {
         ) : (
           <div>No compute environments found</div>
         )}
+      </div>
+      <div className={styles.section}>
+        <Resources />
       </div>
     </div>
   );

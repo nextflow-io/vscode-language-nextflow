@@ -24,4 +24,11 @@
     font-size: 14px;
     opacity: 0.8;
   }
+  &.small {
+    height: 24px;
+    padding: 0 12px;
+  }
+  &.fullWidth {
+    width: 100%;
+  }
 }
