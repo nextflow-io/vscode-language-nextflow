@@ -1,3 +1,7 @@
+.container {
+  width: 100%;
+  box-sizing: border-box;
+}
 .row {
   user-select: none;
   width: 100%;
@@ -24,86 +28,14 @@
       margin-right: 6px;
     }
   }
-}
-.row.workflow {
-  & .name {
-    font-weight: bold;
-    width: 100%;
-  }
   & .children {
     padding: 0 0 4px 0;
-    & > label {
-      display: block;
-      cursor: pointer;
-      padding: 0 16px 0 28px;
-      &:hover {
-        background-color: var(--nf-item-bg-hover);
-      }
-      & > span {
-        font-size: 8px;
-        margin-left: 8px;
-      }
-    }
-    & > div {
-      & > label {
-        padding: 4px 16px 4px 32px;
-        color: var(--nf-item-fg-active);
-        display: block;
-        width: 100%;
-        cursor: pointer;
-        line-height: 1;
-        &:hover {
-          background-color: var(--nf-item-bg-hover);
-        }
-      }
-    }
+    margin-left: 7px;
+    border-left: 1px solid var(--vscode-dropdown-border);
   }
-}
-
-.row.process {
-  & .name {
-    width: 100%;
-    flex: 1 1 auto;
-    text-overflow: ellipsis;
-    overflow: hidden;
-  }
-  & .metaLabel {
-    white-space: nowrap;
-    cursor: pointer;
-    text-overflow: ellipsis;
-    overflow: hidden;
-    width: auto;
-    flex: none;
-    padding-right: 6px;
-    opacity: 0.8;
-    &:hover {
-      opacity: 1;
+  &.level-0 {
+    & .name {
+      font-weight: bold;
     }
-    &.disabled {
-      color: #666 !important;
-      cursor: default;
-    }
-    & .metaIcon {
-      width: 14px;
-      height: 12px;
-      margin-right: 4px;
-      opacity: 0;
-      top: 1px;
-      position: relative;
-    }
-  }
-  &:hover {
-    & .metaIcon {
-      opacity: 0.6;
-    }
-  }
-}
-.section {
-  width: 100%;
-  box-sizing: border-box;
-  &:not(:last-child) {
-    padding-bottom: 16px;
-    margin-bottom: 16px;
-    border-bottom: 1px solid var(--nf-item-bg-hover);
   }
 }

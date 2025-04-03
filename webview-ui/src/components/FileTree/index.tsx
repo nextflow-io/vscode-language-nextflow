@@ -5,15 +5,14 @@ import styles from "./styles.module.css";
 import { FileNode as FileNodeType } from "../../Context/WorkspaceProvider/types";
 
 type Props = {
-  files: FileNodeType[];
+  tree?: FileNodeType;
 };
 
-const FileTree = ({ files }: Props) => {
+const FileTree = ({ tree }: Props) => {
+  if (!tree) return null;
   return (
-    <div className={styles.section}>
-      {files.map((node) => (
-        <FileNode key={node.filePath} node={node} />
-      ))}
+    <div className={styles.container}>
+      <FileNode node={tree} />
     </div>
   );
 };

@@ -12,7 +12,7 @@ const FileNodeChildren = ({
 }) => {
   const { getFile, openFile, isSelected, selectItem } = useWorkspaceContext();
 
-  const linkableFiles = items.map((label) => getFile(label)).filter(Boolean);
+  const linkableFiles = items?.map((label) => getFile(label)).filter(Boolean);
   const itemKey = `${parent}.${label}`;
   const isOpen = isSelected(itemKey);
 
@@ -23,7 +23,7 @@ const FileNodeChildren = ({
       </label>
       {isOpen && (
         <div>
-          {linkableFiles.map((file) => {
+          {linkableFiles?.map((file) => {
             if (!file) return null;
             return (
               <label key={label} onClick={() => openFile(file)}>

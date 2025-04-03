@@ -1,0 +1,28 @@
+@font-face {
+  font-family: "codicon";
+  font-display: block;
+  src: url("../assets/codicon.ttf") format("truetype");
+}
+
+.codicon {
+  font: normal normal normal 16px/1 codicon;
+  display: inline-block;
+  text-decoration: none;
+  text-rendering: auto;
+  text-align: center;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+}
+
+/* Folder icon */
+.codicon-folder:before {
+  content: "\ea83";
+}
+
+/* File icon */
+.codicon-file:before {
+  content: "\ea7b";
+}

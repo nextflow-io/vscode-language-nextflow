@@ -1,5 +1,5 @@
 import { useWorkspaceContext } from "../../Context";
-import FileTree from "../../components/FileTree";
+import FileList from "../../components/FileList";
 
 import styles from "./styles.module.css";
 
@@ -19,7 +19,7 @@ const Processes = () => {
       <div className={styles.header}>
         Test coverage: <span style={{ color }}>{coverage}%</span>
       </div>
-      <FileTree files={processes} />
+      <FileList files={processes} />
     </div>
   );
 };

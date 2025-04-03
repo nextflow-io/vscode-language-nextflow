@@ -6,6 +6,7 @@ import { sortFiles } from "./utils";
 const WorkspaceContext = createContext<WorkspaceContextType>({
   files: [],
   tests: [],
+  tree: undefined,
   openFile: () => {},
   getFile: () => undefined,
   getTest: () => undefined,
@@ -20,6 +21,7 @@ const WorkspaceContext = createContext<WorkspaceContextType>({
 interface WorkspaceContextType {
   files: FileNodeType[];
   tests: FileNodeType[];
+  tree?: FileNodeType;
   openFile: (file: FileNodeType, isTest?: boolean) => void;
   getFile: (name: string) => FileNodeType | undefined;
   getTest: (name: string) => FileNodeType | undefined;
@@ -41,8 +43,9 @@ const WorkspaceProvider = ({ children, vscode, viewID }: Props) => {
   const state = vscode.getState();
 
   const [testCount, setTestCount] = useState(0);
-  const [files, setFiles] = useState<FileNodeType[]>(state?.files || []);
-  const [tests, setTests] = useState<FileNodeType[]>(state?.tests || []);
+  const [files, setFiles] = useState<FileNodeType[]>([]);
+  const [tests, setTests] = useState<FileNodeType[]>([]);
+  const [tree, setTree] = useState<FileNodeType | undefined>(undefined);
   const [selectedItems, setSelectedItems] = useState<string[]>(
     state?.selectedItems || []
   );
@@ -56,13 +59,13 @@ const WorkspaceProvider = ({ children, vscode, viewID }: Props) => {
     setTestCount(count);
   }, [files]);
 
-  useEffect(() => {
-    vscode.setState({ files });
-  }, [files]);
+  // useEffect(() => {
+  //   vscode.setState({ files });
+  // }, [files]);
 
-  useEffect(() => {
-    vscode.setState({ tests });
-  }, [tests]);
+  // useEffect(() => {
+  //   vscode.setState({ tests });
+  // }, [tests]);
 
   useEffect(() => {
     vscode.setState({ selectedItems });
@@ -75,6 +78,9 @@ const WorkspaceProvider = ({ children, vscode, viewID }: Props) => {
         const { files, tests } = message.fileList;
         setFiles(sortFiles(files || []));
         setTests(sortFiles(tests || []));
+      }
+      if (message.tree) {
+        setTree(message.tree);
       }
     };
     window.addEventListener("message", handleMessage);
@@ -115,6 +121,7 @@ const WorkspaceProvider = ({ children, vscode, viewID }: Props) => {
       value={{
         files,
         tests,
+        tree,
         openFile,
         getFile,
         getTest,
