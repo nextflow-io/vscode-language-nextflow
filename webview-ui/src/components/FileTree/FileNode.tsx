@@ -1,5 +1,5 @@
 import clsx from "clsx";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useWorkspaceContext } from "../../Context";
 import styles from "./styles.module.css";
 import { FileNode as FileNodeType } from "../../Context/WorkspaceProvider/types";
@@ -7,26 +7,50 @@ import { FileNode as FileNodeType } from "../../Context/WorkspaceProvider/types"
 type Props = {
   node: FileNodeType;
   level?: number;
+  searchTerm?: string;
 };
 
-const FileNode = ({ node, level = 0 }: Props) => {
+const FileNode = ({ node, level = 0, searchTerm }: Props) => {
   const { openFile } = useWorkspaceContext();
   const [expanded, setExpanded] = useState(level < 1);
-  const hasChildren = !!node.children?.length;
+  const isFolder = !!node.children?.length;
+
+  useEffect(() => {
+    if (searchTerm) setExpanded(true);
+    if (!searchTerm) setExpanded(level < 1);
+  }, [searchTerm]);
 
   function handleClick() {
-    if (hasChildren) setExpanded((prev) => !prev);
+    if (hasChildren && !searchTerm) setExpanded((prev) => !prev);
     openFile(node);
   }
 
+  const filteredChildren = node.children?.filter((child) => {
+    if (searchTerm) {
+      const isMatch = child.name
+        .toLowerCase()
+        .includes(searchTerm?.toLowerCase() || "");
+      return isMatch;
+    }
+    return true;
+  });
+
+  const hasChildren = !!filteredChildren?.length;
+
+  let isMatch = true;
+  if (searchTerm) {
+    isMatch = node.name.toLowerCase().includes(searchTerm?.toLowerCase() || "");
+  }
+  if (!hasChildren && !isMatch) return null;
+
   return (
-    <div className={clsx(styles.row, { [styles.folder]: hasChildren })}>
+    <div className={clsx(styles.row, { [styles.folder]: isFolder })}>
       <label className={clsx(styles.item)}>
         <span className={styles.name} onClick={handleClick}>
           <i
             className={clsx(
               "codicon",
-              hasChildren ? "codicon-folder" : "codicon-file"
+              isFolder ? "codicon-folder" : "codicon-file"
             )}
           />
           {node.name}
@@ -35,7 +59,12 @@ const FileNode = ({ node, level = 0 }: Props) => {
       {hasChildren && expanded && (
         <div className={styles.children}>
           {node.children?.map((child) => (
-            <FileNode key={child.name} node={child} level={level + 1} />
+            <FileNode
+              key={child.name}
+              node={child}
+              level={level + 1}
+              searchTerm={searchTerm}
+            />
           ))}
         </div>
       )}
