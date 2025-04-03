@@ -25,12 +25,22 @@ const FileNode = ({ node, level = 0, searchTerm }: Props) => {
     openFile(node);
   }
 
+  const hasAnyMatchingDescendant = (node: FileNodeType): boolean => {
+    if (!searchTerm) return true;
+
+    const nodeMatches = node.name
+      .toLowerCase()
+      .includes(searchTerm.toLowerCase());
+    if (nodeMatches) return true;
+
+    return (
+      node.children?.some((child) => hasAnyMatchingDescendant(child)) || false
+    );
+  };
+
   const filteredChildren = node.children?.filter((child) => {
     if (searchTerm) {
-      const isMatch = child.name
-        .toLowerCase()
-        .includes(searchTerm?.toLowerCase() || "");
-      return isMatch;
+      return hasAnyMatchingDescendant(child);
     }
     return true;
   });
