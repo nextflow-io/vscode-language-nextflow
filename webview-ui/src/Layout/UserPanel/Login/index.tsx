@@ -26,11 +26,17 @@ const Login = () => {
               <p>Token expired: {formatTime(tokenExpiry)}</p>
             </div>
           )}
-          <Button onClick={login}>Login to Seqera Platform</Button>
+          <Button onClick={login}>
+            Login to Seqera Platform
+            <i className="codicon codicon-sign-in ml-2" />
+          </Button>
         </div>
       </div>
       <div className={clsx(styles.section, styles.centered)}>
-        <Button href="https://seqera.io/ask-ai">Talk to Seqera AI</Button>
+        <Button href="https://seqera.io/ask-ai">
+          Talk to Seqera AI
+          <i className="codicon codicon-comment-discussion ml-2" />
+        </Button>
       </div>
     </div>
   );

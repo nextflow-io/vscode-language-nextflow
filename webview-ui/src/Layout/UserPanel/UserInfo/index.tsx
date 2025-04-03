@@ -29,7 +29,10 @@ const UserInfo = () => {
         Email: {userInfo?.user?.email}
       </div>
       <div className={clsx(styles.section)}>
-        <Button href="https://seqera.io/ask-ai">Talk to Seqera AI</Button>
+        <Button href="https://seqera.io/ask-ai">
+          Talk to Seqera AI
+          <i className="codicon codicon-comment-discussion ml-2" />
+        </Button>
       </div>
       <div className={styles.section}>
         <h3>Workspaces</h3>

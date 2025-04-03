@@ -1,5 +1,6 @@
 .button {
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
   background-color: var(--vscode-button-background);
   border: 1px solid var(--vscode-button-border);
   color: var(--vscode-button-foreground);
