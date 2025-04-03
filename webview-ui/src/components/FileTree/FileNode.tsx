@@ -20,7 +20,7 @@ const FileNode = ({ node, level = 0 }: Props) => {
   }
 
   return (
-    <div className={clsx(styles.row, styles[`level-${level}`])}>
+    <div className={clsx(styles.row, { [styles.folder]: hasChildren })}>
       <label className={clsx(styles.item)}>
         <span className={styles.name} onClick={handleClick}>
           <i

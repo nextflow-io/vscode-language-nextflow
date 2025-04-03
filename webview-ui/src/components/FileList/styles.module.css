@@ -76,6 +76,12 @@
     flex: none;
     padding-right: 6px;
     opacity: 0.8;
+    display: flex;
+    align-items: center;
+    font-size: 9px;
+    text-transform: uppercase;
+    font-family: sans-serif;
+    letter-spacing: 0.5px;
     &:hover {
       opacity: 1;
     }
@@ -83,18 +89,24 @@
       color: #666 !important;
       cursor: default;
     }
-    & .metaIcon {
-      width: 14px;
-      height: 12px;
+    & .metaIcon,
+    & .metaIconHover {
+      font-size: 12px;
       margin-right: 4px;
-      opacity: 0;
-      top: 1px;
+      opacity: 0.6;
       position: relative;
+      top: -1px;
+    }
+    & .metaIconHover {
+      display: none;
     }
   }
   &:hover {
     & .metaIcon {
-      opacity: 0.6;
+      display: none;
+    }
+    & .metaIconHover {
+      display: block;
     }
   }
 }

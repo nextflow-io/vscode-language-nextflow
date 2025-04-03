@@ -15,12 +15,8 @@
 }
 
 .selectButton::after {
-  content: "";
-  width: 0;
-  height: 0;
-  border-left: 4px solid transparent;
-  border-right: 4px solid transparent;
-  border-top: 4px solid var(--vscode-foreground);
+  font-family: codicon;
+  content: "\eab4";
   margin-left: 8px;
   transition: transform 0.2s ease;
 }

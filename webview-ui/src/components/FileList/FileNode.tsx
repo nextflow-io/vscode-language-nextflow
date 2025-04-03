@@ -3,7 +3,6 @@ import clsx from "clsx";
 import { useWorkspaceContext } from "../../Context";
 import FileNodeChildren from "./FileNodeChildren";
 import nextflowIcon from "../../images/nextflow-icon.svg";
-import fileIcon from "../../images/go-to-file.svg";
 
 import styles from "./styles.module.css";
 
@@ -36,7 +35,16 @@ const FileNode = ({ node }: Props) => {
                 className={styles.metaLabel}
                 onClick={() => openFile(testFile)}
               >
-                <img className={styles.metaIcon} src={fileIcon} />
+                <i
+                  className={clsx(
+                    "codicon",
+                    "codicon-go-to-file",
+                    styles.metaIconHover
+                  )}
+                />
+                <i
+                  className={clsx("codicon", "codicon-check", styles.metaIcon)}
+                />
                 Tested
               </span>
             ) : (
