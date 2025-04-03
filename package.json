@@ -155,7 +155,7 @@
         },
         {
           "command": "nextflow.logout",
-          "when": "view == userInfo",
+          "when": "view == userInfo && nextflow.isLoggedIn == true",
           "group": "navigation@10"
         }
       ]

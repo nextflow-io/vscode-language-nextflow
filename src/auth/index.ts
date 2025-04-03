@@ -39,6 +39,7 @@ const showWelcomeMessage = async () => {
   const session = await getSession("auth0", []);
   let msg = "Logged out from Seqera Platform";
   if (session) msg = `Logged in to Seqera Platform: ${session.account.label}`;
+  commands.executeCommand("setContext", "nextflow.isLoggedIn", true);
   window.showInformationMessage(msg);
 };
 
