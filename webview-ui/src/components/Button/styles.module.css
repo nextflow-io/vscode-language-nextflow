@@ -1,10 +1,11 @@
 .button {
+  height: 29px;
   display: inline-flex;
   align-items: center;
   background-color: var(--vscode-button-background);
   border: 1px solid var(--vscode-button-border);
   color: var(--vscode-button-foreground);
-  padding: 8px 16px;
+  padding: 0 16px;
   border-radius: 3px;
   cursor: pointer;
   text-decoration: none;
@@ -15,5 +16,12 @@
     background-color: var(--vscode-button-hoverBackground);
     border-color: var(--vscode-button-border-hover);
     color: var(--vscode-button-foreground);
+    & i {
+      opacity: 1;
+    }
+  }
+  & i {
+    font-size: 14px;
+    opacity: 0.8;
   }
 }

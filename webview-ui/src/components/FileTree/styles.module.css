@@ -23,6 +23,8 @@
       width: 100%;
       & i {
         margin-right: 6px;
+        opacity: 0.8;
+        font-size: 14px;
       }
     }
   }
@@ -34,6 +36,9 @@
   &.folder {
     & > .item > .name {
       font-weight: bold;
+      & i {
+        opacity: 1;
+      }
     }
   }
 }

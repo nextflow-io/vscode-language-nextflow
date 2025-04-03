@@ -2,7 +2,6 @@ import { useState } from "react";
 import { useWorkspaceContext } from "../../Context";
 import FileTree from "../../components/FileTree";
 import FileList from "../../components/FileList";
-import styles from "./styles.module.css";
 import Select from "../../components/Select";
 
 type View = "tree" | "list";
@@ -14,7 +13,7 @@ const Workflows = () => {
 
   return (
     <>
-      <div className={styles.header}>
+      <div className="p-2">
         <Select
           options={[
             { label: "Import Tree", value: "tree" },
