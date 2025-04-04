@@ -29,7 +29,8 @@
     "Programming Languages"
   ],
   "activationEvents": [
-    "onStartupFinished"
+    "onStartupFinished",
+    "onAuthenticationRequest:azuread"
   ],
   "main": "./extension.js",
   "contributes": {
@@ -98,6 +99,7 @@
     ],
     "commands": [
       {
+        "icon": "$(refresh)",
         "command": "nextflow.reloadWebView",
         "title": "Reload Seqera Webview",
         "category": "Nextflow"
@@ -131,8 +133,44 @@
         "command": "nextflow.writeTest",
         "title": "Write nf-test with Seqera",
         "category": "Nextflow"
+      },
+      {
+        "command": "nextflow.login",
+        "title": "Login to Seqera Platform",
+        "category": "Nextflow",
+        "icon": "$(sign-in)"
+      },
+      {
+        "command": "nextflow.logout",
+        "title": "Logout from Seqera Platform",
+        "category": "Nextflow",
+        "icon": "$(sign-out)"
+      },
+      {
+        "command": "nextflow.goToCloud",
+        "title": "Go to Seqera Platform",
+        "category": "Nextflow",
+        "icon": "$(cloud)"
       }
     ],
+    "menus": {
+      "view/title": [
+        {
+          "command": "nextflow.reloadWebView",
+          "group": "navigation@10"
+        },
+        {
+          "command": "nextflow.logout",
+          "when": "view == userInfo && nextflow.isLoggedIn == true",
+          "group": "navigation@10"
+        },
+        {
+          "command": "nextflow.goToCloud",
+          "when": "view == userInfo && nextflow.isLoggedIn == true",
+          "group": "navigation@10"
+        }
+      ]
+    },
     "configuration": {
       "type": "object",
       "description": "Configuration for Nextflow language support",
@@ -224,12 +262,17 @@
         {
           "id": "seqera",
           "title": "Seqera",
-          "icon": "images/seqera.svg"
+          "icon": "images/nextflow.svg"
         }
       ]
     },
     "views": {
       "seqera": [
+        {
+          "id": "userInfo",
+          "name": "Seqera Platform",
+          "type": "webview"
+        },
         {
           "id": "workflows",
           "name": "Workflows",
@@ -258,10 +301,12 @@
     "@vscode/vsce": "^3.2.1",
     "esbuild": "^0.25.0",
     "esbuild-plugin-copy": "^2.1.1",
+    "jwt-decode": "^4.0.0",
     "mermaid": "^11.4.1",
     "node-fetch": "^3.3.2",
     "posthog-node": "^4.4.1",
     "prettier": "3.5.2",
+    "uuid": "^11.1.0",
     "typescript": "^5.7.2",
     "vscode-jsonrpc": "^8.0.2",
     "vscode-languageclient": "^8.0.2"

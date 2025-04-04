@@ -1,0 +1,121 @@
+.row {
+  user-select: none;
+  width: 100%;
+  & .item {
+    line-height: 1;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    cursor: pointer;
+    color: var(--nf-item-fg-active);
+    &:hover {
+      background-color: var(--nf-item-bg-hover);
+    }
+    & .name {
+      display: flex;
+      align-items: center;
+      padding: 6px 8px;
+      width: 100%;
+    }
+    & .icon {
+      width: 10px;
+      height: 10px;
+      margin-right: 6px;
+    }
+  }
+}
+.row.workflow {
+  & .name {
+    font-weight: bold;
+    width: 100%;
+  }
+  & .children {
+    padding: 0 0 4px 0;
+    & > label {
+      display: block;
+      cursor: pointer;
+      padding: 0 16px 0 28px;
+      &:hover {
+        background-color: var(--nf-item-bg-hover);
+      }
+      & > span {
+        font-size: 8px;
+        margin-left: 8px;
+      }
+    }
+    & > div {
+      & > label {
+        padding: 4px 16px 4px 32px;
+        color: var(--nf-item-fg-active);
+        display: block;
+        width: 100%;
+        cursor: pointer;
+        line-height: 1;
+        &:hover {
+          background-color: var(--nf-item-bg-hover);
+        }
+      }
+    }
+  }
+}
+
+.row.process {
+  & .name {
+    width: 100%;
+    flex: 1 1 auto;
+    text-overflow: ellipsis;
+    overflow: hidden;
+  }
+  & .metaLabel {
+    white-space: nowrap;
+    cursor: pointer;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    width: auto;
+    flex: none;
+    padding-right: 6px;
+    opacity: 0.8;
+    display: flex;
+    align-items: center;
+    font-size: 9px;
+    text-transform: uppercase;
+    font-family: sans-serif;
+    letter-spacing: 0.5px;
+    &:hover {
+      opacity: 1;
+    }
+    &.disabled {
+      color: #666 !important;
+      cursor: default;
+    }
+    & .metaIcon,
+    & .metaIconHover {
+      font-size: 12px;
+      margin-right: 4px;
+      opacity: 0.6;
+      position: relative;
+      top: -1px;
+    }
+    & .metaIconHover {
+      display: none;
+    }
+  }
+  &:hover {
+    & .metaIcon {
+      display: none;
+    }
+    & .metaIconHover {
+      display: block;
+    }
+  }
+}
+.section {
+  width: 100%;
+  box-sizing: border-box;
+  &:not(:last-child) {
+    padding-bottom: 16px;
+    margin-bottom: 16px;
+    border-bottom: 1px solid var(--nf-item-bg-hover);
+  }
+}

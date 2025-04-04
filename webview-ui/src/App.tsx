@@ -1,11 +1,11 @@
 import Layout from "./Layout";
-import NextflowProvider from "./Provider";
+import Context from "./Context";
 
 function App() {
   return (
-    <NextflowProvider>
+    <Context>
       <Layout />
-    </NextflowProvider>
+    </Context>
   );
 }
 

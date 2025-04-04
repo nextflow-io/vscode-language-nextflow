@@ -1,0 +1,60 @@
+.select {
+  position: relative;
+  width: 100%;
+}
+
+.selectButton {
+  border: 1px solid var(--vscode-dropdown-border);
+  background: var(--vscode-dropdown-background);
+  border-radius: 2px;
+  padding: 0 8px;
+  height: 29px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.selectButton::after {
+  font-family: codicon;
+  content: "\eab4";
+  margin-left: 8px;
+  transition: transform 0.2s ease;
+}
+
+.selectButton[aria-expanded="true"]::after {
+  transform: rotate(180deg);
+}
+
+.dropdown {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background: var(--vscode-dropdown-background);
+  border: 1px solid var(--vscode-dropdown-border);
+  border-radius: 2px;
+  margin-top: 4px;
+  max-height: 200px;
+  overflow-y: auto;
+  z-index: 1000;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.option {
+  padding: 0 8px;
+  height: 29px;
+  display: flex;
+  align-items: center;
+  transition: background-color 0.2s;
+  cursor: pointer;
+}
+
+.option:hover {
+  background-color: var(--vscode-list-hoverBackground);
+}
+
+.selected {
+  background-color: var(--vscode-list-activeSelectionBackground);
+  color: var(--vscode-list-activeSelectionForeground);
+}

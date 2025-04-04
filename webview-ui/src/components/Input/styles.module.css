@@ -1,0 +1,30 @@
+.inputContainer {
+  position: relative;
+  width: 100%;
+}
+
+.input {
+  width: 100%;
+  border: 1px solid var(--vscode-dropdown-border);
+  background: var(--vscode-dropdown-background);
+  border-radius: 2px;
+  padding: 0 8px;
+  height: 29px;
+  color: var(--vscode-input-foreground);
+  font-family: var(--vscode-font-family);
+  font-size: var(--vscode-font-size);
+}
+
+.input:focus {
+  outline: 1px solid var(--vscode-focusBorder);
+  outline-offset: -1px;
+}
+
+.input:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.input::placeholder {
+  color: var(--vscode-input-placeholderForeground);
+}

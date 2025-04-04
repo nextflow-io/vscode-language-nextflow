@@ -1,0 +1,32 @@
+section {
+  padding: 10px;
+}
+section.centered {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+section.cozy {
+  padding: 15px 30px;
+}
+section.cozy:first-child {
+  padding-top: 30px;
+}
+section.cozy:last-child {
+  padding-bottom: 30px;
+}
+.flex {
+  display: flex;
+}
+.items-center {
+  align-items: center;
+}
+.justify-center {
+  justify-content: center;
+}
+.flex-auto {
+  flex: auto;
+}
+.flex-none {
+  flex: none;
+}

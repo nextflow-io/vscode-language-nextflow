@@ -4,14 +4,17 @@ import { activateChatbot } from "./chatbot";
 import { activateLanguageServer, stopLanguageServer } from "./languageServer";
 import { activateWelcomePage } from "./welcomePage";
 import { activateTelemetry, deactivateTelemetry } from "./telemetry";
-import { activateWebview } from "./activateWebview";
+import { activateWebview } from "./webview";
+import { activateAuth, AuthProvider } from "./auth";
 
 export function activate(context: vscode.ExtensionContext) {
-  activateWelcomePage(context);
   const trackEvent = activateTelemetry(context);
-  activateLanguageServer(context, trackEvent);
+  const authProvider = new AuthProvider(context);
+  activateAuth(context, authProvider);
+  activateWebview(context, authProvider);
   activateChatbot(context, trackEvent);
-  activateWebview(context);
+  activateLanguageServer(context, trackEvent);
+  activateWelcomePage(context);
 }
 
 export function deactivate(
