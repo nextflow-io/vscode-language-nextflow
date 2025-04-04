@@ -13,8 +13,8 @@ const Login = () => {
 
   return (
     <div>
-      <section className="centered">
-        <div>
+      <section className="centered cozy">
+        <div className="mt-2">
           {error && (
             <div>
               <p>Error: {error}</p>
@@ -31,11 +31,11 @@ const Login = () => {
           </Button>
         </div>
       </section>
-      <section>
-        <OpenChat />
-      </section>
-      <section>
+      <section className="cozy">
         <Resources showIntro />
+      </section>
+      <section className="cozy">
+        <OpenChat />
       </section>
     </div>
   );

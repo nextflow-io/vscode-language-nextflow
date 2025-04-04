@@ -35,7 +35,7 @@ type Props = {
 
 export const Resources: React.FC<Props> = ({ showIntro = false }) => {
   return (
-    <div className={styles.container}>
+    <div>
       <h2 className={styles.title}>Resources</h2>
       {showIntro && (
         <p className={styles.intro}>
@@ -48,7 +48,8 @@ export const Resources: React.FC<Props> = ({ showIntro = false }) => {
         {resources.map((resource, index) => (
           <li key={index}>
             <Button href={resource.url} small fullWidth>
-              <span className={styles.label}>{resource.label}</span>
+              {resource.label}
+              <i className="codicon codicon-link-external ml-2" />
             </Button>
           </li>
         ))}

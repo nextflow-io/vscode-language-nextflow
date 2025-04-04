@@ -6,6 +6,15 @@ section.centered {
   align-items: center;
   justify-content: center;
 }
+section.cozy {
+  padding: 15px 30px;
+}
+section.cozy:first-child {
+  padding-top: 30px;
+}
+section.cozy:last-child {
+  padding-bottom: 30px;
+}
 .flex {
   display: flex;
 }
