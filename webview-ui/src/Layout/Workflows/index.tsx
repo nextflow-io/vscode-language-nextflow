@@ -20,6 +20,14 @@ const Workflows = () => {
     );
   }
 
+  if (!tree?.name) {
+    return (
+      <section className="cozy">
+        <p>No workflows found</p>
+      </section>
+    );
+  }
+
   return (
     <>
       <div className={styles.filters}>
