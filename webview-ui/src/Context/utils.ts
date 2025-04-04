@@ -1,18 +1,12 @@
-// This has proven to be problematic. Must only be called once, and then can
-// only be passed along as props.
-
 function getVscode() {
-  let vscode: any;
-  try {
-    if (!window.acquireVsCodeApi) {
-      throw new Error("VS Code API not available WS");
-    }
-    vscode = window.vscode || window.acquireVsCodeApi();
-  } catch (error) {
-    console.warn("VS Code API could not be acquired WS:", error);
-    vscode = null;
+  if (window.vscode) return window.vscode;
+  if (window.acquireVsCodeApi) {
+    const vscode = window.acquireVsCodeApi();
+    window.vscode = vscode;
+    return vscode;
   }
-  return vscode;
+  console.warn("VS Code API could not be acquired");
+  return null;
 }
 
 export { getVscode };

@@ -28,6 +28,9 @@ class WebviewProvider implements vscode.WebviewViewProvider {
         case "openFile":
           this.openFile(message.file);
           break;
+        case "openChat":
+          this.openChat();
+          break;
         case "login":
           this.login();
           break;
@@ -48,25 +51,17 @@ class WebviewProvider implements vscode.WebviewViewProvider {
   }
 
   private async initViewData(view: vscode.WebviewView, refresh?: boolean) {
-    const { viewID, _currentView, _context } = this;
+    const { viewID, _context } = this;
     if (viewID === "userInfo") {
       const accessToken = await getAccessToken(_context);
       if (!accessToken) return;
-      if (!_currentView) return;
-      await fetchPlatformData(
-        accessToken,
-        viewID,
-        _currentView.webview,
-        _context,
-        refresh
-      );
+      await fetchPlatformData(accessToken, view.webview, _context, refresh);
     } else {
       const fileList = await buildList();
       const mainFile = fileList.files.find(
         (file) => file.fileName === "main.nf"
       );
       view.webview.postMessage({
-        viewID,
         fileList,
         tree: await buildTree(fileList.files, mainFile)
       });
@@ -85,6 +80,10 @@ class WebviewProvider implements vscode.WebviewViewProvider {
     await vscode.window.showTextDocument(doc, {
       selection: new vscode.Range(file.line || 0, 0, file.line || 0, 0)
     });
+  }
+
+  private async openChat() {
+    await vscode.commands.executeCommand("nextflow.openChat");
   }
 
   private initHTML(view: vscode.WebviewView) {
@@ -106,12 +105,13 @@ class WebviewProvider implements vscode.WebviewViewProvider {
   }
 
   private getBuiltHTML(view: vscode.WebviewView) {
+    const isCursor = vscode.env.appName.includes("Cursor");
     const distUri = this.getBuildPath();
     let html = fs.readFileSync(path.join(distUri.fsPath, "index.html"), "utf8");
 
     html = html.replace(
       "</head>",
-      `<script>window.initialData = { viewID: "${this.viewID}" };</script></head>`
+      `<script>window.initialData = { viewID: "${this.viewID}", isCursor: ${isCursor} };</script></head>`
     );
 
     html = updateRefs(html, view.webview, distUri);

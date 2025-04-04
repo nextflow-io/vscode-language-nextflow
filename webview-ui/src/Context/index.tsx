@@ -23,6 +23,8 @@ type ViewID = "workflows" | "processes" | "userInfo" | null;
 
 const Context = ({ children }: Props) => {
   const viewID = window.initialData?.viewID as ViewID;
+  const isCursor = window.initialData?.isCursor;
+  console.log("🟠 isCursor", isCursor);
   const [authState, setAuthState] = useState<AuthState | undefined>(undefined);
   const [userInfo, setUserInfo] = useState<UserInfo | undefined>(undefined);
   const [workspaces, setWorkspaces] = useState<Workspace[]>([]);
@@ -44,7 +46,7 @@ const Context = ({ children }: Props) => {
   }, []);
 
   return (
-    <WorkspaceProvider vscode={vscode} viewID={viewID}>
+    <WorkspaceProvider vscode={vscode} viewID={viewID} isCursor={isCursor}>
       {viewID === "userInfo" ? (
         <TowerProvider
           vscode={vscode}

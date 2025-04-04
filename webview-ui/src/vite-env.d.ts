@@ -10,6 +10,7 @@ declare global {
     vscode: any;
     initialData: {
       viewID: "workflows" | "processes" | "userInfo";
+      isCursor: boolean;
     };
   }
 }

@@ -73,7 +73,6 @@ class AuthProvider implements AuthenticationProvider, Disposable {
 
       const data = await fetchPlatformData(
         accessToken,
-        "userInfo",
         this.webviewView,
         this.context
       );

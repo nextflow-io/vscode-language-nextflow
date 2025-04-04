@@ -1,11 +1,10 @@
-import clsx from "clsx";
-import Button from "../../../components/Button";
 import { useTowerContext } from "../../../Context";
 import Select from "../../../components/Select";
 
 import styles from "./styles.module.css";
 import { getComputeEnvURL } from "../utils";
 import { Resources } from "../Resources";
+import OpenChat from "../OpenChat";
 
 const UserInfo = () => {
   const {
@@ -24,18 +23,15 @@ const UserInfo = () => {
           <p>Error:{error}</p>
         </div>
       )}
-      <div className={styles.section}>
+      <section>
         User: {userInfo?.user?.userName}
         <br />
         Email: {userInfo?.user?.email}
-      </div>
-      <div className={clsx(styles.section)}>
-        <Button href="https://seqera.io/ask-ai">
-          Talk to Seqera AI
-          <i className="codicon codicon-comment-discussion ml-2" />
-        </Button>
-      </div>
-      <div className={styles.section}>
+      </section>
+      <section>
+        <OpenChat />
+      </section>
+      <section>
         <h3>Workspaces</h3>
         {workspaces?.length ? (
           <Select
@@ -49,8 +45,8 @@ const UserInfo = () => {
         ) : (
           <div>No workspaces found</div>
         )}
-      </div>
-      <div className={styles.section}>
+      </section>
+      <section>
         <h3>Compute Environments</h3>
         {computeEnvs?.length ? (
           <>
@@ -65,10 +61,10 @@ const UserInfo = () => {
         ) : (
           <div>No compute environments found</div>
         )}
-      </div>
-      <div className={styles.section}>
+      </section>
+      <section>
         <Resources />
-      </div>
+      </section>
     </div>
   );
 };

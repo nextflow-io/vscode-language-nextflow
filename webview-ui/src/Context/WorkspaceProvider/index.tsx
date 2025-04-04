@@ -15,7 +15,9 @@ const WorkspaceContext = createContext<WorkspaceContextType>({
   isSelected: () => false,
   viewID: null,
   testCount: 0,
-  login: () => {}
+  login: () => {},
+  openChat: () => {},
+  isCursor: false
 });
 
 interface WorkspaceContextType {
@@ -31,15 +33,18 @@ interface WorkspaceContextType {
   viewID: string | null;
   testCount: number;
   login: () => void;
+  openChat: () => void;
+  isCursor: boolean;
 }
 
 type Props = {
   children: React.ReactNode;
   vscode: any;
   viewID: string | null;
+  isCursor: boolean;
 };
 
-const WorkspaceProvider = ({ children, vscode, viewID }: Props) => {
+const WorkspaceProvider = ({ children, vscode, viewID, isCursor }: Props) => {
   const state = vscode.getState();
 
   const [testCount, setTestCount] = useState(0);
@@ -58,14 +63,6 @@ const WorkspaceProvider = ({ children, vscode, viewID }: Props) => {
     }
     setTestCount(count);
   }, [files]);
-
-  // useEffect(() => {
-  //   vscode.setState({ files });
-  // }, [files]);
-
-  // useEffect(() => {
-  //   vscode.setState({ tests });
-  // }, [tests]);
 
   useEffect(() => {
     vscode.setState({ selectedItems });
@@ -116,6 +113,10 @@ const WorkspaceProvider = ({ children, vscode, viewID }: Props) => {
     vscode.postMessage({ command: "login" });
   }
 
+  function openChat() {
+    vscode.postMessage({ command: "openChat" });
+  }
+
   return (
     <WorkspaceContext.Provider
       value={{
@@ -123,6 +124,7 @@ const WorkspaceProvider = ({ children, vscode, viewID }: Props) => {
         tests,
         tree,
         openFile,
+        openChat,
         getFile,
         getTest,
         selectedItems,
@@ -130,7 +132,8 @@ const WorkspaceProvider = ({ children, vscode, viewID }: Props) => {
         isSelected,
         testCount,
         login,
-        viewID
+        viewID,
+        isCursor
       }}
     >
       {children}

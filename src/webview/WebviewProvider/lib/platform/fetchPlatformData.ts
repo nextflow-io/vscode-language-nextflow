@@ -9,7 +9,6 @@ import getAuthState, { AuthState } from "./getAuthState";
 import { expired } from "../../../../auth/AuthProvider/utils/jwt";
 
 type PlatformData = {
-  viewID: string;
   authState: AuthState;
   userInfo?: UserInfoResponse;
   workspaces?: Workspace[];
@@ -28,7 +27,6 @@ function handleUpdate(
 
 const fetchPlatformData = async (
   accessToken: string,
-  viewID: string,
   view: WebviewView["webview"],
   context: ExtensionContext,
   refresh?: boolean
@@ -47,7 +45,6 @@ const fetchPlatformData = async (
   hasExpired = expired(authState?.tokenExpiry);
 
   let data: PlatformData = {
-    viewID,
     authState
   };
 

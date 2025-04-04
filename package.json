@@ -145,6 +145,12 @@
         "title": "Logout from Seqera Platform",
         "category": "Nextflow",
         "icon": "$(sign-out)"
+      },
+      {
+        "command": "nextflow.goToCloud",
+        "title": "Go to Seqera Platform",
+        "category": "Nextflow",
+        "icon": "$(cloud)"
       }
     ],
     "menus": {
@@ -155,6 +161,11 @@
         },
         {
           "command": "nextflow.logout",
+          "when": "view == userInfo && nextflow.isLoggedIn == true",
+          "group": "navigation@10"
+        },
+        {
+          "command": "nextflow.goToCloud",
           "when": "view == userInfo && nextflow.isLoggedIn == true",
           "group": "navigation@10"
         }
