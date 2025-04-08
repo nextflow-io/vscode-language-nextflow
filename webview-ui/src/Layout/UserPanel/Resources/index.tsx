@@ -26,6 +26,10 @@ const resources: ResourceLink[] = [
   {
     label: "Seqera Cloud Documentation",
     url: "https://docs.seqera.io/"
+  },
+  {
+    label: "Go to Seqera AI",
+    url: "https://ai.seqera.io/"
   }
 ];
 

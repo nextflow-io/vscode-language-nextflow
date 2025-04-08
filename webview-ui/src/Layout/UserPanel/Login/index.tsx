@@ -1,8 +1,6 @@
 import Button from "../../../components/Button";
 import { useWorkspaceContext, useTowerContext } from "../../../Context";
 import { formatTime } from "../utils";
-import { Resources } from "../Resources";
-import OpenChat from "../OpenChat";
 
 const Login = () => {
   const { login } = useWorkspaceContext();
@@ -30,12 +28,6 @@ const Login = () => {
             <i className="codicon codicon-sign-in ml-2" />
           </Button>
         </div>
-      </section>
-      <section className="cozy">
-        <Resources showIntro />
-      </section>
-      <section className="cozy">
-        <OpenChat />
       </section>
     </div>
   );

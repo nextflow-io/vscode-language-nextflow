@@ -3,8 +3,6 @@ import Select from "../../../components/Select";
 
 import styles from "./styles.module.css";
 import { getComputeEnvURL } from "../utils";
-import { Resources } from "../Resources";
-import OpenChat from "../OpenChat";
 
 const UserInfo = () => {
   const {
@@ -27,9 +25,6 @@ const UserInfo = () => {
         User: {userInfo?.user?.userName}
         <br />
         Email: {userInfo?.user?.email}
-      </section>
-      <section>
-        <OpenChat />
       </section>
       <section>
         <h3>Workspaces</h3>
@@ -61,9 +56,6 @@ const UserInfo = () => {
         ) : (
           <div>No compute environments found</div>
         )}
-      </section>
-      <section>
-        <Resources />
       </section>
     </div>
   );

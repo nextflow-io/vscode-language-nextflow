@@ -129,6 +129,17 @@
         "category": "Nextflow"
       },
       {
+        "command": "nextflow.resources.openResource",
+        "title": "Open Resource",
+        "category": "Nextflow"
+      },
+      {
+        "command": "nextflow.resources.refresh",
+        "title": "Refresh Resources",
+        "category": "Nextflow",
+        "icon": "$(refresh)"
+      },
+      {
         "command": "nextflow.seqera.goToCloud",
         "title": "Go to Seqera Cloud",
         "category": "Nextflow",
@@ -160,6 +171,11 @@
           "group": "navigation@10"
         },
         {
+          "command": "nextflow.resources.refresh",
+          "when": "view == resources",
+          "group": "navigation@10"
+        },
+        {
           "command": "nextflow.seqera.logout",
           "when": "view == userInfo && nextflow.isLoggedIn == true",
           "group": "navigation@10"
@@ -168,6 +184,12 @@
           "command": "nextflow.seqera.goToCloud",
           "when": "view == userInfo && nextflow.isLoggedIn == true",
           "group": "navigation@10"
+        }
+      ],
+      "view/item/context": [
+        {
+          "command": "nextflow.resources.openResource",
+          "when": "view == resources"
         }
       ]
     },
@@ -274,6 +296,11 @@
           "type": "webview"
         },
         {
+          "id": "resources",
+          "name": "Resources",
+          "type": "tree"
+        },
+        {
           "id": "workflows",
           "name": "Workflows",
           "type": "webview"
@@ -284,7 +311,13 @@
           "type": "webview"
         }
       ]
-    }
+    },
+    "viewsWelcome": [
+      {
+        "view": "resources",
+        "contents": "Below you'll find helpful resources to learn about Nextflow, get support, and explore the platform's features."
+      }
+    ]
   },
   "scripts": {
     "check-types": "tsc --noEmit",
@@ -296,7 +329,10 @@
   },
   "devDependencies": {
     "@types/node": "^20",
+    "@types/react": "^19.1.0",
+    "@types/react-dom": "^19.1.1",
     "@types/vscode": "^1.96.0",
+    "@vitejs/plugin-react": "^4.3.4",
     "@vscode/chat-extension-utils": "^0.0.0-alpha.4",
     "@vscode/vsce": "^3.2.1",
     "esbuild": "^0.25.0",
@@ -308,7 +344,13 @@
     "prettier": "3.5.2",
     "typescript": "^5.7.2",
     "uuid": "^11.1.0",
+    "vite": "^6.2.5",
     "vscode-jsonrpc": "^8.0.2",
     "vscode-languageclient": "^8.0.2"
+  },
+  "dependencies": {
+    "clsx": "^2.1.1",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0"
   }
 }
