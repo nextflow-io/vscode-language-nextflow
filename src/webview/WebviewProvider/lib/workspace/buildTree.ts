@@ -2,12 +2,21 @@ import { FileNode } from "./types";
 
 async function buildTree(
   allFiles: FileNode[],
-  node?: FileNode,
-  processedNodes = new Set<string>()
+  processedNodes = new Set<string>(),
+  currentNode?: FileNode,
+  isChild?: boolean
 ): Promise<any> {
+  let node = currentNode;
+  if (!isChild)
+    node = allFiles.reduce((shortest, current) => {
+      if (!shortest) return current;
+      return current.filePath.length < shortest.filePath.length
+        ? current
+        : shortest;
+    }, allFiles[0]);
+
   if (!node) return [];
 
-  // If we've already processed this node, return it to avoid infinite recursion
   if (processedNodes.has(node.name)) {
     return node;
   }
@@ -18,7 +27,7 @@ async function buildTree(
   for (const nodeName of node.imports) {
     const childNode = allFiles.find((file) => file.name === nodeName);
     if (!childNode) continue;
-    const child = await buildTree(allFiles, childNode, processedNodes);
+    const child = await buildTree(allFiles, processedNodes, childNode, true);
     if (!child) continue;
     node.children.push(child);
   }

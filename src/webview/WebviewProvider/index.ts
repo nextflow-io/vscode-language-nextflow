@@ -63,7 +63,7 @@ class WebviewProvider implements vscode.WebviewViewProvider {
       );
       view.webview.postMessage({
         fileList,
-        tree: await buildTree(fileList.files, mainFile)
+        tree: await buildTree(fileList.files)
       });
     }
   }
