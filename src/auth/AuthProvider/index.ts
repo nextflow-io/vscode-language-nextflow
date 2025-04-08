@@ -28,7 +28,7 @@ type ExchangePromise = {
 };
 
 const TYPE = `auth0`;
-const NAME = `Seqera Platform`;
+const NAME = `Seqera Cloud`;
 const AUTH_ENDPOINT = `${SEQERA_PLATFORM_URL}/oauth/login/auth0?source=vscode`;
 export const STORAGE_KEY_NAME = `${TYPE}.sessions`;
 
@@ -141,7 +141,7 @@ class AuthProvider implements AuthenticationProvider, Disposable {
     return await window.withProgress<string>(
       {
         location: ProgressLocation.Notification,
-        title: "Signing in to Seqera Platform...",
+        title: "Signing in to Seqera Cloud...",
         cancellable: true
       },
       async (_, token) => {

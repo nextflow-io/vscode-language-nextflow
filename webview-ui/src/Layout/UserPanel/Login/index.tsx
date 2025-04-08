@@ -26,7 +26,7 @@ const Login = () => {
             </div>
           )}
           <Button onClick={login}>
-            Login to Seqera Platform
+            Login to Seqera Cloud
             <i className="codicon codicon-sign-in ml-2" />
           </Button>
         </div>

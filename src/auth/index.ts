@@ -32,7 +32,10 @@ async function activateAuth(
   const { registerCommand } = commands;
   const loginCommand = registerCommand("nextflow.seqera.login", handleLogin);
   const logoutCommand = registerCommand("nextflow.seqera.logout", handleLogout);
-  const goToCloudCommand = registerCommand("nextflow.seqera.goToCloud", goToCloud);
+  const goToCloudCommand = registerCommand(
+    "nextflow.seqera.goToCloud",
+    goToCloud
+  );
   const sessionChange = onDidChangeSessions(handleSessionChange);
 
   context.subscriptions.push(authProvider);
@@ -44,8 +47,8 @@ async function activateAuth(
 
 const showWelcomeMessage = async () => {
   const session = await getSession("auth0", []);
-  let msg = "Logged out from Seqera Platform";
-  if (session) msg = `Logged in to Seqera Platform: ${session.account.label}`;
+  let msg = "Logged out from Seqera Cloud";
+  if (session) msg = `Logged in to Seqera Cloud: ${session.account.label}`;
   commands.executeCommand("setContext", "nextflow.isLoggedIn", true);
   window.showInformationMessage(msg);
 };

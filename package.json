@@ -130,19 +130,19 @@
       },
       {
         "command": "nextflow.seqera.goToCloud",
-        "title": "Go to Seqera Platform",
+        "title": "Go to Seqera Cloud",
         "category": "Nextflow",
         "icon": "$(cloud)"
       },
       {
         "command": "nextflow.seqera.login",
-        "title": "Login to Seqera Platform",
+        "title": "Login to Seqera Cloud",
         "category": "Nextflow",
         "icon": "$(sign-in)"
       },
       {
         "command": "nextflow.seqera.logout",
-        "title": "Logout from Seqera Platform",
+        "title": "Logout from Seqera Cloud",
         "category": "Nextflow",
         "icon": "$(sign-out)"
       },
@@ -270,7 +270,7 @@
       "seqera": [
         {
           "id": "userInfo",
-          "name": "Seqera Platform",
+          "name": "Seqera Cloud",
           "type": "webview"
         },
         {
