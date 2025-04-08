@@ -47,7 +47,7 @@ class WebviewProvider implements vscode.WebviewViewProvider {
   }
 
   private async login() {
-    await vscode.commands.executeCommand("nextflow.login");
+    await vscode.commands.executeCommand("nextflow.seqera.login");
   }
 
   private async initViewData(view: vscode.WebviewView, refresh?: boolean) {

@@ -99,12 +99,6 @@
     ],
     "commands": [
       {
-        "icon": "$(refresh)",
-        "command": "nextflow.reloadWebView",
-        "title": "Reload Seqera Webview",
-        "category": "Nextflow"
-      },
-      {
         "command": "nextflow.convertToDSL2",
         "title": "Convert to DSL2 with Seqera",
         "category": "Nextflow"
@@ -135,37 +129,43 @@
         "category": "Nextflow"
       },
       {
-        "command": "nextflow.login",
+        "command": "nextflow.seqera.goToCloud",
+        "title": "Go to Seqera Platform",
+        "category": "Nextflow",
+        "icon": "$(cloud)"
+      },
+      {
+        "command": "nextflow.seqera.login",
         "title": "Login to Seqera Platform",
         "category": "Nextflow",
         "icon": "$(sign-in)"
       },
       {
-        "command": "nextflow.logout",
+        "command": "nextflow.seqera.logout",
         "title": "Logout from Seqera Platform",
         "category": "Nextflow",
         "icon": "$(sign-out)"
       },
       {
-        "command": "nextflow.goToCloud",
-        "title": "Go to Seqera Platform",
+        "command": "nextflow.seqera.reloadWebview",
+        "title": "Reload Seqera Webview",
         "category": "Nextflow",
-        "icon": "$(cloud)"
+        "icon": "$(refresh)"
       }
     ],
     "menus": {
       "view/title": [
         {
-          "command": "nextflow.reloadWebView",
+          "command": "nextflow.seqera.reloadWebview",
           "group": "navigation@10"
         },
         {
-          "command": "nextflow.logout",
+          "command": "nextflow.seqera.logout",
           "when": "view == userInfo && nextflow.isLoggedIn == true",
           "group": "navigation@10"
         },
         {
-          "command": "nextflow.goToCloud",
+          "command": "nextflow.seqera.goToCloud",
           "when": "view == userInfo && nextflow.isLoggedIn == true",
           "group": "navigation@10"
         }

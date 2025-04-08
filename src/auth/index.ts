@@ -30,9 +30,9 @@ async function activateAuth(
   };
 
   const { registerCommand } = commands;
-  const loginCommand = registerCommand("nextflow.login", handleLogin);
-  const logoutCommand = registerCommand("nextflow.logout", handleLogout);
-  const goToCloudCommand = registerCommand("nextflow.goToCloud", goToCloud);
+  const loginCommand = registerCommand("nextflow.seqera.login", handleLogin);
+  const logoutCommand = registerCommand("nextflow.seqera.logout", handleLogout);
+  const goToCloudCommand = registerCommand("nextflow.seqera.goToCloud", goToCloud);
   const sessionChange = onDidChangeSessions(handleSessionChange);
 
   context.subscriptions.push(authProvider);

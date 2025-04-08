@@ -24,7 +24,7 @@ export function activateWebview(
     context.subscriptions.push(provider);
   });
 
-  vscode.commands.registerCommand("nextflow.reloadWebView", () => {
+  vscode.commands.registerCommand("nextflow.seqera.reloadWebview", () => {
     userInfoProvider.reloadView();
     processesProvider.reloadView();
     workflowProvider.reloadView();
