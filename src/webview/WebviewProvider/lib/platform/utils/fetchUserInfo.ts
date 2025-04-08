@@ -1,10 +1,10 @@
-import { API_URL } from "../../../../../constants";
+import { SEQERA_API_URL } from "../../../../../constants";
 import type { UserInfoResponse } from "./types";
 
 const fetchUserInfo = async (token: string): Promise<UserInfoResponse> => {
   if (!token) return { message: "No token found" } as UserInfoResponse;
   try {
-    const response = await fetch(`${API_URL}/user-info`, {
+    const response = await fetch(`${SEQERA_API_URL}/user-info`, {
       headers: {
         Authorization: `Bearer ${token}`
       }

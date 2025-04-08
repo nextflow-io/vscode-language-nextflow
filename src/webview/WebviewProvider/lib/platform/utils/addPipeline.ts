@@ -1,7 +1,7 @@
 import type { Pipeline, ComputeEnv, WorkspaceID } from "./types";
 import type { FormData } from "./types";
 import type { AuthenticationSession } from "vscode";
-import { API_URL } from "../../../../../constants";
+import { SEQERA_API_URL } from "../../../../../constants";
 
 const addPipeline = async (
   session: AuthenticationSession | null,
@@ -22,7 +22,7 @@ const addPipeline = async (
       computeEnvId: computeEnv.id
     };
 
-  return await fetch(`${API_URL}/pipelines?workspaceId=${workspaceID}`, {
+  return await fetch(`${SEQERA_API_URL}/pipelines?workspaceId=${workspaceID}`, {
     credentials: "include",
     method: "POST",
     headers: new Headers({

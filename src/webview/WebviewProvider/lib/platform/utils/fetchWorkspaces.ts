@@ -1,5 +1,5 @@
 import type { Workspace } from "./types";
-import { API_URL } from "../../../../../constants";
+import { SEQERA_API_URL } from "../../../../../constants";
 
 const fetchWorkspaces = async (
   token: string,
@@ -7,7 +7,7 @@ const fetchWorkspaces = async (
 ): Promise<Workspace[]> => {
   if (!token) return [];
   try {
-    const response = await fetch(`${API_URL}/user/${userID}/workspaces`, {
+    const response = await fetch(`${SEQERA_API_URL}/user/${userID}/workspaces`, {
       credentials: "include",
       method: "GET",
       headers: new Headers({

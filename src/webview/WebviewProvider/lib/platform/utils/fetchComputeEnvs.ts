@@ -1,4 +1,4 @@
-import { API_URL } from "../../../../../constants";
+import { SEQERA_API_URL } from "../../../../../constants";
 import type { Workspace, ComputeEnv } from "./types";
 
 const fetchComputeEnvs = async (
@@ -16,7 +16,7 @@ const fetchComputeEnvs = async (
         const params = new URLSearchParams({
           workspaceId: `${workspace.workspaceId}`
         });
-        const url = `${API_URL}/compute-envs?${params}`;
+        const url = `${SEQERA_API_URL}/compute-envs?${params}`;
 
         const res = await fetch(url, {
           credentials: "include",

@@ -1,5 +1,5 @@
 import { Workspace, ComputeEnv } from "../../Context/types";
-import { PLATFORM_URL } from "../../../../src/constants";
+import { SEQERA_PLATFORM_URL } from "../../../../src/constants";
 
 export function formatTime(tokenExpiry?: number) {
   if (!tokenExpiry) return "";
@@ -13,7 +13,7 @@ export function formatTime(tokenExpiry?: number) {
 }
 
 export function getWorkspaceURL(workspace: Workspace) {
-  return `${PLATFORM_URL}/orgs/${workspace.orgName}/workspaces/${workspace.workspaceName}/launchpad`;
+  return `${SEQERA_PLATFORM_URL}/orgs/${workspace.orgName}/workspaces/${workspace.workspaceName}/launchpad`;
 }
 
 export function getComputeEnvURL(
@@ -24,5 +24,5 @@ export function getComputeEnvURL(
     (w) => w.workspaceName === computeEnv.workspaceName
   );
   if (!workspace) return "";
-  return `${PLATFORM_URL}/orgs/${workspace.orgName}/workspaces/${workspace.workspaceName}/compute-envs/${computeEnv.id}`;
+  return `${SEQERA_PLATFORM_URL}/orgs/${workspace.orgName}/workspaces/${workspace.workspaceName}/compute-envs/${computeEnv.id}`;
 }

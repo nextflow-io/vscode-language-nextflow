@@ -12,7 +12,7 @@ import {
 import { PromiseAdapter, promiseFromEvent } from "./utils/promiseFromEvent";
 import UriEventHandler from "./utils/UriEventHandler";
 import { fetchPlatformData } from "../../webview/WebviewProvider/lib";
-import { PLATFORM_URL } from "../../constants";
+import { SEQERA_PLATFORM_URL } from "../../constants";
 
 import type {
   AuthenticationProvider,
@@ -29,7 +29,7 @@ type ExchangePromise = {
 
 const TYPE = `auth0`;
 const NAME = `Seqera Platform`;
-const AUTH_ENDPOINT = `${PLATFORM_URL}/oauth/login/auth0?source=vscode`;
+const AUTH_ENDPOINT = `${SEQERA_PLATFORM_URL}/oauth/login/auth0?source=vscode`;
 export const STORAGE_KEY_NAME = `${TYPE}.sessions`;
 
 class AuthProvider implements AuthenticationProvider, Disposable {

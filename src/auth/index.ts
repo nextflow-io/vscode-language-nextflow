@@ -4,7 +4,7 @@ const { getSession, onDidChangeSessions } = authentication;
 import getAccessToken from "./getAccessToken";
 import AuthProvider from "./AuthProvider";
 import type { ExtensionContext } from "vscode";
-import { PLATFORM_URL } from "../constants";
+import { SEQERA_PLATFORM_URL } from "../constants";
 
 async function activateAuth(
   context: ExtensionContext,
@@ -26,7 +26,7 @@ async function activateAuth(
   };
 
   const goToCloud = () => {
-    commands.executeCommand("vscode.open", Uri.parse(PLATFORM_URL));
+    commands.executeCommand("vscode.open", Uri.parse(SEQERA_PLATFORM_URL));
   };
 
   const { registerCommand } = commands;
