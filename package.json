@@ -288,8 +288,8 @@
   },
   "scripts": {
     "check-types": "tsc --noEmit",
-    "compile": "npm run check-types && node esbuild.js",
-    "package": "npm run ui-build && npm run check-types && node esbuild.js --production && (cd build ; vsce package -o nextflow.vsix)",
+    "compile": "npm run check-types && npm run ui-build && node esbuild.js",
+    "package": "npm run check-types && npm run ui-build && node esbuild.js --production && (cd build ; vsce package -o nextflow.vsix)",
     "ui-dev": "cd webview-ui && npm run dev",
     "ui-watch": "cd webview-ui && npm run build -- --watch",
     "ui-build": "cd webview-ui && npm run build"
@@ -306,8 +306,8 @@
     "node-fetch": "^3.3.2",
     "posthog-node": "^4.4.1",
     "prettier": "3.5.2",
-    "uuid": "^11.1.0",
     "typescript": "^5.7.2",
+    "uuid": "^11.1.0",
     "vscode-jsonrpc": "^8.0.2",
     "vscode-languageclient": "^8.0.2"
   }
