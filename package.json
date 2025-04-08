@@ -168,11 +168,7 @@
       "view/title": [
         {
           "command": "nextflow.seqera.reloadWebview",
-          "group": "navigation@10"
-        },
-        {
-          "command": "nextflow.resources.refresh",
-          "when": "view == resources",
+          "when": "view == workflows || view == processes || view == userInfo",
           "group": "navigation@10"
         },
         {
