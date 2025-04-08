@@ -24,15 +24,46 @@ export function activateWebview(
     context.subscriptions.push(provider);
   });
 
-  vscode.commands.registerCommand("nextflow.seqera.reloadWebview", () => {
-    userInfoProvider.reloadView();
-    processesProvider.reloadView();
-    workflowProvider.reloadView();
+  vscode.commands.registerCommand("nextflow.seqera.reloadWebView", () => {
+    userInfoProvider.initViewData(true);
+    processesProvider.initViewData();
+    workflowProvider.initViewData();
   });
 
+  // Workspace events
+
   vscode.workspace.onDidSaveTextDocument(() => {
-    processesProvider.reloadView();
-    workflowProvider.reloadView();
+    processesProvider.initViewData();
+    workflowProvider.initViewData();
+  });
+
+  vscode.workspace.onDidOpenTextDocument((document) => {
+    if (
+      document.uri.fsPath.endsWith(".nf") ||
+      document.uri.fsPath.endsWith(".nf.test")
+    ) {
+      workflowProvider.openFileEvent(document.uri.fsPath);
+    }
+  });
+
+  vscode.workspace.onDidCreateFiles(() => {
+    processesProvider.initViewData();
+    workflowProvider.initViewData();
+  });
+
+  vscode.workspace.onDidDeleteFiles(() => {
+    processesProvider.initViewData();
+    workflowProvider.initViewData();
+  });
+
+  vscode.workspace.onDidRenameFiles(() => {
+    processesProvider.initViewData();
+    workflowProvider.initViewData();
+  });
+
+  vscode.workspace.onDidChangeWorkspaceFolders(() => {
+    processesProvider.initViewData();
+    workflowProvider.initViewData();
   });
 
   vscode.workspace.onDidChangeTextDocument((event) => {
@@ -40,13 +71,8 @@ export function activateWebview(
       event.document.uri.fsPath.endsWith(".nf") ||
       event.document.uri.fsPath.endsWith(".nf.test")
     ) {
-      processesProvider.reloadView();
-      workflowProvider.reloadView();
+      processesProvider.initViewData();
+      workflowProvider.initViewData();
     }
-  });
-
-  vscode.workspace.onDidDeleteFiles(() => {
-    processesProvider.reloadView();
-    workflowProvider.reloadView();
   });
 }

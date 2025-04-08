@@ -21,7 +21,7 @@ class WebviewProvider implements vscode.WebviewViewProvider {
   public async resolveWebviewView(view: vscode.WebviewView): Promise<void> {
     this._authProvider?.setWebview(view.webview);
     this.initHTML(view);
-    await this.initViewData(view);
+    await this.initViewData();
 
     view.webview.onDidReceiveMessage((message) => {
       switch (message.command) {
@@ -35,14 +35,14 @@ class WebviewProvider implements vscode.WebviewViewProvider {
           this.login();
           break;
         case "refresh":
-          this.initViewData(view, true);
+          this.initViewData(true);
           break;
       }
     });
 
     view.onDidChangeVisibility(() => {
       if (!view.visible) return;
-      this.initViewData(view);
+      this.initViewData();
     });
   }
 
@@ -50,17 +50,15 @@ class WebviewProvider implements vscode.WebviewViewProvider {
     await vscode.commands.executeCommand("nextflow.seqera.login");
   }
 
-  private async initViewData(view: vscode.WebviewView, refresh?: boolean) {
-    const { viewID, _context } = this;
+  public async initViewData(refresh?: boolean) {
+    const { viewID, _context, _currentView: view } = this;
+    if (!view) return;
     if (viewID === "userInfo") {
       const accessToken = await getAccessToken(_context);
       if (!accessToken) return;
       await fetchPlatformData(accessToken, view.webview, _context, refresh);
     } else {
       const fileList = await buildList();
-      const mainFile = fileList.files.find(
-        (file) => file.fileName === "main.nf"
-      );
       view.webview.postMessage({
         fileList,
         tree: await buildTree(fileList.files)
@@ -72,7 +70,14 @@ class WebviewProvider implements vscode.WebviewViewProvider {
     if (!this._currentView) return;
     const html = this.getBuiltHTML(this._currentView);
     this._currentView.webview.html = html;
-    await this.initViewData(this._currentView);
+    await this.initViewData(true);
+  }
+
+  public async openFileEvent(filePath: string) {
+    this._currentView?.webview.postMessage({
+      command: "fileOpened",
+      filePath
+    });
   }
 
   private async openFile(file: FileNode) {
@@ -80,6 +85,7 @@ class WebviewProvider implements vscode.WebviewViewProvider {
     await vscode.window.showTextDocument(doc, {
       selection: new vscode.Range(file.line || 0, 0, file.line || 0, 0)
     });
+    this.openFileEvent(file.filePath);
   }
 
   private async openChat() {

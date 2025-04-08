@@ -17,7 +17,8 @@ const WorkspaceContext = createContext<WorkspaceContextType>({
   testCount: 0,
   login: () => {},
   openChat: () => {},
-  isCursor: false
+  isCursor: false,
+  reloadView: () => {}
 });
 
 interface WorkspaceContextType {
@@ -35,6 +36,7 @@ interface WorkspaceContextType {
   login: () => void;
   openChat: () => void;
   isCursor: boolean;
+  reloadView: () => void;
 }
 
 type Props = {
@@ -117,6 +119,10 @@ const WorkspaceProvider = ({ children, vscode, viewID, isCursor }: Props) => {
     vscode.postMessage({ command: "openChat" });
   }
 
+  function reloadView() {
+    vscode.postMessage({ command: "reloadView" });
+  }
+
   return (
     <WorkspaceContext.Provider
       value={{
@@ -133,7 +139,8 @@ const WorkspaceProvider = ({ children, vscode, viewID, isCursor }: Props) => {
         testCount,
         login,
         viewID,
-        isCursor
+        isCursor,
+        reloadView
       }}
     >
       {children}
