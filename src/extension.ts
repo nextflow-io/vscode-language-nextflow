@@ -12,26 +12,19 @@ export function activate(context: vscode.ExtensionContext) {
   const trackEvent = activateTelemetry(context);
   const authProvider = new AuthProvider(context);
   activateAuth(context, authProvider);
-  activateWebview(context, authProvider);
   activateChatbot(context, trackEvent);
   activateLanguageServer(context, trackEvent);
+  activateWebview(context, authProvider);
   activateWelcomePage(context);
-  
+
   // Register Resources TreeView
   const resourcesProvider = new ResourcesProvider();
   vscode.window.registerTreeDataProvider('resources', resourcesProvider);
   
   // Register command to open resource URLs
   context.subscriptions.push(
-    vscode.commands.registerCommand('nextflow.resources.openResource', (url: string) => {
+    vscode.commands.registerCommand('nextflow.seqera.openResource', (url: string) => {
       vscode.env.openExternal(vscode.Uri.parse(url));
-    })
-  );
-  
-  // Register refresh command for resources view
-  context.subscriptions.push(
-    vscode.commands.registerCommand('nextflow.resources.refresh', () => {
-      resourcesProvider.refresh();
     })
   );
 }

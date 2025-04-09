@@ -124,17 +124,6 @@
         "category": "Nextflow"
       },
       {
-        "command": "nextflow.resources.openResource",
-        "title": "Open Resource",
-        "category": "Nextflow"
-      },
-      {
-        "command": "nextflow.resources.refresh",
-        "title": "Refresh Resources",
-        "category": "Nextflow",
-        "icon": "$(refresh)"
-      },
-      {
         "command": "nextflow.seqera.goToCloud",
         "title": "Go to Seqera Cloud",
         "category": "Nextflow",
@@ -151,6 +140,11 @@
         "title": "Logout from Seqera Cloud",
         "category": "Nextflow",
         "icon": "$(sign-out)"
+      },
+      {
+        "command": "nextflow.seqera.openResource",
+        "title": "Open Resource",
+        "category": "Nextflow"
       },
       {
         "command": "nextflow.seqera.reloadWebview",
@@ -184,7 +178,7 @@
       ],
       "view/item/context": [
         {
-          "command": "nextflow.resources.openResource",
+          "command": "nextflow.seqera.openResource",
           "when": "view == resources"
         }
       ]
