@@ -42,9 +42,6 @@ const FileNode = ({ node }: Props) => {
                     styles.metaIconHover
                   )}
                 />
-                <i
-                  className={clsx("codicon", "codicon-check", styles.metaIcon)}
-                />
                 Tested
               </span>
             ) : (
