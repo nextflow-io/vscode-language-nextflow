@@ -22,7 +22,6 @@ async function activateAuth(
     const session = sessions[0];
     if (!session) return;
     await authProvider.removeSession(session.id);
-    commands.executeCommand("setContext", "nextflow.isLoggedIn", false);
   };
 
   const goToCloud = () => {
@@ -48,8 +47,12 @@ async function activateAuth(
 const showWelcomeMessage = async () => {
   const session = await getSession("auth0", []);
   let msg = "Logged out from Seqera Cloud";
-  if (session) msg = `Logged in to Seqera Cloud: ${session.account.label}`;
-  commands.executeCommand("setContext", "nextflow.isLoggedIn", true);
+  if (session) {
+    msg = `Logged in to Seqera Cloud: ${session.account.label}`;
+    commands.executeCommand("setContext", "nextflow.isLoggedIn", true);
+  } else {
+    commands.executeCommand("setContext", "nextflow.isLoggedIn", false);
+  }
   window.showInformationMessage(msg);
 };
 
