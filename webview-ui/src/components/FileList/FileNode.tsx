@@ -42,7 +42,7 @@ const FileNode = ({ node }: Props) => {
                     styles.metaIconHover
                   )}
                 />
-                Tested
+                nf-test
               </span>
             ) : (
               <span className={styles.metaLabel + " " + styles.disabled}>
