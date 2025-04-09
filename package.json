@@ -287,16 +287,6 @@
     "views": {
       "nextflow": [
         {
-          "id": "userInfo",
-          "name": "Seqera Cloud",
-          "type": "webview"
-        },
-        {
-          "id": "resources",
-          "name": "Resources",
-          "type": "tree"
-        },
-        {
           "id": "workflows",
           "name": "Workflows",
           "type": "webview"
@@ -305,6 +295,16 @@
           "id": "processes",
           "name": "Processes",
           "type": "webview"
+        },
+        {
+          "id": "userInfo",
+          "name": "Seqera Cloud",
+          "type": "webview"
+        },
+        {
+          "id": "resources",
+          "name": "Resources",
+          "type": "tree"
         }
       ]
     },
