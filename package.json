@@ -278,14 +278,14 @@
     "viewsContainers": {
       "activitybar": [
         {
-          "id": "seqera",
-          "title": "Seqera",
+          "id": "nextflow",
+          "title": "Nextflow",
           "icon": "images/nextflow.svg"
         }
       ]
     },
     "views": {
-      "seqera": [
+      "nextflow": [
         {
           "id": "userInfo",
           "name": "Seqera Cloud",
