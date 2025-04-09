@@ -16,11 +16,11 @@ const resources: ResourceLink[] = [
     url: "https://nextflow.io/docs/latest/index.html"
   },
   {
-    label: "Feedback Portal",
+    label: "Seqera Feedback Forum",
     url: "https://feedback.seqera.io/"
   },
   {
-    label: "Community Forum",
+    label: "Seqera Community Forum",
     url: "https://community.seqera.io/"
   },
   {
@@ -28,7 +28,7 @@ const resources: ResourceLink[] = [
     url: "https://docs.seqera.io/"
   },
   {
-    label: "Go to Seqera AI",
+    label: "Seqera AI",
     url: "https://ai.seqera.io/"
   }
 ];
