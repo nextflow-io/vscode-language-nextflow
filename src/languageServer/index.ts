@@ -267,10 +267,10 @@ export function activateLanguageServer(
     (uri, name) => { previewDag(context, uri, name); }
   );
   vscode.commands.registerCommand(
-    "nextflow.restartServer",
+    "nextflow.languageServer.restart",
     () => { restartLanguageServer(context); }
   );
-  vscode.commands.registerCommand("nextflow.stopServer", stopLanguageServer);
+  vscode.commands.registerCommand("nextflow.languageServer.stop", stopLanguageServer);
   vscode.commands.registerCommand(
     "nextflow.openFileFromWebview",
     async (uriString: string) => {

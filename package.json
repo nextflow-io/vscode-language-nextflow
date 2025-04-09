@@ -96,33 +96,33 @@
     ],
     "commands": [
       {
-        "command": "nextflow.convertToDSL2",
+        "command": "nextflow.chatbot.convertToDSL2",
         "title": "Convert to DSL2 with Seqera",
         "category": "Nextflow"
       },
       {
-        "command": "nextflow.openChat",
+        "command": "nextflow.chatbot.openChat",
         "title": "Chat with Seqera",
         "category": "Nextflow"
       },
       {
-        "command": "nextflow.restartServer",
+        "command": "nextflow.chatbot.writeTest",
+        "title": "Write nf-test with Seqera",
+        "category": "Nextflow"
+      },
+      {
+        "command": "nextflow.languageServer.restart",
         "title": "Restart language server",
+        "category": "Nextflow"
+      },
+      {
+        "command": "nextflow.languageServer.stop",
+        "title": "Stop language server",
         "category": "Nextflow"
       },
       {
         "command": "nextflow.showWelcomePage",
         "title": "Show Welcome Page",
-        "category": "Nextflow"
-      },
-      {
-        "command": "nextflow.stopServer",
-        "title": "Stop language server",
-        "category": "Nextflow"
-      },
-      {
-        "command": "nextflow.writeTest",
-        "title": "Write nf-test with Seqera",
         "category": "Nextflow"
       }
     ],
@@ -134,6 +134,28 @@
           "type": "boolean",
           "default": false,
           "description": "Enable debug logging and debug information in hover hints."
+        },
+        "nextflow.errorReportingMode": {
+          "type": "string",
+          "enum": [
+            "off",
+            "errors",
+            "warnings",
+            "paranoid"
+          ],
+          "enumDescriptions": [
+            "Disable all error reporting.",
+            "Enable errors only.",
+            "Enable errors and standard warnings.",
+            "Enable errors, standard warnings, and additional warnings for future deprecations, potential problems, and other discouraged patterns."
+          ],
+          "default": "warnings",
+          "description": "Set the desired level of error reporting."
+        },
+        "nextflow.extendedCompletion": {
+          "type": "boolean",
+          "default": false,
+          "description": "Provide auto-completions from outside the current script. If an external completion is selected, it will be automatically included into the current script."
         },
         "nextflow.files.exclude": {
           "type": "array",
@@ -150,7 +172,7 @@
         "nextflow.formatting.harshilAlignment": {
           "type": "boolean",
           "default": false,
-          "markdownDescription": "Use the [Harshil Alignment™️](https://nf-co.re/docs/contributing/code_editors_and_styling/harshil_alignment) when formatting Nextflow scripts and config files.\n\n*Note: not all rules are supported yet*"
+          "markdownDescription": "Use the [Harshil Alignment™️](https://nf-co.re/docs/contributing/code_editors_and_styling/harshil_alignment) when formatting Nextflow scripts and config files.\n\n*Note: not all rules are supported.*"
         },
         "nextflow.formatting.maheshForm": {
           "type": "boolean",
@@ -162,10 +184,10 @@
           "default": "",
           "markdownDescription": "Specify the folder path to the desired Java runtime. Equivalent to the `JAVA_HOME` environment variable, i.e. the Java binary should be located at `$JAVA_HOME/bin/java`. Use this setting if the extension cannot find Java automatically."
         },
-        "nextflow.paranoidWarnings": {
-          "type": "boolean",
-          "default": false,
-          "description": "Enable additional warnings for things like future deprecations, discouraged patterns, and so on."
+        "nextflow.maxCompletionItems": {
+          "type": "integer",
+          "default": 100,
+          "description": "The maximum number of auto-completions to suggest at a time."
         },
         "nextflow.targetVersion": {
           "type": "string",
@@ -178,7 +200,7 @@
         "nextflow.telemetry.enabled": {
           "type": "boolean",
           "default": false,
-          "markdownDescription": "Enable usage data to be sent to Seqera. See the extension README for more information about what we do and do not collect."
+          "markdownDescription": "Enable usage data to be sent to Seqera. See the welcome page for more information about what we do and do not collect."
         }
       }
     },

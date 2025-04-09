@@ -23,7 +23,7 @@ export function activateChatbot(
   // Commands
 
   const openChat = vscode.commands.registerCommand(
-    "nextflow.openChat",
+    "nextflow.chatbot.openChat",
     async () => {
       await vscode.commands.executeCommand("workbench.action.chat.open", {
         query: "@Seqera ",
@@ -35,7 +35,7 @@ export function activateChatbot(
   context.subscriptions.push(openChat);
 
   const writeTest = vscode.commands.registerCommand(
-    "nextflow.writeTest",
+    "nextflow.chatbot.writeTest",
     async () => {
       await vscode.commands.executeCommand("workbench.action.chat.open", {
         query: "@Seqera /nf-test"
@@ -46,7 +46,7 @@ export function activateChatbot(
   context.subscriptions.push(writeTest);
 
   const convertToDSL2 = vscode.commands.registerCommand(
-    "nextflow.convertToDSL2",
+    "nextflow.chatbot.convertToDSL2",
     async () => {
       await vscode.commands.executeCommand("workbench.action.chat.open", {
         query: "@Seqera /dsl2"
