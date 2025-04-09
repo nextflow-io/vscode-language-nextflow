@@ -37,16 +37,6 @@ function parseFile(content: string): FileInfo | null {
     };
   }
 
-  // Workflow test
-  rx = /^\s*workflow\s+"(\w+)"/gm;
-  if ((m = rx.exec(content)) !== null) {
-    return {
-      name: m[1],
-      type: "test",
-      line: getLineNumber(content, m.index) - 1
-    };
-  }
-
   return null;
 }
 
