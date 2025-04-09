@@ -2,32 +2,28 @@ import * as vscode from "vscode";
 
 import { FileNode } from "./types";
 
-import { findNfFiles, findTestFiles } from "./findFiles";
+import { findNfScripts, findNfTests } from "./findFiles";
 import getItem from "./getItem";
 
-async function buildList(): Promise<{
+function buildList(): {
   files: FileNode[];
   tests: FileNode[];
-}> {
+} {
   const folders = vscode.workspace.workspaceFolders;
-  if (!folders?.length) return { files: [], tests: [] };
+  if (!folders?.length)
+    return { files: [], tests: [] };
+
   const root = folders[0].uri.fsPath;
-  const nfFiles = await findNfFiles(root);
-  const testFiles = await findTestFiles(root);
-  const nfNodes: FileNode[] = [];
-  const testNodes: FileNode[] = [];
 
-  for (const filePath of nfFiles) {
-    const item = await getItem(filePath);
-    if (item) nfNodes.push(item);
-  }
+  const files: FileNode[] = findNfScripts(root)
+    .map(getItem)
+    .filter((item) => item != null);
 
-  for (const filePath of testFiles) {
-    const item = await getItem(filePath);
-    if (item) testNodes.push(item);
-  }
+  const tests: FileNode[] = findNfTests(root)
+    .map(getItem)
+    .filter((item) => item != null);
 
-  return { files: nfNodes, tests: testNodes };
+  return { files: files, tests: tests };
 }
 
 export default buildList;

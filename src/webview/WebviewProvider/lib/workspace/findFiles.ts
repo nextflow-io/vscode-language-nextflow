@@ -2,36 +2,33 @@ import * as fs from "fs";
 import * as path from "path";
 import * as vscode from "vscode";
 
-async function findFiles(
+function findFiles(
   dir: string,
-  extension: string,
-  found: string[] = []
-): Promise<string[]> {
-  for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
-    const p = path.join(dir, entry.name);
-    const isValidExtension = entry.name.endsWith(extension);
+  extension: string
+): string[] {
+  const excludedDirs = vscode.workspace
+    .getConfiguration("nextflow")
+    .get<string[]>("files.exclude", []);
 
-    const excludedDirs = vscode.workspace
-      .getConfiguration("nextflow")
-      .get<string[]>("files.exclude", []);
+  return fs.readdirSync(dir, { withFileTypes: true })
+    .flatMap((entry) => {
+      const filePath = path.join(dir, entry.name);
 
-    excludedDirs.push("node_modules");
-
-    if (entry.isDirectory() && !excludedDirs.includes(entry.name)) {
-      await findFiles(p, extension, found);
-    } else if (entry.isFile() && isValidExtension) {
-      found.push(p);
-    }
-  }
-  return found;
+      if (entry.isDirectory() && !excludedDirs.includes(entry.name))
+        return findFiles(filePath, extension);
+      if (entry.isFile() && entry.name.endsWith(extension))
+        return filePath;
+      return undefined;
+    })
+    .filter(file => file != undefined);
 }
 
-const findNfFiles = (dir: string) => {
+function findNfScripts(dir: string): string[] {
   return findFiles(dir, ".nf");
-};
+}
 
-const findTestFiles = (dir: string) => {
+function findNfTests(dir: string): string[] {
   return findFiles(dir, ".nf.test");
-};
+}
 
-export { findNfFiles, findTestFiles };
+export { findNfScripts, findNfTests };

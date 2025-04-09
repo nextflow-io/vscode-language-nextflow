@@ -1,33 +1,36 @@
 import { FileNode } from "./types";
 
-async function buildTree(
+function getShortestPath(allFiles: FileNode[]): FileNode {
+  return allFiles.reduce((shortest, current) => {
+    if (!shortest)
+      return current;
+    return current.filePath.length < shortest.filePath.length
+      ? current
+      : shortest;
+  });
+}
+
+function buildTree(
   allFiles: FileNode[],
   processedNodes = new Set<string>(),
-  currentNode?: FileNode,
-  isChild?: boolean
-): Promise<any> {
-  let node = currentNode;
-  if (!isChild)
-    node = allFiles.reduce((shortest, current) => {
-      if (!shortest) return current;
-      return current.filePath.length < shortest.filePath.length
-        ? current
-        : shortest;
-    }, allFiles[0]);
+  currentNode?: FileNode
+): FileNode | null {
+  const node = currentNode ?? getShortestPath(allFiles);
 
-  if (!node) return [];
+  if (!node)
+    return null;
 
-  if (processedNodes.has(node.name)) {
+  if (processedNodes.has(node.name))
     return node;
-  }
   processedNodes.add(node.name);
 
-  if (!node.children) node.children = [];
+  if (!node.children)
+    node.children = [];
 
   for (const nodeName of node.imports) {
     const childNode = allFiles.find((file) => file.name === nodeName);
     if (!childNode) continue;
-    const child = await buildTree(allFiles, processedNodes, childNode, true);
+    const child = buildTree(allFiles, processedNodes, childNode);
     if (!child) continue;
     node.children.push(child);
   }
