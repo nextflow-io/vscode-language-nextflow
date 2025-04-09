@@ -1,9 +1,6 @@
 type Type =
   | "workflow"
   | "process"
-  | "nextflow_workflow"
-  | "nextflow_process"
-  | "subworkflow"
   | undefined;
 
 export interface FileInfo {

@@ -17,16 +17,6 @@ function parseFile(content: string): FileInfo | null {
     };
   }
 
-  // Test (process directive with quotes)
-  rx = /^\s*process\s+"(\w+)"/gm;
-  if ((m = rx.exec(content)) !== null) {
-    return {
-      name: m[1],
-      type: "test",
-      line: getLineNumber(content, m.index) - 1
-    };
-  }
-
   // Process
   rx = /^\s*process\s+(\w+)/gm;
   if ((m = rx.exec(content)) !== null) {
@@ -37,33 +27,23 @@ function parseFile(content: string): FileInfo | null {
     };
   }
 
-  // Subworkflow
-  rx = /^\s*subworkflow\s+(\w+)/gm;
+  // Process test
+  rx = /^\s*process\s+"(\w+)"/gm;
   if ((m = rx.exec(content)) !== null) {
     return {
       name: m[1],
-      type: "subworkflow",
-      line: getLineNumber(content, m.index)
+      type: "test",
+      line: getLineNumber(content, m.index) - 1
     };
   }
 
-  // Nextflow Workflow
-  rx = /^\s*nextflow\s+workflow\s+(\w+)/gm;
+  // Workflow test
+  rx = /^\s*workflow\s+"(\w+)"/gm;
   if ((m = rx.exec(content)) !== null) {
     return {
       name: m[1],
-      type: "nextflow_workflow",
-      line: getLineNumber(content, m.index)
-    };
-  }
-
-  // Nextflow Process
-  rx = /^\s*nextflow\s+process\s+(\w+)/gm;
-  if ((m = rx.exec(content)) !== null) {
-    return {
-      name: m[1],
-      type: "nextflow_process",
-      line: getLineNumber(content, m.index)
+      type: "test",
+      line: getLineNumber(content, m.index) - 1
     };
   }
 
