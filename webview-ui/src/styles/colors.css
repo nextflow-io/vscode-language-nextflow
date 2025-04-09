@@ -1,0 +1,8 @@
+:root {
+  --nf-item-bg-active: var(--vscode-list-inactiveSelectionBackground);
+  --nf-item-bg-hover: var(--vscode-list-hoverBackground);
+  --nf-item-bg-selected: var(--vscode-list-activeSelectionBackground);
+  --nf-item-fg-active: var(--vscode-list-activeSelectionForeground);
+  --nf-item-fg-hover: var(--vscode-list-hoverForeground);
+  --nf-item-fg-selected: var(--vscode-list-activeSelectionForeground);
+}

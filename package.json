@@ -28,7 +28,10 @@
   "categories": [
     "Programming Languages"
   ],
-  "activationEvents": [],
+  "activationEvents": [
+    "onStartupFinished",
+    "onAuthenticationRequest:azuread"
+  ],
   "main": "./extension.js",
   "contributes": {
     "languages": [
@@ -121,11 +124,71 @@
         "category": "Nextflow"
       },
       {
+        "command": "nextflow.resources.openResource",
+        "title": "Open Resource",
+        "category": "Nextflow"
+      },
+      {
+        "command": "nextflow.resources.refresh",
+        "title": "Refresh Resources",
+        "category": "Nextflow",
+        "icon": "$(refresh)"
+      },
+      {
+        "command": "nextflow.seqera.goToCloud",
+        "title": "Go to Seqera Cloud",
+        "category": "Nextflow",
+        "icon": "$(cloud)"
+      },
+      {
+        "command": "nextflow.seqera.login",
+        "title": "Login to Seqera Cloud",
+        "category": "Nextflow",
+        "icon": "$(sign-in)"
+      },
+      {
+        "command": "nextflow.seqera.logout",
+        "title": "Logout from Seqera Cloud",
+        "category": "Nextflow",
+        "icon": "$(sign-out)"
+      },
+      {
+        "command": "nextflow.seqera.reloadWebview",
+        "title": "Reload Seqera Webview",
+        "category": "Nextflow",
+        "icon": "$(refresh)"
+      },
+      {
         "command": "nextflow.showWelcomePage",
         "title": "Show Welcome Page",
         "category": "Nextflow"
       }
     ],
+    "menus": {
+      "view/title": [
+        {
+          "command": "nextflow.seqera.reloadWebview",
+          "when": "view == workflows || view == processes || view == userInfo",
+          "group": "navigation@10"
+        },
+        {
+          "command": "nextflow.seqera.logout",
+          "when": "view == userInfo && nextflow.isLoggedIn == true",
+          "group": "navigation@10"
+        },
+        {
+          "command": "nextflow.seqera.goToCloud",
+          "when": "view == userInfo && nextflow.isLoggedIn == true",
+          "group": "navigation@10"
+        }
+      ],
+      "view/item/context": [
+        {
+          "command": "nextflow.resources.openResource",
+          "when": "view == resources"
+        }
+      ]
+    },
     "configuration": {
       "type": "object",
       "description": "Configuration for Nextflow language support",
@@ -233,12 +296,54 @@
           "highContrast": "#0DC09D"
         }
       }
+    ],
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "nextflow",
+          "title": "Nextflow",
+          "icon": "images/nextflow.svg"
+        }
+      ]
+    },
+    "views": {
+      "nextflow": [
+        {
+          "id": "workflows",
+          "name": "Workflows",
+          "type": "webview"
+        },
+        {
+          "id": "processes",
+          "name": "Processes",
+          "type": "webview"
+        },
+        {
+          "id": "userInfo",
+          "name": "Seqera Cloud",
+          "type": "webview"
+        },
+        {
+          "id": "resources",
+          "name": "Resources",
+          "type": "tree"
+        }
+      ]
+    },
+    "viewsWelcome": [
+      {
+        "view": "resources",
+        "contents": "Below you'll find helpful resources to learn about Nextflow, get support, and explore the platform's features."
+      }
     ]
   },
   "scripts": {
     "check-types": "tsc --noEmit",
-    "compile": "npm run check-types && node esbuild.js",
-    "package": "npm run check-types && node esbuild.js --production && (cd build ; vsce package -o nextflow.vsix)"
+    "compile": "npm run check-types && npm run ui-build && node esbuild.js",
+    "package": "npm run check-types && npm run ui-build && node esbuild.js --production && (cd build ; vsce package -o nextflow.vsix)",
+    "ui-dev": "cd webview-ui && npm run dev",
+    "ui-watch": "cd webview-ui && npm run build -- --watch",
+    "ui-build": "cd webview-ui && npm run build"
   },
   "devDependencies": {
     "@types/node": "^20",
@@ -247,11 +352,13 @@
     "@vscode/vsce": "^3.2.1",
     "esbuild": "^0.25.0",
     "esbuild-plugin-copy": "^2.1.1",
+    "jwt-decode": "^4.0.0",
     "mermaid": "^11.4.1",
     "node-fetch": "^3.3.2",
     "posthog-node": "^4.4.1",
     "prettier": "3.5.2",
     "typescript": "^5.7.2",
+    "uuid": "^11.1.0",
     "vscode-jsonrpc": "^8.0.2",
     "vscode-languageclient": "^8.0.2"
   }

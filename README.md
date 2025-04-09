@@ -15,7 +15,7 @@ See also:
 
 ![nextflow vscode extension](images/vscode-nextflow.png)
 
-The extension uses the [Nextflow langauge server](https://github.com/nextflow-io/language-server) to provide code intelligence:
+The extension uses the [Nextflow language server](https://github.com/nextflow-io/language-server) to provide code intelligence:
 
 - Syntax highlighting
 - Code navigation (outline, go to definition, find references)
@@ -81,6 +81,13 @@ git clone https://github.com/nextflow-io/vscode-language-nextflow
 cd vscode-language-nextflow
 ```
 
+Install dependencies:
+
+```bash
+(cd webview-ui ; npm install)
+npm install
+```
+
 If you need to edit the language server, clone the repository and build it:
 
 ```bash
@@ -88,9 +95,15 @@ git clone https://github.com/nextflow-io/language-server
 make server
 ```
 
-Finally, press `F5` to build the extension and launch a new VS Code window with the extension loaded.
+Finally, in VS Code or Cursor, press `F5` to build the extension and launch a new workspace with the extension loaded (alternatively you can run `Debug: Start Debugging` from the command palette).
 
 You will be prompted to enter a path to your Nextflow workspace, which defaults to `../test-workspace` relative to the project directory.
+
+Alternatively, you can run the Webview UI with live reload:
+
+```bash
+npm run ui-watch
+```
 
 ## Publishing
 
