@@ -13,12 +13,12 @@ const WorkspaceContext = createContext<WorkspaceContextType>({
   selectedItems: [],
   selectItem: () => {},
   isSelected: () => false,
-  viewID: null,
+  viewID: "",
   testCount: 0,
   login: () => {},
   openChat: () => {},
   isCursor: false,
-  reloadView: () => {}
+  refresh: () => {}
 });
 
 interface WorkspaceContextType {
@@ -31,18 +31,18 @@ interface WorkspaceContextType {
   selectedItems: string[];
   selectItem: (name: string) => void;
   isSelected: (name: string) => boolean;
-  viewID: string | null;
+  viewID: string;
   testCount: number;
   login: () => void;
   openChat: () => void;
   isCursor: boolean;
-  reloadView: () => void;
+  refresh: () => void;
 }
 
 type Props = {
   children: React.ReactNode;
   vscode: any;
-  viewID: string | null;
+  viewID: string;
   isCursor: boolean;
 };
 
@@ -119,8 +119,8 @@ const WorkspaceProvider = ({ children, vscode, viewID, isCursor }: Props) => {
     vscode.postMessage({ command: "openChat" });
   }
 
-  function reloadView() {
-    vscode.postMessage({ command: "reloadView" });
+  function refresh() {
+    vscode.postMessage({ command: "refresh" });
   }
 
   return (
@@ -140,7 +140,7 @@ const WorkspaceProvider = ({ children, vscode, viewID, isCursor }: Props) => {
         login,
         viewID,
         isCursor,
-        reloadView
+        refresh
       }}
     >
       {children}

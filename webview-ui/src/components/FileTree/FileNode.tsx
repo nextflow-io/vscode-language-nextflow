@@ -60,11 +60,19 @@ const FileNode = ({ node, level = 0, searchTerm }: Props) => {
           <i
             className={clsx(
               "codicon",
-              isFolder ? "codicon-folder" : "codicon-file"
+              isFolder ? "codicon-symbol-method" : "codicon-symbol-method"
             )}
           />
           {node.name}
         </span>
+        {hasChildren && (
+          <i
+            className={clsx("codicon", {
+              "codicon-chevron-right": !expanded,
+              "codicon-chevron-down": expanded
+            })}
+          />
+        )}
       </label>
       {hasChildren && expanded && (
         <div className={styles.children}>
