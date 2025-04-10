@@ -39,7 +39,9 @@ npm run ui-watch
 
 1. Update the extension version number in `package.json`.
 2. Update the changelog in `CHANGELOG.md`.
-3. Run the "Publish Extension" action to publish the extension to the Visual Studio Marketplace and Open VSX Registry.
+3. Make a release commit e.g. "Release 1.0.0".
+4. Create a release in GitHub e.g. "v1.0.0".
+5. Run the "Publish Extension" action to publish the extension to the Visual Studio Marketplace and Open VSX Registry.
 
 ## Additional resources
 
