@@ -50,13 +50,7 @@ The language server requires Java 17 or later.
 
 The following settings are available:
 
-- `nextflow.completion.extended`: Provide auto-completions from outside the current script. If an external completion is selected, it will be automatically included into the current script.
-
-- `nextflow.completion.maxItems`: The maximum number of auto-completions to suggest at a time.
-
 - `nextflow.debug`: Enable debug logging and debug information in hover hints.
-
-- `nextflow.errorReportingMode`: Set the desired level of error reporting.
 
 - `nextflow.files.exclude`: Configure glob patterns for excluding folders from being searched for Nextflow scripts and configuration files.
 
@@ -66,9 +60,9 @@ The following settings are available:
 
 - `nextflow.formatting.maheshForm`: Place process outputs at the end of the process body when formatting Nextflow scripts.
 
-- `nextflow.formatting.sortDeclarations`: Sort script declarations when formatting Nextflow scripts.
-
 - `nextflow.java.home`: Specifies the folder path to the JDK. Equivalent to the `JAVA_HOME` environment variable, i.e. the Java binary should be located at `$JAVA_HOME/bin/java`. Use this setting if the extension cannot find Java automatically.
+
+- `nextflow.paranoidWarnings`: Enable additional warnings for future deprecations, potential problems, and other discouraged patterns.
 
 - `nextflow.targetVersion`: Target version of Nextflow to be used by the language server.
 
