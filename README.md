@@ -66,6 +66,8 @@ The following settings are available:
 
 - `nextflow.formatting.maheshForm`: Place process outputs at the end of the process body when formatting Nextflow scripts.
 
+- `nextflow.formatting.sortDeclarations`: Sort script declarations when formatting Nextflow scripts.
+
 - `nextflow.java.home`: Specifies the folder path to the JDK. Equivalent to the `JAVA_HOME` environment variable, i.e. the Java binary should be located at `$JAVA_HOME/bin/java`. Use this setting if the extension cannot find Java automatically.
 
 - `nextflow.targetVersion`: Target version of Nextflow to be used by the language server.

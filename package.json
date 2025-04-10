@@ -241,6 +241,11 @@
           "default": false,
           "markdownDescription": "Place process outputs at the end of the process body when formatting Nextflow scripts."
         },
+        "nextflow.formatting.sortDeclarations": {
+          "type": "boolean",
+          "default": false,
+          "markdownDescription": "Sort script declarations when formatting Nextflow scripts."
+        },
         "nextflow.java.home": {
           "type": "string",
           "default": "",
