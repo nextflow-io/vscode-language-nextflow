@@ -1,22 +1,14 @@
 # Nextflow extension for VS Code
 
-## Available commands
+## Commands
 
-Open the command palette and type `Nextflow` to see the following commands:
-
-- Show Welcome Page
-- Chat with Seqera
-- Convert to DSL2 with Seqera
-- Restart language server
-- Stop language server
+Open the command palette and type `Nextflow` to see the list of available commands.
 
 ## Language server
 
-The extension will automatically download a language server release based on the "Nextflow > Target Version" extension setting.
+The extension will automatically download a language server release based on the `nextflow.targetVersion` extension setting.
 
-## Documentation
-
-Read the [Nextflow documentation](https://nextflow.io/docs/latest/vscode.html) for more information about using the Nextflow extension.
+Read the [Nextflow documentation](https://nextflow.io/docs/latest/vscode.html) for more information about the Nextflow language server.
 
 ## Telemetry
 

@@ -1,13 +1,6 @@
 # Nextflow extension for Visual Studio Code
 
-VS Code extension for [Nextflow](https://www.nextflow.io/) that provides language support for scripts and config files, using the [Nextflow language server](https://github.com/nextflow-io/language-server).
-
-Read the blog posts ([part 1](https://seqera.io/blog/modernizing-nextflow-developer-experience/), [part 2](https://seqera.io/blog/modernizing-nextflow-developer-experience-part-2/)) and the [docs](https://nextflow.io/docs/latest/vscode.html) for more information.
-
-See also:
-
-- [VSCode Marketplace](https://marketplace.visualstudio.com/items?itemName=nextflow.nextflow)
-- [Open VSX Registry](https://www.open-vsx.org/extension/nextflow/nextflow)
+VS Code extension for [Nextflow](https://www.nextflow.io/) that provides language support for Nextflow scripts and config files.
 
 ## Features
 
@@ -26,6 +19,13 @@ The extension uses the [Nextflow language server](https://github.com/nextflow-io
 - Rename
 - DAG preview for workflows
 
+Read the [Nextflow documentation](https://nextflow.io/docs/latest/vscode.html) for more information about the Nextflow language server.
+
+Related blog posts:
+
+- [Modernizing the Nextflow Developer Experience (Part 1): The IDE](https://seqera.io/blog/modernizing-nextflow-developer-experience/)
+- [Modernizing the Nextflow Developer Experience (Part 2): The Language Server](https://seqera.io/blog/modernizing-nextflow-developer-experience-part-2/)
+
 ### Copilot for Nextflow
 
 ![VS Code Copilot Extension](images/chat-usage.gif)
@@ -39,6 +39,10 @@ The extension includes a GitHub Copilot extension specifically trained for Nextf
 - Special commands:
   - `/dsl2` - Convert DSL1 scripts to DSL2
   - `/nf-test` - Assists in generating nf-test test cases and improving test coverage
+
+Related blog posts:
+
+- [Bringing Seqera AI to the Nextflow VS Code extension](https://seqera.io/blog/seqera-ai--nextflow-vs-code/)
 
 ### Workflows and Processes View
 
@@ -59,7 +63,11 @@ This view helps you:
 
 ![Process View](images/process_view.png)
 
-## Requirements
+## Installation
+
+This extension is available in the [Visual Studio Marketplace](https://marketplace.visualstudio.com/items?itemName=nextflow.nextflow) and the [Open VSX Registry](https://www.open-vsx.org/extension/nextflow/nextflow).
+
+### Requirements
 
 The language server requires Java 17 or later.
 
@@ -77,6 +85,10 @@ wget https://github.com/nextflow-io/language-server/releases/download/v24.10.0/l
 The extension will fall back to the latest patch version from the local cache if it can't download from GitHub.
 
 *Note: Nextflow language server patch versions have no correlation to Nextflow patch versions. Always use the latest patch version of the language server when downloading a release manually.*
+
+## Commands
+
+Open the command palette and type `Nextflow` to see the list of available commands.
 
 ## Configuration
 
