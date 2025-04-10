@@ -11,6 +11,10 @@ See also:
 
 ## Features
 
+[Language Server Features](#nextflow-language-server) | [Copilot Features](#copilot-for-nextflow)
+
+
+
 ### Nextflow language server
 
 ![nextflow vscode extension](images/vscode-nextflow.png)
@@ -39,6 +43,29 @@ The extension includes a GitHub Copilot extension specifically trained for Nextf
 - Special commands:
   - `/dsl2` - Convert DSL1 scripts to DSL2
   - `/nf-test` - Assists in generating nf-test test cases and improving test coverage
+
+### Workflow View
+
+This extension provides dedicated support for visualizing Nextflow workflows, helping you logically understand how your Nextflow pipeline is structured.
+
+The view is constructed based on the `include` logic within your Nextflow code, making it easy to follow dependencies and process flow.
+
+See below for an example visualization of the [nf-core/rnaseq](https://github.com/nf-core/rnaseq) pipeline:
+
+![Workflow View](images/workflow_view.png)
+
+### Process View
+
+This extension provides dedicated support for managing and monitoring your Nextflow processes. The Process View offers a comprehensive list of all processes in your workflow, including their test coverage status.
+
+Each process is clearly labeled with an indicator showing whether it has test coverage (NF-TEST), making it easy to identify which parts of your pipeline need additional testing.
+
+The view helps you:
+- Track test coverage across your entire pipeline
+- Quickly identify untested processes
+- Navigate directly to process definitions by clicking on their names
+
+![Process View](images/process_view.png)
 
 ## Requirements
 
