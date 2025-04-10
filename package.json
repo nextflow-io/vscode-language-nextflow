@@ -301,13 +301,7 @@
           "type": "tree"
         }
       ]
-    },
-    "viewsWelcome": [
-      {
-        "view": "resources",
-        "contents": "Below you'll find helpful resources to learn about Nextflow, get support, and explore the platform's features."
-      }
-    ]
+    }
   },
   "scripts": {
     "check-types": "tsc --noEmit",
