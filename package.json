@@ -99,45 +99,29 @@
     ],
     "commands": [
       {
-        "command": "nextflow.convertToDSL2",
+        "command": "nextflow.chatbot.convertToDSL2",
         "title": "Convert to DSL2 with Seqera",
         "category": "Nextflow"
       },
       {
-        "command": "nextflow.openChat",
+        "command": "nextflow.chatbot.openChat",
         "title": "Chat with Seqera",
         "category": "Nextflow"
       },
       {
-        "command": "nextflow.restartServer",
-        "title": "Restart language server",
-        "category": "Nextflow"
-      },
-      {
-        "command": "nextflow.showWelcomePage",
-        "title": "Show Welcome Page",
-        "category": "Nextflow"
-      },
-      {
-        "command": "nextflow.stopServer",
-        "title": "Stop language server",
-        "category": "Nextflow"
-      },
-      {
-        "command": "nextflow.writeTest",
+        "command": "nextflow.chatbot.writeTest",
         "title": "Write nf-test with Seqera",
         "category": "Nextflow"
       },
       {
-        "command": "nextflow.resources.openResource",
-        "title": "Open Resource",
+        "command": "nextflow.languageServer.restart",
+        "title": "Restart language server",
         "category": "Nextflow"
       },
       {
-        "command": "nextflow.resources.refresh",
-        "title": "Refresh Resources",
-        "category": "Nextflow",
-        "icon": "$(refresh)"
+        "command": "nextflow.languageServer.stop",
+        "title": "Stop language server",
+        "category": "Nextflow"
       },
       {
         "command": "nextflow.seqera.goToCloud",
@@ -158,10 +142,20 @@
         "icon": "$(sign-out)"
       },
       {
+        "command": "nextflow.seqera.openResource",
+        "title": "Open Resource",
+        "category": "Nextflow"
+      },
+      {
         "command": "nextflow.seqera.reloadWebview",
         "title": "Reload Seqera Webview",
         "category": "Nextflow",
         "icon": "$(refresh)"
+      },
+      {
+        "command": "nextflow.showWelcomePage",
+        "title": "Show Welcome Page",
+        "category": "Nextflow"
       }
     ],
     "menus": {
@@ -184,7 +178,7 @@
       ],
       "view/item/context": [
         {
-          "command": "nextflow.resources.openResource",
+          "command": "nextflow.seqera.openResource",
           "when": "view == resources"
         }
       ]
@@ -213,7 +207,7 @@
         "nextflow.formatting.harshilAlignment": {
           "type": "boolean",
           "default": false,
-          "markdownDescription": "Use the [Harshil Alignment™️](https://nf-co.re/docs/contributing/code_editors_and_styling/harshil_alignment) when formatting Nextflow scripts and config files.\n\n*Note: not all rules are supported yet*"
+          "markdownDescription": "Use the [Harshil Alignment™️](https://nf-co.re/docs/contributing/code_editors_and_styling/harshil_alignment) when formatting Nextflow scripts and config files.\n\n*Note: not all rules are supported.*"
         },
         "nextflow.formatting.maheshForm": {
           "type": "boolean",
@@ -228,7 +222,7 @@
         "nextflow.paranoidWarnings": {
           "type": "boolean",
           "default": false,
-          "description": "Enable additional warnings for things like future deprecations, discouraged patterns, and so on."
+          "description": "Enable additional warnings for future deprecations, potential problems, and other discouraged patterns."
         },
         "nextflow.targetVersion": {
           "type": "string",
@@ -241,7 +235,7 @@
         "nextflow.telemetry.enabled": {
           "type": "boolean",
           "default": false,
-          "markdownDescription": "Enable usage data to be sent to Seqera. See the extension README for more information about what we do and do not collect."
+          "markdownDescription": "Enable usage data to be sent to Seqera. See the welcome page for more information about what we do and do not collect."
         }
       }
     },

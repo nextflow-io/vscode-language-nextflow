@@ -44,6 +44,30 @@ The extension includes a GitHub Copilot extension specifically trained for Nextf
 
 The language server requires Java 17 or later.
 
+*Note: for custom Java installations such as conda, you might need to set the `nextflow.java.home` extension setting for the extension to find your Java installation.*
+
+## Configuration
+
+The following settings are available:
+
+- `nextflow.debug`: Enable debug logging and debug information in hover hints.
+
+- `nextflow.files.exclude`: Configure glob patterns for excluding folders from being searched for Nextflow scripts and configuration files.
+
+- `nextflow.formatting.harshilAlignment`: Use the [Harshil Alignment™️](https://nf-co.re/docs/contributing/code_editors_and_styling/harshil_alignment) when formatting Nextflow scripts and config files.
+
+  *Note: not all rules are supported.*
+
+- `nextflow.formatting.maheshForm`: Place process outputs at the end of the process body when formatting Nextflow scripts.
+
+- `nextflow.java.home`: Specifies the folder path to the JDK. Equivalent to the `JAVA_HOME` environment variable, i.e. the Java binary should be located at `$JAVA_HOME/bin/java`. Use this setting if the extension cannot find Java automatically.
+
+- `nextflow.paranoidWarnings`: Enable additional warnings for future deprecations, potential problems, and other discouraged patterns.
+
+- `nextflow.targetVersion`: Target version of Nextflow to be used by the language server.
+
+- `nextflow.telemetry.enabled`: Enable usage data to be sent to Seqera. See the [welcome page](./src/welcomePage/welcome-vscode.md) for more information about what we do and do not collect.
+
 ## Development
 
 Clone this repository:

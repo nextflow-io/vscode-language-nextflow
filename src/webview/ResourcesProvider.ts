@@ -14,7 +14,7 @@ export class ResourceItem extends vscode.TreeItem {
     if (url) {
       this.description = url;
       this.command = {
-        command: "nextflow.resources.openResource",
+        command: "nextflow.seqera.openResource",
         title: "Open Resource",
         arguments: [url]
       };
@@ -43,7 +43,7 @@ export class ResourcesProvider
     },
     {
       label: "Nextflow Documentation",
-      url: "https://nextflow.io/docs/latest/index.html"
+      url: "https://nextflow.io/docs/latest/"
     },
     {
       label: "Seqera Feedback Forum",
@@ -63,7 +63,7 @@ export class ResourcesProvider
     },
     {
       label: "Open Seqera Copilot",
-      command: "nextflow.openChat"
+      command: "nextflow.chatbot.openChat"
     }
   ];
 
