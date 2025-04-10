@@ -11,10 +11,6 @@ See also:
 
 ## Features
 
-[Language Server Features](#nextflow-language-server) | [Copilot Features](#copilot-for-nextflow)
-
-
-
 ### Nextflow language server
 
 ![nextflow vscode extension](images/vscode-nextflow.png)
@@ -44,26 +40,22 @@ The extension includes a GitHub Copilot extension specifically trained for Nextf
   - `/dsl2` - Convert DSL1 scripts to DSL2
   - `/nf-test` - Assists in generating nf-test test cases and improving test coverage
 
-### Workflow View
+### Workflows and Processes View
 
-This extension provides dedicated support for visualizing Nextflow workflows, helping you logically understand how your Nextflow pipeline is structured.
+The extension provides custom views for managing Nextflow workflows and processes.
 
-The view is constructed based on the `include` logic within your Nextflow code, making it easy to follow dependencies and process flow.
+The Workflows view provides a comprehensive overview of your pipeline project. It infers the structure of your pipeline from the include declarations in your scripts.
 
-See below for an example visualization of the [nf-core/rnaseq](https://github.com/nf-core/rnaseq) pipeline:
+Here is an eaxmple from the [nf-core/rnaseq](https://github.com/nf-core/rnaseq) pipeline:
 
-![Workflow View](images/workflow_view.png)
+![Workflows View](images/workflow_view.png)
 
-### Process View
+The Processes view provides a comprehensive list of all processes in your pipeline, as well as any associated [nf-test](https://www.nf-test.com/) files.
 
-This extension provides dedicated support for managing and monitoring your Nextflow processes. The Process View offers a comprehensive list of all processes in your workflow, including their test coverage status.
-
-Each process is clearly labeled with an indicator showing whether it has test coverage (NF-TEST), making it easy to identify which parts of your pipeline need additional testing.
-
-The view helps you:
-- Track test coverage across your entire pipeline
+This view helps you:
+- Monitor test coverage across your entire pipeline
 - Quickly identify untested processes
-- Navigate directly to process definitions by clicking on their names
+- Easily navigate to a process definition (or corresponding test) by name
 
 ![Process View](images/process_view.png)
 
