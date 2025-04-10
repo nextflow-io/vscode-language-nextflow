@@ -65,6 +65,19 @@ The language server requires Java 17 or later.
 
 *Note: for custom Java installations such as conda, you might need to set the `nextflow.java.home` extension setting for the extension to find your Java installation.*
 
+### Offline usage
+
+The extension downloads an appropriate version of the language server from GitHub based on the `nextflow.targetVersion` extension setting. To use the language server in an offline environment, you must download a language server release manually and save it in the local cache directory used by the extension. For example:
+
+```bash
+mkdir -p ~/.nextflow/lsp/v24.10
+wget https://github.com/nextflow-io/language-server/releases/download/v24.10.0/language-server-all.jar -O ~/.nextflow/lsp/v24.10/v24.10.0.jar
+```
+
+The extension will fall back to the latest patch version from the local cache if it can't download from GitHub.
+
+*Note: Nextflow language server patch versions have no correlation to Nextflow patch versions. Always use the latest patch version of the language server when downloading a release manually.*
+
 ## Configuration
 
 The following settings are available:
