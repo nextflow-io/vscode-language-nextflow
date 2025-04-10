@@ -1,18 +1,14 @@
 # Nextflow extension for Cursor
 
-## Available commands
+## Commands
 
-Open the command palette and type `Nextflow` to see the following commands:
-
-- Show Welcome Page
-- Chat with Seqera
-- Convert to DSL2 with Seqera
-- Restart language server
-- Stop language server
+Open the command palette and type `Nextflow` to see the list of available commands.
 
 ## Language server
 
-The extension will automatically download a language server release based on the "Nextflow > Target Version" extension setting.
+The extension will automatically download a language server release based on the `nextflow.targetVersion` extension setting.
+
+Read the [Nextflow documentation](https://nextflow.io/docs/latest/vscode.html) for more information about the Nextflow language server.
 
 ## Seqera AI
 
@@ -30,10 +26,6 @@ In order for Cursor to have access to the Nextflow docs, perform the following s
 4. Paste `https://www.nextflow.io/docs/latest/`
 
 Now you will be able to use the `@Nextflow` command in Cursor Chat. The same can be done for MultiQC or other tools.
-
-## Documentation
-
-Read the [Nextflow documentation](https://nextflow.io/docs/latest/vscode.html) for more information about using the Nextflow extension.
 
 ## Telemetry
 

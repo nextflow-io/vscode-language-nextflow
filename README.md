@@ -1,13 +1,6 @@
 # Nextflow extension for Visual Studio Code
 
-VS Code extension for [Nextflow](https://www.nextflow.io/) that provides language support for scripts and config files, using the [Nextflow language server](https://github.com/nextflow-io/language-server).
-
-Read the blog posts ([part 1](https://seqera.io/blog/modernizing-nextflow-developer-experience/), [part 2](https://seqera.io/blog/modernizing-nextflow-developer-experience-part-2/)) and the [docs](https://nextflow.io/docs/latest/vscode.html) for more information.
-
-See also:
-
-- [VSCode Marketplace](https://marketplace.visualstudio.com/items?itemName=nextflow.nextflow)
-- [Open VSX Registry](https://www.open-vsx.org/extension/nextflow/nextflow)
+VS Code extension for [Nextflow](https://www.nextflow.io/) that provides language support for Nextflow scripts and config files.
 
 ## Features
 
@@ -26,6 +19,13 @@ The extension uses the [Nextflow language server](https://github.com/nextflow-io
 - Rename
 - DAG preview for workflows
 
+Read the [Nextflow documentation](https://nextflow.io/docs/latest/vscode.html) for more information about the Nextflow language server.
+
+Related blog posts:
+
+- [Modernizing the Nextflow Developer Experience (Part 1): The IDE](https://seqera.io/blog/modernizing-nextflow-developer-experience/)
+- [Modernizing the Nextflow Developer Experience (Part 2): The Language Server](https://seqera.io/blog/modernizing-nextflow-developer-experience-part-2/)
+
 ### Copilot for Nextflow
 
 ![VS Code Copilot Extension](images/chat-usage.gif)
@@ -40,11 +40,55 @@ The extension includes a GitHub Copilot extension specifically trained for Nextf
   - `/dsl2` - Convert DSL1 scripts to DSL2
   - `/nf-test` - Assists in generating nf-test test cases and improving test coverage
 
-## Requirements
+Related blog posts:
+
+- [Bringing Seqera AI to the Nextflow VS Code extension](https://seqera.io/blog/seqera-ai--nextflow-vs-code/)
+
+### Workflows and Processes View
+
+The extension provides custom views for managing Nextflow workflows and processes.
+
+The Workflows view provides a comprehensive overview of your pipeline project. It infers the structure of your pipeline from the include declarations in your scripts.
+
+Here is an eaxmple from the [nf-core/rnaseq](https://github.com/nf-core/rnaseq) pipeline:
+
+![Workflows View](images/workflow_view.png)
+
+The Processes view provides a comprehensive list of all processes in your pipeline, as well as any associated [nf-test](https://www.nf-test.com/) files.
+
+This view helps you:
+- Monitor test coverage across your entire pipeline
+- Quickly identify untested processes
+- Easily navigate to a process definition (or corresponding test) by name
+
+![Process View](images/process_view.png)
+
+## Installation
+
+This extension is available in the [Visual Studio Marketplace](https://marketplace.visualstudio.com/items?itemName=nextflow.nextflow) and the [Open VSX Registry](https://www.open-vsx.org/extension/nextflow/nextflow).
+
+### Requirements
 
 The language server requires Java 17 or later.
 
 *Note: for custom Java installations such as conda, you might need to set the `nextflow.java.home` extension setting for the extension to find your Java installation.*
+
+### Offline usage
+
+The extension downloads an appropriate version of the language server from GitHub based on the `nextflow.targetVersion` extension setting. To use the language server in an offline environment, you must download a language server release manually and save it in the local cache directory used by the extension. For example:
+
+```bash
+mkdir -p ~/.nextflow/lsp/v24.10
+wget https://github.com/nextflow-io/language-server/releases/download/v24.10.0/language-server-all.jar -O ~/.nextflow/lsp/v24.10/v24.10.0.jar
+```
+
+The extension will fall back to the latest patch version from the local cache if it can't download from GitHub.
+
+*Note: Nextflow language server patch versions have no correlation to Nextflow patch versions. Always use the latest patch version of the language server when downloading a release manually.*
+
+## Commands
+
+Open the command palette and type `Nextflow` to see the list of available commands.
 
 ## Configuration
 
@@ -73,56 +117,6 @@ The following settings are available:
 - `nextflow.targetVersion`: Target version of Nextflow to be used by the language server.
 
 - `nextflow.telemetry.enabled`: Enable usage data to be sent to Seqera. See the [welcome page](./src/welcomePage/welcome-vscode.md) for more information about what we do and do not collect.
-
-## Development
-
-Clone this repository:
-
-```bash
-git clone https://github.com/nextflow-io/vscode-language-nextflow
-cd vscode-language-nextflow
-```
-
-Install dependencies:
-
-```bash
-(cd webview-ui ; npm install)
-npm install
-```
-
-If you need to edit the language server, clone the repository and build it:
-
-```bash
-git clone https://github.com/nextflow-io/language-server
-make server
-```
-
-Finally, in VS Code or Cursor, press `F5` to build the extension and launch a new workspace with the extension loaded (alternatively you can run `Debug: Start Debugging` from the command palette).
-
-You will be prompted to enter a path to your Nextflow workspace, which defaults to `../test-workspace` relative to the project directory.
-
-Alternatively, you can run the Webview UI with live reload:
-
-```bash
-npm run ui-watch
-```
-
-## Publishing
-
-1. Update the extension version number in `package.json`.
-2. Update the changelog in `CHANGELOG.md`.
-3. Run the "Publish Extension" action to publish the extension to the VSCode marketplace and Open VSX.
-
-## Contributing
-
-Contributions are welcome. Feel free to fork [this repository](https://github.com/nextflow-io/vscode-language-nextflow) and open a pull request to propose changes.
-
-See also:
-
-- https://manual.macromates.com/en/language_grammars
-- https://code.visualstudio.com/docs/extensions/publish-extension
-- https://code.visualstudio.com/docs/extensions/yocode
-- https://code.visualstudio.com/docs/extensionAPI/extension-manifest
 
 ## Telemetry notice
 
