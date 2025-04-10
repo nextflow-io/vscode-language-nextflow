@@ -40,6 +40,25 @@ The extension includes a GitHub Copilot extension specifically trained for Nextf
   - `/dsl2` - Convert DSL1 scripts to DSL2
   - `/nf-test` - Assists in generating nf-test test cases and improving test coverage
 
+### Workflows and Processes View
+
+The extension provides custom views for managing Nextflow workflows and processes.
+
+The Workflows view provides a comprehensive overview of your pipeline project. It infers the structure of your pipeline from the include declarations in your scripts.
+
+Here is an eaxmple from the [nf-core/rnaseq](https://github.com/nf-core/rnaseq) pipeline:
+
+![Workflows View](images/workflow_view.png)
+
+The Processes view provides a comprehensive list of all processes in your pipeline, as well as any associated [nf-test](https://www.nf-test.com/) files.
+
+This view helps you:
+- Monitor test coverage across your entire pipeline
+- Quickly identify untested processes
+- Easily navigate to a process definition (or corresponding test) by name
+
+![Process View](images/process_view.png)
+
 ## Requirements
 
 The language server requires Java 17 or later.
