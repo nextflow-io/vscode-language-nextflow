@@ -187,10 +187,37 @@
       "type": "object",
       "description": "Configuration for Nextflow language support",
       "properties": {
+        "nextflow.completion.extended": {
+          "type": "boolean",
+          "default": false,
+          "description": "Provide auto-completions from outside the current script. If an external completion is selected, it will be automatically included into the current script."
+        },
+        "nextflow.completion.maxItems": {
+          "type": "integer",
+          "default": 100,
+          "description": "The maximum number of auto-completions to suggest at a time."
+        },
         "nextflow.debug": {
           "type": "boolean",
           "default": false,
           "description": "Enable debug logging and debug information in hover hints."
+        },
+        "nextflow.errorReportingMode": {
+          "type": "string",
+          "enum": [
+            "off",
+            "errors",
+            "warnings",
+            "paranoid"
+          ],
+          "enumDescriptions": [
+            "Disable all error reporting.",
+            "Enable errors only.",
+            "Enable errors and standard warnings.",
+            "Enable errors, standard warnings, and additional warnings for future deprecations, potential problems, and other discouraged patterns."
+          ],
+          "default": "warnings",
+          "description": "Set the desired level of error reporting."
         },
         "nextflow.files.exclude": {
           "type": "array",
@@ -214,15 +241,15 @@
           "default": false,
           "markdownDescription": "Place process outputs at the end of the process body when formatting Nextflow scripts."
         },
+        "nextflow.formatting.sortDeclarations": {
+          "type": "boolean",
+          "default": false,
+          "markdownDescription": "Sort script declarations when formatting Nextflow scripts."
+        },
         "nextflow.java.home": {
           "type": "string",
           "default": "",
           "markdownDescription": "Specify the folder path to the desired Java runtime. Equivalent to the `JAVA_HOME` environment variable, i.e. the Java binary should be located at `$JAVA_HOME/bin/java`. Use this setting if the extension cannot find Java automatically."
-        },
-        "nextflow.paranoidWarnings": {
-          "type": "boolean",
-          "default": false,
-          "description": "Enable additional warnings for future deprecations, potential problems, and other discouraged patterns."
         },
         "nextflow.targetVersion": {
           "type": "string",
