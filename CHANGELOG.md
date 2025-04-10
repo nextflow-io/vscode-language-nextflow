@@ -4,6 +4,13 @@ All notable changes to the Nextflow VS Code extension will be documented here.
 
 See [Keep a Changelog](http://keepachangelog.com/) for recommendations on how to structure this file.
 
+## [1.2.0] - 2025-04-10
+
+- Add extension settings for code completion and formatting
+- Add extension setting for error reporting mode
+- Add opt-in telemetry (#82)
+- Add Seqera auth and webviews (#92)
+
 ## [1.1.0] - 2025-02-25
 
 - Download language server on startup (#68)
