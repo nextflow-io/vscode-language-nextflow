@@ -1,75 +1,139 @@
 # Nextflow extension for Visual Studio Code
 
-VS Code extension for [Nextflow](https://www.nextflow.io/) that provides language support for scripts and config files, using the [Nextflow language server](https://github.com/nextflow-io/language-server).
-
-![nextflow vscode extension](images/vscode-nextflow.png)
-
-Read the [blog post](https://seqera.io/blog/modernizing-nextflow-developer-experience/) and the [docs](https://nextflow.io/docs/latest/vscode.html) for more information.
-
-See also:
-
-- [VSCode Marketplace](https://marketplace.visualstudio.com/items?itemName=nextflow.nextflow)
-- [Open VSX Registry](https://www.open-vsx.org/extension/nextflow/nextflow)
+VS Code extension for [Nextflow](https://www.nextflow.io/) that provides language support for Nextflow scripts and config files.
 
 ## Features
 
-The following language features are currently supported:
+### Nextflow language server
 
-- syntax highlighting
-- code navigation (outline, go to definition, find references)
-- completion
-- diagnostics (errors, warnings)
-- formatting
-- hover hints
-- rename
+![nextflow vscode extension](images/vscode-nextflow.png)
+
+The extension uses the [Nextflow language server](https://github.com/nextflow-io/language-server) to provide code intelligence:
+
+- Syntax highlighting
+- Code navigation (outline, go to definition, find references)
+- Code completion
+- Diagnostics (errors, warnings)
+- Formatting
+- Hover hints
+- Rename
 - DAG preview for workflows
 
-## Requirements
+Read the [Nextflow documentation](https://nextflow.io/docs/latest/vscode.html) for more information about the Nextflow language server.
+
+Related blog posts:
+
+- [Modernizing the Nextflow Developer Experience (Part 1): The IDE](https://seqera.io/blog/modernizing-nextflow-developer-experience/)
+- [Modernizing the Nextflow Developer Experience (Part 2): The Language Server](https://seqera.io/blog/modernizing-nextflow-developer-experience-part-2/)
+
+### Copilot for Nextflow
+
+![VS Code Copilot Extension](images/chat-usage.gif)
+
+The extension includes a GitHub Copilot extension specifically trained for Nextflow development:
+
+- Full support for Nextflow DSL2 syntax
+- Context-aware assistance that understands your specific codebase
+- Generates code following Nextflow best practices and patterns
+- Works with any LLM you have access to (e.g. OpenAI, Anthropic, Google) through Github Copilot (Sonnet 3.5 is recommended by the Seqera team)
+- Special commands:
+  - `/dsl2` - Convert DSL1 scripts to DSL2
+  - `/nf-test` - Assists in generating nf-test test cases and improving test coverage
+
+Related blog posts:
+
+- [Bringing Seqera AI to the Nextflow VS Code extension](https://seqera.io/blog/seqera-ai--nextflow-vs-code/)
+
+### Workflows and Processes View
+
+The extension provides custom views for managing Nextflow workflows and processes.
+
+The Workflows view provides a comprehensive overview of your pipeline project. It infers the structure of your pipeline from the include declarations in your scripts.
+
+Here is an eaxmple from the [nf-core/rnaseq](https://github.com/nf-core/rnaseq) pipeline:
+
+![Workflows View](images/workflow_view.png)
+
+The Processes view provides a comprehensive list of all processes in your pipeline, as well as any associated [nf-test](https://www.nf-test.com/) files.
+
+This view helps you:
+- Monitor test coverage across your entire pipeline
+- Quickly identify untested processes
+- Easily navigate to a process definition (or corresponding test) by name
+
+![Process View](images/process_view.png)
+
+## Installation
+
+This extension is available in the [Visual Studio Marketplace](https://marketplace.visualstudio.com/items?itemName=nextflow.nextflow) and the [Open VSX Registry](https://www.open-vsx.org/extension/nextflow/nextflow).
+
+### Requirements
 
 The language server requires Java 17 or later.
 
-## Development
+*Note: for custom Java installations such as conda, you might need to set the `nextflow.java.home` extension setting for the extension to find your Java installation.*
 
-Clone this repository:
+### Offline usage
 
-```bash
-git clone https://github.com/nextflow-io/vscode-language-nextflow
-```
-
-Clone the language server into this repository:
+The extension downloads an appropriate version of the language server from GitHub based on the `nextflow.targetVersion` extension setting. To use the language server in an offline environment, you must download a language server release manually and save it in the local cache directory used by the extension. For example:
 
 ```bash
-cd vscode-language-nextflow
-git clone https://github.com/nextflow-io/language-server
+mkdir -p ~/.nextflow/lsp/v24.10
+wget https://github.com/nextflow-io/language-server/releases/download/v24.10.0/language-server-all.jar -O ~/.nextflow/lsp/v24.10/v24.10.0.jar
 ```
 
-Build the extension:
+The extension will fall back to the latest patch version from the local cache if it can't download from GitHub.
 
-```bash
-./gradlew build
-```
+*Note: Nextflow language server patch versions have no correlation to Nextflow patch versions. Always use the latest patch version of the language server when downloading a release manually.*
 
-From VS Code, you can press `F5` to launch a new VS Code window with the extension loaded.
+## Commands
 
-Alternatively, you can install the extension into your environment (reload required):
+Open the command palette and type `Nextflow` to see the list of available commands.
 
-```bash
-./gradlew install
-```
+## Configuration
 
-## Publishing
+The following settings are available:
 
-Update the extension version number in `package.json` and `.vscode/launch.json`, then run the "Deploy Extension" action to publish the extension to the VSCode marketplace and Open VSX.
+- `nextflow.completion.extended`: Provide auto-completions from outside the current script. If an external completion is selected, it will be automatically included into the current script.
 
-## Contributing
+- `nextflow.completion.maxItems`: The maximum number of auto-completions to suggest at a time.
 
-Contributions are welcome. Feel free to fork [this repository](https://github.com/nextflow-io/vscode-language-nextflow) and open a pull request to propose changes.
+- `nextflow.debug`: Enable debug logging and debug information in hover hints.
 
-## Useful links
+- `nextflow.errorReportingMode`: Set the desired level of error reporting.
 
-* https://manual.macromates.com/en/language_grammars
-* https://code.visualstudio.com/docs/extensions/publish-extension
-* https://code.visualstudio.com/docs/extensions/yocode
-* https://code.visualstudio.com/docs/extensionAPI/extension-manifest
+- `nextflow.files.exclude`: Configure glob patterns for excluding folders from being searched for Nextflow scripts and configuration files.
 
-**Enjoy!**
+- `nextflow.formatting.harshilAlignment`: Use the [Harshil Alignment™️](https://nf-co.re/docs/contributing/code_editors_and_styling/harshil_alignment) when formatting Nextflow scripts and config files.
+
+  *Note: not all rules are supported.*
+
+- `nextflow.formatting.maheshForm`: Place process outputs at the end of the process body when formatting Nextflow scripts.
+
+- `nextflow.formatting.sortDeclarations`: Sort script declarations when formatting Nextflow scripts.
+
+- `nextflow.java.home`: Specifies the folder path to the JDK. Equivalent to the `JAVA_HOME` environment variable, i.e. the Java binary should be located at `$JAVA_HOME/bin/java`. Use this setting if the extension cannot find Java automatically.
+
+- `nextflow.targetVersion`: Target version of Nextflow to be used by the language server.
+
+- `nextflow.telemetry.enabled`: Enable usage data to be sent to Seqera. See the [welcome page](./src/welcomePage/welcome-vscode.md) for more information about what we do and do not collect.
+
+## Telemetry notice
+
+We (Seqera) collect limited usage data through this extension to help us understand which features are most valuable and improve your overall experience.
+
+This telemetry is opt-in and can be enabled or disabled at any time by toggling "Nextflow > Telemetry: Enabled" in your VS Code settings.
+
+**Information we collect**
+
+- Commands: We track when you invoke a command provided by this extension (e.g. openChat, writeTest, etc.), but not the contents of that command (e.g. user-supplied arguments).
+- File events: We track when you open a Nextflow file, but not the file name or its contents.
+- Environment info: We collect your operating system type, VS Code version, and the extension version to help diagnose issues and guide future development.
+
+**Information we do not collect**
+
+- Chat contents: We do not collect any text you enter into the chat panel.
+- File contents: We do not collect any source code, file paths, or any other file contents.
+- Personal info: We do not collect project names, directory paths, or any personally identifiable information.
+
+If you have any questions or concerns, feel free to open an issue in our repository. We appreciate your trust and feedback!

@@ -1,13 +1,26 @@
-// A launch configuration that launches the extension inside a new window
+// See: https://go.microsoft.com/fwlink/?linkid=830387
 {
-    "version": "1.0.2",
+    "version": "0.2.0",
     "configurations": [
         {
-            "name": "Extension",
+            "name": "Run Extension",
             "type": "extensionHost",
             "request": "launch",
-            "runtimeExecutable": "${execPath}",
-            "args": ["--extensionDevelopmentPath=${workspaceRoot}/build" ]
+            "args": [
+                "--extensionDevelopmentPath=${workspaceRoot}/build",
+                "${input:testWorkspace}",
+                "--goto",
+                "${input:testWorkspace}/main.nf"
+            ],
+            "preLaunchTask": "${defaultBuildTask}"
+        }
+    ],
+    "inputs": [
+        {
+            "id": "testWorkspace",
+            "type": "promptString",
+            "description": "Path to a Nextflow workspace",
+            "default": "${workspaceFolder}/../test-workspace"
         }
     ]
 }

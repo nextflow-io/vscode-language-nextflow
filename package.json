@@ -1,166 +1,358 @@
 {
-    "name": "nextflow",
-    "displayName": "Nextflow",
-    "description": "Nextflow language support",
-    "version": "1.0.2",
-    "publisher": "nextflow",
-    "repository": {
-        "type": "git",
-        "url": "https://github.com/nextflow-io/vscode-language-nextflow.git"
-    },
-    "homepage": "https://nextflow.io",
-    "bugs": {
-        "url": "https://github.com/nextflow-io/vscode-language-nextflow/issues"
-    },
-    "icon": "images/nextflow-icon-128x128.png",
-    "keywords": [
-        "bioinformatics",
-        "nextflow",
-        "nf-core",
-        "pipelines",
-        "computational biology",
-        "scientific",
-        "workflows"
-    ],
-    "main": "extension",
-    "engines": {
-        "vscode": "^1.73.1"
-    },
-    "devDependencies": {
-        "@types/node": "^16.18.6",
-        "@types/vscode": "^1.73.1",
-        "ts-loader": "^9.4.2",
-        "typescript": "^4.9.3",
-        "@vscode/vsce": "^2.15.0",
-        "vscode-jsonrpc": "^8.0.2",
-        "vscode-languageclient": "^8.0.2",
-        "webpack": "^5.95.0",
-        "webpack-cli": "^5.0.1"
-    },
-    "activationEvents": [
-      "onLanguage:nextflow",
-      "onCommand:nextflow.restartServer",
-      "onCommand:nextflow.stopServer"
-    ],
-    "categories": [
-        "Programming Languages"
-    ],
-    "contributes": {
-        "languages": [
-            {
-                "id": "nextflow",
-                "aliases": [
-                    "Nextflow",
-                    "nextflow"
-                ],
-                "extensions": [
-                    ".nf",
-                    ".nf.test"
-                ],
-                "firstLine": "^#!.*\\bnextflow\\b",
-                "configuration": "./language-configuration.json",
-                "icon": {
-                    "light": "./images/nextflow-icon-128x128.png",
-                    "dark": "./images/nextflow-icon-128x128.png"
-                }
-            },
-            {
-                "id": "nextflow-config",
-                "aliases": [
-                    "Nextflow Config"
-                ],
-                "extensions": [
-                    ".config"
-                ],
-                "configuration": "./language-configuration.json",
-                "icon": {
-                    "light": "./images/nextflow-icon-128x128.png",
-                    "dark": "./images/nextflow-icon-128x128.png"
-                }
-            },
-            {
-                "id": "nextflow-markdown-injection"
-            }
+  "name": "nextflow",
+  "displayName": "Nextflow",
+  "description": "Nextflow language support",
+  "version": "1.2.0",
+  "publisher": "nextflow",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/nextflow-io/vscode-language-nextflow.git"
+  },
+  "homepage": "https://nextflow.io",
+  "bugs": {
+    "url": "https://github.com/nextflow-io/vscode-language-nextflow/issues"
+  },
+  "icon": "images/nextflow-icon-128x128.png",
+  "keywords": [
+    "bioinformatics",
+    "nextflow",
+    "nf-core",
+    "pipelines",
+    "computational biology",
+    "scientific",
+    "workflows"
+  ],
+  "engines": {
+    "vscode": "^1.96.0"
+  },
+  "categories": [
+    "Programming Languages"
+  ],
+  "activationEvents": [
+    "onStartupFinished",
+    "onAuthenticationRequest:azuread"
+  ],
+  "main": "./extension.js",
+  "contributes": {
+    "languages": [
+      {
+        "id": "nextflow",
+        "aliases": [
+          "Nextflow",
+          "nextflow"
         ],
-        "grammars": [
-            {
-                "language": "nextflow",
-                "scopeName": "source.nextflow",
-                "path": "./syntaxes/nextflow.tmLanguage.json"
-            },
-            {
-                "language": "nextflow-config",
-                "scopeName": "source.nextflow-config",
-                "path": "./syntaxes/nextflow-config.tmLanguage.json"
-            },
-            {
-                "scopeName": "source.nextflow-groovy",
-                "path": "./syntaxes/groovy.tmLanguage.json"
-            },
-            {
-                "language": "nextflow-markdown-injection",
-                "scopeName": "markdown.nextflow.codeblock",
-                "path": "./syntaxes/nextflow-markdown-injection.json",
-                "injectTo": [
-                    "text.html.markdown"
-                ],
-                "embeddedLanguages": {
-                    "meta.embedded.block.nextflow": "nextflow"
-                }
-            }
+        "extensions": [
+          ".nf",
+          ".nf.test"
         ],
-        "commands": [
-            {
-                "command": "nextflow.restartServer",
-                "title": "Restart language server",
-                "category": "Nextflow"
-            },
-            {
-                "command": "nextflow.stopServer",
-                "title": "Stop language server",
-                "category": "Nextflow"
-            }
-        ],
-        "configuration": {
-            "type": "object",
-            "description": "Configuration for Nextflow language support",
-            "properties": {
-                "nextflow.debug": {
-                    "type": "boolean",
-                    "default": false,
-                    "description": "Enable debug logging and debug information in hover hints."
-                },
-                "nextflow.files.exclude": {
-                    "type": "array",
-                    "items": {
-                        "type": "string"
-                    },
-                    "default": [
-                        ".git",
-                        ".nf-test",
-                        "work"
-                    ],
-                    "description": "Configure glob patterns for excluding folders from being searched for Nextflow scripts and configuration files."
-                },
-                "nextflow.formatting.harshilAlignment": {
-                    "type": "boolean",
-                    "default": false,
-                    "markdownDescription": "Use the [Harshil Alignment™️](https://nf-co.re/docs/contributing/code_editors_and_styling/harshil_alignment) when formatting Nextflow scripts and config files.\n\n*Note: not all rules are supported yet*"
-                },
-                "nextflow.java.home": {
-                    "type": [
-                        "string",
-                        "null"
-                    ],
-                    "default": null,
-                    "markdownDescription": "Specify the folder path to the desired Java runtime. Equivalent to the `JAVA_HOME` environment variable, i.e. the Java binary should be located at `$JAVA_HOME/bin/java`. Use this setting if the extension cannot find Java automatically."
-                },
-                "nextflow.suppressFutureWarnings": {
-                    "type": "boolean",
-                    "default": true,
-                    "description": "Hide warnings for future deprecations and other paranoid warnings."
-                }
-            }
+        "firstLine": "^#!.*\\bnextflow\\b",
+        "configuration": "./language-configuration.json",
+        "icon": {
+          "light": "./images/nextflow-icon-128x128.png",
+          "dark": "./images/nextflow-icon-128x128.png"
         }
+      },
+      {
+        "id": "nextflow-config",
+        "aliases": [
+          "Nextflow Config"
+        ],
+        "extensions": [
+          ".config"
+        ],
+        "configuration": "./language-configuration.json",
+        "icon": {
+          "light": "./images/nextflow-icon-128x128.png",
+          "dark": "./images/nextflow-icon-128x128.png"
+        }
+      },
+      {
+        "id": "nextflow-markdown-injection"
+      }
+    ],
+    "grammars": [
+      {
+        "language": "nextflow",
+        "scopeName": "source.nextflow",
+        "path": "./syntaxes/nextflow.tmLanguage.json"
+      },
+      {
+        "language": "nextflow-config",
+        "scopeName": "source.nextflow-config",
+        "path": "./syntaxes/nextflow-config.tmLanguage.json"
+      },
+      {
+        "scopeName": "source.nextflow-groovy",
+        "path": "./syntaxes/groovy.tmLanguage.json"
+      },
+      {
+        "language": "nextflow-markdown-injection",
+        "scopeName": "markdown.nextflow.codeblock",
+        "path": "./syntaxes/nextflow-markdown-injection.json",
+        "injectTo": [
+          "text.html.markdown"
+        ],
+        "embeddedLanguages": {
+          "meta.embedded.block.nextflow": "nextflow"
+        }
+      }
+    ],
+    "commands": [
+      {
+        "command": "nextflow.chatbot.convertToDSL2",
+        "title": "Convert to DSL2 with Seqera",
+        "category": "Nextflow"
+      },
+      {
+        "command": "nextflow.chatbot.openChat",
+        "title": "Chat with Seqera",
+        "category": "Nextflow"
+      },
+      {
+        "command": "nextflow.chatbot.writeTest",
+        "title": "Write nf-test with Seqera",
+        "category": "Nextflow"
+      },
+      {
+        "command": "nextflow.languageServer.restart",
+        "title": "Restart language server",
+        "category": "Nextflow"
+      },
+      {
+        "command": "nextflow.languageServer.stop",
+        "title": "Stop language server",
+        "category": "Nextflow"
+      },
+      {
+        "command": "nextflow.seqera.goToCloud",
+        "title": "Go to Seqera Cloud",
+        "category": "Nextflow",
+        "icon": "$(cloud)"
+      },
+      {
+        "command": "nextflow.seqera.login",
+        "title": "Login to Seqera Cloud",
+        "category": "Nextflow",
+        "icon": "$(sign-in)"
+      },
+      {
+        "command": "nextflow.seqera.logout",
+        "title": "Logout from Seqera Cloud",
+        "category": "Nextflow",
+        "icon": "$(sign-out)"
+      },
+      {
+        "command": "nextflow.seqera.openResource",
+        "title": "Open Resource",
+        "category": "Nextflow"
+      },
+      {
+        "command": "nextflow.seqera.reloadWebview",
+        "title": "Reload Seqera Webview",
+        "category": "Nextflow",
+        "icon": "$(refresh)"
+      },
+      {
+        "command": "nextflow.showWelcomePage",
+        "title": "Show Welcome Page",
+        "category": "Nextflow"
+      }
+    ],
+    "menus": {
+      "view/title": [
+        {
+          "command": "nextflow.seqera.reloadWebview",
+          "when": "view == workflows || view == processes || view == userInfo",
+          "group": "navigation@10"
+        },
+        {
+          "command": "nextflow.seqera.logout",
+          "when": "view == userInfo && nextflow.isLoggedIn == true",
+          "group": "navigation@10"
+        },
+        {
+          "command": "nextflow.seqera.goToCloud",
+          "when": "view == userInfo && nextflow.isLoggedIn == true",
+          "group": "navigation@10"
+        }
+      ],
+      "view/item/context": [
+        {
+          "command": "nextflow.seqera.openResource",
+          "when": "view == resources"
+        }
+      ]
+    },
+    "configuration": {
+      "type": "object",
+      "description": "Configuration for Nextflow language support",
+      "properties": {
+        "nextflow.completion.extended": {
+          "type": "boolean",
+          "default": false,
+          "description": "Provide auto-completions from outside the current script. If an external completion is selected, it will be automatically included into the current script."
+        },
+        "nextflow.completion.maxItems": {
+          "type": "integer",
+          "default": 100,
+          "description": "The maximum number of auto-completions to suggest at a time."
+        },
+        "nextflow.debug": {
+          "type": "boolean",
+          "default": false,
+          "description": "Enable debug logging and debug information in hover hints."
+        },
+        "nextflow.errorReportingMode": {
+          "type": "string",
+          "enum": [
+            "off",
+            "errors",
+            "warnings",
+            "paranoid"
+          ],
+          "enumDescriptions": [
+            "Disable all error reporting.",
+            "Enable errors only.",
+            "Enable errors and standard warnings.",
+            "Enable errors, standard warnings, and additional warnings for future deprecations, potential problems, and other discouraged patterns."
+          ],
+          "default": "warnings",
+          "description": "Set the desired level of error reporting."
+        },
+        "nextflow.files.exclude": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "default": [
+            ".git",
+            ".nf-test",
+            "work"
+          ],
+          "description": "Configure glob patterns for excluding folders from being searched for Nextflow scripts and configuration files."
+        },
+        "nextflow.formatting.harshilAlignment": {
+          "type": "boolean",
+          "default": false,
+          "markdownDescription": "Use the [Harshil Alignment™️](https://nf-co.re/docs/contributing/code_editors_and_styling/harshil_alignment) when formatting Nextflow scripts and config files.\n\n*Note: not all rules are supported.*"
+        },
+        "nextflow.formatting.maheshForm": {
+          "type": "boolean",
+          "default": false,
+          "markdownDescription": "Place process outputs at the end of the process body when formatting Nextflow scripts."
+        },
+        "nextflow.formatting.sortDeclarations": {
+          "type": "boolean",
+          "default": false,
+          "markdownDescription": "Sort script declarations when formatting Nextflow scripts."
+        },
+        "nextflow.java.home": {
+          "type": "string",
+          "default": "",
+          "markdownDescription": "Specify the folder path to the desired Java runtime. Equivalent to the `JAVA_HOME` environment variable, i.e. the Java binary should be located at `$JAVA_HOME/bin/java`. Use this setting if the extension cannot find Java automatically."
+        },
+        "nextflow.targetVersion": {
+          "type": "string",
+          "enum": [
+            "v24.10"
+          ],
+          "default": "v24.10",
+          "markdownDescription": "Target version of Nextflow to be used by the language server."
+        },
+        "nextflow.telemetry.enabled": {
+          "type": "boolean",
+          "default": false,
+          "markdownDescription": "Enable usage data to be sent to Seqera. See the welcome page for more information about what we do and do not collect."
+        }
+      }
+    },
+    "chatParticipants": [
+      {
+        "id": "nextflow.chatbot",
+        "fullName": "Seqera",
+        "name": "Seqera",
+        "description": "How can I help you with Nextflow?",
+        "isSticky": true,
+        "commands": [
+          {
+            "name": "nf-test",
+            "description": "Write an nf-test for the code that you see"
+          },
+          {
+            "name": "dsl2",
+            "description": "Convert code to DSL2"
+          }
+        ]
+      }
+    ],
+    "colors": [
+      {
+        "id": "chat.avatarForeground",
+        "description": "Foreground color used for chat avatars.",
+        "defaults": {
+          "light": "#0DC09D",
+          "dark": "#0DC09D",
+          "highContrast": "#0DC09D"
+        }
+      }
+    ],
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "nextflow",
+          "title": "Nextflow",
+          "icon": "images/nextflow.svg"
+        }
+      ]
+    },
+    "views": {
+      "nextflow": [
+        {
+          "id": "workflows",
+          "name": "Workflows",
+          "type": "webview"
+        },
+        {
+          "id": "processes",
+          "name": "Processes",
+          "type": "webview"
+        },
+        {
+          "id": "userInfo",
+          "name": "Seqera Cloud",
+          "type": "webview"
+        },
+        {
+          "id": "resources",
+          "name": "Resources",
+          "type": "tree"
+        }
+      ]
     }
+  },
+  "scripts": {
+    "check-types": "tsc --noEmit",
+    "compile": "npm run check-types && npm run ui-build && node esbuild.js",
+    "package": "npm run check-types && npm run ui-build && node esbuild.js --production && (cd build ; vsce package -o nextflow.vsix)",
+    "ui-dev": "cd webview-ui && npm run dev",
+    "ui-watch": "cd webview-ui && npm run build -- --watch",
+    "ui-build": "cd webview-ui && npm run build"
+  },
+  "devDependencies": {
+    "@types/node": "^20",
+    "@types/vscode": "^1.96.0",
+    "@vscode/chat-extension-utils": "^0.0.0-alpha.4",
+    "@vscode/vsce": "^3.2.1",
+    "esbuild": "^0.25.0",
+    "esbuild-plugin-copy": "^2.1.1",
+    "jwt-decode": "^4.0.0",
+    "mermaid": "^11.4.1",
+    "node-fetch": "^3.3.2",
+    "posthog-node": "^4.4.1",
+    "prettier": "3.5.2",
+    "typescript": "^5.7.2",
+    "uuid": "^11.1.0",
+    "vscode-jsonrpc": "^8.0.2",
+    "vscode-languageclient": "^8.0.2"
+  }
 }

@@ -1,37 +1,26 @@
 {
-	"$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
-	"name": "Nextflow Config",
-	"scopeName": "source.nextflow-config",
-	"patterns": [
-		{
-			"include": "#nextflow-config"
-		}
-	],
-	"repository": {
-		"nextflow-config": {
-			"patterns": [
-				{
-					"include": "#include-config"
-				},
-				{
-					"include": "#implicit-variables"
-				},
-				{
-					"include": "source.nextflow-groovy"
-				}
-			]
-		},
-		"include-config": {
-			"name": "keyword.nextflow",
-			"match": "(?<=(^|{)\\s*)includeConfig(?=[\\s(])"
-		},
-		"implicit-variables": {
-			"patterns": [
-				{
-					"match": "(?<=[^\\.\\w]|^)(params|launchDir|projectDir|workDir)\\b",
-					"name": "variable.language.nextflow"
-				}
-			]
-		}
-	}
+  "$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+  "name": "Nextflow Config",
+  "scopeName": "source.nextflow-config",
+  "patterns": [
+    {
+      "include": "#nextflow-config"
+    }
+  ],
+  "repository": {
+    "nextflow-config": {
+      "patterns": [
+        {
+          "include": "#include-config"
+        },
+        {
+          "include": "source.nextflow-groovy"
+        }
+      ]
+    },
+    "include-config": {
+      "name": "keyword.nextflow",
+      "match": "(?<=(^|{)\\s*)includeConfig(?=[\\s(])"
+    }
+  }
 }

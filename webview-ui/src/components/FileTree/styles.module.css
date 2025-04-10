@@ -1,0 +1,44 @@
+.container {
+  width: 100%;
+  box-sizing: border-box;
+}
+.row {
+  user-select: none;
+  width: 100%;
+  & .item {
+    line-height: 1;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    cursor: pointer;
+    color: var(--nf-item-fg-active);
+    &:hover {
+      background-color: var(--nf-item-bg-hover);
+    }
+    & .name {
+      display: flex;
+      align-items: center;
+      padding: 6px 8px;
+      width: 100%;
+      & i {
+        margin-right: 6px;
+        opacity: 0.8;
+        font-size: 14px;
+      }
+    }
+  }
+  & .children {
+    padding: 0 0 4px 0;
+    margin-left: 7px;
+    border-left: 1px solid var(--vscode-dropdown-border);
+  }
+  &.folder {
+    & > .item > .name {
+      font-weight: bold;
+      & i {
+        opacity: 1;
+      }
+    }
+  }
+}

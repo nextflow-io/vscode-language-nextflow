@@ -1,4 +1,4 @@
-.gradle
+.DS_Store
 .vscode
 .vsix
 build/

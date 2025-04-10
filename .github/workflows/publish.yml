@@ -2,10 +2,6 @@ name: Publish Extension
 
 on:
   workflow_dispatch:
-    inputs:
-      version:
-        description: 'Language server version'
-        required: true
       open_vsx:
         description: 'Publish to Open VSX Registry'
         type: boolean
@@ -27,24 +23,12 @@ jobs:
           cache: "npm"
 
       - name: npm clean install
-        run: npm ci
-
-      - name: Download language server JAR
         run: |
-          mkdir -p language-server/build/libs
-          wget -P language-server/build/libs https://github.com/nextflow-io/language-server/releases/download/$VERSION/language-server-all.jar
-        env:
-          VERSION: ${{ github.event.inputs.version }}
+          (cd webview-ui ; npm ci)
+          npm ci
 
       - name: Build vscode extension
-        run: ./gradlew build
-
-      - name: Publish to Open VSX Registry
-        if: ${{ github.event.inputs.open_vsx == true }}
-        uses: HaaLeo/publish-vscode-extension@v1
-        with:
-          pat: ${{ secrets.OPEN_VSX_TOKEN }}
-          extensionFile: build/nextflow.vsix
+        run: npm run package
 
       - name: Publish to Visual Studio Marketplace
         if: ${{ github.event.inputs.vscode_marketplace == true }}
@@ -52,4 +36,11 @@ jobs:
         with:
           pat: ${{ secrets.VSCE_TOKEN }}
           registryUrl: https://marketplace.visualstudio.com
+          extensionFile: build/nextflow.vsix
+
+      - name: Publish to Open VSX Registry
+        if: ${{ github.event.inputs.open_vsx == true }}
+        uses: HaaLeo/publish-vscode-extension@v1
+        with:
+          pat: ${{ secrets.OPEN_VSX_TOKEN }}
           extensionFile: build/nextflow.vsix
