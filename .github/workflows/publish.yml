@@ -6,6 +6,14 @@ on:
       version:
         description: 'Language server version'
         required: true
+      open_vsx:
+        description: 'Publish to Open VSX Registry'
+        type: boolean
+        default: true
+      vscode_marketplace:
+        description: 'Publish to Visual Studio Marketplace'
+        type: boolean
+        default: true
 
 jobs:
   deploy:
@@ -32,12 +40,14 @@ jobs:
         run: ./gradlew build
 
       - name: Publish to Open VSX Registry
+        if: ${{ github.event.inputs.open_vsx == true }}
         uses: HaaLeo/publish-vscode-extension@v1
         with:
           pat: ${{ secrets.OPEN_VSX_TOKEN }}
           extensionFile: build/nextflow.vsix
 
       - name: Publish to Visual Studio Marketplace
+        if: ${{ github.event.inputs.vscode_marketplace == true }}
         uses: HaaLeo/publish-vscode-extension@v1
         with:
           pat: ${{ secrets.VSCE_TOKEN }}
