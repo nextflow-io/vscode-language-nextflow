@@ -4,3 +4,4 @@ export * from "./platform/utils";
 
 export { default as buildList } from "./workspace/buildList";
 export { default as buildTree } from "./workspace/buildTree";
+export { default as getGitHubUrl } from "./workspace/getGitInfo";

@@ -2,7 +2,7 @@ import * as vscode from "vscode";
 import * as fs from "fs";
 import * as path from "path";
 
-import { buildList, buildTree, fetchPlatformData } from "./lib";
+import { buildList, buildTree, fetchPlatformData, getGitHubUrl } from "./lib";
 import { AuthProvider, getAccessToken } from "../../auth";
 import { FileNode } from "./lib/workspace/types";
 
@@ -52,6 +52,8 @@ class WebviewProvider implements vscode.WebviewViewProvider {
 
   public async initViewData(refresh?: boolean) {
     const { viewID, _context, _currentView: view } = this;
+    const gitUrl = await getGitHubUrl();
+    console.log("🟢 gitUrl", gitUrl);
     if (!view) return;
     if (viewID === "userInfo") {
       const accessToken = await getAccessToken(_context);
