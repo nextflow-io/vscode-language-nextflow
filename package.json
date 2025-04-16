@@ -326,6 +326,11 @@
           "id": "resources",
           "name": "Resources",
           "type": "tree"
+        },
+        {
+          "id": "runs",
+          "name": "Runs",
+          "type": "tree"
         }
       ]
     }
