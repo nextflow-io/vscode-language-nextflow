@@ -251,7 +251,7 @@ export type Workflow = {
   optimized: boolean;
 };
 
-export type WorkflowsResponse = {
+export type HistoryResponse = {
   workflows: {
     workflow: Workflow;
   }[];
