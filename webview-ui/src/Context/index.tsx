@@ -8,7 +8,8 @@ import {
   Workspace,
   ComputeEnv,
   Organization,
-  HistoryResponse
+  HistoryResponse,
+  RepoInfo
 } from "./types";
 
 const vscode = getVscode();
@@ -38,6 +39,7 @@ const Context = ({ children }: Props) => {
   const [history, setHistory] = useState<HistoryResponse | undefined>(
     undefined
   );
+  const [repoInfo, setRepoInfo] = useState<RepoInfo | undefined>(undefined);
 
   useEffect(() => {
     const handleMessage = (event: MessageEvent) => {
@@ -49,6 +51,7 @@ const Context = ({ children }: Props) => {
       if (data.computeEnvs) setComputeEnvs(data.computeEnvs);
       if (data.organizations) setOrganizations(data.organizations);
       if (data.history) setHistory(data.history);
+      if (data.repoInfo) setRepoInfo(data.repoInfo);
     };
     window.addEventListener("message", handleMessage);
     return () => window.removeEventListener("message", handleMessage);
@@ -65,7 +68,8 @@ const Context = ({ children }: Props) => {
             workspaces,
             computeEnvs,
             organizations,
-            history
+            history,
+            repoInfo
           }}
         >
           {children}

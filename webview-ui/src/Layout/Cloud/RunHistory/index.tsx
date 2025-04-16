@@ -11,14 +11,18 @@ const UserInfo = () => {
     selectedWorkspace,
     setSelectedWorkspace,
     computeEnvs,
-    history
+    history,
+    repoInfo
   } = useTowerContext();
 
   useEffect(() => {
+    if (repoInfo) {
+      console.log("🟢 repoInfo", repoInfo);
+    }
     if (history) {
       console.log("🟢 history", history);
     }
-  }, [history]);
+  }, [history, repoInfo]);
 
   return (
     <div>
