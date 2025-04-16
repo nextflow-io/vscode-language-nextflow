@@ -4,6 +4,7 @@ import Select from "../../../components/Select";
 import styles from "./styles.module.css";
 import { getComputeEnvURL } from "../utils";
 import { useEffect } from "react";
+import { Workflow } from "../../../Context/types";
 
 const UserInfo = () => {
   const {
@@ -14,6 +15,14 @@ const UserInfo = () => {
     history,
     repoInfo
   } = useTowerContext();
+
+  const items = history?.workflows.map(({ workflow }) => workflow);
+  let itemsForRepo: Workflow[] = [];
+
+  if (repoInfo?.url) {
+    itemsForRepo =
+      items?.filter((item) => item.repository === repoInfo.url) || [];
+  }
 
   useEffect(() => {
     if (repoInfo) {
@@ -59,8 +68,16 @@ const UserInfo = () => {
       </section>
       <section>
         <h3>Run History</h3>
-        {history?.workflows?.map((workflow) => (
-          <div key={workflow.workflow.id}>{workflow.workflow.runName}</div>
+        {!!itemsForRepo.length && (
+          <>
+            {itemsForRepo.map((workflow) => (
+              <div key={workflow.id}>{workflow.runName}</div>
+            ))}
+            <hr />
+          </>
+        )}
+        {items?.map((workflow) => (
+          <div key={workflow.id}>{workflow.runName}</div>
         ))}
       </section>
     </div>
