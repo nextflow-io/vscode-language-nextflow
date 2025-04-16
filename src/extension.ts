@@ -4,9 +4,12 @@ import { activateChatbot } from "./chatbot";
 import { activateLanguageServer, stopLanguageServer } from "./languageServer";
 import { activateWelcomePage } from "./welcomePage";
 import { activateTelemetry, deactivateTelemetry } from "./telemetry";
-import { activateWebview } from "./webview";
+import {
+  activateWebview,
+  ResourcesProvider,
+  WorkflowsProvider
+} from "./webview";
 import { activateAuth, AuthProvider } from "./auth";
-import { ResourcesProvider } from "./webview/ResourcesProvider";
 
 export function activate(context: vscode.ExtensionContext) {
   const trackEvent = activateTelemetry(context);
@@ -19,13 +22,20 @@ export function activate(context: vscode.ExtensionContext) {
 
   // Register Resources TreeView
   const resourcesProvider = new ResourcesProvider();
-  vscode.window.registerTreeDataProvider('resources', resourcesProvider);
-  
+  vscode.window.registerTreeDataProvider("resources", resourcesProvider);
+
+  // Register Workflows TreeView
+  const workflowsProvider = new WorkflowsProvider(context);
+  vscode.window.registerTreeDataProvider("runs", workflowsProvider);
+
   // Register command to open resource URLs
   context.subscriptions.push(
-    vscode.commands.registerCommand('nextflow.seqera.openResource', (url: string) => {
-      vscode.env.openExternal(vscode.Uri.parse(url));
-    })
+    vscode.commands.registerCommand(
+      "nextflow.seqera.openResource",
+      (url: string) => {
+        vscode.env.openExternal(vscode.Uri.parse(url));
+      }
+    )
   );
 }
 
