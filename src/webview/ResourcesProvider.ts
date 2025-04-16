@@ -14,9 +14,9 @@ export class ResourceItem extends vscode.TreeItem {
     if (url) {
       this.description = url;
       this.command = {
-        command: "nextflow.seqera.openResource",
+        command: "vscode.open",
         title: "Open Resource",
-        arguments: [url]
+        arguments: [vscode.Uri.parse(url)]
       };
       this.iconPath = new vscode.ThemeIcon("link-external");
     } else if (command) {
