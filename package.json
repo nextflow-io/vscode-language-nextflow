@@ -328,8 +328,8 @@
           "type": "tree"
         },
         {
-          "id": "runs",
-          "name": "Runs",
+          "id": "history",
+          "name": "Run History",
           "type": "tree"
         }
       ]

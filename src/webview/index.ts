@@ -2,7 +2,7 @@ import * as vscode from "vscode";
 import WebviewProvider from "./WebviewProvider";
 import { AuthProvider } from "../auth";
 export { default as ResourcesProvider } from "./ResourcesProvider";
-export { default as WorkflowsProvider } from "./WorkflowsProvider";
+export { default as HistoryProvider } from "./HistoryProvider";
 
 export function activateWebview(
   context: vscode.ExtensionContext,

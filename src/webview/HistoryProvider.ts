@@ -1,5 +1,5 @@
 import * as vscode from "vscode";
-import fetchWorkflows from "./WebviewProvider/lib/platform/utils/fetchWorkflows";
+import fetchHistory from "./WebviewProvider/lib/platform/utils/fetchHistory";
 import type { Workflow } from "./WebviewProvider/lib/platform/utils/types";
 import getAccessToken from "../auth/getAccessToken";
 
@@ -33,7 +33,7 @@ export class WorkflowItem extends vscode.TreeItem {
   }
 }
 
-class WorkflowsProvider implements vscode.TreeDataProvider<WorkflowItem> {
+class HistoryProvider implements vscode.TreeDataProvider<WorkflowItem> {
   private _onDidChangeTreeData: vscode.EventEmitter<
     WorkflowItem | undefined | null | void
   > = new vscode.EventEmitter<WorkflowItem | undefined | null | void>();
@@ -62,16 +62,16 @@ class WorkflowsProvider implements vscode.TreeDataProvider<WorkflowItem> {
 
   refresh(): void {
     if (this.accessToken) {
-      this.fetchWorkflows();
+      this.fetchHistory();
     } else {
       this.workflows = [];
       this._onDidChangeTreeData.fire();
     }
   }
 
-  private async fetchWorkflows() {
+  private async fetchHistory() {
     try {
-      const response = await fetchWorkflows(this.accessToken!, 123);
+      const response = await fetchHistory(this.accessToken!, 123);
       this.workflows = response.workflows.map((w) => w.workflow);
       this._onDidChangeTreeData.fire();
     } catch (error) {
@@ -96,4 +96,4 @@ class WorkflowsProvider implements vscode.TreeDataProvider<WorkflowItem> {
   }
 }
 
-export default WorkflowsProvider;
+export default HistoryProvider;
