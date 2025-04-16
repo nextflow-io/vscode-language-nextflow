@@ -36,6 +36,13 @@ export function activateWebview(
     workflowProvider.initViewData();
   });
 
+  vscode.commands.registerCommand(
+    "nextflow.seqera.selectWorkspace",
+    (workspaceId: string) => {
+      historyProvider.updateWorkspace(workspaceId);
+    }
+  );
+
   // Workspace events
 
   vscode.workspace.onDidSaveTextDocument(() => {
