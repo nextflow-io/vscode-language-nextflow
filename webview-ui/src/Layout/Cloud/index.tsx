@@ -4,9 +4,10 @@ import { useTowerContext } from "../../Context";
 
 import Login from "./Login";
 import UserInfo from "./UserInfo";
+import RunHistory from "./RunHistory";
 
-const UserPanel = () => {
-  const { tokenExpiry, hasToken, refresh } = useTowerContext();
+const Cloud = () => {
+  const { tokenExpiry, hasToken, refresh, error } = useTowerContext();
 
   let tokenExpired = false;
   if (tokenExpiry) tokenExpired = tokenExpiry < Date.now() / 1000;
@@ -30,7 +31,18 @@ const UserPanel = () => {
   if (!hasToken || tokenExpired) {
     return <Login />;
   }
-  return <UserInfo />;
+
+  return (
+    <>
+      {error && (
+        <section>
+          <p>Error:{error}</p>
+        </section>
+      )}
+      <UserInfo />
+      <RunHistory />
+    </>
+  );
 };
 
-export default UserPanel;
+export default Cloud;

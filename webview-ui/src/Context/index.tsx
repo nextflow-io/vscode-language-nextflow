@@ -3,7 +3,13 @@ import WorkspaceProvider, { useWorkspaceContext } from "./WorkspaceProvider";
 import TowerProvider, { useTowerContext } from "./TowerProvider";
 import { getVscode } from "./utils";
 
-import { UserInfo, Workspace, ComputeEnv, Organization } from "./types";
+import {
+  UserInfo,
+  Workspace,
+  ComputeEnv,
+  Organization,
+  HistoryResponse
+} from "./types";
 
 const vscode = getVscode();
 
@@ -29,6 +35,9 @@ const Context = ({ children }: Props) => {
   const [workspaces, setWorkspaces] = useState<Workspace[]>([]);
   const [computeEnvs, setComputeEnvs] = useState<ComputeEnv[]>([]);
   const [organizations, setOrganizations] = useState<Organization[]>([]);
+  const [history, setHistory] = useState<HistoryResponse | undefined>(
+    undefined
+  );
 
   useEffect(() => {
     const handleMessage = (event: MessageEvent) => {
@@ -39,6 +48,7 @@ const Context = ({ children }: Props) => {
       if (data.workspaces) setWorkspaces(data.workspaces);
       if (data.computeEnvs) setComputeEnvs(data.computeEnvs);
       if (data.organizations) setOrganizations(data.organizations);
+      if (data.history) setHistory(data.history);
     };
     window.addEventListener("message", handleMessage);
     return () => window.removeEventListener("message", handleMessage);
@@ -50,7 +60,13 @@ const Context = ({ children }: Props) => {
         <TowerProvider
           vscode={vscode}
           authState={authState}
-          platformData={{ userInfo, workspaces, computeEnvs, organizations }}
+          platformData={{
+            userInfo,
+            workspaces,
+            computeEnvs,
+            organizations,
+            history
+          }}
         >
           {children}
         </TowerProvider>

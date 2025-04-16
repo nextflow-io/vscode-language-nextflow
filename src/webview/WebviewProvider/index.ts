@@ -2,7 +2,13 @@ import * as vscode from "vscode";
 import * as fs from "fs";
 import * as path from "path";
 
-import { buildList, buildTree, fetchPlatformData, getGitHubUrl } from "./lib";
+import {
+  buildList,
+  buildTree,
+  fetchPlatformData,
+  getGitHubUrl,
+  fetchHistory
+} from "./lib";
 import { AuthProvider, getAccessToken } from "../../auth";
 import { FileNode } from "./lib/workspace/types";
 
@@ -37,6 +43,9 @@ class WebviewProvider implements vscode.WebviewViewProvider {
         case "refresh":
           this.initViewData(true);
           break;
+        case "fetchHistory":
+          this.fetchHistory(message.workspaceId);
+          break;
       }
     });
 
@@ -48,6 +57,17 @@ class WebviewProvider implements vscode.WebviewViewProvider {
 
   private async login() {
     await vscode.commands.executeCommand("nextflow.seqera.login");
+  }
+
+  private async fetchHistory(workspaceId: number) {
+    const accessToken = await getAccessToken(this._context);
+    if (!accessToken) return;
+    const history = await fetchHistory(accessToken, workspaceId);
+    this._currentView?.webview.postMessage({
+      viewID: this.viewID,
+      command: "history",
+      history
+    });
   }
 
   public async initViewData(refresh?: boolean) {

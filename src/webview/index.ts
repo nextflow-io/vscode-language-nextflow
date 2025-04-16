@@ -1,7 +1,6 @@
 import * as vscode from "vscode";
 import WebviewProvider from "./WebviewProvider";
 import { AuthProvider } from "../auth";
-import HistoryProvider from "./HistoryProvider";
 import ResourcesProvider from "./ResourcesProvider";
 
 export function activateWebview(
@@ -9,7 +8,6 @@ export function activateWebview(
   authProvider: AuthProvider
 ) {
   const resourcesProvider = new ResourcesProvider();
-  const historyProvider = new HistoryProvider(context);
   const workflowProvider = new WebviewProvider(context, "workflows");
   const processesProvider = new WebviewProvider(context, "processes");
   const userInfoProvider = new WebviewProvider(
@@ -22,7 +20,6 @@ export function activateWebview(
     vscode.window.registerWebviewViewProvider("workflows", workflowProvider),
     vscode.window.registerWebviewViewProvider("processes", processesProvider),
     vscode.window.registerWebviewViewProvider("userInfo", userInfoProvider),
-    vscode.window.registerTreeDataProvider("history", historyProvider),
     vscode.window.registerTreeDataProvider("resources", resourcesProvider)
   ];
 
@@ -35,13 +32,6 @@ export function activateWebview(
     processesProvider.initViewData();
     workflowProvider.initViewData();
   });
-
-  vscode.commands.registerCommand(
-    "nextflow.seqera.selectWorkspace",
-    (workspaceId: string) => {
-      historyProvider.updateWorkspace(workspaceId);
-    }
-  );
 
   // Workspace events
 

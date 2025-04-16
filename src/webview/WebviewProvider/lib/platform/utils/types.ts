@@ -19,6 +19,7 @@ export type ComputeEnv = {
   status: string;
   workDir: string;
   credentialsId: string;
+  workspaceName: string;
 };
 
 export type WorkspaceID = number | string | null;

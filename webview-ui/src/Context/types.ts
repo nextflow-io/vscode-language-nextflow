@@ -1,28 +1,12 @@
-export type TowerConfig = {
-  accessToken?: string;
-  isEnterprise?: boolean;
-  url?: string;
-  apiURL?: string;
-};
+import * as PlatformTypes from "../../../src/webview/WebviewProvider/lib/platform/utils/types";
 
-export type LaunchConfig = {
-  name?: string;
-  id?: number;
-  nf_files_in_root?: string[];
-  description?: string;
-};
+export type HistoryResponse = PlatformTypes.HistoryResponse;
+export type TowerConfig = PlatformTypes.TowerConfig;
+export type LaunchConfig = PlatformTypes.LaunchConfig;
+export type ComputeEnv = PlatformTypes.ComputeEnv;
+export type WorkspaceID = PlatformTypes.WorkspaceID;
 
-export type ComputeEnv = {
-  id: string;
-  name: string;
-  platform: string;
-  status: string;
-  workDir: string;
-  credentialsId: string;
-  workspaceName: string;
-};
-
-export type WorkspaceID = number | string;
+// TODO: these
 
 export type Organization = {
   orgId: number | string;
