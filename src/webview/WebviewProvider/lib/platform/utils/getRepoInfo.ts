@@ -1,12 +1,12 @@
 import * as vscode from "vscode";
 
-interface GitHubInfo {
+interface RepoInfo {
   url: string;
-  repoName: string;
+  name: string;
   owner: string;
 }
 
-async function getGitHubUrl(): Promise<GitHubInfo | undefined> {
+async function getRepoInfo(): Promise<RepoInfo | undefined> {
   try {
     const extension = vscode.extensions.getExtension("vscode.git");
     if (!extension) {
@@ -43,19 +43,19 @@ async function getGitHubUrl(): Promise<GitHubInfo | undefined> {
 
     url = url.replace(/\.git$/, "");
     const match = url.match(/github\.com\/([^\/]+)\/([^\/]+)/);
-    if (!match) return { url, repoName: "", owner: "" };
+    if (!match) return { url, name: "", owner: "" };
 
-    const [, owner, repoName] = match;
+    const [, owner, name] = match;
 
     return {
       url,
-      repoName,
+      name,
       owner
     };
   } catch (error) {
-    console.error("Error getting GitHub URL:", error);
+    console.error("Error getting repo info:", error);
     return undefined;
   }
 }
 
-export default getGitHubUrl;
+export default getRepoInfo;

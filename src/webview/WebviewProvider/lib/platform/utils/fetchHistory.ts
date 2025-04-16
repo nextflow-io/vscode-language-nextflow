@@ -1,4 +1,4 @@
-import type { HistoryResponse } from "./types";
+import type { HistoryResponse } from "../types";
 import { SEQERA_API_URL } from "../../../../../constants";
 
 const fetchHistory = async (
