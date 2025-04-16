@@ -4,11 +4,7 @@ import { activateChatbot } from "./chatbot";
 import { activateLanguageServer, stopLanguageServer } from "./languageServer";
 import { activateWelcomePage } from "./welcomePage";
 import { activateTelemetry, deactivateTelemetry } from "./telemetry";
-import {
-  activateWebview,
-  ResourcesProvider,
-  WorkflowsProvider
-} from "./webview";
+import { activateWebview, ResourcesProvider, HistoryProvider } from "./webview";
 import { activateAuth, AuthProvider } from "./auth";
 
 export function activate(context: vscode.ExtensionContext) {
@@ -25,8 +21,8 @@ export function activate(context: vscode.ExtensionContext) {
   vscode.window.registerTreeDataProvider("resources", resourcesProvider);
 
   // Register Workflows TreeView
-  const workflowsProvider = new WorkflowsProvider(context);
-  vscode.window.registerTreeDataProvider("runs", workflowsProvider);
+  const historyProvider = new HistoryProvider(context);
+  vscode.window.registerTreeDataProvider("history", historyProvider);
 
   // Register command to open resource URLs
   context.subscriptions.push(

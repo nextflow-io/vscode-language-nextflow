@@ -1,7 +1,7 @@
 import type { WorkflowsResponse } from "./types";
 import { SEQERA_API_URL } from "../../../../../constants";
 
-const fetchWorkflows = async (
+const fetchHistory = async (
   token: string,
   workspaceId: number
 ): Promise<WorkflowsResponse> => {
@@ -27,4 +27,4 @@ const fetchWorkflows = async (
   }
 };
 
-export default fetchWorkflows;
+export default fetchHistory;
