@@ -4,7 +4,7 @@ import fetchWorkspaces from "./utils/fetchWorkspaces";
 import fetchComputeEnvs from "./utils/fetchComputeEnvs";
 import debounce from "../debounce";
 
-import { Workspace, UserInfoResponse, ComputeEnv } from "./utils/types";
+import { Workspace, UserInfoResponse, ComputeEnv } from "./types";
 import getAuthState, { AuthState } from "./getAuthState";
 import { expired } from "../../../../auth/AuthProvider/utils/jwt";
 

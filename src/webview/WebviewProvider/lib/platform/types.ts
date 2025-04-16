@@ -35,6 +35,17 @@ export type Workspace = {
   roles?: string[];
 };
 
+export type Organization = {
+  orgId: number | string;
+  orgName: string;
+  orgLogoUrl?: string | null;
+  workspaceId?: WorkspaceID;
+  workspaceName?: string | null;
+  workspaceFullName?: string | null;
+  visibility?: string | null;
+  roles?: string[];
+};
+
 export type Pipeline = {
   pipelineId: number;
   name: string;
