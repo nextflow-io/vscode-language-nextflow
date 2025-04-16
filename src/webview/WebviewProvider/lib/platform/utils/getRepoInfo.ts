@@ -1,10 +1,6 @@
 import * as vscode from "vscode";
 
-interface RepoInfo {
-  url: string;
-  name: string;
-  owner: string;
-}
+import { RepoInfo } from "../types";
 
 async function getRepoInfo(): Promise<RepoInfo | undefined> {
   try {

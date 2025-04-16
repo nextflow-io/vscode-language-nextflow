@@ -6,7 +6,8 @@ import {
   Organization,
   ComputeEnv,
   UserInfo,
-  HistoryResponse
+  HistoryResponse,
+  RepoInfo
 } from "../types";
 import { AuthState } from "..";
 import { getOrganizations, getWorkspaces } from "./utils";
@@ -26,6 +27,7 @@ type PlatformData = {
   computeEnvs: ComputeEnv[];
   organizations: Organization[];
   history?: HistoryResponse;
+  repoInfo?: RepoInfo;
 };
 
 type TowerContextType = {
@@ -47,6 +49,7 @@ type TowerContextType = {
   hasToken?: boolean;
   tokenExpired?: boolean;
   tokenExpiry?: number;
+  repoInfo?: RepoInfo;
 };
 
 const TowerProvider: React.FC<Props> = ({
@@ -59,7 +62,8 @@ const TowerProvider: React.FC<Props> = ({
     userInfo,
     workspaces: orgsAndWorkspaces,
     computeEnvs,
-    history
+    history,
+    repoInfo
   } = platformData;
 
   const organizations: Organization[] = useMemo(
@@ -142,7 +146,8 @@ const TowerProvider: React.FC<Props> = ({
         isAuthenticated: auth.isAuthenticated,
         hasToken: auth.hasToken,
         tokenExpired: auth.tokenExpired,
-        tokenExpiry: auth.tokenExpiry
+        tokenExpiry: auth.tokenExpiry,
+        repoInfo
       }}
     >
       {children}

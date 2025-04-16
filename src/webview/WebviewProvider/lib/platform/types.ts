@@ -1,3 +1,9 @@
+export type RepoInfo = {
+  url: string;
+  name: string;
+  owner: string;
+};
+
 export type TowerConfig = {
   accessToken?: string;
   isEnterprise?: boolean;
