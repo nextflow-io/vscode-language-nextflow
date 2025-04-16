@@ -5,10 +5,8 @@ import {
   Workspace,
   Organization,
   ComputeEnv,
-  PipelineResponse,
   UserInfo,
-  Pipeline,
-  FormData
+  HistoryResponse
 } from "../types";
 import { AuthState } from "..";
 import { getOrganizations, getWorkspaces } from "./utils";
@@ -27,15 +25,13 @@ type PlatformData = {
   workspaces: Workspace[];
   computeEnvs: ComputeEnv[];
   organizations: Organization[];
+  history?: HistoryResponse;
 };
 
 type TowerContextType = {
   error?: string | null;
   userInfo?: UserInfo;
-  addPipeline: (
-    pipeline: Pipeline,
-    formData: FormData
-  ) => Promise<PipelineResponse | undefined>;
+  history?: HistoryResponse;
   selectedWorkspace: WorkspaceID;
   setSelectedWorkspace: (n: WorkspaceID) => void;
   selectedComputeEnv: string | null;
@@ -59,7 +55,12 @@ const TowerProvider: React.FC<Props> = ({
   platformData,
   vscode
 }) => {
-  const { userInfo, workspaces: orgsAndWorkspaces, computeEnvs } = platformData;
+  const {
+    userInfo,
+    workspaces: orgsAndWorkspaces,
+    computeEnvs,
+    history
+  } = platformData;
 
   const organizations: Organization[] = useMemo(
     () => getOrganizations(orgsAndWorkspaces),
@@ -81,15 +82,21 @@ const TowerProvider: React.FC<Props> = ({
   }, [workspaces]);
 
   useEffect(() => {
-    const selectedWorkspaceName = workspaces.find(
+    // Set the compute environments for the selected workspace
+    const selected = workspaces.find(
       (w) => w.workspaceId === selectedWorkspace
-    )?.workspaceName;
-    if (!selectedWorkspaceName) return;
+    );
+    const name = selected?.workspaceName;
+    if (!name) return;
     setVisibleEnvs(
-      computeEnvs?.filter((ce) => ce.workspaceName === selectedWorkspaceName) ??
-        []
+      computeEnvs?.filter((ce) => ce.workspaceName === name) ?? []
     );
     setSelectedComputeEnv(visibleEnvs[0]?.id ?? "");
+  }, [selectedWorkspace]);
+
+  useEffect(() => {
+    // Fetch the history for the selected workspace
+    fetchHistory(selectedWorkspace);
   }, [selectedWorkspace]);
 
   const getOrgWorkspaces = (orgId: string | number) => {
@@ -107,13 +114,8 @@ const TowerProvider: React.FC<Props> = ({
     };
   }
 
-  function handleAddPipeline(
-    pipeline: Pipeline,
-    formData: FormData
-  ): Promise<PipelineResponse | undefined> {
-    console.log(">> pipeline", pipeline);
-    console.log(">> formData", formData);
-    return Promise.resolve(undefined);
+  function fetchHistory(workspaceId: WorkspaceID) {
+    vscode.postMessage({ command: "fetchHistory", workspaceId });
   }
 
   function refresh() {
@@ -125,7 +127,7 @@ const TowerProvider: React.FC<Props> = ({
       value={{
         error: auth.error,
         userInfo,
-        addPipeline: handleAddPipeline,
+        history,
         selectedWorkspace,
         setSelectedWorkspace,
         selectedComputeEnv,

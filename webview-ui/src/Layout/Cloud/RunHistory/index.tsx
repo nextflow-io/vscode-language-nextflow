@@ -3,38 +3,34 @@ import Select from "../../../components/Select";
 
 import styles from "./styles.module.css";
 import { getComputeEnvURL } from "../utils";
+import { useEffect } from "react";
 
 const UserInfo = () => {
   const {
     workspaces,
     selectedWorkspace,
     setSelectedWorkspace,
-    userInfo,
     computeEnvs,
-    error
+    history
   } = useTowerContext();
+
+  useEffect(() => {
+    if (history) {
+      console.log("🟢 history", history);
+    }
+  }, [history]);
 
   return (
     <div>
-      {error && (
-        <div className={styles.section}>
-          <p>Error:{error}</p>
-        </div>
-      )}
-      <section>
-        User: {userInfo?.user?.userName}
-        <br />
-        Email: {userInfo?.user?.email}
-      </section>
       <section>
         <h3>Workspaces</h3>
         {workspaces?.length ? (
           <Select
             options={workspaces.map((ws) => ({
               label: ws.orgName + " / " + ws.workspaceName,
-              value: ws.workspaceId
+              value: ws.workspaceId as number
             }))}
-            value={selectedWorkspace}
+            value={selectedWorkspace ?? ""}
             onChange={setSelectedWorkspace}
           />
         ) : (
@@ -56,6 +52,12 @@ const UserInfo = () => {
         ) : (
           <div>No compute environments found</div>
         )}
+      </section>
+      <section>
+        <h3>Run History</h3>
+        {history?.workflows?.map((workflow) => (
+          <div key={workflow.workflow.id}>{workflow.workflow.runName}</div>
+        ))}
       </section>
     </div>
   );
