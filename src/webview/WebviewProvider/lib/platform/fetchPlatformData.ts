@@ -8,18 +8,18 @@ import {
   Workspace,
   UserInfoResponse,
   ComputeEnv,
-  WorkflowsResponse
+  HistoryResponse
 } from "./utils/types";
 import getAuthState, { AuthState } from "./getAuthState";
 import { expired } from "../../../../auth/AuthProvider/utils/jwt";
-import fetchWorkflows from "./utils/fetchWorkflows";
+import fetchHistory from "./utils/fetchHistory";
 
 type PlatformData = {
   authState: AuthState;
   userInfo?: UserInfoResponse;
   workspaces?: Workspace[];
   computeEnvs?: ComputeEnv[];
-  workflows?: WorkflowsResponse;
+  history?: HistoryResponse;
 };
 
 function handleUpdate(
@@ -70,14 +70,14 @@ const fetchPlatformData = async (
 
   const workspaces = await fetchWorkspaces(accessToken, userInfo.user.id);
   const computeEnvs = await fetchComputeEnvs(accessToken, workspaces);
-  const workflows = await fetchWorkflows(accessToken);
+  const history = await fetchHistory(accessToken, 123);
 
   data = {
     ...data,
     userInfo,
     workspaces,
     computeEnvs,
-    workflows
+    history
   };
 
   handleUpdate(data, context, view);
