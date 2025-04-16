@@ -13,6 +13,7 @@ const WorkspaceContext = createContext<WorkspaceContextType>({
   selectedItems: [],
   selectItem: () => {},
   isSelected: () => false,
+  isSelectedFile: () => false,
   viewID: "",
   testCount: 0,
   login: () => {},
@@ -34,6 +35,7 @@ interface WorkspaceContextType {
   selectedItems: string[];
   selectItem: (name: string) => void;
   isSelected: (name: string) => boolean;
+  isSelectedFile: (file: FileNodeType) => boolean;
   viewID: string;
   testCount: number;
   login: () => void;
@@ -63,6 +65,7 @@ const WorkspaceProvider = ({ children, vscode, viewID, isCursor }: Props) => {
     state?.selectedItems || []
   );
   const [selectedView, setSelectedView] = useState<string>("runs");
+  const [selectedFile, setSelectedFile] = useState<string>("");
 
   useEffect(() => {
     let count = 0;
@@ -80,6 +83,9 @@ const WorkspaceProvider = ({ children, vscode, viewID, isCursor }: Props) => {
   useEffect(() => {
     const handleMessage = (event: MessageEvent) => {
       const message = event.data;
+      if (message.selectedFile) {
+        setSelectedFile(message.selectedFile);
+      }
       if (message.fileList) {
         const { files, tests } = message.fileList;
         setFiles(sortFiles(files || []));
@@ -103,6 +109,10 @@ const WorkspaceProvider = ({ children, vscode, viewID, isCursor }: Props) => {
 
   function isSelected(name: string) {
     return selectedItems.includes(name);
+  }
+
+  function isSelectedFile(file: FileNodeType) {
+    return selectedFile === file.filePath;
   }
 
   function openFile(file: FileNodeType) {
@@ -148,6 +158,7 @@ const WorkspaceProvider = ({ children, vscode, viewID, isCursor }: Props) => {
         selectedItems,
         selectItem,
         isSelected,
+        isSelectedFile,
         testCount,
         login,
         viewID,

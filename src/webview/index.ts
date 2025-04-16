@@ -47,7 +47,7 @@ export function activateWebview(
       document.uri.fsPath.endsWith(".nf") ||
       document.uri.fsPath.endsWith(".nf.test")
     ) {
-      workflowProvider.openFileEvent(document.uri.fsPath);
+      workflowProvider.setSelectedFile(document.uri.fsPath);
     }
   });
 

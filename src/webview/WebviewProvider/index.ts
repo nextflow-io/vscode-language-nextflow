@@ -148,6 +148,8 @@ class WebviewProvider implements vscode.WebviewViewProvider {
   public async initViewData(refresh?: boolean) {
     const { viewID, _context, _currentView: view } = this;
     if (!view) return;
+    const wsState = this._context.workspaceState;
+    const selectedFile = wsState.get("selectedFile");
     if (viewID === "userInfo") {
       this.getRepoInfo();
       const accessToken = await this.getAccessToken();
@@ -157,16 +159,25 @@ class WebviewProvider implements vscode.WebviewViewProvider {
       const fileList = buildList();
       view.webview.postMessage({
         fileList,
-        tree: buildTree(fileList.files)
+        tree: buildTree(fileList.files),
+        selectedFile
       });
     }
   }
 
-  public async openFileEvent(filePath: string) {
+  public async reloadView() {
+    if (!this._currentView) return;
+    const html = this.getBuiltHTML(this._currentView);
+    this._currentView.webview.html = html;
+    await this.initViewData(true);
+  }
+
+  public async setSelectedFile(filePath: string) {
     this._currentView?.webview.postMessage({
-      command: "fileOpened",
-      filePath
+      selectedFile: filePath
     });
+    const wsState = this._context.workspaceState;
+    wsState.update("selectedFile", filePath);
   }
 
   private async openFile(file: FileNode) {
@@ -174,7 +185,6 @@ class WebviewProvider implements vscode.WebviewViewProvider {
     await vscode.window.showTextDocument(doc, {
       selection: new vscode.Range(file.line || 0, 0, file.line || 0, 0)
     });
-    this.openFileEvent(file.filePath);
   }
 
   private async openChat() {
