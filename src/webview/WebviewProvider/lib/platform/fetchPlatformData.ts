@@ -40,15 +40,20 @@ const fetchPlatformData = async (
   const savedAuth = savedState?.authState as AuthState | undefined;
   let hasExpired = expired(savedAuth?.tokenExpiry);
 
+  const repoInfo = await getRepoInfo();
+
+  const restoredState = {
+    ...savedState,
+    repoInfo
+  };
+
   if (!hasExpired && !refresh) {
-    view.postMessage(savedState);
-    return savedState as PlatformData;
+    view.postMessage(restoredState);
+    return restoredState as PlatformData;
   }
 
   const authState = await getAuthState(accessToken);
   hasExpired = expired(authState?.tokenExpiry);
-
-  const repoInfo = await getRepoInfo();
 
   let data: PlatformData = {
     repoInfo,

@@ -2,7 +2,13 @@ import * as vscode from "vscode";
 import * as fs from "fs";
 import * as path from "path";
 
-import { buildList, buildTree, fetchPlatformData, fetchHistory } from "./lib";
+import {
+  buildList,
+  buildTree,
+  fetchPlatformData,
+  fetchHistory,
+  getRepoInfo
+} from "./lib";
 import { AuthProvider, getAccessToken } from "../../auth";
 import { FileNode } from "./lib/workspace/types";
 
@@ -71,6 +77,12 @@ class WebviewProvider implements vscode.WebviewViewProvider {
       const accessToken = await getAccessToken(_context);
       if (!accessToken) return;
       await fetchPlatformData(accessToken, view.webview, _context, refresh);
+      setTimeout(async () => {
+        const repoInfo = await getRepoInfo();
+        view.webview.postMessage({
+          repoInfo
+        });
+      }, 1000);
     } else {
       const fileList = buildList();
       view.webview.postMessage({

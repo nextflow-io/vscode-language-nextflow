@@ -50,6 +50,8 @@ type TowerContextType = {
   tokenExpired?: boolean;
   tokenExpiry?: number;
   repoInfo?: RepoInfo;
+  useLocalContext: boolean;
+  setUseLocalContext: (n: boolean) => void;
 };
 
 const TowerProvider: React.FC<Props> = ({
@@ -80,6 +82,11 @@ const TowerProvider: React.FC<Props> = ({
   const [selectedWorkspace, setSelectedWorkspace] = useState<WorkspaceID>("");
   const [selectedComputeEnv, setSelectedComputeEnv] = useState<string>("");
   const [selectedOrg, setSelectedOrg] = useState<string>("");
+  const [useLocalContext, setUseLocalContext] = useState<boolean>(false);
+
+  useEffect(() => {
+    setUseLocalContext(!!repoInfo);
+  }, [repoInfo]);
 
   useEffect(() => {
     setSelectedWorkspace(workspaces[0]?.workspaceId ?? "");
@@ -129,6 +136,8 @@ const TowerProvider: React.FC<Props> = ({
   return (
     <TowerContext.Provider
       value={{
+        useLocalContext,
+        setUseLocalContext,
         error: auth.error,
         userInfo,
         history,
