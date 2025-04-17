@@ -42,7 +42,22 @@ export function filterHistory(
   repoInfo: RepoInfo | undefined,
   shouldFilter: boolean
 ): Workflow[] {
-  const items = history?.workflows?.map(({ workflow }) => workflow) || [];
-  if (!shouldFilter || !repoInfo) return items;
+  let items = history?.workflows?.map(({ workflow }) => workflow) || [];
+  items = items.sort((a, b) => {
+    // Starred first
+    if (a.starred !== b.starred) {
+      return a.starred ? -1 : 1;
+    }
+    // Ordered by dateCreated
+    return (
+      new Date(b.dateCreated).getTime() - new Date(a.dateCreated).getTime()
+    );
+  });
+
+  if (!shouldFilter || !repoInfo) {
+    return items;
+  }
+
+  // Filter items not related to the repo's repository
   return items.filter((w) => w.repository === repoInfo.url);
 }

@@ -114,6 +114,7 @@ const TowerProvider: React.FC<Props> = ({
 
   useEffect(() => {
     // Fetch the pipelines & history for the selected workspace
+    if (!selectedWorkspace) return;
     fetchPipelines(selectedWorkspace);
     fetchHistory(selectedWorkspace);
   }, [selectedWorkspace]);

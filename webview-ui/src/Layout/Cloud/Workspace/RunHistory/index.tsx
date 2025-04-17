@@ -1,6 +1,14 @@
 import { useTowerContext } from "../../../../Context";
-import { getRunHistoryURL } from "./utils";
+import {
+  getRunHistoryURL,
+  formatDate,
+  getRuntimeMinutes,
+  getStatusIcon
+} from "./utils";
 import Button from "../../../../components/Button";
+import styles from "./styles.module.css";
+import clsx from "clsx";
+
 const RunHistory = () => {
   const { workspaces, selectedWorkspace, history } = useTowerContext();
 
@@ -21,7 +29,32 @@ const RunHistory = () => {
               alt
               className="mb-1"
             >
-              {workflow.runName}
+              <div className={styles.item}>
+                <span className={styles.name}>{workflow.runName}</span>
+                <div className={styles.metadata}>
+                  <span className={styles.date}>
+                    {formatDate(workflow.dateCreated)}
+                  </span>
+                  <span
+                    className={clsx(
+                      styles.status,
+                      workflow.status === "FAILED" && styles.failed
+                    )}
+                  >
+                    <i
+                      className={clsx(
+                        "codicon",
+                        `codicon-${getStatusIcon(workflow.status)}`
+                      )}
+                    />
+                  </span>
+                  {workflow.complete && (
+                    <span className={styles.runtime}>
+                      {getRuntimeMinutes(workflow)}m
+                    </span>
+                  )}
+                </div>
+              </div>
             </Button>
           ))}
         </>

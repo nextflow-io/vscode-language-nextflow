@@ -1,0 +1,57 @@
+.item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.name {
+  flex: 1;
+  margin-right: 1rem;
+  font-weight: 500;
+}
+
+.metadata {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.9em;
+  color: var(--vscode-descriptionForeground);
+}
+
+.date {
+  color: var(--vscode-descriptionForeground);
+  font-size: 0.9em;
+}
+
+.status {
+  display: flex;
+  align-items: center;
+  & i {
+    font-size: 14px;
+  }
+  &.succeeded {
+    background-color: var(--vscode-testing-iconPassed);
+    color: white;
+  }
+  &.failed {
+    opacity: 0.6;
+  }
+  &.running {
+    background-color: var(--vscode-testing-iconQueued);
+    color: white;
+  }
+  &.cancelled {
+    background-color: var(--vscode-testing-iconSkipped);
+    color: white;
+  }
+  &.unknown {
+    background-color: var(--vscode-badge-background);
+    color: var(--vscode-badge-foreground);
+  }
+}
+
+.runtime {
+  display: flex;
+  align-items: center;
+}

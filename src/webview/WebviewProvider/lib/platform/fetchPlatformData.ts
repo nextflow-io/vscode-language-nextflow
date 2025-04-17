@@ -3,8 +3,7 @@ import {
   fetchComputeEnvs,
   fetchUserInfo,
   fetchWorkspaces,
-  debounce,
-  getRepoInfo
+  debounce
 } from "./utils";
 
 import { Workspace, UserInfoResponse, ComputeEnv, RepoInfo } from "./types";
@@ -40,23 +39,22 @@ const fetchPlatformData = async (
   const savedAuth = savedState?.authState as AuthState | undefined;
   let hasExpired = expired(savedAuth?.tokenExpiry);
 
-  const repoInfo = await getRepoInfo();
+  // const repoInfo = await getRepoInfo();
 
-  const restoredState = {
-    ...savedState,
-    repoInfo
-  };
+  // const restoredState = {
+  //   ...savedState,
+  //   repoInfo
+  // };
 
   if (!hasExpired && !refresh) {
-    view.postMessage(restoredState);
-    return restoredState as PlatformData;
+    view.postMessage(savedState);
+    return savedState as PlatformData;
   }
 
   const authState = await getAuthState(accessToken);
   hasExpired = expired(authState?.tokenExpiry);
 
   let data: PlatformData = {
-    repoInfo,
     authState
   };
 
