@@ -43,3 +43,11 @@
   color: var(--vscode-button-foreground);
   font-weight: 400;
 }
+.button.alt2 {
+  background: var(--vscode-dropdown-border);
+  border: 1px solid var(--vscode-dropdown-border);
+  color: var(--vscode-button-foreground);
+}
+.button.subtle {
+  background-color: var(--vscode-sideBarSectionHeader-background);
+}

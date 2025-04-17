@@ -2,7 +2,8 @@ import { useTowerContext } from "../../../Context";
 import UserInfo from "./UserInfo";
 import RunHistory from "./RunHistory";
 import WorkspaceSelector from "./WorkspaceSelector";
-
+import RepoInfo from "./RepoInfo";
+import AddedPipelines from "./AddedPipelines";
 const Workspace = () => {
   const { error } = useTowerContext();
   return (
@@ -13,8 +14,12 @@ const Workspace = () => {
         </section>
       )}
       <UserInfo />
-      <WorkspaceSelector />
-      <RunHistory />
+      <RepoInfo />
+      <section>
+        <WorkspaceSelector />
+        <AddedPipelines />
+        <RunHistory />
+      </section>
     </>
   );
 };
