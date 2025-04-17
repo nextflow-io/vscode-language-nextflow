@@ -25,9 +25,10 @@
     opacity: 0.8;
   }
   &.small {
-    height: 11px;
-    padding: 0 8px;
+    height: 20px;
+    padding: 0 6px;
     font-size: 11px;
+    outline: none;
     & i {
       font-size: 13px !important;
       margin-right: 4px;

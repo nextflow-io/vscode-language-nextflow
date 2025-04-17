@@ -8,10 +8,17 @@ import {
   UserInfo,
   HistoryResponse,
   RepoInfo,
-  PipelinesResponse
+  PipelinesResponse,
+  Pipeline,
+  Workflow
 } from "../types";
 import { AuthState } from "..";
-import { getOrganizations, getWorkspaces } from "./utils";
+import {
+  getOrganizations,
+  getWorkspaces,
+  filterPipelines,
+  filterHistory
+} from "./utils";
 
 const TowerContext = createContext<TowerContextType>(null as any);
 
@@ -35,7 +42,7 @@ type PlatformData = {
 type TowerContextType = {
   error?: string | null;
   userInfo?: UserInfo;
-  history?: HistoryResponse;
+  history?: Workflow[];
   selectedWorkspace: WorkspaceID;
   setSelectedWorkspace: (n: WorkspaceID) => void;
   selectedComputeEnv: string | null;
@@ -52,7 +59,7 @@ type TowerContextType = {
   tokenExpired?: boolean;
   tokenExpiry?: number;
   repoInfo?: RepoInfo;
-  pipelines?: PipelinesResponse;
+  pipelines?: Pipeline[];
   useLocalContext: boolean;
   setUseLocalContext: (n: boolean) => void;
 };
@@ -87,10 +94,6 @@ const TowerProvider: React.FC<Props> = ({
   const [selectedComputeEnv, setSelectedComputeEnv] = useState<string>("");
   const [selectedOrg, setSelectedOrg] = useState<string>("");
   const [useLocalContext, setUseLocalContext] = useState<boolean>(false);
-
-  useEffect(() => {
-    setUseLocalContext(!!repoInfo);
-  }, [repoInfo]);
 
   useEffect(() => {
     setSelectedWorkspace(workspaces[0]?.workspaceId ?? "");
@@ -149,7 +152,7 @@ const TowerProvider: React.FC<Props> = ({
         setUseLocalContext,
         error: auth.error,
         userInfo,
-        history,
+        history: filterHistory(history, repoInfo, useLocalContext),
         selectedWorkspace,
         setSelectedWorkspace,
         selectedComputeEnv,
@@ -166,7 +169,7 @@ const TowerProvider: React.FC<Props> = ({
         tokenExpired: auth.tokenExpired,
         tokenExpiry: auth.tokenExpiry,
         repoInfo,
-        pipelines
+        pipelines: filterPipelines(pipelines, repoInfo, useLocalContext)
       }}
     >
       {children}

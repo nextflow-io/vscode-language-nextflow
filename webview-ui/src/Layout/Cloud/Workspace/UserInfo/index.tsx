@@ -14,16 +14,19 @@ const UserInfo = () => {
   return (
     <div className={styles.toolbar}>
       {!!repoInfo && (
-        <Button href={getPipelineURL(repoInfo)} alt icon="codicon-info">
+        <Button href={getPipelineURL(repoInfo)} alt>
+          <img
+            src={pipelineIcon}
+            style={{ height: 12, opacity: 0.6 }}
+            className="mr-2"
+          />
           {`${repoInfo.name}`}
         </Button>
       )}
       <Button href={`${SEQERA_PLATFORM_URL}`} alt description="Launchpad">
-        <img src={pipelineIcon} style={{ height: 14, opacity: 0.8 }} />
+        <img src={seqeraLogo} style={{ height: 13, opacity: 1 }} />
       </Button>
-      <Button href="https://seqera.io/ask-ai" alt>
-        <img src={seqeraLogo} style={{ height: 14, opacity: 0.8 }} />
-      </Button>
+      <Button href="https://seqera.io/ask-ai" alt icon="codicon-hubot" />
       <Button
         href={`${SEQERA_PLATFORM_URL}/profile`}
         description={username}
