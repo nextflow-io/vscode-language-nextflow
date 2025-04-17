@@ -1,16 +1,13 @@
-import { Workspace, ComputeEnv, RepoInfo, Pipeline } from "../../Context/types";
+import {
+  Workspace,
+  ComputeEnv,
+  RepoInfo,
+  Pipeline,
+  Dataset
+} from "../../Context/types";
 import { SEQERA_PLATFORM_URL } from "../../../../src/constants";
 
-export function formatTime(tokenExpiry?: number) {
-  if (!tokenExpiry) return "";
-  return new Date(tokenExpiry * 1000).toLocaleString("en-US", {
-    month: "short",
-    day: "numeric",
-    hour: "numeric",
-    minute: "2-digit",
-    hour12: true
-  });
-}
+// Build URLs to Seqera Cloud
 
 export function getWorkspaceURL(workspace: Workspace) {
   return `${SEQERA_PLATFORM_URL}/orgs/${workspace.orgName}/workspaces/${workspace.workspaceName}/launchpad`;
@@ -34,6 +31,13 @@ export function getPipelineURL(repoInfo: RepoInfo) {
 export function getWorkflowURL(pipeline: Pipeline) {
   return `${SEQERA_PLATFORM_URL}/orgs/${pipeline.orgName}/workspaces/${pipeline.workspaceName}/launchpad/${pipeline.pipelineId}`;
 }
+
+export function getDatasetURL(dataset: Dataset, workspace?: Workspace) {
+  if (!workspace) return "";
+  return `${SEQERA_PLATFORM_URL}/orgs/${workspace.orgName}/workspaces/${workspace.workspaceName}/datasets/${dataset.id}`;
+}
+
+// Date formatting
 
 export const formatDate = (dateString: string) => {
   const date = new Date(dateString);
@@ -59,7 +63,6 @@ export const relativeTime = (dateString: string) => {
   const date = new Date(dateString);
   const now = new Date();
   const diffInSeconds = Math.floor((now.getTime() - date.getTime()) / 1000);
-  console.log("diffInSeconds", diffInSeconds);
 
   if (diffInSeconds < 60) {
     return "Just now";
@@ -76,10 +79,10 @@ export const relativeTime = (dateString: string) => {
   }
 
   const diffInDays = Math.floor(diffInHours / 24);
-  if (diffInDays < 7) {
+  if (diffInDays < 28) {
     return `${diffInDays} day${diffInDays === 1 ? "" : "s"} ago`;
   }
 
-  // For dates older than a week, fall back to the existing formatDate function
+  // Fallback to normal date format
   return formatDate(dateString);
 };

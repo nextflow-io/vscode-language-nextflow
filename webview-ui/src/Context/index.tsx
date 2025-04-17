@@ -10,7 +10,8 @@ import {
   Organization,
   HistoryResponse,
   RepoInfo,
-  PipelinesResponse
+  PipelinesResponse,
+  Dataset
 } from "./types";
 
 const vscode = getVscode();
@@ -44,6 +45,7 @@ const Context = ({ children }: Props) => {
     undefined
   );
   const [repoInfo, setRepoInfo] = useState<RepoInfo | undefined>(undefined);
+  const [datasets, setDatasets] = useState<Dataset[]>([]);
 
   useEffect(() => {
     const handleMessage = (event: MessageEvent) => {
@@ -57,6 +59,7 @@ const Context = ({ children }: Props) => {
       if (data.history) setHistory(data.history);
       if (data.pipelines) setPipelines(data.pipelines);
       if (data.repoInfo) setRepoInfo(data.repoInfo);
+      if (data.datasets) setDatasets(data.datasets);
     };
     window.addEventListener("message", handleMessage);
     return () => window.removeEventListener("message", handleMessage);
@@ -75,7 +78,8 @@ const Context = ({ children }: Props) => {
             organizations,
             history,
             repoInfo,
-            pipelines
+            pipelines,
+            datasets
           }}
         >
           {children}

@@ -10,7 +10,8 @@ import {
   RepoInfo,
   PipelinesResponse,
   Pipeline,
-  Workflow
+  Workflow,
+  Dataset
 } from "../types";
 import { AuthState } from "..";
 import {
@@ -37,6 +38,7 @@ type PlatformData = {
   history?: HistoryResponse;
   repoInfo?: RepoInfo;
   pipelines?: PipelinesResponse;
+  datasets?: Dataset[];
 };
 
 type TowerContextType = {
@@ -60,6 +62,7 @@ type TowerContextType = {
   tokenExpiry?: number;
   repoInfo?: RepoInfo;
   pipelines?: Pipeline[];
+  datasets?: Dataset[];
   useLocalContext: boolean;
   setUseLocalContext: (n: boolean) => void;
 };
@@ -76,6 +79,7 @@ const TowerProvider: React.FC<Props> = ({
     computeEnvs,
     history,
     pipelines,
+    datasets,
     repoInfo
   } = platformData;
 
@@ -117,6 +121,7 @@ const TowerProvider: React.FC<Props> = ({
     if (!selectedWorkspace) return;
     fetchPipelines(selectedWorkspace);
     fetchHistory(selectedWorkspace);
+    fetchDatasets(selectedWorkspace);
   }, [selectedWorkspace]);
 
   const getOrgWorkspaces = (orgId: string | number) => {
@@ -140,6 +145,10 @@ const TowerProvider: React.FC<Props> = ({
 
   function fetchPipelines(workspaceId: WorkspaceID) {
     vscode.postMessage({ command: "fetchPipelines", workspaceId });
+  }
+
+  function fetchDatasets(workspaceId: WorkspaceID) {
+    vscode.postMessage({ command: "fetchDatasets", workspaceId });
   }
 
   function refresh() {
@@ -170,7 +179,8 @@ const TowerProvider: React.FC<Props> = ({
         tokenExpired: auth.tokenExpired,
         tokenExpiry: auth.tokenExpiry,
         repoInfo,
-        pipelines: filterPipelines(pipelines, repoInfo, useLocalContext)
+        pipelines: filterPipelines(pipelines, repoInfo, useLocalContext),
+        datasets
       }}
     >
       {children}
