@@ -84,6 +84,11 @@ export type PipelineResponse = {
   pipeline?: Pipeline;
 };
 
+export type PipelinesResponse = {
+  pipelines: Pipeline[];
+  totalSize: number;
+};
+
 export type User = {
   id: number;
   userName: string;

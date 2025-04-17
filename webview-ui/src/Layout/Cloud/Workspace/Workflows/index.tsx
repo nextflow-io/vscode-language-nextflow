@@ -1,10 +1,10 @@
 import Button from "../../../../components/Button";
-import { getPipelineURL } from "../../utils";
+import { getWorkflowURL } from "../../utils";
 import { useTowerContext } from "../../../../Context";
 import pipelineIcon from "../../../../images/pipeline.svg";
 
 const Workflows = () => {
-  const { repoInfo, useLocalContext, setUseLocalContext } = useTowerContext();
+  const { useLocalContext, setUseLocalContext, pipelines } = useTowerContext();
   return (
     <div>
       <div className="flex items-center mb-2">
@@ -19,11 +19,15 @@ const Workflows = () => {
           Local context
         </Button>
       </div>
-      {repoInfo && (
-        <Button href={getPipelineURL(repoInfo)} alt fullWidth>
-          <img src={pipelineIcon} className="mr-2" />
-          {`${repoInfo.owner}/${repoInfo.name}`}
-        </Button>
+      {!!pipelines && (
+        <>
+          {pipelines.pipelines.map((pipeline) => (
+            <Button href={getWorkflowURL(pipeline)} alt fullWidth>
+              <img src={pipelineIcon} className="mr-2" />
+              {pipeline.name}
+            </Button>
+          ))}
+        </>
       )}
     </div>
   );

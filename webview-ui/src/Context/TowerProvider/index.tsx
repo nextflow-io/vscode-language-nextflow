@@ -7,7 +7,8 @@ import {
   ComputeEnv,
   UserInfo,
   HistoryResponse,
-  RepoInfo
+  RepoInfo,
+  PipelinesResponse
 } from "../types";
 import { AuthState } from "..";
 import { getOrganizations, getWorkspaces } from "./utils";
@@ -28,6 +29,7 @@ type PlatformData = {
   organizations: Organization[];
   history?: HistoryResponse;
   repoInfo?: RepoInfo;
+  pipelines?: PipelinesResponse;
 };
 
 type TowerContextType = {
@@ -50,6 +52,7 @@ type TowerContextType = {
   tokenExpired?: boolean;
   tokenExpiry?: number;
   repoInfo?: RepoInfo;
+  pipelines?: PipelinesResponse;
   useLocalContext: boolean;
   setUseLocalContext: (n: boolean) => void;
 };
@@ -65,6 +68,7 @@ const TowerProvider: React.FC<Props> = ({
     workspaces: orgsAndWorkspaces,
     computeEnvs,
     history,
+    pipelines,
     repoInfo
   } = platformData;
 
@@ -106,7 +110,8 @@ const TowerProvider: React.FC<Props> = ({
   }, [selectedWorkspace]);
 
   useEffect(() => {
-    // Fetch the history for the selected workspace
+    // Fetch the pipelines & history for the selected workspace
+    fetchPipelines(selectedWorkspace);
     fetchHistory(selectedWorkspace);
   }, [selectedWorkspace]);
 
@@ -127,6 +132,10 @@ const TowerProvider: React.FC<Props> = ({
 
   function fetchHistory(workspaceId: WorkspaceID) {
     vscode.postMessage({ command: "fetchHistory", workspaceId });
+  }
+
+  function fetchPipelines(workspaceId: WorkspaceID) {
+    vscode.postMessage({ command: "fetchPipelines", workspaceId });
   }
 
   function refresh() {
@@ -156,7 +165,8 @@ const TowerProvider: React.FC<Props> = ({
         hasToken: auth.hasToken,
         tokenExpired: auth.tokenExpired,
         tokenExpiry: auth.tokenExpiry,
-        repoInfo
+        repoInfo,
+        pipelines
       }}
     >
       {children}
