@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import { useTowerContext } from "../../../../Context";
 import { Workflow } from "../../../../Context/types";
 
@@ -12,15 +11,6 @@ const RunHistory = () => {
     itemsForRepo =
       items?.filter((item) => item.repository === repoInfo.url) || [];
   }
-
-  useEffect(() => {
-    if (repoInfo) {
-      console.log("🟢 repoInfo", repoInfo);
-    }
-    if (history) {
-      console.log("🟢 history", history);
-    }
-  }, [history, repoInfo]);
 
   return (
     <section>

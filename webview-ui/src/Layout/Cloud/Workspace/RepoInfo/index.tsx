@@ -7,13 +7,8 @@ const RepoInfo = () => {
   if (!repoInfo?.url) return null;
 
   return (
-    <div className="p-2">
-      <Button
-        href={getPipelineURL(repoInfo)}
-        subtle
-        fullWidth
-        icon="codicon-info"
-      >
+    <div className="px-2 pt-2">
+      <Button href={getPipelineURL(repoInfo)} alt fullWidth icon="codicon-info">
         {`${repoInfo.owner}/${repoInfo.name}`}
       </Button>
     </div>

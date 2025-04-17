@@ -10,6 +10,8 @@ type Props = {
   alt2?: boolean;
   subtle?: boolean;
   small?: boolean;
+  bare?: boolean;
+  active?: boolean;
   fullWidth?: boolean;
   icon?: string;
   className?: string;
@@ -22,6 +24,8 @@ const Button: React.FC<Props> = ({
   href,
   children = null,
   small,
+  bare,
+  active,
   fullWidth,
   icon,
   className: classNameProp,
@@ -37,7 +41,9 @@ const Button: React.FC<Props> = ({
     [styles.icon]: !!icon,
     [styles.alt]: alt,
     [styles.subtle]: subtle,
-    [styles.alt2]: alt2
+    [styles.alt2]: alt2,
+    [styles.bare]: bare,
+    [styles.active]: active
   });
 
   let content = children;
