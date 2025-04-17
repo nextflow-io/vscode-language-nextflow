@@ -4,6 +4,8 @@ import {
   Workspace
 } from "../../../../../../src/webview/WebviewProvider/lib/platform/types";
 
+export { formatDate, relativeTime } from "../../utils";
+
 export function getRunHistoryURL(
   workspace: Workspace | undefined,
   item: Workflow
@@ -12,26 +14,6 @@ export function getRunHistoryURL(
 
   return `${SEQERA_PLATFORM_URL}/orgs/${workspace.orgName}/workspaces/${workspace.workspaceName}/watch/${item.id}`;
 }
-
-export const formatDate = (dateString: string) => {
-  const date = new Date(dateString);
-  const now = new Date();
-  const isCurrentYear = date.getFullYear() === now.getFullYear();
-
-  const options: Intl.DateTimeFormatOptions = {
-    month: "short",
-    day: "numeric",
-    hour: "numeric",
-    minute: "2-digit",
-    hour12: true
-  };
-
-  if (!isCurrentYear) {
-    options.year = "numeric";
-  }
-
-  return date.toLocaleString("en-US", options);
-};
 
 export const getRuntimeMinutes = (workflow: any) => {
   if (!workflow.complete) return null;
