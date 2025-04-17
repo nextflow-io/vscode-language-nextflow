@@ -3,6 +3,7 @@ import UserInfo from "./UserInfo";
 import RunHistory from "./RunHistory";
 import WorkspaceSelector from "./WorkspaceSelector";
 import Pipelines from "./Pipelines";
+import Datasets from "./Datasets";
 
 const Workspace = () => {
   const { error } = useTowerContext();

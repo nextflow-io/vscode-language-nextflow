@@ -280,3 +280,13 @@ export type HistoryResponse = {
   }[];
   totalSize: number;
 };
+
+export interface Dataset {
+  id: string;
+  name: string;
+  description: string | null;
+  mediaType: string;
+  deleted: boolean;
+  dateCreated: string;
+  lastUpdated: string;
+}

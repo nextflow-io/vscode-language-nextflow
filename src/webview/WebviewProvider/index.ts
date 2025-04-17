@@ -8,7 +8,8 @@ import {
   fetchPlatformData,
   fetchHistory,
   getRepoInfo,
-  fetchPipelines
+  fetchPipelines,
+  fetchDatasets
 } from "./lib";
 import { AuthProvider, getAccessToken } from "../../auth";
 import { FileNode } from "./lib/workspace/types";
@@ -51,6 +52,9 @@ class WebviewProvider implements vscode.WebviewViewProvider {
         case "fetchPipelines":
           this.fetchPipelines(message.workspaceId);
           break;
+        case "fetchDatasets":
+          this.fetchDatasets(message.workspaceId);
+          break;
       }
     });
 
@@ -75,7 +79,6 @@ class WebviewProvider implements vscode.WebviewViewProvider {
     if (!accessToken) return;
     const history = await fetchHistory(accessToken, workspaceId);
     this._currentView?.webview.postMessage({
-      command: "history",
       history
     });
   }
@@ -92,8 +95,16 @@ class WebviewProvider implements vscode.WebviewViewProvider {
     if (!accessToken) return;
     const pipelines = await fetchPipelines(accessToken, workspaceId);
     this._currentView?.webview.postMessage({
-      command: "pipelines",
       pipelines
+    });
+  }
+
+  private async fetchDatasets(workspaceId: number) {
+    const accessToken = await this.getAccessToken();
+    if (!accessToken) return;
+    const datasets = await fetchDatasets(accessToken, workspaceId);
+    this._currentView?.webview.postMessage({
+      datasets
     });
   }
 
@@ -113,13 +124,6 @@ class WebviewProvider implements vscode.WebviewViewProvider {
         tree: buildTree(fileList.files)
       });
     }
-  }
-
-  public async reloadView() {
-    if (!this._currentView) return;
-    const html = this.getBuiltHTML(this._currentView);
-    this._currentView.webview.html = html;
-    await this.initViewData(true);
   }
 
   public async openFileEvent(filePath: string) {
