@@ -31,4 +31,15 @@
   &.fullWidth {
     width: 100%;
   }
+  & i {
+    &.iconfix {
+      font-size: 17px;
+    }
+  }
+}
+.button.alt {
+  background-color: var(--vscode-editor-background);
+  border: 1px solid var(--vscode-dropdown-border);
+  color: var(--vscode-button-foreground);
+  font-weight: 400;
 }

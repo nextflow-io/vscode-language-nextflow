@@ -1,4 +1,4 @@
-import { Workspace, ComputeEnv } from "../../Context/types";
+import { Workspace, ComputeEnv, RepoInfo } from "../../Context/types";
 import { SEQERA_PLATFORM_URL } from "../../../../src/constants";
 
 export function formatTime(tokenExpiry?: number) {
@@ -25,4 +25,8 @@ export function getComputeEnvURL(
   );
   if (!workspace) return "";
   return `${SEQERA_PLATFORM_URL}/orgs/${workspace.orgName}/workspaces/${workspace.workspaceName}/compute-envs/${computeEnv.id}`;
+}
+
+export function getPipelineURL(repoInfo: RepoInfo) {
+  return `https://seqera.io/pipelines/${repoInfo.name}--${repoInfo.owner}`;
 }
