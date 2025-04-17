@@ -97,12 +97,10 @@ class WebviewProvider implements vscode.WebviewViewProvider {
       const accessToken = await this.getAccessToken();
       if (!accessToken) return;
       await fetchPlatformData(accessToken, view.webview, _context, refresh);
-      setTimeout(async () => {
-        const repoInfo = await getRepoInfo();
-        view.webview.postMessage({
-          repoInfo
-        });
-      }, 2000);
+      const repoInfo = await getRepoInfo();
+      view.webview.postMessage({
+        repoInfo
+      });
     } else {
       const fileList = buildList();
       view.webview.postMessage({
