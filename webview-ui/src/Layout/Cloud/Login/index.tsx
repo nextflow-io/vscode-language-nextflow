@@ -1,6 +1,6 @@
 import Button from "../../../components/Button";
 import { useWorkspaceContext, useTowerContext } from "../../../Context";
-import { formatTime } from "../utils";
+import { formatTime } from "./utils";
 
 const Login = () => {
   const { login } = useWorkspaceContext();

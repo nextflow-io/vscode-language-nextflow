@@ -2,9 +2,18 @@ import * as vscode from "vscode";
 import * as fs from "fs";
 import * as path from "path";
 
-import { buildList, buildTree, fetchPlatformData } from "./lib";
+import {
+  buildList,
+  buildTree,
+  fetchPlatformData,
+  fetchHistory,
+  getRepoInfo,
+  fetchPipelines,
+  fetchDatasets
+} from "./lib";
 import { AuthProvider, getAccessToken } from "../../auth";
 import { FileNode } from "./lib/workspace/types";
+import { jwtExpired } from "../../auth/AuthProvider/utils/jwt";
 
 class WebviewProvider implements vscode.WebviewViewProvider {
   _currentView?: vscode.WebviewView;
@@ -37,6 +46,15 @@ class WebviewProvider implements vscode.WebviewViewProvider {
         case "refresh":
           this.initViewData(true);
           break;
+        case "fetchHistory":
+          this.fetchHistory(message.workspaceId);
+          break;
+        case "fetchPipelines":
+          this.fetchPipelines(message.workspaceId);
+          break;
+        case "fetchDatasets":
+          this.fetchDatasets(message.workspaceId);
+          break;
       }
     });
 
@@ -50,13 +68,55 @@ class WebviewProvider implements vscode.WebviewViewProvider {
     await vscode.commands.executeCommand("nextflow.seqera.login");
   }
 
+  private async getAccessToken(): Promise<string | undefined> {
+    const accessToken = await getAccessToken(this._context);
+    const expired = jwtExpired(accessToken);
+    return expired ? undefined : accessToken;
+  }
+
+  private async fetchHistory(workspaceId: number) {
+    const accessToken = await this.getAccessToken();
+    if (!accessToken) return;
+    const history = await fetchHistory(accessToken, workspaceId);
+    this._currentView?.webview.postMessage({
+      history
+    });
+  }
+
+  private async getRepoInfo() {
+    const repoInfo = await getRepoInfo();
+    this._currentView?.webview.postMessage({
+      repoInfo
+    });
+  }
+
+  private async fetchPipelines(workspaceId: number) {
+    const accessToken = await this.getAccessToken();
+    if (!accessToken) return;
+    const pipelines = await fetchPipelines(accessToken, workspaceId);
+    this._currentView?.webview.postMessage({
+      pipelines
+    });
+  }
+
+  private async fetchDatasets(workspaceId: number) {
+    const accessToken = await this.getAccessToken();
+    if (!accessToken) return;
+    const datasets = await fetchDatasets(accessToken, workspaceId);
+    this._currentView?.webview.postMessage({
+      datasets
+    });
+  }
+
   public async initViewData(refresh?: boolean) {
     const { viewID, _context, _currentView: view } = this;
     if (!view) return;
     if (viewID === "userInfo") {
-      const accessToken = await getAccessToken(_context);
+      const accessToken = await this.getAccessToken();
       if (!accessToken) return;
       await fetchPlatformData(accessToken, view.webview, _context, refresh);
+      await this.getRepoInfo();
+      setTimeout(async () => this.getRepoInfo(), 1000); // Sometimes fails initially
     } else {
       const fileList = buildList();
       view.webview.postMessage({
@@ -64,13 +124,6 @@ class WebviewProvider implements vscode.WebviewViewProvider {
         tree: buildTree(fileList.files)
       });
     }
-  }
-
-  public async reloadView() {
-    if (!this._currentView) return;
-    const html = this.getBuiltHTML(this._currentView);
-    this._currentView.webview.html = html;
-    await this.initViewData(true);
   }
 
   public async openFileEvent(filePath: string) {

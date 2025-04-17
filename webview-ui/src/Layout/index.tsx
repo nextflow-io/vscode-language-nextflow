@@ -1,7 +1,7 @@
 import { useEffect, useRef } from "react";
 import { useWorkspaceContext } from "../Context";
 import Processes from "./Processes";
-import UserPanel from "./UserPanel";
+import Cloud from "./Cloud";
 import Workflows from "./Workflows";
 
 const Layout = () => {
@@ -21,7 +21,7 @@ const Layout = () => {
     }
   }, [files]);
 
-  if (viewID === "userInfo") return <UserPanel />;
+  if (viewID === "userInfo") return <Cloud />;
   if (viewID === "workflows") return <Workflows />;
   if (viewID === "processes") return <Processes />;
   return null;

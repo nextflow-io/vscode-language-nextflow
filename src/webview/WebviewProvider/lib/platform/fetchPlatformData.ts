@@ -1,10 +1,12 @@
 import { ExtensionContext, WebviewView } from "vscode";
-import fetchUserInfo from "./utils/fetchUserInfo";
-import fetchWorkspaces from "./utils/fetchWorkspaces";
-import fetchComputeEnvs from "./utils/fetchComputeEnvs";
-import debounce from "../debounce";
+import {
+  fetchComputeEnvs,
+  fetchUserInfo,
+  fetchWorkspaces,
+  debounce
+} from "./utils";
 
-import { Workspace, UserInfoResponse, ComputeEnv } from "./utils/types";
+import { Workspace, UserInfoResponse, ComputeEnv, RepoInfo } from "./types";
 import getAuthState, { AuthState } from "./getAuthState";
 import { expired } from "../../../../auth/AuthProvider/utils/jwt";
 
@@ -13,6 +15,7 @@ type PlatformData = {
   userInfo?: UserInfoResponse;
   workspaces?: Workspace[];
   computeEnvs?: ComputeEnv[];
+  repoInfo?: RepoInfo;
 };
 
 function handleUpdate(
@@ -35,6 +38,13 @@ const fetchPlatformData = async (
   const savedState = wsState.get("platformData") as PlatformData | undefined;
   const savedAuth = savedState?.authState as AuthState | undefined;
   let hasExpired = expired(savedAuth?.tokenExpiry);
+
+  // const repoInfo = await getRepoInfo();
+
+  // const restoredState = {
+  //   ...savedState,
+  //   repoInfo
+  // };
 
   if (!hasExpired && !refresh) {
     view.postMessage(savedState);

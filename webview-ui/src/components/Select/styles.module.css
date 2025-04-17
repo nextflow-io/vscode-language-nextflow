@@ -4,15 +4,22 @@
 }
 
 .selectButton {
-  border: 1px solid var(--vscode-dropdown-border);
-  background: var(--vscode-dropdown-background);
-  border-radius: 2px;
-  padding: 0 8px;
+  border: 1px solid var(--vscode-button-border);
+  background: var(--vscode-button-background);
+  color: var(--vscode-button-foreground);
+  border-radius: 3px;
+  padding: 0 16px;
   height: 29px;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: space-between;
+  transition: all 0.2s;
+}
+
+.selectButton:hover {
+  background-color: var(--vscode-button-hoverBackground);
+  border-color: var(--vscode-button-border-hover);
 }
 
 .selectButton::after {
@@ -24,6 +31,23 @@
 
 .selectButton[aria-expanded="true"]::after {
   transform: rotate(180deg);
+}
+
+.selectButton.alt {
+  background-color: var(--vscode-editor-background);
+  border: 1px solid var(--vscode-dropdown-border);
+  color: var(--vscode-button-foreground);
+  font-weight: 400;
+}
+
+.selectButton.alt2 {
+  background: var(--vscode-dropdown-border);
+  border: 1px solid var(--vscode-dropdown-border);
+  color: var(--vscode-button-foreground);
+}
+
+.selectButton.subtle {
+  background-color: var(--vscode-sideBarSectionHeader-background);
 }
 
 .dropdown {

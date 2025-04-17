@@ -1,5 +1,5 @@
 import { SEQERA_API_URL } from "../../../../../constants";
-import type { Workspace, ComputeEnv } from "./types";
+import type { Workspace, ComputeEnv } from "../types";
 
 const fetchComputeEnvs = async (
   token: string,

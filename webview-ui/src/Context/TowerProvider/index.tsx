@@ -5,13 +5,21 @@ import {
   Workspace,
   Organization,
   ComputeEnv,
-  PipelineResponse,
   UserInfo,
+  HistoryResponse,
+  RepoInfo,
+  PipelinesResponse,
   Pipeline,
-  FormData
+  Workflow,
+  Dataset
 } from "../types";
 import { AuthState } from "..";
-import { getOrganizations, getWorkspaces } from "./utils";
+import {
+  getOrganizations,
+  getWorkspaces,
+  filterPipelines,
+  filterHistory
+} from "./utils";
 
 const TowerContext = createContext<TowerContextType>(null as any);
 
@@ -27,15 +35,16 @@ type PlatformData = {
   workspaces: Workspace[];
   computeEnvs: ComputeEnv[];
   organizations: Organization[];
+  history?: HistoryResponse;
+  repoInfo?: RepoInfo;
+  pipelines?: PipelinesResponse;
+  datasets?: Dataset[];
 };
 
 type TowerContextType = {
   error?: string | null;
   userInfo?: UserInfo;
-  addPipeline: (
-    pipeline: Pipeline,
-    formData: FormData
-  ) => Promise<PipelineResponse | undefined>;
+  history?: Workflow[];
   selectedWorkspace: WorkspaceID;
   setSelectedWorkspace: (n: WorkspaceID) => void;
   selectedComputeEnv: string | null;
@@ -51,6 +60,11 @@ type TowerContextType = {
   hasToken?: boolean;
   tokenExpired?: boolean;
   tokenExpiry?: number;
+  repoInfo?: RepoInfo;
+  pipelines?: Pipeline[];
+  datasets?: Dataset[];
+  useLocalContext: boolean;
+  setUseLocalContext: (n: boolean) => void;
 };
 
 const TowerProvider: React.FC<Props> = ({
@@ -59,7 +73,15 @@ const TowerProvider: React.FC<Props> = ({
   platformData,
   vscode
 }) => {
-  const { userInfo, workspaces: orgsAndWorkspaces, computeEnvs } = platformData;
+  const {
+    userInfo,
+    workspaces: orgsAndWorkspaces,
+    computeEnvs,
+    history,
+    pipelines,
+    datasets,
+    repoInfo
+  } = platformData;
 
   const organizations: Organization[] = useMemo(
     () => getOrganizations(orgsAndWorkspaces),
@@ -75,21 +97,31 @@ const TowerProvider: React.FC<Props> = ({
   const [selectedWorkspace, setSelectedWorkspace] = useState<WorkspaceID>("");
   const [selectedComputeEnv, setSelectedComputeEnv] = useState<string>("");
   const [selectedOrg, setSelectedOrg] = useState<string>("");
+  const [useLocalContext, setUseLocalContext] = useState<boolean>(false);
 
   useEffect(() => {
     setSelectedWorkspace(workspaces[0]?.workspaceId ?? "");
   }, [workspaces]);
 
   useEffect(() => {
-    const selectedWorkspaceName = workspaces.find(
+    // Set the compute environments for the selected workspace
+    const selected = workspaces.find(
       (w) => w.workspaceId === selectedWorkspace
-    )?.workspaceName;
-    if (!selectedWorkspaceName) return;
+    );
+    const name = selected?.workspaceName;
+    if (!name) return;
     setVisibleEnvs(
-      computeEnvs?.filter((ce) => ce.workspaceName === selectedWorkspaceName) ??
-        []
+      computeEnvs?.filter((ce) => ce.workspaceName === name) ?? []
     );
     setSelectedComputeEnv(visibleEnvs[0]?.id ?? "");
+  }, [selectedWorkspace]);
+
+  useEffect(() => {
+    // Fetch the pipelines & history for the selected workspace
+    if (!selectedWorkspace) return;
+    fetchPipelines(selectedWorkspace);
+    fetchHistory(selectedWorkspace);
+    fetchDatasets(selectedWorkspace);
   }, [selectedWorkspace]);
 
   const getOrgWorkspaces = (orgId: string | number) => {
@@ -107,13 +139,16 @@ const TowerProvider: React.FC<Props> = ({
     };
   }
 
-  function handleAddPipeline(
-    pipeline: Pipeline,
-    formData: FormData
-  ): Promise<PipelineResponse | undefined> {
-    console.log(">> pipeline", pipeline);
-    console.log(">> formData", formData);
-    return Promise.resolve(undefined);
+  function fetchHistory(workspaceId: WorkspaceID) {
+    vscode.postMessage({ command: "fetchHistory", workspaceId });
+  }
+
+  function fetchPipelines(workspaceId: WorkspaceID) {
+    vscode.postMessage({ command: "fetchPipelines", workspaceId });
+  }
+
+  function fetchDatasets(workspaceId: WorkspaceID) {
+    vscode.postMessage({ command: "fetchDatasets", workspaceId });
   }
 
   function refresh() {
@@ -123,9 +158,11 @@ const TowerProvider: React.FC<Props> = ({
   return (
     <TowerContext.Provider
       value={{
+        useLocalContext,
+        setUseLocalContext,
         error: auth.error,
         userInfo,
-        addPipeline: handleAddPipeline,
+        history: filterHistory(history, repoInfo, useLocalContext),
         selectedWorkspace,
         setSelectedWorkspace,
         selectedComputeEnv,
@@ -140,7 +177,10 @@ const TowerProvider: React.FC<Props> = ({
         isAuthenticated: auth.isAuthenticated,
         hasToken: auth.hasToken,
         tokenExpired: auth.tokenExpired,
-        tokenExpiry: auth.tokenExpiry
+        tokenExpiry: auth.tokenExpiry,
+        repoInfo,
+        pipelines: filterPipelines(pipelines, repoInfo, useLocalContext),
+        datasets
       }}
     >
       {children}

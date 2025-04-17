@@ -1,5 +1,5 @@
-import Button from "../../../components/Button";
-import { useWorkspaceContext } from "../../../Context";
+import Button from "../../../../components/Button";
+import { useWorkspaceContext } from "../../../../Context";
 
 const OpenChat = () => {
   const { openChat, isCursor } = useWorkspaceContext();

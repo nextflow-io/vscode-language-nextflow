@@ -3,7 +3,16 @@ import WorkspaceProvider, { useWorkspaceContext } from "./WorkspaceProvider";
 import TowerProvider, { useTowerContext } from "./TowerProvider";
 import { getVscode } from "./utils";
 
-import { UserInfo, Workspace, ComputeEnv, Organization } from "./types";
+import {
+  UserInfo,
+  Workspace,
+  ComputeEnv,
+  Organization,
+  HistoryResponse,
+  RepoInfo,
+  PipelinesResponse,
+  Dataset
+} from "./types";
 
 const vscode = getVscode();
 
@@ -29,6 +38,14 @@ const Context = ({ children }: Props) => {
   const [workspaces, setWorkspaces] = useState<Workspace[]>([]);
   const [computeEnvs, setComputeEnvs] = useState<ComputeEnv[]>([]);
   const [organizations, setOrganizations] = useState<Organization[]>([]);
+  const [history, setHistory] = useState<HistoryResponse | undefined>(
+    undefined
+  );
+  const [pipelines, setPipelines] = useState<PipelinesResponse | undefined>(
+    undefined
+  );
+  const [repoInfo, setRepoInfo] = useState<RepoInfo | undefined>(undefined);
+  const [datasets, setDatasets] = useState<Dataset[]>([]);
 
   useEffect(() => {
     const handleMessage = (event: MessageEvent) => {
@@ -39,6 +56,10 @@ const Context = ({ children }: Props) => {
       if (data.workspaces) setWorkspaces(data.workspaces);
       if (data.computeEnvs) setComputeEnvs(data.computeEnvs);
       if (data.organizations) setOrganizations(data.organizations);
+      if (data.history) setHistory(data.history);
+      if (data.pipelines) setPipelines(data.pipelines);
+      if (data.repoInfo) setRepoInfo(data.repoInfo);
+      if (data.datasets) setDatasets(data.datasets);
     };
     window.addEventListener("message", handleMessage);
     return () => window.removeEventListener("message", handleMessage);
@@ -50,7 +71,16 @@ const Context = ({ children }: Props) => {
         <TowerProvider
           vscode={vscode}
           authState={authState}
-          platformData={{ userInfo, workspaces, computeEnvs, organizations }}
+          platformData={{
+            userInfo,
+            workspaces,
+            computeEnvs,
+            organizations,
+            history,
+            repoInfo,
+            pipelines,
+            datasets
+          }}
         >
           {children}
         </TowerProvider>

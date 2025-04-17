@@ -3,9 +3,9 @@ import { useRef } from "react";
 import { useTowerContext } from "../../Context";
 
 import Login from "./Login";
-import UserInfo from "./UserInfo";
+import Workspace from "./Workspace";
 
-const UserPanel = () => {
+const Cloud = () => {
   const { tokenExpiry, hasToken, refresh } = useTowerContext();
 
   let tokenExpired = false;
@@ -30,7 +30,8 @@ const UserPanel = () => {
   if (!hasToken || tokenExpired) {
     return <Login />;
   }
-  return <UserInfo />;
+
+  return <Workspace />;
 };
 
-export default UserPanel;
+export default Cloud;

@@ -5,7 +5,7 @@
   width: 100%;
   & > * {
     display: block;
-    padding: 10px;
+    padding: 6px;
   }
   & > *:not(:last-child) {
     border-right: 1px solid var(--vscode-minimapSlider-activeBackground);

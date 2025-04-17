@@ -14,9 +14,9 @@ export class ResourceItem extends vscode.TreeItem {
     if (url) {
       this.description = url;
       this.command = {
-        command: "nextflow.seqera.openResource",
+        command: "vscode.open",
         title: "Open Resource",
-        arguments: [url]
+        arguments: [vscode.Uri.parse(url)]
       };
       this.iconPath = new vscode.ThemeIcon("link-external");
     } else if (command) {
@@ -26,9 +26,7 @@ export class ResourceItem extends vscode.TreeItem {
   }
 }
 
-export class ResourcesProvider
-  implements vscode.TreeDataProvider<ResourceItem>
-{
+class ResourcesProvider implements vscode.TreeDataProvider<ResourceItem> {
   private _onDidChangeTreeData: vscode.EventEmitter<
     ResourceItem | undefined | null | void
   > = new vscode.EventEmitter<ResourceItem | undefined | null | void>();
@@ -98,3 +96,5 @@ export class ResourcesProvider
     }
   }
 }
+
+export default ResourcesProvider;
