@@ -8,6 +8,7 @@ import styles from "./styles.module.css";
 const Pipelines = () => {
   const { useLocalContext, setUseLocalContext, pipelines, repoInfo } =
     useTowerContext();
+  const hasPipelines = !!pipelines?.length;
   return (
     <div>
       <div className="flex items-center mb-2 pb-2">
@@ -24,7 +25,7 @@ const Pipelines = () => {
           </Button>
         )}
       </div>
-      {!!pipelines && (
+      {hasPipelines ? (
         <>
           {pipelines.map((pipeline) => (
             <a href={getWorkflowURL(pipeline)} className={styles.item}>
@@ -41,6 +42,16 @@ const Pipelines = () => {
               </div>
             </a>
           ))}
+        </>
+      ) : (
+        <>
+          {useLocalContext && repoInfo ? (
+            <div className="px-2 small">
+              None found for {repoInfo?.name} in current workspace
+            </div>
+          ) : (
+            <div className="px-2 small">None found in current workspace</div>
+          )}
         </>
       )}
     </div>

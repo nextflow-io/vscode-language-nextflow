@@ -11,20 +11,22 @@ import clsx from "clsx";
 import { useState } from "react";
 
 const RunHistory = () => {
-  const { workspaces, selectedWorkspace, history } = useTowerContext();
+  const { workspaces, selectedWorkspace, history, useLocalContext, repoInfo } =
+    useTowerContext();
   const [displayCount, setDisplayCount] = useState(10);
 
   const workspace = workspaces?.find(
     (ws) => ws.workspaceId === selectedWorkspace
   );
 
+  const hasHistory = !!history?.length;
   const displayedHistory = history?.slice(0, displayCount) || [];
-  const hasMore = history && history.length > displayCount;
+  const hasMore = hasHistory && history.length > displayCount;
 
   return (
     <div>
       <h4>Run History</h4>
-      {!!displayedHistory.length && (
+      {hasHistory ? (
         <>
           {displayedHistory.map((workflow) => (
             <Button
@@ -72,6 +74,16 @@ const RunHistory = () => {
             >
               Show More
             </Button>
+          )}
+        </>
+      ) : (
+        <>
+          {useLocalContext && repoInfo ? (
+            <div className="px-2 small">
+              No runs found for {repoInfo?.name} in current workspace
+            </div>
+          ) : (
+            <div className="px-2 small">No runs found in current workspace</div>
           )}
         </>
       )}

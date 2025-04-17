@@ -8,12 +8,14 @@ const Datasets = () => {
 
   const workspace = workspaces.find((w) => w.workspaceId === selectedWorkspace);
 
+  const hasDatasets = !!datasets?.length;
+
   return (
     <div>
       <h4>Datasets</h4>
-      {!!datasets?.length && (
+      {hasDatasets ? (
         <>
-          {datasets.map((dataset) => (
+          {datasets?.map((dataset) => (
             <Button
               href={getDatasetURL(dataset, workspace)}
               key={dataset.id}
@@ -27,6 +29,8 @@ const Datasets = () => {
             </Button>
           ))}
         </>
+      ) : (
+        <div className="px-2 small">None found for current workspace</div>
       )}
     </div>
   );

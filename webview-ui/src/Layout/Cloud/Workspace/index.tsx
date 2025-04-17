@@ -19,6 +19,7 @@ const Workspace = () => {
       <section>
         <Pipelines />
         <RunHistory />
+        <Datasets />
       </section>
     </>
   );
