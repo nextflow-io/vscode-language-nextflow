@@ -8,20 +8,25 @@ import {
 import Button from "../../../../components/Button";
 import styles from "./styles.module.css";
 import clsx from "clsx";
+import { useState } from "react";
 
 const RunHistory = () => {
   const { workspaces, selectedWorkspace, history } = useTowerContext();
+  const [displayCount, setDisplayCount] = useState(10);
 
   const workspace = workspaces?.find(
     (ws) => ws.workspaceId === selectedWorkspace
   );
 
+  const displayedHistory = history?.slice(0, displayCount) || [];
+  const hasMore = history && history.length > displayCount;
+
   return (
     <div>
       <h4>Run History</h4>
-      {!!history?.length && (
+      {!!displayedHistory.length && (
         <>
-          {history.map((workflow) => (
+          {displayedHistory.map((workflow) => (
             <Button
               href={getRunHistoryURL(workspace, workflow)}
               key={workflow.id}
@@ -57,6 +62,17 @@ const RunHistory = () => {
               </div>
             </Button>
           ))}
+          {hasMore && (
+            <Button
+              onClick={() => setDisplayCount((prev) => prev + 10)}
+              fullWidth
+              bare
+              small
+              className="mt-2"
+            >
+              Show More
+            </Button>
+          )}
         </>
       )}
     </div>
