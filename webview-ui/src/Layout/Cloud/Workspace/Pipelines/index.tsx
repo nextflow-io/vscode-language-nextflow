@@ -1,7 +1,9 @@
 import Button from "../../../../components/Button";
-import { getWorkflowURL } from "../../utils";
+import { getWorkflowURL, relativeTime } from "../../utils";
 import { useTowerContext } from "../../../../Context";
 import workflowIcon from "../../../../images/workflow.svg";
+
+import styles from "./styles.module.css";
 
 const Pipelines = () => {
   const { useLocalContext, setUseLocalContext, pipelines, repoInfo } =
@@ -25,19 +27,19 @@ const Pipelines = () => {
       {!!pipelines && (
         <>
           {pipelines.map((pipeline) => (
-            <Button
-              href={getWorkflowURL(pipeline)}
-              alt
-              fullWidth
-              className="mb-1"
-            >
-              <img
-                src={workflowIcon}
-                className="mr-2"
-                style={{ height: 12, opacity: 0.8 }}
-              />
-              {pipeline.name}
-            </Button>
+            <a href={getWorkflowURL(pipeline)} className={styles.item}>
+              <div className="flex items-center">
+                <img
+                  src={workflowIcon}
+                  className="mr-2"
+                  style={{ height: 12, opacity: 0.8 }}
+                />
+                {pipeline.name}
+              </div>
+              <div className={styles.meta}>
+                Updated: {relativeTime(pipeline.lastUpdated)}
+              </div>
+            </a>
           ))}
         </>
       )}

@@ -32,7 +32,11 @@ export function filterPipelines(
   repoInfo: RepoInfo | undefined,
   shouldFilter: boolean
 ): Pipeline[] {
-  const items = pipelines?.pipelines || [];
+  let items = pipelines?.pipelines || [];
+  items = items.sort(
+    (a, b) =>
+      new Date(b.lastUpdated).getTime() - new Date(a.lastUpdated).getTime()
+  );
   if (!shouldFilter || !repoInfo) return items;
   return items.filter((w) => w.repository === repoInfo.url);
 }

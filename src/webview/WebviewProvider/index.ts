@@ -80,6 +80,13 @@ class WebviewProvider implements vscode.WebviewViewProvider {
     });
   }
 
+  private async getRepoInfo() {
+    const repoInfo = await getRepoInfo();
+    this._currentView?.webview.postMessage({
+      repoInfo
+    });
+  }
+
   private async fetchPipelines(workspaceId: number) {
     const accessToken = await this.getAccessToken();
     if (!accessToken) return;
@@ -97,10 +104,8 @@ class WebviewProvider implements vscode.WebviewViewProvider {
       const accessToken = await this.getAccessToken();
       if (!accessToken) return;
       await fetchPlatformData(accessToken, view.webview, _context, refresh);
-      const repoInfo = await getRepoInfo();
-      view.webview.postMessage({
-        repoInfo
-      });
+      await this.getRepoInfo();
+      setTimeout(async () => this.getRepoInfo(), 1000); // Sometimes fails initially
     } else {
       const fileList = buildList();
       view.webview.postMessage({

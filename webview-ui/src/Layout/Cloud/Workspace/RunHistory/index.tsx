@@ -1,7 +1,7 @@
 import { useTowerContext } from "../../../../Context";
 import {
   getRunHistoryURL,
-  formatDate,
+  relativeTime,
   getRuntimeMinutes,
   getStatusIcon
 } from "./utils";
@@ -33,7 +33,7 @@ const RunHistory = () => {
                 <span className={styles.name}>{workflow.runName}</span>
                 <div className={styles.metadata}>
                   <span className={styles.date}>
-                    {formatDate(workflow.dateCreated)}
+                    {relativeTime(workflow.dateCreated)}
                   </span>
                   <span
                     className={clsx(
