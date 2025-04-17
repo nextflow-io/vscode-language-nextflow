@@ -12,6 +12,7 @@ import {
 } from "./lib";
 import { AuthProvider, getAccessToken } from "../../auth";
 import { FileNode } from "./lib/workspace/types";
+import { jwtExpired } from "../../auth/AuthProvider/utils/jwt";
 
 class WebviewProvider implements vscode.WebviewViewProvider {
   _currentView?: vscode.WebviewView;
@@ -63,8 +64,14 @@ class WebviewProvider implements vscode.WebviewViewProvider {
     await vscode.commands.executeCommand("nextflow.seqera.login");
   }
 
-  private async fetchHistory(workspaceId: number) {
+  private async getAccessToken(): Promise<string | undefined> {
     const accessToken = await getAccessToken(this._context);
+    const expired = jwtExpired(accessToken);
+    return expired ? undefined : accessToken;
+  }
+
+  private async fetchHistory(workspaceId: number) {
+    const accessToken = await this.getAccessToken();
     if (!accessToken) return;
     const history = await fetchHistory(accessToken, workspaceId);
     this._currentView?.webview.postMessage({
@@ -74,7 +81,7 @@ class WebviewProvider implements vscode.WebviewViewProvider {
   }
 
   private async fetchPipelines(workspaceId: number) {
-    const accessToken = await getAccessToken(this._context);
+    const accessToken = await this.getAccessToken();
     if (!accessToken) return;
     const pipelines = await fetchPipelines(accessToken, workspaceId);
     this._currentView?.webview.postMessage({
@@ -87,7 +94,7 @@ class WebviewProvider implements vscode.WebviewViewProvider {
     const { viewID, _context, _currentView: view } = this;
     if (!view) return;
     if (viewID === "userInfo") {
-      const accessToken = await getAccessToken(_context);
+      const accessToken = await this.getAccessToken();
       if (!accessToken) return;
       await fetchPlatformData(accessToken, view.webview, _context, refresh);
       setTimeout(async () => {
