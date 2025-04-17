@@ -30,3 +30,6 @@ section.cozy:last-child {
 .flex-none {
   flex: none;
 }
+.small {
+  font-size: 11px;
+}
