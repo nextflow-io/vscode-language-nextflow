@@ -14,17 +14,19 @@ const UserInfo = () => {
         href={`${SEQERA_PLATFORM_URL}/profile`}
         description={username}
         icon="codicon-account"
+        alt2
       />
-      <Button href={`${SEQERA_PLATFORM_URL}`} icon="codicon-cloud">
+      <Button href={`${SEQERA_PLATFORM_URL}`} icon="codicon-cloud" alt2>
         Dashboard
       </Button>
-      <Button href="https://seqera.io/ask-ai" icon="codicon-hubot">
+      <Button href="https://seqera.io/ask-ai" icon="codicon-hubot" alt2>
         Ask AI
       </Button>
       <Button
         href="https://docs.seqera.io"
         icon="codicon-question"
         description="Docs"
+        alt2
       />
     </div>
   );

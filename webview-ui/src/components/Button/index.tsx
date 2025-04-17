@@ -7,6 +7,8 @@ type Props = {
   href?: string;
   children?: React.ReactNode;
   alt?: boolean;
+  alt2?: boolean;
+  subtle?: boolean;
   small?: boolean;
   fullWidth?: boolean;
   icon?: string;
@@ -25,13 +27,17 @@ const Button: React.FC<Props> = ({
   className: classNameProp,
   iconClassName,
   description,
-  alt
+  alt,
+  alt2,
+  subtle
 }) => {
   const className = clsx(styles.button, classNameProp, {
     [styles.small]: small,
     [styles.fullWidth]: fullWidth,
     [styles.icon]: !!icon,
-    [styles.alt]: alt
+    [styles.alt]: alt,
+    [styles.subtle]: subtle,
+    [styles.alt2]: alt2
   });
 
   let content = children;
