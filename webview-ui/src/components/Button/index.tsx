@@ -29,7 +29,7 @@ const Button: React.FC<Props> = ({
   fullWidth,
   icon,
   className: classNameProp,
-  iconClassName,
+  iconClassName = "",
   description,
   alt,
   alt2,

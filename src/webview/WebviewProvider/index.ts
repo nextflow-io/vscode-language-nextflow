@@ -82,7 +82,7 @@ class WebviewProvider implements vscode.WebviewViewProvider {
         view.webview.postMessage({
           repoInfo
         });
-      }, 1000);
+      }, 2000);
     } else {
       const fileList = buildList();
       view.webview.postMessage({
