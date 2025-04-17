@@ -7,7 +7,8 @@ import {
   buildTree,
   fetchPlatformData,
   fetchHistory,
-  getRepoInfo
+  getRepoInfo,
+  fetchPipelines
 } from "./lib";
 import { AuthProvider, getAccessToken } from "../../auth";
 import { FileNode } from "./lib/workspace/types";
@@ -46,6 +47,9 @@ class WebviewProvider implements vscode.WebviewViewProvider {
         case "fetchHistory":
           this.fetchHistory(message.workspaceId);
           break;
+        case "fetchPipelines":
+          this.fetchPipelines(message.workspaceId);
+          break;
       }
     });
 
@@ -64,9 +68,18 @@ class WebviewProvider implements vscode.WebviewViewProvider {
     if (!accessToken) return;
     const history = await fetchHistory(accessToken, workspaceId);
     this._currentView?.webview.postMessage({
-      viewID: this.viewID,
       command: "history",
       history
+    });
+  }
+
+  private async fetchPipelines(workspaceId: number) {
+    const accessToken = await getAccessToken(this._context);
+    if (!accessToken) return;
+    const pipelines = await fetchPipelines(accessToken, workspaceId);
+    this._currentView?.webview.postMessage({
+      command: "pipelines",
+      pipelines
     });
   }
 

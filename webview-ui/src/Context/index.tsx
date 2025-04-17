@@ -9,7 +9,8 @@ import {
   ComputeEnv,
   Organization,
   HistoryResponse,
-  RepoInfo
+  RepoInfo,
+  PipelinesResponse
 } from "./types";
 
 const vscode = getVscode();
@@ -39,6 +40,9 @@ const Context = ({ children }: Props) => {
   const [history, setHistory] = useState<HistoryResponse | undefined>(
     undefined
   );
+  const [pipelines, setPipelines] = useState<PipelinesResponse | undefined>(
+    undefined
+  );
   const [repoInfo, setRepoInfo] = useState<RepoInfo | undefined>(undefined);
 
   useEffect(() => {
@@ -51,6 +55,7 @@ const Context = ({ children }: Props) => {
       if (data.computeEnvs) setComputeEnvs(data.computeEnvs);
       if (data.organizations) setOrganizations(data.organizations);
       if (data.history) setHistory(data.history);
+      if (data.pipelines) setPipelines(data.pipelines);
       if (data.repoInfo) setRepoInfo(data.repoInfo);
     };
     window.addEventListener("message", handleMessage);
@@ -69,7 +74,8 @@ const Context = ({ children }: Props) => {
             computeEnvs,
             organizations,
             history,
-            repoInfo
+            repoInfo,
+            pipelines
           }}
         >
           {children}
