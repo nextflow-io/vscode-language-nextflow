@@ -3,11 +3,10 @@ import { useRef } from "react";
 import { useTowerContext } from "../../Context";
 
 import Login from "./Login";
-import UserInfo from "./UserInfo";
-import RunHistory from "./RunHistory";
+import Workspace from "./Workspace";
 
 const Cloud = () => {
-  const { tokenExpiry, hasToken, refresh, error } = useTowerContext();
+  const { tokenExpiry, hasToken, refresh } = useTowerContext();
 
   let tokenExpired = false;
   if (tokenExpiry) tokenExpired = tokenExpiry < Date.now() / 1000;
@@ -32,17 +31,7 @@ const Cloud = () => {
     return <Login />;
   }
 
-  return (
-    <>
-      {error && (
-        <section>
-          <p>Error:{error}</p>
-        </section>
-      )}
-      <UserInfo />
-      <RunHistory />
-    </>
-  );
+  return <Workspace />;
 };
 
 export default Cloud;

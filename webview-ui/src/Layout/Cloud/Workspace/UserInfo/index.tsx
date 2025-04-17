@@ -1,4 +1,4 @@
-import { useTowerContext } from "../../../Context";
+import { useTowerContext } from "../../../../Context";
 
 const UserInfo = () => {
   const { userInfo } = useTowerContext();
