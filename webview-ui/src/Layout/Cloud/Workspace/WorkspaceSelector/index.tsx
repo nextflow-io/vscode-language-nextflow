@@ -27,13 +27,17 @@ const WorkspaceSelector = () => {
             }))}
             value={selectedWorkspace ?? ""}
             onChange={setSelectedWorkspace}
-            alt2
           />
         ) : (
           <div>No workspaces found</div>
         )}
         {!!manageURL && (
-          <Button href={manageURL} icon="codicon-gear" alt2 className="ml-2" />
+          <Button
+            href={manageURL}
+            icon="codicon-gear"
+            subtle
+            className="ml-2"
+          />
         )}
       </div>
     </>
