@@ -103,7 +103,7 @@ async function getLanguageServerPath(context: vscode.ExtensionContext) {
   const fileUri = vscode.Uri.file(cachePath);
   await vscode.workspace.fs.writeFile(fileUri, new Uint8Array(arrayBuffer));
   vscode.window.showInformationMessage(
-    `Downloaded language server ${resolvedVersion}.`
+    `Downloaded Nextflow language server ${resolvedVersion}.`
   );
   return fileUri.fsPath;
 }
