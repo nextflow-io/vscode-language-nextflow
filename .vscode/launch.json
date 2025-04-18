@@ -12,7 +12,7 @@
                 "--goto",
                 "${input:testWorkspace}/main.nf"
             ],
-            "preLaunchTask": "${defaultBuildTask}"
+            "preLaunchTask": "npm: compile"
         }
     ],
     "inputs": [
