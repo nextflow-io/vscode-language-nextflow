@@ -3,10 +3,12 @@
   align-items: center;
   justify-content: stretch;
   gap: 8px;
-  border-bottom: 1px solid var(--vscode-dropdown-border);
-  padding: 8px;
+  padding: 0 8px 8px 8px;
   > * {
     flex: 1 1 auto;
-    justify-content: center;
+    &:not(:first-child) {
+      max-width: 50px;
+      justify-content: center;
+    }
   }
 }

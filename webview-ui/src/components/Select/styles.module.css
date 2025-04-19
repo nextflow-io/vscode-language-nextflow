@@ -8,18 +8,55 @@
   background: var(--vscode-button-background);
   color: var(--vscode-button-foreground);
   border-radius: 3px;
-  padding: 0 16px;
+  padding: 0 10px;
   height: 29px;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: space-between;
   transition: all 0.2s;
-}
-
-.selectButton:hover {
-  background-color: var(--vscode-button-hoverBackground);
-  border-color: var(--vscode-button-border-hover);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  &:hover {
+    background-color: var(--vscode-button-hoverBackground);
+    border-color: var(--vscode-button-border-hover);
+  }
+  &.alt {
+    background-color: var(--vscode-editor-background);
+    border: 1px solid var(--vscode-dropdown-border);
+    color: var(--vscode-button-foreground);
+    font-weight: 400;
+  }
+  &.alt2 {
+    background: var(--vscode-dropdown-border);
+    border: 1px solid var(--vscode-dropdown-border);
+    color: var(--vscode-button-foreground);
+  }
+  &.subtle {
+    background-color: var(--vscode-sideBarSectionHeader-background);
+    &:hover {
+      background-color: var(--vscode-button-background);
+    }
+  }
+  &.subtle2 {
+    background-color: var(--vscode-sideBarSectionHeader-background);
+    opacity: 0.8;
+    &:hover {
+      background-color: var(--vscode-button-background);
+    }
+  }
+  & .label {
+    display: flex;
+    flex: 1 1 auto;
+    align-items: center;
+    & i,
+    & img {
+      margin-right: 8px;
+      height: 13px;
+      width: 13px;
+    }
+  }
 }
 
 .selectButton::after {
@@ -31,23 +68,6 @@
 
 .selectButton[aria-expanded="true"]::after {
   transform: rotate(180deg);
-}
-
-.selectButton.alt {
-  background-color: var(--vscode-editor-background);
-  border: 1px solid var(--vscode-dropdown-border);
-  color: var(--vscode-button-foreground);
-  font-weight: 400;
-}
-
-.selectButton.alt2 {
-  background: var(--vscode-dropdown-border);
-  border: 1px solid var(--vscode-dropdown-border);
-  color: var(--vscode-button-foreground);
-}
-
-.selectButton.subtle {
-  background-color: var(--vscode-sideBarSectionHeader-background);
 }
 
 .dropdown {

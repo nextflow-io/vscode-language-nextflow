@@ -5,13 +5,17 @@
   background-color: var(--vscode-button-background);
   border: 1px solid var(--vscode-button-border);
   color: var(--vscode-button-foreground);
-  padding: 0 16px;
+  padding: 0 10px;
   border-radius: 3px;
   cursor: pointer;
   text-decoration: none;
   line-height: 1;
   white-space: nowrap;
   transition: all 0.2s;
+  min-width: 29px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
   &:hover {
     background-color: var(--vscode-button-hoverBackground);
     border-color: var(--vscode-button-border-hover);
@@ -23,6 +27,7 @@
   & i {
     font-size: 14px;
     opacity: 0.8;
+    flex: none;
   }
   &.small {
     height: 20px;
@@ -42,6 +47,9 @@
       font-size: 17px;
     }
   }
+  &.icon {
+    justify-content: center;
+  }
 }
 .button.alt {
   background-color: var(--vscode-editor-background);
@@ -56,6 +64,16 @@
 }
 .button.subtle {
   background-color: var(--vscode-sideBarSectionHeader-background);
+  &:hover {
+    background-color: var(--vscode-button-background);
+  }
+}
+.button.subtle2 {
+  background-color: var(--vscode-sideBarSectionHeader-background);
+  opacity: 0.8;
+  &:hover {
+    background-color: var(--vscode-button-background);
+  }
 }
 .button.bare {
   background-color: transparent;
