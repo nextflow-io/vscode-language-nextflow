@@ -22,11 +22,13 @@ const WorkspaceSelector = () => {
         {workspaces?.length ? (
           <Select
             options={workspaces.map((ws) => ({
-              label: ws.orgName + " / " + ws.workspaceName,
+              label: ws.orgName + "/" + ws.workspaceName,
               value: ws.workspaceId as number
             }))}
             value={selectedWorkspace ?? ""}
+            icon="seqera"
             onChange={setSelectedWorkspace}
+            subtle
           />
         ) : (
           <div>No workspaces found</div>
@@ -35,7 +37,7 @@ const WorkspaceSelector = () => {
           <Button
             href={manageURL}
             icon="codicon-gear"
-            subtle
+            subtle2
             className="ml-2"
           />
         )}

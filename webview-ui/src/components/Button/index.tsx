@@ -9,6 +9,7 @@ type Props = {
   alt?: boolean;
   alt2?: boolean;
   subtle?: boolean;
+  subtle2?: boolean;
   small?: boolean;
   bare?: boolean;
   active?: boolean;
@@ -33,14 +34,16 @@ const Button: React.FC<Props> = ({
   description,
   alt,
   alt2,
-  subtle
+  subtle,
+  subtle2
 }) => {
   const className = clsx(styles.button, classNameProp, {
     [styles.small]: small,
     [styles.fullWidth]: fullWidth,
-    [styles.icon]: !!icon,
+    [styles.icon]: !!icon && !children,
     [styles.alt]: alt,
     [styles.subtle]: subtle,
+    [styles.subtle2]: subtle2,
     [styles.alt2]: alt2,
     [styles.bare]: bare,
     [styles.active]: active
