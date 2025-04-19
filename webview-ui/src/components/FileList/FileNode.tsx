@@ -2,6 +2,7 @@ import clsx from "clsx";
 
 import { useWorkspaceContext } from "../../Context";
 import FileNodeChildren from "./FileNodeChildren";
+import processIcon from "../../images/process.svg";
 
 import styles from "./styles.module.css";
 
@@ -24,7 +25,7 @@ const FileNode = ({ node }: Props) => {
     <div className={clsx(styles.row, { [styles[typeStyleName]]: !!type })}>
       <label className={clsx(styles.item)}>
         <span className={styles.name} onClick={() => openFile(node)}>
-          <i className="codicon codicon-symbol-method" />
+          <img className={styles.icon} src={processIcon} />
           {node.name}
         </span>
         {type === "processes" && (

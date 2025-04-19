@@ -21,11 +21,6 @@
       align-items: center;
       padding: 5px 8px;
       width: 100%;
-      & img {
-        margin-right: 6px;
-        height: 13px;
-        width: 20px;
-      }
     }
     & i {
       transition: transform 0.2s;
@@ -52,9 +47,16 @@
       }
     }
   }
-  &.expanded {
-    & > .item > .name > img {
-      transform: translateX(1px);
-    }
+}
+.icon {
+  margin-right: 6px;
+  height: 13px;
+  width: 20px;
+  &.fileIcon {
+    width: 11px;
+    height: 14px;
+  }
+  &.folderIconOpen {
+    transform: translateX(1px);
   }
 }

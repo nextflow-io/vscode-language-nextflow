@@ -57,10 +57,18 @@ const FileNode = ({ node, level = 0, searchTerm }: Props) => {
   if (!hasChildren && !isMatch) return null;
 
   let icon = null;
+  let iconClassName = "";
   if (isFolder) {
-    icon = expanded ? folderOpen : folderClosed;
+    if (expanded) {
+      icon = folderOpen;
+      iconClassName = styles.folderIconOpen;
+    } else {
+      icon = folderClosed;
+      iconClassName = styles.folderIconClosed;
+    }
   } else {
     icon = file;
+    iconClassName = styles.fileIcon;
   }
 
   return (
@@ -72,7 +80,7 @@ const FileNode = ({ node, level = 0, searchTerm }: Props) => {
     >
       <label className={clsx(styles.item)}>
         <span className={styles.name} onClick={handleClick}>
-          <img src={icon} />
+          <img src={icon} className={clsx(styles.icon, iconClassName)} />
           {node.name}
         </span>
         {hasChildren && <i className="codicon codicon-chevron-right" />}

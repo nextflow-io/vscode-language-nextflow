@@ -17,11 +17,11 @@
       align-items: center;
       padding: 6px 8px;
       width: 100%;
-      & > i {
-        margin-right: 6px;
-        font-size: 16px;
-        color: var(--vscode-button-hoverBackground);
-      }
+    }
+    & .icon {
+      width: 15px;
+      height: 14px;
+      margin-right: 6px;
     }
   }
 }
