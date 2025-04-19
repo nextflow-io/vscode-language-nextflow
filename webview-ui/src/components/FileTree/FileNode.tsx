@@ -3,6 +3,9 @@ import { useState, useEffect } from "react";
 import { useWorkspaceContext } from "../../Context";
 import styles from "./styles.module.css";
 import { FileNode as FileNodeType } from "../../Context/WorkspaceProvider/types";
+import folderClosed from "../../images/folder-closed.svg";
+import folderOpen from "../../images/folder-open.svg";
+import file from "../../images/file.svg";
 
 type Props = {
   node: FileNodeType;
@@ -53,16 +56,23 @@ const FileNode = ({ node, level = 0, searchTerm }: Props) => {
   }
   if (!hasChildren && !isMatch) return null;
 
+  let icon = null;
+  if (isFolder) {
+    icon = expanded ? folderOpen : folderClosed;
+  } else {
+    icon = file;
+  }
+
   return (
-    <div className={clsx(styles.row, { [styles.folder]: isFolder })}>
+    <div
+      className={clsx(styles.row, {
+        [styles.folder]: isFolder,
+        [styles.expanded]: expanded
+      })}
+    >
       <label className={clsx(styles.item)}>
         <span className={styles.name} onClick={handleClick}>
-          <i
-            className={clsx(
-              "codicon",
-              isFolder ? "codicon-symbol-method" : "codicon-symbol-method"
-            )}
-          />
+          <img src={icon} />
           {node.name}
         </span>
         {hasChildren && (
