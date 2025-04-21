@@ -1,6 +1,15 @@
 name: Publish Extension
 
-on: workflow_dispatch
+on:
+  workflow_dispatch:
+    vscode_marketplace:
+      description: 'Publish to Visual Studio Marketplace'
+      type: boolean
+      default: true
+    open_vsx:
+      description: 'Publish to Open VSX Registry'
+      type: boolean
+      default: true
 
 jobs:
   deploy:
@@ -22,6 +31,7 @@ jobs:
         run: npm run package
 
       - name: Publish to Visual Studio Marketplace
+        if: ${{ github.event.inputs.vscode_marketplace == true }}
         uses: HaaLeo/publish-vscode-extension@v1
         with:
           pat: ${{ secrets.VSCE_TOKEN }}
@@ -29,6 +39,7 @@ jobs:
           extensionFile: build/nextflow.vsix
 
       - name: Publish to Open VSX Registry
+        if: ${{ github.event.inputs.open_vsx == true }}
         uses: HaaLeo/publish-vscode-extension@v1
         with:
           pat: ${{ secrets.OPEN_VSX_TOKEN }}
