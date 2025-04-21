@@ -33,6 +33,9 @@
     "onAuthenticationRequest:azuread"
   ],
   "main": "./extension.js",
+  "extensionDependencies": [
+    "vscode.git"
+  ],
   "contributes": {
     "languages": [
       {

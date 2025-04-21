@@ -21,7 +21,8 @@ async function getRepoInfo(): Promise<RepoInfo | undefined> {
     const repository = git.repositories[0];
     if (!repository) return undefined;
 
-    const { remotes } = repository;
+    const remotes = repository?.state?.remotes || repository?.remotes;
+
     if (!remotes) return undefined;
 
     const origin = remotes.find(
