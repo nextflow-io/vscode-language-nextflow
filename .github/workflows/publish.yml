@@ -2,14 +2,14 @@ name: Publish Extension
 
 on:
   workflow_dispatch:
-      open_vsx:
-        description: 'Publish to Open VSX Registry'
-        type: boolean
-        default: true
-      vscode_marketplace:
-        description: 'Publish to Visual Studio Marketplace'
-        type: boolean
-        default: true
+    vscode_marketplace:
+      description: 'Publish to Visual Studio Marketplace'
+      type: boolean
+      default: true
+    open_vsx:
+      description: 'Publish to Open VSX Registry'
+      type: boolean
+      default: true
 
 jobs:
   deploy:
