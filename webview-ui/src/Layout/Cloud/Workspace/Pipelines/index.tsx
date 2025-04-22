@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import Button from "../../../../components/Button";
 import { getWorkflowURL, relativeTime } from "../../utils";
 import { useTowerContext } from "../../../../Context";
@@ -6,9 +7,18 @@ import workflowIcon from "../../../../images/workflow.svg";
 import styles from "./styles.module.css";
 
 const Pipelines = () => {
-  const { useLocalContext, setUseLocalContext, pipelines, repoInfo } =
-    useTowerContext();
+  const {
+    useLocalContext,
+    setUseLocalContext,
+    pipelines,
+    repoInfo,
+    fetchPipelines,
+    workspaceId
+  } = useTowerContext();
   const hasPipelines = !!pipelines?.length;
+
+  useEffect(() => fetchPipelines(workspaceId), [workspaceId]);
+
   return (
     <div>
       <div className="flex items-center mb-2 pb-2">

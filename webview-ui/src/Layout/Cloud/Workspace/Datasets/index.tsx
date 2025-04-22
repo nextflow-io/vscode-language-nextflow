@@ -1,12 +1,16 @@
+import { useEffect } from "react";
 import { useTowerContext } from "../../../../Context";
 import Button from "../../../../components/Button";
 import styles from "./styles.module.css";
 import { getDatasetURL } from "../../utils";
 
 const Datasets = () => {
-  const { datasets, selectedWorkspace } = useTowerContext();
+  const { datasets, selectedWorkspace, fetchDatasets, workspaceId } =
+    useTowerContext();
 
   const hasDatasets = !!datasets?.length;
+
+  useEffect(() => fetchDatasets(workspaceId), [workspaceId]);
 
   return (
     <div>

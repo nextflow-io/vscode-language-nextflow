@@ -1,16 +1,23 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useTowerContext } from "../../../../Context";
 import Button from "../../../../components/Button";
 import styles from "./styles.module.css";
 import { getDataLinkURL } from "../../utils";
 
 const DataLinks = () => {
-  const { dataLinks, selectedWorkspace: workspace } = useTowerContext();
+  const {
+    dataLinks,
+    selectedWorkspace: workspace,
+    fetchDataLinks,
+    workspaceId
+  } = useTowerContext();
   const [displayCount, setDisplayCount] = useState(5);
 
   const hasDataLinks = !!dataLinks?.length;
   const displayedDataLinks = dataLinks?.slice(0, displayCount) || [];
   const hasMore = hasDataLinks && dataLinks.length > displayCount;
+
+  useEffect(() => fetchDataLinks(workspaceId), [workspaceId]);
 
   return (
     <div>
