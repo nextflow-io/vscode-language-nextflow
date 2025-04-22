@@ -290,3 +290,30 @@ export interface Dataset {
   dateCreated: string;
   lastUpdated: string;
 }
+
+export interface DataLinkCredential {
+  id: string;
+  name: string;
+  provider: string;
+}
+
+export interface DataLink {
+  id: string;
+  name: string;
+  description: string | null;
+  resourceRef: string;
+  type: string;
+  provider: string;
+  region: string;
+  credentials: DataLinkCredential[];
+  publicAccessible: boolean;
+  hidden: boolean;
+  status: string;
+  message: string | null;
+}
+
+export type DataLinksResponse = {
+  dataLinks?: DataLink[];
+  totalSize?: number;
+  message?: string;
+};

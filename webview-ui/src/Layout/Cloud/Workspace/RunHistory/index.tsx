@@ -13,7 +13,7 @@ import { useState } from "react";
 const RunHistory = () => {
   const { workspaces, selectedWorkspace, history, useLocalContext, repoInfo } =
     useTowerContext();
-  const [displayCount, setDisplayCount] = useState(10);
+  const [displayCount, setDisplayCount] = useState(5);
 
   const workspace = workspaces?.find(
     (ws) => ws.workspaceId === selectedWorkspace
@@ -66,11 +66,11 @@ const RunHistory = () => {
           ))}
           {hasMore && (
             <Button
-              onClick={() => setDisplayCount((prev) => prev + 10)}
+              onClick={() => setDisplayCount((prev) => prev + 5)}
+              className="block text-right"
               fullWidth
               bare
               small
-              className="mt-2"
             >
               Show More
             </Button>

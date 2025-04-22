@@ -3,7 +3,8 @@ import {
   ComputeEnv,
   RepoInfo,
   Pipeline,
-  Dataset
+  Dataset,
+  DataLink
 } from "../../Context/types";
 import { SEQERA_PLATFORM_URL } from "../../../../src/constants";
 
@@ -35,6 +36,12 @@ export function getWorkflowURL(pipeline: Pipeline) {
 export function getDatasetURL(dataset: Dataset, workspace?: Workspace) {
   if (!workspace) return "";
   return `${SEQERA_PLATFORM_URL}/orgs/${workspace.orgName}/workspaces/${workspace.workspaceName}/datasets/${dataset.id}`;
+}
+
+export function getDataLinkURL(dataLink: DataLink, workspace?: Workspace) {
+  const credID = dataLink.credentials?.[0]?.id;
+  if (!workspace || !credID) return "";
+  return `${SEQERA_PLATFORM_URL}/orgs/${workspace.orgName}/workspaces/${workspace.workspaceName}/data-explorer/${dataLink.id}/browse?credentialsId=${credID}`;
 }
 
 // Date formatting
