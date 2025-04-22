@@ -16,6 +16,10 @@
   margin-top: 0.5rem;
   margin-bottom: 0.5rem;
 }
+.mx-auto {
+  margin-left: auto;
+  margin-right: auto;
+}
 .mx-0 {
   margin-left: 0;
   margin-right: 0;

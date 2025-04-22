@@ -9,7 +9,8 @@ import {
   fetchHistory,
   getRepoInfo,
   fetchPipelines,
-  fetchDatasets
+  fetchDatasets,
+  fetchDataLinks
 } from "./lib";
 import { AuthProvider, getAccessToken } from "../../auth";
 import { FileNode } from "./lib/workspace/types";
@@ -54,6 +55,9 @@ class WebviewProvider implements vscode.WebviewViewProvider {
           break;
         case "fetchDatasets":
           this.fetchDatasets(message.workspaceId);
+          break;
+        case "fetchDataLinks":
+          this.fetchDataLinks(message.workspaceId);
           break;
       }
     });
@@ -105,6 +109,15 @@ class WebviewProvider implements vscode.WebviewViewProvider {
     const datasets = await fetchDatasets(accessToken, workspaceId);
     this._currentView?.webview.postMessage({
       datasets
+    });
+  }
+
+  private async fetchDataLinks(workspaceId: number) {
+    const accessToken = await this.getAccessToken();
+    if (!accessToken) return;
+    const dataLinks = await fetchDataLinks(accessToken, workspaceId);
+    this._currentView?.webview.postMessage({
+      dataLinks
     });
   }
 

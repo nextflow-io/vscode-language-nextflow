@@ -11,7 +11,8 @@ import {
   HistoryResponse,
   RepoInfo,
   PipelinesResponse,
-  Dataset
+  Dataset,
+  DataLink
 } from "./types";
 
 const vscode = getVscode();
@@ -46,6 +47,7 @@ const Context = ({ children }: Props) => {
   );
   const [repoInfo, setRepoInfo] = useState<RepoInfo | undefined>(undefined);
   const [datasets, setDatasets] = useState<Dataset[]>([]);
+  const [dataLinks, setDataLinks] = useState<DataLink[]>([]);
 
   useEffect(() => {
     const handleMessage = (event: MessageEvent) => {
@@ -60,6 +62,7 @@ const Context = ({ children }: Props) => {
       if (data.pipelines) setPipelines(data.pipelines);
       if (data.repoInfo) setRepoInfo(data.repoInfo);
       if (data.datasets) setDatasets(data.datasets);
+      if (data.dataLinks) setDataLinks(data.dataLinks);
     };
     window.addEventListener("message", handleMessage);
     return () => window.removeEventListener("message", handleMessage);
@@ -79,7 +82,8 @@ const Context = ({ children }: Props) => {
             history,
             repoInfo,
             pipelines,
-            datasets
+            datasets,
+            dataLinks
           }}
         >
           {children}

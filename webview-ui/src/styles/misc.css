@@ -15,6 +15,15 @@ section.cozy:first-child {
 section.cozy:last-child {
   padding-bottom: 30px;
 }
+.block {
+  display: block !important;
+}
+.text-center {
+  text-align: center;
+}
+.text-right {
+  text-align: right;
+}
 .flex {
   display: flex;
 }

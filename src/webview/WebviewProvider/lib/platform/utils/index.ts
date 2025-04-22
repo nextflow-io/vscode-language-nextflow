@@ -7,3 +7,4 @@ export { default as getRepoInfo } from "./getRepoInfo";
 export { default as debounce } from "./debounce";
 export { default as fetchPipelines } from "./fetchPipelines";
 export { default as fetchDatasets } from "./fetchDatasets";
+export { default as fetchDataLinks } from "./fetchDataLinks";

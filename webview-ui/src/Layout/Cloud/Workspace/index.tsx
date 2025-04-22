@@ -3,7 +3,7 @@ import Toolbar from "./Toolbar";
 import RunHistory from "./RunHistory";
 import Pipelines from "./Pipelines";
 import Datasets from "./Datasets";
-
+import DataLinks from "./DataLinks";
 const Workspace = () => {
   const { error } = useTowerContext();
   return (
@@ -18,6 +18,7 @@ const Workspace = () => {
         <Pipelines />
         <RunHistory />
         <Datasets />
+        <DataLinks />
       </section>
     </>
   );
