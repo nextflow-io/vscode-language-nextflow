@@ -12,7 +12,6 @@ const Pipelines = () => {
   return (
     <div>
       <div className="flex items-center mb-2 pb-2">
-        <h4 className="flex-auto mt-0 mb-0">Workflows</h4>
         {!!repoInfo?.name && (
           <Button
             onClick={() => setUseLocalContext(!useLocalContext)}

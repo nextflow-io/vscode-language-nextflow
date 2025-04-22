@@ -4,16 +4,15 @@ import { getWorkspaceURL } from "../../utils";
 import Button from "../../../../components/Button";
 
 const WorkspaceSelector = () => {
-  const { workspaces, selectedWorkspace, setSelectedWorkspace } =
-    useTowerContext();
-
-  const currentWorkspace = workspaces?.find(
-    (ws) => ws.workspaceId === selectedWorkspace
-  );
+  const {
+    workspaces,
+    selectedWorkspace: workspace,
+    setSelectedWorkspace
+  } = useTowerContext();
 
   let manageURL = "";
-  if (currentWorkspace) {
-    manageURL = getWorkspaceURL(currentWorkspace);
+  if (workspace) {
+    manageURL = getWorkspaceURL(workspace);
   }
 
   return (
@@ -25,9 +24,15 @@ const WorkspaceSelector = () => {
               label: ws.orgName + "/" + ws.workspaceName,
               value: ws.workspaceId as number
             }))}
-            value={selectedWorkspace ?? ""}
+            value={workspace?.workspaceId ?? ""}
             icon="seqera"
-            onChange={setSelectedWorkspace}
+            onChange={(value) => {
+              const workspace = workspaces.find(
+                (ws) => ws.workspaceId === value
+              );
+              if (!workspace) return;
+              setSelectedWorkspace(workspace);
+            }}
             subtle
           />
         ) : (

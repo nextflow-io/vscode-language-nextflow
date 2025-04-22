@@ -5,10 +5,8 @@ import styles from "./styles.module.css";
 import { getDataLinkURL } from "../../utils";
 
 const DataLinks = () => {
-  const { dataLinks, workspaces, selectedWorkspace } = useTowerContext();
+  const { dataLinks, selectedWorkspace: workspace } = useTowerContext();
   const [displayCount, setDisplayCount] = useState(5);
-
-  const workspace = workspaces.find((w) => w.workspaceId === selectedWorkspace);
 
   const hasDataLinks = !!dataLinks?.length;
   const displayedDataLinks = dataLinks?.slice(0, displayCount) || [];
@@ -16,7 +14,6 @@ const DataLinks = () => {
 
   return (
     <div>
-      <h4>Data Buckets</h4>
       {hasDataLinks ? (
         <>
           {displayedDataLinks?.map((dataLink) => (

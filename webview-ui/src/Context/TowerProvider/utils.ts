@@ -5,7 +5,8 @@ import {
   RepoInfo,
   Workflow,
   HistoryResponse,
-  Workspace
+  Workspace,
+  ComputeEnv
 } from "../types";
 
 export function getOrganizations(
@@ -13,6 +14,18 @@ export function getOrganizations(
 ): Organization[] {
   if (!orgsAndWorkspaces) return [];
   return orgsAndWorkspaces.filter((w) => !w.workspaceId);
+}
+
+export function filterComputeEnvs(
+  computeEnvs: ComputeEnv[] | undefined,
+  workspace: Workspace | undefined
+): ComputeEnv[] {
+  if (!computeEnvs) return [];
+  if (!workspace) return computeEnvs;
+  return (
+    computeEnvs?.filter((ce) => ce.workspaceName === workspace.workspaceName) ||
+    []
+  );
 }
 
 export function getWorkspaces(

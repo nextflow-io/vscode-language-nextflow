@@ -7,7 +7,6 @@ const ComputeEnvironments = () => {
 
   return (
     <section>
-      <h4>Compute Environments</h4>
       {computeEnvs?.length ? (
         <>
           {computeEnvs?.map((computeEnv) => (
