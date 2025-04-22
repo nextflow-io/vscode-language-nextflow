@@ -4,20 +4,17 @@ import styles from "./styles.module.css";
 import { getDatasetURL } from "../../utils";
 
 const Datasets = () => {
-  const { datasets, workspaces, selectedWorkspace } = useTowerContext();
-
-  const workspace = workspaces.find((w) => w.workspaceId === selectedWorkspace);
+  const { datasets, selectedWorkspace } = useTowerContext();
 
   const hasDatasets = !!datasets?.length;
 
   return (
     <div>
-      <h4>Datasets</h4>
       {hasDatasets ? (
         <>
           {datasets?.map((dataset) => (
             <Button
-              href={getDatasetURL(dataset, workspace)}
+              href={getDatasetURL(dataset, selectedWorkspace)}
               key={dataset.id}
               fullWidth
               alt

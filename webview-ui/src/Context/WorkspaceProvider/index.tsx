@@ -18,7 +18,9 @@ const WorkspaceContext = createContext<WorkspaceContextType>({
   login: () => {},
   openChat: () => {},
   isCursor: false,
-  refresh: () => {}
+  refresh: () => {},
+  selectedView: "pipelines",
+  setSelectedView: () => {}
 });
 
 interface WorkspaceContextType {
@@ -37,6 +39,8 @@ interface WorkspaceContextType {
   openChat: () => void;
   isCursor: boolean;
   refresh: () => void;
+  selectedView: string;
+  setSelectedView: (view: string) => void;
 }
 
 type Props = {
@@ -56,6 +60,7 @@ const WorkspaceProvider = ({ children, vscode, viewID, isCursor }: Props) => {
   const [selectedItems, setSelectedItems] = useState<string[]>(
     state?.selectedItems || []
   );
+  const [selectedView, setSelectedView] = useState<string>("pipelines");
 
   useEffect(() => {
     let count = 0;
@@ -140,7 +145,9 @@ const WorkspaceProvider = ({ children, vscode, viewID, isCursor }: Props) => {
         login,
         viewID,
         isCursor,
-        refresh
+        refresh,
+        selectedView,
+        setSelectedView
       }}
     >
       {children}

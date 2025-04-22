@@ -1,11 +1,14 @@
-import { useTowerContext } from "../../../Context";
+import { useTowerContext, useWorkspaceContext } from "../../../Context";
 import Toolbar from "./Toolbar";
 import RunHistory from "./RunHistory";
 import Pipelines from "./Pipelines";
 import Datasets from "./Datasets";
 import DataLinks from "./DataLinks";
+import ComputeEnvironments from "./ComputeEnvironments";
+
 const Workspace = () => {
   const { error } = useTowerContext();
+  const { selectedView } = useWorkspaceContext();
   return (
     <>
       {error && (
@@ -15,10 +18,11 @@ const Workspace = () => {
       )}
       <Toolbar />
       <section>
-        <Pipelines />
-        <RunHistory />
-        <Datasets />
-        <DataLinks />
+        {selectedView === "pipelines" && <Pipelines />}
+        {selectedView === "runs" && <RunHistory />}
+        {selectedView === "datasets" && <Datasets />}
+        {selectedView === "data-links" && <DataLinks />}
+        {selectedView === "compute-environments" && <ComputeEnvironments />}
       </section>
     </>
   );

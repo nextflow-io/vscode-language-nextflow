@@ -19,7 +19,8 @@ import {
   getOrganizations,
   getWorkspaces,
   filterPipelines,
-  filterHistory
+  filterHistory,
+  filterComputeEnvs
 } from "./utils";
 
 const TowerContext = createContext<TowerContextType>(null as any);
@@ -47,11 +48,12 @@ type TowerContextType = {
   error?: string | null;
   userInfo?: UserInfo;
   history?: Workflow[];
-  selectedWorkspace: WorkspaceID;
-  setSelectedWorkspace: (n: WorkspaceID) => void;
+  selectedWorkspace: Workspace | undefined;
+  setSelectedWorkspace: (n: Workspace) => void;
   selectedComputeEnv: string | null;
   setSelectedComputeEnv: (n: string) => void;
   computeEnvs: ComputeEnv[];
+  fetchComputeEnvs: (workspace: Workspace) => void;
   workspaces: Workspace[];
   organizations?: Organization[];
   getWorkspaces: (orgId: string | number) => Workspace[];
@@ -97,36 +99,25 @@ const TowerProvider: React.FC<Props> = ({
     [orgsAndWorkspaces]
   );
 
-  const [visibleEnvs, setVisibleEnvs] = useState<ComputeEnv[]>([]);
-  const [selectedWorkspace, setSelectedWorkspace] = useState<WorkspaceID>("");
+  const [selectedWorkspace, setSelectedWorkspace] = useState<
+    Workspace | undefined
+  >(undefined);
   const [selectedComputeEnv, setSelectedComputeEnv] = useState<string>("");
   const [selectedOrg, setSelectedOrg] = useState<string>("");
   const [useLocalContext, setUseLocalContext] = useState<boolean>(false);
 
   useEffect(() => {
-    setSelectedWorkspace(workspaces[0]?.workspaceId ?? "");
+    setSelectedWorkspace(workspaces?.[0]);
   }, [workspaces]);
 
   useEffect(() => {
-    // Set the compute environments for the selected workspace
-    const selected = workspaces.find(
-      (w) => w.workspaceId === selectedWorkspace
-    );
-    const name = selected?.workspaceName;
-    if (!name) return;
-    setVisibleEnvs(
-      computeEnvs?.filter((ce) => ce.workspaceName === name) ?? []
-    );
-    setSelectedComputeEnv(visibleEnvs[0]?.id ?? "");
-  }, [selectedWorkspace]);
-
-  useEffect(() => {
     // Fetch the pipelines & history for the selected workspace
-    if (!selectedWorkspace) return;
-    fetchPipelines(selectedWorkspace);
-    fetchHistory(selectedWorkspace);
-    fetchDatasets(selectedWorkspace);
-    fetchDataLinks(selectedWorkspace);
+    const workspaceId = selectedWorkspace?.workspaceId;
+    if (!workspaceId) return;
+    fetchPipelines(workspaceId);
+    fetchHistory(workspaceId);
+    fetchDatasets(workspaceId);
+    fetchDataLinks(workspaceId);
   }, [selectedWorkspace]);
 
   const getOrgWorkspaces = (orgId: string | number) => {
@@ -160,6 +151,12 @@ const TowerProvider: React.FC<Props> = ({
     vscode.postMessage({ command: "fetchDataLinks", workspaceId });
   }
 
+  function fetchComputeEnvs(workspace: Workspace) {
+    const workspaceId = workspace.workspaceId;
+    if (!workspaceId) return;
+    vscode.postMessage({ command: "fetchComputeEnvs", workspaceId });
+  }
+
   function refresh() {
     vscode.postMessage({ command: "refresh" });
   }
@@ -176,7 +173,8 @@ const TowerProvider: React.FC<Props> = ({
         setSelectedWorkspace,
         selectedComputeEnv,
         setSelectedComputeEnv,
-        computeEnvs: visibleEnvs,
+        fetchComputeEnvs,
+        computeEnvs: filterComputeEnvs(computeEnvs, selectedWorkspace),
         workspaces,
         getWorkspaces: getOrgWorkspaces,
         organizations,

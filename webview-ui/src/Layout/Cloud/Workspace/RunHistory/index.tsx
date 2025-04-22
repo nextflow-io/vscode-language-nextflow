@@ -11,13 +11,13 @@ import clsx from "clsx";
 import { useState } from "react";
 
 const RunHistory = () => {
-  const { workspaces, selectedWorkspace, history, useLocalContext, repoInfo } =
-    useTowerContext();
+  const {
+    selectedWorkspace: workspace,
+    history,
+    useLocalContext,
+    repoInfo
+  } = useTowerContext();
   const [displayCount, setDisplayCount] = useState(5);
-
-  const workspace = workspaces?.find(
-    (ws) => ws.workspaceId === selectedWorkspace
-  );
 
   const hasHistory = !!history?.length;
   const displayedHistory = history?.slice(0, displayCount) || [];
@@ -25,7 +25,6 @@ const RunHistory = () => {
 
   return (
     <div>
-      <h4>Run History</h4>
       {hasHistory ? (
         <>
           {displayedHistory.map((workflow) => (
