@@ -34,7 +34,8 @@ class WebviewProvider implements vscode.WebviewViewProvider {
     await this.initViewData();
 
     view.webview.onDidReceiveMessage((message) => {
-      switch (message.command) {
+      const { command, workspaceId } = message;
+      switch (command) {
         case "openFile":
           this.openFile(message.file);
           break;
@@ -48,16 +49,20 @@ class WebviewProvider implements vscode.WebviewViewProvider {
           this.initViewData(true);
           break;
         case "fetchHistory":
-          this.fetchHistory(message.workspaceId);
+          if (!workspaceId) return;
+          this.fetchHistory(workspaceId);
           break;
         case "fetchPipelines":
-          this.fetchPipelines(message.workspaceId);
+          if (!workspaceId) return;
+          this.fetchPipelines(workspaceId);
           break;
         case "fetchDatasets":
-          this.fetchDatasets(message.workspaceId);
+          if (!workspaceId) return;
+          this.fetchDatasets(workspaceId);
           break;
         case "fetchDataLinks":
-          this.fetchDataLinks(message.workspaceId);
+          if (!workspaceId) return;
+          this.fetchDataLinks(workspaceId);
           break;
       }
     });

@@ -1,12 +1,7 @@
 import { ExtensionContext, WebviewView } from "vscode";
-import {
-  fetchComputeEnvs,
-  fetchUserInfo,
-  fetchWorkspaces,
-  debounce
-} from "./utils";
+import { fetchUserInfo, fetchWorkspaces, debounce } from "./utils";
 
-import { Workspace, UserInfoResponse, ComputeEnv, RepoInfo } from "./types";
+import { Workspace, UserInfoResponse } from "./types";
 import getAuthState, { AuthState } from "./getAuthState";
 import { expired } from "../../../../auth/AuthProvider/utils/jwt";
 
@@ -14,8 +9,6 @@ type PlatformData = {
   authState: AuthState;
   userInfo?: UserInfoResponse;
   workspaces?: Workspace[];
-  computeEnvs?: ComputeEnv[];
-  repoInfo?: RepoInfo;
 };
 
 function handleUpdate(
@@ -38,13 +31,6 @@ const fetchPlatformData = async (
   const savedState = wsState.get("platformData") as PlatformData | undefined;
   const savedAuth = savedState?.authState as AuthState | undefined;
   let hasExpired = expired(savedAuth?.tokenExpiry);
-
-  // const repoInfo = await getRepoInfo();
-
-  // const restoredState = {
-  //   ...savedState,
-  //   repoInfo
-  // };
 
   if (!hasExpired && !refresh) {
     view.postMessage(savedState);
@@ -72,13 +58,11 @@ const fetchPlatformData = async (
   }
 
   const workspaces = await fetchWorkspaces(accessToken, userInfo.user.id);
-  const computeEnvs = await fetchComputeEnvs(accessToken, workspaces);
 
   data = {
     ...data,
     userInfo,
-    workspaces,
-    computeEnvs
+    workspaces
   };
 
   handleUpdate(data, context, view);

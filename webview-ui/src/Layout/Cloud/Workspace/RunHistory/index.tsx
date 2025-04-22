@@ -1,3 +1,6 @@
+import { useEffect, useState } from "react";
+import clsx from "clsx";
+
 import { useTowerContext } from "../../../../Context";
 import {
   getRunHistoryURL,
@@ -7,21 +10,23 @@ import {
 } from "./utils";
 import Button from "../../../../components/Button";
 import styles from "./styles.module.css";
-import clsx from "clsx";
-import { useState } from "react";
 
 const RunHistory = () => {
   const {
     selectedWorkspace: workspace,
     history,
     useLocalContext,
-    repoInfo
+    repoInfo,
+    fetchHistory,
+    workspaceId
   } = useTowerContext();
   const [displayCount, setDisplayCount] = useState(5);
 
   const hasHistory = !!history?.length;
   const displayedHistory = history?.slice(0, displayCount) || [];
   const hasMore = hasHistory && history.length > displayCount;
+
+  useEffect(() => fetchHistory(workspaceId), [workspaceId]);
 
   return (
     <div>

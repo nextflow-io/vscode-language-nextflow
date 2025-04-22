@@ -1,9 +1,13 @@
+import { useEffect } from "react";
 import { getComputeEnvURL } from "../../utils";
 import { useTowerContext } from "../../../../Context";
 import styles from "./styles.module.css";
 
 const ComputeEnvironments = () => {
-  const { workspaces, computeEnvs } = useTowerContext();
+  const { workspaces, computeEnvs, fetchComputeEnvs, workspaceId } =
+    useTowerContext();
+
+  useEffect(() => fetchComputeEnvs(workspaceId), [workspaceId]);
 
   return (
     <section>

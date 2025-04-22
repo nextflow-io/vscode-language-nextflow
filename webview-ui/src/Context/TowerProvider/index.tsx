@@ -1,7 +1,6 @@
 import { createContext, useContext, useEffect, useMemo, useState } from "react";
 
 import {
-  WorkspaceID,
   Workspace,
   Organization,
   ComputeEnv,
@@ -12,7 +11,8 @@ import {
   Pipeline,
   Workflow,
   Dataset,
-  DataLink
+  DataLink,
+  WorkspaceID
 } from "../types";
 import { AuthState } from "..";
 import {
@@ -49,11 +49,16 @@ type TowerContextType = {
   userInfo?: UserInfo;
   history?: Workflow[];
   selectedWorkspace: Workspace | undefined;
+  workspaceId: WorkspaceID | undefined;
   setSelectedWorkspace: (n: Workspace) => void;
   selectedComputeEnv: string | null;
   setSelectedComputeEnv: (n: string) => void;
   computeEnvs: ComputeEnv[];
-  fetchComputeEnvs: (workspace: Workspace) => void;
+  fetchComputeEnvs: (workspaceId?: WorkspaceID) => void;
+  fetchPipelines: (workspaceId?: WorkspaceID) => void;
+  fetchDatasets: (workspaceId?: WorkspaceID) => void;
+  fetchDataLinks: (workspaceId?: WorkspaceID) => void;
+  fetchHistory: (workspaceId?: WorkspaceID) => void;
   workspaces: Workspace[];
   organizations?: Organization[];
   getWorkspaces: (orgId: string | number) => Workspace[];
@@ -105,20 +110,11 @@ const TowerProvider: React.FC<Props> = ({
   const [selectedComputeEnv, setSelectedComputeEnv] = useState<string>("");
   const [selectedOrg, setSelectedOrg] = useState<string>("");
   const [useLocalContext, setUseLocalContext] = useState<boolean>(false);
+  const workspaceId = selectedWorkspace?.workspaceId;
 
   useEffect(() => {
     setSelectedWorkspace(workspaces?.[0]);
   }, [workspaces]);
-
-  useEffect(() => {
-    // Fetch the pipelines & history for the selected workspace
-    const workspaceId = selectedWorkspace?.workspaceId;
-    if (!workspaceId) return;
-    fetchPipelines(workspaceId);
-    fetchHistory(workspaceId);
-    fetchDatasets(workspaceId);
-    fetchDataLinks(workspaceId);
-  }, [selectedWorkspace]);
 
   const getOrgWorkspaces = (orgId: string | number) => {
     return getWorkspaces(orgsAndWorkspaces, orgId);
@@ -135,25 +131,23 @@ const TowerProvider: React.FC<Props> = ({
     };
   }
 
-  function fetchHistory(workspaceId: WorkspaceID) {
+  function fetchHistory(workspaceId?: WorkspaceID) {
     vscode.postMessage({ command: "fetchHistory", workspaceId });
   }
 
-  function fetchPipelines(workspaceId: WorkspaceID) {
+  function fetchPipelines(workspaceId?: WorkspaceID) {
     vscode.postMessage({ command: "fetchPipelines", workspaceId });
   }
 
-  function fetchDatasets(workspaceId: WorkspaceID) {
+  function fetchDatasets(workspaceId?: WorkspaceID) {
     vscode.postMessage({ command: "fetchDatasets", workspaceId });
   }
 
-  function fetchDataLinks(workspaceId: WorkspaceID) {
+  function fetchDataLinks(workspaceId?: WorkspaceID) {
     vscode.postMessage({ command: "fetchDataLinks", workspaceId });
   }
 
-  function fetchComputeEnvs(workspace: Workspace) {
-    const workspaceId = workspace.workspaceId;
-    if (!workspaceId) return;
+  function fetchComputeEnvs(workspaceId?: WorkspaceID) {
     vscode.postMessage({ command: "fetchComputeEnvs", workspaceId });
   }
 
@@ -168,13 +162,19 @@ const TowerProvider: React.FC<Props> = ({
         setUseLocalContext,
         error: auth.error,
         userInfo,
-        history: filterHistory(history, repoInfo, useLocalContext),
         selectedWorkspace,
+        workspaceId,
         setSelectedWorkspace,
         selectedComputeEnv,
         setSelectedComputeEnv,
         fetchComputeEnvs,
+        fetchPipelines,
+        fetchDatasets,
+        fetchDataLinks,
+        fetchHistory,
+        history: filterHistory(history, repoInfo, useLocalContext),
         computeEnvs: filterComputeEnvs(computeEnvs, selectedWorkspace),
+        pipelines: filterPipelines(pipelines, repoInfo, useLocalContext),
         workspaces,
         getWorkspaces: getOrgWorkspaces,
         organizations,
@@ -186,7 +186,6 @@ const TowerProvider: React.FC<Props> = ({
         tokenExpired: auth.tokenExpired,
         tokenExpiry: auth.tokenExpiry,
         repoInfo,
-        pipelines: filterPipelines(pipelines, repoInfo, useLocalContext),
         datasets,
         dataLinks
       }}
