@@ -16,6 +16,7 @@ import {
 import { AuthProvider, getAccessToken } from "../../auth";
 import { FileNode } from "./lib/workspace/types";
 import { jwtExpired } from "../../auth/AuthProvider/utils/jwt";
+import { sleep } from "./lib/utils";
 
 class WebviewProvider implements vscode.WebviewViewProvider {
   _currentView?: vscode.WebviewView;
@@ -32,6 +33,7 @@ class WebviewProvider implements vscode.WebviewViewProvider {
   public async resolveWebviewView(view: vscode.WebviewView): Promise<void> {
     this._authProvider?.setWebview(view.webview);
     this.initHTML(view);
+    await sleep(100); // Wait for the app to mount
     await this.initViewData();
 
     view.webview.onDidReceiveMessage((message) => {

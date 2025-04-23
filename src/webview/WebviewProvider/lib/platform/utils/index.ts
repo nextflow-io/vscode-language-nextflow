@@ -4,7 +4,6 @@ export { default as fetchComputeEnvs } from "./fetchComputeEnvs";
 export { default as addPipeline } from "./addPipeline";
 export { default as fetchHistory } from "./fetchHistory";
 export { default as getRepoInfo } from "./getRepoInfo";
-export { default as debounce } from "./debounce";
 export { default as fetchPipelines } from "./fetchPipelines";
 export { default as fetchDatasets } from "./fetchDatasets";
 export { default as fetchDataLinks } from "./fetchDataLinks";

@@ -16,23 +16,12 @@ const Cloud = () => {
   const { isAuthenticated } = useTowerContext();
   const timeoutRef = useRef<NodeJS.Timeout | null>(null);
 
-  useEffect(() => {
-    // Hacky fix for empty auth state we get sometimes
-    // TODO: find out why this is happening
-    if (isAuthenticated) {
-      const ref = timeoutRef.current;
-      if (!ref) return;
-      clearTimeout(ref);
-      timeoutRef.current = null;
-    } else {
-      timeoutRef.current = setTimeout(refresh, 1000);
-    }
-  }, [isAuthenticated]);
+  // Note: This effect ensures that we have the needed state after the component
+  // mounts (it usually does, but not always). Would be good to find a better
+  // way of doing this.
 
   useEffect(() => {
-    // Hacky fix for empty repo info we get sometimes
-    // TODO: find out why this is happening
-    if (repoInfo) {
+    if (isAuthenticated && repoInfo?.name) {
       const ref = timeoutRef.current;
       if (!ref) return;
       clearTimeout(ref);
@@ -40,7 +29,7 @@ const Cloud = () => {
     } else {
       timeoutRef.current = setTimeout(refresh, 1000);
     }
-  }, [repoInfo]);
+  }, [isAuthenticated, repoInfo?.name]);
 
   return (
     <>

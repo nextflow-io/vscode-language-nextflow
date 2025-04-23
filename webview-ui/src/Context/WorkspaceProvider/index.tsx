@@ -60,7 +60,7 @@ const WorkspaceProvider = ({ children, vscode, viewID, isCursor }: Props) => {
   const [selectedItems, setSelectedItems] = useState<string[]>(
     state?.selectedItems || []
   );
-  const [selectedView, setSelectedView] = useState<string>("pipelines");
+  const [selectedView, setSelectedView] = useState<string>("runs");
 
   useEffect(() => {
     let count = 0;
