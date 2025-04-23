@@ -4,12 +4,14 @@ import { useTowerContext } from "../../Context";
 
 import Login from "./Login";
 import Workspace from "./Workspace";
+import Toolbar from "./Toolbar";
 
 const Cloud = () => {
   const { tokenExpiry, hasToken, refresh } = useTowerContext();
 
   let tokenExpired = false;
   if (tokenExpiry) tokenExpired = tokenExpiry < Date.now() / 1000;
+  const showLogin = !hasToken || tokenExpired;
 
   const { isAuthenticated } = useTowerContext();
   const timeoutRef = useRef<NodeJS.Timeout | null>(null);
@@ -27,11 +29,12 @@ const Cloud = () => {
     }
   }, [isAuthenticated]);
 
-  if (!hasToken || tokenExpired) {
-    return <Login />;
-  }
-
-  return <Workspace />;
+  return (
+    <>
+      <Toolbar />
+      {showLogin ? <Login /> : <Workspace />}
+    </>
+  );
 };
 
 export default Cloud;

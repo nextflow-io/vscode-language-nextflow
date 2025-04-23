@@ -1,7 +1,7 @@
-import { useTowerContext } from "../../../../Context";
-import Select from "../../../../components/Select";
-import { getWorkspaceURL } from "../../utils";
-import Button from "../../../../components/Button";
+import { useTowerContext } from "../../../Context";
+import Select from "../../../components/Select";
+import { getWorkspaceURL } from "../utils";
+import Button from "../../../components/Button";
 
 const WorkspaceSelector = () => {
   const {

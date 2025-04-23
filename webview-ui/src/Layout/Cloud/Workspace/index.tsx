@@ -1,5 +1,4 @@
 import { useTowerContext, useWorkspaceContext } from "../../../Context";
-import Toolbar from "./Toolbar";
 import RunHistory from "./RunHistory";
 import Pipelines from "./Pipelines";
 import Datasets from "./Datasets";
@@ -16,7 +15,6 @@ const Workspace = () => {
           <p>Error:{error}</p>
         </section>
       )}
-      <Toolbar />
       <section>
         {selectedView === "pipelines" && <Pipelines />}
         {selectedView === "runs" && <RunHistory />}
