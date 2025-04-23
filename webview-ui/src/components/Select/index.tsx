@@ -16,6 +16,7 @@ type Props = {
   subtle?: boolean;
   subtle2?: boolean;
   icon?: string;
+  large?: boolean;
 };
 
 const Select: React.FC<Props> = ({
@@ -26,7 +27,8 @@ const Select: React.FC<Props> = ({
   alt2,
   subtle,
   subtle2,
-  icon
+  icon,
+  large
 }) => {
   const [isOpen, setIsOpen] = useState(false);
   const selectRef = useRef<HTMLDivElement>(null);
@@ -51,7 +53,8 @@ const Select: React.FC<Props> = ({
     [styles.alt]: alt,
     [styles.alt2]: alt2,
     [styles.subtle]: subtle,
-    [styles.subtle2]: subtle2
+    [styles.subtle2]: subtle2,
+    [styles.large]: large
   });
 
   let iconElement = <></>;

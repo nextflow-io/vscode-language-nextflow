@@ -66,7 +66,7 @@ const Toolbar = () => {
               ]}
               value={selectedView}
               onChange={(value) => setSelectedView(value as string)}
-              subtle
+              alt
             />
           </div>
         </>

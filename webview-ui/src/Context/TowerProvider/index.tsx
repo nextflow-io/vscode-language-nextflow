@@ -152,6 +152,7 @@ const TowerProvider: React.FC<Props> = ({
   }
 
   function refresh() {
+    console.log("🟠 refresh");
     vscode.postMessage({ command: "refresh" });
   }
 
