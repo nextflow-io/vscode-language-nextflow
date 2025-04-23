@@ -1,5 +1,6 @@
 import { ExtensionContext, WebviewView } from "vscode";
-import { fetchUserInfo, fetchWorkspaces, debounce } from "./utils";
+import { fetchUserInfo, fetchWorkspaces } from "./utils";
+import { debounce } from "../utils";
 
 import { Workspace, UserInfoResponse } from "./types";
 import getAuthState, { AuthState } from "./getAuthState";
