@@ -1,9 +1,21 @@
+import { ExtensionContext } from "vscode";
 import * as vscode from "vscode";
 
 import { RepoInfo } from "../types";
 
-async function getRepoInfo(): Promise<RepoInfo | undefined> {
+function handleUpdate(context: ExtensionContext, repoInfo: RepoInfo) {
+  const vsCodeState = context.workspaceState;
+  vsCodeState.update("repoInfo", repoInfo);
+}
+
+async function getRepoInfo(
+  context: ExtensionContext
+): Promise<RepoInfo | undefined> {
   try {
+    const wsState = context.workspaceState;
+    const savedState = wsState.get("repoInfo") as RepoInfo | undefined;
+    if (savedState) return savedState;
+
     const extension = vscode.extensions.getExtension("vscode.git");
     if (!extension) {
       return undefined;
@@ -44,11 +56,14 @@ async function getRepoInfo(): Promise<RepoInfo | undefined> {
 
     const [, owner, name] = match;
 
-    return {
+    const repoInfo = {
       url,
       name,
       owner
     };
+
+    handleUpdate(context, repoInfo);
+    return repoInfo;
   } catch (error) {
     console.error("Error getting repo info:", error);
     return undefined;

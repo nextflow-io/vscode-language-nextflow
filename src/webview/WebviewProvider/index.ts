@@ -48,6 +48,9 @@ class WebviewProvider implements vscode.WebviewViewProvider {
         case "refresh":
           this.initViewData(true);
           break;
+        case "getRepoInfo":
+          this.getRepoInfo();
+          break;
         case "fetchHistory":
           if (!workspaceId) return;
           this.fetchHistory(workspaceId);
@@ -93,7 +96,7 @@ class WebviewProvider implements vscode.WebviewViewProvider {
   }
 
   private async getRepoInfo() {
-    const repoInfo = await getRepoInfo();
+    const repoInfo = await getRepoInfo(this._context);
     this._currentView?.webview.postMessage({
       repoInfo
     });
@@ -130,11 +133,10 @@ class WebviewProvider implements vscode.WebviewViewProvider {
     const { viewID, _context, _currentView: view } = this;
     if (!view) return;
     if (viewID === "userInfo") {
+      this.getRepoInfo();
       const accessToken = await this.getAccessToken();
       if (!accessToken) return;
       await fetchPlatformData(accessToken, view.webview, _context, refresh);
-      await this.getRepoInfo();
-      setTimeout(async () => this.getRepoInfo(), 1000); // Sometimes fails initially
     } else {
       const fileList = buildList();
       view.webview.postMessage({

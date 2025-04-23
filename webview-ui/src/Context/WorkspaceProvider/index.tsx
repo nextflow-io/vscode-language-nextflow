@@ -20,7 +20,8 @@ const WorkspaceContext = createContext<WorkspaceContextType>({
   isCursor: false,
   refresh: () => {},
   selectedView: "pipelines",
-  setSelectedView: () => {}
+  setSelectedView: () => {},
+  getRepoInfo: () => {}
 });
 
 interface WorkspaceContextType {
@@ -41,6 +42,7 @@ interface WorkspaceContextType {
   refresh: () => void;
   selectedView: string;
   setSelectedView: (view: string) => void;
+  getRepoInfo: () => void;
 }
 
 type Props = {
@@ -128,6 +130,10 @@ const WorkspaceProvider = ({ children, vscode, viewID, isCursor }: Props) => {
     vscode.postMessage({ command: "refresh" });
   }
 
+  function getRepoInfo() {
+    vscode.postMessage({ command: "getRepoInfo" });
+  }
+
   return (
     <WorkspaceContext.Provider
       value={{
@@ -147,7 +153,8 @@ const WorkspaceProvider = ({ children, vscode, viewID, isCursor }: Props) => {
         isCursor,
         refresh,
         selectedView,
-        setSelectedView
+        setSelectedView,
+        getRepoInfo
       }}
     >
       {children}
