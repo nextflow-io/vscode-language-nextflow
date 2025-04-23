@@ -18,7 +18,6 @@ const WorkspaceContext = createContext<WorkspaceContextType>({
   login: () => {},
   openChat: () => {},
   isCursor: false,
-  refresh: () => {},
   selectedView: "pipelines",
   setSelectedView: () => {},
   getRepoInfo: () => {}
@@ -39,7 +38,6 @@ interface WorkspaceContextType {
   login: () => void;
   openChat: () => void;
   isCursor: boolean;
-  refresh: () => void;
   selectedView: string;
   setSelectedView: (view: string) => void;
   getRepoInfo: () => void;
@@ -126,10 +124,6 @@ const WorkspaceProvider = ({ children, vscode, viewID, isCursor }: Props) => {
     vscode.postMessage({ command: "openChat" });
   }
 
-  function refresh() {
-    vscode.postMessage({ command: "refresh" });
-  }
-
   function getRepoInfo() {
     vscode.postMessage({ command: "getRepoInfo" });
   }
@@ -151,7 +145,6 @@ const WorkspaceProvider = ({ children, vscode, viewID, isCursor }: Props) => {
         login,
         viewID,
         isCursor,
-        refresh,
         selectedView,
         setSelectedView,
         getRepoInfo

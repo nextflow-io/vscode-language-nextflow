@@ -7,7 +7,7 @@ import Workspace from "./Workspace";
 import Toolbar from "./Toolbar";
 
 const Cloud = () => {
-  const { tokenExpiry, hasToken, refresh } = useTowerContext();
+  const { tokenExpiry, hasToken, refresh, repoInfo } = useTowerContext();
 
   let tokenExpired = false;
   if (tokenExpiry) tokenExpired = tokenExpiry < Date.now() / 1000;
@@ -28,6 +28,19 @@ const Cloud = () => {
       timeoutRef.current = setTimeout(refresh, 1000);
     }
   }, [isAuthenticated]);
+
+  useEffect(() => {
+    // Hacky fix for empty repo info we get sometimes
+    // TODO: find out why this is happening
+    if (repoInfo) {
+      const ref = timeoutRef.current;
+      if (!ref) return;
+      clearTimeout(ref);
+      timeoutRef.current = null;
+    } else {
+      timeoutRef.current = setTimeout(refresh, 1000);
+    }
+  }, [repoInfo]);
 
   return (
     <>
