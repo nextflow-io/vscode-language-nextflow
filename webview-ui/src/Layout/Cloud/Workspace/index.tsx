@@ -16,9 +16,9 @@ const Workspace = () => {
         </section>
       )}
       <section>
-        {selectedView === "pipelines" && <Pipelines />}
         {selectedView === "runs" && <RunHistory />}
         {selectedView === "datasets" && <Datasets />}
+        {selectedView === "pipelines" && <Pipelines />}
         {selectedView === "data-links" && <DataLinks />}
         {selectedView === "compute-environments" && <ComputeEnvironments />}
       </section>

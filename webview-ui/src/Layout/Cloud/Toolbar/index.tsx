@@ -58,9 +58,9 @@ const Toolbar = () => {
           <div className="px-2">
             <Select
               options={[
-                { label: "Pipelines", value: "pipelines" },
                 { label: "Run History", value: "runs" },
                 { label: "Datasets", value: "datasets" },
+                { label: "Pipelines", value: "pipelines" },
                 { label: "Data Buckets", value: "data-links" },
                 { label: "Compute Environments", value: "compute-environments" }
               ]}
