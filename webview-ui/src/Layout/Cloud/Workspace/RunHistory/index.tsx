@@ -9,6 +9,8 @@ import {
   getStatusIcon
 } from "./utils";
 import Button from "../../../../components/Button";
+import FilterForProject from "../../_shared/FilterForProject";
+
 import styles from "./styles.module.css";
 
 const RunHistory = () => {
@@ -30,6 +32,7 @@ const RunHistory = () => {
 
   return (
     <div>
+      <FilterForProject />
       {hasHistory ? (
         <>
           {displayedHistory.map((workflow) => (

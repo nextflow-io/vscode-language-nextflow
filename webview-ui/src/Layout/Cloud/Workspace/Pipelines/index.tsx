@@ -1,39 +1,20 @@
 import { useEffect } from "react";
-import Button from "../../../../components/Button";
 import { getWorkflowURL, relativeTime } from "../../utils";
 import { useTowerContext } from "../../../../Context";
 import workflowIcon from "../../../../images/workflow.svg";
-
+import FilterForProject from "../../_shared/FilterForProject";
 import styles from "./styles.module.css";
 
 const Pipelines = () => {
-  const {
-    useLocalContext,
-    setUseLocalContext,
-    pipelines,
-    repoInfo,
-    fetchPipelines,
-    workspaceId
-  } = useTowerContext();
+  const { useLocalContext, pipelines, repoInfo, fetchPipelines, workspaceId } =
+    useTowerContext();
   const hasPipelines = !!pipelines?.length;
 
   useEffect(() => fetchPipelines(workspaceId), [workspaceId]);
 
   return (
     <div>
-      <div className="flex items-center mb-2 pb-2">
-        {!!repoInfo?.name && (
-          <Button
-            onClick={() => setUseLocalContext(!useLocalContext)}
-            icon={useLocalContext ? "codicon-check" : "codicon-close"}
-            active={useLocalContext}
-            small
-            alt
-          >
-            Filter for {repoInfo.name}
-          </Button>
-        )}
-      </div>
+      <FilterForProject />
       {hasPipelines ? (
         <>
           {pipelines.map((pipeline) => (

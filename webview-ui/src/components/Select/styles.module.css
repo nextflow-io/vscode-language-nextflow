@@ -57,6 +57,12 @@
       width: 13px;
     }
   }
+  &.large {
+    height: 36px;
+    padding: 0 16px;
+    font-size: 15px;
+    font-weight: 500;
+  }
 }
 
 .selectButton::after {
