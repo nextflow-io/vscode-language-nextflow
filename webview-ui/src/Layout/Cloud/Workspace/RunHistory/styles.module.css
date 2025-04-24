@@ -1,57 +1,53 @@
 .item {
+  display: block;
+  padding: 6px 8px;
+  border-radius: 4px;
+  border: 1px solid var(--vscode-dropdown-border);
+  color: var(--vscode-button-foreground);
+  margin-bottom: 6px;
+  cursor: pointer;
+  transition: all 0.2s;
+  &:hover {
+    border-color: var(--vscode-button-background);
+    color: var(--vscode-button-foreground);
+  }
+}
+.header {
   display: flex;
   justify-content: space-between;
   align-items: center;
   width: 100%;
+  & .name {
+    flex: 1;
+    margin-right: 1rem;
+    font-weight: 500;
+  }
+  & .metadata {
+    color: var(--vscode-descriptionForeground);
+    font-size: 10px;
+  }
 }
-
-.name {
-  flex: 1;
-  margin-right: 1rem;
-  font-weight: 500;
-}
-
-.metadata {
+.footer {
+  margin-top: 2px;
   display: flex;
+  justify-content: space-between;
   align-items: center;
-  gap: 0.5rem;
-  font-size: 0.9em;
-  color: var(--vscode-descriptionForeground);
-}
-
-.date {
-  color: var(--vscode-descriptionForeground);
-  font-size: 0.9em;
-}
-
-.status {
-  display: flex;
-  align-items: center;
-  & i {
-    font-size: 14px;
+  width: 100%;
+  & .status {
+    display: flex;
+    align-items: center;
+    font-size: 10px;
+    opacity: 0.8;
+    & i {
+      margin-right: 2px;
+      font-size: 11px;
+    }
+    &.FAILED {
+      opacity: 0.6;
+    }
   }
-  &.succeeded {
-    background-color: var(--vscode-testing-iconPassed);
-    color: white;
+  & .date {
+    color: var(--vscode-descriptionForeground);
+    font-size: 10px;
   }
-  &.failed {
-    opacity: 0.6;
-  }
-  &.running {
-    background-color: var(--vscode-testing-iconQueued);
-    color: white;
-  }
-  &.cancelled {
-    background-color: var(--vscode-testing-iconSkipped);
-    color: white;
-  }
-  &.unknown {
-    background-color: var(--vscode-badge-background);
-    color: var(--vscode-badge-foreground);
-  }
-}
-
-.runtime {
-  display: flex;
-  align-items: center;
 }

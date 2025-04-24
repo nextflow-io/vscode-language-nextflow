@@ -56,11 +56,17 @@
   border: 1px solid var(--vscode-dropdown-border);
   color: var(--vscode-button-foreground);
   font-weight: 400;
+  &:hover {
+    border-color: var(--vscode-button-background);
+  }
 }
 .button.alt2 {
   background: var(--vscode-dropdown-border);
   border: 1px solid var(--vscode-dropdown-border);
   color: var(--vscode-button-foreground);
+  &:hover {
+    border-color: var(--vscode-button-background);
+  }
 }
 .button.subtle {
   background-color: var(--vscode-sideBarSectionHeader-background);

@@ -27,11 +27,17 @@
     border: 1px solid var(--vscode-dropdown-border);
     color: var(--vscode-button-foreground);
     font-weight: 400;
+    &:hover {
+      border-color: var(--vscode-button-background);
+    }
   }
   &.alt2 {
     background: var(--vscode-dropdown-border);
     border: 1px solid var(--vscode-dropdown-border);
     color: var(--vscode-button-foreground);
+    &:hover {
+      border-color: var(--vscode-button-background);
+    }
   }
   &.subtle {
     background-color: var(--vscode-sideBarSectionHeader-background);
@@ -82,7 +88,7 @@
   left: 0;
   right: 0;
   background: var(--vscode-dropdown-background);
-  border: 1px solid var(--vscode-dropdown-border);
+  border: 1px solid var(--vscode-button-background);
   border-radius: 2px;
   margin-top: 4px;
   max-height: 200px;
