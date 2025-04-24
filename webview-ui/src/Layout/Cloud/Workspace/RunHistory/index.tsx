@@ -9,7 +9,7 @@ import {
   getStatusIcon
 } from "./utils";
 import Button from "../../../../components/Button";
-import FilterForProject from "../../_shared/FilterForProject";
+import FilterForProject from "../FilterForProject";
 
 import styles from "./styles.module.css";
 

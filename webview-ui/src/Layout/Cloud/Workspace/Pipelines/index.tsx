@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { getWorkflowURL, relativeTime } from "../../utils";
 import { useTowerContext } from "../../../../Context";
 import workflowIcon from "../../../../images/workflow.svg";
-import FilterForProject from "../../_shared/FilterForProject";
+import FilterForProject from "../FilterForProject";
 import styles from "./styles.module.css";
 
 const Pipelines = () => {
@@ -19,13 +19,13 @@ const Pipelines = () => {
         <>
           {pipelines.map((pipeline) => (
             <a href={getWorkflowURL(pipeline)} className={styles.item}>
-              <div className="flex items-center">
+              <div className={styles.name}>
                 <img
                   src={workflowIcon}
                   className="mr-2"
                   style={{ height: 12, opacity: 0.8 }}
                 />
-                {pipeline.name}
+                <label>{pipeline.name}</label>
               </div>
               <div className={styles.meta}>
                 Updated: {relativeTime(pipeline.lastUpdated)}
