@@ -34,7 +34,7 @@ const Toolbar = () => {
           <img src={seqeraLogo} style={{ height: 13, opacity: 1 }} />
           {!repoInfo && <span className="ml-2">Launchpad</span>}
         </Button>
-        <Button href="https://seqera.io/ask-ai" subtle2>
+        <Button href="https://seqera.io/ask-ai" subtle2 description="Seqera AI">
           <img src={aiIcon} style={{ height: 13, opacity: 1 }} />
         </Button>
         {isAuthenticated && (
