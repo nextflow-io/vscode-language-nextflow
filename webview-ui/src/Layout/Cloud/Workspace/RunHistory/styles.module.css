@@ -7,6 +7,7 @@
   margin-bottom: 6px;
   cursor: pointer;
   transition: all 0.2s;
+  min-width: 260px;
   &:hover {
     border-color: var(--vscode-button-background);
     color: var(--vscode-button-foreground);
@@ -21,10 +22,16 @@
     flex: 1;
     margin-right: 1rem;
     font-weight: 500;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
   & .metadata {
     color: var(--vscode-descriptionForeground);
     font-size: 10px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 }
 .footer {
@@ -38,6 +45,9 @@
     align-items: center;
     font-size: 10px;
     opacity: 0.8;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
     & i {
       margin-right: 2px;
       font-size: 11px;
@@ -49,5 +59,8 @@
   & .date {
     color: var(--vscode-descriptionForeground);
     font-size: 10px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 }
