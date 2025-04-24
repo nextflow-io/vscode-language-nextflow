@@ -6,8 +6,6 @@ const fetchPipelines = async (
   workspaceId: number
 ): Promise<PipelinesResponse> => {
   if (!token) return { pipelines: [], totalSize: 0 };
-  console.log("🟢 fetchPipelines", workspaceId);
-  console.log("🟢 fetchPipelines", token);
   try {
     const response = await fetch(
       `${SEQERA_API_URL}/pipelines?workspaceId=${workspaceId}`,
