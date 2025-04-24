@@ -32,7 +32,7 @@ const Modules = () => {
   
   useEffect(() => {
     // Load the modules from the components_mini.json file
-    fetch(new URL('../../assets/components_mini.json', import.meta.url).href)
+    fetch(new URL('../../assets/components.json', import.meta.url).href)
       .then(response => response.json())
       .then(data => {
         if (data.modules) {
