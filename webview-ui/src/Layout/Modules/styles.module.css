@@ -1,0 +1,88 @@
+.filters {
+  display: flex;
+  gap: 10px;
+  padding: 10px;
+  border-bottom: 1px solid var(--vscode-dropdown-border);
+}
+
+.modulesList {
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.moduleCard {
+  padding: 12px;
+  border: 1px solid var(--vscode-dropdown-border);
+  border-radius: 4px;
+  background-color: var(--vscode-editor-background);
+}
+
+.moduleHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 6px;
+}
+
+.moduleHeader h3 {
+  margin: 0;
+  font-size: 16px;
+  color: var(--vscode-editor-foreground);
+}
+
+.description {
+  margin: 6px 0 12px;
+  font-size: 14px;
+  color: var(--vscode-descriptionForeground);
+}
+
+.moduleDetails {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 12px;
+}
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+
+.tag {
+  background-color: var(--vscode-badge-background);
+  color: var(--vscode-badge-foreground);
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 11px;
+}
+
+.popularity {
+  color: var(--vscode-descriptionForeground);
+  font-size: 12px;
+}
+
+.actions {
+  display: flex;
+  gap: 6px;
+}
+
+.installButton, .docsButton {
+  background-color: transparent;
+  border: 1px solid var(--vscode-button-border);
+  color: var(--vscode-button-foreground);
+  font-size: 12px;
+  padding: 4px 8px;
+  cursor: pointer;
+  border-radius: 3px;
+}
+
+.installButton {
+  background-color: var(--vscode-button-background);
+}
+
+.installButton:hover, .docsButton:hover {
+  opacity: 0.8;
+} 

@@ -1,0 +1,645 @@
+{
+  "modules": [
+    {
+      "name": "abacas",
+      "path": "modules/nf-core/abacas/meta.yml",
+      "type": "module",
+      "meta": {
+        "name": "abacas",
+        "description": "contiguate draft genome assembly",
+        "keywords": [
+          "genome",
+          "assembly",
+          "contiguate"
+        ],
+        "tools": [
+          {
+            "abacas": {
+              "description": "ABACAS is intended to rapidly contiguate (align, order, orientate),\nvisualize and design primers to close gaps on shotgun assembled\ncontigs based on a reference sequence.\n",
+              "homepage": "http://abacas.sourceforge.net/documentation.html",
+              "documentation": "http://abacas.sourceforge.net/documentation.html",
+              "doi": "10.1093/bioinformatics/btp347",
+              "licence": [
+                "GPL v2-or-later"
+              ],
+              "identifier": "biotools:abacas"
+            }
+          }
+        ],
+        "input": [
+          [
+            {
+              "meta": {
+                "type": "map",
+                "description": "Groovy Map containing sample information\ne.g. [ id:'test', single_end:false ]\n"
+              }
+            },
+            {
+              "scaffold": {
+                "type": "file",
+                "description": "Fasta file containing scaffold",
+                "pattern": "*.{fasta,fa}"
+              }
+            }
+          ],
+          [
+            {
+              "fasta": {
+                "type": "file",
+                "description": "FASTA reference file",
+                "pattern": "*.{fasta,fa}"
+              }
+            }
+          ]
+        ],
+        "output": [
+          {
+            "results": [
+              {
+                "meta": {
+                  "type": "map",
+                  "description": "Groovy Map containing sample information\ne.g. [ id:'test', single_end:false ]\n"
+                }
+              },
+              {
+                "*.abacas*": {
+                  "type": "file",
+                  "description": "List containing abacas output files\n[ 'test.abacas.bin', 'test.abacas.fasta', 'test.abacas.gaps',\n'test.abacas.gaps.tab', 'test.abacas.nucmer.delta',\n'test.abacas.nucmer.filtered.delta', 'test.abacas.nucmer.tiling',\n'test.abacas.tab', 'test.abacas.unused.contigs.out',\n'test.abacas.MULTIFASTA.fa' ]\n",
+                  "pattern": "*.{abacas}*"
+                }
+              }
+            ]
+          },
+          {
+            "versions": [
+              {
+                "versions.yml": {
+                  "type": "file",
+                  "description": "File containing software versions",
+                  "pattern": "versions.yml"
+                }
+              }
+            ]
+          }
+        ],
+        "authors": [
+          "@joseespinosa",
+          "@drpatelh"
+        ],
+        "maintainers": [
+          "@joseespinosa",
+          "@drpatelh"
+        ]
+      },
+      "pipelines": [
+        {
+          "name": "viralrecon",
+          "version": "2.6.0"
+        }
+      ]
+    },
+    {
+      "name": "abricate_run",
+      "path": "modules/nf-core/abricate/run/meta.yml",
+      "type": "module",
+      "meta": {
+        "name": "abricate_run",
+        "description": "Screen assemblies for antimicrobial resistance against multiple databases",
+        "keywords": [
+          "bacteria",
+          "assembly",
+          "antimicrobial resistance"
+        ],
+        "tools": [
+          {
+            "abricate": {
+              "description": "Mass screening of contigs for antibiotic resistance genes",
+              "homepage": "https://github.com/tseemann/abricate",
+              "documentation": "https://github.com/tseemann/abricate",
+              "tool_dev_url": "https://github.com/tseemann/abricate",
+              "licence": [
+                "GPL v2"
+              ],
+              "identifier": "biotools:ABRicate"
+            }
+          }
+        ],
+        "input": [
+          [
+            {
+              "meta": {
+                "type": "map",
+                "description": "Groovy Map containing sample information\ne.g. [ id:'test', single_end:false ]\n"
+              }
+            },
+            {
+              "assembly": {
+                "type": "file",
+                "description": "FASTA, GenBank or EMBL formatted file",
+                "pattern": "*.{fa,fasta,fna,fa.gz,fasta.gz,fna.gz,gbk,gbk.gz,embl,embl.gz}"
+              }
+            }
+          ],
+          [
+            {
+              "databasedir": {
+                "type": "directory",
+                "description": "Optional location of local copy of database files, possibly with custom databases set up with `abricate --setupdb`",
+                "pattern": "*/"
+              }
+            }
+          ]
+        ],
+        "output": [
+          {
+            "report": [
+              {
+                "meta": {
+                  "type": "map",
+                  "description": "Groovy Map containing sample information\ne.g. [ id:'test', single_end:false ]\n"
+                }
+              },
+              {
+                "*.txt": {
+                  "type": "file",
+                  "description": "Tab-delimited report of results",
+                  "pattern": "*.{txt}"
+                }
+              }
+            ]
+          },
+          {
+            "versions": [
+              {
+                "versions.yml": {
+                  "type": "file",
+                  "description": "File containing software versions",
+                  "pattern": "versions.yml"
+                }
+              }
+            ]
+          }
+        ],
+        "authors": [
+          "@rpetit3"
+        ],
+        "maintainers": [
+          "@rpetit3"
+        ]
+      },
+      "pipelines": [
+        {
+          "name": "funcscan",
+          "version": "2.1.0"
+        }
+      ]
+    },
+    {
+      "name": "abricate_summary",
+      "path": "modules/nf-core/abricate/summary/meta.yml",
+      "type": "module",
+      "meta": {
+        "name": "abricate_summary",
+        "description": "Screen assemblies for antimicrobial resistance against multiple databases",
+        "keywords": [
+          "bacteria",
+          "assembly",
+          "antimicrobial reistance"
+        ],
+        "tools": [
+          {
+            "abricate": {
+              "description": "Mass screening of contigs for antibiotic resistance genes",
+              "homepage": "https://github.com/tseemann/abricate",
+              "documentation": "https://github.com/tseemann/abricate",
+              "tool_dev_url": "https://github.com/tseemann/abricate",
+              "licence": [
+                "GPL v2"
+              ],
+              "identifier": "biotools:ABRicate"
+            }
+          }
+        ],
+        "input": [
+          [
+            {
+              "meta": {
+                "type": "map",
+                "description": "Groovy Map containing sample information\ne.g. [ id:'test', single_end:false ]\n"
+              }
+            },
+            {
+              "reports": {
+                "type": "file",
+                "description": "FASTA, GenBank or EMBL formatted file",
+                "pattern": "*.{fa,fasta,fna,fa.gz,fasta.gz,fna.gz,gbk,gbk.gz,embl,embl.gz}"
+              }
+            }
+          ]
+        ],
+        "output": [
+          {
+            "report": [
+              {
+                "meta": {
+                  "type": "map",
+                  "description": "Groovy Map containing sample information\ne.g. [ id:'test', single_end:false ]\n"
+                }
+              },
+              {
+                "*.txt": {
+                  "type": "file",
+                  "description": "Tab-delimited report of aggregated results",
+                  "pattern": "*.{txt}"
+                }
+              }
+            ]
+          },
+          {
+            "versions": [
+              {
+                "versions.yml": {
+                  "type": "file",
+                  "description": "File containing software versions",
+                  "pattern": "versions.yml"
+                }
+              }
+            ]
+          }
+        ],
+        "authors": [
+          "@rpetit3"
+        ],
+        "maintainers": [
+          "@rpetit3"
+        ]
+      }
+    },
+    {
+      "name": "abritamr_run",
+      "path": "modules/nf-core/abritamr/run/meta.yml",
+      "type": "module",
+      "meta": {
+        "name": "abritamr_run",
+        "description": "A NATA accredited tool for reporting the presence of antimicrobial resistance genes in bacterial genomes",
+        "keywords": [
+          "bacteria",
+          "fasta",
+          "antibiotic resistance"
+        ],
+        "tools": [
+          {
+            "abritamr": {
+              "description": "A pipeline for running AMRfinderPlus and collating results into functional classes",
+              "homepage": "https://github.com/MDU-PHL/abritamr",
+              "documentation": "https://github.com/MDU-PHL/abritamr",
+              "tool_dev_url": "https://github.com/MDU-PHL/abritamr",
+              "doi": "10.1038/s41467-022-35713-4",
+              "licence": [
+                "GPL v3"
+              ],
+              "identifier": "biotools:abritamr"
+            }
+          }
+        ],
+        "input": [
+          [
+            {
+              "meta": {
+                "type": "map",
+                "description": "Groovy Map containing sample information\ne.g. `[ id:'test', single_end:false ]`\n"
+              }
+            },
+            {
+              "fasta": {
+                "type": "file",
+                "description": "Assembled contigs in FASTA format",
+                "pattern": "*.{fasta,fasta.gz,fa,fa.gz,fna,fna.gz,faa,faa.gz}"
+              }
+            }
+          ]
+        ],
+        "output": [
+          {
+            "matches": [
+              {
+                "meta": {
+                  "type": "file",
+                  "description": "Tab-delimited file, with a row per sequence, and columns representing functional drug classes",
+                  "pattern": "*.summary_matches.txt"
+                }
+              },
+              {
+                "*.summary_matches.txt": {
+                  "type": "file",
+                  "description": "Tab-delimited file, with a row per sequence, and columns representing functional drug classes",
+                  "pattern": "*.summary_matches.txt"
+                }
+              }
+            ]
+          },
+          {
+            "partials": [
+              {
+                "meta": {
+                  "type": "file",
+                  "description": "Tab-delimited file, with a row per sequence, and columns representing partial hits to functional drug classes",
+                  "pattern": "*.summary_partials.txt"
+                }
+              },
+              {
+                "*.summary_partials.txt": {
+                  "type": "file",
+                  "description": "Tab-delimited file, with a row per sequence, and columns representing partial hits to functional drug classes",
+                  "pattern": "*.summary_partials.txt"
+                }
+              }
+            ]
+          },
+          {
+            "virulence": [
+              {
+                "meta": {
+                  "type": "string",
+                  "description": "Tab-delimited file, with a row per sequence, and columns representing AMRFinderPlus virulence gene classification",
+                  "pattern": "*.summary_virulence.txt"
+                }
+              },
+              {
+                "*.summary_virulence.txt": {
+                  "type": "string",
+                  "description": "Tab-delimited file, with a row per sequence, and columns representing AMRFinderPlus virulence gene classification",
+                  "pattern": "*.summary_virulence.txt"
+                }
+              }
+            ]
+          },
+          {
+            "out": [
+              {
+                "meta": {
+                  "type": "string",
+                  "description": "raw output from AMRFinder plus (per sequence)",
+                  "pattern": "*.amrfinder.txt"
+                }
+              },
+              {
+                "*.amrfinder.out": {
+                  "type": "string",
+                  "description": "raw output from AMRFinder plus (per sequence)",
+                  "pattern": "*.amrfinder.txt"
+                }
+              }
+            ]
+          },
+          {
+            "txt": [
+              {
+                "meta": {
+                  "type": "string",
+                  "description": "Tab-delimited file, combining non-empty summary files",
+                  "pattern": "*.abritamr.txt"
+                }
+              },
+              {
+                "*.abritamr.txt": {
+                  "type": "string",
+                  "description": "Tab-delimited file, combining non-empty summary files",
+                  "pattern": "*.abritamr.txt"
+                }
+              }
+            ]
+          },
+          {
+            "versions": [
+              {
+                "versions.yml": {
+                  "type": "file",
+                  "description": "File containing software versions",
+                  "pattern": "versions.yml"
+                }
+              }
+            ]
+          }
+        ],
+        "authors": [
+          "@rpetit3"
+        ],
+        "maintainers": [
+          "@rpetit3",
+          "@sateeshperi"
+        ]
+      }
+    },
+    {
+      "name": "adapterremoval",
+      "path": "modules/nf-core/adapterremoval/meta.yml",
+      "type": "module",
+      "meta": {
+        "name": "adapterremoval",
+        "description": "Trim sequencing adapters and collapse overlapping reads",
+        "keywords": [
+          "trimming",
+          "adapters",
+          "merging",
+          "fastq"
+        ],
+        "tools": [
+          {
+            "adapterremoval": {
+              "description": "The AdapterRemoval v2 tool for merging and clipping reads.",
+              "homepage": "https://github.com/MikkelSchubert/adapterremoval",
+              "documentation": "https://adapterremoval.readthedocs.io",
+              "licence": [
+                "GPL v3"
+              ],
+              "identifier": "biotools:adapterremoval"
+            }
+          }
+        ],
+        "input": [
+          [
+            {
+              "meta": {
+                "type": "map",
+                "description": "Groovy Map containing sample information\ne.g. [ id:'test', single_end:false ]\n"
+              }
+            },
+            {
+              "reads": {
+                "type": "file",
+                "description": "List of input FastQ files of size 1 and 2 for single-end and paired-end data,\nrespectively.\n",
+                "pattern": "*.{fq,fastq,fq.gz,fastq.gz}"
+              }
+            }
+          ],
+          [
+            {
+              "adapterlist": {
+                "type": "file",
+                "description": "Optional text file containing list of adapters to look for for removal with one adapter per line. Otherwise will look for default adapters (see AdapterRemoval man page), or can be modified to remove user-specified adapters via ext.args."
+              }
+            }
+          ]
+        ],
+        "output": [
+          {
+            "singles_truncated": [
+              {
+                "meta": {
+                  "type": "file",
+                  "description": "Adapter trimmed FastQ files of either single-end reads, or singleton\n'orphaned' reads from merging of paired-end data (i.e., one of the pair\nwas lost due to filtering thresholds).\n",
+                  "pattern": "*.truncated.fastq.gz"
+                }
+              },
+              {
+                "${prefix}.truncated.fastq.gz": {
+                  "type": "file",
+                  "description": "Adapter trimmed FastQ files of either single-end reads, or singleton\n'orphaned' reads from merging of paired-end data (i.e., one of the pair\nwas lost due to filtering thresholds).\n",
+                  "pattern": "*.truncated.fastq.gz"
+                }
+              }
+            ]
+          },
+          {
+            "discarded": [
+              {
+                "meta": {
+                  "type": "file",
+                  "description": "Adapter trimmed FastQ files of reads that did not pass filtering\nthresholds.\n",
+                  "pattern": "*.discarded.fastq.gz"
+                }
+              },
+              {
+                "${prefix}.discarded.fastq.gz": {
+                  "type": "file",
+                  "description": "Adapter trimmed FastQ files of reads that did not pass filtering\nthresholds.\n",
+                  "pattern": "*.discarded.fastq.gz"
+                }
+              }
+            ]
+          },
+          {
+            "paired_truncated": [
+              {
+                "meta": {
+                  "type": "file",
+                  "description": "Adapter trimmed R{1,2} FastQ files of paired-end reads that did not merge\nwith their respective R{1,2} pair due to long templates. The respective pair\nis stored in 'pair{1,2}_truncated'.\n",
+                  "pattern": "*.pair{1,2}.truncated.fastq.gz"
+                }
+              },
+              {
+                "${prefix}.pair{1,2}.truncated.fastq.gz": {
+                  "type": "file",
+                  "description": "Adapter trimmed R{1,2} FastQ files of paired-end reads that did not merge\nwith their respective R{1,2} pair due to long templates. The respective pair\nis stored in 'pair{1,2}_truncated'.\n",
+                  "pattern": "*.pair{1,2}.truncated.fastq.gz"
+                }
+              }
+            ]
+          },
+          {
+            "collapsed": [
+              {
+                "meta": {
+                  "type": "file",
+                  "description": "Collapsed FastQ of paired-end reads that successfully merged with their\nrespective R1 pair but were not trimmed.\n",
+                  "pattern": "*.collapsed.fastq.gz"
+                }
+              },
+              {
+                "${prefix}.collapsed.fastq.gz": {
+                  "type": "file",
+                  "description": "Collapsed FastQ of paired-end reads that successfully merged with their\nrespective R1 pair but were not trimmed.\n",
+                  "pattern": "*.collapsed.fastq.gz"
+                }
+              }
+            ]
+          },
+          {
+            "collapsed_truncated": [
+              {
+                "meta": {
+                  "type": "file",
+                  "description": "Collapsed FastQ of paired-end reads that successfully merged with their\nrespective R1 pair and were trimmed of adapter due to sufficient overlap.\n",
+                  "pattern": "*.collapsed.truncated.fastq.gz"
+                }
+              },
+              {
+                "${prefix}.collapsed.truncated.fastq.gz": {
+                  "type": "file",
+                  "description": "Collapsed FastQ of paired-end reads that successfully merged with their\nrespective R1 pair and were trimmed of adapter due to sufficient overlap.\n",
+                  "pattern": "*.collapsed.truncated.fastq.gz"
+                }
+              }
+            ]
+          },
+          {
+            "paired_interleaved": [
+              {
+                "meta": {
+                  "type": "file",
+                  "description": "Write paired-end reads to a single file, interleaving mate 1 and mate 2 reads\n",
+                  "pattern": "*.paired.fastq.gz"
+                }
+              },
+              {
+                "${prefix}.paired.fastq.gz": {
+                  "type": "file",
+                  "description": "Write paired-end reads to a single file, interleaving mate 1 and mate 2 reads\n",
+                  "pattern": "*.paired.fastq.gz"
+                }
+              }
+            ]
+          },
+          {
+            "settings": [
+              {
+                "meta": {
+                  "type": "file",
+                  "description": "AdapterRemoval log file",
+                  "pattern": "*.settings"
+                }
+              },
+              {
+                "*.settings": {
+                  "type": "file",
+                  "description": "AdapterRemoval log file",
+                  "pattern": "*.settings"
+                }
+              }
+            ]
+          },
+          {
+            "versions": [
+              {
+                "versions.yml": {
+                  "type": "file",
+                  "description": "File containing software versions",
+                  "pattern": "versions.yml"
+                }
+              }
+            ]
+          }
+        ],
+        "authors": [
+          "@maxibor",
+          "@jfy133"
+        ],
+        "maintainers": [
+          "@maxibor",
+          "@jfy133"
+        ]
+      },
+      "pipelines": [
+        {
+          "name": "mag",
+          "version": "3.4.0"
+        },
+        {
+          "name": "taxprofiler",
+          "version": "1.2.3"
+        }
+      ]
+    }
+  ]
+}
