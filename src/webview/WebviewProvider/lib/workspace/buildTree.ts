@@ -1,9 +1,9 @@
 import { FileNode } from "./types";
 
-function getShortestPath(allFiles: FileNode[]): FileNode {
+function getShortestPath(allFiles: FileNode[]): FileNode | undefined {
+  if (!allFiles || !allFiles.length) return undefined;
   return allFiles.reduce((shortest, current) => {
-    if (!shortest)
-      return current;
+    if (!shortest) return current;
     return current.filePath.length < shortest.filePath.length
       ? current
       : shortest;
@@ -17,15 +17,12 @@ function buildTree(
 ): FileNode | null {
   const node = currentNode ?? getShortestPath(allFiles);
 
-  if (!node)
-    return null;
+  if (!node) return null;
 
-  if (processedNodes.has(node.name))
-    return node;
+  if (processedNodes.has(node.name)) return node;
   processedNodes.add(node.name);
 
-  if (!node.children)
-    node.children = [];
+  if (!node.children) node.children = [];
 
   for (const nodeName of node.imports) {
     const childNode = allFiles.find((file) => file.name === nodeName);

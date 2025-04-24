@@ -25,11 +25,7 @@ const Processes = () => {
   if (coverage < 20) color = "red";
 
   if (!processes.length) {
-    return (
-      <section className="cozy">
-        <p>No processes found</p>
-      </section>
-    );
+    return <section className="cozy">No processes found</section>;
   }
 
   return (

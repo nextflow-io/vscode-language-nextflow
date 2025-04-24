@@ -2,31 +2,35 @@ import { SEQERA_PLATFORM_URL } from "../../../../../src/constants";
 import Button from "../../../components/Button";
 import { useTowerContext, useWorkspaceContext } from "../../../Context";
 import { getPipelineURL } from "../utils";
-import styles from "./styles.module.css";
 import pipelineIcon from "../../../images/pipeline.svg";
 import seqeraLogo from "../../../images/seqera.svg";
 import WorkspaceSelector from "./WorkspaceSelector";
 import Select from "../../../components/Select";
 import aiIcon from "../../../images/ai.svg";
+
+import styles from "./styles.module.css";
+
 const Toolbar = () => {
   const { userInfo, repoInfo, isAuthenticated } = useTowerContext();
   const { selectedView, setSelectedView } = useWorkspaceContext();
   const username = userInfo?.user?.userName || "unknown";
+  const url = getPipelineURL(repoInfo);
+  const isGithub = url?.includes("github.com");
 
   return (
     <>
       <div className={styles.toolbar}>
         {!!repoInfo && (
-          <Button
-            href={getPipelineURL(repoInfo)}
-            subtle
-            className={styles.primaryButton}
-          >
-            <img
-              src={pipelineIcon}
-              style={{ height: 12, opacity: 0.6 }}
-              className="mr-2"
-            />
+          <Button href={url} subtle>
+            {isGithub ? (
+              <i className="codicon codicon-github mr-2" />
+            ) : (
+              <img
+                src={pipelineIcon}
+                style={{ height: 12, opacity: 0.6 }}
+                className="mr-2"
+              />
+            )}
             {`${repoInfo.owner}/${repoInfo.name}`}
           </Button>
         )}
