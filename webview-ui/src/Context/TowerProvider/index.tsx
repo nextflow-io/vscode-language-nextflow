@@ -64,7 +64,6 @@ type TowerContextType = {
   getWorkspaces: (orgId: string | number) => Workspace[];
   setSelectedOrg: (n: string) => void;
   selectedOrg: string;
-  refresh: () => void;
   isAuthenticated?: boolean;
   hasToken?: boolean;
   tokenExpired?: boolean;
@@ -151,11 +150,6 @@ const TowerProvider: React.FC<Props> = ({
     vscode.postMessage({ command: "fetchComputeEnvs", workspaceId });
   }
 
-  function refresh() {
-    console.log("🟠 refresh");
-    vscode.postMessage({ command: "refresh" });
-  }
-
   return (
     <TowerContext.Provider
       value={{
@@ -181,7 +175,6 @@ const TowerProvider: React.FC<Props> = ({
         organizations,
         selectedOrg,
         setSelectedOrg,
-        refresh,
         isAuthenticated: auth.isAuthenticated,
         hasToken: auth.hasToken,
         tokenExpired: auth.tokenExpired,

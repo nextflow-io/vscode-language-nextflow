@@ -1,12 +1,11 @@
 import { useEffect, useRef } from "react";
-import { useWorkspaceContext, useTowerContext } from "../Context";
+import { useWorkspaceContext } from "../Context";
 import Processes from "./Processes";
 import Cloud from "./Cloud";
 import Workflows from "./Workflows";
 
 const Layout = () => {
-  const { viewID, files } = useWorkspaceContext();
-  const { refresh } = useTowerContext();
+  const { viewID, files, refresh } = useWorkspaceContext();
   const timeoutRef = useRef<NodeJS.Timeout | null>(null);
 
   useEffect(() => {
