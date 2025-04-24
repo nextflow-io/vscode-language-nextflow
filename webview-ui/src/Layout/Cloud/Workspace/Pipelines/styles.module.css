@@ -5,8 +5,9 @@
   border: 1px solid var(--vscode-dropdown-border);
   color: var(--vscode-button-foreground);
   margin-bottom: 6px;
+  cursor: pointer;
   &:hover {
-    background-color: var(--vscode-menu-background);
+    border-color: var(--vscode-button-background);
     color: var(--vscode-button-foreground);
   }
   & .name {

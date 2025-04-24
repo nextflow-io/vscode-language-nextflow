@@ -36,40 +36,31 @@ const RunHistory = () => {
       {hasHistory ? (
         <>
           {displayedHistory.map((workflow) => (
-            <Button
+            <a
               href={getRunHistoryURL(workspace, workflow)}
               key={workflow.id}
-              fullWidth
-              alt
-              className="mb-1"
+              className={styles.item}
             >
-              <div className={styles.item}>
+              <div className={styles.header}>
                 <span className={styles.name}>{workflow.runName}</span>
-                <div className={styles.metadata}>
-                  <span className={styles.date}>
-                    {relativeTime(workflow.dateCreated)}
-                  </span>
-                  <span
+                <div className={styles.metadata}>{workflow.projectName}</div>
+              </div>
+              <div className={styles.footer}>
+                <div className={clsx(styles.status, styles[workflow.status])}>
+                  <i
                     className={clsx(
-                      styles.status,
-                      workflow.status === "FAILED" && styles.failed
+                      "codicon",
+                      `codicon-${getStatusIcon(workflow.status)}`
                     )}
-                  >
-                    <i
-                      className={clsx(
-                        "codicon",
-                        `codicon-${getStatusIcon(workflow.status)}`
-                      )}
-                    />
-                  </span>
-                  {workflow.complete && (
-                    <span className={styles.runtime}>
-                      {getRuntimeMinutes(workflow)}m
-                    </span>
-                  )}
+                  />
+                  {workflow.status}
+                  {!!workflow.complete && ` (${getRuntimeMinutes(workflow)}m)`}
+                </div>
+                <div className={styles.date}>
+                  {relativeTime(workflow.dateCreated)}
                 </div>
               </div>
-            </Button>
+            </a>
           ))}
           {hasMore && (
             <Button
