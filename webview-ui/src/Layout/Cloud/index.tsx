@@ -1,13 +1,14 @@
 import { useEffect } from "react";
 import { useRef } from "react";
-import { useTowerContext } from "../../Context";
+import { useTowerContext, useWorkspaceContext } from "../../Context";
 
 import Login from "./Login";
 import Workspace from "./Workspace";
 import Toolbar from "./Toolbar";
 
 const Cloud = () => {
-  const { tokenExpiry, hasToken, refresh, repoInfo } = useTowerContext();
+  const { tokenExpiry, hasToken, repoInfo } = useTowerContext();
+  const { refresh } = useWorkspaceContext();
 
   let tokenExpired = false;
   if (tokenExpiry) tokenExpired = tokenExpiry < Date.now() / 1000;
