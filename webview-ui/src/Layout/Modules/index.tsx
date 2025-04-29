@@ -127,24 +127,6 @@ const Modules = () => {
               </div>
               
               <p className={styles.description}>{module.meta.description}</p>
-              
-              <div className={styles.moduleDetails}>
-                {module.meta.keywords && (
-                  <div className={styles.tags}>
-                    {module.meta.keywords.map((keyword, i) => (
-                      <span key={i} className={styles.tag}>{keyword}</span>
-                    ))}
-                  </div>
-                )}
-                
-                {module.pipelines && (
-                  <div className={styles.popularity}>
-                    <span className={styles.usedIn}>
-                      Used in {module.pipelines.length} pipeline{module.pipelines.length !== 1 ? 's' : ''}
-                    </span>
-                  </div>
-                )}
-              </div>
             </div>
           ))}
         </div>
