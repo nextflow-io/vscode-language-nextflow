@@ -15,11 +15,14 @@ export function activateWebview(
     "userInfo",
     authProvider
   );
-
+  const modulesProvider = new WebviewProvider(context, "modules");
+  
+  // Register views
   const providers = [
     vscode.window.registerWebviewViewProvider("workflows", workflowProvider),
     vscode.window.registerWebviewViewProvider("processes", processesProvider),
     vscode.window.registerWebviewViewProvider("userInfo", userInfoProvider),
+    vscode.window.registerWebviewViewProvider("modules", modulesProvider),
     vscode.window.registerTreeDataProvider("resources", resourcesProvider)
   ];
 
@@ -27,15 +30,24 @@ export function activateWebview(
     context.subscriptions.push(provider);
   });
 
+  // Register command
   vscode.commands.registerCommand("nextflow.seqera.reloadWebview", () => {
-    userInfoProvider.initViewData(true);
-    processesProvider.initViewData();
     workflowProvider.initViewData();
+    processesProvider.initViewData();
+    userInfoProvider.initViewData(true);
+    modulesProvider.initViewData();
   });
 
-  // Workspace events
+  // Register events
+  vscode.window.onDidChangeActiveTextEditor((editor) => {
+    if (!editor) return;
+    const { document } = editor;
+    if (document.languageId !== "nextflow") return;
+    workflowProvider.openFileEvent(document.uri.fsPath);
+  });
 
-  vscode.workspace.onDidSaveTextDocument(() => {
+  vscode.workspace.onDidSaveTextDocument((document) => {
+    if (document.languageId !== "nextflow") return;
     processesProvider.initViewData();
     workflowProvider.initViewData();
   });
@@ -47,6 +59,16 @@ export function activateWebview(
     ) {
       workflowProvider.openFileEvent(document.uri.fsPath);
     }
+    workflowProvider.initViewData();
+  });
+
+  vscode.workspace.onDidCloseTextDocument(() => {
+    workflowProvider.initViewData();
+  });
+
+  vscode.workspace.onDidChangeWorkspaceFolders(() => {
+    processesProvider.initViewData();
+    workflowProvider.initViewData();
   });
 
   vscode.workspace.onDidCreateFiles(() => {
@@ -64,18 +86,14 @@ export function activateWebview(
     workflowProvider.initViewData();
   });
 
-  vscode.workspace.onDidChangeWorkspaceFolders(() => {
-    processesProvider.initViewData();
-    workflowProvider.initViewData();
-  });
-
   vscode.workspace.onDidChangeTextDocument((event) => {
     if (
       event.document.uri.fsPath.endsWith(".nf") ||
       event.document.uri.fsPath.endsWith(".nf.test")
     ) {
       processesProvider.initViewData();
-      workflowProvider.initViewData();
     }
   });
+
+  return providers;
 }

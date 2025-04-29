@@ -3,6 +3,7 @@ import { useWorkspaceContext } from "../Context";
 import Processes from "./Processes";
 import Cloud from "./Cloud";
 import Workflows from "./Workflows";
+import Modules from "./Modules";
 
 const Layout = () => {
   const { viewID, files, refresh } = useWorkspaceContext();
@@ -28,6 +29,7 @@ const Layout = () => {
   if (viewID === "userInfo") return <Cloud />;
   if (viewID === "workflows") return <Workflows />;
   if (viewID === "processes") return <Processes />;
+  if (viewID === "modules") return <Modules />;
   return null;
 };
 

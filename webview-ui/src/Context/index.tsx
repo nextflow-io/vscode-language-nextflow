@@ -29,7 +29,7 @@ export type AuthState = {
   error?: string;
 };
 
-type ViewID = "workflows" | "processes" | "userInfo" | "";
+type ViewID = "workflows" | "processes" | "userInfo" | "modules" | "";
 
 const Context = ({ children }: Props) => {
   const viewID = window.initialData?.viewID as ViewID;
