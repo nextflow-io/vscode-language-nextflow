@@ -102,7 +102,9 @@ The following settings are available:
 
 - `nextflow.errorReportingMode`: Set the desired level of error reporting.
 
-- `nextflow.files.exclude`: Configure glob patterns for excluding folders from being searched for Nextflow scripts and configuration files.
+- `nextflow.files.exclude`: Folders that should be excluded when scanning the workspace for Nextflow files.
+
+- `nextflow.files.scanWorkspace`: Scan the workspace for Nextflow scripts and config files on startup.
 
 - `nextflow.formatting.harshilAlignment`: Use the [Harshil Alignment™️](https://nf-co.re/docs/contributing/code_editors_and_styling/harshil_alignment) when formatting Nextflow scripts and config files.
 

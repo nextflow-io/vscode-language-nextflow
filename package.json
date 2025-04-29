@@ -229,7 +229,12 @@
             ".nf-test",
             "work"
           ],
-          "description": "Configure glob patterns for excluding folders from being searched for Nextflow scripts and configuration files."
+          "description": "Folders that should be excluded when scanning the workspace for Nextflow files."
+        },
+        "nextflow.files.scanWorkspace": {
+          "type": "boolean",
+          "default": false,
+          "description": "Scan the workspace for Nextflow scripts and config files on startup."
         },
         "nextflow.formatting.harshilAlignment": {
           "type": "boolean",
