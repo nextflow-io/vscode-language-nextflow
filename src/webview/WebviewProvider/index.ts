@@ -10,7 +10,8 @@ import {
   fetchPlatformData,
   fetchRuns,
   getRepoInfo,
-  queryWorkspace
+  queryWorkspace,
+  generateTest
 } from "./lib";
 import { AuthProvider, getAccessToken } from "../../auth";
 import { jwtExpired } from "../../auth/AuthProvider/utils/jwt";
@@ -71,6 +72,8 @@ class WebviewProvider implements vscode.WebviewViewProvider {
         case "fetchComputeEnvs":
           if (!workspaceId) return;
           this.fetchComputeEnvs(workspaceId);
+        case "generateTest":
+          this.generateTest(message.filePath);
           break;
       }
     });
@@ -156,6 +159,12 @@ class WebviewProvider implements vscode.WebviewViewProvider {
       const nodes = await queryWorkspace();
       view.webview.postMessage({ nodes });
     }
+  }
+
+  public async generateTest(filePath: string) {
+    const accessToken = await getAccessToken(this._context);
+    if (!accessToken) return;
+    await generateTest(filePath, accessToken);
   }
 
   private async openFile(filePath: string, line: number) {
