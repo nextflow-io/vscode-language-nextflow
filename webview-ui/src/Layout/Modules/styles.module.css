@@ -13,7 +13,7 @@
 }
 
 .moduleCard {
-  padding: 12px;
+  padding: 8px 10px;
   border: 1px solid var(--vscode-dropdown-border);
   border-radius: 4px;
   background-color: var(--vscode-editor-background);
@@ -23,17 +23,22 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 6px;
+  margin-bottom: 4px;
+  gap: 8px;
 }
 
 .moduleHeader h3 {
   margin: 0;
   font-size: 16px;
   color: var(--vscode-editor-foreground);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  flex-shrink: 1;
 }
 
 .description {
-  margin: 6px 0 12px;
+  margin: 4px 0 8px;
   font-size: 14px;
   color: var(--vscode-descriptionForeground);
 }
@@ -67,6 +72,7 @@
 .actions {
   display: flex;
   gap: 6px;
+  flex-shrink: 0;
 }
 
 .installButton, .docsButton {
