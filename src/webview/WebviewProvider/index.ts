@@ -161,10 +161,26 @@ class WebviewProvider implements vscode.WebviewViewProvider {
     }
   }
 
-  public async createTest(filePath: string) {
+  private async emitTestCreated(filePath: string, successful: boolean) {
+    this._currentView?.webview.postMessage({
+      testCreated: {
+        filePath,
+        successful
+      }
+    });
+  }
+
+  private async createTest(filePath: string) {
     const accessToken = await getAccessToken(this._context);
-    if (!accessToken) return;
-    await createTest(filePath, accessToken);
+    if (!accessToken) return false;
+
+    try {
+      const created = await createTest(filePath, accessToken);
+      this.emitTestCreated(filePath, created);
+    } catch (error) {
+      console.log("🟠 Test creation failed", error);
+      this.emitTestCreated(filePath, false);
+    }
   }
 
   private async openFile(filePath: string, line: number) {

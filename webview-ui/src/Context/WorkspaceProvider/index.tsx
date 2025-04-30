@@ -17,7 +17,8 @@ const WorkspaceContext = createContext<WorkspaceContextType>({
   setSelectedView: () => {},
   getRepoInfo: () => {},
   refresh: () => {},
-  createTest: () => {}
+  createTest: () => {},
+  creatingTest: {}
 });
 
 interface WorkspaceContextType {
@@ -36,6 +37,11 @@ interface WorkspaceContextType {
   getRepoInfo: () => void;
   refresh: () => void;
   createTest: (filePath: string) => void;
+  creatingTest: {
+    filePath?: string;
+    successful?: boolean;
+    finished?: boolean;
+  };
 }
 
 type Props = {
@@ -49,6 +55,9 @@ const WorkspaceProvider = ({ children, vscode, viewID, isCursor }: Props) => {
   const state = vscode.getState();
 
   const [nodes, setNodes] = useState<TreeNode[]>([]);
+  const [creatingTest, setCreatingTest] = useState<
+    ContextTypes["creatingTest"]
+  >({});
   const [selectedItems, setSelectedItems] = useState<string[]>(
     state?.selectedItems || []
   );
@@ -62,6 +71,14 @@ const WorkspaceProvider = ({ children, vscode, viewID, isCursor }: Props) => {
     const handleMessage = (event: MessageEvent) => {
       const message = event.data;
       setNodes(message.nodes as TreeNode[]);
+      if (message.testCreated) {
+        const data = message.testCreated;
+        setCreatingTest({
+          filePath: data.filePath,
+          successful: data.successful,
+          finished: true
+        });
+      }
     };
     window.addEventListener("message", handleMessage);
     return () => window.removeEventListener("message", handleMessage);
@@ -80,11 +97,10 @@ const WorkspaceProvider = ({ children, vscode, viewID, isCursor }: Props) => {
   }
 
   function findChildren(node: TreeNode): TreeNode[] {
-    if (!node.children)
-      return [];
-    return node.children.flatMap((call) => (
+    if (!node.children) return [];
+    return node.children.flatMap((call) =>
       nodes.filter((n) => n.path === call.path && n.name === call.name)
-    ));
+    );
   }
 
   function openFile(filePath: string, line: number) {
@@ -109,6 +125,10 @@ const WorkspaceProvider = ({ children, vscode, viewID, isCursor }: Props) => {
   }
 
   function createTest(filePath: string) {
+    setCreatingTest({
+      filePath,
+      finished: false
+    });
     vscode.postMessage({ command: "createTest", filePath });
   }
 
@@ -129,7 +149,8 @@ const WorkspaceProvider = ({ children, vscode, viewID, isCursor }: Props) => {
         setSelectedView,
         getRepoInfo,
         refresh,
-        createTest
+        createTest,
+        creatingTest
       }}
     >
       {children}

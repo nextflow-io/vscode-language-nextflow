@@ -48,6 +48,13 @@
     &:hover {
       opacity: 1;
     }
+    &.success,
+    &.generating {
+      color: var(--vscode-gitDecoration-untrackedResourceForeground);
+    }
+    &.error {
+      color: var(--vscode-gitDecoration-modifiedResourceForeground);
+    }
     &.disabled {
       color: #666 !important;
       cursor: default;

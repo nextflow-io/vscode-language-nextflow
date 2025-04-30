@@ -2,7 +2,7 @@ import * as vscode from "vscode";
 import * as fs from "fs";
 import generateTest from "./generateTest";
 
-async function createTest(filePath: string, token: string) {
+async function createTest(filePath: string, token: string): Promise<boolean> {
   return vscode.window.withProgress(
     {
       location: vscode.ProgressLocation.Notification,
@@ -26,11 +26,13 @@ async function createTest(filePath: string, token: string) {
 
         await vscode.workspace.applyEdit(workspaceEdit);
         vscode.window.showInformationMessage(`nf-test created: ${newFilePath}`);
+        return true;
       } catch (error: any) {
         console.log("🟢 Error generating nf-test", error);
         vscode.window.showErrorMessage(
           `Failed to generate nf-test: ${error?.message}`
         );
+        return false;
       }
     }
   );
