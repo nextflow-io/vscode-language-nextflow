@@ -84,7 +84,7 @@ async function createNFTestFile(filePath: string, token: string) {
   try {
     const content = fs.readFileSync(filePath, "utf8");
     const nfTest = await generateNFTest(content, token);
-    const newFilePath = filePath.replace(".nf", ".test.nf");
+    const newFilePath = filePath.replace(".nf", ".nf.test");
 
     const workspaceEdit = new vscode.WorkspaceEdit();
     const uri = vscode.Uri.file(newFilePath);
@@ -99,7 +99,7 @@ async function createNFTestFile(filePath: string, token: string) {
   }
 }
 
-const systemPrompt = `You ONLY output code for nf-tests, nothing else. You do not output any other text such as comments, explanations, or anything else.`;
+const systemPrompt = `You ONLY output code for nf-tests, nothing else. Do not include backticks or code blocks. You do not output any other text such as explanations, or anything else. You output pure code.`;
 
 const getUserMessage = (content: string) => `
 Generate an nf-test for the following Nextflow process:
