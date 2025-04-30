@@ -63,8 +63,8 @@ const Toolbar = () => {
             <Select
               options={[
                 { label: "Run History", value: "runs" },
-                { label: "Datasets", value: "datasets" },
                 { label: "Pipelines", value: "pipelines" },
+                { label: "Datasets", value: "datasets" },
                 { label: "Data Buckets", value: "data-links" },
                 { label: "Compute Environments", value: "compute-environments" }
               ]}

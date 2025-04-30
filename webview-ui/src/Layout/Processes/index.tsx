@@ -1,28 +1,28 @@
 import { useState } from "react";
 import { useWorkspaceContext } from "../../Context";
 import FileList from "../../components/FileList";
-
-import styles from "./styles.module.css";
 import Input from "../../components/Input";
+import styles from "./styles.module.css";
+
+function round(x: number) {
+  return Math.round(x * 100) / 100;
+}
 
 const Processes = () => {
-  const { files, testCount } = useWorkspaceContext();
-  const processes = files.filter((f) => f.type === "process");
+  const { nodes } = useWorkspaceContext();
+  const processes = nodes.filter((f) => f.type === "process");
   const [search, setSearch] = useState("");
 
-  let filteredProcesses = processes;
-  if (search) {
-    filteredProcesses = processes.filter((p) =>
-      p.name.toLowerCase().includes(search.toLowerCase())
-    );
-  }
+  const filteredProcesses = search
+    ? processes.filter((p) => p.name.toLowerCase().includes(search.toLowerCase()))
+    : processes;
 
-  const processCount = processes.length;
-  let coverage = (testCount / processCount) * 100;
-  coverage = Math.round(coverage * 100) / 100;
-  let color = "#0dc09d";
-  if (coverage < 80) color = "orange";
-  if (coverage < 20) color = "red";
+  const testCount = processes.filter((n) => n.test !== undefined).length;
+  const coverage = round((testCount / processes.length) * 100);
+  const color =
+    coverage >= 80 ? "#0dc09d" :
+    coverage >= 20 ? "orange" :
+    "red";
 
   if (!processes.length) {
     return <section className="cozy">No processes found</section>;
@@ -40,7 +40,7 @@ const Processes = () => {
       <div className={styles.header}>
         Test coverage: <span style={{ color }}>{coverage}%</span>
       </div>
-      <FileList files={filteredProcesses} />
+      <FileList nodes={filteredProcesses} />
     </>
   );
 };

@@ -1,22 +1,22 @@
+import { TreeNode } from "../../Context/WorkspaceProvider/types";
 import FileNode from "./FileNode";
-
 import styles from "./styles.module.css";
 
-import { FileNode as FileNodeType } from "../../Context/WorkspaceProvider/types";
-
 type Props = {
-  tree?: FileNodeType;
+  nodes: TreeNode[];
   searchTerm?: string;
 };
 
-const FileTree = ({ tree, searchTerm }: Props) => {
-  if (!tree?.name) {
-    return <section className="cozy">No file tree found</section>;
+const FileTree = ({ nodes, searchTerm }: Props) => {
+  if (nodes.length == 0) {
+    return <section className="cozy">No entry workflows found</section>;
   }
 
   return (
     <div className={styles.container}>
-      <FileNode node={tree} searchTerm={searchTerm} />
+      {nodes.map((node) => (
+        <FileNode node={node} searchTerm={searchTerm} />
+      ))}
     </div>
   );
 };

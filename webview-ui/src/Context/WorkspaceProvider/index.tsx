@@ -1,20 +1,15 @@
 import { createContext, useContext, useEffect, useState } from "react";
 
-import { FileNode as FileNodeType } from "./types";
-import { sortFiles } from "./utils";
+import { TreeNode } from "./types";
 
 const WorkspaceContext = createContext<WorkspaceContextType>({
-  files: [],
-  tests: [],
-  tree: undefined,
+  nodes: [],
+  findChildren: () => [],
   openFile: () => {},
-  getFile: () => undefined,
-  getTest: () => undefined,
   selectedItems: [],
   selectItem: () => {},
   isSelected: () => false,
   viewID: "",
-  testCount: 0,
   login: () => {},
   openChat: () => {},
   isCursor: false,
@@ -25,17 +20,13 @@ const WorkspaceContext = createContext<WorkspaceContextType>({
 });
 
 interface WorkspaceContextType {
-  files: FileNodeType[];
-  tests: FileNodeType[];
-  tree?: FileNodeType;
-  openFile: (file: FileNodeType, isTest?: boolean) => void;
-  getFile: (name: string) => FileNodeType | undefined;
-  getTest: (name: string) => FileNodeType | undefined;
+  nodes: TreeNode[];
+  findChildren: (node: TreeNode) => TreeNode[];
+  openFile: (uri: string, line: number) => void;
   selectedItems: string[];
   selectItem: (name: string) => void;
   isSelected: (name: string) => boolean;
   viewID: string;
-  testCount: number;
   login: () => void;
   openChat: () => void;
   isCursor: boolean;
@@ -55,23 +46,11 @@ type Props = {
 const WorkspaceProvider = ({ children, vscode, viewID, isCursor }: Props) => {
   const state = vscode.getState();
 
-  const [testCount, setTestCount] = useState(0);
-  const [files, setFiles] = useState<FileNodeType[]>([]);
-  const [tests, setTests] = useState<FileNodeType[]>([]);
-  const [tree, setTree] = useState<FileNodeType | undefined>(undefined);
+  const [nodes, setNodes] = useState<TreeNode[]>([]);
   const [selectedItems, setSelectedItems] = useState<string[]>(
     state?.selectedItems || []
   );
   const [selectedView, setSelectedView] = useState<string>("runs");
-
-  useEffect(() => {
-    let count = 0;
-    for (const file of files) {
-      const testFile = getTest(file.name);
-      if (testFile) count++;
-    }
-    setTestCount(count);
-  }, [files]);
 
   useEffect(() => {
     vscode.setState({ selectedItems });
@@ -80,14 +59,9 @@ const WorkspaceProvider = ({ children, vscode, viewID, isCursor }: Props) => {
   useEffect(() => {
     const handleMessage = (event: MessageEvent) => {
       const message = event.data;
-      if (message.fileList) {
-        const { files, tests } = message.fileList;
-        setFiles(sortFiles(files || []));
-        setTests(sortFiles(tests || []));
-      }
-      if (message.tree) {
-        setTree(message.tree);
-      }
+      const nodes = message.nodes as TreeNode[];
+      nodes.sort((a, b) => a.name.localeCompare(b.name));
+      setNodes(nodes);
     };
     window.addEventListener("message", handleMessage);
     return () => window.removeEventListener("message", handleMessage);
@@ -105,17 +79,16 @@ const WorkspaceProvider = ({ children, vscode, viewID, isCursor }: Props) => {
     return selectedItems.includes(name);
   }
 
-  function openFile(file: FileNodeType) {
-    if (!file) return;
-    vscode.postMessage({ command: "openFile", file });
+  function findChildren(node: TreeNode): TreeNode[] {
+    if (!node.children)
+      return [];
+    return node.children.flatMap((call) =>
+      nodes.filter((n) => n.uri === call.uri && n.name === call.name)
+    );
   }
 
-  function getFile(name: string) {
-    return files.find((file) => file.name === name);
-  }
-
-  function getTest(name: string) {
-    return tests.find((test) => test.name === name);
+  function openFile(uri: string, line: number) {
+    vscode.postMessage({ command: "openFile", uri: uri, line: line });
   }
 
   function login() {
@@ -138,17 +111,13 @@ const WorkspaceProvider = ({ children, vscode, viewID, isCursor }: Props) => {
   return (
     <WorkspaceContext.Provider
       value={{
-        files,
-        tests,
-        tree,
+        nodes,
+        findChildren,
         openFile,
         openChat,
-        getFile,
-        getTest,
         selectedItems,
         selectItem,
         isSelected,
-        testCount,
         login,
         viewID,
         isCursor,

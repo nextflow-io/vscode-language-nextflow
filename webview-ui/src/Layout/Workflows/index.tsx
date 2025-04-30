@@ -1,24 +1,25 @@
 import { useState } from "react";
 import { useWorkspaceContext } from "../../Context";
-import FileTree from "../../components/FileTree";
 import FileList from "../../components/FileList";
-import Select from "../../components/Select";
+import FileTree from "../../components/FileTree";
 import Input from "../../components/Input";
+import Select from "../../components/Select";
 import styles from "./styles.module.css";
+
 type View = "tree" | "list";
 
 const Workflows = () => {
   const [view, setView] = useState<View>("tree");
-  const { files, tree } = useWorkspaceContext();
-  const workflows = files.filter((f) => f.type === "workflow");
+  const { nodes } = useWorkspaceContext();
   const [search, setSearch] = useState("");
 
-  let filteredWorkflows = workflows;
-  if (search) {
-    filteredWorkflows = workflows.filter((wf) =>
-      wf.name.toLowerCase().includes(search.toLowerCase())
-    );
-  }
+  const entryNodes = view === "tree"
+    ? nodes.filter((n) => n.name === "<entry>")
+    : nodes;
+
+  const filteredNodes = view === "list" && search
+    ? nodes.filter((n) => n.name.toLowerCase().includes(search.toLowerCase()))
+    : nodes;
 
   return (
     <>
@@ -26,7 +27,7 @@ const Workflows = () => {
         <Input
           value={search}
           onChange={(value) => setSearch(value)}
-          placeholder="Search workflows"
+          placeholder="Search processes and workflows"
         />
         <Select
           options={[
@@ -38,17 +39,13 @@ const Workflows = () => {
         />
       </div>
       {view === "tree" ? (
-        !tree?.name ? (
-          <section className="cozy">No workflows found</section>
-        ) : (
-          <FileTree tree={tree} searchTerm={search} />
-        )
+        !entryNodes.length
+          ? <section className="cozy">No workflows found</section>
+          : <FileTree nodes={entryNodes} searchTerm={search} />
       ) : (
-        !filteredWorkflows.length ? (
-          <section className="cozy">No workflows found</section>
-        ) : (
-          <FileList files={filteredWorkflows} />
-        )
+        !filteredNodes.length
+          ? <section className="cozy">No workflows found</section>
+          : <FileList nodes={filteredNodes} />
       )}
     </>
   );

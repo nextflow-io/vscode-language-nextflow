@@ -1,19 +1,19 @@
 import clsx from "clsx";
 import { useState, useEffect } from "react";
 import { useWorkspaceContext } from "../../Context";
+import { TreeNode } from "../../Context/WorkspaceProvider/types";
 import styles from "./styles.module.css";
-import { FileNode as FileNodeType } from "../../Context/WorkspaceProvider/types";
 
 type Props = {
-  node: FileNodeType;
+  node: TreeNode;
   level?: number;
   searchTerm?: string;
 };
 
 const FileNode = ({ node, level = 0, searchTerm }: Props) => {
-  const { openFile } = useWorkspaceContext();
+  const { findChildren, openFile } = useWorkspaceContext();
   const [expanded, setExpanded] = useState(level < 1);
-  const isFolder = !!node.children?.length;
+  const isWorkflow = node.type === "workflow";
 
   useEffect(() => {
     if (searchTerm) setExpanded(true);
@@ -21,42 +21,38 @@ const FileNode = ({ node, level = 0, searchTerm }: Props) => {
   }, [searchTerm]);
 
   function handleClick() {
-    if (hasChildren && !searchTerm) setExpanded((prev) => !prev);
-    openFile(node);
+    if (hasChildren && !searchTerm)
+      setExpanded((prev) => !prev);
+    openFile(node.uri, node.line);
   }
 
-  const hasAnyMatchingDescendant = (node: FileNodeType): boolean => {
-    if (!searchTerm) return true;
+  function isMatch(node: TreeNode): boolean {
+    return !searchTerm || node.name.toLowerCase().includes(searchTerm.toLowerCase());
+  }
 
-    const nodeMatches = node.name
-      .toLowerCase()
-      .includes(searchTerm.toLowerCase());
-    if (nodeMatches) return true;
+  function isRecursiveMatch(node: TreeNode): boolean {
+    if (!node || !searchTerm)
+      return true;
 
-    return (
-      node.children?.some((child) => hasAnyMatchingDescendant(child)) || false
-    );
+    if (isMatch(node))
+      return true;
+
+    return findChildren(node).some(isRecursiveMatch);
   };
 
-  const filteredChildren = node.children?.filter((child) => {
-    if (searchTerm) {
-      return hasAnyMatchingDescendant(child);
-    }
-    return true;
-  });
+  const children = findChildren(node);
+  const filteredChildren = searchTerm
+    ? children.filter(isRecursiveMatch)
+    : children;
 
-  const hasChildren = !!filteredChildren?.length;
-
-  let isMatch = true;
-  if (searchTerm) {
-    isMatch = node.name.toLowerCase().includes(searchTerm?.toLowerCase() || "");
-  }
-  if (!hasChildren && !isMatch) return null;
+  const hasChildren = filteredChildren.length > 0;
+  if (!hasChildren && !isMatch(node))
+    return null;
 
   return (
     <div
       className={clsx(styles.row, {
-        [styles.folder]: isFolder,
+        [styles.folder]: isWorkflow,
         [styles.expanded]: expanded
       })}
     >
@@ -65,7 +61,7 @@ const FileNode = ({ node, level = 0, searchTerm }: Props) => {
           <i
             className={clsx(
               "codicon",
-              isFolder ? "codicon-symbol-method" : "codicon-symbol-method"
+              isWorkflow ? "codicon-symbol-method" : "codicon-symbol-method"
             )}
           />
           {node.name}
@@ -74,7 +70,7 @@ const FileNode = ({ node, level = 0, searchTerm }: Props) => {
       </label>
       {hasChildren && expanded && (
         <div className={styles.children}>
-          {node.children?.map((child) => (
+          {filteredChildren.map((child) => (
             <FileNode
               key={child.name}
               node={child}

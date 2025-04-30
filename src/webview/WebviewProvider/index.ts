@@ -3,18 +3,16 @@ import * as fs from "fs";
 import * as path from "path";
 
 import {
-  buildList,
-  buildTree,
+  fetchComputeEnvs,
+  fetchDataLinks,
+  fetchDatasets,
+  fetchPipelines,
   fetchPlatformData,
   fetchRuns,
   getRepoInfo,
-  fetchPipelines,
-  fetchDatasets,
-  fetchDataLinks,
-  fetchComputeEnvs
+  queryWorkspace
 } from "./lib";
 import { AuthProvider, getAccessToken } from "../../auth";
-import { FileNode } from "./lib/workspace/types";
 import { jwtExpired } from "../../auth/AuthProvider/utils/jwt";
 import { sleep } from "./lib/utils";
 
@@ -24,7 +22,7 @@ class WebviewProvider implements vscode.WebviewViewProvider {
 
   constructor(
     private readonly _context: vscode.ExtensionContext,
-    private readonly viewID: "workflows" | "processes" | "userInfo" | "modules",
+    private readonly viewID: "workflows" | "processes" | "userInfo",
     private readonly _authProvider?: AuthProvider
   ) {
     this._extensionUri = _context.extensionUri;
@@ -40,7 +38,7 @@ class WebviewProvider implements vscode.WebviewViewProvider {
       const { command, workspaceId } = message;
       switch (command) {
         case "openFile":
-          this.openFile(message.file);
+          this.openFile(message.uri, message.line);
           break;
         case "openChat":
           this.openChat();
@@ -153,12 +151,10 @@ class WebviewProvider implements vscode.WebviewViewProvider {
       const accessToken = await this.getAccessToken();
       if (!accessToken) return;
       await fetchPlatformData(accessToken, view.webview, _context, refresh);
-    } else {
-      const fileList = buildList();
-      view.webview.postMessage({
-        fileList,
-        tree: buildTree(fileList.files)
-      });
+    }
+    if (viewID === "processes" || viewID === "workflows") {
+      const nodes = await queryWorkspace();
+      view.webview.postMessage({ nodes });
     }
   }
 
@@ -169,12 +165,13 @@ class WebviewProvider implements vscode.WebviewViewProvider {
     });
   }
 
-  private async openFile(file: FileNode) {
-    const doc = await vscode.workspace.openTextDocument(file.filePath);
+  private async openFile(uri: string, line: number) {
+    const filePath = vscode.Uri.parse(uri).fsPath;
+    const doc = await vscode.workspace.openTextDocument(filePath);
     await vscode.window.showTextDocument(doc, {
-      selection: new vscode.Range(file.line || 0, 0, file.line || 0, 0)
+      selection: new vscode.Range(line, 0, line, 0)
     });
-    this.openFileEvent(file.filePath);
+    this.openFileEvent(filePath);
   }
 
   private async openChat() {

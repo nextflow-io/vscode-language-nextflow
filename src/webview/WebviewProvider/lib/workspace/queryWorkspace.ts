@@ -1,0 +1,83 @@
+import * as fs from "fs";
+import * as path from "path";
+import * as vscode from "vscode";
+
+import { TestNode, TreeNode } from "./types";
+
+function findFiles(dir: string, extension: string): string[] {
+  return fs.readdirSync(dir, { withFileTypes: true })
+    .flatMap((entry) => {
+      const filePath = path.join(dir, entry.name);
+
+      if (entry.isDirectory())
+        return findFiles(filePath, extension);
+      if (entry.isFile() && entry.name.endsWith(extension))
+        return [filePath];
+      return [];
+    });
+}
+
+function getLineNumber(text: string, charIndex: number): number {
+  return text.slice(0, charIndex).split("\n").length - 1;
+};
+
+function parseNfTest(filePath: string): TestNode[] {
+  const uri = vscode.Uri.file(filePath).toString();
+  const text = fs.readFileSync(filePath, "utf8");
+  const result: TestNode[] = [];
+  let m;
+
+  // Process test
+  while ((m = /^\s*process\s+"(\w+)"/g.exec(text)) !== null) {
+    result.push({
+      name: m[1],
+      uri: uri,
+      line: getLineNumber(text, m.index)
+    });
+  }
+
+  // Workflow test
+  while ((m = /^\s*workflow\s+"(\w+)"/g.exec(text)) !== null) {
+    result.push({
+      name: m[1],
+      uri: uri,
+      line: getLineNumber(text, m.index)
+    });
+  }
+
+  return result;
+}
+
+function findNfTests(dir: string): TestNode[] {
+  return findFiles(dir, ".nf.test").flatMap(parseNfTest);
+}
+
+export async function queryWorkspace(): Promise<TreeNode[]> {
+  const folders = vscode.workspace.workspaceFolders;
+  if (!folders || folders.length == 0)
+    return [];
+
+  const res: any = await vscode.commands.executeCommand(
+    "nextflow.server.previewWorkspace",
+    folders[0].name
+  );
+  if (!res || !res.result) {
+    const message = res?.error ?? "Failed to query workspace preview.";
+    vscode.window.showErrorMessage(message);
+    return [];
+  }
+
+  const nodes = res.result as TreeNode[];
+  const tests = new Map<string,TestNode[]>()
+
+  nodes.forEach((node) => {
+    const uri = node.uri;
+    if (!tests.has(uri)) {
+      const filePath = vscode.Uri.parse(uri).fsPath;
+      tests.set(uri, findNfTests(path.dirname(filePath)))
+    }
+    node.test = tests.get(uri)?.find((test) => test.name === node.name);
+  });
+
+  return nodes;
+}

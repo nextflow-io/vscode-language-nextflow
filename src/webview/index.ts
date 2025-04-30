@@ -1,7 +1,11 @@
 import * as vscode from "vscode";
-import WebviewProvider from "./WebviewProvider";
 import { AuthProvider } from "../auth";
 import ResourcesProvider from "./ResourcesProvider";
+import WebviewProvider from "./WebviewProvider";
+
+function isNextflowFile(filePath: string) {
+  return filePath.endsWith(".nf") || filePath.endsWith(".nf.test");
+}
 
 export function activateWebview(
   context: vscode.ExtensionContext,
@@ -16,6 +20,16 @@ export function activateWebview(
     authProvider
   );
   
+  const refresh = (uris?: readonly vscode.Uri[]) => {
+    if (
+      uris === undefined ||
+      uris.some((uri) => isNextflowFile(uri.fsPath))
+    ) {
+      processesProvider.initViewData();
+      workflowProvider.initViewData();
+    }
+  };
+
   // Register views
   const providers = [
     vscode.window.registerWebviewViewProvider("workflows", workflowProvider),
@@ -31,45 +45,21 @@ export function activateWebview(
   // Register command
   vscode.commands.registerCommand("nextflow.seqera.reloadWebview", () => {
     userInfoProvider.initViewData(true);
-    processesProvider.initViewData();
-    workflowProvider.initViewData();
+    refresh();
   });
 
   // Register events
-  vscode.workspace.onDidSaveTextDocument((document) => {
-    if (document.languageId !== "nextflow") return;
-    processesProvider.initViewData();
-    workflowProvider.initViewData();
-  });
-
+  vscode.workspace.onDidSaveTextDocument((e) => refresh([e.uri]));
   vscode.workspace.onDidOpenTextDocument((document) => {
-    if (
-      document.uri.fsPath.endsWith(".nf") ||
-      document.uri.fsPath.endsWith(".nf.test")
-    ) {
-      workflowProvider.openFileEvent(document.uri.fsPath);
+    const filePath = document.uri.fsPath;
+    if (isNextflowFile(filePath)) {
+      workflowProvider.openFileEvent(filePath);
     }
   });
-
-  vscode.workspace.onDidCreateFiles(() => {
-    processesProvider.initViewData();
-    workflowProvider.initViewData();
-  });
-
-  vscode.workspace.onDidDeleteFiles(() => {
-    processesProvider.initViewData();
-    workflowProvider.initViewData();
-  });
-
-  vscode.workspace.onDidRenameFiles(() => {
-    processesProvider.initViewData();
-    workflowProvider.initViewData();
-  });
-
-  vscode.workspace.onDidChangeWorkspaceFolders(() => {
-    processesProvider.initViewData();
-    workflowProvider.initViewData();
-  });
+  vscode.workspace.onDidCreateFiles((e) => refresh(e.files));
+  vscode.workspace.onDidDeleteFiles((e) => refresh(e.files));
+  vscode.workspace.onDidRenameFiles((e) => refresh(e.files.map((r) => r.newUri)));
+  vscode.workspace.onDidChangeWorkspaceFolders((_) => refresh());
 
   return providers;
 }
