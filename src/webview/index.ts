@@ -15,14 +15,12 @@ export function activateWebview(
     "userInfo",
     authProvider
   );
-  const modulesProvider = new WebviewProvider(context, "modules");
   
   // Register views
   const providers = [
     vscode.window.registerWebviewViewProvider("workflows", workflowProvider),
     vscode.window.registerWebviewViewProvider("processes", processesProvider),
     vscode.window.registerWebviewViewProvider("userInfo", userInfoProvider),
-    vscode.window.registerWebviewViewProvider("modules", modulesProvider),
     vscode.window.registerTreeDataProvider("resources", resourcesProvider)
   ];
 
@@ -32,20 +30,12 @@ export function activateWebview(
 
   // Register command
   vscode.commands.registerCommand("nextflow.seqera.reloadWebview", () => {
-    workflowProvider.initViewData();
-    processesProvider.initViewData();
     userInfoProvider.initViewData(true);
-    modulesProvider.initViewData();
+    processesProvider.initViewData();
+    workflowProvider.initViewData();
   });
 
   // Register events
-  vscode.window.onDidChangeActiveTextEditor((editor) => {
-    if (!editor) return;
-    const { document } = editor;
-    if (document.languageId !== "nextflow") return;
-    workflowProvider.openFileEvent(document.uri.fsPath);
-  });
-
   vscode.workspace.onDidSaveTextDocument((document) => {
     if (document.languageId !== "nextflow") return;
     processesProvider.initViewData();

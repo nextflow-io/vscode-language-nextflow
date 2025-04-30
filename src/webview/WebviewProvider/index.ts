@@ -74,12 +74,6 @@ class WebviewProvider implements vscode.WebviewViewProvider {
           if (!workspaceId) return;
           this.fetchComputeEnvs(workspaceId);
           break;
-        case "runCommand":
-          this.runCommand(message.text);
-          break;
-        case "openExternal":
-          this.openExternal(message.url);
-          break;
       }
     });
 
@@ -87,14 +81,6 @@ class WebviewProvider implements vscode.WebviewViewProvider {
       if (!view.visible) return;
       this.initViewData();
     });
-  }
-
-  private async runCommand(command: string) {
-    await vscode.commands.executeCommand("workbench.action.terminal.sendSequence", { text: `${command}\n` });
-  }
-
-  private async openExternal(url: string) {
-    await vscode.env.openExternal(vscode.Uri.parse(url));
   }
 
   private async login() {
