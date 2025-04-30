@@ -25,12 +25,6 @@ export function getComputeEnvURL(
   return `${SEQERA_PLATFORM_URL}/orgs/${workspace.orgName}/workspaces/${workspace.workspaceName}/compute-envs/${computeEnv.id}`;
 }
 
-export function getPipelineURL(repoInfo?: RepoInfo) {
-  if (!repoInfo) return undefined;
-  if (repoInfo.owner !== "nf-core") return repoInfo.url;
-  return `https://seqera.io/pipelines/${repoInfo.name}--${repoInfo.owner}`;
-}
-
 export function getWorkflowURL(pipeline: Pipeline) {
   return `${SEQERA_PLATFORM_URL}/orgs/${pipeline.orgName}/workspaces/${pipeline.workspaceName}/launchpad/${pipeline.pipelineId}`;
 }
