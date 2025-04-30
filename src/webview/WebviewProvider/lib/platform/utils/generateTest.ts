@@ -81,22 +81,37 @@ async function generateNFTest(content: string, token: string): Promise<string> {
 }
 
 async function createNFTestFile(filePath: string, token: string) {
-  try {
-    const content = fs.readFileSync(filePath, "utf8");
-    const nfTest = await generateNFTest(content, token);
-    const newFilePath = filePath.replace(".nf", ".nf.test");
+  return vscode.window.withProgress(
+    {
+      location: vscode.ProgressLocation.Notification,
+      title: "Creating nf-test",
+      cancellable: false
+    },
+    async (progress) => {
+      try {
+        progress.report({ message: "Reading file contents" });
+        const content = fs.readFileSync(filePath, "utf8");
 
-    const workspaceEdit = new vscode.WorkspaceEdit();
-    const uri = vscode.Uri.file(newFilePath);
-    workspaceEdit.createFile(uri, { ignoreIfExists: true });
-    workspaceEdit.insert(uri, new vscode.Position(0, 0), nfTest);
+        progress.report({ message: "Generating code" });
+        const nfTest = await generateNFTest(content, token);
+        const newFilePath = filePath.replace(".nf", ".nf.test");
 
-    await vscode.workspace.applyEdit(workspaceEdit);
-  } catch (error: any) {
-    vscode.window.showErrorMessage(
-      `Failed to generate nf-test: ${error?.message}`
-    );
-  }
+        progress.report({ message: "Creating test file" });
+        const workspaceEdit = new vscode.WorkspaceEdit();
+        const uri = vscode.Uri.file(newFilePath);
+        workspaceEdit.createFile(uri, { ignoreIfExists: true });
+        workspaceEdit.insert(uri, new vscode.Position(0, 0), nfTest);
+
+        await vscode.workspace.applyEdit(workspaceEdit);
+        vscode.window.showInformationMessage(`nf-test created: ${newFilePath}`);
+      } catch (error: any) {
+        console.log("🟢 Error generating nf-test", error);
+        vscode.window.showErrorMessage(
+          `Failed to generate nf-test: ${error?.message}`
+        );
+      }
+    }
+  );
 }
 
 const systemPrompt = `You ONLY output code for nf-tests, nothing else. Do not include backticks or code blocks. You do not output any other text such as explanations, or anything else. You output pure code.`;
