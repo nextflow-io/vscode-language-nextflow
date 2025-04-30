@@ -24,28 +24,14 @@ function getLineNumber(text: string, charIndex: number): number {
 function parseNfTest(filePath: string): TestNode[] {
   const uri = vscode.Uri.file(filePath).toString();
   const text = fs.readFileSync(filePath, "utf8");
-  const result: TestNode[] = [];
-  let m;
-
-  // Process test
-  while ((m = /^\s*process\s+"(\w+)"/g.exec(text)) !== null) {
-    result.push({
-      name: m[1],
+  const matches = text.matchAll(/^\s*(process|workflow)\s+"(\w+)"/gm);
+  return [...matches].map((m) => (
+    {
+      name: m[2],
       uri: uri,
       line: getLineNumber(text, m.index)
-    });
-  }
-
-  // Workflow test
-  while ((m = /^\s*workflow\s+"(\w+)"/g.exec(text)) !== null) {
-    result.push({
-      name: m[1],
-      uri: uri,
-      line: getLineNumber(text, m.index)
-    });
-  }
-
-  return result;
+    } as TestNode
+  ));
 }
 
 function findNfTests(dir: string): TestNode[] {
