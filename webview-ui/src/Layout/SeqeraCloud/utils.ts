@@ -1,7 +1,6 @@
 import {
   Workspace,
   ComputeEnv,
-  RepoInfo,
   Pipeline,
   Dataset,
   DataLink

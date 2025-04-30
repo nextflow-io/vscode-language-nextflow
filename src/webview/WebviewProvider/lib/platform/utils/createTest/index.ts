@@ -21,21 +21,41 @@ async function createTest(filePath: string, token: string): Promise<boolean> {
         progress.report({ message: "Creating test file" });
         const workspaceEdit = new vscode.WorkspaceEdit();
         const uri = vscode.Uri.file(newFilePath);
-        workspaceEdit.createFile(uri, { ignoreIfExists: true });
+        workspaceEdit.createFile(uri, { ignoreIfExists: false });
         workspaceEdit.insert(uri, new vscode.Position(0, 0), nfTest);
 
         await vscode.workspace.applyEdit(workspaceEdit);
         vscode.window.showInformationMessage(`nf-test created: ${newFilePath}`);
         return true;
       } catch (error: any) {
-        console.log("🟢 Error generating nf-test", error);
-        vscode.window.showErrorMessage(
-          `Failed to generate nf-test: ${error?.message}`
-        );
-        return false;
+        const isAuthError =
+          error?.message?.includes("401") ||
+          error?.message?.includes("Unauthorized");
+
+        if (isAuthError) {
+          return handleAuthError();
+        } else {
+          vscode.window.showErrorMessage(
+            `Failed to generate nf-test: ${error?.message}`
+          );
+          return false;
+        }
       }
     }
   );
+}
+
+async function handleAuthError(): Promise<boolean> {
+  const loginAction = "Login to Seqera Cloud";
+  const result = await vscode.window.showInformationMessage(
+    "Authentication required to generate nf-test. Please login to continue.",
+    loginAction
+  );
+
+  if (result === loginAction) {
+    await vscode.commands.executeCommand("nextflow.seqera.login");
+  }
+  return false;
 }
 
 export default createTest;
