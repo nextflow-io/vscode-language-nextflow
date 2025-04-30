@@ -24,9 +24,22 @@ async function createTest(filePath: string, token: string): Promise<boolean> {
         workspaceEdit.createFile(uri, { ignoreIfExists: false });
         workspaceEdit.insert(uri, new vscode.Position(0, 0), nfTest);
 
-        await vscode.workspace.applyEdit(workspaceEdit);
-        vscode.window.showInformationMessage(`nf-test created: ${newFilePath}`);
-        return true;
+        const success = await vscode.workspace.applyEdit(workspaceEdit);
+
+        if (success) {
+          const document = await vscode.workspace.openTextDocument(uri);
+          await document.save();
+          await vscode.window.showTextDocument(document);
+
+          vscode.window.showInformationMessage(
+            `nf-test created: ${newFilePath}`
+          );
+        } else {
+          vscode.window.showErrorMessage("Failed to create test file");
+          await vscode.workspace.fs.delete(uri);
+        }
+
+        return success;
       } catch (error: any) {
         const isAuthError =
           error?.message?.includes("401") ||
