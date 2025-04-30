@@ -4,15 +4,71 @@
 }
 
 .selectButton {
-  border: 1px solid var(--vscode-dropdown-border);
-  background: var(--vscode-dropdown-background);
-  border-radius: 2px;
-  padding: 0 8px;
+  border: 1px solid var(--vscode-button-border);
+  background: var(--vscode-button-background);
+  color: var(--vscode-button-foreground);
+  border-radius: 3px;
+  padding: 0 10px;
   height: 29px;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: space-between;
+  transition: all 0.2s;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  &:hover {
+    background-color: var(--vscode-button-hoverBackground);
+    border-color: var(--vscode-button-border-hover);
+  }
+  &.alt {
+    background-color: var(--vscode-editor-background);
+    border: 1px solid var(--vscode-dropdown-border);
+    color: var(--vscode-button-foreground);
+    font-weight: 400;
+    &:hover {
+      border-color: var(--vscode-button-background);
+    }
+  }
+  &.alt2 {
+    background: var(--vscode-dropdown-border);
+    border: 1px solid var(--vscode-dropdown-border);
+    color: var(--vscode-button-foreground);
+    &:hover {
+      border-color: var(--vscode-button-background);
+    }
+  }
+  &.subtle {
+    background-color: var(--vscode-sideBarSectionHeader-background);
+    &:hover {
+      background-color: var(--vscode-button-background);
+    }
+  }
+  &.subtle2 {
+    background-color: var(--vscode-sideBarSectionHeader-background);
+    opacity: 0.8;
+    &:hover {
+      background-color: var(--vscode-button-background);
+    }
+  }
+  & .label {
+    display: flex;
+    flex: 1 1 auto;
+    align-items: center;
+    & i,
+    & img {
+      margin-right: 8px;
+      height: 13px;
+      width: 13px;
+    }
+  }
+  &.large {
+    height: 36px;
+    padding: 0 16px;
+    font-size: 15px;
+    font-weight: 500;
+  }
 }
 
 .selectButton::after {
@@ -32,7 +88,7 @@
   left: 0;
   right: 0;
   background: var(--vscode-dropdown-background);
-  border: 1px solid var(--vscode-dropdown-border);
+  border: 1px solid var(--vscode-button-background);
   border-radius: 2px;
   margin-top: 4px;
   max-height: 200px;

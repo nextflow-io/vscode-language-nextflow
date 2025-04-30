@@ -3,7 +3,17 @@ import WorkspaceProvider, { useWorkspaceContext } from "./WorkspaceProvider";
 import TowerProvider, { useTowerContext } from "./TowerProvider";
 import { getVscode } from "./utils";
 
-import { UserInfo, Workspace, ComputeEnv, Organization } from "./types";
+import {
+  UserInfo,
+  Workspace,
+  ComputeEnv,
+  Organization,
+  RunsResponse,
+  RepoInfo,
+  PipelinesResponse,
+  Dataset,
+  DataLink
+} from "./types";
 
 const vscode = getVscode();
 
@@ -29,6 +39,15 @@ const Context = ({ children }: Props) => {
   const [workspaces, setWorkspaces] = useState<Workspace[]>([]);
   const [computeEnvs, setComputeEnvs] = useState<ComputeEnv[]>([]);
   const [organizations, setOrganizations] = useState<Organization[]>([]);
+  const [runs, setRuns] = useState<RunsResponse | undefined>(
+    undefined
+  );
+  const [pipelines, setPipelines] = useState<PipelinesResponse | undefined>(
+    undefined
+  );
+  const [repoInfo, setRepoInfo] = useState<RepoInfo | undefined>(undefined);
+  const [datasets, setDatasets] = useState<Dataset[]>([]);
+  const [dataLinks, setDataLinks] = useState<DataLink[]>([]);
 
   useEffect(() => {
     const handleMessage = (event: MessageEvent) => {
@@ -39,6 +58,11 @@ const Context = ({ children }: Props) => {
       if (data.workspaces) setWorkspaces(data.workspaces);
       if (data.computeEnvs) setComputeEnvs(data.computeEnvs);
       if (data.organizations) setOrganizations(data.organizations);
+      if (data.runs) setRuns(data.runs);
+      if (data.pipelines) setPipelines(data.pipelines);
+      if (data.repoInfo) setRepoInfo(data.repoInfo);
+      if (data.datasets) setDatasets(data.datasets);
+      if (data.dataLinks) setDataLinks(data.dataLinks);
     };
     window.addEventListener("message", handleMessage);
     return () => window.removeEventListener("message", handleMessage);
@@ -50,7 +74,17 @@ const Context = ({ children }: Props) => {
         <TowerProvider
           vscode={vscode}
           authState={authState}
-          platformData={{ userInfo, workspaces, computeEnvs, organizations }}
+          platformData={{
+            userInfo,
+            workspaces,
+            computeEnvs,
+            organizations,
+            runs,
+            repoInfo,
+            pipelines,
+            datasets,
+            dataLinks
+          }}
         >
           {children}
         </TowerProvider>

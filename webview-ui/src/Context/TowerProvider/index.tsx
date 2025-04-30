@@ -1,17 +1,27 @@
 import { createContext, useContext, useEffect, useMemo, useState } from "react";
 
 import {
-  WorkspaceID,
   Workspace,
   Organization,
   ComputeEnv,
-  PipelineResponse,
   UserInfo,
+  RunsResponse,
+  RepoInfo,
+  PipelinesResponse,
   Pipeline,
-  FormData
+  Workflow,
+  Dataset,
+  DataLink,
+  WorkspaceID
 } from "../types";
 import { AuthState } from "..";
-import { getOrganizations, getWorkspaces } from "./utils";
+import {
+  getOrganizations,
+  getWorkspaces,
+  filterPipelines,
+  filterRuns,
+  filterComputeEnvs
+} from "./utils";
 
 const TowerContext = createContext<TowerContextType>(null as any);
 
@@ -27,30 +37,43 @@ type PlatformData = {
   workspaces: Workspace[];
   computeEnvs: ComputeEnv[];
   organizations: Organization[];
+  runs?: RunsResponse;
+  repoInfo?: RepoInfo;
+  pipelines?: PipelinesResponse;
+  datasets?: Dataset[];
+  dataLinks?: DataLink[];
 };
 
 type TowerContextType = {
   error?: string | null;
   userInfo?: UserInfo;
-  addPipeline: (
-    pipeline: Pipeline,
-    formData: FormData
-  ) => Promise<PipelineResponse | undefined>;
-  selectedWorkspace: WorkspaceID;
-  setSelectedWorkspace: (n: WorkspaceID) => void;
+  runs?: Workflow[];
+  selectedWorkspace: Workspace | undefined;
+  workspaceId: WorkspaceID | undefined;
+  setSelectedWorkspace: (n: Workspace) => void;
   selectedComputeEnv: string | null;
   setSelectedComputeEnv: (n: string) => void;
   computeEnvs: ComputeEnv[];
+  fetchComputeEnvs: (workspaceId?: WorkspaceID) => void;
+  fetchPipelines: (workspaceId?: WorkspaceID) => void;
+  fetchDatasets: (workspaceId?: WorkspaceID) => void;
+  fetchDataLinks: (workspaceId?: WorkspaceID) => void;
+  fetchRuns: (workspaceId?: WorkspaceID) => void;
   workspaces: Workspace[];
   organizations?: Organization[];
   getWorkspaces: (orgId: string | number) => Workspace[];
   setSelectedOrg: (n: string) => void;
   selectedOrg: string;
-  refresh: () => void;
   isAuthenticated?: boolean;
   hasToken?: boolean;
   tokenExpired?: boolean;
   tokenExpiry?: number;
+  repoInfo?: RepoInfo;
+  pipelines?: Pipeline[];
+  datasets?: Dataset[];
+  dataLinks?: DataLink[];
+  useLocalContext: boolean;
+  setUseLocalContext: (n: boolean) => void;
 };
 
 const TowerProvider: React.FC<Props> = ({
@@ -59,7 +82,16 @@ const TowerProvider: React.FC<Props> = ({
   platformData,
   vscode
 }) => {
-  const { userInfo, workspaces: orgsAndWorkspaces, computeEnvs } = platformData;
+  const {
+    userInfo,
+    workspaces: orgsAndWorkspaces,
+    computeEnvs,
+    runs,
+    pipelines,
+    datasets,
+    dataLinks,
+    repoInfo
+  } = platformData;
 
   const organizations: Organization[] = useMemo(
     () => getOrganizations(orgsAndWorkspaces),
@@ -71,26 +103,17 @@ const TowerProvider: React.FC<Props> = ({
     [orgsAndWorkspaces]
   );
 
-  const [visibleEnvs, setVisibleEnvs] = useState<ComputeEnv[]>([]);
-  const [selectedWorkspace, setSelectedWorkspace] = useState<WorkspaceID>("");
+  const [selectedWorkspace, setSelectedWorkspace] = useState<
+    Workspace | undefined
+  >(undefined);
   const [selectedComputeEnv, setSelectedComputeEnv] = useState<string>("");
   const [selectedOrg, setSelectedOrg] = useState<string>("");
+  const [useLocalContext, setUseLocalContext] = useState<boolean>(false);
+  const workspaceId = selectedWorkspace?.workspaceId;
 
   useEffect(() => {
-    setSelectedWorkspace(workspaces[0]?.workspaceId ?? "");
+    setSelectedWorkspace(workspaces?.[0]);
   }, [workspaces]);
-
-  useEffect(() => {
-    const selectedWorkspaceName = workspaces.find(
-      (w) => w.workspaceId === selectedWorkspace
-    )?.workspaceName;
-    if (!selectedWorkspaceName) return;
-    setVisibleEnvs(
-      computeEnvs?.filter((ce) => ce.workspaceName === selectedWorkspaceName) ??
-        []
-    );
-    setSelectedComputeEnv(visibleEnvs[0]?.id ?? "");
-  }, [selectedWorkspace]);
 
   const getOrgWorkspaces = (orgId: string | number) => {
     return getWorkspaces(orgsAndWorkspaces, orgId);
@@ -107,40 +130,58 @@ const TowerProvider: React.FC<Props> = ({
     };
   }
 
-  function handleAddPipeline(
-    pipeline: Pipeline,
-    formData: FormData
-  ): Promise<PipelineResponse | undefined> {
-    console.log(">> pipeline", pipeline);
-    console.log(">> formData", formData);
-    return Promise.resolve(undefined);
+  function fetchRuns(workspaceId?: WorkspaceID) {
+    vscode.postMessage({ command: "fetchRuns", workspaceId });
   }
 
-  function refresh() {
-    vscode.postMessage({ command: "refresh" });
+  function fetchPipelines(workspaceId?: WorkspaceID) {
+    vscode.postMessage({ command: "fetchPipelines", workspaceId });
+  }
+
+  function fetchDatasets(workspaceId?: WorkspaceID) {
+    vscode.postMessage({ command: "fetchDatasets", workspaceId });
+  }
+
+  function fetchDataLinks(workspaceId?: WorkspaceID) {
+    vscode.postMessage({ command: "fetchDataLinks", workspaceId });
+  }
+
+  function fetchComputeEnvs(workspaceId?: WorkspaceID) {
+    vscode.postMessage({ command: "fetchComputeEnvs", workspaceId });
   }
 
   return (
     <TowerContext.Provider
       value={{
+        useLocalContext,
+        setUseLocalContext,
         error: auth.error,
         userInfo,
-        addPipeline: handleAddPipeline,
         selectedWorkspace,
+        workspaceId,
         setSelectedWorkspace,
         selectedComputeEnv,
         setSelectedComputeEnv,
-        computeEnvs: visibleEnvs,
+        fetchComputeEnvs,
+        fetchPipelines,
+        fetchDatasets,
+        fetchDataLinks,
+        fetchRuns,
+        runs: filterRuns(runs, repoInfo, useLocalContext),
+        computeEnvs: filterComputeEnvs(computeEnvs, selectedWorkspace),
+        pipelines: filterPipelines(pipelines, repoInfo, useLocalContext),
         workspaces,
         getWorkspaces: getOrgWorkspaces,
         organizations,
         selectedOrg,
         setSelectedOrg,
-        refresh,
         isAuthenticated: auth.isAuthenticated,
         hasToken: auth.hasToken,
         tokenExpired: auth.tokenExpired,
-        tokenExpiry: auth.tokenExpiry
+        tokenExpiry: auth.tokenExpiry,
+        repoInfo,
+        datasets,
+        dataLinks
       }}
     >
       {children}

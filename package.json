@@ -142,11 +142,6 @@
         "icon": "$(sign-out)"
       },
       {
-        "command": "nextflow.seqera.openResource",
-        "title": "Open Resource",
-        "category": "Nextflow"
-      },
-      {
         "command": "nextflow.seqera.reloadWebview",
         "title": "Reload Seqera Webview",
         "category": "Nextflow",
@@ -174,12 +169,6 @@
           "command": "nextflow.seqera.goToCloud",
           "when": "view == userInfo && nextflow.isLoggedIn == true",
           "group": "navigation@10"
-        }
-      ],
-      "view/item/context": [
-        {
-          "command": "nextflow.seqera.openResource",
-          "when": "view == resources"
         }
       ]
     },
@@ -359,5 +348,8 @@
     "uuid": "^11.1.0",
     "vscode-jsonrpc": "^8.0.2",
     "vscode-languageclient": "^8.0.2"
-  }
+  },
+  "extensionDependencies": [
+    "vscode.git"
+  ]
 }

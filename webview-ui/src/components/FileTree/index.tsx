@@ -10,12 +10,10 @@ type Props = {
 };
 
 const FileTree = ({ tree, searchTerm }: Props) => {
-  if (!tree?.name)
-    return (
-      <section className="cozy">
-        <p>No file tree found</p>
-      </section>
-    );
+  if (!tree?.name) {
+    return <section className="cozy">No file tree found</section>;
+  }
+
   return (
     <div className={styles.container}>
       <FileNode node={tree} searchTerm={searchTerm} />

@@ -1,0 +1,66 @@
+.item {
+  display: block;
+  padding: 6px 8px;
+  border-radius: 4px;
+  border: 1px solid var(--vscode-dropdown-border);
+  color: var(--vscode-button-foreground);
+  margin-bottom: 6px;
+  cursor: pointer;
+  transition: all 0.2s;
+  min-width: 260px;
+  &:hover {
+    border-color: var(--vscode-button-background);
+    color: var(--vscode-button-foreground);
+  }
+}
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  & .name {
+    flex: 1;
+    margin-right: 1rem;
+    font-weight: 500;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  & .metadata {
+    color: var(--vscode-descriptionForeground);
+    font-size: 10px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+}
+.footer {
+  margin-top: 2px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  & .status {
+    display: flex;
+    align-items: center;
+    font-size: 10px;
+    opacity: 0.8;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    & i {
+      margin-right: 2px;
+      font-size: 11px;
+    }
+    &.FAILED {
+      opacity: 0.6;
+    }
+  }
+  & .date {
+    color: var(--vscode-descriptionForeground);
+    font-size: 10px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+}

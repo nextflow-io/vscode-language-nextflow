@@ -1,5 +1,5 @@
-import type { Pipeline, ComputeEnv, WorkspaceID } from "./types";
-import type { FormData } from "./types";
+import type { Pipeline, ComputeEnv, WorkspaceID } from "../types";
+import type { FormData } from "../types";
 import type { AuthenticationSession } from "vscode";
 import { SEQERA_API_URL } from "../../../../../constants";
 

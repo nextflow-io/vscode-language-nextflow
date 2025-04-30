@@ -38,9 +38,17 @@ const Workflows = () => {
         />
       </div>
       {view === "tree" ? (
-        <FileTree tree={tree} searchTerm={search} />
+        !tree?.name ? (
+          <section className="cozy">No workflows found</section>
+        ) : (
+          <FileTree tree={tree} searchTerm={search} />
+        )
       ) : (
-        <FileList files={filteredWorkflows} />
+        !filteredWorkflows.length ? (
+          <section className="cozy">No workflows found</section>
+        ) : (
+          <FileList files={filteredWorkflows} />
+        )
       )}
     </>
   );

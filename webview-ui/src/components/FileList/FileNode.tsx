@@ -2,7 +2,6 @@ import clsx from "clsx";
 
 import { useWorkspaceContext } from "../../Context";
 import FileNodeChildren from "./FileNodeChildren";
-import nextflowIcon from "../../images/nextflow-icon.svg";
 
 import styles from "./styles.module.css";
 
@@ -25,7 +24,7 @@ const FileNode = ({ node }: Props) => {
     <div className={clsx(styles.row, { [styles[typeStyleName]]: !!type })}>
       <label className={clsx(styles.item)}>
         <span className={styles.name} onClick={() => openFile(node)}>
-          <img className={styles.icon} src={nextflowIcon} />
+          <i className="codicon codicon-symbol-method" />
           {node.name}
         </span>
         {type === "processes" && (

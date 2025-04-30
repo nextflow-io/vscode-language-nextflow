@@ -1,6 +1,7 @@
 import { useState, useRef, useEffect } from "react";
 import styles from "./styles.module.css";
-
+import clsx from "clsx";
+import seqeraLogo from "../../images/seqera.svg";
 type Option = {
   value: string | number;
   label: string | number;
@@ -10,9 +11,25 @@ type Props = {
   options: Option[];
   value: string | number;
   onChange: (value: string | number) => void;
+  alt?: boolean;
+  alt2?: boolean;
+  subtle?: boolean;
+  subtle2?: boolean;
+  icon?: string;
+  large?: boolean;
 };
 
-const Select: React.FC<Props> = ({ options, value, onChange }) => {
+const Select: React.FC<Props> = ({
+  options,
+  value,
+  onChange,
+  alt,
+  alt2,
+  subtle,
+  subtle2,
+  icon,
+  large
+}) => {
   const [isOpen, setIsOpen] = useState(false);
   const selectRef = useRef<HTMLDivElement>(null);
 
@@ -32,14 +49,33 @@ const Select: React.FC<Props> = ({ options, value, onChange }) => {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
+  const buttonClassName = clsx(styles.selectButton, {
+    [styles.alt]: alt,
+    [styles.alt2]: alt2,
+    [styles.subtle]: subtle,
+    [styles.subtle2]: subtle2,
+    [styles.large]: large
+  });
+
+  let iconElement = <></>;
+  if (icon) {
+    iconElement = <i className={`codicon ${icon}`} />;
+  }
+  if (icon === "seqera") {
+    iconElement = <img src={seqeraLogo} />;
+  }
+
   return (
     <div className={styles.select} ref={selectRef}>
       <div
-        className={styles.selectButton}
+        className={buttonClassName}
         onClick={() => setIsOpen(!isOpen)}
         aria-expanded={isOpen}
       >
-        {selectedOption?.label || "Select an option"}
+        <span className={styles.label}>
+          {iconElement}
+          {selectedOption?.label || "Select an option"}
+        </span>
       </div>
       {isOpen && (
         <div className={styles.dropdown}>

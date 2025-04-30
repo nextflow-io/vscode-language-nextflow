@@ -18,6 +18,9 @@ const WorkspaceContext = createContext<WorkspaceContextType>({
   login: () => {},
   openChat: () => {},
   isCursor: false,
+  selectedView: "pipelines",
+  setSelectedView: () => {},
+  getRepoInfo: () => {},
   refresh: () => {}
 });
 
@@ -36,6 +39,9 @@ interface WorkspaceContextType {
   login: () => void;
   openChat: () => void;
   isCursor: boolean;
+  selectedView: string;
+  setSelectedView: (view: string) => void;
+  getRepoInfo: () => void;
   refresh: () => void;
 }
 
@@ -56,6 +62,7 @@ const WorkspaceProvider = ({ children, vscode, viewID, isCursor }: Props) => {
   const [selectedItems, setSelectedItems] = useState<string[]>(
     state?.selectedItems || []
   );
+  const [selectedView, setSelectedView] = useState<string>("runs");
 
   useEffect(() => {
     let count = 0;
@@ -119,7 +126,12 @@ const WorkspaceProvider = ({ children, vscode, viewID, isCursor }: Props) => {
     vscode.postMessage({ command: "openChat" });
   }
 
+  function getRepoInfo() {
+    vscode.postMessage({ command: "getRepoInfo" });
+  }
+
   function refresh() {
+    console.log("🟠 refresh");
     vscode.postMessage({ command: "refresh" });
   }
 
@@ -140,6 +152,9 @@ const WorkspaceProvider = ({ children, vscode, viewID, isCursor }: Props) => {
         login,
         viewID,
         isCursor,
+        selectedView,
+        setSelectedView,
+        getRepoInfo,
         refresh
       }}
     >

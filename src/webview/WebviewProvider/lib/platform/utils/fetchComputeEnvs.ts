@@ -1,37 +1,24 @@
 import { SEQERA_API_URL } from "../../../../../constants";
-import type { Workspace, ComputeEnv } from "./types";
+import type { WorkspaceID, ComputeEnv } from "../types";
 
 const fetchComputeEnvs = async (
   token: string,
-  orgsAndWorkspaces: Workspace[]
+  workspaceId: WorkspaceID
 ): Promise<ComputeEnv[]> => {
   if (!token) return [];
 
-  const workspaces = orgsAndWorkspaces.filter((w) => !!w.workspaceId);
-  if (workspaces.length === 0) return [];
-
   try {
-    const results = await Promise.all(
-      workspaces.map(async (workspace) => {
-        const params = new URLSearchParams({
-          workspaceId: `${workspace.workspaceId}`
-        });
-        const url = `${SEQERA_API_URL}/compute-envs?${params}`;
-
-        const res = await fetch(url, {
-          credentials: "include",
-          method: "GET",
-          headers: new Headers({
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`
-          })
-        });
-        const data = (await res.json()) as { computeEnvs: ComputeEnv[] };
-        return data?.computeEnvs || ([] as ComputeEnv[]);
+    const url = `${SEQERA_API_URL}/compute-envs?workspaceId=${workspaceId}`;
+    const res = await fetch(url, {
+      credentials: "include",
+      method: "GET",
+      headers: new Headers({
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`
       })
-    );
-
-    return results.flat();
+    });
+    const data = (await res.json()) as { computeEnvs: ComputeEnv[] };
+    return data?.computeEnvs || ([] as ComputeEnv[]);
   } catch (e) {
     console.error(e);
     return [];
