@@ -192,7 +192,7 @@ class WebviewProvider implements vscode.WebviewViewProvider {
   }
 
   private async openChat() {
-    await vscode.commands.executeCommand("nextflow.openChat");
+    await vscode.commands.executeCommand("nextflow.chatbot.openChat");
   }
 
   private initHTML(view: vscode.WebviewView) {

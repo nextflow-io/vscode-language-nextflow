@@ -59,16 +59,6 @@ export function activateWebview(
     ) {
       workflowProvider.openFileEvent(document.uri.fsPath);
     }
-    workflowProvider.initViewData();
-  });
-
-  vscode.workspace.onDidCloseTextDocument(() => {
-    workflowProvider.initViewData();
-  });
-
-  vscode.workspace.onDidChangeWorkspaceFolders(() => {
-    processesProvider.initViewData();
-    workflowProvider.initViewData();
   });
 
   vscode.workspace.onDidCreateFiles(() => {
@@ -86,13 +76,9 @@ export function activateWebview(
     workflowProvider.initViewData();
   });
 
-  vscode.workspace.onDidChangeTextDocument((event) => {
-    if (
-      event.document.uri.fsPath.endsWith(".nf") ||
-      event.document.uri.fsPath.endsWith(".nf.test")
-    ) {
-      processesProvider.initViewData();
-    }
+  vscode.workspace.onDidChangeWorkspaceFolders(() => {
+    processesProvider.initViewData();
+    workflowProvider.initViewData();
   });
 
   return providers;

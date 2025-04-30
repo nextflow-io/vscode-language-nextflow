@@ -33,9 +33,6 @@
     "onAuthenticationRequest:azuread"
   ],
   "main": "./extension.js",
-  "extensionDependencies": [
-    "vscode.git"
-  ],
   "contributes": {
     "languages": [
       {
@@ -356,5 +353,8 @@
     "uuid": "^11.1.0",
     "vscode-jsonrpc": "^8.0.2",
     "vscode-languageclient": "^8.0.2"
-  }
+  },
+  "extensionDependencies": [
+    "vscode.git"
+  ]
 }
