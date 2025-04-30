@@ -21,11 +21,10 @@
       align-items: center;
       padding: 6px 8px;
       width: 100%;
-      & i {
-        margin-right: 6px;
-        opacity: 0.8;
-        font-size: 14px;
-      }
+    }
+    & i {
+      transition: transform 0.2s;
+      margin-right: 4px;
     }
   }
   & .children {
@@ -38,6 +37,13 @@
       font-weight: bold;
       & i {
         opacity: 1;
+      }
+    }
+    &.expanded {
+      & > .item {
+        & i {
+          transform: rotate(90deg);
+        }
       }
     }
   }

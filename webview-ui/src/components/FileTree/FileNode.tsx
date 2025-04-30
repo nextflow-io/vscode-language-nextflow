@@ -54,9 +54,14 @@ const FileNode = ({ node, level = 0, searchTerm }: Props) => {
   if (!hasChildren && !isMatch) return null;
 
   return (
-    <div className={clsx(styles.row, { [styles.folder]: isFolder })}>
-      <label className={clsx(styles.item)}>
-        <span className={styles.name} onClick={handleClick}>
+    <div
+      className={clsx(styles.row, {
+        [styles.folder]: isFolder,
+        [styles.expanded]: expanded
+      })}
+    >
+      <label className={clsx(styles.item)} onClick={handleClick}>
+        <span className={styles.name}>
           <i
             className={clsx(
               "codicon",
@@ -65,14 +70,7 @@ const FileNode = ({ node, level = 0, searchTerm }: Props) => {
           />
           {node.name}
         </span>
-        {hasChildren && (
-          <i
-            className={clsx("codicon", {
-              "codicon-chevron-right": !expanded,
-              "codicon-chevron-down": expanded
-            })}
-          />
-        )}
+        {hasChildren && <i className="codicon codicon-chevron-right" />}
       </label>
       {hasChildren && expanded && (
         <div className={styles.children}>
