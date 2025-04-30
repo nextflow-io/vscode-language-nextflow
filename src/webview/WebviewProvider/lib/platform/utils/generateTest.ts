@@ -8,27 +8,24 @@ interface Message {
 }
 
 interface ChatRequest {
-  messages: Message[];
-  threadId?: string;
-  model?: string;
-  tools?: string[];
-  system?: string;
+  message: string;
+  stream: boolean;
+  tags: string[];
+  title: string;
 }
 
 async function generateNFTest(content: string, token: string): Promise<string> {
+  const userMessage = getUserMessage(content);
   const request: ChatRequest = {
-    messages: [
-      {
-        role: "user",
-        content: getUserMessage(content)
-      }
-    ],
-    tools: ["write_file"], // See web/api-assistant/constants.py
-    system: systemPrompt
+    message: `:::details\n\n${systemPrompt}\n\n${userMessage}\n\n:::\n\n`,
+    stream: true,
+    tags: ["multiqc"], // TODO: Add nf-test as a valid external source
+    title: "NF-Test Generation"
   };
 
   try {
-    const response = await fetch(`${INTERN_API_URL}/chat/v2`, {
+    const response = await fetch(`${INTERN_API_URL}/internal-ai/query`, {
+      credentials: "include",
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -36,6 +33,15 @@ async function generateNFTest(content: string, token: string): Promise<string> {
       },
       body: JSON.stringify(request)
     });
+
+    // If it's not a stream response, try to get the error message
+    if (
+      !response.ok &&
+      response.headers.get("content-type")?.includes("application/json")
+    ) {
+      const errorData = await response.json();
+      console.log("🟠 nf-test error response:", errorData);
+    }
 
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);
@@ -69,7 +75,7 @@ async function generateNFTest(content: string, token: string): Promise<string> {
 
     return fullResponse;
   } catch (error) {
-    console.error("🟢 Error generating nf-test:", error);
+    console.error("🟠 Error generating nf-test:", error);
     throw error;
   }
 }
