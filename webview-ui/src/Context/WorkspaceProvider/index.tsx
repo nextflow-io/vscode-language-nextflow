@@ -17,7 +17,7 @@ const WorkspaceContext = createContext<WorkspaceContextType>({
   setSelectedView: () => {},
   getRepoInfo: () => {},
   refresh: () => {},
-  generateTest: () => {}
+  createTest: () => {}
 });
 
 interface WorkspaceContextType {
@@ -35,7 +35,7 @@ interface WorkspaceContextType {
   setSelectedView: (view: string) => void;
   getRepoInfo: () => void;
   refresh: () => void;
-  generateTest: (filePath: string) => void;
+  createTest: (filePath: string) => void;
 }
 
 type Props = {
@@ -108,8 +108,8 @@ const WorkspaceProvider = ({ children, vscode, viewID, isCursor }: Props) => {
     vscode.postMessage({ command: "refresh" });
   }
 
-  function generateTest(filePath: string) {
-    vscode.postMessage({ command: "generateTest", filePath });
+  function createTest(filePath: string) {
+    vscode.postMessage({ command: "createTest", filePath });
   }
 
   return (
@@ -129,7 +129,7 @@ const WorkspaceProvider = ({ children, vscode, viewID, isCursor }: Props) => {
         setSelectedView,
         getRepoInfo,
         refresh,
-        generateTest
+        createTest
       }}
     >
       {children}

@@ -11,7 +11,7 @@ import {
   fetchRuns,
   getRepoInfo,
   queryWorkspace,
-  generateTest
+  createTest
 } from "./lib";
 import { AuthProvider, getAccessToken } from "../../auth";
 import { jwtExpired } from "../../auth/AuthProvider/utils/jwt";
@@ -72,8 +72,8 @@ class WebviewProvider implements vscode.WebviewViewProvider {
         case "fetchComputeEnvs":
           if (!workspaceId) return;
           this.fetchComputeEnvs(workspaceId);
-        case "generateTest":
-          this.generateTest(message.filePath);
+        case "createTest":
+          this.createTest(message.filePath);
           break;
       }
     });
@@ -161,10 +161,10 @@ class WebviewProvider implements vscode.WebviewViewProvider {
     }
   }
 
-  public async generateTest(filePath: string) {
+  public async createTest(filePath: string) {
     const accessToken = await getAccessToken(this._context);
     if (!accessToken) return;
-    await generateTest(filePath, accessToken);
+    await createTest(filePath, accessToken);
   }
 
   private async openFile(filePath: string, line: number) {
