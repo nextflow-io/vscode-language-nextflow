@@ -52,18 +52,24 @@ function findNfTests(dir: string): TestNode[] {
   return findFiles(dir, ".nf.test").flatMap(parseNfTest);
 }
 
+async function previewWorkspace(name: string): Promise<any> {
+  try {
+    return await vscode.commands.executeCommand("nextflow.server.previewWorkspace", name);
+  } catch (error) {
+    return null;
+  }
+}
+
 export async function queryWorkspace(): Promise<TreeNode[]> {
   const folders = vscode.workspace.workspaceFolders;
   if (!folders || folders.length == 0)
     return [];
 
-  const res: any = await vscode.commands.executeCommand(
-    "nextflow.server.previewWorkspace",
-    folders[0].name
-  );
+  const name = folders[0].name;
+  const res: any = await previewWorkspace(name);
   if (!res || !res.result) {
-    const message = res?.error ?? "Failed to query workspace preview.";
-    vscode.window.showErrorMessage(message);
+    if (res?.error)
+      vscode.window.showErrorMessage(res.error);
     return [];
   }
 
