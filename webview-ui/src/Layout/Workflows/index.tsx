@@ -40,11 +40,11 @@ const Workflows = () => {
       </div>
       {view === "tree" ? (
         !entryNodes.length
-          ? <section className="cozy">No workflows found</section>
+          ? <section className="cozy">No entry workflows found</section>
           : <FileTree nodes={entryNodes} searchTerm={search} />
       ) : (
         !filteredNodes.length
-          ? <section className="cozy">No workflows found</section>
+          ? <section className="cozy">No processes or workflows found</section>
           : <FileList nodes={filteredNodes} />
       )}
     </>
