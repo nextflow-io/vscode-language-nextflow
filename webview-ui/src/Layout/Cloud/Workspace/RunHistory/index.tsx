@@ -3,7 +3,7 @@ import clsx from "clsx";
 
 import { useTowerContext } from "../../../../Context";
 import {
-  getRunHistoryURL,
+  getRunURL,
   relativeTime,
   getRuntimeMinutes,
   getStatusIcon
@@ -16,28 +16,28 @@ import styles from "./styles.module.css";
 const RunHistory = () => {
   const {
     selectedWorkspace: workspace,
-    history,
+    runs,
     useLocalContext,
     repoInfo,
-    fetchHistory,
+    fetchRuns,
     workspaceId
   } = useTowerContext();
   const [displayCount, setDisplayCount] = useState(5);
 
-  const hasHistory = !!history?.length;
-  const displayedHistory = history?.slice(0, displayCount) || [];
-  const hasMore = hasHistory && history.length > displayCount;
+  const hasRuns = !!runs?.length;
+  const displayedHistory = runs?.slice(0, displayCount) || [];
+  const hasMore = hasRuns && runs.length > displayCount;
 
-  useEffect(() => fetchHistory(workspaceId), [workspaceId]);
+  useEffect(() => fetchRuns(workspaceId), [workspaceId]);
 
   return (
     <div>
       <FilterForProject />
-      {hasHistory ? (
+      {hasRuns ? (
         <>
           {displayedHistory.map((workflow) => (
             <a
-              href={getRunHistoryURL(workspace, workflow)}
+              href={getRunURL(workspace, workflow)}
               key={workflow.id}
               className={styles.item}
             >

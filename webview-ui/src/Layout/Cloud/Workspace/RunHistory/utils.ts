@@ -6,7 +6,7 @@ import {
 
 export { formatDate, relativeTime } from "../../utils";
 
-export function getRunHistoryURL(
+export function getRunURL(
   workspace: Workspace | undefined,
   item: Workflow
 ) {

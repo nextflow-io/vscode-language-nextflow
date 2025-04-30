@@ -1,10 +1,10 @@
-import type { HistoryResponse } from "../types";
+import type { RunsResponse } from "../types";
 import { SEQERA_API_URL } from "../../../../../constants";
 
-const fetchHistory = async (
+const fetchRuns = async (
   token: string,
   workspaceId: number
-): Promise<HistoryResponse> => {
+): Promise<RunsResponse> => {
   if (!token) return { workflows: [], totalSize: 0 };
   try {
     const response = await fetch(
@@ -18,8 +18,8 @@ const fetchHistory = async (
         })
       }
     );
-    console.log("🟣 fetchHistory", response.status);
-    const res = (await response.json()) as HistoryResponse;
+    console.log("🟣 fetchRuns", response.status);
+    const res = (await response.json()) as RunsResponse;
     return res || { workflows: [], totalSize: 0 };
   } catch (e) {
     console.error(e);
@@ -27,4 +27,4 @@ const fetchHistory = async (
   }
 };
 
-export default fetchHistory;
+export default fetchRuns;

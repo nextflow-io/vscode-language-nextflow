@@ -5,7 +5,7 @@ import {
   Organization,
   ComputeEnv,
   UserInfo,
-  HistoryResponse,
+  RunsResponse,
   RepoInfo,
   PipelinesResponse,
   Pipeline,
@@ -19,7 +19,7 @@ import {
   getOrganizations,
   getWorkspaces,
   filterPipelines,
-  filterHistory,
+  filterRuns,
   filterComputeEnvs
 } from "./utils";
 
@@ -37,7 +37,7 @@ type PlatformData = {
   workspaces: Workspace[];
   computeEnvs: ComputeEnv[];
   organizations: Organization[];
-  history?: HistoryResponse;
+  runs?: RunsResponse;
   repoInfo?: RepoInfo;
   pipelines?: PipelinesResponse;
   datasets?: Dataset[];
@@ -47,7 +47,7 @@ type PlatformData = {
 type TowerContextType = {
   error?: string | null;
   userInfo?: UserInfo;
-  history?: Workflow[];
+  runs?: Workflow[];
   selectedWorkspace: Workspace | undefined;
   workspaceId: WorkspaceID | undefined;
   setSelectedWorkspace: (n: Workspace) => void;
@@ -58,7 +58,7 @@ type TowerContextType = {
   fetchPipelines: (workspaceId?: WorkspaceID) => void;
   fetchDatasets: (workspaceId?: WorkspaceID) => void;
   fetchDataLinks: (workspaceId?: WorkspaceID) => void;
-  fetchHistory: (workspaceId?: WorkspaceID) => void;
+  fetchRuns: (workspaceId?: WorkspaceID) => void;
   workspaces: Workspace[];
   organizations?: Organization[];
   getWorkspaces: (orgId: string | number) => Workspace[];
@@ -86,7 +86,7 @@ const TowerProvider: React.FC<Props> = ({
     userInfo,
     workspaces: orgsAndWorkspaces,
     computeEnvs,
-    history,
+    runs,
     pipelines,
     datasets,
     dataLinks,
@@ -130,8 +130,8 @@ const TowerProvider: React.FC<Props> = ({
     };
   }
 
-  function fetchHistory(workspaceId?: WorkspaceID) {
-    vscode.postMessage({ command: "fetchHistory", workspaceId });
+  function fetchRuns(workspaceId?: WorkspaceID) {
+    vscode.postMessage({ command: "fetchRuns", workspaceId });
   }
 
   function fetchPipelines(workspaceId?: WorkspaceID) {
@@ -166,8 +166,8 @@ const TowerProvider: React.FC<Props> = ({
         fetchPipelines,
         fetchDatasets,
         fetchDataLinks,
-        fetchHistory,
-        history: filterHistory(history, repoInfo, useLocalContext),
+        fetchRuns,
+        runs: filterRuns(runs, repoInfo, useLocalContext),
         computeEnvs: filterComputeEnvs(computeEnvs, selectedWorkspace),
         pipelines: filterPipelines(pipelines, repoInfo, useLocalContext),
         workspaces,

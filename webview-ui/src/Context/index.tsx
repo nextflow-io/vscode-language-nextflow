@@ -8,7 +8,7 @@ import {
   Workspace,
   ComputeEnv,
   Organization,
-  HistoryResponse,
+  RunsResponse,
   RepoInfo,
   PipelinesResponse,
   Dataset,
@@ -39,7 +39,7 @@ const Context = ({ children }: Props) => {
   const [workspaces, setWorkspaces] = useState<Workspace[]>([]);
   const [computeEnvs, setComputeEnvs] = useState<ComputeEnv[]>([]);
   const [organizations, setOrganizations] = useState<Organization[]>([]);
-  const [history, setHistory] = useState<HistoryResponse | undefined>(
+  const [runs, setRuns] = useState<RunsResponse | undefined>(
     undefined
   );
   const [pipelines, setPipelines] = useState<PipelinesResponse | undefined>(
@@ -58,7 +58,7 @@ const Context = ({ children }: Props) => {
       if (data.workspaces) setWorkspaces(data.workspaces);
       if (data.computeEnvs) setComputeEnvs(data.computeEnvs);
       if (data.organizations) setOrganizations(data.organizations);
-      if (data.history) setHistory(data.history);
+      if (data.runs) setRuns(data.runs);
       if (data.pipelines) setPipelines(data.pipelines);
       if (data.repoInfo) setRepoInfo(data.repoInfo);
       if (data.datasets) setDatasets(data.datasets);
@@ -79,7 +79,7 @@ const Context = ({ children }: Props) => {
             workspaces,
             computeEnvs,
             organizations,
-            history,
+            runs,
             repoInfo,
             pipelines,
             datasets,

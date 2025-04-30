@@ -4,7 +4,7 @@ import {
   PipelinesResponse,
   RepoInfo,
   Workflow,
-  HistoryResponse,
+  RunsResponse,
   Workspace,
   ComputeEnv
 } from "../types";
@@ -54,12 +54,12 @@ export function filterPipelines(
   return items.filter((w) => w.repository === repoInfo.url);
 }
 
-export function filterHistory(
-  history: HistoryResponse | undefined,
+export function filterRuns(
+  runs: RunsResponse | undefined,
   repoInfo: RepoInfo | undefined,
   shouldFilter: boolean
 ): Workflow[] {
-  let items = history?.workflows?.map(({ workflow }) => workflow) || [];
+  let items = runs?.workflows?.map(({ workflow }) => workflow) || [];
   items = items.sort((a, b) => {
     // Starred first
     if (a.starred !== b.starred) {

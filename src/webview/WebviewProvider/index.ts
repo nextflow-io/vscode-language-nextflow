@@ -6,7 +6,7 @@ import {
   buildList,
   buildTree,
   fetchPlatformData,
-  fetchHistory,
+  fetchRuns,
   getRepoInfo,
   fetchPipelines,
   fetchDatasets,
@@ -54,9 +54,9 @@ class WebviewProvider implements vscode.WebviewViewProvider {
         case "getRepoInfo":
           this.getRepoInfo();
           break;
-        case "fetchHistory":
+        case "fetchRuns":
           if (!workspaceId) return;
-          this.fetchHistory(workspaceId);
+          this.fetchRuns(workspaceId);
           break;
         case "fetchPipelines":
           if (!workspaceId) return;
@@ -107,12 +107,12 @@ class WebviewProvider implements vscode.WebviewViewProvider {
     return expired ? undefined : accessToken;
   }
 
-  private async fetchHistory(workspaceId: number) {
+  private async fetchRuns(workspaceId: number) {
     const accessToken = await this.getAccessToken();
     if (!accessToken) return;
-    const history = await fetchHistory(accessToken, workspaceId);
+    const runs = await fetchRuns(accessToken, workspaceId);
     this._currentView?.webview.postMessage({
-      history
+      runs
     });
   }
 
