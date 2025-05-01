@@ -27,7 +27,10 @@ Rules:
 
 If the test file is incomplete, respond with the missing code that should be added to make it valid.
 Respond with exactly "true" if the test file is complete.
-If not complete, ONLY respond with the missing code (no explanation, no backticks, no code blocks, no comments, no nothing).
+If not complete, ONLY respond with the missing code + 1 line of code above it.
+The response code is to be appended to the end of the test file, minus the last line of code. Provide indentation accordingly.
+Do not add explanations, backticks, code blocks, comments, or anything else.
+
 
 Test file content:
 {content}

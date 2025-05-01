@@ -3,6 +3,20 @@ import * as fs from "fs";
 import generateTest from "./generateTest";
 import doubleCheck from "./doubleCheck";
 
+function scrollToEnd(editor: vscode.TextEditor, document: vscode.TextDocument) {
+  if (editor) {
+    const lastLine = document.lineCount - 1;
+    const lastPosition = new vscode.Position(
+      lastLine,
+      document.lineAt(lastLine).text.length
+    );
+    editor.revealRange(
+      new vscode.Range(lastPosition, lastPosition),
+      vscode.TextEditorRevealType.Default
+    );
+  }
+}
+
 async function createTest(filePath: string, token: string): Promise<boolean> {
   return vscode.window.withProgress(
     {
@@ -51,19 +65,7 @@ async function createTest(filePath: string, token: string): Promise<boolean> {
             generatedContent
           );
           await vscode.workspace.applyEdit(edit);
-
-          // Scroll to the end of the document
-          if (editor) {
-            const lastLine = document.lineCount - 1;
-            const lastPosition = new vscode.Position(
-              lastLine,
-              document.lineAt(lastLine).text.length
-            );
-            editor.revealRange(
-              new vscode.Range(lastPosition, lastPosition),
-              vscode.TextEditorRevealType.Default
-            );
-          }
+          scrollToEnd(editor, document);
         });
 
         // Ensure the final content is saved
@@ -75,13 +77,21 @@ async function createTest(filePath: string, token: string): Promise<boolean> {
         if (validationResult !== true) {
           // If validation failed, append the suggested improvements
           const workspaceEdit = new vscode.WorkspaceEdit();
+
+          // Remove the last line before appending
+          const lastLine = document.lineCount - 1;
+          const lastLineRange = document.lineAt(lastLine).range;
+          workspaceEdit.delete(uri, lastLineRange);
+
+          // Append the validation result
           workspaceEdit.insert(
             uri,
-            new vscode.Position(document.lineCount, 0),
-            "\n\n" + validationResult
+            new vscode.Position(document.lineCount - 1, 0),
+            validationResult
           );
           await vscode.workspace.applyEdit(workspaceEdit);
           await document.save();
+          scrollToEnd(editor, document);
         }
 
         vscode.window.showInformationMessage(`nf-test created: ${newFilePath}`);
