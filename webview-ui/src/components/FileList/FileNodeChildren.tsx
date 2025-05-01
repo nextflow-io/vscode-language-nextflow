@@ -34,10 +34,9 @@ const FileNodeChildren = ({
             if (!file) return null;
             return (
               <label
-                className={clsx(
-                  styles.child,
-                  isSelectedFile(file) && styles.selected
-                )}
+                className={clsx(styles.child, {
+                  [styles.selected]: isSelectedFile(file)
+                })}
                 key={label}
                 onClick={() => openFile(file)}
               >

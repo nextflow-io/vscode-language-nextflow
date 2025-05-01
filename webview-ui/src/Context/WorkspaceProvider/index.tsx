@@ -52,9 +52,18 @@ type Props = {
   vscode: any;
   viewID: string;
   isCursor: boolean;
+  selectedFile: string;
+  setSelectedFile: (file: string) => void;
 };
 
-const WorkspaceProvider = ({ children, vscode, viewID, isCursor }: Props) => {
+const WorkspaceProvider = ({
+  children,
+  vscode,
+  viewID,
+  isCursor,
+  selectedFile,
+  setSelectedFile
+}: Props) => {
   const state = vscode.getState();
 
   const [testCount, setTestCount] = useState(0);
@@ -65,7 +74,6 @@ const WorkspaceProvider = ({ children, vscode, viewID, isCursor }: Props) => {
     state?.selectedItems || []
   );
   const [selectedView, setSelectedView] = useState<string>("runs");
-  const [selectedFile, setSelectedFile] = useState<string>("");
 
   useEffect(() => {
     let count = 0;
@@ -112,6 +120,7 @@ const WorkspaceProvider = ({ children, vscode, viewID, isCursor }: Props) => {
   }
 
   function isSelectedFile(file: FileNodeType) {
+    console.log("🟠 isSelectedFile", selectedFile, file.filePath);
     return selectedFile === file.filePath;
   }
 

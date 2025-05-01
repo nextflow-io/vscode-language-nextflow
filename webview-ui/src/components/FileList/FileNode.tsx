@@ -24,7 +24,6 @@ const FileNode = ({ node }: Props) => {
   if (type === "processes") {
     typeStyleName = "process";
   }
-
   return (
     <div
       className={clsx(styles.row, {
