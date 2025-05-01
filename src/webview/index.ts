@@ -12,13 +12,14 @@ export function activateWebview(
   authProvider: AuthProvider
 ) {
   const projectProvider = new WebviewProvider(context, "project");
-  const resourcesProvider = new ResourcesProvider();
+  const modulesProvider = new WebviewProvider(context, "modules");
   const userInfoProvider = new WebviewProvider(
     context,
     "userInfo",
     authProvider
   );
-  
+  const resourcesProvider = new ResourcesProvider();
+
   const refresh = (uris?: readonly vscode.Uri[]) => {
     if (
       uris === undefined ||
@@ -31,6 +32,7 @@ export function activateWebview(
   // Register views
   const providers = [
     vscode.window.registerWebviewViewProvider("project", projectProvider),
+    vscode.window.registerWebviewViewProvider("modules", modulesProvider),
     vscode.window.registerWebviewViewProvider("userInfo", userInfoProvider),
     vscode.window.registerTreeDataProvider("resources", resourcesProvider)
   ];
@@ -41,8 +43,9 @@ export function activateWebview(
 
   // Register command
   vscode.commands.registerCommand("nextflow.seqera.reloadWebview", () => {
-    userInfoProvider.initViewData(true);
     refresh();
+    modulesProvider.initViewData();
+    userInfoProvider.initViewData(true);
   });
 
   // Register events
