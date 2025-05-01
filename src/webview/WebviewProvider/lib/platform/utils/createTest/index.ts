@@ -17,7 +17,6 @@ async function createTest(filePath: string, token: string): Promise<boolean> {
 
         progress.report({ message: "Generating code" });
         const nfTest = await generateTest(content, token);
-        console.log("🟢 nfTest:", nfTest);
         const newFilePath = filePath.replace(".nf", ".nf.test");
 
         progress.report({ message: "Creating test file" });
@@ -34,7 +33,6 @@ async function createTest(filePath: string, token: string): Promise<boolean> {
 
           progress.report({ message: "Validating test file" });
           const validationResult = await doubleCheck(nfTest, token);
-          console.log("🟢 validationResult:", validationResult);
 
           if (validationResult !== true) {
             // If validation failed, append the suggested improvements
