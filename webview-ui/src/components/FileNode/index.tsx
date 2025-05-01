@@ -2,6 +2,8 @@ import clsx from "clsx";
 import { useState, useEffect } from "react";
 import { useWorkspaceContext } from "../../Context";
 import { TreeNode } from "../../Context/WorkspaceProvider/types";
+import processIcon from "../../images/process.svg";
+import workflowIcon from "../../images/workflow.svg";
 import styles from "./styles.module.css";
 
 type Props = {
@@ -49,24 +51,24 @@ const FileNode = ({ node, level = 0, searchTerm }: Props) => {
   if (!hasChildren && !isMatch(node))
     return null;
 
+  const icon = isWorkflow ? workflowIcon : processIcon;
+  const iconClassName = isWorkflow ? styles.workflowIcon : styles.processIcon;
+
   return (
     <div
       className={clsx(styles.row, {
-        [styles.folder]: isWorkflow,
+        [styles.workflow]: isWorkflow,
         [styles.expanded]: expanded
       })}
     >
-      <label className={clsx(styles.item)} onClick={handleClick}>
-        <span className={styles.name}>
-          <i
-            className={clsx(
-              "codicon",
-              isWorkflow ? "codicon-symbol-method" : "codicon-symbol-method"
-            )}
-          />
+      <label className={clsx(styles.item)}>
+        <span className={styles.name} onClick={handleClick}>
+          <img src={icon} className={clsx(styles.icon, iconClassName)} />
           {node.name}
         </span>
-        {hasChildren && <i className="codicon codicon-chevron-right" />}
+        {hasChildren && (
+          <i className="codicon codicon-chevron-right" />
+        )}
       </label>
       {hasChildren && expanded && (
         <div className={styles.children}>

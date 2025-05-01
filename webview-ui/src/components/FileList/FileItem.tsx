@@ -2,6 +2,7 @@ import clsx from "clsx";
 
 import { useWorkspaceContext } from "../../Context";
 import { TreeNode } from "../../Context/WorkspaceProvider/types";
+import processIcon from "../../images/process.svg";
 import styles from "./styles.module.css";
 
 type Props = {
@@ -15,7 +16,7 @@ const FileItem = ({ node }: Props) => {
     <div className={clsx(styles.row)}>
       <label className={clsx(styles.item)}>
         <span className={styles.name} onClick={() => openFile(node.path, node.line)}>
-          <i className="codicon codicon-symbol-method" />
+          <img className={styles.icon} src={processIcon} />
           {node.name}
         </span>
         {node.name !== "<entry>" && (

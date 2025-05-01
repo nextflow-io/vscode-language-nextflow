@@ -75,7 +75,7 @@ const Project = () => {
           onChange={(value) => setViewMode(value as ViewMode)}
         />
       </div>
-      {testCoverage()}
+      {viewMode === "list" && testCoverage()}
       {viewMode === "tree" ? treeView() : listView()}
     </>
   );
