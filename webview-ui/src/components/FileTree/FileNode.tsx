@@ -3,9 +3,8 @@ import { useState, useEffect } from "react";
 import { useWorkspaceContext } from "../../Context";
 import styles from "./styles.module.css";
 import { FileNode as FileNodeType } from "../../Context/WorkspaceProvider/types";
-import folderClosed from "../../images/folder-closed.svg";
-import folderOpen from "../../images/folder-open.svg";
-import file from "../../images/file.svg";
+import processIcon from "../../images/process.svg";
+import workflowIcon from "../../images/workflow.svg";
 
 type Props = {
   node: FileNodeType;
@@ -16,7 +15,8 @@ type Props = {
 const FileNode = ({ node, level = 0, searchTerm }: Props) => {
   const { openFile } = useWorkspaceContext();
   const [expanded, setExpanded] = useState(level < 1);
-  const isFolder = !!node.children?.length;
+  const isWorkflow = !!node.children?.length;
+  const isFolder = isWorkflow && level > 0;
 
   useEffect(() => {
     if (searchTerm) setExpanded(true);
@@ -24,7 +24,7 @@ const FileNode = ({ node, level = 0, searchTerm }: Props) => {
   }, [searchTerm]);
 
   function handleClick() {
-    if (hasChildren && !searchTerm) setExpanded((prev) => !prev);
+    if (isFolder && !searchTerm) setExpanded((prev) => !prev);
     openFile(node);
   }
 
@@ -58,23 +58,18 @@ const FileNode = ({ node, level = 0, searchTerm }: Props) => {
 
   let icon = null;
   let iconClassName = "";
-  if (isFolder) {
-    if (expanded) {
-      icon = folderOpen;
-      iconClassName = styles.folderIconOpen;
-    } else {
-      icon = folderClosed;
-      iconClassName = styles.folderIconClosed;
-    }
+  if (isWorkflow) {
+    icon = workflowIcon;
+    iconClassName = styles.workflowIcon;
   } else {
-    icon = file;
-    iconClassName = styles.fileIcon;
+    icon = processIcon;
+    iconClassName = styles.processIcon;
   }
 
   return (
     <div
       className={clsx(styles.row, {
-        [styles.folder]: isFolder,
+        [styles.workflow]: isWorkflow,
         [styles.expanded]: expanded
       })}
     >
@@ -83,7 +78,9 @@ const FileNode = ({ node, level = 0, searchTerm }: Props) => {
           <img src={icon} className={clsx(styles.icon, iconClassName)} />
           {node.name}
         </span>
-        {hasChildren && <i className="codicon codicon-chevron-right" />}
+        {hasChildren && isFolder && (
+          <i className="codicon codicon-chevron-right" />
+        )}
       </label>
       {hasChildren && expanded && (
         <div className={styles.children}>
