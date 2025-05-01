@@ -161,7 +161,7 @@ class WebviewProvider implements vscode.WebviewViewProvider {
   private async openFile(filePath: string, line: number) {
     const doc = await vscode.workspace.openTextDocument(filePath);
     await vscode.window.showTextDocument(doc, {
-      selection: new vscode.Range(line, 0, line, 0)
+      selection: line != -1 ? new vscode.Range(line, 0, line, 0) : undefined
     });
   }
 
