@@ -1,6 +1,9 @@
 .row {
   user-select: none;
   width: 100%;
+  & .selected {
+    background-color: var(--nf-item-bg-active);
+  }
   & .item {
     line-height: 1;
     display: flex;

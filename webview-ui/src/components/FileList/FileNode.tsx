@@ -12,16 +12,25 @@ type Props = {
 };
 
 const FileNode = ({ node }: Props) => {
-  const { openFile, getTest, viewID: type } = useWorkspaceContext();
+  const {
+    openFile,
+    getTest,
+    viewID: type,
+    isSelectedFile
+  } = useWorkspaceContext();
   const testFile = getTest(node.name);
 
   let typeStyleName = "workflow";
   if (type === "processes") {
     typeStyleName = "process";
   }
-
   return (
-    <div className={clsx(styles.row, { [styles[typeStyleName]]: !!type })}>
+    <div
+      className={clsx(styles.row, {
+        [styles[typeStyleName]]: !!type,
+        [styles.selected]: isSelectedFile(node)
+      })}
+    >
       <label className={clsx(styles.item)}>
         <span className={styles.name} onClick={() => openFile(node)}>
           <i className="codicon codicon-symbol-method" />
@@ -52,11 +61,7 @@ const FileNode = ({ node }: Props) => {
         )}
       </label>
       {type === "workflows" && (
-        <FileNodeChildren
-          label="Includes"
-          parent={node.name}
-          items={node.imports}
-        />
+        <FileNodeChildren label="Includes" fileNode={node} />
       )}
     </div>
   );

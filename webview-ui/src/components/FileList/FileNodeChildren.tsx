@@ -1,20 +1,27 @@
-import styles from "./styles.module.css";
+import clsx from "clsx";
 import { useWorkspaceContext } from "../../Context";
 
-const FileNodeChildren = ({
-  parent,
-  label,
-  items = []
-}: {
-  parent: string;
-  label: string;
-  items: string[];
-}) => {
-  const { getFile, openFile, isSelected, selectItem } = useWorkspaceContext();
+import { FileNode as FileNodeType } from "../../Context/WorkspaceProvider/types";
 
-  const linkableFiles = items?.map((label) => getFile(label)).filter(Boolean);
-  const itemKey = `${parent}.${label}`;
+import styles from "./styles.module.css";
+
+const FileNodeChildren = ({
+  fileNode,
+  label
+}: {
+  fileNode: FileNodeType;
+  label: string;
+}) => {
+  const { getFile, openFile, isSelected, isSelectedFile, selectItem } =
+    useWorkspaceContext();
+
+  const linkableFiles = fileNode?.imports
+    ?.map((label) => getFile(label))
+    .filter(Boolean);
+  const itemKey = `${fileNode?.name}.${label}`;
   const isOpen = isSelected(itemKey);
+
+  if (!linkableFiles) return null;
 
   return (
     <div className={styles.children}>
@@ -26,7 +33,13 @@ const FileNodeChildren = ({
           {linkableFiles?.map((file) => {
             if (!file) return null;
             return (
-              <label key={label} onClick={() => openFile(file)}>
+              <label
+                className={clsx(styles.child, {
+                  [styles.selected]: isSelectedFile(file)
+                })}
+                key={label}
+                onClick={() => openFile(file)}
+              >
                 {file.name}
               </label>
             );
