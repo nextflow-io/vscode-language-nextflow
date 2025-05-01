@@ -4,7 +4,11 @@ interface StreamResponse {
   content: string;
 }
 
-async function fetchContent(prompt: string, token: string): Promise<string> {
+async function fetchContent(
+  prompt: string,
+  token: string,
+  onChunk?: (chunk: string) => void
+): Promise<string> {
   try {
     const response = await fetch(`${INTERN_API_URL}/internal-ai/query`, {
       credentials: "include",
@@ -55,6 +59,10 @@ async function fetchContent(prompt: string, token: string): Promise<string> {
             const data = JSON.parse(line.slice(6));
             if (data.content) {
               fullResponse += data.content;
+              // Call the onChunk callback if provided
+              if (onChunk) {
+                onChunk(data.content);
+              }
             }
           } catch (e) {
             console.log("🟢 Error parsing SSE data:", e);
