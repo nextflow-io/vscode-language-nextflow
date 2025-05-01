@@ -158,19 +158,11 @@ class WebviewProvider implements vscode.WebviewViewProvider {
     }
   }
 
-  public async openFileEvent(filePath: string) {
-    this._currentView?.webview.postMessage({
-      command: "fileOpened",
-      filePath
-    });
-  }
-
   private async openFile(filePath: string, line: number) {
     const doc = await vscode.workspace.openTextDocument(filePath);
     await vscode.window.showTextDocument(doc, {
       selection: new vscode.Range(line, 0, line, 0)
     });
-    this.openFileEvent(filePath);
   }
 
   private async openChat() {

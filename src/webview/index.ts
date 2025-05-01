@@ -47,12 +47,6 @@ export function activateWebview(
 
   // Register events
   vscode.workspace.onDidSaveTextDocument((e) => refresh([e.uri]));
-  vscode.workspace.onDidOpenTextDocument((document) => {
-    const filePath = document.uri.fsPath;
-    if (isNextflowFile(filePath)) {
-      projectProvider.openFileEvent(filePath);
-    }
-  });
   vscode.workspace.onDidCreateFiles((e) => refresh(e.files));
   vscode.workspace.onDidDeleteFiles((e) => refresh(e.files));
   vscode.workspace.onDidRenameFiles((e) => refresh(e.files.map((r) => r.newUri)));
