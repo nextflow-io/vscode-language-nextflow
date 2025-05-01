@@ -157,7 +157,7 @@
       "view/title": [
         {
           "command": "nextflow.seqera.reloadWebview",
-          "when": "view == workflows || view == processes || view == userInfo",
+          "when": "view == project || view == userInfo",
           "group": "navigation@10"
         },
         {
