@@ -14,7 +14,7 @@ const FileItem = ({ node }: Props) => {
   return (
     <div className={clsx(styles.row)}>
       <label className={clsx(styles.item)}>
-        <span className={styles.name} onClick={() => openFile(node.uri, node.line)}>
+        <span className={styles.name} onClick={() => openFile(node.path, node.line)}>
           <i className="codicon codicon-symbol-method" />
           {node.name}
         </span>
@@ -22,7 +22,7 @@ const FileItem = ({ node }: Props) => {
           !!node.test ? (
             <span
               className={styles.metaLabel}
-              onClick={() => !!node.test && openFile(node.test.uri, node.test.line)}
+              onClick={() => !!node.test && openFile(node.test.path, node.test.line)}
             >
               <i
                 className={clsx(

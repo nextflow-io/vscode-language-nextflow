@@ -38,7 +38,7 @@ class WebviewProvider implements vscode.WebviewViewProvider {
       const { command, workspaceId } = message;
       switch (command) {
         case "openFile":
-          this.openFile(message.uri, message.line);
+          this.openFile(message.path, message.line);
           break;
         case "openChat":
           this.openChat();
@@ -165,8 +165,7 @@ class WebviewProvider implements vscode.WebviewViewProvider {
     });
   }
 
-  private async openFile(uri: string, line: number) {
-    const filePath = vscode.Uri.parse(uri).fsPath;
+  private async openFile(filePath: string, line: number) {
     const doc = await vscode.workspace.openTextDocument(filePath);
     await vscode.window.showTextDocument(doc, {
       selection: new vscode.Range(line, 0, line, 0)

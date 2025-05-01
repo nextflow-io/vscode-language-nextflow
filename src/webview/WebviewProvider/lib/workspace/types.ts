@@ -2,7 +2,7 @@
 export interface TreeNode {
   name: string;
   type: "process" | "workflow";
-  uri: string;
+  path: string;
   line: number;
   test?: TestNode;
   children?: CallNode[];
@@ -10,11 +10,11 @@ export interface TreeNode {
 
 export interface TestNode {
   name: string;
-  uri: string;
+  path: string;
   line: number;
 }
 
 export interface CallNode {
   name: string;
-  uri: string;
+  path: string;
 }

@@ -23,7 +23,7 @@ const FileNode = ({ node, level = 0, searchTerm }: Props) => {
   function handleClick() {
     if (hasChildren && !searchTerm)
       setExpanded((prev) => !prev);
-    openFile(node.uri, node.line);
+    openFile(node.path, node.line);
   }
 
   function isMatch(node: TreeNode): boolean {

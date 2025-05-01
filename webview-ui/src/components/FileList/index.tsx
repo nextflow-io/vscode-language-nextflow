@@ -9,7 +9,7 @@ type Props = {
 const FileList = ({ nodes }: Props) => {
   return (
     <div className={styles.section}>
-      {nodes.map((node) => <FileItem key={`${node.uri}:${node.name}`} node={node} />)}
+      {nodes.map((node) => <FileItem key={`${node.path}:${node.name}`} node={node} />)}
     </div>
   );
 };

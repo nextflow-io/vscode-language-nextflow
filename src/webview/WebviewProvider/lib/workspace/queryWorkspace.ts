@@ -22,13 +22,12 @@ function getLineNumber(text: string, charIndex: number): number {
 };
 
 function parseNfTest(filePath: string): TestNode[] {
-  const uri = vscode.Uri.file(filePath).toString();
   const text = fs.readFileSync(filePath, "utf8");
   const matches = text.matchAll(/^\s*(process|workflow)\s+"(\w+)"/gm);
   return [...matches].map((m) => (
     {
       name: m[2],
-      uri: uri,
+      path: filePath,
       line: getLineNumber(text, m.index)
     } as TestNode
   ));
@@ -63,12 +62,11 @@ export async function queryWorkspace(): Promise<TreeNode[]> {
   const tests = new Map<string,TestNode[]>()
 
   nodes.forEach((node) => {
-    const uri = node.uri;
-    if (!tests.has(uri)) {
-      const filePath = vscode.Uri.parse(uri).fsPath;
-      tests.set(uri, findNfTests(path.dirname(filePath)))
+    const filePath = node.path;
+    if (!tests.has(filePath)) {
+      tests.set(filePath, findNfTests(path.dirname(filePath)))
     }
-    node.test = tests.get(uri)?.find((test) => test.name === node.name);
+    node.test = tests.get(filePath)?.find((test) => test.name === node.name);
   });
 
   return nodes;

@@ -22,7 +22,7 @@ const WorkspaceContext = createContext<WorkspaceContextType>({
 interface WorkspaceContextType {
   nodes: TreeNode[];
   findChildren: (node: TreeNode) => TreeNode[];
-  openFile: (uri: string, line: number) => void;
+  openFile: (filePath: string, line: number) => void;
   selectedItems: string[];
   selectItem: (name: string) => void;
   isSelected: (name: string) => boolean;
@@ -80,13 +80,13 @@ const WorkspaceProvider = ({ children, vscode, viewID, isCursor }: Props) => {
   function findChildren(node: TreeNode): TreeNode[] {
     if (!node.children)
       return [];
-    return node.children.flatMap((call) =>
-      nodes.filter((n) => n.uri === call.uri && n.name === call.name)
-    );
+    return node.children.flatMap((call) => (
+      nodes.filter((n) => n.path === call.path && n.name === call.name)
+    ));
   }
 
-  function openFile(uri: string, line: number) {
-    vscode.postMessage({ command: "openFile", uri: uri, line: line });
+  function openFile(filePath: string, line: number) {
+    vscode.postMessage({ command: "openFile", path: filePath, line: line });
   }
 
   function login() {
