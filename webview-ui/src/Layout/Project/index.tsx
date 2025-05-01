@@ -14,7 +14,7 @@ function round(x: number) {
 
 const Project = () => {
   const { nodes } = useWorkspaceContext();
-  const [viewMode, setViewMode] = useState<ViewMode>("tree");
+  const [viewMode, setViewMode] = useState<ViewMode>("list");
   const [search, setSearch] = useState("");
 
   const entryNodes = nodes.filter((n) => n.name === "<entry>");
