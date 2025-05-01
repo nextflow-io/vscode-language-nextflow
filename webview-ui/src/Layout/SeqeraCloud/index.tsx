@@ -6,7 +6,7 @@ import Login from "./Login";
 import Workspace from "./Workspace";
 import Toolbar from "./Toolbar";
 
-const Cloud = () => {
+const SeqeraCloud = () => {
   const { tokenExpiry, hasToken, repoInfo } = useTowerContext();
   const { refresh } = useWorkspaceContext();
 
@@ -40,4 +40,4 @@ const Cloud = () => {
   );
 };
 
-export default Cloud;
+export default SeqeraCloud;

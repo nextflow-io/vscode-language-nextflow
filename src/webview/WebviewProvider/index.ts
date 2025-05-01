@@ -22,7 +22,7 @@ class WebviewProvider implements vscode.WebviewViewProvider {
 
   constructor(
     private readonly _context: vscode.ExtensionContext,
-    private readonly viewID: "project" | "userInfo",
+    private readonly viewID: "project" | "seqeraCloud",
     private readonly _authProvider?: AuthProvider
   ) {
     this._extensionUri = _context.extensionUri;
@@ -146,7 +146,7 @@ class WebviewProvider implements vscode.WebviewViewProvider {
   public async initViewData(refresh?: boolean) {
     const { viewID, _context, _currentView: view } = this;
     if (!view) return;
-    if (viewID === "userInfo") {
+    if (viewID === "seqeraCloud") {
       this.getRepoInfo();
       const accessToken = await this.getAccessToken();
       if (!accessToken) return;

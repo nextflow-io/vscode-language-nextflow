@@ -13,9 +13,9 @@ export function activateWebview(
 ) {
   const projectProvider = new WebviewProvider(context, "project");
   const resourcesProvider = new ResourcesProvider();
-  const userInfoProvider = new WebviewProvider(
+  const seqeraCloudProvider = new WebviewProvider(
     context,
-    "userInfo",
+    "seqeraCloud",
     authProvider
   );
   
@@ -31,7 +31,7 @@ export function activateWebview(
   // Register views
   const providers = [
     vscode.window.registerWebviewViewProvider("project", projectProvider),
-    vscode.window.registerWebviewViewProvider("userInfo", userInfoProvider),
+    vscode.window.registerWebviewViewProvider("seqeraCloud", seqeraCloudProvider),
     vscode.window.registerTreeDataProvider("resources", resourcesProvider)
   ];
 
@@ -41,7 +41,7 @@ export function activateWebview(
 
   // Register command
   vscode.commands.registerCommand("nextflow.seqera.reloadWebview", () => {
-    userInfoProvider.initViewData(true);
+    seqeraCloudProvider.initViewData(true);
     refresh();
   });
 

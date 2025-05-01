@@ -157,17 +157,17 @@
       "view/title": [
         {
           "command": "nextflow.seqera.reloadWebview",
-          "when": "view == project || view == userInfo",
+          "when": "view == project || view == seqeraCloud",
           "group": "navigation@10"
         },
         {
           "command": "nextflow.seqera.logout",
-          "when": "view == userInfo && nextflow.isLoggedIn == true",
+          "when": "view == seqeraCloud && nextflow.isLoggedIn == true",
           "group": "navigation@10"
         },
         {
           "command": "nextflow.seqera.goToCloud",
-          "when": "view == userInfo && nextflow.isLoggedIn == true",
+          "when": "view == seqeraCloud && nextflow.isLoggedIn == true",
           "group": "navigation@10"
         }
       ]
@@ -302,7 +302,7 @@
           "type": "webview"
         },
         {
-          "id": "userInfo",
+          "id": "seqeraCloud",
           "name": "Seqera Cloud",
           "type": "webview"
         },

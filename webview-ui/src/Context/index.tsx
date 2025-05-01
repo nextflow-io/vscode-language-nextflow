@@ -29,7 +29,7 @@ export type AuthState = {
   error?: string;
 };
 
-type ViewID = "project" | "userInfo" | "";
+type ViewID = "project" | "seqeraCloud" | "";
 
 const Context = ({ children }: Props) => {
   const viewID = window.initialData?.viewID as ViewID;
@@ -70,7 +70,7 @@ const Context = ({ children }: Props) => {
 
   return (
     <WorkspaceProvider vscode={vscode} viewID={viewID} isCursor={isCursor}>
-      {viewID === "userInfo" ? (
+      {viewID === "seqeraCloud" ? (
         <TowerProvider
           vscode={vscode}
           authState={authState}

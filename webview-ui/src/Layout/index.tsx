@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { useWorkspaceContext } from "../Context";
-import Cloud from "./Cloud";
 import Project from "./Project";
+import SeqeraCloud from "./SeqeraCloud";
 
 const Layout = () => {
   const { viewID, nodes, refresh } = useWorkspaceContext();
@@ -24,8 +24,8 @@ const Layout = () => {
     }
   }, [nodes, retryCount]);
 
-  if (viewID === "userInfo") return <Cloud />;
   if (viewID === "project") return <Project />;
+  if (viewID === "seqeraCloud") return <SeqeraCloud />;
   return null;
 };
 

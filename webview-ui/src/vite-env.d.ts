@@ -9,7 +9,7 @@ declare global {
     };
     vscode: any;
     initialData: {
-      viewID: "project" | "userInfo";
+      viewID: "project" | "seqeraCloud";
       isCursor: boolean;
     };
   }
