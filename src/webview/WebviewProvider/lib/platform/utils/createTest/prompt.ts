@@ -17,7 +17,7 @@ The test should be compatible with the nf-test framework (https://code.askimed.c
 `;
 };
 
-export const validateTestPrompt = `You are a Nextflow test file validator. Your task is to check if the provided test file is complete and valid.
+export const validateTestPrompt = `You are a Nextflow test file completer. Your task is to check if the provided test file is complete, and if not, complete it.
 
 Rules:
 1. The test file must contain at least one test case
@@ -25,8 +25,9 @@ Rules:
 3. The test file must include all necessary imports
 4. The test file must follow Nextflow test conventions
 
-If the test file is complete and valid, respond with exactly "true".
-If the test file is incomplete or invalid, respond with the missing or incorrect code that should be added to make it valid.
+If the test file is incomplete, respond with the missing code that should be added to make it valid.
+Respond with exactly "true" if the test file is complete.
+If not complete, ONLY respond with the missing code (no explanation, no backticks, no code blocks, no comments, no nothing).
 
 Test file content:
 {content}
