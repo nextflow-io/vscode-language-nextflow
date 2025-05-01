@@ -8,7 +8,7 @@ type Props = {
   node: TreeNode;
 };
 
-const FileNode = ({ node }: Props) => {
+const FileItem = ({ node }: Props) => {
   const { openFile } = useWorkspaceContext();
 
   return (
@@ -44,4 +44,4 @@ const FileNode = ({ node }: Props) => {
   );
 };
 
-export default FileNode;
+export default FileItem;

@@ -7,3 +7,7 @@
   padding: 10px;
   border-bottom: 1px solid var(--vscode-dropdown-border);
 }
+.container {
+  width: 100%;
+  box-sizing: border-box;
+}

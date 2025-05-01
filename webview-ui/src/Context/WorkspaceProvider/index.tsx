@@ -59,9 +59,7 @@ const WorkspaceProvider = ({ children, vscode, viewID, isCursor }: Props) => {
   useEffect(() => {
     const handleMessage = (event: MessageEvent) => {
       const message = event.data;
-      const nodes = message.nodes as TreeNode[];
-      nodes.sort((a, b) => a.name.localeCompare(b.name));
-      setNodes(nodes);
+      setNodes(message.nodes as TreeNode[]);
     };
     window.addEventListener("message", handleMessage);
     return () => window.removeEventListener("message", handleMessage);

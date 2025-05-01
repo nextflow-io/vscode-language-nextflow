@@ -1,5 +1,5 @@
 import { TreeNode } from "../../Context/WorkspaceProvider/types";
-import FileNode from "./FileNode";
+import FileItem from "./FileItem";
 import styles from "./styles.module.css";
 
 type Props = {
@@ -9,7 +9,7 @@ type Props = {
 const FileList = ({ nodes }: Props) => {
   return (
     <div className={styles.section}>
-      {nodes.map((node) => <FileNode key={`${node.uri}:${node.name}`} node={node} />)}
+      {nodes.map((node) => <FileItem key={`${node.uri}:${node.name}`} node={node} />)}
     </div>
   );
 };

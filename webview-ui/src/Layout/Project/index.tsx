@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useWorkspaceContext } from "../../Context";
 import FileList from "../../components/FileList";
-import FileTree from "../../components/FileTree";
+import FileNode from "../../components/FileNode";
 import Input from "../../components/Input";
 import Select from "../../components/Select";
 import styles from "./styles.module.css";
@@ -18,11 +18,8 @@ const Project = () => {
   const [search, setSearch] = useState("");
 
   const entryNodes = nodes.filter((n) => n.name === "<entry>");
-  const filteredNodes = viewMode === "list" && search
-    ? nodes.filter((n) => n.name.toLowerCase().includes(search.toLowerCase()))
-    : nodes;
 
-  const testCoverage = () => {
+  function testCoverage() {
     const totalCount = nodes.length - entryNodes.length;
     if( totalCount == 0 )
       return <></>;
@@ -39,17 +36,27 @@ const Project = () => {
     );
   };
 
-  const treeView = () => (
-    entryNodes.length > 0
-      ? <FileTree nodes={entryNodes} searchTerm={search} />
-      : <section className="cozy">No entry workflows found</section>
-  );
+  function treeView() {
+    if (entryNodes.length == 0)
+      return <section className="cozy">No entry workflows found</section>;
+    return (
+      <div className={styles.container}>
+        {entryNodes.map((node) => (
+          <FileNode node={node} searchTerm={search} />
+        ))}
+      </div>
+    );
+  };
 
-  const listView = () => (
-    filteredNodes.length > 0
-      ? <FileList nodes={filteredNodes} />
-      : <section className="cozy">No processes or workflows found</section>
-  );
+  function listView() {
+    const filteredNodes = search
+      ? nodes.filter((n) => n.name.toLowerCase().includes(search.toLowerCase()))
+      : nodes.slice();
+    filteredNodes.sort((a, b) => a.name.localeCompare(b.name));
+    if (filteredNodes.length == 0)
+      return <section className="cozy">No processes or workflows found</section>;
+    return <FileList nodes={filteredNodes} />;
+  };
 
   return (
     <>
