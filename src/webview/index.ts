@@ -11,9 +11,8 @@ export function activateWebview(
   context: vscode.ExtensionContext,
   authProvider: AuthProvider
 ) {
+  const projectProvider = new WebviewProvider(context, "project");
   const resourcesProvider = new ResourcesProvider();
-  const workflowProvider = new WebviewProvider(context, "workflows");
-  const processesProvider = new WebviewProvider(context, "processes");
   const userInfoProvider = new WebviewProvider(
     context,
     "userInfo",
@@ -25,15 +24,13 @@ export function activateWebview(
       uris === undefined ||
       uris.some((uri) => isNextflowFile(uri.fsPath))
     ) {
-      processesProvider.initViewData();
-      workflowProvider.initViewData();
+      projectProvider.initViewData();
     }
   };
 
   // Register views
   const providers = [
-    vscode.window.registerWebviewViewProvider("workflows", workflowProvider),
-    vscode.window.registerWebviewViewProvider("processes", processesProvider),
+    vscode.window.registerWebviewViewProvider("project", projectProvider),
     vscode.window.registerWebviewViewProvider("userInfo", userInfoProvider),
     vscode.window.registerTreeDataProvider("resources", resourcesProvider)
   ];
@@ -53,7 +50,7 @@ export function activateWebview(
   vscode.workspace.onDidOpenTextDocument((document) => {
     const filePath = document.uri.fsPath;
     if (isNextflowFile(filePath)) {
-      workflowProvider.openFileEvent(filePath);
+      projectProvider.openFileEvent(filePath);
     }
   });
   vscode.workspace.onDidCreateFiles((e) => refresh(e.files));

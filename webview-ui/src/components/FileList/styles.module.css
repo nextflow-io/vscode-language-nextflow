@@ -24,43 +24,6 @@
       }
     }
   }
-}
-.row.workflow {
-  & .name {
-    font-weight: bold;
-    width: 100%;
-  }
-  & .children {
-    padding: 0 0 4px 0;
-    & > label {
-      display: block;
-      cursor: pointer;
-      padding: 0 16px 0 28px;
-      &:hover {
-        background-color: var(--nf-item-bg-hover);
-      }
-      & > span {
-        font-size: 8px;
-        margin-left: 8px;
-      }
-    }
-    & > div {
-      & > label {
-        padding: 4px 16px 4px 32px;
-        color: var(--nf-item-fg-active);
-        display: block;
-        width: 100%;
-        cursor: pointer;
-        line-height: 1;
-        &:hover {
-          background-color: var(--nf-item-bg-hover);
-        }
-      }
-    }
-  }
-}
-
-.row.process {
   & .name {
     width: 100%;
     flex: 1 1 auto;

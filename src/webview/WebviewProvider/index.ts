@@ -22,7 +22,7 @@ class WebviewProvider implements vscode.WebviewViewProvider {
 
   constructor(
     private readonly _context: vscode.ExtensionContext,
-    private readonly viewID: "workflows" | "processes" | "userInfo",
+    private readonly viewID: "project" | "userInfo",
     private readonly _authProvider?: AuthProvider
   ) {
     this._extensionUri = _context.extensionUri;
@@ -152,7 +152,7 @@ class WebviewProvider implements vscode.WebviewViewProvider {
       if (!accessToken) return;
       await fetchPlatformData(accessToken, view.webview, _context, refresh);
     }
-    if (viewID === "processes" || viewID === "workflows") {
+    if (viewID === "project") {
       const nodes = await queryWorkspace();
       view.webview.postMessage({ nodes });
     }

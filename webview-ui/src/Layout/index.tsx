@@ -1,8 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { useWorkspaceContext } from "../Context";
 import Cloud from "./Cloud";
-import Processes from "./Processes";
-import Workflows from "./Workflows";
+import Project from "./Project";
 
 const Layout = () => {
   const { viewID, nodes, refresh } = useWorkspaceContext();
@@ -12,7 +11,7 @@ const Layout = () => {
   useEffect(() => {
     // Hacky fix for empty file state we get sometimes
     // TODO: find out why this is happening
-    if (!["workflows", "processes"].includes(viewID)) return;
+    if (viewID !== "project") return;
     if (!nodes.length && retryCount < 2) {
       timeoutRef.current = setTimeout(() => {
         refresh();
@@ -26,8 +25,7 @@ const Layout = () => {
   }, [nodes, retryCount]);
 
   if (viewID === "userInfo") return <Cloud />;
-  if (viewID === "processes") return <Processes />;
-  if (viewID === "workflows") return <Workflows />;
+  if (viewID === "project") return <Project />;
   return null;
 };
 

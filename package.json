@@ -302,13 +302,8 @@
     "views": {
       "nextflow": [
         {
-          "id": "workflows",
-          "name": "Workflows",
-          "type": "webview"
-        },
-        {
-          "id": "processes",
-          "name": "Processes",
+          "id": "project",
+          "name": "Project",
           "type": "webview"
         },
         {

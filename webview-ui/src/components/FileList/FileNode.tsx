@@ -9,20 +9,16 @@ type Props = {
 };
 
 const FileNode = ({ node }: Props) => {
-  const { openFile, viewID: type } = useWorkspaceContext();
-
-  const typeStyleName = type === "processes"
-    ? "process"
-    : "workflow";
+  const { openFile } = useWorkspaceContext();
 
   return (
-    <div className={clsx(styles.row, { [styles[typeStyleName]]: !!type })}>
+    <div className={clsx(styles.row)}>
       <label className={clsx(styles.item)}>
         <span className={styles.name} onClick={() => openFile(node.uri, node.line)}>
           <i className="codicon codicon-symbol-method" />
           {node.name}
         </span>
-        {type === "processes" && (
+        {node.name !== "<entry>" && (
           !!node.test ? (
             <span
               className={styles.metaLabel}
