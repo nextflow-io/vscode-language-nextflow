@@ -36,7 +36,7 @@ async function createTest(filePath: string, token: string): Promise<boolean> {
 
         // Stream the content to the file as it's generated
         let generatedContent = "";
-        await generateTest(content, token, (chunk) => {
+        await generateTest(content, token, async (chunk) => {
           // Append the new chunk to our accumulated content
           generatedContent += chunk;
 
@@ -50,7 +50,20 @@ async function createTest(filePath: string, token: string): Promise<boolean> {
             ),
             generatedContent
           );
-          vscode.workspace.applyEdit(edit);
+          await vscode.workspace.applyEdit(edit);
+
+          // Scroll to the end of the document
+          if (editor) {
+            const lastLine = document.lineCount - 1;
+            const lastPosition = new vscode.Position(
+              lastLine,
+              document.lineAt(lastLine).text.length
+            );
+            editor.revealRange(
+              new vscode.Range(lastPosition, lastPosition),
+              vscode.TextEditorRevealType.Default
+            );
+          }
         });
 
         // Ensure the final content is saved
