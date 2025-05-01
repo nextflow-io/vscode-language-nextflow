@@ -16,3 +16,18 @@ Please create a complete nf-test that:
 The test should be compatible with the nf-test framework (https://code.askimed.com/nf-test/) and follow standard Nextflow testing patterns.
 `;
 };
+
+export const validateTestPrompt = `You are a Nextflow test file validator. Your task is to check if the provided test file is complete and valid.
+
+Rules:
+1. The test file must contain at least one test case
+2. Each test case must have a proper setup and teardown
+3. The test file must include all necessary imports
+4. The test file must follow Nextflow test conventions
+
+If the test file is complete and valid, respond with exactly "true".
+If the test file is incomplete or invalid, respond with the missing or incorrect code that should be added to make it valid.
+
+Test file content:
+{content}
+`;

@@ -1,6 +1,7 @@
 import * as vscode from "vscode";
 import * as fs from "fs";
 import generateTest from "./generateTest";
+import doubleCheck from "./doubleCheck";
 
 async function createTest(filePath: string, token: string): Promise<boolean> {
   return vscode.window.withProgress(
@@ -16,6 +17,7 @@ async function createTest(filePath: string, token: string): Promise<boolean> {
 
         progress.report({ message: "Generating code" });
         const nfTest = await generateTest(content, token);
+        console.log("🟢 nfTest:", nfTest);
         const newFilePath = filePath.replace(".nf", ".nf.test");
 
         progress.report({ message: "Creating test file" });
@@ -29,6 +31,23 @@ async function createTest(filePath: string, token: string): Promise<boolean> {
         if (success) {
           const document = await vscode.workspace.openTextDocument(uri);
           await document.save();
+
+          progress.report({ message: "Validating test file" });
+          const validationResult = await doubleCheck(nfTest, token);
+          console.log("🟢 validationResult:", validationResult);
+
+          if (validationResult !== true) {
+            // If validation failed, append the suggested improvements
+            const workspaceEdit = new vscode.WorkspaceEdit();
+            workspaceEdit.insert(
+              uri,
+              new vscode.Position(document.lineCount, 0),
+              "\n\n" + validationResult
+            );
+            await vscode.workspace.applyEdit(workspaceEdit);
+            await document.save();
+          }
+
           await vscode.window.showTextDocument(document);
 
           vscode.window.showInformationMessage(
