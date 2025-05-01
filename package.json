@@ -157,7 +157,7 @@
       "view/title": [
         {
           "command": "nextflow.seqera.reloadWebview",
-          "when": "view == project || view == userInfo",
+          "when": "view == project || view == modules || view == userInfo",
           "group": "navigation@10"
         },
         {
@@ -299,6 +299,11 @@
         {
           "id": "project",
           "name": "Project",
+          "type": "webview"
+        },
+        {
+          "id": "modules",
+          "name": "Modules",
           "type": "webview"
         },
         {

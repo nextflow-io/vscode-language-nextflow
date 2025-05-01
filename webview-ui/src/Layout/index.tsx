@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { useWorkspaceContext } from "../Context";
 import Cloud from "./Cloud";
+import Modules from "./Modules";
 import Project from "./Project";
 
 const Layout = () => {
@@ -25,6 +26,7 @@ const Layout = () => {
   }, [nodes, retryCount]);
 
   if (viewID === "userInfo") return <Cloud />;
+  if (viewID === "modules") return <Modules />;
   if (viewID === "project") return <Project />;
   return null;
 };

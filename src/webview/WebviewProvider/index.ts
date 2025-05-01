@@ -22,7 +22,7 @@ class WebviewProvider implements vscode.WebviewViewProvider {
 
   constructor(
     private readonly _context: vscode.ExtensionContext,
-    private readonly viewID: "project" | "userInfo",
+    private readonly viewID: "project" | "modules" | "userInfo",
     private readonly _authProvider?: AuthProvider
   ) {
     this._extensionUri = _context.extensionUri;
@@ -39,6 +39,9 @@ class WebviewProvider implements vscode.WebviewViewProvider {
       switch (command) {
         case "openFile":
           this.openFile(message.path, message.line);
+          break;
+        case "openExternal":
+          this.openExternal(message.url);
           break;
         case "openChat":
           this.openChat();
@@ -71,6 +74,9 @@ class WebviewProvider implements vscode.WebviewViewProvider {
         case "fetchComputeEnvs":
           if (!workspaceId) return;
           this.fetchComputeEnvs(workspaceId);
+          break;
+        case "runCommand":
+          this.runCommand(message.text);
           break;
       }
     });
@@ -165,8 +171,19 @@ class WebviewProvider implements vscode.WebviewViewProvider {
     });
   }
 
+  private async openExternal(url: string) {
+    await vscode.env.openExternal(vscode.Uri.parse(url));
+  }
+
   private async openChat() {
     await vscode.commands.executeCommand("nextflow.chatbot.openChat");
+  }
+
+  private async runCommand(command: string) {
+    await vscode.commands.executeCommand(
+      "workbench.action.terminal.sendSequence",
+      { text: `${command}\n` }
+    );
   }
 
   private initHTML(view: vscode.WebviewView) {
