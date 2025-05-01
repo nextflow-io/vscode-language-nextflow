@@ -1,21 +1,20 @@
-type Type =
-  | "workflow"
-  | "process"
-  | "test"
-  | undefined;
 
-export interface FileInfo {
+export interface TreeNode {
   name: string;
-  type: Type;
-  line?: number;
+  type: "process" | "workflow";
+  path: string;
+  line: number;
+  test?: TestNode;
+  children?: CallNode[];
 }
 
-export interface FileNode {
+export interface TestNode {
   name: string;
-  fileName: string;
-  filePath: string;
-  type: Type;
-  imports: string[];
-  children?: FileNode[];
-  line?: number;
+  path: string;
+  line: number;
+}
+
+export interface CallNode {
+  name: string;
+  path: string;
 }

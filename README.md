@@ -44,24 +44,25 @@ Related blog posts:
 
 - [Bringing Seqera AI to the Nextflow VS Code extension](https://seqera.io/blog/seqera-ai--nextflow-vs-code/)
 
-### Workflows and Processes View
+### Project view
 
-The extension provides custom views for managing Nextflow workflows and processes.
+The extension provides a custom view for Nextflow projects. The Project view uses the language server to provide an overview of your pipeline project.
 
-The Workflows view provides a comprehensive overview of your pipeline project. It infers the structure of your pipeline from the include declarations in your scripts.
+The list view lists all processes and workflows, as well as any associated [nf-test](https://www.nf-test.com/) files, in alphabetical order:
 
-Here is an eaxmple from the [nf-core/rnaseq](https://github.com/nf-core/rnaseq) pipeline:
+![Project List View](images/project_view_list.png)
 
-![Workflows View](images/workflow_view.png)
+The tree view shows processes and workflows organized by call hierarchy:
 
-The Processes view provides a comprehensive list of all processes in your pipeline, as well as any associated [nf-test](https://www.nf-test.com/) files.
+![Project Tree View](images/project_view_tree.png)
 
-This view helps you:
+*Examples taken from the [nf-core/fetchngs](https://github.com/nf-core/fetchngs) pipeline.*
+
+The Project view allows you to:
+
+- See the structure of your pipeline
+- Navigate to a process, workflow, or test by name
 - Monitor test coverage across your entire pipeline
-- Quickly identify untested processes
-- Easily navigate to a process definition (or corresponding test) by name
-
-![Process View](images/process_view.png)
 
 ## Installation
 

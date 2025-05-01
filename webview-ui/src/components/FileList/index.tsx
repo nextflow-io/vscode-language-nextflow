@@ -1,18 +1,15 @@
-import FileNode from "./FileNode";
-
+import { TreeNode } from "../../Context/WorkspaceProvider/types";
+import FileItem from "./FileItem";
 import styles from "./styles.module.css";
 
-import { FileNode as FileNodeType } from "../../Context/WorkspaceProvider/types";
-
 type Props = {
-  files: FileNodeType[];
+  nodes: TreeNode[];
 };
 
-const FileList = ({ files }: Props) => {
-  if (!files) return null;
+const FileList = ({ nodes }: Props) => {
   return (
     <div className={styles.section}>
-      {files?.map((node) => <FileNode key={node.filePath} node={node} />)}
+      {nodes.map((node) => <FileItem key={`${node.path}:${node.name}`} node={node} />)}
     </div>
   );
 };
