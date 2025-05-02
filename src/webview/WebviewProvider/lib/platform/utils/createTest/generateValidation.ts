@@ -9,10 +9,8 @@ async function generateValidation(
   try {
     const prompt = getValidationPrompt(content);
     const response = await fetchContent(prompt, token, onChunk);
-
-    console.log("🟢 AI validation response:", response);
+    return response;
   } catch (error) {
-    console.log("🟢 AI validation error:", error);
     return "Error validating test file. Please check manually.";
   }
 }
