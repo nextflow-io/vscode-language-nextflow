@@ -1,6 +1,6 @@
 import { createContext, useContext, useEffect, useState } from "react";
 
-import { TreeNode } from "./types";
+import { TestCreation, TreeNode } from "./types";
 
 const WorkspaceContext = createContext<WorkspaceContextType>({
   nodes: [],
@@ -18,7 +18,7 @@ const WorkspaceContext = createContext<WorkspaceContextType>({
   getRepoInfo: () => {},
   refresh: () => {},
   createTest: () => {},
-  creatingTest: {}
+  testCreation: {}
 });
 
 interface WorkspaceContextType {
@@ -37,11 +37,7 @@ interface WorkspaceContextType {
   getRepoInfo: () => void;
   refresh: () => void;
   createTest: (filePath: string) => void;
-  creatingTest: {
-    filePath?: string;
-    successful?: boolean;
-    finished?: boolean;
-  };
+  testCreation: TestCreation;
 }
 
 type Props = {
@@ -55,8 +51,8 @@ const WorkspaceProvider = ({ children, vscode, viewID, isCursor }: Props) => {
   const state = vscode.getState();
 
   const [nodes, setNodes] = useState<TreeNode[]>([]);
-  const [creatingTest, setCreatingTest] = useState<
-    ContextTypes["creatingTest"]
+  const [testCreation, setCreatingTest] = useState<
+    WorkspaceContextType["testCreation"]
   >({});
   const [selectedItems, setSelectedItems] = useState<string[]>(
     state?.selectedItems || []
@@ -150,7 +146,7 @@ const WorkspaceProvider = ({ children, vscode, viewID, isCursor }: Props) => {
         getRepoInfo,
         refresh,
         createTest,
-        creatingTest
+        testCreation
       }}
     >
       {children}
