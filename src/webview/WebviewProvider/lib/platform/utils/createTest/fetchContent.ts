@@ -1,8 +1,5 @@
 import { INTERN_API_URL } from "../../../../../../constants";
-
-interface StreamResponse {
-  content: string;
-}
+import { systemPrompt } from "./prompt";
 
 async function fetchContent(
   prompt: string,
@@ -10,7 +7,10 @@ async function fetchContent(
   onChunk?: (chunk: string) => void
 ): Promise<string> {
   try {
-    const response = await fetch(`${INTERN_API_URL}/internal-ai/query`, {
+    const fullPrompt = `:::details\n\n${systemPrompt}\n\n${prompt}\n\n:::\n\n`;
+    const url = `${INTERN_API_URL}/internal-ai/query`;
+
+    const response = await fetch(url, {
       credentials: "include",
       method: "POST",
       headers: {
@@ -18,7 +18,7 @@ async function fetchContent(
         Authorization: `Bearer ${token}`
       },
       body: JSON.stringify({
-        message: prompt,
+        message: fullPrompt,
         stream: true,
         tags: ["multiqc"],
         title: "NF-Test Generation"

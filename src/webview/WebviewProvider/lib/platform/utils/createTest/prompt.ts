@@ -1,6 +1,6 @@
 export const systemPrompt = `You ONLY output code for nf-tests, nothing else. Do not include backticks or code blocks. You do not output any other text such as explanations, or anything else. You output pure code.`;
 
-export const getUserPrompt = (fileContents: string) => {
+export const getPrompt = (fileContents: string) => {
   return `
 Generate an nf-test for the following Nextflow process:
 
@@ -17,21 +17,13 @@ The test should be compatible with the nf-test framework (https://code.askimed.c
 `;
 };
 
-export const validateTestPrompt = `You are a Nextflow test file completer. Your task is to check if the provided test file is complete, and if not, complete it.
-
-Rules:
-1. The test file must contain at least one test case
-2. Each test case must have a proper setup and teardown
-3. The test file must include all necessary imports
-4. The test file must follow Nextflow test conventions
-
-If the test file is incomplete, respond with the missing code that should be added to make it valid.
-Respond with exactly "true" if the test file is complete.
-If not complete, ONLY respond with the missing code + 1 line of code above it.
-The response code is to be appended to the end of the test file, minus the last line of code. Provide indentation accordingly.
-Do not add explanations, backticks, code blocks, comments, or anything else.
-
+export const getValidationPrompt = (testFileContents: string) => {
+  return `
+Check whether the following nf-test file appears to have finished being generated.
+If it looks valid and does not have anything missing at the end, respond with exactly "true".
+If it has not finished generating, continue with the generation process and respond with the missing code that needs to be added to make it valid.
 
 Test file content:
-{content}
+${testFileContents}
 `;
+};

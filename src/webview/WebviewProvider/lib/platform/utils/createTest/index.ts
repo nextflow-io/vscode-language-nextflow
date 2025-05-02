@@ -1,7 +1,7 @@
 import * as vscode from "vscode";
 import * as fs from "fs";
 import generateTest from "./generateTest";
-import doubleCheck from "./doubleCheck";
+import generateValidation from "./generateValidation";
 
 function scrollToEnd(editor: vscode.TextEditor, document: vscode.TextDocument) {
   if (editor) {
@@ -51,7 +51,6 @@ async function createTest(filePath: string, token: string): Promise<boolean> {
         // Stream the content to the file as it's generated
         let generatedContent = "";
         await generateTest(content, token, async (chunk) => {
-          // Append the new chunk to our accumulated content
           generatedContent += chunk;
 
           // Update the file with the full content so far
@@ -68,31 +67,26 @@ async function createTest(filePath: string, token: string): Promise<boolean> {
           scrollToEnd(editor, document);
         });
 
-        // Ensure the final content is saved
         await document.save();
-
         progress.report({ message: "Validating test file" });
-        const validationResult = await doubleCheck(generatedContent, token);
 
-        if (validationResult !== true) {
-          // If validation failed, append the suggested improvements
-          const workspaceEdit = new vscode.WorkspaceEdit();
+        await generateValidation(generatedContent, token, async (chunk) => {
+          generatedContent += chunk;
+          const edit = new vscode.WorkspaceEdit();
 
-          // Remove the last line before appending
-          const lastLine = document.lineCount - 1;
-          const lastLineRange = document.lineAt(lastLine).range;
-          workspaceEdit.delete(uri, lastLineRange);
-
-          // Append the validation result
-          workspaceEdit.insert(
+          edit.replace(
             uri,
-            new vscode.Position(document.lineCount - 1, 0),
-            validationResult
+            new vscode.Range(
+              new vscode.Position(0, 0),
+              document.lineAt(document.lineCount - 1).range.end
+            ),
+            generatedContent
           );
-          await vscode.workspace.applyEdit(workspaceEdit);
-          await document.save();
+          await vscode.workspace.applyEdit(edit);
           scrollToEnd(editor, document);
-        }
+        });
+
+        await document.save();
 
         vscode.window.showInformationMessage(`nf-test created: ${newFilePath}`);
 
