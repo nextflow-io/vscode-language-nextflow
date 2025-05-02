@@ -66,7 +66,7 @@ const WorkspaceProvider = ({ children, vscode, viewID, isCursor }: Props) => {
   useEffect(() => {
     const handleMessage = (event: MessageEvent) => {
       const message = event.data;
-      setNodes(message.nodes as TreeNode[]);
+      if (message.nodes) setNodes(message.nodes);
       if (message.testCreated) {
         const data = message.testCreated;
         setCreatingTest({
