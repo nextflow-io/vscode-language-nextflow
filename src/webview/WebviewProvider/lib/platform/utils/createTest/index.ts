@@ -34,7 +34,7 @@ async function createTest(filePath: string, token: string): Promise<boolean> {
         // Create the empty file first
         progress.report({ message: "Creating test file" });
         const createEdit = new vscode.WorkspaceEdit();
-        createEdit.createFile(uri, { ignoreIfExists: false });
+        createEdit.createFile(uri, { ignoreIfExists: true });
 
         const createSuccess = await vscode.workspace.applyEdit(createEdit);
         if (!createSuccess) {
