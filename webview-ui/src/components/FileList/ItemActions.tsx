@@ -27,11 +27,22 @@ const ItemActions: React.FC<Props> = ({ node }) => {
   }
 
   const { label, style } = getTestLabel(node, testCreation);
+  let inProgress = true;
+  const onClick = () => createTest(node.path);
+
+  if (
+    typeof testCreation?.finished === "undefined" ||
+    testCreation.finished === true
+  ) {
+    inProgress = false;
+  }
 
   return (
     <span
-      className={clsx(styles.actions, style)}
-      onClick={() => createTest(node.path)}
+      className={clsx(styles.actions, style, {
+        [styles.inProgress]: inProgress
+      })}
+      onClick={inProgress ? undefined : onClick}
     >
       {label}
     </span>

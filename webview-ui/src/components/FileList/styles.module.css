@@ -47,6 +47,7 @@
   letter-spacing: 0.5px;
   &:hover {
     opacity: 1;
+    color: var(--vscode-gitDecoration-untrackedResourceForeground);
   }
   &.success,
   &.generating {
@@ -57,6 +58,9 @@
   }
   &.disabled {
     color: #666 !important;
+    cursor: default;
+  }
+  &.inProgress {
     cursor: default;
   }
   & .actionIcon {
