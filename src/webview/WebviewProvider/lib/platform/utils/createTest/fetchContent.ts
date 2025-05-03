@@ -1,12 +1,14 @@
 import { SEQERA_INTERN_API_URL } from "../../../../../../constants";
-import { systemPrompt } from "./prompt";
+import { systemPrompt as defaultSystemPrompt } from "./prompt";
 
 async function fetchContent(
   prompt: string,
   token: string,
-  onChunk?: (chunk: string) => void
+  onChunk?: (chunk: string) => void,
+  givenSystemPrompt?: string
 ): Promise<string> {
   try {
+    const systemPrompt = givenSystemPrompt || defaultSystemPrompt;
     const fullPrompt = `:::details\n\n${systemPrompt}\n\n${prompt}\n\n:::\n\n`;
     const url = `${SEQERA_INTERN_API_URL}/internal-ai/query`;
 

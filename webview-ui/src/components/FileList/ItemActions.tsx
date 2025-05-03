@@ -9,27 +9,13 @@ type Props = {
 };
 
 const ItemActions: React.FC<Props> = ({ node }) => {
-  const { openFile, testCreation, createTest } = useWorkspaceContext();
+  const { openFile, testCreation, createTest, getContainer } =
+    useWorkspaceContext();
   if (node.name === "<entry>") return null;
-
-  if (!!node.test) {
-    return (
-      <span
-        className={styles.actions}
-        onClick={() => !!node.test && openFile(node.test.path, node.test.line)}
-      >
-        <i
-          className={clsx("codicon", "codicon-go-to-file", styles.actionIcon)}
-        />
-        nf-test
-      </span>
-    );
-  }
-
+  const hasTest = !!node.test;
   const { label, style } = getTestLabel(node, testCreation);
-  let inProgress = true;
-  const onClick = () => createTest(node.path);
 
+  let inProgress = true;
   if (
     typeof testCreation?.finished === "undefined" ||
     testCreation.finished === true
@@ -38,14 +24,33 @@ const ItemActions: React.FC<Props> = ({ node }) => {
   }
 
   return (
-    <span
-      className={clsx(styles.actions, style, {
-        [styles.inProgress]: inProgress
-      })}
-      onClick={inProgress ? undefined : onClick}
-    >
-      {label}
-    </span>
+    <div className={styles.actions}>
+      <span className={styles.action} onClick={() => getContainer(node.path)}>
+        Wave
+      </span>
+      {hasTest ? (
+        <span
+          className={styles.action}
+          onClick={() =>
+            !!node.test && openFile(node.test.path, node.test.line)
+          }
+        >
+          <i
+            className={clsx("codicon", "codicon-go-to-file", styles.actionIcon)}
+          />
+          nf-test
+        </span>
+      ) : (
+        <span
+          className={clsx(styles.action, style, {
+            [styles.inProgress]: inProgress
+          })}
+          onClick={() => createTest(node.path)}
+        >
+          {label}
+        </span>
+      )}
+    </div>
   );
 };
 
