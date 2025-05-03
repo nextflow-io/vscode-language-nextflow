@@ -30,7 +30,7 @@
   }
 }
 
-.actions {
+.action {
   white-space: nowrap;
   cursor: pointer;
   text-overflow: ellipsis;

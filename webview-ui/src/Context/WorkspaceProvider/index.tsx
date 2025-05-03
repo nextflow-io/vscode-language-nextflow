@@ -18,7 +18,8 @@ const WorkspaceContext = createContext<WorkspaceContextType>({
   getRepoInfo: () => {},
   refresh: () => {},
   createTest: () => {},
-  testCreation: {}
+  testCreation: {},
+  getContainer: () => {}
 });
 
 interface WorkspaceContextType {
@@ -38,6 +39,7 @@ interface WorkspaceContextType {
   refresh: () => void;
   createTest: (filePath: string) => void;
   testCreation: TestCreation;
+  getContainer: (filePath: string) => void;
 }
 
 type Props = {
@@ -129,6 +131,10 @@ const WorkspaceProvider = ({ children, vscode, viewID, isCursor }: Props) => {
     vscode.postMessage({ command: "createTest", filePath });
   }
 
+  function getContainer(filePath: string) {
+    vscode.postMessage({ command: "getContainer", filePath });
+  }
+
   return (
     <WorkspaceContext.Provider
       value={{
@@ -147,7 +153,8 @@ const WorkspaceProvider = ({ children, vscode, viewID, isCursor }: Props) => {
         getRepoInfo,
         refresh,
         createTest,
-        testCreation
+        testCreation,
+        getContainer
       }}
     >
       {children}

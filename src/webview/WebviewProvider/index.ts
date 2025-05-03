@@ -11,7 +11,8 @@ import {
   fetchPlatformData,
   fetchRuns,
   getRepoInfo,
-  queryWorkspace
+  queryWorkspace,
+  getContainer
 } from "./lib";
 import { AuthProvider, getAccessToken } from "../../auth";
 import { jwtExpired } from "../../auth/AuthProvider/utils/jwt";
@@ -74,6 +75,9 @@ class WebviewProvider implements vscode.WebviewViewProvider {
           this.fetchComputeEnvs(workspaceId);
         case "createTest":
           this.createTest(message.filePath);
+          break;
+        case "getContainer":
+          this.getContainer(message.filePath);
           break;
       }
     });
@@ -180,6 +184,27 @@ class WebviewProvider implements vscode.WebviewViewProvider {
     } catch (error) {
       console.log("🟠 Test creation failed", error);
       this.emitTestCreated(filePath, false);
+    }
+  }
+
+  private async emitContainerCreated(filePath: string, successful: boolean) {
+    this._currentView?.webview.postMessage({
+      containerCreated: {
+        filePath,
+        successful
+      }
+    });
+  }
+  private async getContainer(filePath: string) {
+    const accessToken = await getAccessToken(this._context);
+    if (!accessToken) return false;
+
+    try {
+      const created = await getContainer(filePath, accessToken);
+      this.emitContainerCreated(filePath, created);
+    } catch (error) {
+      console.log("🟠 Container creation failed", error);
+      this.emitContainerCreated(filePath, false);
     }
   }
 
