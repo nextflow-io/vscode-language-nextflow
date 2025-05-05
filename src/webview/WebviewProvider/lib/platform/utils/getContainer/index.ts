@@ -1,7 +1,7 @@
 import * as vscode from "vscode";
 import * as fs from "fs";
 import generateRequirements from "./generateRequirements";
-import { appendToFile } from "../createTest/utils";
+import { startBuild } from "./startBuild";
 
 async function getContainer(filePath: string, token: string): Promise<boolean> {
   return vscode.window.withProgress(
@@ -16,32 +16,43 @@ async function getContainer(filePath: string, token: string): Promise<boolean> {
         const newFilePath = filePath.replace(".nf", ".nf.container");
         const uri = vscode.Uri.file(newFilePath);
 
-        // Create new file
-        progress.report({ message: "Creating test file" });
+        // Find required packages
+        progress.report({ message: "Finding required packages" });
+        const generatedContent = await generateRequirements(content, token);
+
+        // Start container build
+        progress.report({ message: "Starting container build" });
+        const buildResult = await startBuild(generatedContent);
+
+        if (buildResult.error) {
+          vscode.window.showErrorMessage(
+            `Failed to build container: ${buildResult.error}`
+          );
+          return false;
+        }
+
+        // Create and save the container file with build info
         const createEdit = new vscode.WorkspaceEdit();
         createEdit.createFile(uri, { ignoreIfExists: true });
         const createSuccess = await vscode.workspace.applyEdit(createEdit);
         if (!createSuccess) {
-          vscode.window.showErrorMessage("Failed to create test file");
+          vscode.window.showErrorMessage("Failed to create container file");
           return false;
         }
 
-        // Open the file
         const document = await vscode.workspace.openTextDocument(uri);
         const editor = await vscode.window.showTextDocument(document);
-
-        // Find required packages
-        progress.report({ message: "Finding required packages" });
-        let generatedContent = "";
-        await generateRequirements(content, token, async (chunk) => {
-          generatedContent += chunk;
-          await appendToFile(uri, document, editor, generatedContent);
+        await editor.edit((editBuilder) => {
+          editBuilder.insert(
+            new vscode.Position(0, 0),
+            JSON.stringify(buildResult, null, 2)
+          );
         });
-
-        // Save
         await document.save();
 
-        vscode.window.showInformationMessage(`Done: ${newFilePath}`);
+        vscode.window.showInformationMessage(
+          `Container build started: ${newFilePath}`
+        );
 
         return true;
       } catch (error: any) {

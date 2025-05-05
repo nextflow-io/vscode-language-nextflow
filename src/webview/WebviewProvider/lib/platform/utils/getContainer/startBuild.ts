@@ -39,8 +39,8 @@ function parsePackagesString(packagesString: string): PackageResult[] {
  */
 export async function startBuild(
   packagesString: string,
-  imageType: ImageType,
-  selectedPlatform: Platform
+  imageType?: ImageType,
+  selectedPlatform?: Platform
 ): Promise<WaveBuild> {
   const packages = parsePackagesString(packagesString);
 
