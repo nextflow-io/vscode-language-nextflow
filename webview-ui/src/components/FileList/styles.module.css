@@ -29,7 +29,10 @@
     margin-right: 6px;
   }
 }
-
+.actions {
+  display: flex;
+  align-items: center;
+}
 .action {
   white-space: nowrap;
   cursor: pointer;
