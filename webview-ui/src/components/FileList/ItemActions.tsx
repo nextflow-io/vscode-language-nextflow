@@ -1,6 +1,7 @@
 import clsx from "clsx";
 import { TestCreation, TreeNode } from "../../Context/WorkspaceProvider/types";
 import { useWorkspaceContext } from "../../Context/WorkspaceProvider";
+import waveIcon from "../../images/wave-icon.svg";
 
 import styles from "./styles.module.css";
 
@@ -25,12 +26,17 @@ const ItemActions: React.FC<Props> = ({ node }) => {
 
   return (
     <div className={styles.actions}>
-      <span className={styles.action} onClick={() => getContainer(node.path)}>
-        Wave
-      </span>
+      <button
+        className={styles.action}
+        onClick={() => getContainer(node.path)}
+        title="Generate Wave Container"
+      >
+        <img src={waveIcon} className={styles.wave} />
+      </button>
       {hasTest ? (
-        <span
+        <button
           className={styles.action}
+          title="Open nf-test"
           onClick={() =>
             !!node.test && openFile(node.test.path, node.test.line)
           }
@@ -39,16 +45,17 @@ const ItemActions: React.FC<Props> = ({ node }) => {
             className={clsx("codicon", "codicon-go-to-file", styles.actionIcon)}
           />
           nf-test
-        </span>
+        </button>
       ) : (
-        <span
+        <button
           className={clsx(styles.action, style, {
             [styles.inProgress]: inProgress
           })}
           onClick={() => createTest(node.path)}
+          title="Generate nf-test"
         >
           {label}
-        </span>
+        </button>
       )}
     </div>
   );

@@ -36,15 +36,19 @@
   align-items: center;
   flex: none;
   margin-left: 4px;
+  padding-right: 6px;
 }
 .action {
+  background: none !important;
+  border: none !important;
+  padding: 0;
+  outline: none !important;
   white-space: nowrap;
   cursor: pointer;
   text-overflow: ellipsis;
   overflow: hidden;
   width: auto;
   flex: none;
-  padding-right: 6px;
   opacity: 0.8;
   display: flex;
   align-items: center;
@@ -76,6 +80,14 @@
     opacity: 0.6;
     position: relative;
     top: -1px;
+  }
+  & .wave {
+    width: 21px;
+    height: 21px;
+    opacity: 0.6;
+    &:hover {
+      opacity: 1;
+    }
   }
 }
 &:hover {
