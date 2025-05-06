@@ -4,6 +4,12 @@ All notable changes to the Nextflow VS Code extension will be documented here.
 
 See [Keep a Changelog](http://keepachangelog.com/) for recommendations on how to structure this file.
 
+## [1.3.0] - 2025-05-05
+
+- Run history, Pipelines, Datasets, Data Buckets (#110)
+- Replace Processes/Workflows view with Project view (#117)
+- Add nf-test generation to Project view (#118)
+
 ## [1.2.0] - 2025-04-10
 
 - Add extension settings for code completion and formatting
