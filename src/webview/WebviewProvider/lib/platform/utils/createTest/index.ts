@@ -2,7 +2,7 @@ import * as vscode from "vscode";
 import * as fs from "fs";
 import generateTest from "./generateTest";
 import generateValidation from "./generateValidation";
-import { scrollToEnd, appendToFile } from "./utils";
+import { appendToFile } from "./utils";
 async function createTest(filePath: string, token: string): Promise<boolean> {
   return vscode.window.withProgress(
     {

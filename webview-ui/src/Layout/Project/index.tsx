@@ -13,25 +13,28 @@ function round(x: number) {
 }
 
 const Project = () => {
-  const { nodes = [] } = useWorkspaceContext();
+  const { nodes } = useWorkspaceContext();
   const [viewMode, setViewMode] = useState<ViewMode>("list");
   const [search, setSearch] = useState("");
 
-  const entryNodes = nodes?.filter((n) => n.name === "<entry>") || [];
+  const entryNodes = nodes.filter((n) => n.name === "<entry>");
 
   function testCoverage() {
     const totalCount = nodes.length - entryNodes.length;
-    if (totalCount == 0) return null;
+    if( totalCount == 0 )
+      return <></>;
     const testCount = nodes.filter((n) => n.test !== undefined).length;
     const coverage = round((testCount / totalCount) * 100);
     const color =
-      coverage >= 80 ? "#0dc09d" : coverage >= 20 ? "orange" : "red";
+      coverage >= 80 ? "#0dc09d" :
+      coverage >= 20 ? "orange" :
+      "red";
     return (
       <div className={styles.header}>
         Test coverage: <span style={{ color }}>{coverage}%</span>
       </div>
     );
-  }
+  };
 
   function treeView() {
     if (entryNodes.length == 0)
@@ -43,21 +46,17 @@ const Project = () => {
         ))}
       </div>
     );
-  }
+  };
 
   function listView() {
     const filteredNodes = search
-      ? nodes.filter((n) =>
-          n.name?.toLowerCase().includes(search.toLowerCase())
-        )
+      ? nodes.filter((n) => n.name.toLowerCase().includes(search.toLowerCase()))
       : nodes.slice();
-    filteredNodes.sort((a, b) => a.name?.localeCompare(b.name));
+    filteredNodes.sort((a, b) => a.name.localeCompare(b.name));
     if (filteredNodes.length == 0)
-      return (
-        <section className="cozy">No processes or workflows found</section>
-      );
+      return <section className="cozy">No processes or workflows found</section>;
     return <FileList nodes={filteredNodes} />;
-  }
+  };
 
   return (
     <>

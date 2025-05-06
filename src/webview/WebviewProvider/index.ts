@@ -3,6 +3,7 @@ import * as fs from "fs";
 import * as path from "path";
 
 import {
+  createTest,
   fetchComputeEnvs,
   fetchDataLinks,
   fetchDatasets,
@@ -10,8 +11,7 @@ import {
   fetchPlatformData,
   fetchRuns,
   getRepoInfo,
-  queryWorkspace,
-  createTest
+  queryWorkspace
 } from "./lib";
 import { AuthProvider, getAccessToken } from "../../auth";
 import { jwtExpired } from "../../auth/AuthProvider/utils/jwt";

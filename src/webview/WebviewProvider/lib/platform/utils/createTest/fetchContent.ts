@@ -1,4 +1,4 @@
-import { INTERN_API_URL } from "../../../../../../constants";
+import { SEQERA_INTERN_API_URL } from "../../../../../../constants";
 import { systemPrompt } from "./prompt";
 
 async function fetchContent(
@@ -8,7 +8,7 @@ async function fetchContent(
 ): Promise<string> {
   try {
     const fullPrompt = `:::details\n\n${systemPrompt}\n\n${prompt}\n\n:::\n\n`;
-    const url = `${INTERN_API_URL}/internal-ai/query`;
+    const url = `${SEQERA_INTERN_API_URL}/internal-ai/query`;
 
     const response = await fetch(url, {
       credentials: "include",
