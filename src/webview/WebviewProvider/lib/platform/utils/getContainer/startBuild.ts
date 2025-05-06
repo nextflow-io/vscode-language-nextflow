@@ -90,18 +90,18 @@ export async function startBuild(
     const build = (await response.json()) as WaveResponse;
 
     if (response.ok) {
-      console.log("🟢 Build started successfully:", build);
+      console.log("🟢 Container built:", build);
       return build;
     }
 
-    console.error(
-      "🟢 Build request failed:",
+    console.log(
+      "🟠 Build request failed:",
       response.status,
       response.statusText
     );
     return { buildId: build.buildId, error: response.statusText };
   } catch (error) {
-    console.error("🟢 Error starting build:", error);
+    console.error("🟠 Error starting build:", error);
     throw new Error(
       `Failed to start container build: ${error instanceof Error ? error.message : String(error)}`
     );

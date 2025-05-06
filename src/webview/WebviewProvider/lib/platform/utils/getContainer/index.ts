@@ -17,8 +17,6 @@ async function getContainer(filePath: string, token: string): Promise<boolean> {
         await vscode.workspace.openTextDocument(originalFilePath);
 
         const content = fs.readFileSync(filePath, "utf8");
-        const newFilePath = filePath.replace(".nf", ".nf.container");
-        const uri = vscode.Uri.file(newFilePath);
 
         // Find required packages
         progress.report({ message: "Finding required packages" });
@@ -35,26 +33,19 @@ async function getContainer(filePath: string, token: string): Promise<boolean> {
           return false;
         }
 
-        // Create and save the container file with build info
-        const createEdit = new vscode.WorkspaceEdit();
-        createEdit.createFile(uri, { ignoreIfExists: true });
-        const createSuccess = await vscode.workspace.applyEdit(createEdit);
-        if (!createSuccess) {
-          vscode.window.showErrorMessage("Failed to create container file");
+        // Open the container image URL in the default browser
+        if (buildResult.containerImage) {
+          const url = buildResult.containerImage;
+          await vscode.window.showInputBox({
+            value: url,
+            prompt: "Container URL",
+            ignoreFocusOut: true,
+            title: "Wave container built"
+          });
+        } else {
+          vscode.window.showErrorMessage("Failed to get container");
           return false;
         }
-
-        const document = await vscode.workspace.openTextDocument(uri);
-        const editor = await vscode.window.showTextDocument(document);
-        await editor.edit((editBuilder) => {
-          editBuilder.insert(
-            new vscode.Position(0, 0),
-            JSON.stringify(buildResult, null, 2)
-          );
-        });
-        await document.save();
-
-        vscode.window.showInformationMessage(`Container built: ${newFilePath}`);
 
         return true;
       } catch (error: any) {
