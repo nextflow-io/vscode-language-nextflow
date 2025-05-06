@@ -12,6 +12,10 @@ async function getContainer(filePath: string, token: string): Promise<boolean> {
     },
     async (progress) => {
       try {
+        // Open the original file
+        const originalFilePath = vscode.Uri.file(filePath);
+        await vscode.workspace.openTextDocument(originalFilePath);
+
         const content = fs.readFileSync(filePath, "utf8");
         const newFilePath = filePath.replace(".nf", ".nf.container");
         const uri = vscode.Uri.file(newFilePath);
@@ -50,9 +54,7 @@ async function getContainer(filePath: string, token: string): Promise<boolean> {
         });
         await document.save();
 
-        vscode.window.showInformationMessage(
-          `Container build started: ${newFilePath}`
-        );
+        vscode.window.showInformationMessage(`Container built: ${newFilePath}`);
 
         return true;
       } catch (error: any) {
