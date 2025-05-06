@@ -3,6 +3,7 @@ import * as fs from "fs";
 import generateTest from "./generateTest";
 import generateValidation from "./generateValidation";
 import { appendToFile } from "./utils";
+
 async function createTest(filePath: string, token: string): Promise<boolean> {
   return vscode.window.withProgress(
     {
