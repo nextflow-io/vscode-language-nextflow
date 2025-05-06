@@ -1,6 +1,6 @@
 import { createContext, useContext, useEffect, useState } from "react";
 
-import { TreeNode } from "./types";
+import { TestCreation, TreeNode } from "./types";
 
 const WorkspaceContext = createContext<WorkspaceContextType>({
   nodes: [],
@@ -16,7 +16,9 @@ const WorkspaceContext = createContext<WorkspaceContextType>({
   selectedView: "pipelines",
   setSelectedView: () => {},
   getRepoInfo: () => {},
-  refresh: () => {}
+  refresh: () => {},
+  createTest: () => {},
+  testCreation: {}
 });
 
 interface WorkspaceContextType {
@@ -34,6 +36,8 @@ interface WorkspaceContextType {
   setSelectedView: (view: string) => void;
   getRepoInfo: () => void;
   refresh: () => void;
+  createTest: (filePath: string) => void;
+  testCreation: TestCreation;
 }
 
 type Props = {
@@ -47,6 +51,9 @@ const WorkspaceProvider = ({ children, vscode, viewID, isCursor }: Props) => {
   const state = vscode.getState();
 
   const [nodes, setNodes] = useState<TreeNode[]>([]);
+  const [testCreation, setCreatingTest] = useState<
+    WorkspaceContextType["testCreation"]
+  >({});
   const [selectedItems, setSelectedItems] = useState<string[]>(
     state?.selectedItems || []
   );
@@ -59,7 +66,15 @@ const WorkspaceProvider = ({ children, vscode, viewID, isCursor }: Props) => {
   useEffect(() => {
     const handleMessage = (event: MessageEvent) => {
       const message = event.data;
-      setNodes(message.nodes as TreeNode[]);
+      if (message.nodes) setNodes(message.nodes);
+      if (message.testCreated) {
+        const data = message.testCreated;
+        setCreatingTest({
+          filePath: data.filePath,
+          successful: data.successful,
+          finished: true
+        });
+      }
     };
     window.addEventListener("message", handleMessage);
     return () => window.removeEventListener("message", handleMessage);
@@ -106,6 +121,14 @@ const WorkspaceProvider = ({ children, vscode, viewID, isCursor }: Props) => {
     vscode.postMessage({ command: "refresh" });
   }
 
+  function createTest(filePath: string) {
+    setCreatingTest({
+      filePath,
+      finished: false
+    });
+    vscode.postMessage({ command: "createTest", filePath });
+  }
+
   return (
     <WorkspaceContext.Provider
       value={{
@@ -122,7 +145,9 @@ const WorkspaceProvider = ({ children, vscode, viewID, isCursor }: Props) => {
         selectedView,
         setSelectedView,
         getRepoInfo,
-        refresh
+        refresh,
+        createTest,
+        testCreation
       }}
     >
       {children}

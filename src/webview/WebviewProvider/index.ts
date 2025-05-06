@@ -3,6 +3,7 @@ import * as fs from "fs";
 import * as path from "path";
 
 import {
+  createTest,
   fetchComputeEnvs,
   fetchDataLinks,
   fetchDatasets,
@@ -71,6 +72,8 @@ class WebviewProvider implements vscode.WebviewViewProvider {
         case "fetchComputeEnvs":
           if (!workspaceId) return;
           this.fetchComputeEnvs(workspaceId);
+        case "createTest":
+          this.createTest(message.filePath);
           break;
       }
     });
@@ -155,6 +158,28 @@ class WebviewProvider implements vscode.WebviewViewProvider {
     if (viewID === "project") {
       const nodes = await queryWorkspace();
       view.webview.postMessage({ nodes });
+    }
+  }
+
+  private async emitTestCreated(filePath: string, successful: boolean) {
+    this._currentView?.webview.postMessage({
+      testCreated: {
+        filePath,
+        successful
+      }
+    });
+  }
+
+  private async createTest(filePath: string) {
+    const accessToken = await getAccessToken(this._context);
+    if (!accessToken) return false;
+
+    try {
+      const created = await createTest(filePath, accessToken);
+      this.emitTestCreated(filePath, created);
+    } catch (error) {
+      console.log("🟠 Test creation failed", error);
+      this.emitTestCreated(filePath, false);
     }
   }
 

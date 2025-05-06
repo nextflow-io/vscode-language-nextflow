@@ -1,7 +1,6 @@
 import { SEQERA_PLATFORM_URL } from "../../../../../src/constants";
 import Button from "../../../components/Button";
 import { useTowerContext, useWorkspaceContext } from "../../../Context";
-import { getPipelineURL } from "../utils";
 import pipelineIcon from "../../../images/pipeline.svg";
 import seqeraLogo from "../../../images/seqera.svg";
 import WorkspaceSelector from "./WorkspaceSelector";
@@ -14,7 +13,7 @@ const Toolbar = () => {
   const { userInfo, repoInfo, isAuthenticated } = useTowerContext();
   const { selectedView, setSelectedView } = useWorkspaceContext();
   const username = userInfo?.user?.userName || "unknown";
-  const url = getPipelineURL(repoInfo);
+  const url = repoInfo?.url;
   const isGithub = url?.includes("github.com");
 
   return (
