@@ -15,16 +15,16 @@ type PlatformData = {
 function handleUpdate(
   data: PlatformData,
   context: ExtensionContext,
-  view: WebviewView["webview"]
+  view?: WebviewView["webview"]
 ) {
   const vsCodeState = context.workspaceState;
   vsCodeState.update("platformData", data);
-  view.postMessage(data);
+  view?.postMessage(data);
 }
 
 const fetchPlatformData = async (
   accessToken: string,
-  view: WebviewView["webview"],
+  view: WebviewView["webview"] | undefined,
   context: ExtensionContext,
   refresh?: boolean
 ): Promise<PlatformData> => {
@@ -34,7 +34,7 @@ const fetchPlatformData = async (
   let hasExpired = expired(savedAuth?.tokenExpiry);
 
   if (!hasExpired && !refresh) {
-    view.postMessage(savedState);
+    view?.postMessage(savedState);
     return savedState as PlatformData;
   }
 
