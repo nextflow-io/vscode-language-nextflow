@@ -3,7 +3,7 @@ import * as fs from "fs";
 import generateRequirements from "./generateRequirements";
 import { startBuild } from "./startBuild";
 
-async function getContainer(filePath: string, token: string): Promise<boolean> {
+async function getContainer(filePath: string, token = ""): Promise<boolean> {
   return vscode.window.withProgress(
     {
       location: vscode.ProgressLocation.Notification,
@@ -66,6 +66,7 @@ async function getContainer(filePath: string, token: string): Promise<boolean> {
       } catch (error: any) {
         const isAuthError =
           error?.message?.includes("401") ||
+          error?.message?.includes("403") ||
           error?.message?.includes("Unauthorized");
 
         if (isAuthError) {
