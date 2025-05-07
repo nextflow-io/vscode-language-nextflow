@@ -103,7 +103,7 @@ export async function startBuild(
   } catch (error) {
     console.error("🟠 Error starting build:", error);
     throw new Error(
-      `Failed to start container build: ${error instanceof Error ? error.message : String(error)}`
+      `${error instanceof Error ? error.message : String(error)}`
     );
   }
 }
