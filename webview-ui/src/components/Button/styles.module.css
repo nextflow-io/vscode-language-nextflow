@@ -69,16 +69,15 @@
   }
 }
 .button.subtle {
-  background-color: var(--vscode-sideBarSectionHeader-background);
+  opacity: 0.9;
   &:hover {
-    background-color: var(--vscode-button-background);
+    opacity: 1;
   }
 }
 .button.subtle2 {
-  background-color: var(--vscode-sideBarSectionHeader-background);
-  opacity: 0.8;
+  opacity: 0.7;
   &:hover {
-    background-color: var(--vscode-button-background);
+    opacity: 1;
   }
 }
 .button.bare {

@@ -41,6 +41,7 @@
 .action {
   background: none !important;
   border: none !important;
+  color: var(--vscode-editor-foreground);
   padding: 0;
   outline: none !important;
   white-space: nowrap;
@@ -84,10 +85,6 @@
   & .wave {
     width: 21px;
     height: 21px;
-    opacity: 0.6;
-    &:hover {
-      opacity: 1;
-    }
   }
 }
 &:hover {
