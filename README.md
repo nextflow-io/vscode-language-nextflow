@@ -76,7 +76,7 @@ The language server requires Java 17 or later.
 
 ### Offline usage
 
-The extension downloads an appropriate version of the language server from GitHub based on the `nextflow.targetVersion` extension setting. To use the language server in an offline environment, you must download a language server release manually and save it in the local cache directory used by the extension. For example:
+The extension downloads an appropriate version of the language server from GitHub based on the `nextflow.languageVersion` extension setting. To use the language server in an offline environment, you must download a language server release manually and save it in the local cache directory used by the extension. For example:
 
 ```bash
 mkdir -p ~/.nextflow/lsp/v24.10
@@ -115,7 +115,7 @@ The following settings are available:
 
 - `nextflow.java.home`: Specifies the folder path to the JDK. Equivalent to the `JAVA_HOME` environment variable, i.e. the Java binary should be located at `$JAVA_HOME/bin/java`. Use this setting if the extension cannot find Java automatically.
 
-- `nextflow.targetVersion`: Target version of Nextflow to be used by the language server.
+- `nextflow.languageVersion`: Nextflow language version to be used by the language server.
 
 - `nextflow.telemetry.enabled`: Enable usage data to be sent to Seqera. See the [welcome page](./src/welcomePage/welcome-vscode.md) for more information about what we do and do not collect.
 

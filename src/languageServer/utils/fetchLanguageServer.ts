@@ -29,15 +29,19 @@ async function getLatestLocalVersion(
   versionPrefix: string
 ): Promise<string | null> {
   const targetDir = path.join(os.homedir(), ".nextflow", "lsp", versionPrefix);
-  const files = await vscode.workspace.fs.readDirectory(
-    vscode.Uri.file(targetDir)
-  );
-  const jarFiles = files
-    .map(([name]) => name)
-    .filter((name) => name.endsWith(".jar"))
-    .map((name) => name.replace(".jar", ""))
-    .sort((a, b) => b.localeCompare(a, undefined, { numeric: true }));
-  return jarFiles.length > 0 ? jarFiles[0] : null;
+  try {
+    const files = await vscode.workspace.fs.readDirectory(
+      vscode.Uri.file(targetDir)
+    );
+    const jarFiles = files
+      .map(([name]) => name)
+      .filter((name) => name.endsWith(".jar"))
+      .map((name) => name.replace(".jar", ""))
+      .sort((a, b) => b.localeCompare(a, undefined, { numeric: true }));
+    return jarFiles.length > 0 ? jarFiles[0] : null;
+  } catch (error) {
+    return null;
+  }
 }
 
 export async function fetchLanguageServer(context: vscode.ExtensionContext) {
@@ -55,9 +59,10 @@ export async function fetchLanguageServer(context: vscode.ExtensionContext) {
   }
 
   // get the latest patch release from GitHub or local cache
-  const versionPrefix = vscode.workspace
+  const languageVersion = vscode.workspace
     .getConfiguration("nextflow")
-    .get("targetVersion") as string;
+    .get("languageVersion") as string;
+  const versionPrefix = `v${languageVersion}`;
   let resolvedVersion = await getLatestRemoteVersion(versionPrefix);
   if (!resolvedVersion) {
     resolvedVersion = await getLatestLocalVersion(versionPrefix);

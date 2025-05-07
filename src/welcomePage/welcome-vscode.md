@@ -6,7 +6,7 @@ Open the command palette and type `Nextflow` to see the list of available comman
 
 ## Language server
 
-The extension will automatically download a language server release based on the `nextflow.targetVersion` extension setting.
+The extension will automatically download a language server release based on the `nextflow.languageVersion` extension setting.
 
 Read the [Nextflow documentation](https://nextflow.io/docs/latest/vscode.html) for more information about the Nextflow language server.
 
