@@ -7,7 +7,6 @@ async function getContainer(filePath: string, token: string): Promise<boolean> {
   return vscode.window.withProgress(
     {
       location: vscode.ProgressLocation.Notification,
-      title: "Analyzing project config",
       cancellable: false
     },
     async (progress) => {
@@ -19,31 +18,47 @@ async function getContainer(filePath: string, token: string): Promise<boolean> {
         const content = fs.readFileSync(filePath, "utf8");
 
         // Find required packages
-        progress.report({ message: "Finding required packages" });
+        progress.report({ message: "Seqera AI: Finding required packages" });
         const generatedContent = await generateRequirements(content, token);
 
         // Start container build
-        progress.report({ message: "Starting container build" });
+        progress.report({ message: "Wave: Starting container build" });
         const buildResult = await startBuild(generatedContent);
 
         if (buildResult.error) {
           vscode.window.showErrorMessage(
-            `Failed to build container: ${buildResult.error}`
+            `Wave: Failed to build container: ${buildResult.error}`
           );
           return false;
         }
 
-        // Open the container image URL in the default browser
-        if (buildResult.containerImage) {
-          const url = buildResult.containerImage;
+        const { buildId, containerImage } = buildResult;
+
+        if (buildId) {
+          const buildUrl = `https://wave.seqera.io/view/builds/${buildId}`;
+          const openBuildAction = "See details";
+
+          // Show success message
+          vscode.window
+            .showInformationMessage(
+              `Wave: Container built successfully`,
+              openBuildAction
+            )
+            .then((selection) => {
+              if (selection === openBuildAction) {
+                vscode.env.openExternal(vscode.Uri.parse(buildUrl));
+              }
+            });
+
+          // Show copy dialog
           await vscode.window.showInputBox({
-            value: url,
-            prompt: "Container URL",
+            value: containerImage,
+            prompt: "Cmd+C to copy",
             ignoreFocusOut: true,
-            title: "Wave container built"
+            title: "Wave Image URL"
           });
         } else {
-          vscode.window.showErrorMessage("Failed to get container");
+          vscode.window.showErrorMessage("Wave: Failed to build container");
           return false;
         }
 
@@ -57,7 +72,7 @@ async function getContainer(filePath: string, token: string): Promise<boolean> {
           return handleAuthError();
         } else {
           vscode.window.showErrorMessage(
-            `Failed to get container: ${error?.message}`
+            `Wave: Failed to build container: ${error?.message}`
           );
           return false;
         }
