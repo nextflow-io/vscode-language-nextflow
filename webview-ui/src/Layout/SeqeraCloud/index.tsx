@@ -1,5 +1,4 @@
-import { useEffect } from "react";
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
 import { useTowerContext, useWorkspaceContext } from "../../Context";
 
 import Login from "./Login";
@@ -7,15 +6,9 @@ import Workspace from "./Workspace";
 import Toolbar from "./Toolbar";
 
 const SeqeraCloud = () => {
-  const { tokenExpiry, hasToken, repoInfo } = useTowerContext();
-  const { refresh } = useWorkspaceContext();
-
-  let tokenExpired = false;
-  if (tokenExpiry) tokenExpired = tokenExpiry < Date.now() / 1000;
-  const showLogin = !hasToken || tokenExpired;
-
-  const { isAuthenticated } = useTowerContext();
   const timeoutRef = useRef<NodeJS.Timeout | null>(null);
+  const { repoInfo, isAuthenticated } = useTowerContext();
+  const { refresh } = useWorkspaceContext();
 
   // Note: This effect ensures that we have the needed state after the component
   // mounts (it usually does, but not always). Would be good to find a better
@@ -35,7 +28,7 @@ const SeqeraCloud = () => {
   return (
     <>
       <Toolbar />
-      {showLogin ? <Login /> : <Workspace />}
+      {!isAuthenticated ? <Login /> : <Workspace />}
     </>
   );
 };
