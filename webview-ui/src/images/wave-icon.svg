@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <svg version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500" xml:space="preserve">
 	<style type="text/css">
-		.st0 { fill: white; }
+		.st0 { fill: #606060; }
 	</style>
 	<path class="st0" d="M171.4,244.6c2.6-39.4,33.6-71.1,72.3-73.5V125c-63.6,2.6-114.8,54.7-117.4,119.6H171.4z" />
 	<path class="st0" d="M171.4,375c2.6-39.4,33.6-71.1,72.3-73.5v-46.1C180.1,258,129,310.1,126.3,375H171.4z" />
