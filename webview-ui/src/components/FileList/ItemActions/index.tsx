@@ -1,7 +1,10 @@
 import clsx from "clsx";
-import { TestCreation, TreeNode } from "../../Context/WorkspaceProvider/types";
-import { useWorkspaceContext } from "../../Context/WorkspaceProvider";
-import waveIcon from "../../images/wave-icon.svg";
+import {
+  TestCreation,
+  TreeNode
+} from "../../../Context/WorkspaceProvider/types";
+import { useWorkspaceContext } from "../../../Context/WorkspaceProvider";
+import WaveIcon from "./WaveIcon";
 
 import styles from "./styles.module.css";
 
@@ -31,7 +34,7 @@ const ItemActions: React.FC<Props> = ({ node }) => {
         onClick={() => getContainer(node.path)}
         title="Generate Wave Container"
       >
-        <img src={waveIcon} className={styles.wave} />
+        <WaveIcon className={styles.wave} />
       </button>
       {hasTest ? (
         <button
@@ -41,9 +44,7 @@ const ItemActions: React.FC<Props> = ({ node }) => {
             !!node.test && openFile(node.test.path, node.test.line)
           }
         >
-          <i
-            className={clsx("codicon", "codicon-go-to-file", styles.actionIcon)}
-          />
+          <i className={clsx("codicon", "codicon-beaker", styles.actionIcon)} />
           nf-test
         </button>
       ) : (
@@ -54,6 +55,13 @@ const ItemActions: React.FC<Props> = ({ node }) => {
           onClick={() => createTest(node.path)}
           title="Generate nf-test"
         >
+          <i
+            className={clsx(
+              "codicon",
+              "codicon-beaker-stop",
+              styles.actionIcon
+            )}
+          />
           {label}
         </button>
       )}
