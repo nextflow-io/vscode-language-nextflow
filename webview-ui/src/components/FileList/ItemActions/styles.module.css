@@ -1,0 +1,76 @@
+.actions {
+  display: flex;
+  align-items: center;
+  flex: none;
+  margin-left: 4px;
+  padding-right: 6px;
+}
+.action {
+  background: none !important;
+  border: none !important;
+  color: var(--vscode-editor-foreground);
+  padding: 0;
+  outline: none !important;
+  white-space: nowrap;
+  cursor: pointer;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  width: auto;
+  flex: none;
+  opacity: 0.8;
+  display: flex;
+  align-items: center;
+  font-size: 9px;
+  text-transform: uppercase;
+  font-family: sans-serif;
+  letter-spacing: 0.5px;
+  transition: all 0.2s;
+  &:hover {
+    opacity: 1;
+    color: var(--vscode-gitDecoration-untrackedResourceForeground);
+    & .actionIcon {
+      opacity: 1;
+    }
+    & .wave {
+      opacity: 1;
+      fill: var(--vscode-gitDecoration-untrackedResourceForeground);
+    }
+  }
+  &.success,
+  &.generating {
+    color: var(--vscode-gitDecoration-untrackedResourceForeground);
+  }
+  &.error {
+    color: var(--vscode-gitDecoration-modifiedResourceForeground);
+  }
+  &.disabled {
+    color: #666 !important;
+    cursor: default;
+  }
+  &.inProgress {
+    cursor: default;
+  }
+  & .actionIcon {
+    font-size: 14px;
+    margin-right: 4px;
+    opacity: 0.8;
+    position: relative;
+    top: -1px;
+    transition: opacity 0.1s;
+  }
+  & .wave {
+    width: 21px;
+    height: 21px;
+    transition: fill 0.2s;
+    opacity: 0.8;
+    fill: var(--vscode-editor-foreground);
+  }
+}
+&:hover {
+  & .metaIcon {
+    display: none;
+  }
+  & .metaIconHover {
+    display: block;
+  }
+}
