@@ -3,6 +3,7 @@ import * as fs from "fs";
 import generateTest from "./generateTest";
 import generateValidation from "./generateValidation";
 import { appendToFile } from "./utils";
+import * as path from "path";
 
 async function createTest(filePath: string, token: string): Promise<boolean> {
   return vscode.window.withProgress(
@@ -15,7 +16,13 @@ async function createTest(filePath: string, token: string): Promise<boolean> {
       try {
         progress.report({ message: "Reading file contents" });
         const content = fs.readFileSync(filePath, "utf8");
-        const newFilePath = filePath.replace(".nf", ".nf.test");
+        const dir = path.dirname(filePath);
+        const testDir = path.join(dir, "tests");
+        if (!fs.existsSync(testDir)) {
+          fs.mkdirSync(testDir);
+        }
+        const baseName = path.basename(filePath);
+        const newFilePath = path.join(testDir, baseName.replace(".nf", ".nf.test"));
         const uri = vscode.Uri.file(newFilePath);
 
         // Create new file
