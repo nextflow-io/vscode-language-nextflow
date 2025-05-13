@@ -7,7 +7,7 @@ import {
 
 import { buildMermaid } from "./utils/buildMermaid";
 import { fetchLanguageServer } from "./utils/fetchLanguageServer";
-import { findJava } from "./utils/findJava";
+import { findJava, checkJavaVersion } from "./utils/findJava";
 import type { TrackEvent } from "../telemetry";
 
 const LABEL_RELOAD_WINDOW = "Reload Window";
@@ -22,19 +22,31 @@ function startLanguageServer(context: vscode.ExtensionContext) {
         const javaPath = findJava();
         if (!javaPath) {
           resolve();
-          let settingsJavaHome = vscode.workspace
+          const settingsJavaHome = vscode.workspace
             .getConfiguration("nextflow")
             .get<string>("java.home");
           if (settingsJavaHome) {
             vscode.window.showErrorMessage(
-              "The `nextflow.java.home` setting does not point to a valid JDK."
+              "The `nextflow.java.home` setting does not point to a valid Java install."
             );
           } else {
             vscode.window.showErrorMessage(
-              "Could not locate valid JDK. Use the `nextflow.java.home` setting to configure JDK manually."
+              "Could not locate Java. Use the `nextflow.java.home` setting to configure Java manually."
             );
           }
           return;
+        }
+        try {
+          if (!checkJavaVersion(javaPath)) {
+            resolve();
+            vscode.window.showErrorMessage(
+              `Java 17 or later is required to use the Nextflow language server (using path: ${javaPath}).`
+            );
+            return;
+          }
+        }
+        catch (e) {
+          vscode.window.showWarningMessage(`Failed to check Java version: ${e}`);
         }
         progress.report({
           message: "Initializing Nextflow language server..."

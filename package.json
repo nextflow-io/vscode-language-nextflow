@@ -325,6 +325,7 @@
   },
   "devDependencies": {
     "@types/node": "^20",
+    "@types/semver": "^7.7.0",
     "@types/vscode": "^1.96.0",
     "@vscode/chat-extension-utils": "^0.0.0-alpha.4",
     "@vscode/vsce": "^3.2.1",
@@ -335,6 +336,7 @@
     "node-fetch": "^3.3.2",
     "posthog-node": "^4.4.1",
     "prettier": "3.5.2",
+    "semver": "^7.7.2",
     "typescript": "^5.7.2",
     "uuid": "^11.1.0",
     "vscode-jsonrpc": "^8.0.2",
