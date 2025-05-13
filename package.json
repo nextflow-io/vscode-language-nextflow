@@ -202,8 +202,8 @@
           "enumDescriptions": [
             "Disable all error reporting.",
             "Enable errors only.",
-            "Enable errors and standard warnings.",
-            "Enable errors, standard warnings, and additional warnings for future deprecations, potential problems, and other discouraged patterns."
+            "Enable errors and warnings.",
+            "Enable errors, warnings, and additional messages for best practices."
           ],
           "default": "warnings",
           "description": "Set the desired level of error reporting."
