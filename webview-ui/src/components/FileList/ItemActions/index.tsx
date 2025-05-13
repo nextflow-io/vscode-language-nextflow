@@ -17,14 +17,19 @@ const ItemActions: React.FC<Props> = ({ node }) => {
     useWorkspaceContext();
   if (node.name === "<entry>") return null;
   const hasTest = !!node.test;
-  const { label, style } = getTestLabel(node, testCreation);
+  const { style } = getTestLabel(node, testCreation);
 
   let inProgress = true;
+  let currentItemInProgress = false;
   if (
     typeof testCreation?.finished === "undefined" ||
     testCreation.finished === true
   ) {
     inProgress = false;
+  }
+
+  if (inProgress && testCreation.filePath === node.path) {
+    currentItemInProgress = true;
   }
 
   return (
@@ -33,6 +38,7 @@ const ItemActions: React.FC<Props> = ({ node }) => {
         className={styles.action}
         onClick={() => getContainer(node.path)}
         title="Generate Wave Container"
+        disabled={inProgress}
       >
         <WaveIcon className={styles.wave} />
       </button>
@@ -45,15 +51,15 @@ const ItemActions: React.FC<Props> = ({ node }) => {
           }
         >
           <i className={clsx("codicon", "codicon-beaker", styles.actionIcon)} />
-          nf-test
         </button>
       ) : (
         <button
           className={clsx(styles.action, style, {
-            [styles.inProgress]: inProgress
+            [styles.inProgress]: currentItemInProgress
           })}
           onClick={() => createTest(node.path)}
           title="Generate nf-test"
+          disabled={inProgress}
         >
           <i
             className={clsx(
@@ -62,7 +68,16 @@ const ItemActions: React.FC<Props> = ({ node }) => {
               styles.actionIcon
             )}
           />
-          {label}
+          {currentItemInProgress && (
+            <i
+              className={clsx(
+                "codicon",
+                "codicon-loading",
+                styles.actionIcon,
+                styles.spin
+              )}
+            />
+          )}
         </button>
       )}
     </div>
