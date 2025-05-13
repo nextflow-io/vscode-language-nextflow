@@ -1,15 +1,13 @@
 import { TreeNode } from "../../Context/WorkspaceProvider/types";
 import FileItem from "./FileItem";
 
-import styles from "./styles.module.css";
-
 type Props = {
   nodes: TreeNode[];
 };
 
 const FileList = ({ nodes }: Props) => {
   return (
-    <div className={styles.list}>
+    <div>
       {nodes.map((node) => (
         <FileItem key={`${node.path}:${node.name}`} node={node} />
       ))}

@@ -11,7 +11,8 @@ import {
   fetchPlatformData,
   fetchRuns,
   getRepoInfo,
-  queryWorkspace
+  queryWorkspace,
+  getContainer
 } from "./lib";
 import { AuthProvider, getAccessToken } from "../../auth";
 import { jwtExpired } from "../../auth/AuthProvider/utils/jwt";
@@ -32,11 +33,10 @@ class WebviewProvider implements vscode.WebviewViewProvider {
   public async resolveWebviewView(view: vscode.WebviewView): Promise<void> {
     this._authProvider?.setWebview(view.webview);
     this.initHTML(view);
-    await sleep(100); // Wait for the app to mount
-    await this.initViewData();
 
     view.webview.onDidReceiveMessage((message) => {
       const { command, workspaceId } = message;
+      console.log("🟠 onDidReceiveMessage", message);
       switch (command) {
         case "openFile":
           this.openFile(message.path, message.line);
@@ -75,6 +75,9 @@ class WebviewProvider implements vscode.WebviewViewProvider {
         case "createTest":
           this.createTest(message.filePath);
           break;
+        case "getContainer":
+          this.getContainer(message.filePath);
+          break;
       }
     });
 
@@ -82,6 +85,9 @@ class WebviewProvider implements vscode.WebviewViewProvider {
       if (!view.visible) return;
       this.initViewData();
     });
+
+    await sleep(100); // Wait for the app to mount
+    await this.initViewData();
   }
 
   private async login() {
@@ -148,6 +154,7 @@ class WebviewProvider implements vscode.WebviewViewProvider {
 
   public async initViewData(refresh?: boolean) {
     const { viewID, _context, _currentView: view } = this;
+    console.log("🟠 initViewData", viewID);
     if (!view) return;
     if (viewID === "seqeraCloud") {
       this.getRepoInfo();
@@ -172,7 +179,6 @@ class WebviewProvider implements vscode.WebviewViewProvider {
 
   private async createTest(filePath: string) {
     const accessToken = await getAccessToken(this._context);
-    if (!accessToken) return false;
 
     try {
       const created = await createTest(filePath, accessToken);
@@ -180,6 +186,27 @@ class WebviewProvider implements vscode.WebviewViewProvider {
     } catch (error) {
       console.log("🟠 Test creation failed", error);
       this.emitTestCreated(filePath, false);
+    }
+  }
+
+  private async emitContainerCreated(filePath: string, successful: boolean) {
+    this._currentView?.webview.postMessage({
+      containerCreated: {
+        filePath,
+        successful
+      }
+    });
+  }
+
+  private async getContainer(filePath: string) {
+    const accessToken = await getAccessToken(this._context);
+
+    try {
+      const created = await getContainer(filePath, accessToken);
+      this.emitContainerCreated(filePath, created);
+    } catch (error) {
+      console.log("🟠 Container creation failed", error);
+      this.emitContainerCreated(filePath, false);
     }
   }
 

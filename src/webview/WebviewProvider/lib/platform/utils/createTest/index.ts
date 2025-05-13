@@ -15,7 +15,7 @@ function getTestPath(filePath: string): string {
   return path.join(testDir, baseName.replace(".nf", ".nf.test"));
 }
 
-async function createTest(filePath: string, token: string): Promise<boolean> {
+async function createTest(filePath: string, token = ""): Promise<boolean> {
   return vscode.window.withProgress(
     {
       location: vscode.ProgressLocation.Notification,
@@ -70,6 +70,7 @@ async function createTest(filePath: string, token: string): Promise<boolean> {
       } catch (error: any) {
         const isAuthError =
           error?.message?.includes("401") ||
+          error?.message?.includes("403") ||
           error?.message?.includes("Unauthorized");
 
         if (isAuthError) {
