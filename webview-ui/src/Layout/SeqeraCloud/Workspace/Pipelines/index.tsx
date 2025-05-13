@@ -1,8 +1,8 @@
 import { useEffect } from "react";
 import { getWorkflowURL, relativeTime } from "../../utils";
 import { useTowerContext } from "../../../../Context";
-import workflowIcon from "../../../../images/workflow.svg";
 import FilterForProject from "../FilterForProject";
+import { WorkflowIcon } from "../../../../icons";
 import styles from "./styles.module.css";
 
 const Pipelines = () => {
@@ -20,8 +20,7 @@ const Pipelines = () => {
           {pipelines.map((pipeline) => (
             <a href={getWorkflowURL(pipeline)} className={styles.item}>
               <div className={styles.name}>
-                <img
-                  src={workflowIcon}
+                <WorkflowIcon
                   className="mr-2"
                   style={{ height: 12, opacity: 0.8 }}
                 />
