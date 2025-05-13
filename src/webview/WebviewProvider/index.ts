@@ -197,6 +197,7 @@ class WebviewProvider implements vscode.WebviewViewProvider {
       }
     });
   }
+
   private async getContainer(filePath: string) {
     const accessToken = await getAccessToken(this._context);
 
