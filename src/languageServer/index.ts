@@ -40,7 +40,7 @@ function startLanguageServer(context: vscode.ExtensionContext) {
           if (!checkJavaVersion(javaPath)) {
             resolve();
             vscode.window.showErrorMessage(
-              "Java 17 or later is required to use the Nextflow language server."
+              `Java 17 or later is required to use the Nextflow language server (using path: ${javaPath}).`
             );
             return;
           }
