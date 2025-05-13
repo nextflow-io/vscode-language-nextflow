@@ -38,25 +38,31 @@ async function getContainer(filePath: string, token = ""): Promise<boolean> {
           const buildUrl = `https://wave.seqera.io/view/builds/${buildId}`;
           const openBuildAction = "See details";
 
-          // Show success message
-          vscode.window
-            .showInformationMessage(
-              `Wave: Container built successfully`,
-              openBuildAction
-            )
-            .then((selection) => {
-              if (selection === openBuildAction) {
-                vscode.env.openExternal(vscode.Uri.parse(buildUrl));
-              }
+          if (containerImage) {
+            progress.report({ message: "Wave: Container built" });
+
+            // Show URL
+            await vscode.window.showInputBox({
+              value: containerImage,
+              ignoreFocusOut: true,
+              title: "Wave Image URL"
             });
 
-          // Show copy dialog
-          await vscode.window.showInputBox({
-            value: containerImage,
-            prompt: "Cmd+C to copy",
-            ignoreFocusOut: true,
-            title: "Wave Image URL"
-          });
+            // Copy to clipboard
+            await vscode.env.clipboard.writeText(containerImage);
+
+            // Show success message
+            vscode.window
+              .showInformationMessage(
+                `Wave: Copied to clipboard`,
+                openBuildAction
+              )
+              .then((selection) => {
+                if (selection === openBuildAction) {
+                  vscode.env.openExternal(vscode.Uri.parse(buildUrl));
+                }
+              });
+          }
         } else {
           vscode.window.showErrorMessage("Wave: Failed to build container");
           return false;
