@@ -1,9 +1,19 @@
 import * as vscode from "vscode";
 import * as fs from "fs";
+import * as path from "path";
 import generateTest from "./generateTest";
 import generateValidation from "./generateValidation";
 import { appendToFile } from "./utils";
-import * as path from "path";
+
+function getTestPath(filePath: string): string {
+  const dirName = path.dirname(filePath);
+  const testDir = path.join(dirName, "tests");
+  if (!fs.existsSync(testDir)) {
+    fs.mkdirSync(testDir);
+  }
+  const baseName = path.basename(filePath);
+  return path.join(testDir, baseName.replace(".nf", ".nf.test"));
+}
 
 async function createTest(filePath: string, token: string): Promise<boolean> {
   return vscode.window.withProgress(
@@ -16,14 +26,8 @@ async function createTest(filePath: string, token: string): Promise<boolean> {
       try {
         progress.report({ message: "Reading file contents" });
         const content = fs.readFileSync(filePath, "utf8");
-        const dir = path.dirname(filePath);
-        const testDir = path.join(dir, "tests");
-        if (!fs.existsSync(testDir)) {
-          fs.mkdirSync(testDir);
-        }
-        const baseName = path.basename(filePath);
-        const newFilePath = path.join(testDir, baseName.replace(".nf", ".nf.test"));
-        const uri = vscode.Uri.file(newFilePath);
+        const testPath = getTestPath(filePath);
+        const uri = vscode.Uri.file(testPath);
 
         // Create new file
         progress.report({ message: "Creating test file" });
@@ -60,7 +64,7 @@ async function createTest(filePath: string, token: string): Promise<boolean> {
         // Save
         await document.save();
 
-        vscode.window.showInformationMessage(`nf-test created: ${newFilePath}`);
+        vscode.window.showInformationMessage(`nf-test created: ${testPath}`);
 
         return true;
       } catch (error: any) {
