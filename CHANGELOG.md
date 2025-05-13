@@ -4,6 +4,11 @@ All notable changes to the Nextflow VS Code extension will be documented here.
 
 See [Keep a Changelog](http://keepachangelog.com/) for recommendations on how to structure this file.
 
+## [1.4.0] - 2025-05-13
+
+- Add 25.04 to language version options
+- Generate process containers with Wave
+
 ## [1.3.0] - 2025-05-05
 
 - Run history, Pipelines, Datasets, Data Buckets (#110)
