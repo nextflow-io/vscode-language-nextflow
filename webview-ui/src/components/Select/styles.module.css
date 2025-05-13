@@ -25,7 +25,7 @@
   &.alt {
     background-color: var(--vscode-editor-background);
     border: 1px solid var(--vscode-dropdown-border);
-    color: var(--vscode-button-foreground);
+    color: var(--vscode-editor-foreground);
     font-weight: 400;
     &:hover {
       border-color: var(--vscode-button-background);
@@ -40,13 +40,16 @@
     }
   }
   &.subtle {
-    background-color: var(--vscode-sideBarSectionHeader-background);
+    background-color: var(--vscode-button-background);
+    color: var(--vscode-button-foreground);
+    opacity: 0.9;
     &:hover {
       background-color: var(--vscode-button-background);
     }
   }
   &.subtle2 {
-    background-color: var(--vscode-sideBarSectionHeader-background);
+    background-color: var(--vscode-button-background);
+    color: var(--vscode-button-foreground);
     opacity: 0.8;
     &:hover {
       background-color: var(--vscode-button-background);

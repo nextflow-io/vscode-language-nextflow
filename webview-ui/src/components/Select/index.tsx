@@ -1,7 +1,8 @@
 import { useState, useRef, useEffect } from "react";
 import styles from "./styles.module.css";
 import clsx from "clsx";
-import seqeraLogo from "../../images/seqera.svg";
+import { SeqeraIcon } from "../../icons";
+
 type Option = {
   value: string | number;
   label: string | number;
@@ -62,7 +63,9 @@ const Select: React.FC<Props> = ({
     iconElement = <i className={`codicon ${icon}`} />;
   }
   if (icon === "seqera") {
-    iconElement = <img src={seqeraLogo} />;
+    iconElement = (
+      <SeqeraIcon style={{ height: 13, width: 13 }} className="mr-2" />
+    );
   }
 
   return (

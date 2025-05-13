@@ -1,6 +1,6 @@
 import { useWorkspaceContext } from "../../Context";
 import { TreeNode } from "../../Context/WorkspaceProvider/types";
-import processIcon from "../../images/process.svg";
+import { ProcessIcon } from "../../icons";
 import ItemActions from "./ItemActions";
 
 import styles from "./styles.module.css";
@@ -19,7 +19,7 @@ const FileItem = ({ node }: Props) => {
           className={styles.name}
           onClick={() => openFile(node.path, node.line)}
         >
-          <img className={styles.icon} src={processIcon} />
+          <ProcessIcon className={styles.icon} />
           {node.name}
         </span>
       </label>
