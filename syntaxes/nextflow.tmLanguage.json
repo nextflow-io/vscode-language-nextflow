@@ -12,6 +12,9 @@
     "nextflow": {
       "patterns": [
         {
+          "include": "#record-def"
+        },
+        {
           "include": "#enum-def"
         },
         {
@@ -37,6 +40,24 @@
         }
       ]
     },
+		"record-def": {
+      "name": "record.nextflow",
+			"begin": "^\\s*(record)\\s+(\\w+)\\s*{",
+			"beginCaptures": {
+				"1": {
+					"name": "keyword.nextflow"
+				},
+				"2": {
+					"name": "storage.type.groovy"
+				}
+			},
+			"end": "}",
+			"patterns": [
+        {
+          "include": "source.nextflow-groovy#groovy"
+        }
+			]
+		},
     "enum-def": {
       "begin": "^\\s*(enum)\\s+(\\w+)\\s*{",
       "beginCaptures": {
