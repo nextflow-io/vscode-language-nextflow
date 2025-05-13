@@ -24,6 +24,9 @@
           "include": "#workflow-def"
         },
         {
+          "include": "#params-def"
+        },
+        {
           "include": "#output-def"
         },
         {
@@ -247,6 +250,21 @@
           "name": "constant.block.nextflow",
           "match": "(?:take|main|emit|publish):"
         },
+        {
+          "include": "source.nextflow-groovy#groovy"
+        }
+      ]
+    },
+    "params-def": {
+      "name": "params.nextflow",
+      "begin": "^\\s*(params)\\s*{",
+      "beginCaptures": {
+        "1": {
+          "name": "keyword.nextflow"
+        }
+      },
+      "end": "}",
+      "patterns": [
         {
           "include": "source.nextflow-groovy#groovy"
         }
