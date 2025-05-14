@@ -4,6 +4,11 @@ All notable changes to the Nextflow VS Code extension will be documented here.
 
 See [Keep a Changelog](http://keepachangelog.com/) for recommendations on how to structure this file.
 
+## [1.4.1] - 2025-05-14
+
+- Check Java version on language server startup (#128)
+- Preview error log in run history (#130)
+
 ## [1.4.0] - 2025-05-13
 
 - Add 25.04 to language version options
