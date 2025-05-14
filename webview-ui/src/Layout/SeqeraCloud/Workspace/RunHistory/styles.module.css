@@ -64,3 +64,23 @@
     text-overflow: ellipsis;
   }
 }
+
+.errorReport {
+  margin-top: 6px;
+  font-size: 11px;
+}
+
+.errorPreview {
+  background: var(--vscode-editor-background);
+  border: 1px solid var(--vscode-panel-border);
+  border-radius: 4px;
+  padding: 6px;
+  cursor: pointer;
+  white-space: pre-wrap;
+  word-break: break-word;
+  color: var(--vscode-errorForeground);
+}
+
+.errorPreview:hover {
+  background: var(--vscode-editor-hoverHighlightBackground);
+}
