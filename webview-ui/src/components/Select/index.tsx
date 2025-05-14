@@ -13,7 +13,6 @@ type Props = {
   value: string | number;
   onChange: (value: string | number) => void;
   alt?: boolean;
-  alt2?: boolean;
   subtle?: boolean;
   subtle2?: boolean;
   icon?: string;
@@ -25,7 +24,6 @@ const Select: React.FC<Props> = ({
   value,
   onChange,
   alt,
-  alt2,
   subtle,
   subtle2,
   icon,
@@ -52,7 +50,6 @@ const Select: React.FC<Props> = ({
 
   const buttonClassName = clsx(styles.selectButton, {
     [styles.alt]: alt,
-    [styles.alt2]: alt2,
     [styles.subtle]: subtle,
     [styles.subtle2]: subtle2,
     [styles.large]: large

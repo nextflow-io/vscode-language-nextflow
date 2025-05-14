@@ -50,7 +50,7 @@ const Pipelines = () => {
               </div>
               <div>
                 <button
-                  className="codicon codicon-play"
+                  className="codicon codicon-play listItem-iconButton"
                   onClick={(e) => handlePlayClick(e, pipeline)}
                   style={{
                     background: "none",
