@@ -8,6 +8,7 @@
   cursor: pointer;
   transition: all 0.2s;
   min-width: 260px;
+  outline: none !important;
   &:hover {
     border-color: var(--vscode-button-background);
     color: var(--vscode-button-foreground);
@@ -62,5 +63,49 @@
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+  }
+}
+
+.errorReport {
+  margin-top: 6px;
+  font-size: 11px;
+}
+
+.errorPreview {
+  background: var(--vscode-editor-background);
+  border: 1px solid var(--vscode-panel-border);
+  border-radius: 4px;
+  padding: 6px;
+  cursor: pointer;
+  white-space: pre-wrap;
+  word-break: break-word;
+  color: var(--vscode-errorForeground);
+  position: relative;
+  &:hover {
+    & .copyButton {
+      opacity: 0.5;
+    }
+  }
+}
+
+.errorContent {
+  padding-right: 24px;
+}
+
+.copyButton {
+  position: absolute;
+  top: 4px;
+  right: 4px;
+  background: none;
+  border: none;
+  padding: 4px;
+  cursor: pointer;
+  color: var(--vscode-button-foreground);
+  opacity: 0;
+  transition: opacity 0.2s;
+  font-size: 12px;
+  outline: none !important;
+  &:hover {
+    opacity: 1;
   }
 }
