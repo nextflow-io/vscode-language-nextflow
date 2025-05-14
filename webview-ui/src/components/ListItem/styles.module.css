@@ -9,7 +9,7 @@
   cursor: pointer;
   transition: all 0.2s;
   &:hover {
-    border-color: var(--vscode-button-background);
+    border-color: var(--nf-highlight-2);
     color: var(--vscode-editor-foreground);
   }
   & :global(.listItem-name) {
@@ -34,7 +34,7 @@
     padding: 4px;
     outline: none;
     &:hover {
-      background-color: var(--nf-highlight);
+      color: var(--nf-highlight);
     }
   }
 }

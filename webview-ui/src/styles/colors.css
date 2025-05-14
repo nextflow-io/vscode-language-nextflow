@@ -1,4 +1,4 @@
 :root {
-  --nf-highlight: var(--vscode-gitDecoration-addedResourceForeground);
-  --nf-highlight-2: var(--vscode-gitDecoration-modifiedResourceForeground);
+  --nf-highlight: var(--vscode-gitDecoration-untrackedResourceForeground);
+  --nf-highlight-2: var(--vscode-gitDecoration-addedResourceForeground);
 }

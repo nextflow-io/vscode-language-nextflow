@@ -52,14 +52,6 @@ const Pipelines = () => {
                 <button
                   className="codicon codicon-play listItem-iconButton"
                   onClick={(e) => handlePlayClick(e, pipeline)}
-                  style={{
-                    background: "none",
-                    border: "none",
-                    color: "var(--vscode-button-foreground)",
-                    cursor: "pointer",
-                    padding: "4px",
-                    marginLeft: "8px"
-                  }}
                   title="Run pipeline"
                 />
               </div>
