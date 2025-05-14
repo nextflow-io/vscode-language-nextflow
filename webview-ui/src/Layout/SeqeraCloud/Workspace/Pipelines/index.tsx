@@ -4,13 +4,26 @@ import { useTowerContext } from "../../../../Context";
 import FilterForProject from "../FilterForProject";
 import { WorkflowIcon } from "../../../../icons";
 import ListItem from "../../../../components/ListItem";
+import { Pipeline } from "../../../../Context/types";
 
 const Pipelines = () => {
-  const { useLocalContext, pipelines, repoInfo, fetchPipelines, workspaceId } =
-    useTowerContext();
+  const {
+    useLocalContext,
+    pipelines,
+    repoInfo,
+    fetchPipelines,
+    workspaceId,
+    runPipeline
+  } = useTowerContext();
   const hasPipelines = !!pipelines?.length;
 
   useEffect(() => fetchPipelines(workspaceId), [workspaceId]);
+
+  const handlePlayClick = (e: React.MouseEvent, pipeline: Pipeline) => {
+    e.preventDefault();
+    e.stopPropagation();
+    runPipeline(pipeline.repository, workspaceId!);
+  };
 
   return (
     <div>
@@ -18,16 +31,29 @@ const Pipelines = () => {
       {hasPipelines ? (
         <>
           {pipelines.map((pipeline) => (
-            <ListItem key={pipeline.pipelineId} href={getWorkflowURL(pipeline)}>
-              <div className="listItem-name">
-                <WorkflowIcon
-                  className="mr-2"
-                  style={{ height: 12, opacity: 0.8 }}
-                />
-                <label>{pipeline.name}</label>
+            <ListItem
+              flex
+              key={pipeline.pipelineId}
+              href={getWorkflowURL(pipeline)}
+            >
+              <div>
+                <div className="listItem-name">
+                  <WorkflowIcon
+                    className="mr-2"
+                    style={{ height: 12, opacity: 0.8 }}
+                  />
+                  <label>{pipeline.name}</label>
+                </div>
+                <div className="listItem-meta">
+                  Updated: {relativeTime(pipeline.lastUpdated)}
+                </div>
               </div>
-              <div className="listItem-meta">
-                Updated: {relativeTime(pipeline.lastUpdated)}
+              <div>
+                <button
+                  className="codicon codicon-play listItem-iconButton"
+                  onClick={(e) => handlePlayClick(e, pipeline)}
+                  title="Run pipeline"
+                />
               </div>
             </ListItem>
           ))}
