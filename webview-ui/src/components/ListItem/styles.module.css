@@ -30,6 +30,7 @@
 .listItem.flex {
   display: flex;
   align-items: center;
+  justify-content: space-between;
 }
 .listItem.alt {
   background-color: var(--vscode-editor-background);
@@ -45,4 +46,7 @@ button.listItem {
   text-decoration: none;
   outline: none;
   cursor: pointer;
+  & * {
+    cursor: pointer;
+  }
 }

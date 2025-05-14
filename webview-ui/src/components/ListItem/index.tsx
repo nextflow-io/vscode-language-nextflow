@@ -18,27 +18,26 @@ const ListItem: React.FC<Props> = ({
   alt,
   flex
 }) => {
+  const cName = clsx(styles.listItem, className, {
+    [styles.alt]: alt,
+    [styles.flex]: flex
+  });
+
   if (onClick) {
     return (
-      <button
-        className={clsx(styles.listItem, className, {
-          [styles.alt]: alt,
-          [styles.flex]: flex
-        })}
-        onClick={onClick}
-      >
+      <button className={cName} onClick={onClick}>
         {children}
       </button>
     );
   }
   if (href) {
     return (
-      <a href={href} className={clsx(styles.listItem, className)}>
+      <a href={href} className={cName}>
         {children}
       </a>
     );
   }
-  return <div className={clsx(styles.listItem, className)}>{children}</div>;
+  return <div className={cName}>{children}</div>;
 };
 
 export default ListItem;
