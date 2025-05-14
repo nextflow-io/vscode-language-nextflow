@@ -64,6 +64,7 @@ const Toolbar = () => {
               value={selectedView}
               onChange={(value) => setSelectedView(value as string)}
               alt
+              large
             />
           </div>
         </>

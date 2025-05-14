@@ -65,10 +65,10 @@
     }
   }
   &.large {
-    height: 36px;
-    padding: 0 16px;
-    font-size: 15px;
-    font-weight: 500;
+    height: 32px;
+    padding: 0 11px;
+    font-size: 14px;
+    font-weight: 600;
   }
 }
 

@@ -29,7 +29,7 @@
   & :global(.listItem-iconButton) {
     background: none;
     border: none;
-    color: var(--vscode-button-foreground);
+    color: var(--vscode-editor-foreground);
     cursor: pointer;
     padding: 4px;
     outline: none;
