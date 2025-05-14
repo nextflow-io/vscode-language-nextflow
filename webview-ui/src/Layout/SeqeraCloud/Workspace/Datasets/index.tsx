@@ -1,8 +1,7 @@
 import { useEffect } from "react";
 import { useTowerContext } from "../../../../Context";
-import Button from "../../../../components/Button";
-import styles from "./styles.module.css";
 import { getDatasetURL } from "../../utils";
+import ListItem from "../../../../components/ListItem";
 
 const Datasets = () => {
   const { datasets, selectedWorkspace, fetchDatasets, workspaceId } =
@@ -17,17 +16,13 @@ const Datasets = () => {
       {hasDatasets ? (
         <>
           {datasets?.map((dataset) => (
-            <Button
+            <ListItem
               href={getDatasetURL(dataset, selectedWorkspace)}
               key={dataset.id}
-              fullWidth
               alt
-              className="mb-1"
             >
-              <div className={styles.item}>
-                <span className={styles.name}>{dataset.name}</span>
-              </div>
-            </Button>
+              <span className="listItem-name">{dataset.name}</span>
+            </ListItem>
           ))}
         </>
       ) : (

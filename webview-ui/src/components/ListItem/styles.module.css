@@ -1,5 +1,6 @@
-.item {
+.listItem {
   display: block;
+  width: 100%;
   padding: 6px;
   border-radius: 4px;
   border: 1px solid var(--vscode-dropdown-border);
@@ -10,7 +11,7 @@
     border-color: var(--vscode-button-background);
     color: var(--vscode-button-foreground);
   }
-  & .name {
+  & :global(.listItem-name) {
     display: flex;
     align-items: center;
     & label {
@@ -20,8 +21,21 @@
       white-space: nowrap;
     }
   }
-  & .meta {
+  & :global(.listItem-meta) {
     font-size: 10px;
     opacity: 0.6;
+  }
+}
+.listItem.flex {
+  display: flex;
+  align-items: center;
+}
+.listItem.alt {
+  background-color: var(--vscode-editor-background);
+  border: 1px solid var(--vscode-dropdown-border);
+  color: var(--vscode-button-foreground);
+  font-weight: 400;
+  &:hover {
+    border-color: var(--vscode-button-background);
   }
 }

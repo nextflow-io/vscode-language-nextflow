@@ -1,7 +1,7 @@
 @font-face {
   font-family: "codicon";
   font-display: block;
-  src: url("../codicon.ttf") format("truetype");
+  src: url("./codicon.ttf") format("truetype");
 }
 
 .codicon {
