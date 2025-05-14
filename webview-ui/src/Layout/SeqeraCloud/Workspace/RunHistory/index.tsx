@@ -9,8 +9,9 @@ import {
   getStatusIcon
 } from "./utils";
 import Button from "../../../../components/Button";
-import FilterForProject from "../FilterForProject";
 import ErrorReport from "./ErrorReport";
+import FilterForProject from "../FilterForProject";
+
 import styles from "./styles.module.css";
 
 const RunHistory = () => {
