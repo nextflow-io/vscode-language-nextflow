@@ -7,9 +7,10 @@
   color: var(--vscode-editor-foreground);
   margin-bottom: 6px;
   cursor: pointer;
+  transition: all 0.2s;
   &:hover {
     border-color: var(--vscode-button-background);
-    color: var(--vscode-button-foreground);
+    color: var(--vscode-editor-foreground);
   }
   & :global(.listItem-name) {
     display: flex;
