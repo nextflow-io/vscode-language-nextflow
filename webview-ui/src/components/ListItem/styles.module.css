@@ -46,7 +46,7 @@
 .listItem.alt {
   background-color: var(--vscode-editor-background);
   border: 1px solid var(--vscode-dropdown-border);
-  color: var(--vscode-button-foreground);
+  color: var(--vscode-foreground);
   font-weight: 400;
   &:hover {
     border-color: var(--vscode-button-background);
