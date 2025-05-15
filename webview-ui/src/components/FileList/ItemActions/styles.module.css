@@ -27,18 +27,18 @@
   transition: all 0.2s;
   &:hover {
     opacity: 1;
-    color: var(--vscode-gitDecoration-untrackedResourceForeground);
+    color: var(--nf-highlight);
     & .actionIcon {
       opacity: 1;
     }
     & .wave {
       opacity: 1;
-      fill: var(--vscode-gitDecoration-untrackedResourceForeground);
+      fill: var(--nf-highlight);
     }
   }
   &.success,
   &.generating {
-    color: var(--vscode-gitDecoration-untrackedResourceForeground);
+    color: var(--nf-highlight);
   }
   &.error {
     color: var(--vscode-gitDecoration-modifiedResourceForeground);

@@ -1,9 +1,9 @@
 import { useEffect } from "react";
 import { getWorkflowURL, relativeTime } from "../../utils";
 import { useTowerContext } from "../../../../Context";
-import workflowIcon from "../../../../images/workflow.svg";
 import FilterForProject from "../FilterForProject";
-import styles from "./styles.module.css";
+import { WorkflowIcon } from "../../../../icons";
+import ListItem from "../../../../components/ListItem";
 
 const Pipelines = () => {
   const { useLocalContext, pipelines, repoInfo, fetchPipelines, workspaceId } =
@@ -18,19 +18,18 @@ const Pipelines = () => {
       {hasPipelines ? (
         <>
           {pipelines.map((pipeline) => (
-            <a href={getWorkflowURL(pipeline)} className={styles.item}>
-              <div className={styles.name}>
-                <img
-                  src={workflowIcon}
+            <ListItem key={pipeline.pipelineId} href={getWorkflowURL(pipeline)}>
+              <div className="listItem-name">
+                <WorkflowIcon
                   className="mr-2"
                   style={{ height: 12, opacity: 0.8 }}
                 />
                 <label>{pipeline.name}</label>
               </div>
-              <div className={styles.meta}>
+              <div className="listItem-meta">
                 Updated: {relativeTime(pipeline.lastUpdated)}
               </div>
-            </a>
+            </ListItem>
           ))}
         </>
       ) : (

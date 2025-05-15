@@ -1,11 +1,9 @@
 import { SEQERA_PLATFORM_URL } from "../../../../../src/constants";
 import Button from "../../../components/Button";
 import { useTowerContext, useWorkspaceContext } from "../../../Context";
-import pipelineIcon from "../../../images/pipeline.svg";
-import seqeraLogo from "../../../images/seqera.svg";
 import WorkspaceSelector from "./WorkspaceSelector";
 import Select from "../../../components/Select";
-import aiIcon from "../../../images/ai.svg";
+import { PipelineIcon, SeqeraIcon, AiIcon } from "../../../icons";
 
 import styles from "./styles.module.css";
 
@@ -24,21 +22,17 @@ const Toolbar = () => {
             {isGithub ? (
               <i className="codicon codicon-github mr-2" />
             ) : (
-              <img
-                src={pipelineIcon}
-                style={{ height: 12, opacity: 0.6 }}
-                className="mr-2"
-              />
+              <PipelineIcon className="mr-2" />
             )}
             {`${repoInfo.owner}/${repoInfo.name}`}
           </Button>
         )}
         <Button href={`${SEQERA_PLATFORM_URL}`} subtle2 description="Launchpad">
-          <img src={seqeraLogo} style={{ height: 13, opacity: 1 }} />
+          <SeqeraIcon style={{ height: 13, width: 13 }} />
           {!repoInfo && <span className="ml-2">Launchpad</span>}
         </Button>
         <Button href="https://seqera.io/ask-ai" subtle2 description="Seqera AI">
-          <img src={aiIcon} style={{ height: 13, opacity: 1 }} />
+          <AiIcon style={{ height: 13, width: 13 }} />
         </Button>
         {isAuthenticated && (
           <Button
@@ -70,6 +64,7 @@ const Toolbar = () => {
               value={selectedView}
               onChange={(value) => setSelectedView(value as string)}
               alt
+              large
             />
           </div>
         </>

@@ -2,8 +2,8 @@ import clsx from "clsx";
 import { useState, useEffect } from "react";
 import { useWorkspaceContext } from "../../Context";
 import { TreeNode } from "../../Context/WorkspaceProvider/types";
-import processIcon from "../../images/process.svg";
-import workflowIcon from "../../images/workflow.svg";
+import { ProcessIcon, WorkflowIcon } from "../../icons";
+
 import styles from "./styles.module.css";
 
 type Props = {
@@ -23,24 +23,23 @@ const FileNode = ({ node, level = 0, searchTerm }: Props) => {
   }, [searchTerm]);
 
   function handleClick() {
-    if (hasChildren && !searchTerm)
-      setExpanded((prev) => !prev);
+    if (hasChildren && !searchTerm) setExpanded((prev) => !prev);
     openFile(node.path, node.line);
   }
 
   function isMatch(node: TreeNode): boolean {
-    return !searchTerm || node.name.toLowerCase().includes(searchTerm.toLowerCase());
+    return (
+      !searchTerm || node.name.toLowerCase().includes(searchTerm.toLowerCase())
+    );
   }
 
   function isRecursiveMatch(node: TreeNode): boolean {
-    if (!node || !searchTerm)
-      return true;
+    if (!node || !searchTerm) return true;
 
-    if (isMatch(node))
-      return true;
+    if (isMatch(node)) return true;
 
     return findChildren(node).some(isRecursiveMatch);
-  };
+  }
 
   const children = findChildren(node);
   const filteredChildren = searchTerm
@@ -48,10 +47,9 @@ const FileNode = ({ node, level = 0, searchTerm }: Props) => {
     : children;
 
   const hasChildren = filteredChildren.length > 0;
-  if (!hasChildren && !isMatch(node))
-    return null;
+  if (!hasChildren && !isMatch(node)) return null;
 
-  const icon = isWorkflow ? workflowIcon : processIcon;
+  const Icon = isWorkflow ? WorkflowIcon : ProcessIcon;
   const iconClassName = isWorkflow ? styles.workflowIcon : styles.processIcon;
 
   return (
@@ -63,12 +61,10 @@ const FileNode = ({ node, level = 0, searchTerm }: Props) => {
     >
       <label className={clsx(styles.item)}>
         <span className={styles.name} onClick={handleClick}>
-          <img src={icon} className={clsx(styles.icon, iconClassName)} />
+          <Icon className={clsx(styles.icon, iconClassName)} />
           {node.name}
         </span>
-        {hasChildren && (
-          <i className="codicon codicon-chevron-right" />
-        )}
+        {hasChildren && <i className="codicon codicon-chevron-right" />}
       </label>
       {hasChildren && expanded && (
         <div className={styles.children}>

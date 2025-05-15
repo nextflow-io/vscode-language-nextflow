@@ -35,8 +35,7 @@ class WebviewProvider implements vscode.WebviewViewProvider {
     this.initHTML(view);
 
     view.webview.onDidReceiveMessage((message) => {
-      const { command, workspaceId } = message;
-      console.log("🟠 onDidReceiveMessage", message);
+      const { command, workspaceId, repository } = message;
       switch (command) {
         case "openFile":
           this.openFile(message.path, message.line);

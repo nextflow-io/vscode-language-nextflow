@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { getComputeEnvURL } from "../../utils";
 import { useTowerContext } from "../../../../Context";
-import styles from "./styles.module.css";
+import ListItem from "../../../../components/ListItem";
 
 const ComputeEnvironments = () => {
   const { workspaces, computeEnvs, fetchComputeEnvs, workspaceId } =
@@ -14,11 +14,12 @@ const ComputeEnvironments = () => {
       {computeEnvs?.length ? (
         <>
           {computeEnvs?.map((computeEnv) => (
-            <div className={styles.row} key={computeEnv.id}>
-              <a href={getComputeEnvURL(workspaces, computeEnv)}>
-                {computeEnv.name}
-              </a>
-            </div>
+            <ListItem
+              href={getComputeEnvURL(workspaces, computeEnv)}
+              key={computeEnv.id}
+            >
+              <span className="listItem-name">{computeEnv.name}</span>
+            </ListItem>
           ))}
         </>
       ) : (

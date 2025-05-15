@@ -11,7 +11,7 @@ import {
 import Button from "../../../../components/Button";
 import ErrorReport from "./ErrorReport";
 import FilterForProject from "../FilterForProject";
-
+import ListItem from "../../../../components/ListItem";
 import styles from "./styles.module.css";
 
 const RunHistory = () => {
@@ -37,10 +37,10 @@ const RunHistory = () => {
       {hasRuns ? (
         <>
           {displayedHistory.map((workflow) => (
-            <a
-              href={getRunURL(workspace, workflow)}
+            <ListItem
               key={workflow.id}
               className={styles.item}
+              href={getRunURL(workspace, workflow)}
             >
               <div className={styles.header}>
                 <span className={styles.name}>{workflow.runName}</span>
@@ -64,7 +64,7 @@ const RunHistory = () => {
               {workflow.status === "FAILED" && (
                 <ErrorReport errorReport={workflow.errorReport} />
               )}
-            </a>
+            </ListItem>
           ))}
           {hasMore && (
             <Button

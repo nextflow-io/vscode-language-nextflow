@@ -7,7 +7,6 @@ type Props = {
   href?: string;
   children?: React.ReactNode;
   alt?: boolean;
-  alt2?: boolean;
   subtle?: boolean;
   subtle2?: boolean;
   small?: boolean;
@@ -33,7 +32,6 @@ const Button: React.FC<Props> = ({
   iconClassName = "",
   description,
   alt,
-  alt2,
   subtle,
   subtle2
 }) => {
@@ -44,7 +42,6 @@ const Button: React.FC<Props> = ({
     [styles.alt]: alt,
     [styles.subtle]: subtle,
     [styles.subtle2]: subtle2,
-    [styles.alt2]: alt2,
     [styles.bare]: bare,
     [styles.active]: active
   });

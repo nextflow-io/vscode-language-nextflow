@@ -6,16 +6,17 @@
   align-items: center;
   cursor: pointer;
   &:hover {
-    background-color: var(--nf-item-bg-hover);
+    background-color: var(--vscode-list-hoverBackground);
   }
 }
 .label {
   line-height: 1;
   display: flex;
   align-items: center;
-  color: var(--nf-item-fg-active);
+  color: var(--vscode-list-activeSelectionForeground);
   overflow: hidden;
   flex: 1 1 auto;
+  cursor: pointer;
   & .name {
     display: flex;
     align-items: center;
@@ -24,10 +25,12 @@
     flex: 1 1 auto;
     text-overflow: ellipsis;
     overflow: hidden;
+    cursor: pointer;
   }
   & .icon {
     width: 15px;
     height: 14px;
     margin-right: 6px;
+    cursor: pointer;
   }
 }
