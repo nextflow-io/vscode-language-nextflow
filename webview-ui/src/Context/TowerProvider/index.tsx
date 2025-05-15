@@ -59,7 +59,6 @@ type TowerContextType = {
   fetchDatasets: (workspaceId?: WorkspaceID) => void;
   fetchDataLinks: (workspaceId?: WorkspaceID) => void;
   fetchRuns: (workspaceId?: WorkspaceID) => void;
-  runPipeline: (repository: string, workspaceId: WorkspaceID) => void;
   workspaces: Workspace[];
   organizations?: Organization[];
   getWorkspaces: (orgId: string | number) => Workspace[];
@@ -151,10 +150,6 @@ const TowerProvider: React.FC<Props> = ({
     vscode.postMessage({ command: "fetchComputeEnvs", workspaceId });
   }
 
-  function runPipeline(repository: string, workspaceId: WorkspaceID) {
-    vscode.postMessage({ command: "runPipeline", repository, workspaceId });
-  }
-
   return (
     <TowerContext.Provider
       value={{
@@ -172,7 +167,6 @@ const TowerProvider: React.FC<Props> = ({
         fetchDatasets,
         fetchDataLinks,
         fetchRuns,
-        runPipeline,
         runs: filterRuns(runs, repoInfo, useLocalContext),
         computeEnvs: filterComputeEnvs(computeEnvs, selectedWorkspace),
         pipelines: filterPipelines(pipelines, repoInfo, useLocalContext),
