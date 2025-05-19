@@ -15,6 +15,7 @@ import {
 import { v4 as uuid } from "uuid";
 import { PromiseAdapter, promiseFromEvent } from "./utils/promiseFromEvent";
 import fetch from "node-fetch";
+import { SEQERA_API_URL } from "../../constants";
 
 export const AUTH_TYPE = `auth0`;
 const AUTH_NAME = `Auth0`;
@@ -22,8 +23,16 @@ const CLIENT_ID = `7PJnvIXiXK3HkQR43c4zBf3bWuxISp9W`;
 var CLIENT_SECRET =
   "tZ3N8vHuvpLQlzdGEhel4Vz5DeluNNyTtid-2jFBdDiXmIGNbX9yhjDmQ2Pg6VT-";
 const AUTH0_DOMAIN = `seqera-development.eu.auth0.com`;
-const PLATFORM_DOMAIN = `pr-8246.dev-tower.net`;
 export const SESSIONS_SECRET_KEY = `${AUTH_TYPE}.sessions`;
+
+type AUTH0_OAUTH_RESPONSE = {
+  access_token: string;
+  refresh_token?: string;
+  token_type: "Bearer";
+  expires_in: number;
+  scope: string;
+  id_token: string;
+};
 
 class UriEventHandler extends EventEmitter<Uri> implements UriHandler {
   public handleUri(uri: Uri) {
@@ -82,18 +91,17 @@ class Auth0AuthenticationProvider
     try {
       var token: string = "";
       if (CLIENT_SECRET) {
-        const code = await this.login(scopes, "code");
+        // Note: for getting a refresh token, we need to use this "code" flow.
+        // Use the Auth0 app's secret, and ensure "Allow Offline Access" is enabled.
+        const code = await this.startLogin(scopes, "code");
         if (!code) {
           throw new Error(`Auth0 login failure`);
         }
-        const token_response = (await this.getToken(code)) as {
-          access_token: string;
-          token_type: string;
-        };
-        console.log("🉑 token_response", token_response);
-        token = token_response.access_token;
+        const auth0Response = await this.getToken(code);
+        console.log("🉑 auth0Response", auth0Response);
+        token = auth0Response.access_token;
       } else {
-        token = await this.login(scopes, "token");
+        token = await this.startLogin(scopes, "token");
         if (!token) {
           throw new Error(`Auth0 login failure`);
         }
@@ -160,7 +168,7 @@ class Auth0AuthenticationProvider
     this._disposable.dispose();
   }
 
-  private async login(scopes: string[] = [], response_type: string) {
+  private async startLogin(scopes: string[] = [], response_type: string) {
     return await window.withProgress<string>(
       {
         location: ProgressLocation.Notification,
@@ -268,7 +276,7 @@ class Auth0AuthenticationProvider
       resolve(accessToken);
     };
 
-  private async getToken(code: string) {
+  private async getToken(code: string): Promise<AUTH0_OAUTH_RESPONSE> {
     const data = new URLSearchParams([
       ["grant_type", "authorization_code"],
       ["client_id", CLIENT_ID],
@@ -281,7 +289,7 @@ class Auth0AuthenticationProvider
       headers: { "content-type": "application/x-www-form-urlencoded" },
       body: data.toString()
     });
-    const res = await auth.json();
+    const res = (await auth.json()) as AUTH0_OAUTH_RESPONSE;
     console.log("🉑🉑🉑🉑 auth", res);
     return res;
   }
@@ -299,7 +307,7 @@ class Auth0AuthenticationProvider
   }
 
   private async getPlatformUserInfo(token: string) {
-    const response = await fetch(`https://${PLATFORM_DOMAIN}/api/user-info`, {
+    const response = await fetch(`https://${SEQERA_API_URL}/user-info`, {
       headers: {
         Authorization: `Bearer ${token}`
       }
