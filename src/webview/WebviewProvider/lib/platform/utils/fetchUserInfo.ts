@@ -3,7 +3,6 @@ import type { UserInfoResponse } from "../types";
 
 const fetchUserInfo = async (token: string): Promise<UserInfoResponse> => {
   if (!token) return { message: "No token found" } as UserInfoResponse;
-  console.log("🟢 fetchUserInfo", token);
   try {
     const response = await fetch(`${SEQERA_API_URL}/user-info`, {
       headers: {
