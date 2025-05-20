@@ -9,14 +9,13 @@ import {
   ExtensionContext,
   ProgressLocation,
   Uri,
-  UriHandler,
   window
 } from "vscode";
 import { v4 as uuid } from "uuid";
 import { PromiseAdapter, promiseFromEvent } from "./utils/promiseFromEvent";
 import fetch from "node-fetch";
-import { SEQERA_API_URL } from "../../constants";
-import { UserInfo } from "./types";
+import { fetchUserInfo } from "../../webview/WebviewProvider/lib/platform/utils";
+import UriEventHandler from "./utils/UriEventHandler";
 
 export const AUTH_TYPE = `auth0`;
 const AUTH_NAME = `Auth0`;
@@ -26,7 +25,7 @@ var CLIENT_SECRET =
 const AUTH0_DOMAIN = `seqera-development.eu.auth0.com`;
 export const SESSIONS_SECRET_KEY = `${AUTH_TYPE}.sessions`;
 
-type Auth0oAuthResponse = {
+type ResponseAuth0 = {
   access_token: string;
   refresh_token?: string;
   token_type: "Bearer";
@@ -35,7 +34,7 @@ type Auth0oAuthResponse = {
   id_token: string;
 };
 
-type Auth0UserInfo = {
+type UserInfoAuth0 = {
   email: string;
   email_verified: boolean;
   family_name: string;
@@ -47,12 +46,6 @@ type Auth0UserInfo = {
   sub: string;
   updated_at: string;
 };
-
-class UriEventHandler extends EventEmitter<Uri> implements UriHandler {
-  public handleUri(uri: Uri) {
-    this.fire(uri);
-  }
-}
 
 class Auth0AuthenticationProvider
   implements AuthenticationProvider, Disposable
@@ -66,7 +59,8 @@ class Auth0AuthenticationProvider
     { promise: Promise<string>; cancel: EventEmitter<void> }
   >();
   private _uriHandler = new UriEventHandler();
-  private webviewView: any;
+  private webviewView: string | undefined;
+
   constructor(private readonly context: ExtensionContext) {
     this._disposable = Disposable.from(
       authentication.registerAuthenticationProvider(
@@ -108,20 +102,16 @@ class Auth0AuthenticationProvider
         // Note: for getting a refresh token, we need to use this "code" flow.
         // Use the Auth0 app's secret, and ensure "Allow Offline Access" is enabled.
         const code = await this.startLogin(scopes, "code");
-        if (!code) {
-          throw new Error(`Auth0 login failure`);
-        }
+        console.log("🟢 code", code);
+        if (!code) throw new Error(`Auth0 login failure (code flow)`);
         const auth0Response = await this.fetchAuth0Tokens(code);
-        console.log("🉑 auth0Response", auth0Response);
         token = auth0Response.access_token;
       } else {
         token = await this.startLogin(scopes, "token");
-        if (!token) {
-          throw new Error(`Auth0 login failure`);
-        }
+        if (!token) throw new Error(`Auth0 login failure (token flow)`);
       }
-      const { email, name, nickname } = await this.fetchAuth0UserInfo(token);
-      const userInfo = await this.fetchPlatformUserInfo(token);
+      const { email, name, nickname } = await this.fetchUserInfoAuth0(token);
+      const userInfo = await fetchUserInfo(token);
       console.log("🉑 userInfo", userInfo);
 
       const session: AuthenticationSession = {
@@ -264,11 +254,6 @@ class Auth0AuthenticationProvider
         : new URLSearchParams(uri.fragment);
       const accessToken = query.get("code") || query.get("access_token");
       const state = query.get("state");
-      console.log("🟢 handleUri uri", uri);
-      console.log("🟢 handleUri query", query);
-      console.log("🟢 handleUri code", query.get("code"));
-      console.log("🟢 handleUri access_token", query.get("access_token"));
-      console.log("🟢 handleUri state", query.get("state"));
 
       if (!accessToken) {
         reject(new Error("No token"));
@@ -287,7 +272,7 @@ class Auth0AuthenticationProvider
       resolve(accessToken);
     };
 
-  private async fetchAuth0Tokens(code: string): Promise<Auth0oAuthResponse> {
+  private async fetchAuth0Tokens(code: string): Promise<ResponseAuth0> {
     const data = new URLSearchParams([
       ["grant_type", "authorization_code"],
       ["client_id", CLIENT_ID],
@@ -300,28 +285,17 @@ class Auth0AuthenticationProvider
       headers: { "content-type": "application/x-www-form-urlencoded" },
       body: data.toString()
     });
-    const res = (await auth.json()) as Auth0oAuthResponse;
+    const res = (await auth.json()) as ResponseAuth0;
     return res;
   }
 
-  private async fetchAuth0UserInfo(token: string): Promise<Auth0UserInfo> {
+  private async fetchUserInfoAuth0(token: string): Promise<UserInfoAuth0> {
     const response = await fetch(`https://${AUTH0_DOMAIN}/userinfo`, {
       headers: {
         Authorization: `Bearer ${token}`
       }
     });
-    const res = (await response.json()) as Auth0UserInfo;
-    return res;
-  }
-
-  private async fetchPlatformUserInfo(token: string): Promise<UserInfo> {
-    const response = await fetch(`${SEQERA_API_URL}/user-info`, {
-      headers: {
-        Authorization: `Bearer ${token}`
-      }
-    });
-    const res = (await response.json()) as UserInfo;
-    console.log("🉑 res", res);
+    const res = (await response.json()) as UserInfoAuth0;
     return res;
   }
 
