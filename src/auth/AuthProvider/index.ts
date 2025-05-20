@@ -16,6 +16,7 @@ import { v4 as uuid } from "uuid";
 import { PromiseAdapter, promiseFromEvent } from "./utils/promiseFromEvent";
 import fetch from "node-fetch";
 import { SEQERA_API_URL } from "../../constants";
+import { UserInfo } from "./types";
 
 export const AUTH_TYPE = `auth0`;
 const AUTH_NAME = `Auth0`;
@@ -25,13 +26,26 @@ var CLIENT_SECRET =
 const AUTH0_DOMAIN = `seqera-development.eu.auth0.com`;
 export const SESSIONS_SECRET_KEY = `${AUTH_TYPE}.sessions`;
 
-type AUTH0_OAUTH_RESPONSE = {
+type Auth0oAuthResponse = {
   access_token: string;
   refresh_token?: string;
   token_type: "Bearer";
   expires_in: number;
   scope: string;
   id_token: string;
+};
+
+type Auth0UserInfo = {
+  email: string;
+  email_verified: boolean;
+  family_name: string;
+  given_name: string;
+  name: string;
+  nickname: string;
+  picture: string;
+  preferred_username: string;
+  sub: string;
+  updated_at: string;
 };
 
 class UriEventHandler extends EventEmitter<Uri> implements UriHandler {
@@ -97,7 +111,7 @@ class Auth0AuthenticationProvider
         if (!code) {
           throw new Error(`Auth0 login failure`);
         }
-        const auth0Response = await this.getToken(code);
+        const auth0Response = await this.fetchAuth0Tokens(code);
         console.log("🉑 auth0Response", auth0Response);
         token = auth0Response.access_token;
       } else {
@@ -106,19 +120,16 @@ class Auth0AuthenticationProvider
           throw new Error(`Auth0 login failure`);
         }
       }
-      const userinfo = (await this.getUserInfo(token)) as any;
-      // const puserinfo = (await this.getPlatformUserInfo(token)) as {
-      //   user: { id: string; userName: string; email: string };
-      // };
-      // const platformuser: { id: string; userName: string; email: string } =
-      //   puserinfo.user;
+      const { email, name, nickname } = await this.fetchAuth0UserInfo(token);
+      const userInfo = await this.fetchPlatformUserInfo(token);
+      console.log("🉑 userInfo", userInfo);
 
       const session: AuthenticationSession = {
         id: uuid(),
         accessToken: token,
         account: {
-          label: userinfo.name + "(seqera: " + userinfo.nickname + " )",
-          id: userinfo.email
+          label: name + "(seqera: " + nickname + " )",
+          id: email
         },
         scopes: []
       };
@@ -276,7 +287,7 @@ class Auth0AuthenticationProvider
       resolve(accessToken);
     };
 
-  private async getToken(code: string): Promise<AUTH0_OAUTH_RESPONSE> {
+  private async fetchAuth0Tokens(code: string): Promise<Auth0oAuthResponse> {
     const data = new URLSearchParams([
       ["grant_type", "authorization_code"],
       ["client_id", CLIENT_ID],
@@ -289,31 +300,29 @@ class Auth0AuthenticationProvider
       headers: { "content-type": "application/x-www-form-urlencoded" },
       body: data.toString()
     });
-    const res = (await auth.json()) as AUTH0_OAUTH_RESPONSE;
-    console.log("🉑🉑🉑🉑 auth", res);
+    const res = (await auth.json()) as Auth0oAuthResponse;
     return res;
   }
 
-  private async getUserInfo(token: string) {
-    console.log("🉑 getUserInfo", token);
+  private async fetchAuth0UserInfo(token: string): Promise<Auth0UserInfo> {
     const response = await fetch(`https://${AUTH0_DOMAIN}/userinfo`, {
       headers: {
         Authorization: `Bearer ${token}`
       }
     });
-    const res = await response.json();
-    console.log("🉑 getUserInfo", res);
+    const res = (await response.json()) as Auth0UserInfo;
     return res;
   }
 
-  private async getPlatformUserInfo(token: string) {
-    const response = await fetch(`https://${SEQERA_API_URL}/user-info`, {
+  private async fetchPlatformUserInfo(token: string): Promise<UserInfo> {
+    const response = await fetch(`${SEQERA_API_URL}/user-info`, {
       headers: {
         Authorization: `Bearer ${token}`
       }
     });
-    console.log("🉑 getPlatformUserInfo", response);
-    return await response.json();
+    const res = (await response.json()) as UserInfo;
+    console.log("🉑 res", res);
+    return res;
   }
 
   public setWebview(webview: any) {
