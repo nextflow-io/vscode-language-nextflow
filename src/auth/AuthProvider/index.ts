@@ -15,9 +15,12 @@ import {
 import { v4 as uuid } from "uuid";
 import { PromiseAdapter, promiseFromEvent } from "./utils/promiseFromEvent";
 import fetch from "node-fetch";
-import { fetchUserInfo } from "../../webview/WebviewProvider/lib/platform/utils";
 import UriEventHandler from "./utils/UriEventHandler";
 import { ExchangePromise } from "./types";
+import {
+  fetchPlatformData,
+  clearPlatformData
+} from "../../webview/WebviewProvider/lib";
 
 const TYPE = `auth0`;
 const NAME = `Auth0`;
@@ -25,10 +28,10 @@ const CLIENT_ID = `7PJnvIXiXK3HkQR43c4zBf3bWuxISp9W`;
 const AUTH0_DOMAIN = `seqera-development.eu.auth0.com`;
 export const SESSIONS_SECRET_KEY = `${TYPE}.sessions`;
 
-const CLIENT_SECRET =
-  "tZ3N8vHuvpLQlzdGEhel4Vz5DeluNNyTtid-2jFBdDiXmIGNbX9yhjDmQ2Pg6VT-";
 // TODO: Use a prod Auth0 app secret set via env variable
 // TODO: This value will be rolled up into the built extension anyway - is this okay?
+const CLIENT_SECRET =
+  "tZ3N8vHuvpLQlzdGEhel4Vz5DeluNNyTtid-2jFBdDiXmIGNbX9yhjDmQ2Pg6VT-";
 
 type ResponseAuth0 = {
   access_token: string;
@@ -86,27 +89,34 @@ class AuthProvider implements AuthenticationProvider, Disposable {
 
   public async createSession(scopes: string[]): Promise<AuthenticationSession> {
     try {
-      var token: string = "";
+      let accessToken;
+      let refreshToken;
+
       if (CLIENT_SECRET) {
         // Note: for getting a refresh token, we need to use this "code" flow.
         // Use the Auth0 app's secret, and ensure "Allow Offline Access" is enabled.
         const code = await this.startLogin(scopes, "code");
         if (!code) throw new Error(`Auth0 login failure (code flow)`);
         const auth0Response = await this.fetchAuth0Tokens(code);
-        token = auth0Response.access_token;
+        accessToken = auth0Response.access_token;
+        refreshToken = auth0Response.refresh_token;
       } else {
-        token = await this.startLogin(scopes, "token");
-        if (!token) throw new Error(`Auth0 login failure (token flow)`);
+        accessToken = await this.startLogin(scopes, "token");
+        if (!accessToken) throw new Error(`Auth0 login failure (token flow)`);
       }
-      const { email, name, nickname } = await this.fetchUserInfoAuth0(token);
-      const userInfo = await fetchUserInfo(token);
 
+      // Login success, now fetch from Seqera Cloud
+      await fetchPlatformData(accessToken, this.webviewView, this.context);
+
+      // If that worked, store the vscode session
+      const auth0 = await this.fetchAuth0User(accessToken);
       const session: AuthenticationSession = {
         id: uuid(),
-        accessToken: token,
+        accessToken,
+        refreshToken,
         account: {
-          label: name + "(seqera: " + nickname + " )",
-          id: email
+          label: auth0.name + "(seqera: " + auth0.nickname + " )",
+          id: auth0.email
         },
         scopes: []
       };
@@ -142,6 +152,8 @@ class AuthProvider implements AuthenticationProvider, Disposable {
         JSON.stringify(sessions)
       );
 
+      clearPlatformData(this.webviewView, this.context);
+
       if (session) {
         this.eventEmitter.fire({
           added: [],
@@ -160,14 +172,12 @@ class AuthProvider implements AuthenticationProvider, Disposable {
     return await window.withProgress<string>(
       {
         location: ProgressLocation.Notification,
-        title: "Signing in to Auth0...",
+        title: "Signing in to Seqera Cloud",
         cancellable: true
       },
       async (_, token) => {
         const stateId = uuid();
-
         this.pendingIDs.push(stateId);
-
         const scopeString = scopes.join(" ");
 
         if (!scopes.includes("openid")) {
@@ -182,8 +192,6 @@ class AuthProvider implements AuthenticationProvider, Disposable {
         if (!scopes.includes("offline_access")) {
           scopes.push("offline_access");
         }
-
-        console.log("🟠 login scopes", scopes);
 
         const searchParams = new URLSearchParams([
           ["response_type", response_type],
@@ -203,7 +211,7 @@ class AuthProvider implements AuthenticationProvider, Disposable {
         if (!codeExchangePromise) {
           codeExchangePromise = promiseFromEvent(
             this.uriHandler.event,
-            this.handleUri(scopes)
+            this.handleUri()
           );
           this.promises.set(scopeString, codeExchangePromise);
         }
@@ -230,19 +238,12 @@ class AuthProvider implements AuthenticationProvider, Disposable {
     );
   }
 
-  private handleUri: (
-    scopes: readonly string[]
-  ) => PromiseAdapter<Uri, string> =
-    (scopes) => async (uri, resolve, reject) => {
+  private handleUri: () => PromiseAdapter<Uri, string> =
+    () => async (uri, resolve, reject) => {
       const queryString = uri.query || uri.fragment;
       const query = new URLSearchParams(queryString);
       const accessToken = query.get("code") || query.get("access_token");
       const state = query.get("state");
-
-      console.log("🟠 queryString", queryString);
-      console.log("🟠 query", query);
-      console.log("🟠 scopes", scopes);
-      console.log("🟠 state", state);
 
       if (!accessToken) {
         reject(new Error("No token"));
@@ -278,7 +279,7 @@ class AuthProvider implements AuthenticationProvider, Disposable {
     return res;
   }
 
-  private async fetchUserInfoAuth0(token: string): Promise<UserInfoAuth0> {
+  private async fetchAuth0User(token: string): Promise<UserInfoAuth0> {
     const response = await fetch(`https://${AUTH0_DOMAIN}/userinfo`, {
       headers: {
         Authorization: `Bearer ${token}`
