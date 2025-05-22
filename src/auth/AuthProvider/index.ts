@@ -1,7 +1,7 @@
 import {
-  authentication,
+  authentication as vscodeAuth,
   AuthenticationProvider,
-  AuthenticationProviderAuthenticationSessionsChangeEvent,
+  AuthenticationProviderAuthenticationSessionsChangeEvent as ChangeEvent,
   AuthenticationSession,
   Disposable,
   env,
@@ -9,21 +9,26 @@ import {
   ExtensionContext,
   ProgressLocation,
   Uri,
-  window
+  window,
+  WebviewView
 } from "vscode";
 import { v4 as uuid } from "uuid";
 import { PromiseAdapter, promiseFromEvent } from "./utils/promiseFromEvent";
 import fetch from "node-fetch";
 import { fetchUserInfo } from "../../webview/WebviewProvider/lib/platform/utils";
 import UriEventHandler from "./utils/UriEventHandler";
+import { ExchangePromise } from "./types";
 
-export const AUTH_TYPE = `auth0`;
-const AUTH_NAME = `Auth0`;
+const TYPE = `auth0`;
+const NAME = `Auth0`;
 const CLIENT_ID = `7PJnvIXiXK3HkQR43c4zBf3bWuxISp9W`;
-var CLIENT_SECRET =
-  "tZ3N8vHuvpLQlzdGEhel4Vz5DeluNNyTtid-2jFBdDiXmIGNbX9yhjDmQ2Pg6VT-";
 const AUTH0_DOMAIN = `seqera-development.eu.auth0.com`;
-export const SESSIONS_SECRET_KEY = `${AUTH_TYPE}.sessions`;
+export const SESSIONS_SECRET_KEY = `${TYPE}.sessions`;
+
+const CLIENT_SECRET =
+  "tZ3N8vHuvpLQlzdGEhel4Vz5DeluNNyTtid-2jFBdDiXmIGNbX9yhjDmQ2Pg6VT-";
+// TODO: Use a prod Auth0 app secret set via env variable
+// TODO: This value will be rolled up into the built extension anyway - is this okay?
 
 type ResponseAuth0 = {
   access_token: string;
@@ -47,35 +52,24 @@ type UserInfoAuth0 = {
   updated_at: string;
 };
 
-class Auth0AuthenticationProvider
-  implements AuthenticationProvider, Disposable
-{
-  private _sessionChangeEmitter =
-    new EventEmitter<AuthenticationProviderAuthenticationSessionsChangeEvent>();
-  private _disposable: Disposable;
-  private _pendingStates: string[] = [];
-  private _codeExchangePromises = new Map<
-    string,
-    { promise: Promise<string>; cancel: EventEmitter<void> }
-  >();
-  private _uriHandler = new UriEventHandler();
-  private webviewView: string | undefined;
+class AuthProvider implements AuthenticationProvider, Disposable {
+  private eventEmitter = new EventEmitter<ChangeEvent>();
+  private currentInstance: Disposable;
+  private pendingIDs: string[] = [];
+  private promises = new Map<string, ExchangePromise>();
+  private uriHandler = new UriEventHandler();
+  private webviewView!: WebviewView["webview"];
 
   constructor(private readonly context: ExtensionContext) {
-    this._disposable = Disposable.from(
-      authentication.registerAuthenticationProvider(
-        AUTH_TYPE,
-        AUTH_NAME,
-        // @ts-ignore
-        this,
-        { supportsMultipleAccounts: false }
-      ),
-      window.registerUriHandler(this._uriHandler)
-    );
+    const { registerAuthenticationProvider: register } = vscodeAuth;
+    const options = { supportsMultipleAccounts: false };
+    const authInstance = register(TYPE, NAME, this, options);
+    const uriHandler = window.registerUriHandler(this.uriHandler);
+    this.currentInstance = Disposable.from(authInstance, uriHandler);
   }
 
   get onDidChangeSessions() {
-    return this._sessionChangeEmitter.event;
+    return this.eventEmitter.event;
   }
 
   get redirectUri() {
@@ -84,15 +78,10 @@ class Auth0AuthenticationProvider
     return `vscode://${publisher}.${name}`;
   }
 
-  // @ts-ignore
-  public async getSessions(
-    scopes?: string[]
-  ): Promise<readonly AuthenticationSession[]> {
+  public async getSessions(): Promise<AuthenticationSession[]> {
     const allSessions = await this.context.secrets.get(SESSIONS_SECRET_KEY);
-    if (allSessions) {
-      return Object.freeze(JSON.parse(allSessions) as AuthenticationSession[]);
-    }
-    return [];
+    if (!allSessions) return [];
+    return JSON.parse(allSessions) as AuthenticationSession[];
   }
 
   public async createSession(scopes: string[]): Promise<AuthenticationSession> {
@@ -102,7 +91,6 @@ class Auth0AuthenticationProvider
         // Note: for getting a refresh token, we need to use this "code" flow.
         // Use the Auth0 app's secret, and ensure "Allow Offline Access" is enabled.
         const code = await this.startLogin(scopes, "code");
-        console.log("🟢 code", code);
         if (!code) throw new Error(`Auth0 login failure (code flow)`);
         const auth0Response = await this.fetchAuth0Tokens(code);
         token = auth0Response.access_token;
@@ -112,7 +100,6 @@ class Auth0AuthenticationProvider
       }
       const { email, name, nickname } = await this.fetchUserInfoAuth0(token);
       const userInfo = await fetchUserInfo(token);
-      console.log("🉑 userInfo", userInfo);
 
       const session: AuthenticationSession = {
         id: uuid(),
@@ -129,7 +116,7 @@ class Auth0AuthenticationProvider
         JSON.stringify([session])
       );
 
-      this._sessionChangeEmitter.fire({
+      this.eventEmitter.fire({
         added: [session],
         removed: [],
         changed: []
@@ -156,7 +143,7 @@ class Auth0AuthenticationProvider
       );
 
       if (session) {
-        this._sessionChangeEmitter.fire({
+        this.eventEmitter.fire({
           added: [],
           removed: [session],
           changed: []
@@ -166,7 +153,7 @@ class Auth0AuthenticationProvider
   }
 
   public async dispose() {
-    this._disposable.dispose();
+    this.currentInstance.dispose();
   }
 
   private async startLogin(scopes: string[] = [], response_type: string) {
@@ -179,7 +166,7 @@ class Auth0AuthenticationProvider
       async (_, token) => {
         const stateId = uuid();
 
-        this._pendingStates.push(stateId);
+        this.pendingIDs.push(stateId);
 
         const scopeString = scopes.join(" ");
 
@@ -212,13 +199,13 @@ class Auth0AuthenticationProvider
         );
         await env.openExternal(uri);
 
-        let codeExchangePromise = this._codeExchangePromises.get(scopeString);
+        let codeExchangePromise = this.promises.get(scopeString);
         if (!codeExchangePromise) {
           codeExchangePromise = promiseFromEvent(
-            this._uriHandler.event,
+            this.uriHandler.event,
             this.handleUri(scopes)
           );
-          this._codeExchangePromises.set(scopeString, codeExchangePromise);
+          this.promises.set(scopeString, codeExchangePromise);
         }
 
         try {
@@ -235,11 +222,9 @@ class Auth0AuthenticationProvider
             ).promise
           ]);
         } finally {
-          this._pendingStates = this._pendingStates.filter(
-            (n) => n !== stateId
-          );
+          this.pendingIDs = this.pendingIDs.filter((n) => n !== stateId);
           codeExchangePromise?.cancel.fire();
-          this._codeExchangePromises.delete(scopeString);
+          this.promises.delete(scopeString);
         }
       }
     );
@@ -249,11 +234,15 @@ class Auth0AuthenticationProvider
     scopes: readonly string[]
   ) => PromiseAdapter<Uri, string> =
     (scopes) => async (uri, resolve, reject) => {
-      const query = uri.query
-        ? new URLSearchParams(uri.query)
-        : new URLSearchParams(uri.fragment);
+      const queryString = uri.query || uri.fragment;
+      const query = new URLSearchParams(queryString);
       const accessToken = query.get("code") || query.get("access_token");
       const state = query.get("state");
+
+      console.log("🟠 queryString", queryString);
+      console.log("🟠 query", query);
+      console.log("🟠 scopes", scopes);
+      console.log("🟠 state", state);
 
       if (!accessToken) {
         reject(new Error("No token"));
@@ -264,7 +253,7 @@ class Auth0AuthenticationProvider
         return;
       }
 
-      if (!this._pendingStates.some((n) => n === state)) {
+      if (!this.pendingIDs.some((n) => n === state)) {
         reject(new Error("State not found"));
         return;
       }
@@ -304,4 +293,4 @@ class Auth0AuthenticationProvider
   }
 }
 
-export default Auth0AuthenticationProvider;
+export default AuthProvider;
