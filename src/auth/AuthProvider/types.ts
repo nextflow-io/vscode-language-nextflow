@@ -1,3 +1,5 @@
+import { EventEmitter } from "vscode";
+
 export type User = {
   id: number;
   userName: string;
@@ -27,4 +29,9 @@ export type UserInfo = {
   user: User;
   needConsent: boolean;
   defaultWorkspaceId: number;
+};
+
+export type ExchangePromise = {
+  promise: Promise<string>;
+  cancel: EventEmitter<void>;
 };
