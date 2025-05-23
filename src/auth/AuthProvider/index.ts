@@ -21,17 +21,16 @@ import {
   fetchPlatformData,
   clearPlatformData
 } from "../../webview/WebviewProvider/lib";
+import {
+  AUTH0_CLIENT_ID,
+  AUTH0_CLIENT_SECRET,
+  AUTH0_SCOPES
+} from "../../constants";
 
 const TYPE = `auth0`;
-const NAME = `Auth0`;
-const CLIENT_ID = `7PJnvIXiXK3HkQR43c4zBf3bWuxISp9W`;
+const NAME = `Seqera Cloud`;
 const AUTH0_DOMAIN = `seqera-development.eu.auth0.com`;
 export const SESSIONS_SECRET_KEY = `${TYPE}.sessions`;
-
-// TODO: Use a prod Auth0 app secret set via env variable
-// TODO: This value will be rolled up into the built extension anyway - is this okay?
-const CLIENT_SECRET =
-  "tZ3N8vHuvpLQlzdGEhel4Vz5DeluNNyTtid-2jFBdDiXmIGNbX9yhjDmQ2Pg6VT-";
 
 type ResponseAuth0 = {
   access_token: string;
@@ -55,6 +54,10 @@ type UserInfoAuth0 = {
   updated_at: string;
 };
 
+type Auth0LoginType = "code" | "token";
+
+type OnReturn = PromiseAdapter<Uri, string>;
+
 class AuthProvider implements AuthenticationProvider, Disposable {
   private eventEmitter = new EventEmitter<ChangeEvent>();
   private currentInstance: Disposable;
@@ -75,12 +78,6 @@ class AuthProvider implements AuthenticationProvider, Disposable {
     return this.eventEmitter.event;
   }
 
-  get redirectUri() {
-    const publisher = this.context.extension.packageJSON.publisher;
-    const name = this.context.extension.packageJSON.name;
-    return `vscode://${publisher}.${name}`;
-  }
-
   public async getSessions(): Promise<AuthenticationSession[]> {
     const allSessions = await this.context.secrets.get(SESSIONS_SECRET_KEY);
     if (!allSessions) return [];
@@ -90,33 +87,36 @@ class AuthProvider implements AuthenticationProvider, Disposable {
   public async createSession(scopes: string[]): Promise<AuthenticationSession> {
     try {
       let accessToken;
-      let refreshToken;
 
-      if (CLIENT_SECRET) {
-        // Note: for getting a refresh token, we need to use this "code" flow.
-        // Use the Auth0 app's secret, and ensure "Allow Offline Access" is enabled.
-        const code = await this.startLogin(scopes, "code");
+      if (AUTH0_CLIENT_SECRET) {
+        // Note: this "code" response type is for allowing token refresh functionality. getting a
+        // refresh token, we need to use this "code" flow. Use the Auth0 app's
+        // secret, and ensure "Allow Offline Access" is enabled.
+        const code = await this.startLogin("code");
         if (!code) throw new Error(`Auth0 login failure (code flow)`);
         const auth0Response = await this.fetchAuth0Tokens(code);
         accessToken = auth0Response.access_token;
-        refreshToken = auth0Response.refresh_token;
       } else {
-        accessToken = await this.startLogin(scopes, "token");
+        accessToken = await this.startLogin("token");
         if (!accessToken) throw new Error(`Auth0 login failure (token flow)`);
       }
 
       // Login success, now fetch from Seqera Cloud
-      await fetchPlatformData(accessToken, this.webviewView, this.context);
+      const { userInfo } = await fetchPlatformData(
+        accessToken,
+        this.webviewView,
+        this.context
+      );
+      const user = userInfo?.user;
+      if (!user) throw new Error(`User not found`);
 
       // If that worked, store the vscode session
-      const auth0 = await this.fetchAuth0User(accessToken);
       const session: AuthenticationSession = {
         id: uuid(),
         accessToken,
-        refreshToken,
         account: {
-          label: auth0.name + "(seqera: " + auth0.nickname + " )",
-          id: auth0.email
+          label: user?.userName,
+          id: user.email
         },
         scopes: []
       };
@@ -168,52 +168,49 @@ class AuthProvider implements AuthenticationProvider, Disposable {
     this.currentInstance.dispose();
   }
 
-  private async startLogin(scopes: string[] = [], response_type: string) {
-    return await window.withProgress<string>(
+  get browserCallbackUri() {
+    const publisher = this.context.extension.packageJSON.publisher;
+    const name = this.context.extension.packageJSON.name;
+    return `vscode://${publisher}.${name}`;
+  }
+
+  private async openBrowser(type: Auth0LoginType, stateId: string) {
+    const searchParams = new URLSearchParams([
+      ["response_type", type],
+      ["client_id", AUTH0_CLIENT_ID],
+      ["redirect_uri", this.browserCallbackUri],
+      ["state", stateId],
+      ["scope", AUTH0_SCOPES],
+      ["audience", "platform"],
+      ["prompt", "login"]
+    ]);
+    const uri = Uri.parse(
+      `https://${AUTH0_DOMAIN}/authorize?${searchParams.toString()}`
+    );
+    await env.openExternal(uri);
+  }
+
+  private async startLogin(type: Auth0LoginType) {
+    return await window.withProgress(
       {
         location: ProgressLocation.Notification,
         title: "Signing in to Seqera Cloud",
         cancellable: true
       },
       async (_, token) => {
+        // Add pending login ID to client
         const stateId = uuid();
         this.pendingIDs.push(stateId);
-        const scopeString = scopes.join(" ");
 
-        if (!scopes.includes("openid")) {
-          scopes.push("openid");
-        }
-        if (!scopes.includes("profile")) {
-          scopes.push("profile");
-        }
-        if (!scopes.includes("email")) {
-          scopes.push("email");
-        }
-        if (!scopes.includes("offline_access")) {
-          scopes.push("offline_access");
-        }
+        await this.openBrowser(type, stateId);
 
-        const searchParams = new URLSearchParams([
-          ["response_type", response_type],
-          ["client_id", CLIENT_ID],
-          ["redirect_uri", this.redirectUri],
-          ["state", stateId],
-          ["scope", scopes.join(" ")],
-          ["audience", "platform"],
-          ["prompt", "login"]
-        ]);
-        const uri = Uri.parse(
-          `https://${AUTH0_DOMAIN}/authorize?${searchParams.toString()}`
-        );
-        await env.openExternal(uri);
-
-        let codeExchangePromise = this.promises.get(scopeString);
+        let codeExchangePromise = this.promises.get(AUTH0_SCOPES);
         if (!codeExchangePromise) {
           codeExchangePromise = promiseFromEvent(
             this.uriHandler.event,
-            this.handleUri()
+            this.onReturnFromWeb
           );
-          this.promises.set(scopeString, codeExchangePromise);
+          this.promises.set(AUTH0_SCOPES, codeExchangePromise);
         }
 
         try {
@@ -232,43 +229,42 @@ class AuthProvider implements AuthenticationProvider, Disposable {
         } finally {
           this.pendingIDs = this.pendingIDs.filter((n) => n !== stateId);
           codeExchangePromise?.cancel.fire();
-          this.promises.delete(scopeString);
+          this.promises.delete(AUTH0_SCOPES);
         }
       }
     );
   }
 
-  private handleUri: () => PromiseAdapter<Uri, string> =
-    () => async (uri, resolve, reject) => {
-      const queryString = uri.query || uri.fragment;
-      const query = new URLSearchParams(queryString);
-      const accessToken = query.get("code") || query.get("access_token");
-      const state = query.get("state");
+  private onReturnFromWeb: OnReturn = async (uri, resolve, reject) => {
+    const queryString = uri.query || uri.fragment;
+    const query = new URLSearchParams(queryString);
+    const accessToken = query.get("code") || query.get("access_token");
+    const state = query.get("state");
 
-      if (!accessToken) {
-        reject(new Error("No token"));
-        return;
-      }
-      if (!state) {
-        reject(new Error("No state"));
-        return;
-      }
+    if (!accessToken) {
+      reject(new Error("No token"));
+      return;
+    }
+    if (!state) {
+      reject(new Error("No state"));
+      return;
+    }
 
-      if (!this.pendingIDs.some((n) => n === state)) {
-        reject(new Error("State not found"));
-        return;
-      }
+    if (!this.pendingIDs.some((n) => n === state)) {
+      reject(new Error("Pending login not found"));
+      return;
+    }
 
-      resolve(accessToken);
-    };
+    resolve(accessToken);
+  };
 
   private async fetchAuth0Tokens(code: string): Promise<ResponseAuth0> {
     const data = new URLSearchParams([
       ["grant_type", "authorization_code"],
-      ["client_id", CLIENT_ID],
-      ["client_secret", CLIENT_SECRET],
+      ["client_id", AUTH0_CLIENT_ID],
+      ["client_secret", AUTH0_CLIENT_SECRET],
       ["code", code],
-      ["redirect_uri", this.redirectUri]
+      ["redirect_uri", this.browserCallbackUri]
     ]);
     const auth = await fetch(`https://${AUTH0_DOMAIN}/oauth/token`, {
       method: `POST`,
