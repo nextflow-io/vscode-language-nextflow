@@ -33,7 +33,7 @@
     }
     & .wave {
       opacity: 1;
-      fill: var(--nf-highlight);
+      fill: #3D95FD;
     }
   }
   &.success,
@@ -58,12 +58,15 @@
     top: -1px;
     transition: opacity 0.1s;
   }
+  & .actionGo {
+    color: #388A34;
+  }
   & .wave {
     width: 21px;
     height: 21px;
     transition: fill 0.2s;
     opacity: 0.8;
-    fill: var(--vscode-editor-foreground);
+    fill:#77B5FE;
   }
 }
 &:hover {
