@@ -72,9 +72,8 @@ class AuthProvider implements AuthenticationProvider, Disposable {
       let refreshToken;
 
       if (AUTH0_CLIENT_SECRET) {
-        // Note: this "code" response type is for allowing token refresh functionality. getting a
-        // refresh token, we need to use this "code" flow. Use the Auth0 app's
-        // secret, and ensure "Allow Offline Access" is enabled.
+        // Note: this "code" response type is for allowing token refresh functionality.
+        // Use the Auth0 app's secret, and ensure "Allow Offline Access" is enabled.
         const code = await this.startLogin("code");
         if (!code) throw new Error(`Auth0 login failure (code flow)`);
         const auth0Response = await this.fetchAuth0Tokens(code);
