@@ -11,3 +11,4 @@ export const AUTH0_CLIENT_SECRET =
   "tZ3N8vHuvpLQlzdGEhel4Vz5DeluNNyTtid-2jFBdDiXmIGNbX9yhjDmQ2Pg6VT-";
 export const AUTH0_CLIENT_ID = "7PJnvIXiXK3HkQR43c4zBf3bWuxISp9W";
 export const AUTH0_SCOPES = "openid profile email offline_access";
+export const AUTH0_DOMAIN = `seqera-development.eu.auth0.com`;
