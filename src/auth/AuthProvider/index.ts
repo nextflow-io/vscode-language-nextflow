@@ -18,12 +18,11 @@ import fetch from "node-fetch";
 import UriEventHandler from "./utils/UriEventHandler";
 import {
   AuthSession,
-  ExchangePromise,
+  WebCallback,
   User,
   Auth0LoginType,
-  OnReturn,
   ResponseAuth0,
-  UserInfoAuth0
+  WebCallbackHandler
 } from "./types";
 import {
   fetchPlatformData,
@@ -44,7 +43,7 @@ class AuthProvider implements AuthenticationProvider, Disposable {
   private eventEmitter = new EventEmitter<ChangeEvent>();
   private currentInstance: Disposable;
   private pendingIDs: string[] = [];
-  private promises = new Map<string, ExchangePromise>();
+  private callbackEvents = new Map<string, WebCallback>();
   private uriHandler = new UriEventHandler();
   private webviewView!: WebviewView["webview"];
 
@@ -153,21 +152,11 @@ class AuthProvider implements AuthenticationProvider, Disposable {
     }
   }
 
-  public async dispose() {
-    this.currentInstance.dispose();
-  }
-
-  get browserCallbackUri() {
-    const publisher = this.context.extension.packageJSON.publisher;
-    const name = this.context.extension.packageJSON.name;
-    return `vscode://${publisher}.${name}`;
-  }
-
   private async openBrowser(type: Auth0LoginType, stateId: string) {
     const searchParams = new URLSearchParams([
       ["response_type", type],
       ["client_id", AUTH0_CLIENT_ID],
-      ["redirect_uri", this.browserCallbackUri],
+      ["redirect_uri", this.webCallbackURI],
       ["state", stateId],
       ["scope", AUTH0_SCOPES],
       ["audience", "platform"],
@@ -186,45 +175,59 @@ class AuthProvider implements AuthenticationProvider, Disposable {
         title: "Signing in to Seqera Cloud",
         cancellable: true
       },
-      async (_, token) => {
+      async (_, cancellationToken) => {
         // Add pending login ID to client
         const stateId = uuid();
         this.pendingIDs.push(stateId);
 
         await this.openBrowser(type, stateId);
 
-        let codeExchangePromise = this.promises.get(AUTH0_SCOPES);
-        if (!codeExchangePromise) {
-          codeExchangePromise = promiseFromEvent(
-            this.uriHandler.event,
-            this.onReturnFromWeb
-          );
-          this.promises.set(AUTH0_SCOPES, codeExchangePromise);
-        }
+        let callback: WebCallback | undefined;
 
         try {
+          const pendingCallback = this.callbackEvents.get(AUTH0_SCOPES);
+          callback = pendingCallback;
+          callback ??= promiseFromEvent(
+            this.uriHandler.event,
+            this.webCallbackHandler
+          );
+          this.callbackEvents.set(AUTH0_SCOPES, callback);
+
+          const userCancel = promiseFromEvent<any, any>(
+            cancellationToken.onCancellationRequested,
+            (_, __, reject) => {
+              reject("User Cancelled");
+            }
+          );
+          const timeoutPromise = new Promise<string>((_, reject) =>
+            setTimeout(() => reject("Timed out"), 60000)
+          );
+
           return await Promise.race([
-            codeExchangePromise.promise,
-            new Promise<string>((_, reject) =>
-              setTimeout(() => reject("Cancelled"), 60000)
-            ),
-            promiseFromEvent<any, any>(
-              token.onCancellationRequested,
-              (_, __, reject) => {
-                reject("User Cancelled");
-              }
-            ).promise
+            callback.promise,
+            userCancel.promise,
+            timeoutPromise
           ]);
         } finally {
           this.pendingIDs = this.pendingIDs.filter((n) => n !== stateId);
-          codeExchangePromise?.cancel.fire();
-          this.promises.delete(AUTH0_SCOPES);
+          callback?.cancel.fire();
+          this.callbackEvents.delete(AUTH0_SCOPES);
         }
       }
     );
   }
 
-  private onReturnFromWeb: OnReturn = async (uri, resolve, reject) => {
+  get webCallbackURI() {
+    const publisher = this.context.extension.packageJSON.publisher;
+    const name = this.context.extension.packageJSON.name;
+    return `vscode://${publisher}.${name}`;
+  }
+
+  private webCallbackHandler: WebCallbackHandler = async (
+    uri,
+    resolve,
+    reject
+  ) => {
     const queryString = uri.query || uri.fragment;
     const query = new URLSearchParams(queryString);
     const accessToken = query.get("code") || query.get("access_token");
@@ -253,7 +256,7 @@ class AuthProvider implements AuthenticationProvider, Disposable {
       ["client_id", AUTH0_CLIENT_ID],
       ["client_secret", AUTH0_CLIENT_SECRET],
       ["code", code],
-      ["redirect_uri", this.browserCallbackUri]
+      ["redirect_uri", this.webCallbackURI]
     ]);
     const auth = await fetch(`https://${AUTH0_DOMAIN}/oauth/token`, {
       method: `POST`,
@@ -266,6 +269,10 @@ class AuthProvider implements AuthenticationProvider, Disposable {
 
   public setWebview(webview: any) {
     this.webviewView = webview;
+  }
+
+  public async dispose() {
+    this.currentInstance.dispose();
   }
 }
 
