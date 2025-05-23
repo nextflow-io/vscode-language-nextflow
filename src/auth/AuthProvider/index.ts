@@ -13,10 +13,18 @@ import {
   WebviewView
 } from "vscode";
 import { v4 as uuid } from "uuid";
-import { PromiseAdapter, promiseFromEvent } from "./utils/promiseFromEvent";
+import { promiseFromEvent } from "./utils/promiseFromEvent";
 import fetch from "node-fetch";
 import UriEventHandler from "./utils/UriEventHandler";
-import { ExchangePromise } from "./types";
+import {
+  AuthSession,
+  ExchangePromise,
+  User,
+  Auth0LoginType,
+  OnReturn,
+  ResponseAuth0,
+  UserInfoAuth0
+} from "./types";
 import {
   fetchPlatformData,
   clearPlatformData
@@ -24,39 +32,13 @@ import {
 import {
   AUTH0_CLIENT_ID,
   AUTH0_CLIENT_SECRET,
+  AUTH0_DOMAIN,
   AUTH0_SCOPES
 } from "../../constants";
 
 const TYPE = `auth0`;
 const NAME = `Seqera Cloud`;
-const AUTH0_DOMAIN = `seqera-development.eu.auth0.com`;
-export const SESSIONS_SECRET_KEY = `${TYPE}.sessions`;
-
-type ResponseAuth0 = {
-  access_token: string;
-  refresh_token?: string;
-  token_type: "Bearer";
-  expires_in: number;
-  scope: string;
-  id_token: string;
-};
-
-type UserInfoAuth0 = {
-  email: string;
-  email_verified: boolean;
-  family_name: string;
-  given_name: string;
-  name: string;
-  nickname: string;
-  picture: string;
-  preferred_username: string;
-  sub: string;
-  updated_at: string;
-};
-
-type Auth0LoginType = "code" | "token";
-
-type OnReturn = PromiseAdapter<Uri, string>;
+export const STORAGE_KEY = `${TYPE}.sessions`;
 
 class AuthProvider implements AuthenticationProvider, Disposable {
   private eventEmitter = new EventEmitter<ChangeEvent>();
@@ -79,14 +61,15 @@ class AuthProvider implements AuthenticationProvider, Disposable {
   }
 
   public async getSessions(): Promise<AuthenticationSession[]> {
-    const allSessions = await this.context.secrets.get(SESSIONS_SECRET_KEY);
+    const allSessions = await this.context.secrets.get(STORAGE_KEY);
     if (!allSessions) return [];
     return JSON.parse(allSessions) as AuthenticationSession[];
   }
 
-  public async createSession(scopes: string[]): Promise<AuthenticationSession> {
+  public async createSession(): Promise<AuthenticationSession> {
     try {
       let accessToken;
+      let refreshToken;
 
       if (AUTH0_CLIENT_SECRET) {
         // Note: this "code" response type is for allowing token refresh functionality. getting a
@@ -96,6 +79,7 @@ class AuthProvider implements AuthenticationProvider, Disposable {
         if (!code) throw new Error(`Auth0 login failure (code flow)`);
         const auth0Response = await this.fetchAuth0Tokens(code);
         accessToken = auth0Response.access_token;
+        refreshToken = auth0Response.refresh_token;
       } else {
         accessToken = await this.startLogin("token");
         if (!accessToken) throw new Error(`Auth0 login failure (token flow)`);
@@ -111,26 +95,8 @@ class AuthProvider implements AuthenticationProvider, Disposable {
       if (!user) throw new Error(`User not found`);
 
       // If that worked, store the vscode session
-      const session: AuthenticationSession = {
-        id: uuid(),
-        accessToken,
-        account: {
-          label: user?.userName,
-          id: user.email
-        },
-        scopes: []
-      };
-
-      await this.context.secrets.store(
-        SESSIONS_SECRET_KEY,
-        JSON.stringify([session])
-      );
-
-      this.eventEmitter.fire({
-        added: [session],
-        removed: [],
-        changed: []
-      });
+      const session = await this.storeSession(user, accessToken, refreshToken);
+      if (!session) throw new Error(`Failed to store new session`);
 
       return session;
     } catch (e) {
@@ -139,18 +105,42 @@ class AuthProvider implements AuthenticationProvider, Disposable {
     }
   }
 
+  private async storeSession(
+    user: User,
+    accessToken: string,
+    refreshToken?: string
+  ) {
+    const session: AuthSession = {
+      id: uuid(),
+      accessToken,
+      refreshToken,
+      account: {
+        label: user.userName,
+        id: user.email
+      },
+      scopes: []
+    };
+
+    await this.context.secrets.store(STORAGE_KEY, JSON.stringify([session]));
+
+    this.eventEmitter.fire({
+      added: [session],
+      removed: [],
+      changed: []
+    });
+
+    return session;
+  }
+
   public async removeSession(sessionId: string): Promise<void> {
-    const allSessions = await this.context.secrets.get(SESSIONS_SECRET_KEY);
+    const allSessions = await this.context.secrets.get(STORAGE_KEY);
     if (allSessions) {
       let sessions = JSON.parse(allSessions) as AuthenticationSession[];
       const sessionIdx = sessions.findIndex((s) => s.id === sessionId);
       const session = sessions[sessionIdx];
       sessions.splice(sessionIdx, 1);
 
-      await this.context.secrets.store(
-        SESSIONS_SECRET_KEY,
-        JSON.stringify(sessions)
-      );
+      await this.context.secrets.store(STORAGE_KEY, JSON.stringify(sessions));
 
       clearPlatformData(this.webviewView, this.context);
 
@@ -272,16 +262,6 @@ class AuthProvider implements AuthenticationProvider, Disposable {
       body: data.toString()
     });
     const res = (await auth.json()) as ResponseAuth0;
-    return res;
-  }
-
-  private async fetchAuth0User(token: string): Promise<UserInfoAuth0> {
-    const response = await fetch(`https://${AUTH0_DOMAIN}/userinfo`, {
-      headers: {
-        Authorization: `Bearer ${token}`
-      }
-    });
-    const res = (await response.json()) as UserInfoAuth0;
     return res;
   }
 
