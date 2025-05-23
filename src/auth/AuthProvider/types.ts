@@ -32,7 +32,7 @@ export type UserInfo = {
   defaultWorkspaceId: number;
 };
 
-export type ExchangePromise = {
+export type WebCallback = {
   promise: Promise<string>;
   cancel: EventEmitter<void>;
 };
@@ -64,4 +64,4 @@ export type UserInfoAuth0 = {
 };
 
 export type Auth0LoginType = "code" | "token";
-export type OnReturn = PromiseAdapter<Uri, string>;
+export type WebCallbackHandler = PromiseAdapter<Uri, string>;
