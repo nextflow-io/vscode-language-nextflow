@@ -20,12 +20,12 @@
     width: 14px;
     height: 14px;
     border-radius: 2px;
-    border: 1px solid var(--vscode-dropdown-border);
+    border: 1px solid var(--vscode-descriptionForeground);
     margin-right: 6px;
     & i {
       font-size: 12px;
       opacity: 0;
-      color: var(--vscode-button-foreground);
+      color: var(--nf-highlight);
     }
   }
   &.checked i {

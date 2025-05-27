@@ -8,9 +8,9 @@
     justify-content: space-between;
     width: 100%;
     cursor: pointer;
-    color: var(--nf-item-fg-active);
+    color: var(--vscode-list-activeSelectionForeground);
     &:hover {
-      background-color: var(--nf-item-bg-hover);
+      background-color: var(--vscode-list-hoverBackground);
     }
     & .name {
       display: flex;

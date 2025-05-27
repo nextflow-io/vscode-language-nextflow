@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import { useTowerContext } from "../../../../Context";
 import Button from "../../../../components/Button";
-import styles from "./styles.module.css";
 import { getDataLinkURL } from "../../utils";
+import ListItem from "../../../../components/ListItem";
 
 const DataLinks = () => {
   const {
@@ -24,17 +24,13 @@ const DataLinks = () => {
       {hasDataLinks ? (
         <>
           {displayedDataLinks?.map((dataLink) => (
-            <Button
+            <ListItem
               href={getDataLinkURL(dataLink, workspace)}
               key={dataLink.id}
-              fullWidth
               alt
-              className="mb-1"
             >
-              <div className={styles.item}>
-                <span className={styles.name}>{dataLink.name}</span>
-              </div>
-            </Button>
+              <span className="listItem-name">{dataLink.name}</span>
+            </ListItem>
           ))}
           {hasMore && (
             <Button

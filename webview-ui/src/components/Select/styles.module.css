@@ -18,38 +18,39 @@
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  font-weight: 500;
+  &::after {
+    font-family: codicon;
+    content: "\eab4";
+    margin-left: 8px;
+    transition: transform 0.2s ease;
+  }
   &:hover {
     background-color: var(--vscode-button-hoverBackground);
     border-color: var(--vscode-button-border-hover);
+    &::after {
+      color: var(--nf-highlight);
+    }
   }
   &.alt {
     background-color: var(--vscode-editor-background);
-    border: 1px solid var(--vscode-dropdown-border);
-    color: var(--vscode-button-foreground);
+    border: 1px solid var(--vscode-button-background);
+    color: var(--vscode-editor-foreground);
     font-weight: 400;
     &:hover {
-      border-color: var(--vscode-button-background);
-    }
-  }
-  &.alt2 {
-    background: var(--vscode-dropdown-border);
-    border: 1px solid var(--vscode-dropdown-border);
-    color: var(--vscode-button-foreground);
-    &:hover {
-      border-color: var(--vscode-button-background);
+      border-color: var(--nf-highlight-2);
     }
   }
   &.subtle {
-    background-color: var(--vscode-sideBarSectionHeader-background);
+    opacity: 0.9;
     &:hover {
-      background-color: var(--vscode-button-background);
+      opacity: 1;
     }
   }
   &.subtle2 {
-    background-color: var(--vscode-sideBarSectionHeader-background);
-    opacity: 0.8;
+    opacity: 0.7;
     &:hover {
-      background-color: var(--vscode-button-background);
+      opacity: 1;
     }
   }
   & .label {
@@ -64,18 +65,11 @@
     }
   }
   &.large {
-    height: 36px;
-    padding: 0 16px;
-    font-size: 15px;
-    font-weight: 500;
+    height: 32px;
+    padding: 0 11px;
+    font-size: 14px;
+    font-weight: 600;
   }
-}
-
-.selectButton::after {
-  font-family: codicon;
-  content: "\eab4";
-  margin-left: 8px;
-  transition: transform 0.2s ease;
 }
 
 .selectButton[aria-expanded="true"]::after {
