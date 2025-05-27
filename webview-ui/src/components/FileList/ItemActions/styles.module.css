@@ -66,7 +66,7 @@
     height: 21px;
     transition: fill 0.2s;
     opacity: 0.8;
-    fill:#77B5FE;
+    fill: #77B5FE;
   }
 }
 &:hover {
