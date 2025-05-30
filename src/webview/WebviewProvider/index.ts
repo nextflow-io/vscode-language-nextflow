@@ -17,6 +17,7 @@ import {
 import { AuthProvider, getAccessToken } from "../../auth";
 import { jwtExpired } from "../../auth/AuthProvider/utils/jwt";
 import { sleep } from "./lib/utils";
+import { runPipeline } from "./lib/platform/utils/runPipeline";
 
 class WebviewProvider implements vscode.WebviewViewProvider {
   _currentView?: vscode.WebviewView;
@@ -76,6 +77,9 @@ class WebviewProvider implements vscode.WebviewViewProvider {
           break;
         case "getContainer":
           this.getContainer(message.filePath);
+          break;
+        case "runPipeline":
+          runPipeline(repository, workspaceId);
           break;
       }
     });
