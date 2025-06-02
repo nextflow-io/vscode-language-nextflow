@@ -39,7 +39,7 @@ const Pipelines = () => {
                 <a
                   className="codicon codicon-play listItem-iconButton"
                   href={getLaunchURL(pipeline)}
-                  title="Run pipeline"
+                  title="Launch in Seqera Cloud"
                   target="_blank"
                 />
               </div>
