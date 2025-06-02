@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { getWorkflowURL, relativeTime } from "../../utils";
+import { getLaunchURL, getWorkflowURL, relativeTime } from "../../utils";
 import { useTowerContext } from "../../../../Context";
 import FilterForProject from "../FilterForProject";
 import { WorkflowIcon } from "../../../../icons";
@@ -18,16 +18,30 @@ const Pipelines = () => {
       {hasPipelines ? (
         <>
           {pipelines.map((pipeline) => (
-            <ListItem key={pipeline.pipelineId} href={getWorkflowURL(pipeline)}>
-              <div className="listItem-name">
-                <WorkflowIcon
-                  className="mr-2"
-                  style={{ height: 12, opacity: 0.8 }}
-                />
-                <label>{pipeline.name}</label>
+            <ListItem
+              flex
+              key={pipeline.pipelineId}
+              href={getWorkflowURL(pipeline)}
+            >
+              <div>
+                <div className="listItem-name">
+                  <WorkflowIcon
+                    className="mr-2"
+                    style={{ height: 12, opacity: 0.8 }}
+                  />
+                  <label>{pipeline.name}</label>
+                </div>
+                <div className="listItem-meta">
+                  Updated: {relativeTime(pipeline.lastUpdated)}
+                </div>
               </div>
-              <div className="listItem-meta">
-                Updated: {relativeTime(pipeline.lastUpdated)}
+              <div>
+                <a
+                  className="codicon codicon-play listItem-iconButton"
+                  href={getLaunchURL(pipeline)}
+                  title="Launch in Seqera Cloud"
+                  target="_blank"
+                />
               </div>
             </ListItem>
           ))}

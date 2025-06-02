@@ -28,6 +28,10 @@ export function getWorkflowURL(pipeline: Pipeline) {
   return `${SEQERA_PLATFORM_URL}/orgs/${pipeline.orgName}/workspaces/${pipeline.workspaceName}/launchpad/${pipeline.pipelineId}`;
 }
 
+export function getLaunchURL(pipeline: Pipeline) {
+  return `${SEQERA_PLATFORM_URL}/orgs/${pipeline.orgName}/workspaces/${pipeline.workspaceName}/launchpad/${pipeline.pipelineId}/form/new-form`;
+}
+
 export function getDatasetURL(dataset: Dataset, workspace?: Workspace) {
   if (!workspace) return "";
   return `${SEQERA_PLATFORM_URL}/orgs/${workspace.orgName}/workspaces/${workspace.workspaceName}/datasets/${dataset.id}`;
