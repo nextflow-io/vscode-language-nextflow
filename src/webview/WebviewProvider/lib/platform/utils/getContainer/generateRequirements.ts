@@ -9,7 +9,9 @@ async function generateRequirements(
   const prompt = getPrompt(content);
 
   try {
-    const response = await fetchContent(prompt, token, onChunk);
+    const response = await fetchContent(prompt, token, onChunk, [
+      "wave-generation"
+    ]);
     return response;
   } catch (error) {
     console.error("🟠 Error generating requirements:", error);
