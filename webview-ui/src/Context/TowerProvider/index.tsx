@@ -12,7 +12,8 @@ import {
   Workflow,
   Dataset,
   DataLink,
-  WorkspaceID
+  WorkspaceID,
+  HubPipeline
 } from "../types";
 import { AuthState } from "..";
 import {
@@ -42,6 +43,7 @@ type PlatformData = {
   pipelines?: PipelinesResponse;
   datasets?: Dataset[];
   dataLinks?: DataLink[];
+  hubPipelines?: HubPipeline[];
 };
 
 type TowerContextType = {
@@ -70,6 +72,7 @@ type TowerContextType = {
   tokenExpiry?: number;
   repoInfo?: RepoInfo;
   pipelines?: Pipeline[];
+  hubPipelines?: HubPipeline[];
   datasets?: Dataset[];
   dataLinks?: DataLink[];
   useLocalContext: boolean;
@@ -90,7 +93,8 @@ const TowerProvider: React.FC<Props> = ({
     pipelines,
     datasets,
     dataLinks,
-    repoInfo
+    repoInfo,
+    hubPipelines
   } = platformData;
 
   const organizations: Organization[] = useMemo(
@@ -181,7 +185,8 @@ const TowerProvider: React.FC<Props> = ({
         tokenExpiry: auth.tokenExpiry,
         repoInfo,
         datasets,
-        dataLinks
+        dataLinks,
+        hubPipelines
       }}
     >
       {children}

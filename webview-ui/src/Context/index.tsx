@@ -12,7 +12,8 @@ import {
   RepoInfo,
   PipelinesResponse,
   Dataset,
-  DataLink
+  DataLink,
+  HubPipeline
 } from "./types";
 
 const vscode = getVscode();
@@ -39,15 +40,14 @@ const Context = ({ children }: Props) => {
   const [workspaces, setWorkspaces] = useState<Workspace[]>([]);
   const [computeEnvs, setComputeEnvs] = useState<ComputeEnv[]>([]);
   const [organizations, setOrganizations] = useState<Organization[]>([]);
-  const [runs, setRuns] = useState<RunsResponse | undefined>(
-    undefined
-  );
+  const [runs, setRuns] = useState<RunsResponse | undefined>(undefined);
   const [pipelines, setPipelines] = useState<PipelinesResponse | undefined>(
     undefined
   );
   const [repoInfo, setRepoInfo] = useState<RepoInfo | undefined>(undefined);
   const [datasets, setDatasets] = useState<Dataset[]>([]);
   const [dataLinks, setDataLinks] = useState<DataLink[]>([]);
+  const [hubPipelines, setHubPipelines] = useState<HubPipeline[]>([]);
 
   useEffect(() => {
     const handleMessage = (event: MessageEvent) => {
@@ -63,6 +63,7 @@ const Context = ({ children }: Props) => {
       if (data.repoInfo) setRepoInfo(data.repoInfo);
       if (data.datasets) setDatasets(data.datasets);
       if (data.dataLinks) setDataLinks(data.dataLinks);
+      if (data.hubPipelines) setHubPipelines(data.hubPipelines);
     };
     window.addEventListener("message", handleMessage);
     return () => window.removeEventListener("message", handleMessage);
@@ -83,7 +84,8 @@ const Context = ({ children }: Props) => {
             repoInfo,
             pipelines,
             datasets,
-            dataLinks
+            dataLinks,
+            hubPipelines
           }}
         >
           {children}

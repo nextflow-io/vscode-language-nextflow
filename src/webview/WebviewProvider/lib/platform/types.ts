@@ -1,3 +1,5 @@
+export { Pipeline as HubPipeline } from "./hubTypes";
+
 export type RepoInfo = {
   url: string;
   name: string;
