@@ -1,14 +1,13 @@
 import { SEQERA_INTERN_API_URL } from "../../../../../../constants";
-import { systemPrompt as defaultSystemPrompt } from "./prompt";
+import { systemPrompt } from "./prompt";
 
 async function fetchContent(
   prompt: string,
   token: string,
   onChunk?: (chunk: string) => void,
-  givenSystemPrompt?: string
+  tags = ["test-generation"]
 ): Promise<string> {
   try {
-    const systemPrompt = givenSystemPrompt || defaultSystemPrompt;
     const fullPrompt = `:::details\n\n${systemPrompt}\n\n${prompt}\n\n:::\n\n`;
     const url = `${SEQERA_INTERN_API_URL}/internal-ai/query`;
 
@@ -22,8 +21,8 @@ async function fetchContent(
       body: JSON.stringify({
         message: fullPrompt,
         stream: true,
-        tags: ["nf-test"],
-        title: "NF-Test Generation"
+        tags,
+        title: tags[0]
       })
     });
 
