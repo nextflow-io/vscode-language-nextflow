@@ -8,9 +8,8 @@ import { PipelineIcon, SeqeraIcon, AiIcon } from "../../../icons";
 import styles from "./styles.module.css";
 
 const Toolbar = () => {
-  const { userInfo, repoInfo, isAuthenticated } = useTowerContext();
+  const { repoInfo, isAuthenticated } = useTowerContext();
   const { selectedView, setSelectedView } = useWorkspaceContext();
-  const username = userInfo?.user?.userName || "unknown";
   const url = repoInfo?.url;
   const isGithub = url?.includes("github.com");
 
@@ -36,8 +35,8 @@ const Toolbar = () => {
         </Button>
         {isAuthenticated && (
           <Button
-            href={`${SEQERA_PLATFORM_URL}/profile`}
-            description={username}
+            onClick={() => setSelectedView("add-pipeline")}
+            description="Add to workspace"
             icon="codicon-account"
             subtle2
           />
@@ -59,7 +58,11 @@ const Toolbar = () => {
                 { label: "Pipelines", value: "pipelines" },
                 { label: "Datasets", value: "datasets" },
                 { label: "Data Buckets", value: "data-links" },
-                { label: "Compute Environments", value: "compute-environments" }
+                {
+                  label: "Compute Environments",
+                  value: "compute-environments"
+                },
+                { label: "Add Pipeline", value: "add-pipeline" }
               ]}
               value={selectedView}
               onChange={(value) => setSelectedView(value as string)}

@@ -1,13 +1,15 @@
 import { useEffect } from "react";
 import { getLaunchURL, getWorkflowURL, relativeTime } from "../../utils";
-import { useTowerContext } from "../../../../Context";
+import { useTowerContext, useWorkspaceContext } from "../../../../Context";
 import FilterForProject from "../FilterForProject";
 import { WorkflowIcon } from "../../../../icons";
 import ListItem from "../../../../components/ListItem";
+import Button from "../../../../components/Button";
 
 const Pipelines = () => {
   const { useLocalContext, pipelines, repoInfo, fetchPipelines, workspaceId } =
     useTowerContext();
+  const { setSelectedView } = useWorkspaceContext();
   const hasPipelines = !!pipelines?.length;
 
   useEffect(() => fetchPipelines(workspaceId), [workspaceId]);
@@ -57,6 +59,15 @@ const Pipelines = () => {
           )}
         </>
       )}
+      <Button
+        onClick={() => setSelectedView("add-pipeline")}
+        icon="codicon-add"
+        className="mt-2"
+        subtle2
+        small
+      >
+        Add Pipeline
+      </Button>
     </div>
   );
 };

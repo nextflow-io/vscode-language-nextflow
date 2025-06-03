@@ -28,3 +28,10 @@
 .input::placeholder {
   color: var(--vscode-input-placeholderForeground);
 }
+
+.label {
+  font-size: 11px;
+  color: var(--vscode-input-foreground);
+  opacity: 0.8;
+  margin-bottom: 2px;
+}

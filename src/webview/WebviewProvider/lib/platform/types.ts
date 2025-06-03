@@ -1,4 +1,5 @@
-export { Pipeline as HubPipeline } from "./hubTypes";
+export type { Pipeline as HubPipeline } from "./hubTypes";
+export type { FormData as AddPipelineFormData } from "./utils/addPipeline";
 
 export type RepoInfo = {
   url: string;

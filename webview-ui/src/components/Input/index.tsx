@@ -1,5 +1,6 @@
 import React from "react";
 import styles from "./styles.module.css";
+import clsx from "clsx";
 
 type Props = {
   value: string;
@@ -7,6 +8,8 @@ type Props = {
   placeholder?: string;
   type?: "text" | "password" | "email" | "number";
   disabled?: boolean;
+  label?: string;
+  className?: string;
 };
 
 const Input: React.FC<Props> = ({
@@ -14,10 +17,13 @@ const Input: React.FC<Props> = ({
   onChange,
   placeholder = "",
   type = "text",
-  disabled = false
+  disabled = false,
+  label = "",
+  className = ""
 }) => {
   return (
-    <div className={styles.inputContainer}>
+    <div className={clsx(styles.inputContainer, className)}>
+      {!!label && <label className={styles.label}>{label}</label>}
       <input
         type={type}
         value={value}

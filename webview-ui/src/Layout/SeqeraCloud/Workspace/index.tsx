@@ -4,6 +4,7 @@ import Pipelines from "./Pipelines";
 import Datasets from "./Datasets";
 import DataLinks from "./DataLinks";
 import ComputeEnvironments from "./ComputeEnvironments";
+import AddPipeline from "./AddPipeline";
 
 const Workspace = () => {
   const { error } = useTowerContext();
@@ -21,6 +22,7 @@ const Workspace = () => {
         {selectedView === "datasets" && <Datasets />}
         {selectedView === "data-links" && <DataLinks />}
         {selectedView === "compute-environments" && <ComputeEnvironments />}
+        {selectedView === "add-pipeline" && <AddPipeline />}
       </section>
     </>
   );

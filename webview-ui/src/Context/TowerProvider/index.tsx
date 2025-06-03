@@ -77,6 +77,8 @@ type TowerContextType = {
   dataLinks?: DataLink[];
   useLocalContext: boolean;
   setUseLocalContext: (n: boolean) => void;
+  addPipeline: (computeEnv: ComputeEnv, formData: FormData) => void;
+  fetchHubPipelines: () => void;
 };
 
 const TowerProvider: React.FC<Props> = ({
@@ -154,6 +156,14 @@ const TowerProvider: React.FC<Props> = ({
     vscode.postMessage({ command: "fetchComputeEnvs", workspaceId });
   }
 
+  function fetchHubPipelines() {
+    vscode.postMessage({ command: "fetchHubPipelines" });
+  }
+
+  function addPipeline(computeEnv: ComputeEnv, formData: FormData) {
+    vscode.postMessage({ command: "addPipeline", computeEnv, formData });
+  }
+
   return (
     <TowerContext.Provider
       value={{
@@ -186,7 +196,9 @@ const TowerProvider: React.FC<Props> = ({
         repoInfo,
         datasets,
         dataLinks,
-        hubPipelines
+        fetchHubPipelines,
+        hubPipelines,
+        addPipeline
       }}
     >
       {children}
