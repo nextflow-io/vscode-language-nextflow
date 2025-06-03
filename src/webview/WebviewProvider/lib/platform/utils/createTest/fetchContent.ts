@@ -22,7 +22,7 @@ async function fetchContent(
       body: JSON.stringify({
         message: fullPrompt,
         stream: true,
-        tags: ["multiqc"],
+        tags: ["nf-test"],
         title: "NF-Test Generation"
       })
     });
