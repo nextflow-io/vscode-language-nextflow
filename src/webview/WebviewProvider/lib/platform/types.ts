@@ -123,11 +123,6 @@ export type UserInfo = {
 
 export type UserInfoResponse = UserInfo & { message?: string };
 
-export type FormData = {
-  name: string;
-  description: string;
-};
-
 export type WorkflowStatus =
   | "SUBMITTED"
   | "RUNNING"

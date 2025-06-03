@@ -1,28 +1,35 @@
-import type { Pipeline, ComputeEnv, WorkspaceID } from "../types";
-import type { FormData } from "../types";
-import type { AuthenticationSession } from "vscode";
+import type { ComputeEnv, LaunchConfig } from "../types";
 import { SEQERA_API_URL } from "../../../../../constants";
 
+export type FormData = {
+  name: string;
+  description: string;
+  url: string;
+  launch_config: LaunchConfig;
+  workspaceId: string;
+};
+
+type Message = {
+  computeEnv: ComputeEnv;
+  formData: FormData;
+};
+
 const addPipeline = async (
-  session: AuthenticationSession | null,
-  pipeline: Pipeline,
-  workspaceID: WorkspaceID,
-  computeEnv: ComputeEnv | undefined,
-  formData: FormData
+  accessToken: string,
+  message: Message
 ): Promise<Response> => {
-  const accessToken = session?.accessToken;
-  const name = formData.name || pipeline.name;
+  const { formData, computeEnv } = message;
+  const name = formData.name;
   const description = formData.description;
 
-  const launchConfig = pipeline.launch_config || {};
-  let envConfig = {};
-  if (computeEnv)
-    envConfig = {
-      workDir: computeEnv.workDir,
-      computeEnvId: computeEnv.id
-    };
+  const launchConfig = formData.launch_config || {};
+  const workspaceId = formData.workspaceId || "";
+  const envConfig = {
+    workDir: computeEnv?.workDir || "",
+    computeEnvId: computeEnv?.id || ""
+  };
 
-  return await fetch(`${SEQERA_API_URL}/pipelines?workspaceId=${workspaceID}`, {
+  return await fetch(`${SEQERA_API_URL}/pipelines?workspaceId=${workspaceId}`, {
     credentials: "include",
     method: "POST",
     headers: new Headers({
@@ -35,8 +42,8 @@ const addPipeline = async (
       launch: {
         ...launchConfig,
         ...envConfig,
-        pipeline: pipeline.url,
-        workspaceId: workspaceID || ""
+        pipeline: formData.url || "",
+        workspaceId: workspaceId
       }
     })
   });
