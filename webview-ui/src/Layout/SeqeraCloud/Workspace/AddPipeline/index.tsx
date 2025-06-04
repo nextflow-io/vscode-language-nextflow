@@ -4,12 +4,17 @@ import Input from "../../../../components/Input";
 
 import type {
   AddPipelineFormData,
+  ComputeEnv,
   HubPipeline
 } from "../../../../Context/types";
+import ComputeEnvSelector from "./ComputeEnvSelector";
 
 const AddPipeline = () => {
-  const { fetchHubPipelines, hubPipelines, repoInfo } = useTowerContext();
+  const { fetchHubPipelines, hubPipelines, repoInfo, workspaceId } =
+    useTowerContext();
   const [defaults, setDefaults] = useState<HubPipeline | null>(null);
+  const [selectedComputeEnv, setSelectedComputeEnv] =
+    useState<ComputeEnv | null>(null);
 
   const [formData, setFormData] = useState<AddPipelineFormData>({
     name: "",
@@ -21,6 +26,14 @@ const AddPipeline = () => {
       id: 0
     }
   });
+
+  useEffect(() => {
+    if (!workspaceId) return;
+    setFormData((prev) => ({
+      ...prev,
+      workspaceId: `${workspaceId}`
+    }));
+  }, [workspaceId]);
 
   useEffect(() => {
     if (!repoInfo?.url) return;
@@ -51,6 +64,10 @@ const AddPipeline = () => {
 
   return (
     <div>
+      <ComputeEnvSelector
+        setSelectedComputeEnv={setSelectedComputeEnv}
+        selectedComputeEnv={selectedComputeEnv}
+      />
       <Input
         className="mb-2"
         label="Pipeline name"
@@ -69,13 +86,6 @@ const AddPipeline = () => {
         label="Pipeline URL"
         value={formData.url}
         onChange={(value) => setFormData((prev) => ({ ...prev, url: value }))}
-      />
-      <Input
-        label="Workspace ID"
-        value={formData.workspaceId}
-        onChange={(value) =>
-          setFormData((prev) => ({ ...prev, workspaceId: value }))
-        }
       />
       <Input
         textarea

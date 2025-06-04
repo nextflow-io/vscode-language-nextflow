@@ -74,6 +74,7 @@ class WebviewProvider implements vscode.WebviewViewProvider {
         case "fetchComputeEnvs":
           if (!workspaceId) return;
           this.fetchComputeEnvs(workspaceId);
+          break;
         case "createTest":
           this.createTest(message.filePath);
           break;
