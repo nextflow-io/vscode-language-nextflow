@@ -2,60 +2,85 @@ import { useEffect, useState } from "react";
 import { useTowerContext } from "../../../../Context";
 import Input from "../../../../components/Input";
 
-import type {
-  AddPipelineFormData,
-  ComputeEnv,
-  HubPipeline
-} from "../../../../Context/types";
+import type { ComputeEnv, AddPipelineRequest } from "../../../../Context/types";
 import ComputeEnvSelector from "./ComputeEnvSelector";
+
+const initialState: AddPipelineRequest = {
+  name: "",
+  description: "",
+  launch: {
+    workspaceId: "",
+    computeEnvId: "",
+    workDir: "",
+    pipeline: ""
+  }
+};
 
 const AddPipeline = () => {
   const { fetchHubPipelines, hubPipelines, repoInfo, workspaceId } =
     useTowerContext();
-  const [defaults, setDefaults] = useState<HubPipeline | null>(null);
   const [selectedComputeEnv, setSelectedComputeEnv] =
     useState<ComputeEnv | null>(null);
-
-  const [formData, setFormData] = useState<AddPipelineFormData>({
-    name: "",
-    description: "",
-    url: "",
-    workspaceId: "",
-    launch_config: {
-      name: "",
-      id: 0
-    }
-  });
+  const [isLoading, setIsLoading] = useState(false);
+  const [pipelineAdded, setPipelineAdded] = useState(false);
+  const [addedPipeline, setAddedPipeline] = useState<any>(null);
+  const [requestBody, setRequestBody] =
+    useState<AddPipelineRequest>(initialState);
 
   useEffect(() => {
+    const handleMessage = (event: MessageEvent) => {
+      const { data } = event;
+      if (data.pipelineAdded) {
+        setPipelineAdded(data.pipelineAdded);
+        setAddedPipeline(data.responseBody);
+      }
+    };
+    window.addEventListener("message", handleMessage);
+    return () => window.removeEventListener("message", handleMessage);
+  }, []);
+
+  useEffect(() => {
+    // Set workspace id
     if (!workspaceId) return;
-    setFormData((prev) => ({
+    setRequestBody((prev) => ({
       ...prev,
-      workspaceId: `${workspaceId}`
+      launch: {
+        ...prev.launch,
+        workspaceId: `${workspaceId}`
+      }
     }));
   }, [workspaceId]);
 
   useEffect(() => {
+    // Set repo name and url
+    if (!repoInfo?.url) return;
+    setRequestBody((prev) => ({
+      ...prev,
+      name: repoInfo.name,
+      launch: {
+        ...prev.launch,
+        pipeline: repoInfo.url
+      }
+    }));
+  }, [repoInfo]);
+
+  useEffect(() => {
+    // Set Pipeline info found on Seqera Hub
     if (!repoInfo?.url) return;
     if (!hubPipelines?.length) return;
     const found = hubPipelines?.find(
       (pipeline) => pipeline.url === repoInfo.url
     );
     if (!found) return;
-    setDefaults(found);
+    setRequestBody({
+      name: found.name,
+      description: found.description,
+      launch: {
+        ...found.launch_config,
+        pipeline: found.url
+      }
+    });
   }, [repoInfo, hubPipelines]);
-
-  useEffect(() => {
-    if (!defaults) return;
-    console.log("Setting defaults", defaults);
-    setFormData((prev) => ({
-      ...prev,
-      name: defaults.name,
-      description: defaults.description,
-      url: defaults.url,
-      launch_config: defaults.launch_config
-    }));
-  }, [defaults]);
 
   useEffect(() => {
     if (hubPipelines?.length) return;
@@ -69,33 +94,50 @@ const AddPipeline = () => {
         selectedComputeEnv={selectedComputeEnv}
       />
       <Input
+        label="Work directory"
+        value={requestBody.launch.workDir}
+        onChange={(value) =>
+          setRequestBody((prev) => ({
+            ...prev,
+            launch: { ...prev.launch, workDir: value }
+          }))
+        }
+      />
+      <Input
         className="mb-2"
         label="Pipeline name"
-        value={formData.name}
-        onChange={(value) => setFormData((prev) => ({ ...prev, name: value }))}
+        value={requestBody.name}
+        onChange={(value) =>
+          setRequestBody((prev) => ({ ...prev, name: value }))
+        }
       />
       <Input
         className="mb-2"
         label="Pipeline description"
-        value={formData.description}
+        value={requestBody.description}
         onChange={(value) =>
-          setFormData((prev) => ({ ...prev, description: value }))
+          setRequestBody((prev) => ({ ...prev, description: value }))
         }
       />
       <Input
         label="Pipeline URL"
-        value={formData.url}
-        onChange={(value) => setFormData((prev) => ({ ...prev, url: value }))}
+        value={requestBody.launch.pipeline}
+        onChange={(value) =>
+          setRequestBody((prev) => ({
+            ...prev,
+            launch: { ...prev.launch, pipeline: value }
+          }))
+        }
       />
       <Input
         textarea
         lines={30}
         label="Launch config"
-        value={JSON.stringify(formData.launch_config, null, 2)}
+        value={JSON.stringify(requestBody.launch, null, 2)}
         onChange={(value) =>
-          setFormData((prev) => ({
+          setRequestBody((prev) => ({
             ...prev,
-            launch_config: { ...prev.launch_config, name: value }
+            launch: { ...prev.launch, name: value }
           }))
         }
       />

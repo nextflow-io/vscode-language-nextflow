@@ -1,5 +1,5 @@
 export type { Pipeline as HubPipeline } from "./hubTypes";
-export type { FormData as AddPipelineFormData } from "./utils/addPipeline";
+export type { AddPipelineRequest } from "./hubTypes";
 
 export type RepoInfo = {
   url: string;
@@ -12,13 +12,6 @@ export type TowerConfig = {
   isEnterprise?: boolean;
   url?: string;
   apiURL?: string;
-};
-
-export type LaunchConfig = {
-  name?: string;
-  id?: number;
-  nf_files_in_root?: string[];
-  description?: string;
 };
 
 export type ComputeEnv = {

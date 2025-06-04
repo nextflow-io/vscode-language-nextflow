@@ -128,9 +128,11 @@ class WebviewProvider implements vscode.WebviewViewProvider {
   private async addPipeline(message: any) {
     const accessToken = await this.getAccessToken();
     if (!accessToken) return;
-    const pipelines = await addPipeline(accessToken, message);
+    const response = await addPipeline(accessToken, message);
+    const responseBody = await response.json();
     this._currentView?.webview.postMessage({
-      pipelines
+      pipelineAdded: true,
+      responseBody
     });
   }
 

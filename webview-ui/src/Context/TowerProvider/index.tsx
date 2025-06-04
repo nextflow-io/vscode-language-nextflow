@@ -13,7 +13,8 @@ import {
   Dataset,
   DataLink,
   WorkspaceID,
-  HubPipeline
+  HubPipeline,
+  AddPipelineRequest
 } from "../types";
 import { AuthState } from "..";
 import {
@@ -77,7 +78,7 @@ type TowerContextType = {
   dataLinks?: DataLink[];
   useLocalContext: boolean;
   setUseLocalContext: (n: boolean) => void;
-  addPipeline: (computeEnv: ComputeEnv, formData: FormData) => void;
+  addPipeline: (requestBody: AddPipelineRequest) => void;
   fetchHubPipelines: () => void;
 };
 
@@ -160,8 +161,8 @@ const TowerProvider: React.FC<Props> = ({
     vscode.postMessage({ command: "fetchHubPipelines" });
   }
 
-  function addPipeline(computeEnv: ComputeEnv, formData: FormData) {
-    vscode.postMessage({ command: "addPipeline", computeEnv, formData });
+  function addPipeline(requestBody: AddPipelineRequest) {
+    vscode.postMessage({ command: "addPipeline", requestBody });
   }
 
   return (

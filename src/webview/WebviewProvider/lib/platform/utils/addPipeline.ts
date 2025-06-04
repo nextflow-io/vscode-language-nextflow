@@ -1,33 +1,17 @@
-import type { ComputeEnv, LaunchConfig } from "../types";
 import { SEQERA_API_URL } from "../../../../../constants";
-
-export type FormData = {
-  name: string;
-  description: string;
-  url: string;
-  launch_config: LaunchConfig;
-  workspaceId: string;
-};
+import { AddPipelineRequest } from "../hubTypes";
 
 type Message = {
-  computeEnv: ComputeEnv;
-  formData: FormData;
+  requestBody: AddPipelineRequest;
 };
 
 const addPipeline = async (
   accessToken: string,
   message: Message
 ): Promise<Response> => {
-  const { formData, computeEnv } = message;
-  const name = formData.name;
-  const description = formData.description;
-
-  const launchConfig = formData.launch_config || {};
-  const workspaceId = formData.workspaceId || "";
-  const envConfig = {
-    workDir: computeEnv?.workDir || "",
-    computeEnvId: computeEnv?.id || ""
-  };
+  const { requestBody } = message;
+  const { workspaceId } = requestBody.launch;
+  console.log("🟢 addPipeline", requestBody);
 
   return await fetch(`${SEQERA_API_URL}/pipelines?workspaceId=${workspaceId}`, {
     credentials: "include",
@@ -36,16 +20,7 @@ const addPipeline = async (
       "Content-Type": "application/json",
       Authorization: `Bearer ${accessToken}`
     }),
-    body: JSON.stringify({
-      name,
-      description,
-      launch: {
-        ...launchConfig,
-        ...envConfig,
-        pipeline: formData.url || "",
-        workspaceId: workspaceId
-      }
-    })
+    body: JSON.stringify(requestBody)
   });
 };
 

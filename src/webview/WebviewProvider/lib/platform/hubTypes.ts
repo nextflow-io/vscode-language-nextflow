@@ -1,18 +1,14 @@
-export type Owner = {
+export type AddPipelineRequest = {
   name: string;
-  count: number;
-};
-
-export type Topic = {
-  name: string;
-  count: number;
+  description: string;
+  launch: LaunchConfig;
 };
 
 export type LaunchConfig = {
-  name?: string;
-  id?: number;
-  nf_files_in_root?: string[];
-  description?: string;
+  workspaceId: string;
+  computeEnvId: string;
+  workDir: string;
+  pipeline: string;
 };
 
 export type Pipeline = {
