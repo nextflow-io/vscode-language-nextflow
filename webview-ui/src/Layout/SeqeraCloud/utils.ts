@@ -34,7 +34,9 @@ export function getLaunchURL(pipeline: Pipeline) {
 }
 
 export function getEditURL(responseBody: AddPipelineResponse) {
-  return `${SEQERA_PLATFORM_URL}/orgs/${responseBody.orgName}/workspaces/${responseBody.workspaceName}/launchpad/${responseBody.pipelineId}/edit`;
+  const pipeline = responseBody.pipeline;
+  if (!pipeline) return "";
+  return `${SEQERA_PLATFORM_URL}/orgs/${pipeline.orgName}/workspaces/${pipeline.workspaceName}/launchpad/${pipeline.pipelineId}/edit`;
 }
 
 export function getDatasetURL(dataset: Dataset, workspace?: Workspace) {

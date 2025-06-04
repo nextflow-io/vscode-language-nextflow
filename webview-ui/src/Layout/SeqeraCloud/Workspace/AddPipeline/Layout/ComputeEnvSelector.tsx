@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import { useTowerContext } from "../../../../../Context";
 import { ComputeEnv } from "../../../../../Context/types";
 import Select from "../../../../../components/Select";
@@ -12,17 +11,7 @@ const ComputeEnvSelector = ({
   setSelectedComputeEnv,
   selectedComputeEnv
 }: Props) => {
-  const { computeEnvs, fetchComputeEnvs, workspaceId } = useTowerContext();
-
-  useEffect(() => {
-    fetchComputeEnvs(workspaceId);
-  }, [workspaceId]);
-
-  useEffect(() => {
-    if (!computeEnvs?.length) return;
-    if (selectedComputeEnv) return;
-    setSelectedComputeEnv(computeEnvs[0]);
-  }, [computeEnvs, selectedComputeEnv]);
+  const { computeEnvs } = useTowerContext();
 
   return (
     <div className="mb-2">

@@ -1,9 +1,14 @@
 import Input from "../../../../../components/Input";
 import ComputeEnvSelector from "./ComputeEnvSelector";
 import Button from "../../../../../components/Button";
-import { ComputeEnv, AddPipelineRequest } from "../../../../../Context/types";
+import {
+  ComputeEnv,
+  AddPipelineRequest,
+  AddPipelineResponse
+} from "../../../../../Context/types";
 import SuccessPage from "./SuccessPage";
 import Spinner from "../../../../../components/Spinner";
+import { useTowerContext } from "../../../../../Context";
 
 type Props = {
   requestBody: AddPipelineRequest;
@@ -14,6 +19,8 @@ type Props = {
   setSelectedComputeEnv: (computeEnv: ComputeEnv | null) => void;
   selectedComputeEnv: ComputeEnv | null;
   handleAddPipeline: () => void;
+  responseBody: AddPipelineResponse | null;
+  message?: string;
 };
 
 const Layout: React.FC<Props> = ({
@@ -24,10 +31,16 @@ const Layout: React.FC<Props> = ({
   selectedComputeEnv,
   requestBody,
   setRequestBody,
-  handleAddPipeline
+  handleAddPipeline,
+  responseBody,
+  message
 }) => {
+  const { computeEnvs } = useTowerContext();
   if (pipelineAdded && !failed) {
-    return <SuccessPage />;
+    return <SuccessPage responseBody={responseBody} />;
+  }
+  if (!computeEnvs?.length) {
+    return <div>No compute environments found on current workspace</div>;
   }
   return (
     <div>
@@ -82,7 +95,7 @@ const Layout: React.FC<Props> = ({
         }
       />
       <div className="mt-2">
-        {failed && <div className="mb-2">Failed to add pipeline</div>}
+        {failed && <div className="mb-2">Failed: {!!message && message}</div>}
         <div className="flex items-center gap-2">
           <Button onClick={handleAddPipeline} disabled={isLoading}>
             {isLoading ? "Adding pipeline..." : "Add pipeline"}

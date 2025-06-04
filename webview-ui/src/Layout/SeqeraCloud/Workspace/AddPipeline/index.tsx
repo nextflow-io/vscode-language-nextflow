@@ -26,7 +26,9 @@ const AddPipeline = () => {
     hubPipelines,
     repoInfo,
     workspaceId,
-    addPipeline
+    addPipeline,
+    fetchComputeEnvs,
+    computeEnvs
   } = useTowerContext();
   const [selectedComputeEnv, setSelectedComputeEnv] =
     useState<ComputeEnv | null>(null);
@@ -37,9 +39,30 @@ const AddPipeline = () => {
   );
   const [requestBody, setRequestBody] =
     useState<AddPipelineRequest>(initialState);
-  const failed = pipelineAdded && !responseBody;
+  let failed = pipelineAdded && !responseBody;
+  const message = responseBody?.message;
+  if (message) failed = true;
 
   useEffect(() => {
+    // Fetch hub pipelines
+    if (hubPipelines?.length) return;
+    fetchHubPipelines();
+  }, [hubPipelines]);
+
+  useEffect(() => {
+    // Fetch compute environments
+    fetchComputeEnvs(workspaceId);
+  }, [workspaceId]);
+
+  useEffect(() => {
+    // Set default selectedcompute env
+    if (!computeEnvs?.length) return;
+    if (selectedComputeEnv) return;
+    setSelectedComputeEnv(computeEnvs[0]);
+  }, [computeEnvs, selectedComputeEnv]);
+
+  useEffect(() => {
+    // Set compute env id and work dir on request body
     if (!selectedComputeEnv) return;
     setRequestBody((prev) => ({
       ...prev,
@@ -52,20 +75,7 @@ const AddPipeline = () => {
   }, [selectedComputeEnv]);
 
   useEffect(() => {
-    const handleMessage = (event: MessageEvent) => {
-      const { data } = event;
-      if (data.pipelineAdded) {
-        setIsLoading(false);
-        setPipelineAdded(data.pipelineAdded);
-        setResponseBody(data.responseBody);
-      }
-    };
-    window.addEventListener("message", handleMessage);
-    return () => window.removeEventListener("message", handleMessage);
-  }, []);
-
-  useEffect(() => {
-    // Set workspace id
+    // Set workspace id on request body
     if (!workspaceId) return;
     setRequestBody((prev) => ({
       ...prev,
@@ -77,7 +87,7 @@ const AddPipeline = () => {
   }, [workspaceId]);
 
   useEffect(() => {
-    // Set repo name and url
+    // Set repo name and url on request body
     if (!repoInfo?.url) return;
     setRequestBody((prev) => ({
       ...prev,
@@ -90,7 +100,7 @@ const AddPipeline = () => {
   }, [repoInfo]);
 
   useEffect(() => {
-    // Set Pipeline info found on Seqera Hub
+    // Set Pipeline info found on Seqera Hub on request body
     if (!repoInfo?.url) return;
     if (!hubPipelines?.length) return;
     const found = hubPipelines?.find(
@@ -109,11 +119,22 @@ const AddPipeline = () => {
   }, [repoInfo, hubPipelines, workspaceId]);
 
   useEffect(() => {
-    if (hubPipelines?.length) return;
-    fetchHubPipelines();
-  }, [hubPipelines]);
+    // Handle message from webview
+    const handleMessage = (event: MessageEvent) => {
+      const { data } = event;
+      if (data.pipelineAdded) {
+        setIsLoading(false);
+        setPipelineAdded(data.pipelineAdded);
+        setResponseBody(data.responseBody);
+      }
+    };
+    window.addEventListener("message", handleMessage);
+    return () => window.removeEventListener("message", handleMessage);
+  }, []);
 
   const handleAddPipeline = () => {
+    setPipelineAdded(false);
+    setResponseBody(null);
     setIsLoading(true);
     addPipeline(requestBody);
   };
@@ -128,6 +149,8 @@ const AddPipeline = () => {
       requestBody={requestBody}
       setRequestBody={setRequestBody}
       handleAddPipeline={handleAddPipeline}
+      responseBody={responseBody}
+      message={message}
     />
   );
 };
