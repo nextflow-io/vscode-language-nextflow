@@ -2,8 +2,13 @@ import { useEffect, useState } from "react";
 import { useTowerContext } from "../../../../Context";
 import Input from "../../../../components/Input";
 
-import type { ComputeEnv, AddPipelineRequest } from "../../../../Context/types";
+import type {
+  ComputeEnv,
+  AddPipelineRequest,
+  AddPipelineResponse
+} from "../../../../Context/types";
 import ComputeEnvSelector from "./ComputeEnvSelector";
+import Button from "../../../../components/Button";
 
 const initialState: AddPipelineRequest = {
   name: "",
@@ -12,27 +17,49 @@ const initialState: AddPipelineRequest = {
     workspaceId: "",
     computeEnvId: "",
     workDir: "",
-    pipeline: ""
+    pipeline: "",
+    revision: ""
   }
 };
 
 const AddPipeline = () => {
-  const { fetchHubPipelines, hubPipelines, repoInfo, workspaceId } =
-    useTowerContext();
+  const {
+    fetchHubPipelines,
+    hubPipelines,
+    repoInfo,
+    workspaceId,
+    addPipeline
+  } = useTowerContext();
   const [selectedComputeEnv, setSelectedComputeEnv] =
     useState<ComputeEnv | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const [pipelineAdded, setPipelineAdded] = useState(false);
-  const [addedPipeline, setAddedPipeline] = useState<any>(null);
+  const [responseBody, setResponseBody] = useState<AddPipelineResponse | null>(
+    null
+  );
   const [requestBody, setRequestBody] =
     useState<AddPipelineRequest>(initialState);
+  const failed = pipelineAdded && !responseBody;
+
+  useEffect(() => {
+    if (!selectedComputeEnv) return;
+    setRequestBody((prev) => ({
+      ...prev,
+      launch: {
+        ...prev.launch,
+        computeEnvId: selectedComputeEnv.id,
+        workDir: selectedComputeEnv.workDir
+      }
+    }));
+  }, [selectedComputeEnv]);
 
   useEffect(() => {
     const handleMessage = (event: MessageEvent) => {
       const { data } = event;
       if (data.pipelineAdded) {
+        setIsLoading(false);
         setPipelineAdded(data.pipelineAdded);
-        setAddedPipeline(data.responseBody);
+        setResponseBody(data.responseBody);
       }
     };
     window.addEventListener("message", handleMessage);
@@ -72,23 +99,32 @@ const AddPipeline = () => {
       (pipeline) => pipeline.url === repoInfo.url
     );
     if (!found) return;
-    setRequestBody({
+    setRequestBody((prev) => ({
       name: found.name,
       description: found.description,
       launch: {
-        ...found.launch_config,
+        ...prev.launch,
+        revision: found.revision,
         pipeline: found.url
       }
-    });
-  }, [repoInfo, hubPipelines]);
+    }));
+  }, [repoInfo, hubPipelines, workspaceId]);
 
   useEffect(() => {
     if (hubPipelines?.length) return;
     fetchHubPipelines();
   }, [hubPipelines]);
 
+  const handleAddPipeline = () => {
+    setIsLoading(true);
+    addPipeline(requestBody);
+  };
+
   return (
     <div>
+      {isLoading && <div>Loading...</div>}
+      {failed && <div>Failed to add pipeline</div>}
+      {pipelineAdded && !failed && <div>Pipeline added</div>}
       <ComputeEnvSelector
         setSelectedComputeEnv={setSelectedComputeEnv}
         selectedComputeEnv={selectedComputeEnv}
@@ -130,17 +166,16 @@ const AddPipeline = () => {
         }
       />
       <Input
-        textarea
-        lines={30}
-        label="Launch config"
-        value={JSON.stringify(requestBody.launch, null, 2)}
+        label="Revision"
+        value={requestBody.launch.revision}
         onChange={(value) =>
           setRequestBody((prev) => ({
             ...prev,
-            launch: { ...prev.launch, name: value }
+            launch: { ...prev.launch, revision: value }
           }))
         }
       />
+      <Button onClick={handleAddPipeline}>Add pipeline</Button>
     </div>
   );
 };

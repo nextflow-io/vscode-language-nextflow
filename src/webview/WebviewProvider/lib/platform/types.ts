@@ -1,5 +1,8 @@
-export type { Pipeline as HubPipeline } from "./hubTypes";
+import { LaunchConfig } from "./hubTypes";
+
+export type { HubPipeline } from "./hubTypes";
 export type { AddPipelineRequest } from "./hubTypes";
+export type { AddPipelineResponse } from "./hubTypes";
 
 export type RepoInfo = {
   url: string;

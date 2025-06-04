@@ -25,22 +25,24 @@ const ComputeEnvSelector = ({
   }, [computeEnvs, selectedComputeEnv]);
 
   return (
-    <Select
-      alt
-      label="Compute Environment"
-      options={computeEnvs?.map((computeEnv) => ({
-        label: computeEnv.name,
-        value: computeEnv.id
-      }))}
-      value={selectedComputeEnv?.id ?? ""}
-      onChange={(value) => {
-        const computeEnv = computeEnvs?.find(
-          (computeEnv) => computeEnv.id === value
-        );
-        if (!computeEnv) return;
-        setSelectedComputeEnv(computeEnv);
-      }}
-    />
+    <div className="mb-2">
+      <Select
+        alt
+        label="Compute Environment"
+        options={computeEnvs?.map((computeEnv) => ({
+          label: computeEnv.name,
+          value: computeEnv.id
+        }))}
+        value={selectedComputeEnv?.id ?? ""}
+        onChange={(value) => {
+          const computeEnv = computeEnvs?.find(
+            (computeEnv) => computeEnv.id === value
+          );
+          if (!computeEnv) return;
+          setSelectedComputeEnv(computeEnv);
+        }}
+      />
+    </div>
   );
 };
 

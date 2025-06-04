@@ -1,17 +1,4 @@
-export type AddPipelineRequest = {
-  name: string;
-  description: string;
-  launch: LaunchConfig;
-};
-
-export type LaunchConfig = {
-  workspaceId: string;
-  computeEnvId: string;
-  workDir: string;
-  pipeline: string;
-};
-
-export type Pipeline = {
+export type HubPipeline = {
   id: number;
   latest_release_at: string;
   description: string;
@@ -52,4 +39,42 @@ export type Pipeline = {
   owner: string;
   topics: string[];
   launch_config: LaunchConfig;
+};
+
+export type LaunchConfig = {
+  workspaceId: string;
+  computeEnvId: string;
+  workDir: string;
+  pipeline: string;
+  revision: string;
+};
+
+export type AddPipelineRequest = {
+  name: string;
+  description: string;
+  launch: LaunchConfig;
+};
+
+export type AddPipelineResponse = {
+  computeEnv: null;
+  deleted: boolean;
+  description: string;
+  icon: string;
+  labels: null;
+  lastUpdated: string;
+  name: string;
+  optimizationId: null;
+  optimizationStatus: null;
+  optimizationTargets: null;
+  orgId: number;
+  orgName: string;
+  pipelineId: number;
+  repository: string;
+  userFirstName: string | null;
+  userId: number;
+  userLastName: string | null;
+  userName: string;
+  visibility: string;
+  workspaceId: number;
+  workspaceName: string;
 };
