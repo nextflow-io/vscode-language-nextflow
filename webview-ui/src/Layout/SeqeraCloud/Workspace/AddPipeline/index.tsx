@@ -1,14 +1,12 @@
 import { useEffect, useState } from "react";
 import { useTowerContext } from "../../../../Context";
-import Input from "../../../../components/Input";
 
 import type {
   ComputeEnv,
   AddPipelineRequest,
   AddPipelineResponse
 } from "../../../../Context/types";
-import ComputeEnvSelector from "./ComputeEnvSelector";
-import Button from "../../../../components/Button";
+import Layout from "./Layout";
 
 const initialState: AddPipelineRequest = {
   name: "",
@@ -121,62 +119,16 @@ const AddPipeline = () => {
   };
 
   return (
-    <div>
-      {isLoading && <div>Loading...</div>}
-      {failed && <div>Failed to add pipeline</div>}
-      {pipelineAdded && !failed && <div>Pipeline added</div>}
-      <ComputeEnvSelector
-        setSelectedComputeEnv={setSelectedComputeEnv}
-        selectedComputeEnv={selectedComputeEnv}
-      />
-      <Input
-        label="Work directory"
-        value={requestBody.launch.workDir}
-        onChange={(value) =>
-          setRequestBody((prev) => ({
-            ...prev,
-            launch: { ...prev.launch, workDir: value }
-          }))
-        }
-      />
-      <Input
-        className="mb-2"
-        label="Pipeline name"
-        value={requestBody.name}
-        onChange={(value) =>
-          setRequestBody((prev) => ({ ...prev, name: value }))
-        }
-      />
-      <Input
-        className="mb-2"
-        label="Pipeline description"
-        value={requestBody.description}
-        onChange={(value) =>
-          setRequestBody((prev) => ({ ...prev, description: value }))
-        }
-      />
-      <Input
-        label="Pipeline URL"
-        value={requestBody.launch.pipeline}
-        onChange={(value) =>
-          setRequestBody((prev) => ({
-            ...prev,
-            launch: { ...prev.launch, pipeline: value }
-          }))
-        }
-      />
-      <Input
-        label="Revision"
-        value={requestBody.launch.revision}
-        onChange={(value) =>
-          setRequestBody((prev) => ({
-            ...prev,
-            launch: { ...prev.launch, revision: value }
-          }))
-        }
-      />
-      <Button onClick={handleAddPipeline}>Add pipeline</Button>
-    </div>
+    <Layout
+      isLoading={isLoading}
+      failed={failed}
+      pipelineAdded={pipelineAdded}
+      setSelectedComputeEnv={setSelectedComputeEnv}
+      selectedComputeEnv={selectedComputeEnv}
+      requestBody={requestBody}
+      setRequestBody={setRequestBody}
+      handleAddPipeline={handleAddPipeline}
+    />
   );
 };
 

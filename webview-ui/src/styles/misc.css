@@ -42,3 +42,6 @@ section.cozy:last-child {
 .small {
   font-size: 11px;
 }
+.gap-2 {
+  gap: 8px;
+}

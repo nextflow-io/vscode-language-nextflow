@@ -1,8 +1,8 @@
-import type { Pipeline } from "./hubTypes";
+import type { HubPipeline } from "./hubTypes";
 
 import { SEQERA_HUB_API_URL } from "../../../../constants";
 
-const fetchPipelines = async (): Promise<Pipeline[]> => {
+const fetchPipelines = async (): Promise<HubPipeline[]> => {
   const response = await fetch(`${SEQERA_HUB_API_URL}/pipelines`, {
     credentials: "include",
     method: "GET",
@@ -17,7 +17,7 @@ const fetchPipelines = async (): Promise<Pipeline[]> => {
     return [];
   }
 
-  return data as Pipeline[];
+  return data as HubPipeline[];
 };
 
 export default fetchPipelines;

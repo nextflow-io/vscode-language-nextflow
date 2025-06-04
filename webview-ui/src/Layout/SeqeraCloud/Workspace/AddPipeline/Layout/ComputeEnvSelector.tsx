@@ -1,7 +1,7 @@
 import { useEffect } from "react";
-import { useTowerContext } from "../../../../Context";
-import { ComputeEnv } from "../../../../Context/types";
-import Select from "../../../../components/Select";
+import { useTowerContext } from "../../../../../Context";
+import { ComputeEnv } from "../../../../../Context/types";
+import Select from "../../../../../components/Select";
 
 type Props = {
   setSelectedComputeEnv: (computeEnv: ComputeEnv) => void;

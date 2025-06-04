@@ -17,6 +17,7 @@ type Props = {
   className?: string;
   iconClassName?: string;
   description?: string;
+  disabled?: boolean;
 };
 
 const Button: React.FC<Props> = ({
@@ -33,7 +34,8 @@ const Button: React.FC<Props> = ({
   description,
   alt,
   subtle,
-  subtle2
+  subtle2,
+  disabled
 }) => {
   const className = clsx(styles.button, classNameProp, {
     [styles.small]: small,
@@ -70,7 +72,12 @@ const Button: React.FC<Props> = ({
     );
   }
   return (
-    <button className={className} onClick={onClick} title={description}>
+    <button
+      className={className}
+      onClick={onClick}
+      title={description}
+      disabled={disabled}
+    >
       {content}
     </button>
   );
