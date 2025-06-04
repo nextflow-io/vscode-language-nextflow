@@ -10,6 +10,8 @@ type Props = {
   disabled?: boolean;
   label?: string;
   className?: string;
+  textarea?: boolean;
+  lines?: number;
 };
 
 const Input: React.FC<Props> = ({
@@ -19,19 +21,32 @@ const Input: React.FC<Props> = ({
   type = "text",
   disabled = false,
   label = "",
-  className = ""
+  className = "",
+  textarea = false,
+  lines = 10
 }) => {
   return (
     <div className={clsx(styles.inputContainer, className)}>
       {!!label && <label className={styles.label}>{label}</label>}
-      <input
-        type={type}
-        value={value}
-        onChange={(e) => onChange(e.target.value)}
-        placeholder={placeholder}
-        disabled={disabled}
-        className={styles.input}
-      />
+      {textarea ? (
+        <textarea
+          value={value}
+          onChange={(e) => onChange(e.target.value)}
+          placeholder={placeholder}
+          disabled={disabled}
+          className={styles.input}
+          rows={lines}
+        />
+      ) : (
+        <input
+          type={type}
+          value={value}
+          onChange={(e) => onChange(e.target.value)}
+          placeholder={placeholder}
+          disabled={disabled}
+          className={styles.input}
+        />
+      )}
     </div>
   );
 };

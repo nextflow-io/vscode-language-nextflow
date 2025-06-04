@@ -9,8 +9,7 @@ import type {
 
 const AddPipeline = () => {
   const { fetchHubPipelines, hubPipelines, repoInfo } = useTowerContext();
-  const [selectedHubPipeline, setSelectedHubPipeline] =
-    useState<HubPipeline | null>(null);
+  const [defaults, setDefaults] = useState<HubPipeline | null>(null);
 
   const [formData, setFormData] = useState<AddPipelineFormData>({
     name: "",
@@ -26,26 +25,24 @@ const AddPipeline = () => {
   useEffect(() => {
     if (!repoInfo?.url) return;
     if (!hubPipelines?.length) return;
-    const foundHubPipeline = hubPipelines?.find((pipeline) => {
-      console.log("pipeline", pipeline.url, repoInfo.url);
-      return pipeline.url === repoInfo.url;
-    });
-    console.log("foundHubPipeline", foundHubPipeline);
-    if (foundHubPipeline) {
-      setSelectedHubPipeline(foundHubPipeline);
-    }
+    const found = hubPipelines?.find(
+      (pipeline) => pipeline.url === repoInfo.url
+    );
+    if (!found) return;
+    setDefaults(found);
   }, [repoInfo, hubPipelines]);
 
   useEffect(() => {
-    if (!selectedHubPipeline) return;
+    if (!defaults) return;
+    console.log("Setting defaults", defaults);
     setFormData((prev) => ({
       ...prev,
-      name: selectedHubPipeline.name,
-      description: selectedHubPipeline.description,
-      url: selectedHubPipeline.url,
-      launch_config: selectedHubPipeline.launch_config
+      name: defaults.name,
+      description: defaults.description,
+      url: defaults.url,
+      launch_config: defaults.launch_config
     }));
-  }, [selectedHubPipeline]);
+  }, [defaults]);
 
   useEffect(() => {
     if (hubPipelines?.length) return;
@@ -78,6 +75,18 @@ const AddPipeline = () => {
         value={formData.workspaceId}
         onChange={(value) =>
           setFormData((prev) => ({ ...prev, workspaceId: value }))
+        }
+      />
+      <Input
+        textarea
+        lines={30}
+        label="Launch config"
+        value={JSON.stringify(formData.launch_config, null, 2)}
+        onChange={(value) =>
+          setFormData((prev) => ({
+            ...prev,
+            launch_config: { ...prev.launch_config, name: value }
+          }))
         }
       />
     </div>

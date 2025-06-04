@@ -13,20 +13,24 @@
   color: var(--vscode-input-foreground);
   font-family: var(--vscode-font-family);
   font-size: var(--vscode-font-size);
+  &:focus {
+    outline: 1px solid var(--vscode-focusBorder);
+    outline-offset: -1px;
+  }
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+
+  &::placeholder {
+    color: var(--vscode-input-placeholderForeground);
+  }
 }
 
-.input:focus {
-  outline: 1px solid var(--vscode-focusBorder);
-  outline-offset: -1px;
-}
-
-.input:disabled {
-  opacity: 0.5;
-  cursor: not-allowed;
-}
-
-.input::placeholder {
-  color: var(--vscode-input-placeholderForeground);
+textarea.input {
+  height: auto;
+  padding: 8px;
 }
 
 .label {
