@@ -8,6 +8,7 @@ type Props = {
   className?: string;
   alt?: boolean;
   flex?: boolean;
+  icon?: string;
 };
 
 const ListItem: React.FC<Props> = ({
@@ -16,28 +17,40 @@ const ListItem: React.FC<Props> = ({
   className,
   href,
   alt,
-  flex
+  flex,
+  icon: iconName
 }) => {
   const cName = clsx(styles.listItem, className, {
     [styles.alt]: alt,
     [styles.flex]: flex
   });
 
+  let content = children;
+
+  if (iconName) {
+    content = (
+      <span className="listItem-name">
+        <i className={`codicon codicon-${iconName} mr-2`} />
+        <label>{children}</label>
+      </span>
+    );
+  }
+
   if (onClick) {
     return (
       <button className={cName} onClick={onClick}>
-        {children}
+        {content}
       </button>
     );
   }
   if (href) {
     return (
       <a href={href} className={cName}>
-        {children}
+        {content}
       </a>
     );
   }
-  return <div className={cName}>{children}</div>;
+  return <div className={cName}>{content}</div>;
 };
 
 export default ListItem;

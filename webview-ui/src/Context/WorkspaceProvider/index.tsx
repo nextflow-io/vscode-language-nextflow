@@ -59,7 +59,7 @@ const WorkspaceProvider = ({ children, vscode, viewID, isCursor }: Props) => {
   const [selectedItems, setSelectedItems] = useState<string[]>(
     state?.selectedItems || []
   );
-  const [selectedView, setSelectedView] = useState<string>("runs");
+  const [selectedView, setSelectedView] = useState<string>("pipelines");
 
   useEffect(() => {
     vscode.setState({ selectedItems });
@@ -95,11 +95,10 @@ const WorkspaceProvider = ({ children, vscode, viewID, isCursor }: Props) => {
   }
 
   function findChildren(node: TreeNode): TreeNode[] {
-    if (!node.children)
-      return [];
-    return node.children.flatMap((call) => (
+    if (!node.children) return [];
+    return node.children.flatMap((call) =>
       nodes.filter((n) => n.path === call.path && n.name === call.name)
-    ));
+    );
   }
 
   function openFile(filePath: string, line: number) {
