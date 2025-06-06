@@ -132,3 +132,24 @@ Your response MUST start precisely from the last character of the following test
 ${testFileContents}
 `;
 };
+
+export const responseSchema = {
+  title: "NFTestCodeGeneration",
+  description:
+    "Schema for nf-test code generation response. The AI should fill the 'generation.code' property with pure nf-test code.",
+  type: "object",
+  properties: {
+    generation: {
+      type: "object",
+      properties: {
+        code: {
+          type: "string",
+          description:
+            "The generated nf-test code. This must be pure code, without any surrounding markdown, backticks, or explanations."
+        }
+      },
+      required: ["code"]
+    }
+  },
+  required: ["generation"]
+};
