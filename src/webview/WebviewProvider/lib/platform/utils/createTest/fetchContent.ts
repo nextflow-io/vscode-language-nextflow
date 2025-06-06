@@ -1,5 +1,5 @@
 import { SEQERA_INTERN_API_URL } from "../../../../../../constants";
-import { systemPrompt } from "./prompt";
+import { responseSchema, systemPrompt } from "./prompt";
 
 async function fetchContent(
   prompt: string,
@@ -22,9 +22,12 @@ async function fetchContent(
         message: fullPrompt,
         stream: true,
         tags,
-        title: tags[0]
+        title: tags[0],
+        response_schema: responseSchema
       })
     });
+
+    console.log("🟢 response:", response);
 
     // If it's not a stream response, try to get the error message
     if (
@@ -58,12 +61,35 @@ async function fetchContent(
         if (line.startsWith("data: ")) {
           try {
             const data = JSON.parse(line.slice(6));
-            if (data.content) {
-              fullResponse += data.content;
-              // Call the onChunk callback if provided
-              if (onChunk) {
-                onChunk(data.content);
+
+            // Handle different message types
+            if (data.type === "on_chat_model_stream" && data.content) {
+              // Handle tool use or other content in the stream
+              for (const content of data.content) {
+                if (content.type === "tool_use" && content.partial_json) {
+                  try {
+                    const jsonData = JSON.parse(content.partial_json);
+                    if (jsonData.generation?.code) {
+                      fullResponse += jsonData.generation.code;
+                      if (onChunk) {
+                        onChunk(jsonData.generation.code);
+                      }
+                    }
+                  } catch (e) {
+                    // Ignore parsing errors for partial JSON
+                  }
+                }
               }
+            } else if (data.type === "on_chain_stream") {
+              // Handle chain stream messages if needed
+            } else if (data.type === "on_chat_model_end") {
+              // Log model metadata and response details
+              console.log("🟢 Chat model end:", {
+                model: data.metadata?.ls_model_name,
+                temperature: data.metadata?.ls_temperature,
+                stopReason: data.response_metadata?.stop_reason,
+                runId: data.run_id
+              });
             }
           } catch (e) {
             console.log("🟢 Error parsing SSE data:", e);
