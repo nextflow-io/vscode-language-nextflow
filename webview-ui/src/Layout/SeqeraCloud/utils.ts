@@ -3,7 +3,8 @@ import {
   ComputeEnv,
   Pipeline,
   Dataset,
-  DataLink
+  DataLink,
+  AddPipelineResponse
 } from "../../Context/types";
 import { SEQERA_PLATFORM_URL } from "../../../../src/constants";
 
@@ -30,6 +31,12 @@ export function getWorkflowURL(pipeline: Pipeline) {
 
 export function getLaunchURL(pipeline: Pipeline) {
   return `${SEQERA_PLATFORM_URL}/orgs/${pipeline.orgName}/workspaces/${pipeline.workspaceName}/launchpad/${pipeline.pipelineId}/form/new-form`;
+}
+
+export function getEditURL(responseBody: AddPipelineResponse) {
+  const pipeline = responseBody.pipeline;
+  if (!pipeline) return "";
+  return `${SEQERA_PLATFORM_URL}/orgs/${pipeline.orgName}/workspaces/${pipeline.workspaceName}/launchpad/${pipeline.pipelineId}/edit`;
 }
 
 export function getDatasetURL(dataset: Dataset, workspace?: Workspace) {

@@ -9,24 +9,20 @@ const ComputeEnvironments = () => {
 
   useEffect(() => fetchComputeEnvs(workspaceId), [workspaceId]);
 
-  return (
-    <section>
-      {computeEnvs?.length ? (
-        <>
-          {computeEnvs?.map((computeEnv) => (
-            <ListItem
-              href={getComputeEnvURL(workspaces, computeEnv)}
-              key={computeEnv.id}
-            >
-              <span className="listItem-name">{computeEnv.name}</span>
-            </ListItem>
-          ))}
-        </>
-      ) : (
-        <div>No compute environments found</div>
-      )}
-    </section>
-  );
+  if (!computeEnvs?.length)
+    return <div>No compute environments found on current workspace</div>;
+
+  return <>
+    {computeEnvs?.map((computeEnv) => (
+      <ListItem
+        icon="cloud"
+        href={getComputeEnvURL(workspaces, computeEnv)}
+        key={computeEnv.id}
+      >
+        <span className="listItem-name">{computeEnv.name}</span>
+      </ListItem>
+    ))}
+  </>;
 };
 
 export default ComputeEnvironments;

@@ -12,11 +12,13 @@ import {
   fetchRuns,
   getRepoInfo,
   queryWorkspace,
-  getContainer
+  getContainer,
+  addPipeline
 } from "./lib";
 import { AuthProvider, getAccessToken } from "../../auth";
 import { jwtExpired } from "../../auth/AuthProvider/utils/jwt";
 import { sleep } from "./lib/utils";
+import fetchHubPipelines from "./lib/platform/fetchHubPipelines";
 
 class WebviewProvider implements vscode.WebviewViewProvider {
   _currentView?: vscode.WebviewView;
@@ -71,11 +73,18 @@ class WebviewProvider implements vscode.WebviewViewProvider {
         case "fetchComputeEnvs":
           if (!workspaceId) return;
           this.fetchComputeEnvs(workspaceId);
+          break;
         case "createTest":
           this.createTest(message.filePath);
           break;
         case "getContainer":
           this.getContainer(message.filePath);
+          break;
+        case "fetchHubPipelines":
+          this.fetchHubPipelines();
+          break;
+        case "addPipeline":
+          this.addPipeline(message);
           break;
       }
     });
@@ -112,6 +121,24 @@ class WebviewProvider implements vscode.WebviewViewProvider {
     const repoInfo = await getRepoInfo(this._context);
     this._currentView?.webview.postMessage({
       repoInfo
+    });
+  }
+
+  private async addPipeline(message: any) {
+    const accessToken = await this.getAccessToken();
+    if (!accessToken) return;
+    const response = await addPipeline(accessToken, message);
+    const responseBody = await response.json();
+    this._currentView?.webview.postMessage({
+      pipelineAdded: true,
+      responseBody
+    });
+  }
+
+  private async fetchHubPipelines() {
+    const hubPipelines = await fetchHubPipelines();
+    this._currentView?.webview.postMessage({
+      hubPipelines
     });
   }
 

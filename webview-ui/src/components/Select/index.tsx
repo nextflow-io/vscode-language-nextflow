@@ -17,6 +17,7 @@ type Props = {
   subtle2?: boolean;
   icon?: string;
   large?: boolean;
+  label?: string;
 };
 
 const Select: React.FC<Props> = ({
@@ -27,7 +28,8 @@ const Select: React.FC<Props> = ({
   subtle,
   subtle2,
   icon,
-  large
+  large,
+  label
 }) => {
   const [isOpen, setIsOpen] = useState(false);
   const selectRef = useRef<HTMLDivElement>(null);
@@ -65,7 +67,8 @@ const Select: React.FC<Props> = ({
     );
   }
 
-  return (
+  return <>
+    {label && <div className={styles.outerLabel}>{label}</div>}
     <div className={styles.select} ref={selectRef}>
       <div
         className={buttonClassName}
@@ -74,7 +77,7 @@ const Select: React.FC<Props> = ({
       >
         <span className={styles.label}>
           {iconElement}
-          {selectedOption?.label || "Select an option"}
+          {selectedOption?.label || label || "Select an option"}
         </span>
       </div>
       {isOpen && (
@@ -94,7 +97,7 @@ const Select: React.FC<Props> = ({
         </div>
       )}
     </div>
-  );
+  </>;
 };
 
 export default Select;
