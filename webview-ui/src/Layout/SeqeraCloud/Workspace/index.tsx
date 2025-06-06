@@ -1,10 +1,10 @@
 import { useTowerContext, useWorkspaceContext } from "../../../Context";
 import RunHistory from "./RunHistory";
 import Pipelines from "./Pipelines";
+import AddPipeline from "./AddPipeline";
 import Datasets from "./Datasets";
 import DataLinks from "./DataLinks";
 import ComputeEnvironments from "./ComputeEnvironments";
-import AddPipeline from "./AddPipeline";
 
 const Workspace = () => {
   const { error } = useTowerContext();
@@ -17,9 +17,9 @@ const Workspace = () => {
         </section>
       )}
       <section>
+        {selectedView === "runs" && <RunHistory />}
         {selectedView === "pipelines" && <Pipelines />}
         {selectedView === "add-pipeline" && <AddPipeline />}
-        {selectedView === "runs" && <RunHistory />}
         {selectedView === "datasets" && <Datasets />}
         {selectedView === "data-links" && <DataLinks />}
         {selectedView === "compute-environments" && <ComputeEnvironments />}

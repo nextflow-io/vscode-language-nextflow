@@ -54,15 +54,12 @@ const Toolbar = () => {
           <div className="px-2">
             <Select
               options={[
+                { label: "Run History", value: "runs" },
                 { label: "Pipelines", value: "pipelines" },
                 { label: "Add Pipeline", value: "add-pipeline" },
-                { label: "Run History", value: "runs" },
                 { label: "Datasets", value: "datasets" },
                 { label: "Data Buckets", value: "data-links" },
-                {
-                  label: "Compute Environments",
-                  value: "compute-environments"
-                }
+                { label: "Compute Environments", value: "compute-environments" }
               ]}
               value={selectedView}
               onChange={(value) => setSelectedView(value as string)}

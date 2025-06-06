@@ -67,39 +67,37 @@ const Select: React.FC<Props> = ({
     );
   }
 
-  return (
-    <>
-      {label && <div className={styles.outerLabel}>{label}</div>}
-      <div className={styles.select} ref={selectRef}>
-        <div
-          className={buttonClassName}
-          onClick={() => setIsOpen(!isOpen)}
-          aria-expanded={isOpen}
-        >
-          <span className={styles.label}>
-            {iconElement}
-            {selectedOption?.label || label || "Select an option"}
-          </span>
-        </div>
-        {isOpen && (
-          <div className={styles.dropdown}>
-            {options.map((option) => (
-              <div
-                key={option.value}
-                className={`${styles.option} ${option.value === value ? styles.selected : ""}`}
-                onClick={() => {
-                  onChange(option.value);
-                  setIsOpen(false);
-                }}
-              >
-                {option.label}
-              </div>
-            ))}
-          </div>
-        )}
+  return <>
+    {label && <div className={styles.outerLabel}>{label}</div>}
+    <div className={styles.select} ref={selectRef}>
+      <div
+        className={buttonClassName}
+        onClick={() => setIsOpen(!isOpen)}
+        aria-expanded={isOpen}
+      >
+        <span className={styles.label}>
+          {iconElement}
+          {selectedOption?.label || label || "Select an option"}
+        </span>
       </div>
-    </>
-  );
+      {isOpen && (
+        <div className={styles.dropdown}>
+          {options.map((option) => (
+            <div
+              key={option.value}
+              className={`${styles.option} ${option.value === value ? styles.selected : ""}`}
+              onClick={() => {
+                onChange(option.value);
+                setIsOpen(false);
+              }}
+            >
+              {option.label}
+            </div>
+          ))}
+        </div>
+      )}
+    </div>
+  </>;
 };
 
 export default Select;

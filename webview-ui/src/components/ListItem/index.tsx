@@ -25,16 +25,14 @@ const ListItem: React.FC<Props> = ({
     [styles.flex]: flex
   });
 
-  let content = children;
-
-  if (iconName) {
-    content = (
+  const content = iconName
+    ? (
       <span className="listItem-name">
         <i className={`codicon codicon-${iconName} mr-2`} />
         <label>{children}</label>
       </span>
-    );
-  }
+    )
+    : children;
 
   if (onClick) {
     return (

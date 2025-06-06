@@ -12,19 +12,17 @@ const ComputeEnvironments = () => {
   if (!computeEnvs?.length)
     return <div>No compute environments found on current workspace</div>;
 
-  return (
-    <>
-      {computeEnvs?.map((computeEnv) => (
-        <ListItem
-          icon="cloud"
-          href={getComputeEnvURL(workspaces, computeEnv)}
-          key={computeEnv.id}
-        >
-          <span className="listItem-name">{computeEnv.name}</span>
-        </ListItem>
-      ))}
-    </>
-  );
+  return <>
+    {computeEnvs?.map((computeEnv) => (
+      <ListItem
+        icon="cloud"
+        href={getComputeEnvURL(workspaces, computeEnv)}
+        key={computeEnv.id}
+      >
+        <span className="listItem-name">{computeEnv.name}</span>
+      </ListItem>
+    ))}
+  </>;
 };
 
 export default ComputeEnvironments;
