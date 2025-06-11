@@ -11,24 +11,22 @@ const Datasets = () => {
 
   useEffect(() => fetchDatasets(workspaceId), [workspaceId]);
 
+  if (!hasDatasets)
+    return <div className="px-2 small">None found for current workspace</div>;
+
   return (
-    <div>
-      {hasDatasets ? (
-        <>
-          {datasets?.map((dataset) => (
-            <ListItem
-              href={getDatasetURL(dataset, selectedWorkspace)}
-              key={dataset.id}
-              alt
-            >
-              <span className="listItem-name">{dataset.name}</span>
-            </ListItem>
-          ))}
-        </>
-      ) : (
-        <div className="px-2 small">None found for current workspace</div>
-      )}
-    </div>
+    <>
+      {datasets?.map((dataset) => (
+        <ListItem
+          icon="table"
+          href={getDatasetURL(dataset, selectedWorkspace)}
+          key={dataset.id}
+          alt
+        >
+          <span className="listItem-name">{dataset.name}</span>
+        </ListItem>
+      ))}
+    </>
   );
 };
 

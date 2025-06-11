@@ -1,3 +1,9 @@
+import { LaunchConfig } from "./hubTypes";
+
+export type { HubPipeline } from "./hubTypes";
+export type { AddPipelineRequest } from "./hubTypes";
+export type { AddPipelineResponse } from "./hubTypes";
+
 export type RepoInfo = {
   url: string;
   name: string;
@@ -9,13 +15,6 @@ export type TowerConfig = {
   isEnterprise?: boolean;
   url?: string;
   apiURL?: string;
-};
-
-export type LaunchConfig = {
-  name?: string;
-  id?: number;
-  nf_files_in_root?: string[];
-  description?: string;
 };
 
 export type ComputeEnv = {
@@ -122,11 +121,6 @@ export type UserInfo = {
 };
 
 export type UserInfoResponse = UserInfo & { message?: string };
-
-export type FormData = {
-  name: string;
-  description: string;
-};
 
 export type WorkflowStatus =
   | "SUBMITTED"

@@ -34,7 +34,7 @@
   }
   &.alt {
     background-color: var(--vscode-editor-background);
-    border: 1px solid var(--vscode-button-background);
+    border: 1px solid var(--vscode-dropdown-border);
     color: var(--vscode-editor-foreground);
     font-weight: 400;
     &:hover {
@@ -107,4 +107,11 @@
 .selected {
   background-color: var(--vscode-list-activeSelectionBackground);
   color: var(--vscode-list-activeSelectionForeground);
+}
+
+.outerLabel {
+  font-size: 11px;
+  color: var(--vscode-input-foreground);
+  opacity: 0.8;
+  margin-bottom: 2px;
 }

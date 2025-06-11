@@ -25,6 +25,7 @@ const DataLinks = () => {
         <>
           {displayedDataLinks?.map((dataLink) => (
             <ListItem
+              icon="database"
               href={getDataLinkURL(dataLink, workspace)}
               key={dataLink.id}
               alt

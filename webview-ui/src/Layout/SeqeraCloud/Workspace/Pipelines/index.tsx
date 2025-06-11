@@ -14,7 +14,7 @@ const Pipelines = () => {
 
   return (
     <div>
-      <FilterForProject />
+      <FilterForProject showAddButton />
       {hasPipelines ? (
         <>
           {pipelines.map((pipeline) => (
