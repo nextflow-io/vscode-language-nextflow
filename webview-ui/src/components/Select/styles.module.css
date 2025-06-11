@@ -34,7 +34,7 @@
   }
   &.alt {
     background-color: var(--vscode-editor-background);
-    border: 1px solid var(--vscode-button-background);
+    border: 1px solid var(--vscode-dropdown-border);
     color: var(--vscode-editor-foreground);
     font-weight: 400;
     &:hover {
