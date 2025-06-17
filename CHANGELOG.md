@@ -4,6 +4,12 @@ All notable changes to the Nextflow VS Code extension will be documented here.
 
 See [Keep a Changelog](http://keepachangelog.com/) for recommendations on how to structure this file.
 
+## [1.5.0] - 2025-06-17
+
+- Launch pipeline in Seqera Cloud (#135)
+- Add pipeline to Launchpad (#139)
+- Bump default language version to 25.04
+
 ## [1.4.1] - 2025-05-14
 
 - Check Java version on language server startup (#128)
