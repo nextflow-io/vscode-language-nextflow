@@ -3,7 +3,8 @@
   width: 100%;
   padding: 6px;
   border-radius: 4px;
-  border: 1px solid var(--vscode-button-background);
+  background-color: var(--vscode-editor-background);
+  border: 1px solid var(--vscode-dropdown-border);
   color: var(--vscode-editor-foreground);
   margin-bottom: 6px;
   cursor: pointer;

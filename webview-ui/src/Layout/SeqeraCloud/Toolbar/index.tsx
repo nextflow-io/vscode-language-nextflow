@@ -8,9 +8,8 @@ import { PipelineIcon, SeqeraIcon, AiIcon } from "../../../icons";
 import styles from "./styles.module.css";
 
 const Toolbar = () => {
-  const { userInfo, repoInfo, isAuthenticated } = useTowerContext();
+  const { repoInfo, isAuthenticated } = useTowerContext();
   const { selectedView, setSelectedView } = useWorkspaceContext();
-  const username = userInfo?.user?.userName || "unknown";
   const url = repoInfo?.url;
   const isGithub = url?.includes("github.com");
 
@@ -27,6 +26,14 @@ const Toolbar = () => {
             {`${repoInfo.owner}/${repoInfo.name}`}
           </Button>
         )}
+        {isAuthenticated && (
+          <Button
+            onClick={() => setSelectedView("add-pipeline")}
+            description="Add to workspace"
+            icon="codicon-add"
+            subtle2
+          />
+        )}
         <Button href={`${SEQERA_PLATFORM_URL}`} subtle2 description="Launchpad">
           <SeqeraIcon style={{ height: 13, width: 13 }} />
           {!repoInfo && <span className="ml-2">Launchpad</span>}
@@ -34,14 +41,6 @@ const Toolbar = () => {
         <Button href="https://seqera.io/ask-ai" subtle2 description="Seqera AI">
           <AiIcon style={{ height: 13, width: 13 }} />
         </Button>
-        {isAuthenticated && (
-          <Button
-            href={`${SEQERA_PLATFORM_URL}/profile`}
-            description={username}
-            icon="codicon-account"
-            subtle2
-          />
-        )}
         <Button
           href="https://docs.seqera.io"
           icon="codicon-question"
@@ -55,11 +54,15 @@ const Toolbar = () => {
           <div className="px-2">
             <Select
               options={[
-                { label: "Run History", value: "runs" },
                 { label: "Pipelines", value: "pipelines" },
+                { label: "Add Pipeline", value: "add-pipeline" },
+                { label: "Run History", value: "runs" },
                 { label: "Datasets", value: "datasets" },
                 { label: "Data Buckets", value: "data-links" },
-                { label: "Compute Environments", value: "compute-environments" }
+                {
+                  label: "Compute Environments",
+                  value: "compute-environments"
+                }
               ]}
               value={selectedView}
               onChange={(value) => setSelectedView(value as string)}

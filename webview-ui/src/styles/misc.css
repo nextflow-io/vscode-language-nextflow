@@ -33,6 +33,9 @@ section.cozy:last-child {
 .justify-center {
   justify-content: center;
 }
+.justify-between {
+  justify-content: space-between;
+}
 .flex-auto {
   flex: auto;
 }
@@ -41,4 +44,7 @@ section.cozy:last-child {
 }
 .small {
   font-size: 11px;
+}
+.gap-2 {
+  gap: 8px;
 }

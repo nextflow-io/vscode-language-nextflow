@@ -12,7 +12,9 @@ import {
   Workflow,
   Dataset,
   DataLink,
-  WorkspaceID
+  WorkspaceID,
+  HubPipeline,
+  AddPipelineRequest
 } from "../types";
 import { AuthState } from "..";
 import {
@@ -42,6 +44,7 @@ type PlatformData = {
   pipelines?: PipelinesResponse;
   datasets?: Dataset[];
   dataLinks?: DataLink[];
+  hubPipelines?: HubPipeline[];
 };
 
 type TowerContextType = {
@@ -70,10 +73,13 @@ type TowerContextType = {
   tokenExpiry?: number;
   repoInfo?: RepoInfo;
   pipelines?: Pipeline[];
+  hubPipelines?: HubPipeline[];
   datasets?: Dataset[];
   dataLinks?: DataLink[];
   useLocalContext: boolean;
   setUseLocalContext: (n: boolean) => void;
+  addPipeline: (requestBody: AddPipelineRequest) => void;
+  fetchHubPipelines: () => void;
 };
 
 const TowerProvider: React.FC<Props> = ({
@@ -90,7 +96,8 @@ const TowerProvider: React.FC<Props> = ({
     pipelines,
     datasets,
     dataLinks,
-    repoInfo
+    repoInfo,
+    hubPipelines
   } = platformData;
 
   const organizations: Organization[] = useMemo(
@@ -150,6 +157,14 @@ const TowerProvider: React.FC<Props> = ({
     vscode.postMessage({ command: "fetchComputeEnvs", workspaceId });
   }
 
+  function fetchHubPipelines() {
+    vscode.postMessage({ command: "fetchHubPipelines" });
+  }
+
+  function addPipeline(requestBody: AddPipelineRequest) {
+    vscode.postMessage({ command: "addPipeline", requestBody });
+  }
+
   return (
     <TowerContext.Provider
       value={{
@@ -181,7 +196,10 @@ const TowerProvider: React.FC<Props> = ({
         tokenExpiry: auth.tokenExpiry,
         repoInfo,
         datasets,
-        dataLinks
+        dataLinks,
+        fetchHubPipelines,
+        hubPipelines,
+        addPipeline
       }}
     >
       {children}
