@@ -176,7 +176,10 @@ export function activateLanguageServer(
   trackEvent: TrackEvent
 ) {
   vscode.workspace.onDidChangeConfiguration((event: vscode.ConfigurationChangeEvent) => {
-    if (event.affectsConfiguration("nextflow.java.home")) {
+    const shouldRestart =
+      event.affectsConfiguration("nextflow.java.home") ||
+      event.affectsConfiguration("nextflow.languageVersion");
+    if (shouldRestart) {
       restartLanguageServer(context);
     }
   });
@@ -188,7 +191,9 @@ export function activateLanguageServer(
     "nextflow.languageServer.restart",
     () => { restartLanguageServer(context); }
   );
-  vscode.commands.registerCommand("nextflow.languageServer.stop", stopLanguageServer);
+  vscode.commands.registerCommand("nextflow.languageServer.stop",
+    () => { stopLanguageServer(); }
+  );
   vscode.commands.registerCommand(
     "nextflow.openFileFromWebview",
     async (uriString: string) => {
