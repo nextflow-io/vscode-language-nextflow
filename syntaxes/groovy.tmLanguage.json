@@ -721,7 +721,7 @@
       "patterns": [
         {
           "applyEndPatternLast": 1,
-          "begin": "(?x:(?=\n  (?:\n  (?:def)\n  |\n  (?:boolean|byte|char|short|int|float|long|double)\n  |\n  (?:(?:[a-z]\\w*\\.)*[A-Z]+\\w*) # object type\n  )\n  \\s+\n  [\\w\\d_<>\\[\\],\\s]+\n  (?:=|$)\n  ))",
+          "begin": "(?x:(?=\n  (?:\n  (?:def)\n  |\n  (?:boolean|byte|char|short|int|float|long|double)\n  |\n  (?:(?:[a-z]\\w*\\.)*[A-Z]+\\w*)\n  )\n  \\s+\n  [\\w\\d_<>\\[\\],\\s]+\n  (?:=|$)\n  ))",
           "end": ";|$",
           "name": "meta.definition.variable.groovy",
           "patterns": [
@@ -743,6 +743,19 @@
                 }
               },
               "match": "(\\w[^\\s,]*)\\s+(?=\\=)"
+            },
+            {
+              "captures": {
+                "1": {
+                  "name": "storage.type.groovy"
+                }
+              },
+              "match": ": (\\w+)",
+              "patterns": [
+                {
+                  "include": "#types"
+                }
+              ]
             },
             {
               "begin": "=",
