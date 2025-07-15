@@ -119,6 +119,8 @@ The following settings are available:
 
 - `nextflow.telemetry.enabled`: Enable usage data to be sent to Seqera. See the [welcome page](./src/welcomePage/welcome-vscode.md) for more information about what we do and do not collect.
 
+- `nextflow.dag.showVariables`: Specify if script variables should be shown in DAG preview
+
 ## Telemetry notice
 
 We (Seqera) collect limited usage data through this extension to help us understand which features are most valuable and improve your overall experience.

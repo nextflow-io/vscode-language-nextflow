@@ -253,6 +253,11 @@
           "type": "boolean",
           "default": false,
           "markdownDescription": "Enable usage data to be sent to Seqera. See the welcome page for more information about what we do and do not collect."
+        },
+        "nextflow.dag.showVariables": {
+          "type": "boolean",
+          "default": false,
+          "markdownDescription": "Show variables along with processes in DAG preview"
         }
       }
     },
