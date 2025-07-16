@@ -8,7 +8,7 @@
     justify-content: space-between;
     width: 100%;
     cursor: pointer;
-    color: var(--vscode-list-activeSelectionForeground);
+    color: var(--vscode-foreground);
     &:hover {
       background-color: var(--vscode-list-hoverBackground);
     }
