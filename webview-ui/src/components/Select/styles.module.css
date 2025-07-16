@@ -106,7 +106,7 @@
 
 .selected {
   background-color: var(--vscode-list-activeSelectionBackground);
-  color: var(--vscode-list-activeSelectionForeground);
+  color: var(--vscode-foreground);
 }
 
 .outerLabel {
