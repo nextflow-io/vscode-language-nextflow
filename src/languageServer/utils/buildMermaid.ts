@@ -44,7 +44,8 @@ export function buildMermaid(
         color: var(--mm-container-title) !important;
       }
       /* All node rectangles */
-      .mermaid .node rect {
+      .mermaid .node rect,
+      .mermaid .node polygon {
         fill: var(--mm-node-fill) !important;
         stroke: var(--mm-node-border) !important;
         stroke-width: 3px !important;
