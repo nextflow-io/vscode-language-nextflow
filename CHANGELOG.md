@@ -4,6 +4,11 @@ All notable changes to the Nextflow VS Code extension will be documented here.
 
 See [Keep a Changelog](http://keepachangelog.com/) for recommendations on how to structure this file.
 
+## [1.5.1] - 2025-08-06
+
+- Fix font color in Project view (#149)
+- Apply theme colors to control nodes in DAG preview
+
 ## [1.5.0] - 2025-06-17
 
 - Launch pipeline in Seqera Cloud (#135)
