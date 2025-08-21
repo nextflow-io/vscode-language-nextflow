@@ -4,6 +4,10 @@ All notable changes to the Nextflow VS Code extension will be documented here.
 
 See [Keep a Changelog](http://keepachangelog.com/) for recommendations on how to structure this file.
 
+## [1.5.2] - 2025-08-21
+
+- Enable authentication in GitHub API requests
+
 ## [1.5.1] - 2025-08-06
 
 - Fix font color in Project view (#149)
