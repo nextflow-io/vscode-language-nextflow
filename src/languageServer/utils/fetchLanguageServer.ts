@@ -8,9 +8,14 @@ async function getLatestRemoteVersion(
 ): Promise<string | null> {
   try {
     const url = `https://api.github.com/repos/nextflow-io/language-server/releases`;
-    const response = await fetch(url, {
-      headers: { Accept: "application/vnd.github.v3+json" }
-    });
+    const headers: Record<string, string> = {
+      Accept: "application/vnd.github.v3+json"
+    };
+    const token = await getGitHubToken();
+    if (token) {
+      headers.Authorization = `Bearer ${token}`;
+    }
+    const response = await fetch(url, { headers });
     if (!response.ok) {
       return null;
     }
@@ -23,6 +28,17 @@ async function getLatestRemoteVersion(
   } catch (error) {
     return null;
   }
+}
+
+async function getGitHubToken(): Promise<string | undefined> {
+  try {
+    const session = await vscode.authentication.getSession("github", ["repo"], { silent: true });
+    if (session?.accessToken) {
+      return session.accessToken;
+    }
+  } catch (error) {
+  }
+  return process.env.GITHUB_TOKEN;
 }
 
 async function getLatestLocalVersion(
