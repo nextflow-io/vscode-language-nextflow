@@ -61,7 +61,7 @@ export function checkJavaVersion(javaPath: string): boolean {
 
   const coerced = semver.coerce(version);
   if (!coerced) {
-    throw new Error('Invalid Java version format.');
+    throw new Error(`Invalid Java version format: ${coerced}`);
   }
 
   return semver.gte(coerced, '17.0.0');
