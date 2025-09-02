@@ -46,7 +46,7 @@ function startLanguageServer(context: vscode.ExtensionContext) {
           }
         }
         catch (e) {
-          vscode.window.showWarningMessage(`Failed to check Java version: ${e}`);
+          console.warn(`Failed to check Java version: ${e}`);
         }
         progress.report({
           message: "Initializing Nextflow language server..."
