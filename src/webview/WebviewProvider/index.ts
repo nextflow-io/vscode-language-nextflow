@@ -181,7 +181,6 @@ class WebviewProvider implements vscode.WebviewViewProvider {
 
   public async initViewData(refresh?: boolean) {
     const { viewID, _context, _currentView: view } = this;
-    console.log("🟠 initViewData", viewID);
     if (!view) return;
     if (viewID === "seqeraCloud") {
       this.getRepoInfo();
@@ -211,7 +210,7 @@ class WebviewProvider implements vscode.WebviewViewProvider {
       const created = await createTest(filePath, accessToken);
       this.emitTestCreated(filePath, created);
     } catch (error) {
-      console.log("🟠 Test creation failed", error);
+      console.log("🔴 Test creation failed", error);
       this.emitTestCreated(filePath, false);
     }
   }
@@ -227,12 +226,11 @@ class WebviewProvider implements vscode.WebviewViewProvider {
 
   private async getContainer(filePath: string) {
     const accessToken = await getAccessToken(this._context);
-
     try {
       const created = await getContainer(filePath, accessToken);
       this.emitContainerCreated(filePath, created);
     } catch (error) {
-      console.log("🟠 Container creation failed", error);
+      console.log("🔴 Container creation failed", error);
       this.emitContainerCreated(filePath, false);
     }
   }
