@@ -138,6 +138,46 @@ async function previewDag(context: vscode.ExtensionContext, uri: string, name?: 
   panel.webview.html = buildMermaid(content, name ?? "Entry", mermaidLibUri);
 }
 
+async function convertPipelineToTyped() {
+  const folders = vscode.workspace.workspaceFolders;
+  if (!folders || folders.length == 0)
+    return;
+  const folder = folders.length == 1
+    ? folders[0].name
+    : await vscode.window.showQuickPick(folders.map(f => f.name), { canPickMany: false });
+  if (!folder)
+    return;
+  const res: any = await vscode.commands.executeCommand(
+    "nextflow.server.convertPipelineToTyped",
+    folder
+  );
+  if (!res || res.error) {
+    const message = res?.error ?? "Failed to convert pipeline to static types.";
+    vscode.window.showErrorMessage(message);
+  }
+  else {
+    vscode.window.showInformationMessage("Converted pipeline to static types. Please review updated code for errors.");
+  }
+}
+
+async function convertScriptToTyped() {
+  const uri = vscode.window.activeTextEditor?.document?.uri;
+  if (!uri)
+    return;
+
+  const res: any = await vscode.commands.executeCommand(
+    "nextflow.server.convertScriptToTyped",
+    uri.toString()
+  );
+  if (!res || res.error) {
+    const message = res?.error ?? "Failed to convert script to static types.";
+    vscode.window.showErrorMessage(message);
+  }
+  else {
+    vscode.window.showInformationMessage("Converted script to static types and updated call sites. Please review updated code for errors.");
+  }
+}
+
 function restartLanguageServer(context: vscode.ExtensionContext) {
   if (!languageClient) {
     startLanguageServer(context);
@@ -186,6 +226,14 @@ export function activateLanguageServer(
   vscode.commands.registerCommand(
     "nextflow.previewDag",
     (uri, name) => { previewDag(context, uri, name); }
+  );
+  vscode.commands.registerCommand(
+    "nextflow.languageServer.convertPipelineToTyped",
+    () => { convertPipelineToTyped(); }
+  );
+  vscode.commands.registerCommand(
+    "nextflow.languageServer.convertScriptToTyped",
+    () => { convertScriptToTyped(); }
   );
   vscode.commands.registerCommand(
     "nextflow.languageServer.restart",
