@@ -114,6 +114,16 @@
         "category": "Nextflow"
       },
       {
+        "command": "nextflow.languageServer.convertPipelineToTyped",
+        "title": "Convert pipeline to static types",
+        "category": "Nextflow"
+      },
+      {
+        "command": "nextflow.languageServer.convertScriptToTyped",
+        "title": "Convert script to static types",
+        "category": "Nextflow"
+      },
+      {
         "command": "nextflow.languageServer.restart",
         "title": "Restart language server",
         "category": "Nextflow"
@@ -154,6 +164,20 @@
       }
     ],
     "menus": {
+      "commandPalette": [
+        {
+          "command": "nextflow.chatbot.convertToDSL2",
+          "when": "resourceExtname == '.nf'"
+        },
+        {
+          "command": "nextflow.chatbot.writeTest",
+          "when": "resourceExtname == '.nf'"
+        },
+        {
+          "command": "nextflow.languageServer.convertScriptToTyped",
+          "when": "resourceExtname == '.nf'"
+        }
+      ],
       "view/title": [
         {
           "command": "nextflow.seqera.reloadWebview",
