@@ -277,6 +277,12 @@
           "type": "boolean",
           "default": false,
           "markdownDescription": "Enable usage data to be sent to Seqera. See the welcome page for more information about what we do and do not collect."
+        },
+        "nextflow.typeChecking": {
+          "title": "Type Checking (experimental)",
+          "type": "boolean",
+          "default": false,
+          "description": "Enable static type checking."
         }
       }
     },
