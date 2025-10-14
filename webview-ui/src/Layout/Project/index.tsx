@@ -13,14 +13,21 @@ function round(x: number) {
 }
 
 const Project = () => {
-  const { nodes } = useWorkspaceContext();
+  const { folders, selectedFolder, setSelectedFolder, previewWorkspace, nodes } = useWorkspaceContext();
   const [viewMode, setViewMode] = useState<ViewMode>("list");
   const [search, setSearch] = useState("");
 
-  const entryNodes = nodes.filter((n) => n.name === "<entry>");
+  function selectFolder(name: string) {
+    setSelectedFolder(folders.indexOf(name));
+    previewWorkspace(name);
+  }
+
+  function entryNodes() {
+    return nodes.filter((n) => n.name === "<entry>");
+  }
 
   function testCoverage() {
-    const totalCount = nodes.length - entryNodes.length;
+    const totalCount = nodes.length - entryNodes().length;
     if( totalCount == 0 )
       return <></>;
     const testCount = nodes.filter((n) => n.test !== undefined).length;
@@ -37,11 +44,12 @@ const Project = () => {
   };
 
   function treeView() {
-    if (entryNodes.length == 0)
+    const nodes = entryNodes();
+    if (nodes.length == 0)
       return <section className="cozy">No entry workflows found</section>;
     return (
       <div className={styles.container}>
-        {entryNodes.map((node) => (
+        {nodes.map((node) => (
           <FileNode node={node} searchTerm={search} />
         ))}
       </div>
@@ -60,6 +68,15 @@ const Project = () => {
 
   return (
     <>
+      <div className={styles.filters}>
+        <Select
+          options={folders.map(name => (
+            { label: name, value: name }
+          ))}
+          value={folders[selectedFolder]}
+          onChange={(value) => selectFolder(value as string)}
+        />
+      </div>
       <div className={styles.filters}>
         <Input
           value={search}

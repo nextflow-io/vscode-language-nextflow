@@ -3,6 +3,10 @@ import { createContext, useContext, useEffect, useState } from "react";
 import { TestCreation, TreeNode } from "./types";
 
 const WorkspaceContext = createContext<WorkspaceContextType>({
+  folders: [],
+  selectedFolder: 0,
+  setSelectedFolder: () => {},
+  previewWorkspace: () => {},
   nodes: [],
   findChildren: () => [],
   openFile: () => {},
@@ -23,6 +27,10 @@ const WorkspaceContext = createContext<WorkspaceContextType>({
 });
 
 interface WorkspaceContextType {
+  folders: string[];
+  selectedFolder: number;
+  setSelectedFolder: (index: number) => void;
+  previewWorkspace: (name: string) => void;
   nodes: TreeNode[];
   findChildren: (node: TreeNode) => TreeNode[];
   openFile: (filePath: string, line: number) => void;
@@ -52,6 +60,8 @@ type Props = {
 const WorkspaceProvider = ({ children, vscode, viewID, isCursor }: Props) => {
   const state = vscode.getState();
 
+  const [folders, setFolders] = useState<string[]>([]);
+  const [selectedFolder, setSelectedFolder] = useState<number>(0);
   const [nodes, setNodes] = useState<TreeNode[]>([]);
   const [testCreation, setCreatingTest] = useState<
     WorkspaceContextType["testCreation"]
@@ -68,6 +78,14 @@ const WorkspaceProvider = ({ children, vscode, viewID, isCursor }: Props) => {
   useEffect(() => {
     const handleMessage = (event: MessageEvent) => {
       const message = event.data;
+      if (message.folders) {
+        const folders = message.folders as string[];
+        setFolders(folders);
+        if (folders.length > 0) {
+          setSelectedFolder(0);
+          previewWorkspace(folders[0]);
+        }
+      }
       if (message.nodes) setNodes(message.nodes);
       if (message.testCreated) {
         const data = message.testCreated;
@@ -92,6 +110,10 @@ const WorkspaceProvider = ({ children, vscode, viewID, isCursor }: Props) => {
 
   function isSelected(name: string) {
     return selectedItems.includes(name);
+  }
+
+  function previewWorkspace(name: string) {
+    vscode.postMessage({ command: "previewWorkspace", name: name });
   }
 
   function findChildren(node: TreeNode): TreeNode[] {
@@ -137,6 +159,10 @@ const WorkspaceProvider = ({ children, vscode, viewID, isCursor }: Props) => {
   return (
     <WorkspaceContext.Provider
       value={{
+        folders,
+        selectedFolder,
+        setSelectedFolder,
+        previewWorkspace,
         nodes,
         findChildren,
         openFile,
