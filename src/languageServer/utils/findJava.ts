@@ -48,7 +48,7 @@ export function findJava(): string | null {
 }
 
 export function checkJavaVersion(javaPath: string): boolean {
-  const output = cp.execSync(`${javaPath} -version 2>&1`, { encoding: 'utf8' });
+  const output = cp.execSync(`"${javaPath}" -version 2>&1`, { encoding: 'utf8' });
   const match = output.match(/version "(.*?)"/);
   if (!match || match.length < 2) {
     throw new Error('Could not parse Java version');
