@@ -267,10 +267,11 @@
         "nextflow.languageVersion": {
           "type": "string",
           "enum": [
+            "25.10",
             "25.04",
             "24.10"
           ],
-          "default": "25.04",
+          "default": "25.10",
           "markdownDescription": "Nextflow language version to be used by the language server."
         },
         "nextflow.telemetry.enabled": {
