@@ -4,6 +4,14 @@ All notable changes to the Nextflow VS Code extension will be documented here.
 
 See [Keep a Changelog](http://keepachangelog.com/) for recommendations on how to structure this file.
 
+## [1.6.0] - 2025-10-23
+
+- Add syntax highlighting for `params` block
+- Add syntax highlighting for type annotations
+- Add command to convert scripts to static types
+- Add setting to enable type checking
+- Add option for Nextflow 25.10
+
 ## [1.5.2] - 2025-08-21
 
 - Enable authentication in GitHub API requests

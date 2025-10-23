@@ -2,7 +2,7 @@
   "name": "nextflow",
   "displayName": "Nextflow",
   "description": "Nextflow language support",
-  "version": "1.5.2",
+  "version": "1.6.0",
   "publisher": "nextflow",
   "repository": {
     "type": "git",
