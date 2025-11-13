@@ -20,7 +20,7 @@
     },
     "include-config": {
       "name": "keyword.nextflow",
-      "match": "(?<=(^|{)\\s*)includeConfig(?=[\\s(])"
+      "match": "^\\s*(includeConfig)\\s*"
     }
   }
 }
