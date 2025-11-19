@@ -89,7 +89,7 @@ The extension will fall back to the latest patch version from the local cache if
 
 ## Commands
 
-Open the command palette and type `Nextflow` to see the list of available commands.
+Open the command palette and type `nextflow` to see the list of available commands.
 
 ## Configuration
 
