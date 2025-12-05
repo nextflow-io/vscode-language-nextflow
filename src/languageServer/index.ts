@@ -139,6 +139,13 @@ async function previewDag(context: vscode.ExtensionContext, uri: string, name?: 
 }
 
 async function convertPipelineToTyped() {
+  const languageVersion = vscode.workspace
+    .getConfiguration("nextflow")
+    .get("languageVersion") as string;
+  if (languageVersion === "24.10" || languageVersion == "25.04") {
+    vscode.window.showErrorMessage("The Nextflow language version must be 25.10 or newer in order to convert to static types.");
+    return;
+  }
   const folders = vscode.workspace.workspaceFolders;
   if (!folders || folders.length == 0)
     return;
@@ -161,6 +168,13 @@ async function convertPipelineToTyped() {
 }
 
 async function convertScriptToTyped() {
+  const languageVersion = vscode.workspace
+    .getConfiguration("nextflow")
+    .get("languageVersion") as string;
+  if (languageVersion === "24.10" || languageVersion == "25.04") {
+    vscode.window.showErrorMessage("The Nextflow language version must be 25.10 or newer in order to convert to static types.");
+    return;
+  }
   const uri = vscode.window.activeTextEditor?.document?.uri;
   if (!uri)
     return;
