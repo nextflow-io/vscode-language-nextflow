@@ -4,8 +4,9 @@ import * as path from "path";
 import * as vscode from "vscode";
 
 async function getLatestRemoteVersion(
-  versionPrefix: string
-): Promise<string | null> {
+  versionPrefix: string,
+  isPreview: boolean = false
+): Promise<{ tag: string; updatedAt: string } | null> {
   try {
     const url = `https://api.github.com/repos/nextflow-io/language-server/releases`;
     const headers: Record<string, string> = {
@@ -20,11 +21,25 @@ async function getLatestRemoteVersion(
       return null;
     }
     const releases = await response.json();
-    const matchingReleases = (releases as any[])
-      .map((release) => release.tag_name)
-      .filter((tag) => tag.startsWith(versionPrefix))
-      .sort((a, b) => b.localeCompare(a, undefined, { numeric: true }));
-    return matchingReleases.length > 0 ? matchingReleases[0] : null;
+
+    if (isPreview) {
+      // for preview versions, look for exact tag match (e.g., v26.04.0-PREVIEW)
+      const previewTag = `${versionPrefix}.0-PREVIEW`;
+      const previewRelease = (releases as any[]).find(
+        (release) => release.tag_name === previewTag
+      );
+      return previewRelease
+        ? { tag: previewRelease.tag_name, updatedAt: previewRelease.updated_at }
+        : null;
+    } else {
+      // for stable versions, find the latest patch release
+      const matchingReleases = (releases as any[])
+        .filter((release) => release.tag_name.startsWith(versionPrefix))
+        .sort((a, b) => b.tag_name.localeCompare(a.tag_name, undefined, { numeric: true }));
+      return matchingReleases.length > 0
+        ? { tag: matchingReleases[0].tag_name, updatedAt: matchingReleases[0].updated_at }
+        : null;
+    }
   } catch (error) {
     return null;
   }
@@ -78,8 +93,15 @@ export async function fetchLanguageServer(context: vscode.ExtensionContext) {
   const languageVersion = vscode.workspace
     .getConfiguration("nextflow")
     .get("languageVersion") as string;
-  const versionPrefix = `v${languageVersion}`;
-  let resolvedVersion = await getLatestRemoteVersion(versionPrefix);
+  const isPreview = languageVersion.includes("(preview)");
+  const versionPrefix = `v${languageVersion.replace(" (preview)", "")}`;
+  let resolvedVersion: string | null = null;
+  let remoteUpdatedAt: string | null = null;
+  const remoteVersionResponse = await getLatestRemoteVersion(versionPrefix, isPreview);
+  if (remoteVersionResponse) {
+    resolvedVersion = remoteVersionResponse.tag;
+    remoteUpdatedAt = remoteVersionResponse.updatedAt;
+  }
   if (!resolvedVersion) {
     resolvedVersion = await getLatestLocalVersion(versionPrefix);
     if (resolvedVersion) {
@@ -95,7 +117,19 @@ export async function fetchLanguageServer(context: vscode.ExtensionContext) {
   // use locally cached version if present
   const targetDir = path.join(os.homedir(), ".nextflow", "lsp", versionPrefix);
   const cachePath = path.join(targetDir, `${resolvedVersion}.jar`);
-  if (fs.existsSync(cachePath)) {
+  if (isPreview && fs.existsSync(cachePath) && remoteUpdatedAt) {
+    // for preview versions, check if cached version is newer than remote
+    const localStats = fs.statSync(cachePath);
+    const localModifiedTime = localStats.mtime;
+    const remoteUpdatedTime = new Date(remoteUpdatedAt);
+
+    if (localModifiedTime >= remoteUpdatedTime) {
+      // local cache is up to date
+      return cachePath;
+    }
+    // local cache is outdated, will re-download below
+  } else if (fs.existsSync(cachePath)) {
+    // for stable versions, use cache if it exists
     return cachePath;
   }
 

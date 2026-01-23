@@ -267,6 +267,7 @@
         "nextflow.languageVersion": {
           "type": "string",
           "enum": [
+            "26.04 (preview)",
             "25.10",
             "25.04",
             "24.10"
