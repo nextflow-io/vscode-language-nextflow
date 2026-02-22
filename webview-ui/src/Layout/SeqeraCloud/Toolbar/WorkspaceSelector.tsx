@@ -2,6 +2,7 @@ import { useTowerContext } from "../../../Context";
 import Select from "../../../components/Select";
 import { getWorkspaceURL } from "../utils";
 import Button from "../../../components/Button";
+import { SEQERA_PLATFORM_URL } from "../../../../../src/constants";
 
 const WorkspaceSelector = () => {
   const {
@@ -36,7 +37,9 @@ const WorkspaceSelector = () => {
             subtle
           />
         ) : (
-          <div>No workspaces found</div>
+          <Button subtle href={SEQERA_PLATFORM_URL} fullWidth>
+            No workspaces found
+          </Button>
         )}
         {!!manageURL && (
           <Button
