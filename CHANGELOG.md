@@ -4,6 +4,12 @@ All notable changes to the Nextflow VS Code extension will be documented here.
 
 See [Keep a Changelog](http://keepachangelog.com/) for recommendations on how to structure this file.
 
+## [1.7.0] - 2026-04-29
+
+- Remove type checking setting
+- Add option for Nextflow 26.04
+- Remove Seqera chat participant, welcome pages
+
 ## [1.6.1] - 2026-01-23
 
 - Add option for Nextflow 26.04 preview
