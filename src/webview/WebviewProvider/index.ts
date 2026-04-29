@@ -18,7 +18,6 @@ import {
 import { AuthProvider, getAccessToken } from "../../auth";
 import { jwtExpired } from "../../auth/AuthProvider/utils/jwt";
 import { sleep } from "./lib/utils";
-import { Pipeline } from "./lib/platform/types";
 import fetchHubPipelines from "./lib/platform/fetchHubPipelines";
 
 class WebviewProvider implements vscode.WebviewViewProvider {
@@ -42,9 +41,6 @@ class WebviewProvider implements vscode.WebviewViewProvider {
       switch (command) {
         case "openFile":
           this.openFile(message.path, message.line);
-          break;
-        case "openChat":
-          this.openChat();
           break;
         case "login":
           this.login();
@@ -244,10 +240,6 @@ class WebviewProvider implements vscode.WebviewViewProvider {
     });
   }
 
-  private async openChat() {
-    await vscode.commands.executeCommand("nextflow.chatbot.openChat");
-  }
-
   private initHTML(view: vscode.WebviewView) {
     this._currentView = view;
 
@@ -267,13 +259,12 @@ class WebviewProvider implements vscode.WebviewViewProvider {
   }
 
   private getBuiltHTML(view: vscode.WebviewView) {
-    const isCursor = vscode.env.appName.includes("Cursor");
     const distUri = this.getBuildPath();
     let html = fs.readFileSync(path.join(distUri.fsPath, "index.html"), "utf8");
 
     html = html.replace(
       "</head>",
-      `<script>window.initialData = { viewID: "${this.viewID}", isCursor: ${isCursor} };</script></head>`
+      `<script>window.initialData = { viewID: "${this.viewID}" };</script></head>`
     );
 
     html = updateRefs(html, view.webview, distUri);

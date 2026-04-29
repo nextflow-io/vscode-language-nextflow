@@ -26,24 +26,6 @@ Related blog posts:
 - [Modernizing the Nextflow Developer Experience (Part 1): The IDE](https://seqera.io/blog/modernizing-nextflow-developer-experience/)
 - [Modernizing the Nextflow Developer Experience (Part 2): The Language Server](https://seqera.io/blog/modernizing-nextflow-developer-experience-part-2/)
 
-### Copilot for Nextflow
-
-![VS Code Copilot Extension](images/chat-usage.gif)
-
-The extension includes a GitHub Copilot extension specifically trained for Nextflow development:
-
-- Full support for Nextflow DSL2 syntax
-- Context-aware assistance that understands your specific codebase
-- Generates code following Nextflow best practices and patterns
-- Works with any LLM you have access to (e.g. OpenAI, Anthropic, Google) through Github Copilot (Sonnet 3.5 is recommended by the Seqera team)
-- Special commands:
-  - `/dsl2` - Convert DSL1 scripts to DSL2
-  - `/nf-test` - Assists in generating nf-test test cases and improving test coverage
-
-Related blog posts:
-
-- [Bringing Seqera AI to the Nextflow VS Code extension](https://seqera.io/blog/seqera-ai--nextflow-vs-code/)
-
 ### Project view
 
 The extension provides a custom view for Nextflow projects. The Project view uses the language server to provide an overview of your pipeline project.
@@ -63,6 +45,10 @@ The Project view allows you to:
 - See the structure of your pipeline
 - Navigate to a process, workflow, or test by name
 - Monitor test coverage across your entire pipeline
+
+### Copilot for Nextflow
+
+The Copilot extension for Seqera AI has been removed. Use the [Seqera AI CLI](https://seqera.io/blog/seqera-ai-cli-announcement/) instead.
 
 ## Installation
 
@@ -117,7 +103,7 @@ The following settings are available:
 
 - `nextflow.languageVersion`: Nextflow language version to be used by the language server.
 
-- `nextflow.telemetry.enabled`: Enable usage data to be sent to Seqera. See the [welcome page](./src/welcomePage/welcome-vscode.md) for more information about what we do and do not collect.
+- `nextflow.telemetry.enabled`: Enable usage data to be sent to Seqera. See [below](#telemetry-notice) for more information about what we do and do not collect.
 
 ## Telemetry notice
 
@@ -127,7 +113,7 @@ This telemetry is opt-in and can be enabled or disabled at any time by toggling 
 
 **Information we collect**
 
-- Commands: We track when you invoke a command provided by this extension (e.g. openChat, writeTest, etc.), but not the contents of that command (e.g. user-supplied arguments).
+- Commands: We track when you invoke a command provided by this extension, but not the contents of that command (e.g. user-supplied arguments).
 - File events: We track when you open a Nextflow file, but not the file name or its contents.
 - Environment info: We collect your operating system type, VS Code version, and the extension version to help diagnose issues and guide future development.
 

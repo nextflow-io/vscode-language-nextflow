@@ -11,8 +11,6 @@ const WorkspaceContext = createContext<WorkspaceContextType>({
   isSelected: () => false,
   viewID: "",
   login: () => {},
-  openChat: () => {},
-  isCursor: false,
   selectedView: "pipelines",
   setSelectedView: () => {},
   getRepoInfo: () => {},
@@ -31,8 +29,6 @@ interface WorkspaceContextType {
   isSelected: (name: string) => boolean;
   viewID: string;
   login: () => void;
-  openChat: () => void;
-  isCursor: boolean;
   selectedView: string;
   setSelectedView: (view: string) => void;
   getRepoInfo: () => void;
@@ -46,10 +42,9 @@ type Props = {
   children: React.ReactNode;
   vscode: any;
   viewID: string;
-  isCursor: boolean;
 };
 
-const WorkspaceProvider = ({ children, vscode, viewID, isCursor }: Props) => {
+const WorkspaceProvider = ({ children, vscode, viewID }: Props) => {
   const state = vscode.getState();
 
   const [nodes, setNodes] = useState<TreeNode[]>([]);
@@ -109,10 +104,6 @@ const WorkspaceProvider = ({ children, vscode, viewID, isCursor }: Props) => {
     vscode.postMessage({ command: "login" });
   }
 
-  function openChat() {
-    vscode.postMessage({ command: "openChat" });
-  }
-
   function getRepoInfo() {
     vscode.postMessage({ command: "getRepoInfo" });
   }
@@ -140,13 +131,11 @@ const WorkspaceProvider = ({ children, vscode, viewID, isCursor }: Props) => {
         nodes,
         findChildren,
         openFile,
-        openChat,
         selectedItems,
         selectItem,
         isSelected,
         login,
         viewID,
-        isCursor,
         selectedView,
         setSelectedView,
         getRepoInfo,
