@@ -34,7 +34,6 @@ type ViewID = "project" | "seqeraCloud" | "";
 
 const Context = ({ children }: Props) => {
   const viewID = window.initialData?.viewID as ViewID;
-  const isCursor = window.initialData?.isCursor;
   const [authState, setAuthState] = useState<AuthState | undefined>(undefined);
   const [userInfo, setUserInfo] = useState<UserInfo | undefined>(undefined);
   const [workspaces, setWorkspaces] = useState<Workspace[]>([]);
@@ -70,7 +69,7 @@ const Context = ({ children }: Props) => {
   }, []);
 
   return (
-    <WorkspaceProvider vscode={vscode} viewID={viewID} isCursor={isCursor}>
+    <WorkspaceProvider vscode={vscode} viewID={viewID}>
       {viewID === "seqeraCloud" ? (
         <TowerProvider
           vscode={vscode}

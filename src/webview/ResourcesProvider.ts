@@ -41,7 +41,7 @@ class ResourcesProvider implements vscode.TreeDataProvider<ResourceItem> {
     },
     {
       label: "Nextflow Documentation",
-      url: "https://nextflow.io/docs/latest/"
+      url: "https://docs.seqera.io/nextflow"
     },
     {
       label: "Seqera Feedback Forum",
@@ -60,8 +60,8 @@ class ResourcesProvider implements vscode.TreeDataProvider<ResourceItem> {
       url: "https://ai.seqera.io/"
     },
     {
-      label: "Open Seqera Copilot",
-      command: "nextflow.chatbot.openChat"
+      label: "Seqera MCP",
+      url: "https://seqera.io/mcp/"
     }
   ];
 
@@ -80,18 +80,9 @@ class ResourcesProvider implements vscode.TreeDataProvider<ResourceItem> {
       return Promise.resolve([]);
     } else {
       return Promise.resolve(
-        this.resources.map((resource) => {
-          if (resource.url) {
-            return new ResourceItem(resource.label, resource.url);
-          } else if (resource.command) {
-            return new ResourceItem(resource.label, undefined, {
-              command: resource.command,
-              title: resource.label,
-              arguments: []
-            });
-          }
-          return new ResourceItem(resource.label);
-        })
+        this.resources.map((resource) => (
+          new ResourceItem(resource.label, resource.url)
+        ))
       );
     }
   }

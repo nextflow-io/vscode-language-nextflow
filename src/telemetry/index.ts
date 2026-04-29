@@ -2,8 +2,6 @@ import { randomBytes } from "crypto";
 import { PostHog } from "posthog-node";
 import * as vscode from "vscode";
 
-import { showPage } from "../welcomePage";
-
 export type TrackEvent = (
   eventName: string,
   properties?: { [key: string]: any }
@@ -63,20 +61,11 @@ async function promptTelemetryConsent(): Promise<void> {
   const choice = await vscode.window.showInformationMessage(
     "Nextflow: Enable telemetry to help us improve the extension?",
     "Yes",
-    "No",
-    "More info"
+    "No"
   );
   const config = vscode.workspace.getConfiguration("nextflow");
-
-  if (choice === "Yes") {
-    await config.update("telemetry.enabled", true);
-  } else if (choice === "No") {
-    await config.update("telemetry.enabled", false);
-  } else if (choice === "More info") {
-    showPage();
-    await sleep(3000);
-    await promptTelemetryConsent();
-  }
+  const enabled = choice === "Yes";
+  await config.update("telemetry.enabled", enabled);
 }
 
 function sleep(ms: number) {

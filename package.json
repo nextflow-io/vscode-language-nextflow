@@ -99,21 +99,6 @@
     ],
     "commands": [
       {
-        "command": "nextflow.chatbot.convertToDSL2",
-        "title": "Convert to DSL2 with Seqera",
-        "category": "Nextflow"
-      },
-      {
-        "command": "nextflow.chatbot.openChat",
-        "title": "Chat with Seqera",
-        "category": "Nextflow"
-      },
-      {
-        "command": "nextflow.chatbot.writeTest",
-        "title": "Write nf-test with Seqera",
-        "category": "Nextflow"
-      },
-      {
         "command": "nextflow.languageServer.convertPipelineToTyped",
         "title": "Convert pipeline to static types",
         "category": "Nextflow"
@@ -156,23 +141,10 @@
         "title": "Reload Seqera Webview",
         "category": "Nextflow",
         "icon": "$(refresh)"
-      },
-      {
-        "command": "nextflow.showWelcomePage",
-        "title": "Show Welcome Page",
-        "category": "Nextflow"
       }
     ],
     "menus": {
       "commandPalette": [
-        {
-          "command": "nextflow.chatbot.convertToDSL2",
-          "when": "resourceExtname == '.nf'"
-        },
-        {
-          "command": "nextflow.chatbot.writeTest",
-          "when": "resourceExtname == '.nf'"
-        },
         {
           "command": "nextflow.languageServer.convertScriptToTyped",
           "when": "resourceExtname == '.nf'"
@@ -282,36 +254,6 @@
         }
       }
     },
-    "chatParticipants": [
-      {
-        "id": "nextflow.chatbot",
-        "fullName": "Seqera",
-        "name": "Seqera",
-        "description": "How can I help you with Nextflow?",
-        "isSticky": true,
-        "commands": [
-          {
-            "name": "nf-test",
-            "description": "Write an nf-test for the code that you see"
-          },
-          {
-            "name": "dsl2",
-            "description": "Convert code to DSL2"
-          }
-        ]
-      }
-    ],
-    "colors": [
-      {
-        "id": "chat.avatarForeground",
-        "description": "Foreground color used for chat avatars.",
-        "defaults": {
-          "light": "#0DC09D",
-          "dark": "#0DC09D",
-          "highContrast": "#0DC09D"
-        }
-      }
-    ],
     "viewsContainers": {
       "activitybar": [
         {
@@ -353,7 +295,6 @@
     "@types/node": "^20",
     "@types/semver": "^7.7.0",
     "@types/vscode": "^1.96.0",
-    "@vscode/chat-extension-utils": "^0.0.0-alpha.4",
     "@vscode/vsce": "^3.2.1",
     "esbuild": "^0.25.0",
     "esbuild-plugin-copy": "^2.1.1",
