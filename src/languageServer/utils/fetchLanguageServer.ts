@@ -35,6 +35,7 @@ async function getLatestRemoteVersion(
       // for stable versions, find the latest patch release
       const matchingReleases = (releases as any[])
         .filter((release) => release.tag_name.startsWith(versionPrefix))
+        .filter((release) => !release.tag_name.endsWith("PREVIEW"))
         .sort((a, b) => b.tag_name.localeCompare(a.tag_name, undefined, { numeric: true }));
       return matchingReleases.length > 0
         ? { tag: matchingReleases[0].tag_name, updatedAt: matchingReleases[0].updated_at }
