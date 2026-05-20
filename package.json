@@ -212,7 +212,9 @@
           "default": [
             ".git",
             ".nf-test",
-            "work"
+            "work",
+            ".venv",
+            ".pixi"
           ],
           "description": "Folders that should be excluded when scanning the workspace for Nextflow files."
         },
