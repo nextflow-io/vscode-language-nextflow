@@ -79,8 +79,8 @@
         ],
         "firstLine": "^[A-Z][a-z]{2}-\\d{2} \\d{2}:\\d{2}:\\d{2}\\.\\d{3} \\[[^\\]]+\\] (DEBUG|INFO|WARN|ERROR|TRACE) ",
         "icon": {
-          "light": "./images/nextflow-icon-128x128.png",
-          "dark": "./images/nextflow-icon-128x128.png"
+          "light": "./images/nextflow-log.svg",
+          "dark": "./images/nextflow-log.svg"
         }
       },
       {
