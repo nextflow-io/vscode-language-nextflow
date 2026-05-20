@@ -30,7 +30,9 @@
   ],
   "activationEvents": [
     "onStartupFinished",
-    "onAuthenticationRequest:azuread"
+    "onAuthenticationRequest:azuread",
+    "onLanguage:nextflow-log",
+    "onFileSystem:nextflow-log-filtered"
   ],
   "main": "./extension.js",
   "contributes": {
@@ -67,6 +69,21 @@
         }
       },
       {
+        "id": "nextflow-log",
+        "aliases": [
+          "Nextflow Log"
+        ],
+        "filenamePatterns": [
+          ".nextflow.log",
+          ".nextflow.log.*"
+        ],
+        "firstLine": "^[A-Z][a-z]{2}-\\d{2} \\d{2}:\\d{2}:\\d{2}\\.\\d{3} \\[[^\\]]+\\] (DEBUG|INFO|WARN|ERROR|TRACE) ",
+        "icon": {
+          "light": "./images/nextflow-icon-128x128.png",
+          "dark": "./images/nextflow-icon-128x128.png"
+        }
+      },
+      {
         "id": "nextflow-markdown-injection"
       }
     ],
@@ -80,6 +97,11 @@
         "language": "nextflow-config",
         "scopeName": "source.nextflow-config",
         "path": "./syntaxes/nextflow-config.tmLanguage.json"
+      },
+      {
+        "language": "nextflow-log",
+        "scopeName": "source.nextflow-log",
+        "path": "./syntaxes/nextflow-log.tmLanguage.json"
       },
       {
         "scopeName": "source.nextflow-groovy",
@@ -141,6 +163,42 @@
         "title": "Reload Seqera Webview",
         "category": "Nextflow",
         "icon": "$(refresh)"
+      },
+      {
+        "command": "nextflow.log.toggleTrace",
+        "title": "Toggle TRACE entries",
+        "category": "Nextflow Log",
+        "icon": "$(list-tree)"
+      },
+      {
+        "command": "nextflow.log.toggleDebug",
+        "title": "Toggle DEBUG entries",
+        "category": "Nextflow Log",
+        "icon": "$(bug)"
+      },
+      {
+        "command": "nextflow.log.toggleInfo",
+        "title": "Toggle INFO entries",
+        "category": "Nextflow Log",
+        "icon": "$(info)"
+      },
+      {
+        "command": "nextflow.log.toggleWarn",
+        "title": "Toggle WARN entries",
+        "category": "Nextflow Log",
+        "icon": "$(warning)"
+      },
+      {
+        "command": "nextflow.log.toggleError",
+        "title": "Toggle ERROR entries",
+        "category": "Nextflow Log",
+        "icon": "$(error)"
+      },
+      {
+        "command": "nextflow.log.filterMenu",
+        "title": "Filter visible levels…",
+        "category": "Nextflow Log",
+        "icon": "$(list-filter)"
       }
     ],
     "menus": {
@@ -148,6 +206,57 @@
         {
           "command": "nextflow.languageServer.convertScriptToTyped",
           "when": "resourceExtname == '.nf'"
+        },
+        {
+          "command": "nextflow.log.toggleTrace",
+          "when": "resourceLangId == nextflow-log"
+        },
+        {
+          "command": "nextflow.log.toggleDebug",
+          "when": "resourceLangId == nextflow-log"
+        },
+        {
+          "command": "nextflow.log.toggleInfo",
+          "when": "resourceLangId == nextflow-log"
+        },
+        {
+          "command": "nextflow.log.toggleWarn",
+          "when": "resourceLangId == nextflow-log"
+        },
+        {
+          "command": "nextflow.log.toggleError",
+          "when": "resourceLangId == nextflow-log"
+        },
+        {
+          "command": "nextflow.log.filterMenu",
+          "when": "resourceLangId == nextflow-log"
+        }
+      ],
+      "editor/title": [
+        {
+          "command": "nextflow.log.toggleTrace",
+          "when": "resourceLangId == nextflow-log",
+          "group": "navigation@1"
+        },
+        {
+          "command": "nextflow.log.toggleDebug",
+          "when": "resourceLangId == nextflow-log",
+          "group": "navigation@2"
+        },
+        {
+          "command": "nextflow.log.toggleInfo",
+          "when": "resourceLangId == nextflow-log",
+          "group": "navigation@3"
+        },
+        {
+          "command": "nextflow.log.toggleWarn",
+          "when": "resourceLangId == nextflow-log",
+          "group": "navigation@4"
+        },
+        {
+          "command": "nextflow.log.toggleError",
+          "when": "resourceLangId == nextflow-log",
+          "group": "navigation@5"
         }
       ],
       "view/title": [
@@ -251,6 +360,29 @@
           "type": "boolean",
           "default": false,
           "markdownDescription": "Enable usage data to be sent to Seqera. See the welcome page for more information about what we do and do not collect."
+        },
+        "nextflow.log.debugOpacity": {
+          "type": "number",
+          "minimum": 0.1,
+          "maximum": 1.0,
+          "default": 0.3,
+          "markdownDescription": "Opacity applied to `DEBUG` and `TRACE` entries in `.nextflow.log` files. Set to `1.0` to disable dimming."
+        },
+        "nextflow.log.hiddenLevels": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "TRACE",
+              "DEBUG",
+              "INFO",
+              "WARN",
+              "ERROR"
+            ]
+          },
+          "default": [],
+          "uniqueItems": true,
+          "markdownDescription": "Log levels currently hidden in `.nextflow.log` files. Toggle from the eye icons in the editor title bar."
         }
       }
     },
