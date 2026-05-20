@@ -3,6 +3,9 @@ import * as vscode from "vscode";
 import { FILTERED_SCHEME, LANGUAGE_ID } from "./constants";
 import { getEntries, LogLevel } from "./parseEntries";
 
+const ANSI_ESCAPE = /\x1b\[[0-9;]*[A-Za-z]/g;
+const ENCODER = new TextEncoder();
+
 export function toFilteredUri(original: vscode.Uri): vscode.Uri {
   return original.with({
     scheme: FILTERED_SCHEME,
@@ -17,14 +20,21 @@ export function toOriginalUri(filtered: vscode.Uri): vscode.Uri {
 }
 
 export const READONLY_MESSAGE = new vscode.MarkdownString(
-  "Cannot edit when filtering log output levels"
+  "Cannot edit a cleaned Nextflow log view"
 );
+
+export interface ViewState {
+  hidden: Set<LogLevel>;
+  stripAnsi: boolean;
+}
 
 export class FilteredLogProvider implements vscode.FileSystemProvider {
   private readonly emitter = new vscode.EventEmitter<vscode.FileChangeEvent[]>();
   readonly onDidChangeFile = this.emitter.event;
 
-  constructor(private readonly getHidden: () => Set<LogLevel>) {}
+  constructor(
+    private readonly getStateForOriginal: (uri: vscode.Uri) => ViewState
+  ) {}
 
   refreshAll(): void {
     const events: vscode.FileChangeEvent[] = [];
@@ -61,7 +71,7 @@ export class FilteredLogProvider implements vscode.FileSystemProvider {
   async readFile(uri: vscode.Uri): Promise<Uint8Array> {
     const originalUri = toOriginalUri(uri);
     const original = await vscode.workspace.openTextDocument(originalUri);
-    const hidden = this.getHidden();
+    const { hidden, stripAnsi } = this.getStateForOriginal(originalUri);
 
     let text: string;
     if (hidden.size === 0) {
@@ -77,7 +87,12 @@ export class FilteredLogProvider implements vscode.FileSystemProvider {
       }
       text = lines.join("\n");
     }
-    return new TextEncoder().encode(text);
+
+    if (stripAnsi) {
+      text = text.replace(ANSI_ESCAPE, "");
+    }
+
+    return ENCODER.encode(text);
   }
 
   writeFile(): void {

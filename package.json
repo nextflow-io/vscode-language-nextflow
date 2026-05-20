@@ -199,6 +199,16 @@
         "title": "Filter visible levels…",
         "category": "Nextflow Log",
         "icon": "$(list-filter)"
+      },
+      {
+        "command": "nextflow.log.toggleStripAnsi",
+        "title": "Toggle ANSI code stripping",
+        "category": "Nextflow Log"
+      },
+      {
+        "command": "nextflow.log.toggleShowRawFile",
+        "title": "Toggle raw file view",
+        "category": "Nextflow Log"
       }
     ],
     "menus": {
@@ -229,6 +239,14 @@
         },
         {
           "command": "nextflow.log.filterMenu",
+          "when": "resourceLangId == nextflow-log"
+        },
+        {
+          "command": "nextflow.log.toggleStripAnsi",
+          "when": "resourceLangId == nextflow-log"
+        },
+        {
+          "command": "nextflow.log.toggleShowRawFile",
           "when": "resourceLangId == nextflow-log"
         }
       ],
@@ -383,6 +401,16 @@
           "default": [],
           "uniqueItems": true,
           "markdownDescription": "Log levels currently hidden in `.nextflow.log` files. Toggle from the eye icons in the editor title bar."
+        },
+        "nextflow.log.stripAnsi": {
+          "type": "boolean",
+          "default": true,
+          "markdownDescription": "Remove ANSI escape codes (e.g. `\\u001b[0;32m`) from `.nextflow.log` files when displayed in the editor. The file on disk is unchanged."
+        },
+        "nextflow.log.showRawFile": {
+          "type": "boolean",
+          "default": false,
+          "markdownDescription": "Show the raw `.nextflow.log` file as it is on disk, bypassing the cleaned virtual view. Disables level filtering and ANSI stripping in the editor."
         }
       }
     },

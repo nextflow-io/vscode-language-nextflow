@@ -1,18 +1,11 @@
 import * as vscode from "vscode";
 
-import { FILTERED_SCHEME, LANGUAGE_ID } from "./constants";
+import { isNextflowLogEditor } from "./constants";
 import { entryRange, getEntries, LogLevel } from "./parseEntries";
 
 const DIM_LEVELS = new Set<LogLevel>(["TRACE", "DEBUG"]);
 
 const DEBOUNCE_MS = 50;
-
-function isNextflowLogEditor(editor: vscode.TextEditor): boolean {
-  return (
-    editor.document.languageId === LANGUAGE_ID ||
-    editor.document.uri.scheme === FILTERED_SCHEME
-  );
-}
 
 function readOpacity(): number {
   const value = vscode.workspace
