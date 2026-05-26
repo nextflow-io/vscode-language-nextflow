@@ -10,8 +10,7 @@ const DEBOUNCE_MS = 50;
 function readOpacity(): number {
   const value = vscode.workspace
     .getConfiguration("nextflow.log")
-    .get<number>("debugOpacity", 0.5);
-  if (typeof value !== "number" || isNaN(value)) return 0.5;
+    .get<number>("debugOpacity", 0.3);
   return Math.max(0.1, Math.min(1.0, value));
 }
 
@@ -87,8 +86,11 @@ export function activateDecorate(context: vscode.ExtensionContext): void {
             entry.levelEnd
           )
         );
-      } else if (entry.level === "ERROR") errors.push(range);
-      else if (entry.level === "WARN") warnings.push(range);
+      } else if (entry.level === "ERROR") {
+        errors.push(range);
+      } else if (entry.level === "WARN") {
+        warnings.push(range);
+      }
     }
     editor.setDecorations(dimDecoration, dim);
     editor.setDecorations(errorDecoration, errors);

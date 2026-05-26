@@ -204,9 +204,9 @@ export function activateFilter(context: vscode.ExtensionContext): void {
       ? toOriginalUri(editor.document.uri)
       : editor.document.uri;
     const state = getOrInit(originalUri);
-    if (state.showRaw && isFiltered) {
+    if (state.showRaw) {
       await switchToOriginal(editor);
-    } else if (!state.showRaw && !isFiltered) {
+    } else if (!state.showRaw) {
       await switchToFiltered(editor);
     }
   };

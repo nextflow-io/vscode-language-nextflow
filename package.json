@@ -75,13 +75,10 @@
         ],
         "filenamePatterns": [
           ".nextflow.log",
-          ".nextflow.log.*"
-        ],
-        "firstLine": "^[A-Z][a-z]{2}-\\d{2} \\d{2}:\\d{2}:\\d{2}\\.\\d{3} \\[[^\\]]+\\] (DEBUG|INFO|WARN|ERROR|TRACE) ",
-        "icon": {
-          "light": "./images/nextflow-log.svg",
-          "dark": "./images/nextflow-log.svg"
-        }
+          ".nextflow.log.*",
+          ".module.log",
+          ".module.log.*"
+        ]
       },
       {
         "id": "nextflow-markdown-injection"
@@ -141,6 +138,17 @@
         "category": "Nextflow"
       },
       {
+        "command": "nextflow.log.filterMenu",
+        "title": "Toggle log filters...",
+        "category": "Nextflow Log",
+        "icon": "$(list-filter)"
+      },
+      {
+        "command": "nextflow.log.toggleShowRawFile",
+        "title": "Toggle raw file view",
+        "category": "Nextflow Log"
+      },
+      {
         "command": "nextflow.seqera.goToCloud",
         "title": "Go to Seqera Cloud",
         "category": "Nextflow",
@@ -163,52 +171,6 @@
         "title": "Reload Seqera Webview",
         "category": "Nextflow",
         "icon": "$(refresh)"
-      },
-      {
-        "command": "nextflow.log.toggleTrace",
-        "title": "Toggle TRACE entries",
-        "category": "Nextflow Log",
-        "icon": "$(list-tree)"
-      },
-      {
-        "command": "nextflow.log.toggleDebug",
-        "title": "Toggle DEBUG entries",
-        "category": "Nextflow Log",
-        "icon": "$(bug)"
-      },
-      {
-        "command": "nextflow.log.toggleInfo",
-        "title": "Toggle INFO entries",
-        "category": "Nextflow Log",
-        "icon": "$(info)"
-      },
-      {
-        "command": "nextflow.log.toggleWarn",
-        "title": "Toggle WARN entries",
-        "category": "Nextflow Log",
-        "icon": "$(warning)"
-      },
-      {
-        "command": "nextflow.log.toggleError",
-        "title": "Toggle ERROR entries",
-        "category": "Nextflow Log",
-        "icon": "$(error)"
-      },
-      {
-        "command": "nextflow.log.filterMenu",
-        "title": "Filter visible levels…",
-        "category": "Nextflow Log",
-        "icon": "$(list-filter)"
-      },
-      {
-        "command": "nextflow.log.toggleStripAnsi",
-        "title": "Toggle ANSI code stripping",
-        "category": "Nextflow Log"
-      },
-      {
-        "command": "nextflow.log.toggleShowRawFile",
-        "title": "Toggle raw file view",
-        "category": "Nextflow Log"
       }
     ],
     "menus": {
@@ -218,63 +180,12 @@
           "when": "resourceExtname == '.nf'"
         },
         {
-          "command": "nextflow.log.toggleTrace",
-          "when": "resourceLangId == nextflow-log"
-        },
-        {
-          "command": "nextflow.log.toggleDebug",
-          "when": "resourceLangId == nextflow-log"
-        },
-        {
-          "command": "nextflow.log.toggleInfo",
-          "when": "resourceLangId == nextflow-log"
-        },
-        {
-          "command": "nextflow.log.toggleWarn",
-          "when": "resourceLangId == nextflow-log"
-        },
-        {
-          "command": "nextflow.log.toggleError",
-          "when": "resourceLangId == nextflow-log"
-        },
-        {
           "command": "nextflow.log.filterMenu",
-          "when": "resourceLangId == nextflow-log"
-        },
-        {
-          "command": "nextflow.log.toggleStripAnsi",
           "when": "resourceLangId == nextflow-log"
         },
         {
           "command": "nextflow.log.toggleShowRawFile",
           "when": "resourceLangId == nextflow-log"
-        }
-      ],
-      "editor/title": [
-        {
-          "command": "nextflow.log.toggleTrace",
-          "when": "resourceLangId == nextflow-log",
-          "group": "navigation@1"
-        },
-        {
-          "command": "nextflow.log.toggleDebug",
-          "when": "resourceLangId == nextflow-log",
-          "group": "navigation@2"
-        },
-        {
-          "command": "nextflow.log.toggleInfo",
-          "when": "resourceLangId == nextflow-log",
-          "group": "navigation@3"
-        },
-        {
-          "command": "nextflow.log.toggleWarn",
-          "when": "resourceLangId == nextflow-log",
-          "group": "navigation@4"
-        },
-        {
-          "command": "nextflow.log.toggleError",
-          "when": "resourceLangId == nextflow-log",
-          "group": "navigation@5"
         }
       ],
       "view/title": [
