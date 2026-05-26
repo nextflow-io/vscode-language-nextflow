@@ -14,16 +14,16 @@ import { LOG_LEVELS, LogLevel } from "./parseEntries";
 
 const HIDDEN_KEY = "nextflow.log.hiddenLevels";
 const STRIP_KEY = "nextflow.log.stripAnsi";
-const RAW_KEY = "nextflow.log.showRawFile";
+const FILTER_KEY = "nextflow.log.filter.enabled";
 
 interface FileState extends ViewState {
-  showRaw: boolean;
+  filterEnabled: boolean;
 }
 
 type ItemAction =
   | "level"
   | "stripAnsi"
-  | "showRaw"
+  | "filter"
   | "saveWorkspace"
   | "saveGlobal"
   | "none";
@@ -50,15 +50,15 @@ function readDefaultStripAnsi(): boolean {
   return vscode.workspace.getConfiguration().get<boolean>(STRIP_KEY, true);
 }
 
-function readDefaultShowRaw(): boolean {
-  return vscode.workspace.getConfiguration().get<boolean>(RAW_KEY, false);
+function readDefaultFilterEnabled(): boolean {
+  return vscode.workspace.getConfiguration().get<boolean>(FILTER_KEY, true);
 }
 
 function defaultState(): FileState {
   return {
     hidden: readDefaultHidden(),
     stripAnsi: readDefaultStripAnsi(),
-    showRaw: readDefaultShowRaw()
+    filterEnabled: readDefaultFilterEnabled()
   };
 }
 
@@ -81,14 +81,14 @@ async function saveAllSettings(
     target
   );
   await config.update(
-    RAW_KEY,
-    state.showRaw === false ? undefined : state.showRaw,
+    FILTER_KEY,
+    state.filterEnabled === true ? undefined : state.filterEnabled,
     target
   );
 }
 
 function describeState(state: FileState): string {
-  if (state.showRaw) return "$(file) Raw file — click to clean";
+  if (!state.filterEnabled) return "$(file) Raw file — click to clean";
   if (state.hidden.size === 0)
     return "$(list-filter) Filter Nextflow log levels";
   const visible = LOG_LEVELS.filter((l) => !state.hidden.has(l));
@@ -128,7 +128,7 @@ class FilterCodeLensProvider implements vscode.CodeLensProvider {
     if (!state) return [];
     const range = new vscode.Range(0, 0, 0, 0);
     let title: string;
-    if (state.showRaw) {
+    if (!state.filterEnabled) {
       title = "$(file)  Viewing raw .nextflow.log — click to change";
     } else if (state.hidden.size === 0) {
       title = "$(list-filter)  Filter visible log levels";
@@ -204,10 +204,10 @@ export function activateFilter(context: vscode.ExtensionContext): void {
       ? toOriginalUri(editor.document.uri)
       : editor.document.uri;
     const state = getOrInit(originalUri);
-    if (state.showRaw) {
-      await switchToOriginal(editor);
-    } else if (!state.showRaw) {
+    if (state.filterEnabled) {
       await switchToFiltered(editor);
+    } else {
+      await switchToOriginal(editor);
     }
   };
 
@@ -234,20 +234,20 @@ export function activateFilter(context: vscode.ExtensionContext): void {
     if (!state) return;
     if (state.hidden.has(level)) state.hidden.delete(level);
     else state.hidden.add(level);
-    if (!state.showRaw) refreshCurrent();
+    if (state.filterEnabled) refreshCurrent();
   };
 
   const toggleStripAnsi = (): void => {
     const state = activeState();
     if (!state) return;
     state.stripAnsi = !state.stripAnsi;
-    if (!state.showRaw) refreshCurrent();
+    if (state.filterEnabled) refreshCurrent();
   };
 
-  const toggleShowRaw = async (): Promise<void> => {
+  const toggleFilter = async (): Promise<void> => {
     const state = activeState();
     if (!state) return;
-    state.showRaw = !state.showRaw;
+    state.filterEnabled = !state.filterEnabled;
     await syncAllEditors();
   };
 
@@ -278,10 +278,7 @@ export function activateFilter(context: vscode.ExtensionContext): void {
       "nextflow.log.toggleStripAnsi",
       toggleStripAnsi
     ),
-    vscode.commands.registerCommand(
-      "nextflow.log.toggleShowRawFile",
-      toggleShowRaw
-    )
+    vscode.commands.registerCommand("nextflow.log.toggleFilter", toggleFilter)
   );
 
   const openFilterMenu = (): void => {
@@ -300,10 +297,10 @@ export function activateFilter(context: vscode.ExtensionContext): void {
     });
 
     const buildItems = (): FilterItem[] => {
-      if (state.showRaw) {
+      if (!state.filterEnabled) {
         return [
           {
-            action: "showRaw",
+            action: "filter",
             label: "$(arrow-left) Return to cleaned view"
           }
         ];
@@ -333,7 +330,7 @@ export function activateFilter(context: vscode.ExtensionContext): void {
       });
       items.push(separator("Advanced"));
       items.push({
-        action: "showRaw",
+        action: "filter",
         label: "$(go-to-file) Open as editable file"
       });
       return items;
@@ -349,8 +346,8 @@ export function activateFilter(context: vscode.ExtensionContext): void {
         toggleLevel(picked.level);
       } else if (picked.action === "stripAnsi") {
         toggleStripAnsi();
-      } else if (picked.action === "showRaw") {
-        await toggleShowRaw();
+      } else if (picked.action === "filter") {
+        await toggleFilter();
       } else if (picked.action === "saveWorkspace") {
         await persistSettings(vscode.ConfigurationTarget.Workspace);
         qp.hide();

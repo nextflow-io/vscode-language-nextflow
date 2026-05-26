@@ -144,8 +144,8 @@
         "icon": "$(list-filter)"
       },
       {
-        "command": "nextflow.log.toggleShowRawFile",
-        "title": "Toggle raw file view",
+        "command": "nextflow.log.toggleFilter",
+        "title": "Toggle log level filtering",
         "category": "Nextflow Log"
       },
       {
@@ -184,7 +184,7 @@
           "when": "resourceLangId == nextflow-log"
         },
         {
-          "command": "nextflow.log.toggleShowRawFile",
+          "command": "nextflow.log.toggleFilter",
           "when": "resourceLangId == nextflow-log"
         }
       ],
@@ -318,10 +318,10 @@
           "default": true,
           "markdownDescription": "Remove ANSI escape codes (e.g. `\\u001b[0;32m`) from `.nextflow.log` files when displayed in the editor. The file on disk is unchanged."
         },
-        "nextflow.log.showRawFile": {
+        "nextflow.log.filter.enabled": {
           "type": "boolean",
-          "default": false,
-          "markdownDescription": "Show the raw `.nextflow.log` file as it is on disk, bypassing the cleaned virtual view. Disables level filtering and ANSI stripping in the editor."
+          "default": true,
+          "markdownDescription": "Enable filtering by log level. Logs are read-only when filtered."
         }
       }
     },
