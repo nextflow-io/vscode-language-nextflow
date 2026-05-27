@@ -30,7 +30,9 @@
   ],
   "activationEvents": [
     "onStartupFinished",
-    "onAuthenticationRequest:azuread"
+    "onAuthenticationRequest:azuread",
+    "onLanguage:nextflow-log",
+    "onFileSystem:nextflow-log-filtered"
   ],
   "main": "./extension.js",
   "contributes": {
@@ -48,8 +50,8 @@
         "firstLine": "^#!.*\\bnextflow\\b",
         "configuration": "./language-configuration.json",
         "icon": {
-          "light": "./images/nextflow-icon-128x128.png",
-          "dark": "./images/nextflow-icon-128x128.png"
+          "light": "./images/nextflow-icon.svg",
+          "dark": "./images/nextflow-icon.svg"
         }
       },
       {
@@ -62,8 +64,24 @@
         ],
         "configuration": "./language-configuration.json",
         "icon": {
-          "light": "./images/nextflow-icon-128x128.png",
-          "dark": "./images/nextflow-icon-128x128.png"
+          "light": "./images/nextflow-icon.svg",
+          "dark": "./images/nextflow-icon.svg"
+        }
+      },
+      {
+        "id": "nextflow-log",
+        "aliases": [
+          "Nextflow Log"
+        ],
+        "filenamePatterns": [
+          ".nextflow.log",
+          ".nextflow.log.*",
+          ".module.log",
+          ".module.log.*"
+        ],
+        "icon": {
+          "light": "./images/nextflow-log.svg",
+          "dark": "./images/nextflow-log.svg"
         }
       },
       {
@@ -80,6 +98,11 @@
         "language": "nextflow-config",
         "scopeName": "source.nextflow-config",
         "path": "./syntaxes/nextflow-config.tmLanguage.json"
+      },
+      {
+        "language": "nextflow-log",
+        "scopeName": "source.nextflow-log",
+        "path": "./syntaxes/nextflow-log.tmLanguage.json"
       },
       {
         "scopeName": "source.nextflow-groovy",
@@ -119,6 +142,17 @@
         "category": "Nextflow"
       },
       {
+        "command": "nextflow.log.filter.menu",
+        "title": "Toggle log filters...",
+        "category": "Nextflow Log",
+        "icon": "$(list-filter)"
+      },
+      {
+        "command": "nextflow.log.filter.toggle",
+        "title": "Toggle log filtering",
+        "category": "Nextflow Log"
+      },
+      {
         "command": "nextflow.seqera.goToCloud",
         "title": "Go to Seqera Cloud",
         "category": "Nextflow",
@@ -148,6 +182,14 @@
         {
           "command": "nextflow.languageServer.convertScriptToTyped",
           "when": "resourceExtname == '.nf'"
+        },
+        {
+          "command": "nextflow.log.filter.menu",
+          "when": "resourceLangId == nextflow-log"
+        },
+        {
+          "command": "nextflow.log.filter.toggle",
+          "when": "resourceLangId == nextflow-log"
         }
       ],
       "view/title": [
@@ -254,6 +296,39 @@
           "type": "boolean",
           "default": false,
           "markdownDescription": "Enable usage data to be sent to Seqera. See the welcome page for more information about what we do and do not collect."
+        },
+        "nextflow.log.debugOpacity": {
+          "type": "number",
+          "minimum": 0.1,
+          "maximum": 1.0,
+          "default": 0.3,
+          "markdownDescription": "Opacity applied to `DEBUG` and `TRACE` entries in `.nextflow.log` files. Set to `1.0` to disable dimming."
+        },
+        "nextflow.log.filter.enabled": {
+          "type": "boolean",
+          "default": true,
+          "markdownDescription": "Enable filtering by log level. Logs are read-only when filtered."
+        },
+        "nextflow.log.filter.hiddenLevels": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "TRACE",
+              "DEBUG",
+              "INFO",
+              "WARN",
+              "ERROR"
+            ]
+          },
+          "default": [],
+          "uniqueItems": true,
+          "markdownDescription": "Log levels to hide in `.nextflow.log` files when filtering is enabled. The file on disk is unchanged. Can be toggled per-file in the editor title bar."
+        },
+        "nextflow.log.filter.stripAnsi": {
+          "type": "boolean",
+          "default": true,
+          "markdownDescription": "Remove ANSI escape codes (e.g. `\\u001b[0;32m`) from `.nextflow.log` files when filtering is enabled. The file on disk is unchanged. Can be toggled per-file in the editor title bar."
         }
       }
     },

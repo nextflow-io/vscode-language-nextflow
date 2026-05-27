@@ -1,0 +1,208 @@
+{
+  "$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+  "name": "Nextflow Log",
+  "scopeName": "source.nextflow-log",
+  "patterns": [
+    { "include": "#entry-error" },
+    { "include": "#entry-warn" },
+    { "include": "#entry-info" },
+    { "include": "#entry-debug" },
+    { "include": "#entry-trace" }
+  ],
+  "repository": {
+    "entry-error": {
+      "name": "meta.entry.error.nextflow-log",
+      "begin": "^([A-Z][a-z]{2}-\\d{2} \\d{2}:\\d{2}:\\d{2}\\.\\d{3}) (\\[[^\\]]+\\]) (ERROR) +([\\w$.]+) (-)",
+      "beginCaptures": {
+        "1": { "name": "constant.other.timestamp.nextflow-log" },
+        "2": { "name": "entity.name.tag.thread.nextflow-log" },
+        "3": { "name": "invalid.illegal.level.error.nextflow-log" },
+        "4": { "name": "entity.name.class.logger.nextflow-log" },
+        "5": { "name": "punctuation.separator.nextflow-log" }
+      },
+      "end": "(?=^[A-Z][a-z]{2}-\\d{2} \\d{2}:\\d{2}:\\d{2}\\.\\d{3} \\[)",
+      "patterns": [{ "include": "#message-body" }]
+    },
+    "entry-warn": {
+      "name": "meta.entry.warn.nextflow-log",
+      "begin": "^([A-Z][a-z]{2}-\\d{2} \\d{2}:\\d{2}:\\d{2}\\.\\d{3}) (\\[[^\\]]+\\]) (WARN) +([\\w$.]+) (-)",
+      "beginCaptures": {
+        "1": { "name": "constant.other.timestamp.nextflow-log" },
+        "2": { "name": "entity.name.tag.thread.nextflow-log" },
+        "3": { "name": "invalid.deprecated.level.warn.nextflow-log" },
+        "4": { "name": "entity.name.class.logger.nextflow-log" },
+        "5": { "name": "punctuation.separator.nextflow-log" }
+      },
+      "end": "(?=^[A-Z][a-z]{2}-\\d{2} \\d{2}:\\d{2}:\\d{2}\\.\\d{3} \\[)",
+      "patterns": [{ "include": "#message-body" }]
+    },
+    "entry-info": {
+      "name": "meta.entry.info.nextflow-log",
+      "begin": "^([A-Z][a-z]{2}-\\d{2} \\d{2}:\\d{2}:\\d{2}\\.\\d{3}) (\\[[^\\]]+\\]) (INFO) +([\\w$.]+) (-)",
+      "beginCaptures": {
+        "1": { "name": "constant.other.timestamp.nextflow-log" },
+        "2": { "name": "entity.name.tag.thread.nextflow-log" },
+        "3": { "name": "keyword.other.level.info.nextflow-log" },
+        "4": { "name": "entity.name.class.logger.nextflow-log" },
+        "5": { "name": "punctuation.separator.nextflow-log" }
+      },
+      "end": "(?=^[A-Z][a-z]{2}-\\d{2} \\d{2}:\\d{2}:\\d{2}\\.\\d{3} \\[)",
+      "patterns": [{ "include": "#message-body" }]
+    },
+    "entry-debug": {
+      "name": "meta.entry.debug.nextflow-log",
+      "begin": "^([A-Z][a-z]{2}-\\d{2} \\d{2}:\\d{2}:\\d{2}\\.\\d{3}) (\\[[^\\]]+\\]) (DEBUG) +([\\w$.]+) (-)",
+      "beginCaptures": {
+        "1": { "name": "constant.other.timestamp.nextflow-log" },
+        "2": { "name": "entity.name.tag.thread.nextflow-log" },
+        "3": { "name": "keyword.other.level.debug.nextflow-log" },
+        "4": { "name": "entity.name.class.logger.nextflow-log" },
+        "5": { "name": "punctuation.separator.nextflow-log" }
+      },
+      "end": "(?=^[A-Z][a-z]{2}-\\d{2} \\d{2}:\\d{2}:\\d{2}\\.\\d{3} \\[)",
+      "patterns": [{ "include": "#message-body" }]
+    },
+    "entry-trace": {
+      "name": "meta.entry.trace.nextflow-log",
+      "begin": "^([A-Z][a-z]{2}-\\d{2} \\d{2}:\\d{2}:\\d{2}\\.\\d{3}) (\\[[^\\]]+\\]) (TRACE) +([\\w$.]+) (-)",
+      "beginCaptures": {
+        "1": { "name": "constant.other.timestamp.nextflow-log" },
+        "2": { "name": "entity.name.tag.thread.nextflow-log" },
+        "3": { "name": "keyword.other.level.trace.nextflow-log" },
+        "4": { "name": "entity.name.class.logger.nextflow-log" },
+        "5": { "name": "punctuation.separator.nextflow-log" }
+      },
+      "end": "(?=^[A-Z][a-z]{2}-\\d{2} \\d{2}:\\d{2}:\\d{2}\\.\\d{3} \\[)",
+      "patterns": [{ "include": "#message-body" }]
+    },
+    "message-body": {
+      "patterns": [
+        { "include": "#section-label" },
+        { "include": "#exception-line" },
+        { "include": "#stack-trace-line" },
+        { "include": "#work-hash" },
+        { "include": "#work-path" },
+        { "include": "#process-name-marker" },
+        { "include": "#process-node-header" },
+        { "include": "#channel-port" },
+        { "include": "#indented-status" },
+        { "include": "#script-id" },
+        { "include": "#plugin-version" },
+        { "include": "#url" },
+        { "include": "#quoted-double" },
+        { "include": "#quoted-single" },
+        { "include": "#absolute-path" },
+        { "include": "#key-value" },
+        { "include": "#number-with-unit" }
+      ]
+    },
+    "section-label": {
+      "match": "^(Caused by|Command executed|Command exit status|Command output|Command error|Work dir|Tip):",
+      "captures": {
+        "1": { "name": "keyword.control.section.nextflow-log" }
+      }
+    },
+    "exception-line": {
+      "match": "^([\\w.$]+(?:Exception|Error)): (.+)$",
+      "captures": {
+        "1": { "name": "entity.name.type.exception.nextflow-log" },
+        "2": { "name": "string.unquoted.exception-message.nextflow-log" }
+      }
+    },
+    "stack-trace-line": {
+      "match": "^(\\t+)(at) ([\\w$./<>]+)(\\()([^)]+)(\\))",
+      "captures": {
+        "2": { "name": "keyword.control.at.nextflow-log" },
+        "3": { "name": "entity.name.function.stack-frame.nextflow-log" },
+        "4": { "name": "punctuation.section.parens.begin.nextflow-log" },
+        "5": { "name": "constant.other.source-location.nextflow-log" },
+        "6": { "name": "punctuation.section.parens.end.nextflow-log" }
+      }
+    },
+    "work-hash": {
+      "match": "\\[[a-f0-9]{2}/[a-f0-9]{6,}\\]",
+      "name": "constant.numeric.hash.work.nextflow-log"
+    },
+    "work-path": {
+      "match": "/work/[a-f0-9]{2}/[a-f0-9]{6,}[\\w./-]*",
+      "name": "string.unquoted.path.work.nextflow-log"
+    },
+    "process-name-marker": {
+      "match": "(process|workflow)( > )([A-Za-z0-9_:]+)((?:\\s*\\([^)]+\\))?)",
+      "captures": {
+        "1": { "name": "keyword.other.process-marker.nextflow-log" },
+        "2": { "name": "punctuation.separator.nextflow-log" },
+        "3": { "name": "entity.name.function.process.nextflow-log" },
+        "4": { "name": "meta.process-instance.nextflow-log" }
+      }
+    },
+    "process-node-header": {
+      "match": "^(\\[process\\]) ([A-Za-z0-9_:]+)",
+      "captures": {
+        "1": { "name": "keyword.other.process-marker.nextflow-log" },
+        "2": { "name": "entity.name.function.process.nextflow-log" }
+      }
+    },
+    "channel-port": {
+      "match": "(port \\d+): (\\((value|queue|cntrl)\\)) (\\S+)\\s*; (channel): (.+)$",
+      "captures": {
+        "1": { "name": "variable.parameter.port.nextflow-log" },
+        "2": { "name": "support.type.channel-type.nextflow-log" },
+        "4": { "name": "constant.language.state.nextflow-log" },
+        "5": { "name": "variable.parameter.nextflow-log" },
+        "6": { "name": "variable.other.channel.nextflow-log" }
+      }
+    },
+    "indented-status": {
+      "match": "^( +)(status)(=)(\\S+)",
+      "captures": {
+        "2": { "name": "variable.parameter.nextflow-log" },
+        "3": { "name": "punctuation.separator.key-value.nextflow-log" },
+        "4": { "name": "constant.language.state.nextflow-log" }
+      }
+    },
+    "script-id": {
+      "match": "\\bScript_[a-f0-9]+\\b",
+      "name": "support.constant.script-id.nextflow-log"
+    },
+    "plugin-version": {
+      "match": "\\b([a-zA-Z][\\w-]*)(@)(\\d[\\d.]*)\\b",
+      "captures": {
+        "1": { "name": "support.module.plugin.nextflow-log" },
+        "2": { "name": "punctuation.separator.version.nextflow-log" },
+        "3": { "name": "support.constant.version.nextflow-log" }
+      }
+    },
+    "url": {
+      "match": "https?://[^\\s)]+",
+      "name": "markup.underline.link.nextflow-log"
+    },
+    "quoted-double": {
+      "match": "\"[^\"\\n]*\"",
+      "name": "string.quoted.double.nextflow-log"
+    },
+    "quoted-single": {
+      "match": "'[^'\\n]*'",
+      "name": "string.quoted.single.nextflow-log"
+    },
+    "absolute-path": {
+      "match": "(?<![\\w./@-])/(?:[\\w.-]+/)*[\\w.-]+/?",
+      "name": "string.unquoted.path.nextflow-log"
+    },
+    "key-value": {
+      "match": "\\b([a-zA-Z_][\\w.-]*)(=)([^\\s;,]+)",
+      "captures": {
+        "1": { "name": "variable.parameter.nextflow-log" },
+        "2": { "name": "punctuation.separator.key-value.nextflow-log" },
+        "3": { "name": "string.unquoted.value.nextflow-log" }
+      }
+    },
+    "number-with-unit": {
+      "match": "\\b(\\d+(?:\\.\\d+)?)(\\s*(?:ms|s|m|h|d|GB|MB|KB|TB|B|%))?\\b",
+      "captures": {
+        "1": { "name": "constant.numeric.nextflow-log" },
+        "2": { "name": "keyword.other.unit.nextflow-log" }
+      }
+    }
+  }
+}

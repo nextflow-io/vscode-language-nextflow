@@ -9,5 +9,9 @@ server:
 package:
 	npm run package
 
+test:
+	npm run compile
+	code --extensionDevelopmentPath=$(PWD)/build
+
 install: all
 	code --install-extension build/nextflow.vsix
