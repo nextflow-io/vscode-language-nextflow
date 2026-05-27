@@ -20,7 +20,7 @@ export function toOriginalUri(filtered: vscode.Uri): vscode.Uri {
 }
 
 export const READONLY_MESSAGE = new vscode.MarkdownString(
-  "Cannot edit a cleaned Nextflow log view"
+  "Cannot edit Nextflow log when filtering is enabled"
 );
 
 export interface ViewState {

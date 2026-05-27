@@ -142,14 +142,14 @@
         "category": "Nextflow"
       },
       {
-        "command": "nextflow.log.filterMenu",
+        "command": "nextflow.log.filter.menu",
         "title": "Toggle log filters...",
         "category": "Nextflow Log",
         "icon": "$(list-filter)"
       },
       {
-        "command": "nextflow.log.toggleFilter",
-        "title": "Toggle log level filtering",
+        "command": "nextflow.log.filter.toggle",
+        "title": "Toggle log filtering",
         "category": "Nextflow Log"
       },
       {
@@ -184,11 +184,11 @@
           "when": "resourceExtname == '.nf'"
         },
         {
-          "command": "nextflow.log.filterMenu",
+          "command": "nextflow.log.filter.menu",
           "when": "resourceLangId == nextflow-log"
         },
         {
-          "command": "nextflow.log.toggleFilter",
+          "command": "nextflow.log.filter.toggle",
           "when": "resourceLangId == nextflow-log"
         }
       ],
@@ -301,7 +301,12 @@
           "default": 0.3,
           "markdownDescription": "Opacity applied to `DEBUG` and `TRACE` entries in `.nextflow.log` files. Set to `1.0` to disable dimming."
         },
-        "nextflow.log.hiddenLevels": {
+        "nextflow.log.filter.enabled": {
+          "type": "boolean",
+          "default": true,
+          "markdownDescription": "Enable filtering by log level. Logs are read-only when filtered."
+        },
+        "nextflow.log.filter.hiddenLevels": {
           "type": "array",
           "items": {
             "type": "string",
@@ -315,17 +320,12 @@
           },
           "default": [],
           "uniqueItems": true,
-          "markdownDescription": "Log levels currently hidden in `.nextflow.log` files. Toggle from the eye icons in the editor title bar."
+          "markdownDescription": "Log levels to hide in `.nextflow.log` files when filtering is enabled. The file on disk is unchanged. Can be toggled per-file in the editor title bar."
         },
-        "nextflow.log.stripAnsi": {
+        "nextflow.log.filter.stripAnsi": {
           "type": "boolean",
           "default": true,
-          "markdownDescription": "Remove ANSI escape codes (e.g. `\\u001b[0;32m`) from `.nextflow.log` files when displayed in the editor. The file on disk is unchanged."
-        },
-        "nextflow.log.filter.enabled": {
-          "type": "boolean",
-          "default": true,
-          "markdownDescription": "Enable filtering by log level. Logs are read-only when filtered."
+          "markdownDescription": "Remove ANSI escape codes (e.g. `\\u001b[0;32m`) from `.nextflow.log` files when filtering is enabled. The file on disk is unchanged. Can be toggled per-file in the editor title bar."
         }
       }
     },

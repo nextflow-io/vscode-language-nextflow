@@ -12,9 +12,9 @@ import {
 } from "./filteredView";
 import { LOG_LEVELS, LogLevel } from "./parseEntries";
 
-const HIDDEN_KEY = "nextflow.log.hiddenLevels";
-const STRIP_KEY = "nextflow.log.stripAnsi";
-const FILTER_KEY = "nextflow.log.filter.enabled";
+const FILTER_ENABLED_KEY = "nextflow.log.filter.enabled";
+const FILTER_HIDDEN_LEVELS_KEY = "nextflow.log.filter.hiddenLevels";
+const FILTER_STRIP_ANSI_KEY = "nextflow.log.filter.stripAnsi";
 
 interface FileState extends ViewState {
   filterEnabled: boolean;
@@ -33,10 +33,14 @@ interface FilterItem extends vscode.QuickPickItem {
   level?: LogLevel;
 }
 
-function readDefaultHidden(): Set<LogLevel> {
+function readDefaultFilterEnabled(): boolean {
+  return vscode.workspace.getConfiguration().get<boolean>(FILTER_ENABLED_KEY, true);
+}
+
+function readDefaultHiddenLevels(): Set<LogLevel> {
   const raw = vscode.workspace
     .getConfiguration()
-    .get<string[]>(HIDDEN_KEY, []);
+    .get<string[]>(FILTER_HIDDEN_LEVELS_KEY, []);
   const set = new Set<LogLevel>();
   for (const v of raw) {
     if ((LOG_LEVELS as readonly string[]).includes(v)) {
@@ -47,18 +51,14 @@ function readDefaultHidden(): Set<LogLevel> {
 }
 
 function readDefaultStripAnsi(): boolean {
-  return vscode.workspace.getConfiguration().get<boolean>(STRIP_KEY, true);
-}
-
-function readDefaultFilterEnabled(): boolean {
-  return vscode.workspace.getConfiguration().get<boolean>(FILTER_KEY, true);
+  return vscode.workspace.getConfiguration().get<boolean>(FILTER_STRIP_ANSI_KEY, true);
 }
 
 function defaultState(): FileState {
   return {
-    hidden: readDefaultHidden(),
+    filterEnabled: readDefaultFilterEnabled(),
+    hidden: readDefaultHiddenLevels(),
     stripAnsi: readDefaultStripAnsi(),
-    filterEnabled: readDefaultFilterEnabled()
   };
 }
 
@@ -71,26 +71,26 @@ async function saveAllSettings(
   // Pass `undefined` to remove the key from settings.json when the value
   // matches the package.json default — avoids leaving noisy default entries.
   await config.update(
-    HIDDEN_KEY,
+    FILTER_ENABLED_KEY,
+    state.filterEnabled === true ? undefined : state.filterEnabled,
+    target
+  );
+  await config.update(
+    FILTER_HIDDEN_LEVELS_KEY,
     hiddenList.length === 0 ? undefined : hiddenList,
     target
   );
   await config.update(
-    STRIP_KEY,
+    FILTER_STRIP_ANSI_KEY,
     state.stripAnsi === true ? undefined : state.stripAnsi,
-    target
-  );
-  await config.update(
-    FILTER_KEY,
-    state.filterEnabled === true ? undefined : state.filterEnabled,
     target
   );
 }
 
 function describeState(state: FileState): string {
-  if (!state.filterEnabled) return "$(file) Raw file — click to clean";
+  if (!state.filterEnabled) return "$(file) Raw file (click to change)";
   if (state.hidden.size === 0)
-    return "$(list-filter) Filter Nextflow log levels";
+    return "$(list-filter) Filter log levels";
   const visible = LOG_LEVELS.filter((l) => !state.hidden.has(l));
   return `$(list-filter) ${visible.length ? `Showing: ${visible.join(" · ")}` : "Nothing visible"}`;
 }
@@ -129,14 +129,14 @@ class FilterCodeLensProvider implements vscode.CodeLensProvider {
     const range = new vscode.Range(0, 0, 0, 0);
     let title: string;
     if (!state.filterEnabled) {
-      title = "$(file)  Viewing raw .nextflow.log — click to change";
+      title = "$(file)  Viewing raw log file (click to change)";
     } else if (state.hidden.size === 0) {
-      title = "$(list-filter)  Filter visible log levels";
+      title = "$(list-filter)  Filter log levels";
     } else {
-      title = `$(list-filter)  Hidden: ${LOG_LEVELS.filter((l) => state.hidden.has(l)).join(", ")} — click to change`;
+      title = `$(list-filter)  Hidden: ${LOG_LEVELS.filter((l) => state.hidden.has(l)).join(", ")} (click to change)`;
     }
     return [
-      new vscode.CodeLens(range, { title, command: "nextflow.log.filterMenu" })
+      new vscode.CodeLens(range, { title, command: "nextflow.log.filter.menu" })
     ];
   }
 }
@@ -178,7 +178,7 @@ export function activateFilter(context: vscode.ExtensionContext): void {
     100
   );
   statusBar.tooltip = "Click to change Nextflow log view";
-  statusBar.command = "nextflow.log.filterMenu";
+  statusBar.command = "nextflow.log.filter.menu";
   context.subscriptions.push(statusBar);
 
   const updateStatusBar = (): void => {
@@ -265,20 +265,8 @@ export function activateFilter(context: vscode.ExtensionContext): void {
     );
   };
 
-  for (const level of LOG_LEVELS) {
-    const cap = level.charAt(0) + level.slice(1).toLowerCase();
-    context.subscriptions.push(
-      vscode.commands.registerCommand(`nextflow.log.toggle${cap}`, () =>
-        toggleLevel(level)
-      )
-    );
-  }
   context.subscriptions.push(
-    vscode.commands.registerCommand(
-      "nextflow.log.toggleStripAnsi",
-      toggleStripAnsi
-    ),
-    vscode.commands.registerCommand("nextflow.log.toggleFilter", toggleFilter)
+    vscode.commands.registerCommand("nextflow.log.filter.toggle", toggleFilter)
   );
 
   const openFilterMenu = (): void => {
@@ -286,7 +274,7 @@ export function activateFilter(context: vscode.ExtensionContext): void {
     if (!state) return;
 
     const qp = vscode.window.createQuickPick<FilterItem>();
-    qp.title = "Nextflow log view";
+    qp.title = "Nextflow log filtering";
     qp.placeholder = "Click an option to toggle";
     qp.canSelectMany = false;
 
@@ -301,7 +289,7 @@ export function activateFilter(context: vscode.ExtensionContext): void {
         return [
           {
             action: "filter",
-            label: "$(arrow-left) Return to cleaned view"
+            label: "$(arrow-left) Return to filtered view"
           }
         ];
       }
@@ -365,7 +353,7 @@ export function activateFilter(context: vscode.ExtensionContext): void {
   };
 
   context.subscriptions.push(
-    vscode.commands.registerCommand("nextflow.log.filterMenu", openFilterMenu)
+    vscode.commands.registerCommand("nextflow.log.filter.menu", openFilterMenu)
   );
 
   // Drop state when both the filtered tab and the original tab for a log
