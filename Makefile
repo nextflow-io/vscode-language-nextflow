@@ -1,16 +1,18 @@
-all: clean server package
+all: clean package
 
 clean:
 	rm -rf build
 
 server:
-	cd language-server ; make
+	make -C ../language-server
+
+compile:
+	npm run compile
 
 package:
 	npm run package
 
-test:
-	npm run compile
+test: compile
 	code --extensionDevelopmentPath=$(PWD)/build
 
 install: all

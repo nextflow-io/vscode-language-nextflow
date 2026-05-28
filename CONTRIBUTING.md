@@ -21,7 +21,7 @@ npm install
 If you need to edit the language server, clone the repository and build it:
 
 ```bash
-git clone https://github.com/nextflow-io/language-server
+git clone https://github.com/nextflow-io/language-server ../language-server
 make server
 ```
 

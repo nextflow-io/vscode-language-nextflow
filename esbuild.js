@@ -17,7 +17,7 @@ async function main() {
     "webview-ui/dist/**": "webview-ui/dist"
   };
   if (!production)
-    files["language-server/build/libs/language-server-all.jar"] = "bin";
+    files["../language-server/build/libs/language-server-all.jar"] = "bin";
   await build({
     entryPoints: ["src/extension.ts"],
     bundle: true,
