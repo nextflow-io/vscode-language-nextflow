@@ -374,7 +374,7 @@
     "@types/semver": "^7.7.0",
     "@types/vscode": "^1.96.0",
     "@vscode/vsce": "^3.2.1",
-    "esbuild": "^0.25.0",
+    "esbuild": "^0.28.1",
     "esbuild-plugin-copy": "^2.1.1",
     "jwt-decode": "^4.0.0",
     "mermaid": "^11.15.0",
