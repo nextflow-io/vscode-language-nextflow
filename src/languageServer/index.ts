@@ -138,35 +138,6 @@ async function previewDag(context: vscode.ExtensionContext, uri: string, name?: 
   panel.webview.html = buildMermaid(content, name ?? "Entry", mermaidLibUri);
 }
 
-async function convertPipelineToTyped() {
-  const languageVersion = vscode.workspace
-    .getConfiguration("nextflow")
-    .get("languageVersion") as string;
-  if (languageVersion === "24.10" || languageVersion == "25.04") {
-    vscode.window.showErrorMessage("The Nextflow language version must be 25.10 or newer in order to convert to static types.");
-    return;
-  }
-  const folders = vscode.workspace.workspaceFolders;
-  if (!folders || folders.length == 0)
-    return;
-  const folder = folders.length == 1
-    ? folders[0].name
-    : await vscode.window.showQuickPick(folders.map(f => f.name), { canPickMany: false });
-  if (!folder)
-    return;
-  const res: any = await vscode.commands.executeCommand(
-    "nextflow.server.convertPipelineToTyped",
-    folder
-  );
-  if (!res || res.error) {
-    const message = res?.error ?? "Failed to convert pipeline to static types.";
-    vscode.window.showErrorMessage(message);
-  }
-  else {
-    vscode.window.showInformationMessage("Converted pipeline to static types. Please review updated code for errors.");
-  }
-}
-
 async function convertScriptToTyped() {
   const languageVersion = vscode.workspace
     .getConfiguration("nextflow")
@@ -240,10 +211,6 @@ export function activateLanguageServer(
   vscode.commands.registerCommand(
     "nextflow.previewDag",
     (uri, name) => { previewDag(context, uri, name); }
-  );
-  vscode.commands.registerCommand(
-    "nextflow.languageServer.convertPipelineToTyped",
-    () => { convertPipelineToTyped(); }
   );
   vscode.commands.registerCommand(
     "nextflow.languageServer.convertScriptToTyped",

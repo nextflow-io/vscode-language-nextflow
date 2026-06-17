@@ -122,11 +122,6 @@
     ],
     "commands": [
       {
-        "command": "nextflow.languageServer.convertPipelineToTyped",
-        "title": "Convert pipeline to static types",
-        "category": "Nextflow"
-      },
-      {
         "command": "nextflow.languageServer.convertScriptToTyped",
         "title": "Convert script to static types",
         "category": "Nextflow"
