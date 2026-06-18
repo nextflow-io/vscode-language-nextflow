@@ -26,12 +26,16 @@ type ItemAction =
   | "filter"
   | "saveWorkspace"
   | "saveGlobal"
+  | "docs"
   | "none";
 
 interface FilterItem extends vscode.QuickPickItem {
   action: ItemAction;
   level?: LogLevel;
 }
+
+const DOCS_URL =
+  "https://github.com/nextflow-io/vscode-language-nextflow#configuration";
 
 function readDefaultFilterEnabled(): boolean {
   return vscode.workspace.getConfiguration().get<boolean>(FILTER_ENABLED_KEY, true);
@@ -290,6 +294,10 @@ export function activateFilter(context: vscode.ExtensionContext): void {
           {
             action: "filter",
             label: "$(arrow-left) Return to filtered view"
+          },
+          {
+            action: "docs",
+            label: "$(book) View all settings in the documentation"
           }
         ];
       }
@@ -321,6 +329,10 @@ export function activateFilter(context: vscode.ExtensionContext): void {
         action: "filter",
         label: "$(go-to-file) Open as editable file"
       });
+      items.push({
+        action: "docs",
+        label: "$(book) View all settings in the documentation"
+      });
       return items;
     };
 
@@ -342,6 +354,10 @@ export function activateFilter(context: vscode.ExtensionContext): void {
         return;
       } else if (picked.action === "saveGlobal") {
         await persistSettings(vscode.ConfigurationTarget.Global);
+        qp.hide();
+        return;
+      } else if (picked.action === "docs") {
+        await vscode.env.openExternal(vscode.Uri.parse(DOCS_URL));
         qp.hide();
         return;
       }
