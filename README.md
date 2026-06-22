@@ -62,6 +62,10 @@ Design tokens are documented in [`DESIGN.md`](DESIGN.md) using the [DESIGN.md fo
 
 Run **Preferences: Product Icon Theme** and select **Seqera** for teal-accented workbench icons (activity bar, folding, terminal).
 
+### Seqera file icon theme
+
+Run **Preferences: File Icon Theme** and select **Seqera** for Nextflow-branded file icons (`.nf`, `.config`, log files). Uses VS Code-style folder/file glyphs with an embedded Nextflow logo on script files.
+
 ## Installation
 
 This extension is available in the [Visual Studio Marketplace](https://marketplace.visualstudio.com/items?itemName=nextflow.nextflow) and the [Open VSX Registry](https://www.open-vsx.org/extension/nextflow/nextflow).

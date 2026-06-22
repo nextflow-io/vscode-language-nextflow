@@ -44,6 +44,13 @@
         "path": "./themes/seqera-product-icon-theme.json"
       }
     ],
+    "iconThemes": [
+      {
+        "id": "seqera",
+        "label": "Seqera",
+        "path": "./themes/seqera-file-icon-theme.json"
+      }
+    ],
     "themes": [
       {
         "label": "Seqera Dark",
