@@ -11,7 +11,8 @@ import {
   fetchPlatformData,
   fetchRuns,
   getRepoInfo,
-  queryWorkspace,
+  getWorkspaces,
+  getWorkspacePreview,
   getContainer,
   addPipeline
 } from "./lib";
@@ -82,6 +83,9 @@ class WebviewProvider implements vscode.WebviewViewProvider {
           break;
         case "addPipeline":
           this.addPipeline(message);
+          break;
+        case "previewWorkspace":
+          this.previewWorkspace(message);
           break;
       }
     });
@@ -186,9 +190,16 @@ class WebviewProvider implements vscode.WebviewViewProvider {
       await fetchPlatformData(accessToken, view.webview, _context, refresh);
     }
     if (viewID === "project") {
-      const nodes = await queryWorkspace();
-      view.webview.postMessage({ nodes });
+      const folders = getWorkspaces();
+      view.webview.postMessage({ folders });
     }
+  }
+
+  private async previewWorkspace(name: string) {
+    const nodes = await getWorkspacePreview(name);
+    this._currentView?.webview.postMessage({
+      nodes
+    });
   }
 
   private async emitTestCreated(filePath: string, successful: boolean) {

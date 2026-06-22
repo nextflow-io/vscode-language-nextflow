@@ -45,12 +45,14 @@ async function previewWorkspace(name: string): Promise<any> {
   }
 }
 
-export async function queryWorkspace(): Promise<TreeNode[]> {
+export function getWorkspaces(): string[] {
   const folders = vscode.workspace.workspaceFolders;
-  if (!folders || folders.length == 0)
+  if (!folders)
     return [];
+  return folders.map(folder => folder.name);
+}
 
-  const name = folders[0].name;
+export async function getWorkspacePreview(name: string): Promise<TreeNode[]> {
   const res: any = await previewWorkspace(name);
   if (!res || !res.result) {
     if (res?.error)
