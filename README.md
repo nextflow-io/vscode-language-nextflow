@@ -52,7 +52,7 @@ The Copilot extension for Seqera AI has been removed. Use the [Seqera AI CLI](ht
 
 ### Seqera Dark theme
 
-This extension includes a bundled **Seqera Dark** color theme aligned with Seqera and Nextflow branding. To enable it, open the Command Palette and run **Preferences: Color Theme**, then select **Seqera Dark**.
+This extension includes bundled **Seqera Dark** and **Seqera Light** color themes aligned with Seqera and Nextflow branding. To enable one, open the Command Palette and run **Preferences: Color Theme**, then select **Seqera Dark** or **Seqera Light**.
 
 The theme highlights Nextflow-specific syntax scopes (e.g. `process`, `workflow`, `params`) and log levels in `.nextflow.log` files. Webviews and the DAG preview inherit colors from the active VS Code theme via `--vscode-*` CSS variables.
 
