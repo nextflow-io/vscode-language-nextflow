@@ -49,6 +49,11 @@
         "label": "Seqera Dark",
         "uiTheme": "vs-dark",
         "path": "./themes/seqera-dark-color-theme.json"
+      },
+      {
+        "label": "Seqera Light",
+        "uiTheme": "vs",
+        "path": "./themes/seqera-light-color-theme.json"
       }
     ],
     "languages": [
