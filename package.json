@@ -37,6 +37,13 @@
   ],
   "main": "./extension.js",
   "contributes": {
+    "productIconThemes": [
+      {
+        "id": "seqera",
+        "label": "Seqera",
+        "path": "./themes/seqera-product-icon-theme.json"
+      }
+    ],
     "themes": [
       {
         "label": "Seqera Dark",

@@ -58,6 +58,10 @@ The theme highlights Nextflow-specific syntax scopes (e.g. `process`, `workflow`
 
 Design tokens are documented in [`DESIGN.md`](DESIGN.md) using the [DESIGN.md format](https://github.com/google-labs-code/design.md).
 
+### Seqera product icon theme
+
+Run **Preferences: Product Icon Theme** and select **Seqera** for teal-accented workbench icons (activity bar, folding, terminal).
+
 ## Installation
 
 This extension is available in the [Visual Studio Marketplace](https://marketplace.visualstudio.com/items?itemName=nextflow.nextflow) and the [Open VSX Registry](https://www.open-vsx.org/extension/nextflow/nextflow).

@@ -1,0 +1,93 @@
+{
+  "fonts": [
+    {
+      "id": "codicons",
+      "src": [
+        {
+          "path": "./fonts/codicon.ttf",
+          "format": "truetype"
+        }
+      ],
+      "weight": "normal",
+      "style": "normal",
+      "size": "100%"
+    }
+  ],
+  "iconDefinitions": {
+    "explorer-view-icon": {
+      "fontCharacter": "\\eaf0",
+      "fontColor": "#0DC09D",
+      "fontId": "codicons"
+    },
+    "search-view-icon": {
+      "fontCharacter": "\\ea6d",
+      "fontColor": "#0DC09D",
+      "fontId": "codicons"
+    },
+    "source-control-view-icon": {
+      "fontCharacter": "\\ea68",
+      "fontColor": "#0DC09D",
+      "fontId": "codicons"
+    },
+    "run-view-icon": {
+      "fontCharacter": "\\ead8",
+      "fontColor": "#0DC09D",
+      "fontId": "codicons"
+    },
+    "extensions-view-icon": {
+      "fontCharacter": "\\eae6",
+      "fontColor": "#0DC09D",
+      "fontId": "codicons"
+    },
+    "accounts-view-bar-icon": {
+      "fontCharacter": "\\eb99",
+      "fontColor": "#86E0CE",
+      "fontId": "codicons"
+    },
+    "settings-view-bar-icon": {
+      "fontCharacter": "\\eb51",
+      "fontColor": "#BABCBD",
+      "fontId": "codicons"
+    },
+    "tree-item-expanded": {
+      "fontCharacter": "\\eab4",
+      "fontColor": "#0DC09D",
+      "fontId": "codicons"
+    },
+    "folding-expanded": {
+      "fontCharacter": "\\eab4",
+      "fontColor": "#545555",
+      "fontId": "codicons"
+    },
+    "folding-collapsed": {
+      "fontCharacter": "\\eab6",
+      "fontColor": "#545555",
+      "fontId": "codicons"
+    },
+    "terminal-view-icon": {
+      "fontCharacter": "\\ea85",
+      "fontColor": "#0DC09D",
+      "fontId": "codicons"
+    },
+    "remote-explorer-view-icon": {
+      "fontCharacter": "\\eb39",
+      "fontColor": "#86E0CE",
+      "fontId": "codicons"
+    },
+    "debug-console-view-icon": {
+      "fontCharacter": "\\ea85",
+      "fontColor": "#0DC09D",
+      "fontId": "codicons"
+    },
+    "panel-close": {
+      "fontCharacter": "\\ea76",
+      "fontColor": "#BABCBD",
+      "fontId": "codicons"
+    },
+    "widget-close": {
+      "fontCharacter": "\\ea76",
+      "fontColor": "#BABCBD",
+      "fontId": "codicons"
+    }
+  }
+}
