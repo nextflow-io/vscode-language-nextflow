@@ -18,6 +18,7 @@ The extension uses the [Nextflow language server](https://github.com/nextflow-io
 - Hover hints
 - Rename
 - DAG preview for workflows
+- Metro map preview for workflows and pipeline outputs ([nf-metro](https://github.com/pinin4fjords/nf-metro))
 
 Read the [Nextflow documentation](https://nextflow.io/docs/latest/vscode.html) for more information about the Nextflow language server.
 
@@ -46,6 +47,14 @@ The Project view allows you to:
 - Navigate to a process, workflow, or test by name
 - Monitor test coverage across your entire pipeline
 
+### Metro map preview
+
+The extension integrates with [nf-metro](https://github.com/pinin4fjords/nf-metro) to visualize pipelines as transit-style metro maps:
+
+- **Preview Metro Map** — render a metro map from the current workflow DAG (same source as Nextflow `-with-dag`)
+- **Open Metro Map Preview** — open pre-rendered `.html`, `.svg`, or `.mmd` nf-metro files
+- **Find Metro Map Outputs** — scan common pipeline output directories (`results/`, `output/`, and configured `outputDir`) for nf-metro artifacts
+
 ### Copilot for Nextflow
 
 The Copilot extension for Seqera AI has been removed. Use the [Seqera AI CLI](https://seqera.io/blog/seqera-ai-cli-announcement/) instead.
@@ -59,6 +68,8 @@ This extension is available in the [Visual Studio Marketplace](https://marketpla
 The language server requires Java 17 or later.
 
 *Note: for custom Java installations such as conda, you might need to set the `nextflow.java.home` extension setting for the extension to find your Java installation.*
+
+Metro map preview requires the optional [nf-metro](https://github.com/pinin4fjords/nf-metro) CLI (`pip install nf-metro` or `conda install bioconda::nf-metro`). Set `nextflow.metro.path` if `nf-metro` is not on your `PATH`.
 
 ### Offline usage
 
@@ -110,6 +121,12 @@ The following settings are available:
 - `nextflow.log.filter.hiddenLevels`: Log levels to hide in `.nextflow.log` files when filtering is enabled. The file on disk is unchanged. Can be toggled per-file in the editor title bar.
 
 - `nextflow.log.filter.stripAnsi`: Remove ANSI escape codes (e.g. `\u001b[0;32m`) from `.nextflow.log` files when filtering is enabled. The file on disk is unchanged. Can be toggled per-file in the editor title bar.
+
+- `nextflow.metro.path`: Path to the `nf-metro` executable. If empty, the extension looks for `nf-metro` on `PATH`.
+
+- `nextflow.metro.theme`: Visual theme passed to nf-metro when rendering metro maps (`nfcore`, `light`, or `seqera`; `seqera` requires nf-metro 0.8+).
+
+- `nextflow.metro.format`: Output format for rendered metro maps (`html` or `svg`).
 
 - `nextflow.telemetry.enabled`: Enable usage data to be sent to Seqera. See [below](#telemetry-notice) for more information about what we do and do not collect.
 
