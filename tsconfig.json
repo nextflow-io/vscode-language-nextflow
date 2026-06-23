@@ -8,5 +8,5 @@
     "rootDir": "src",
     "types": []
   },
-  "exclude": ["node_modules", ".vscode-test", "webview-ui", "src/**/*.test.ts"]
+  "exclude": ["node_modules", ".vscode-test", "webview-ui", "src/**/*.test.ts", "src/**/*.integration.ts"]
 }

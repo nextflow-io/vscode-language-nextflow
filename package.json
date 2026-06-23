@@ -429,6 +429,7 @@
   "scripts": {
     "check-types": "tsc --noEmit",
     "test": "npm run check-types && node --experimental-strip-types --test src/metro/metro.test.ts",
+    "test:metro-smoke": "node --experimental-strip-types src/metro/smoke.integration.ts",
     "compile": "npm run check-types && npm run ui-build && node esbuild.js",
     "package": "npm run check-types && npm run ui-build && node esbuild.js --production && (cd build ; vsce package -o nextflow.vsix)",
     "ui-dev": "cd webview-ui && npm run dev",
