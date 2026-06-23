@@ -29,7 +29,7 @@ async function previewMetroArtifact(
 
   const title = path.basename(filePath);
 
-  if (kind === "mmd") {
+  if (kind === "mmd" || kind === "nextflow-dag") {
     try {
       await vscode.window.withProgress(
         {
@@ -40,7 +40,8 @@ async function previewMetroArtifact(
           const { outputPath, format } = await renderMetroFile(
             filePath,
             context,
-            path.basename(filePath, ext)
+            path.basename(filePath, ext),
+            kind === "nextflow-dag"
           );
           await openMetroWebview(
             title,

@@ -84,13 +84,14 @@ export async function renderFromDag(
 export async function renderMetroFile(
   inputPath: string,
   context: vscode.ExtensionContext,
-  title?: string
+  title?: string,
+  fromNextflow = false
 ): Promise<RenderResult> {
   const { format } = getMetroConfig();
   const tmpDir = await createTempDir(context);
   const outputFile = path.join(tmpDir, `metro.${format === "html" ? "html" : "svg"}`);
   return renderWithNfMetro(inputPath, outputFile, {
-    fromNextflow: false,
+    fromNextflow,
     title: title ?? path.basename(inputPath, path.extname(inputPath))
   });
 }

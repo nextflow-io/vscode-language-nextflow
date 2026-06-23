@@ -52,7 +52,7 @@ The Project view allows you to:
 The extension integrates with [nf-metro](https://github.com/pinin4fjords/nf-metro) to visualize pipelines as transit-style metro maps:
 
 - **Preview Metro Map** — render a metro map from the current workflow DAG (same source as Nextflow `-with-dag`)
-- **Open Metro Map Preview** — open pre-rendered `.html`, `.svg`, or `.mmd` nf-metro files
+- **Open Metro Map Preview** — open pre-rendered `.html`, `.svg`, `.mmd` nf-metro files, or Nextflow `-with-dag` `.mmd` exports
 - **Find Metro Map Outputs** — scan common pipeline output directories (`results/`, `output/`, and configured `outputDir`) for nf-metro artifacts
 
 ### Copilot for Nextflow

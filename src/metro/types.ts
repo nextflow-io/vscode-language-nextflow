@@ -1,6 +1,6 @@
 export type MetroTheme = "nfcore" | "light" | "seqera";
 export type MetroFormat = "html" | "svg";
-export type MetroFileKind = "mmd" | "html" | "svg";
+export type MetroFileKind = "mmd" | "html" | "svg" | "nextflow-dag";
 
 export interface MetroConfig {
   path: string;

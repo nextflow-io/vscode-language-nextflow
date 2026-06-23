@@ -1,6 +1,7 @@
 import * as vscode from "vscode";
 
 import { findAndOpenMetroOutputs, openMetroFile } from "./openMetroFile";
+import { getMetroOutputChannel } from "./outputChannel";
 import { previewMetro } from "./previewMetro";
 import type { TrackEvent } from "../telemetry";
 
@@ -19,6 +20,7 @@ export function activateMetro(
     ),
     vscode.commands.registerCommand("nextflow.findMetroOutputs", () =>
       findAndOpenMetroOutputs(context, trackEvent)
-    )
+    ),
+    getMetroOutputChannel()
   );
 }

@@ -3,29 +3,19 @@ import * as path from "path";
 import * as vscode from "vscode";
 
 import { detectMetroFile } from "./detectMetroFile";
+import { parseOutputDirsFromConfig } from "./parseOutputDirs";
 
 const METRO_EXTENSIONS = new Set([".mmd", ".html", ".svg"]);
 const MAX_SCAN_DEPTH = 5;
 
 async function readOutputDirs(workspaceRoot: string): Promise<string[]> {
-  const dirs = new Set<string>([
-    path.join(workspaceRoot, "results"),
-    path.join(workspaceRoot, "output")
-  ]);
-
   const configPath = path.join(workspaceRoot, "nextflow.config");
   try {
     const config = await fs.readFile(configPath, "utf8");
-    const outdirMatch = config.match(/(?:outputDir|params\.outdir)\s*=\s*['"]([^'"]+)['"]/);
-    if (outdirMatch?.[1]) {
-      const outdir = outdirMatch[1];
-      dirs.add(path.isAbsolute(outdir) ? outdir : path.join(workspaceRoot, outdir));
-    }
+    return parseOutputDirsFromConfig(config, workspaceRoot);
   } catch {
-    // nextflow.config may not exist
+    return parseOutputDirsFromConfig("", workspaceRoot);
   }
-
-  return [...dirs];
 }
 
 async function scanDir(dir: string, found: string[], depth = 0): Promise<void> {
