@@ -8,6 +8,9 @@ See [Keep a Changelog](http://keepachangelog.com/) for recommendations on how to
 
 - Add `DESIGN.md` design system specification for Seqera/Nextflow visual identity
 - Add bundled **Seqera Dark** color theme with Nextflow-specific syntax colors
+- Add **Seqera** product icon theme with teal-accented workbench icons
+- Add bundled **Seqera Light** color theme
+- Add **Seqera** file icon theme for `.nf`, `.config`, and Nextflow log files
 
 ## [1.7.1] - 2026-06-08
 

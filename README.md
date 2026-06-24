@@ -54,13 +54,21 @@ The Copilot extension for Seqera AI has been removed. Use the [Seqera AI CLI](ht
 
 ![Seqera Dark theme](images/seqera-dark-theme.png)
 
-This extension includes a bundled **Seqera Dark** color theme aligned with Seqera and Nextflow branding. To enable it, open the Command Palette and run **Preferences: Color Theme**, then select **Seqera Dark**.
+This extension includes bundled **Seqera Dark** and **Seqera Light** color themes aligned with Seqera and Nextflow branding. To enable one, open the Command Palette and run **Preferences: Color Theme**, then select **Seqera Dark** or **Seqera Light**.
 
 The README preview is captured from VS Code using sample files from [vscode-theme-tester](https://github.com/microsoft/vscode-theme-tester) with Nextflow syntax highlighting. Regenerate it with `bash scripts/capture-seqera-theme-preview.sh` after packaging the extension.
 
 The theme highlights Nextflow-specific syntax scopes (e.g. `process`, `workflow`, `params`) and log levels in `.nextflow.log` files. Webviews and the DAG preview inherit colors from the active VS Code theme via `--vscode-*` CSS variables.
 
 Design tokens are documented in [`DESIGN.md`](DESIGN.md) using the [DESIGN.md format](https://github.com/google-labs-code/design.md).
+
+### Seqera product icon theme
+
+Run **Preferences: Product Icon Theme** and select **Seqera** for teal-accented workbench icons (activity bar, folding, terminal).
+
+### Seqera file icon theme
+
+Run **Preferences: File Icon Theme** and select **Seqera** for Nextflow-branded file icons (`.nf`, `.config`, log files). Uses VS Code-style folder/file glyphs with an embedded Nextflow logo on script files.
 
 ## Installation
 

@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Seqera VS Code Themes — Preview</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=JetBrains+Mono:wght@400;600&display=swap');
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: Inter, system-ui, sans-serif;
+      background: #0b0812;
+      color: #f5f5f5;
+      padding: 32px;
+    }
+    h1 { font-size: 1.5rem; margin-bottom: 8px; }
+    p.sub { color: #babcbd; margin-bottom: 28px; max-width: 720px; line-height: 1.5; }
+    .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+    .panel {
+      border: 1px solid #2a2236;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 12px 40px rgba(0,0,0,.35);
+    }
+    .panel h2 {
+      padding: 12px 16px;
+      font-size: .9rem;
+      letter-spacing: .02em;
+      border-bottom: 1px solid;
+    }
+    .workbench { display: grid; grid-template-columns: 48px 180px 1fr; min-height: 340px; }
+    .activity { display: flex; flex-direction: column; align-items: center; gap: 14px; padding-top: 12px; }
+    .activity span {
+      width: 24px; height: 24px; border-radius: 6px;
+      display: grid; place-items: center; font-size: 14px;
+    }
+    .sidebar { padding: 12px 10px; font-size: 12px; }
+    .tree-item { display: flex; align-items: center; gap: 6px; padding: 3px 4px; border-radius: 4px; }
+    .tree-item.indent { padding-left: 18px; }
+    .file-dot { width: 14px; height: 14px; border-radius: 2px; flex-shrink: 0; }
+    .file-dot.nf { background: linear-gradient(135deg, #0dc09d 0 48%, transparent 48% 52%, #0dc09d 52% 100%), linear-gradient(45deg, #0dc09d 0 48%, transparent 48% 52%, #0dc09d 52% 100%); opacity: .95; }
+    .file-dot.log { background: #545555; mask: linear-gradient(#000 0 0) center/10px 2px no-repeat, linear-gradient(#000 0 0) center 4px/10px 2px no-repeat, linear-gradient(#000 0 0) center 8px/10px 2px no-repeat; -webkit-mask: linear-gradient(#000 0 0) center/10px 2px no-repeat, linear-gradient(#000 0 0) center 4px/10px 2px no-repeat, linear-gradient(#000 0 0) center 8px/10px 2px no-repeat; background-color: #0dc09d; }
+    .editor { padding: 0; font-family: "JetBrains Mono", monospace; font-size: 12px; line-height: 1.55; }
+  .editor pre { padding: 14px 16px; white-space: pre; }
+    .swatches { display: flex; gap: 8px; padding: 12px 16px; flex-wrap: wrap; border-top: 1px solid; }
+    .swatch { width: 56px; text-align: center; font-size: 9px; }
+    .swatch div { height: 28px; border-radius: 6px; margin-bottom: 4px; border: 1px solid rgba(0,0,0,.08); }
+    .icons { display: flex; gap: 16px; padding: 12px 16px; align-items: center; border-top: 1px solid; }
+    .icons img, .icons svg { width: 20px; height: 20px; }
+    .icon-label { font-size: 10px; color: inherit; opacity: .7; }
+
+    /* Dark */
+    .dark h2 { background: #160f26; color: #f5f5f5; border-color: #2a2236; }
+    .dark .activity { background: #160f26; border-right: 1px solid #2a2236; }
+    .dark .activity span { color: #0dc09d; }
+    .dark .sidebar { background: #160f26; color: #dddede; border-right: 1px solid #2a2236; }
+    .dark .tree-item.active { background: #0dc09d44; color: #f5f5f5; }
+    .dark .editor { background: #1e1829; color: #f5f5f5; }
+    .dark .kw { color: #0dc09d; font-weight: 600; }
+    .dark .fn { color: #86e0ce; font-weight: 600; }
+    .dark .str { color: #b6ece2; }
+    .dark .cm { color: #545555; font-style: italic; }
+    .dark .swatches { border-color: #2a2236; background: #160f26; color: #babcbd; }
+    .dark .icons { border-color: #2a2236; background: #160f26; color: #0dc09d; }
+
+    /* Light */
+    .light h2 { background: #f5f5f7; color: #160f26; border-color: #dddede; }
+    .light .activity { background: #f5f5f7; border-right: 1px solid #dddede; }
+    .light .activity span { color: #0dc09d; }
+    .light .sidebar { background: #f5f5f7; color: #160f26; border-right: 1px solid #dddede; }
+    .light .tree-item.active { background: #0dc09d33; color: #160f26; }
+    .light .editor { background: #ffffff; color: #160f26; }
+    .light .kw { color: #0a9b7d; font-weight: 600; }
+    .light .fn { color: #065647; font-weight: 600; }
+    .light .str { color: #065647; }
+    .light .cm { color: #545555; font-style: italic; }
+    .light .swatches { border-color: #dddede; background: #f5f5f7; color: #545555; }
+    .light .icons { border-color: #dddede; background: #f5f5f7; color: #0a9b7d; }
+  </style>
+</head>
+<body>
+  <h1>Seqera VS Code Themes</h1>
+  <p class="sub">Preview of bundled <strong>Seqera Dark</strong> and <strong>Seqera Light</strong> color themes with Nextflow syntax highlighting.</p>
+
+  <div class="grid">
+    <section class="panel dark">
+      <h2>Seqera Dark</h2>
+      <div class="workbench">
+        <div class="activity">
+          <span>📁</span><span>🔍</span><span>⎇</span><span>▶</span><span>🧩</span>
+        </div>
+        <div class="sidebar">
+          <div class="tree-item active"><span class="file-dot nf"></span> main.nf</div>
+          <div class="tree-item indent"><span class="file-dot nf"></span> modules/foo.nf</div>
+          <div class="tree-item"><span class="file-dot log"></span> .nextflow.log</div>
+          <div class="tree-item"><span class="file-dot nf"></span> nextflow.config</div>
+        </div>
+        <div class="editor"><pre><span class="cm">// RNA-seq pipeline</span>
+<span class="kw">workflow</span> {
+    <span class="fn">RNASEQ</span>(reads_ch)
+}
+
+<span class="kw">process</span> <span class="fn">RNASEQ</span> {
+    <span class="kw">input</span>:
+    path reads
+
+    <span class="kw">output</span>:
+    path <span class="str">'*.bam'</span>
+
+    <span class="kw">script</span>:
+    <span class="str">"""
+    salmon -o out
+    """</span>
+}</pre></div>
+      </div>
+      <div class="swatches">
+        <div class="swatch"><div style="background:#160F26"></div>ink</div>
+        <div class="swatch"><div style="background:#1E1829"></div>surface</div>
+        <div class="swatch"><div style="background:#0DC09D"></div>teal</div>
+        <div class="swatch"><div style="background:#B6ECE2"></div>mint</div>
+        <div class="swatch"><div style="background:#86E0CE"></div>mint+</div>
+      </div>
+      <div class="icons"><span class="icon-label">Teal accent on selection, tabs, and cursor</span></div>
+    </section>
+
+    <section class="panel light">
+      <h2>Seqera Light</h2>
+      <div class="workbench">
+        <div class="activity">
+          <span>📁</span><span>🔍</span><span>⎇</span><span>▶</span><span>🧩</span>
+        </div>
+        <div class="sidebar">
+          <div class="tree-item active"><span class="file-dot nf"></span> main.nf</div>
+          <div class="tree-item indent"><span class="file-dot nf"></span> modules/foo.nf</div>
+          <div class="tree-item"><span class="file-dot log"></span> .nextflow.log</div>
+          <div class="tree-item"><span class="file-dot nf"></span> nextflow.config</div>
+        </div>
+        <div class="editor"><pre><span class="cm">// RNA-seq pipeline</span>
+<span class="kw">workflow</span> {
+    <span class="fn">RNASEQ</span>(reads_ch)
+}
+
+<span class="kw">process</span> <span class="fn">RNASEQ</span> {
+    <span class="kw">input</span>:
+    path reads
+
+    <span class="kw">output</span>:
+    path <span class="str">'*.bam'</span>
+
+    <span class="kw">script</span>:
+    <span class="str">"""
+    salmon -o out
+    """</span>
+}</pre></div>
+      </div>
+      <div class="swatches">
+        <div class="swatch"><div style="background:#160F26"></div>ink</div>
+        <div class="swatch"><div style="background:#FFFFFF"></div>surface</div>
+        <div class="swatch"><div style="background:#0DC09D"></div>teal</div>
+        <div class="swatch"><div style="background:#B6ECE2"></div>mint</div>
+        <div class="swatch"><div style="background:#F5F5F7"></div>chrome</div>
+      </div>
+      <div class="icons"><span class="icon-label">Light chrome with darker teal keywords</span></div>
+    </section>
+  </div>
+</body>
+</html>
