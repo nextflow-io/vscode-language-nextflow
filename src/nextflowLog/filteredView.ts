@@ -29,7 +29,9 @@ export interface ViewState {
 }
 
 export class FilteredLogProvider implements vscode.FileSystemProvider {
-  private readonly emitter = new vscode.EventEmitter<vscode.FileChangeEvent[]>();
+  private readonly emitter = new vscode.EventEmitter<
+    vscode.FileChangeEvent[]
+  >();
   readonly onDidChangeFile = this.emitter.event;
 
   constructor(
