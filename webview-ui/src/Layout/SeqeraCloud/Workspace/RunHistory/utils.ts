@@ -6,16 +6,13 @@ import {
 
 export { formatDate, relativeTime } from "../../utils";
 
-export function getRunURL(
-  workspace: Workspace | undefined,
-  item: Workflow
-) {
+export function getRunURL(workspace: Workspace | undefined, item: Workflow) {
   if (!workspace) return "";
 
   return `${SEQERA_PLATFORM_URL}/orgs/${workspace.orgName}/workspaces/${workspace.workspaceName}/watch/${item.id}`;
 }
 
-export const getRuntimeMinutes = (workflow: any) => {
+export const getRuntimeMinutes = (workflow: Workflow) => {
   if (!workflow.complete) return null;
   const start = new Date(workflow.dateCreated).getTime();
   const end = new Date(workflow.complete).getTime();
