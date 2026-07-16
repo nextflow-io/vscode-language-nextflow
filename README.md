@@ -40,6 +40,8 @@ The formatter:
 
 To exclude code from formatting, use `// fmt: skip` on the last line of a statement or declaration, or enclose a region with `// fmt: off` and `// fmt: on`.
 
+*Note: the formatting behavior described above requires Nextflow language version 26.08 or later.*
+
 ### Project view
 
 The extension provides a custom view for Nextflow projects. The Project view uses the language server to provide an overview of your pipeline project.
@@ -112,6 +114,8 @@ The following settings are available:
 - `nextflow.formatting.maheshForm`: Place process outputs at the end of the process body when formatting Nextflow scripts.
 
 - `nextflow.formatting.maxLineLength`: Maximum line length when formatting (`0` to disable line wrapping).
+
+  *Note: requires Nextflow language version 26.08 or later.*
 
 - `nextflow.formatting.sortDeclarations`: Sort script declarations when formatting Nextflow scripts.
 

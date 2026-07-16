@@ -6,8 +6,8 @@ See [Keep a Changelog](http://keepachangelog.com/) for recommendations on how to
 
 ## [Unreleased]
 
-- Add `nextflow.formatting.maxLineLength` setting to control automatic line wrapping when formatting (default: `120`, `0` to disable)
-- Document the new formatter behavior: comments are always preserved, K&R style if/else and try/catch, blank line normalization, multi-line string re-indentation, automatic line wrapping, and the `// fmt: skip` / `// fmt: off` / `// fmt: on` directives for excluding code from formatting
+- Add `nextflow.formatting.maxLineLength` setting to control automatic line wrapping when formatting
+- Document the new formatter behavior and `// fmt:` directives in the README
 - Highlight `fmt:` formatter directives in comments
 
 *Note: the new formatter behavior requires a language server release built against the reworked nf-lang formatter ([nextflow-io/nextflow#7346](https://github.com/nextflow-io/nextflow/pull/7346)). Older language server versions ignore the new setting.*

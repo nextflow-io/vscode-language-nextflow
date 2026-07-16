@@ -118,16 +118,7 @@
               "name": "keyword.codetag.notation.groovy"
             }
           },
-          "match": "(//)\\s*(fmt:\\s*(?:skip|off|on)\\b).*$\\n?",
-          "name": "comment.line.double-slash.groovy"
-        },
-        {
-          "captures": {
-            "1": {
-              "name": "punctuation.definition.comment.groovy"
-            }
-          },
-          "match": "(//).*$\\n?",
+          "match": "(//)(?:\\s*(fmt:\\s*(?:skip|off|on))\\s*$)?.*$\\n?",
           "name": "comment.line.double-slash.groovy"
         }
       ]
