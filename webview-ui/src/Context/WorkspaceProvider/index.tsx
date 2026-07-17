@@ -40,7 +40,7 @@ interface WorkspaceContextType {
 
 type Props = {
   children: React.ReactNode;
-  vscode: any;
+  vscode: VSCodeApi;
   viewID: string;
 };
 

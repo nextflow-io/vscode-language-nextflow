@@ -1,4 +1,3 @@
-
 export interface TreeNode {
   name: string;
   type: "process" | "workflow";

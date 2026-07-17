@@ -65,7 +65,10 @@ export function getEntries(document: vscode.TextDocument): LogEntry[] {
   return entries;
 }
 
-export function entryRange(entry: LogEntry, document: vscode.TextDocument): vscode.Range {
+export function entryRange(
+  entry: LogEntry,
+  document: vscode.TextDocument
+): vscode.Range {
   const end = document.lineAt(entry.endLine).range.end;
   return new vscode.Range(entry.startLine, 0, end.line, end.character);
 }

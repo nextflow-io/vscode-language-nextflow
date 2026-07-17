@@ -80,9 +80,9 @@ class ResourcesProvider implements vscode.TreeDataProvider<ResourceItem> {
       return Promise.resolve([]);
     } else {
       return Promise.resolve(
-        this.resources.map((resource) => (
-          new ResourceItem(resource.label, resource.url)
-        ))
+        this.resources.map(
+          (resource) => new ResourceItem(resource.label, resource.url)
+        )
       );
     }
   }

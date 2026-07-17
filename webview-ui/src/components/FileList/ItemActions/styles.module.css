@@ -33,7 +33,7 @@
     }
     & .wave {
       opacity: 1;
-      fill: #3D95FD;
+      fill: #3d95fd;
     }
   }
   &.success,
@@ -59,14 +59,14 @@
     transition: opacity 0.1s;
   }
   & .actionGo {
-    color: #388A34;
+    color: #388a34;
   }
   & .wave {
     width: 21px;
     height: 21px;
     transition: fill 0.2s;
     opacity: 0.8;
-    fill: #77B5FE;
+    fill: #77b5fe;
   }
 }
 &:hover {
