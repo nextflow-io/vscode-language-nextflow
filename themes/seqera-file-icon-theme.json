@@ -1,0 +1,68 @@
+{
+  "iconDefinitions": {
+    "_file_dark": {
+      "iconPath": "./icons/document-dark.svg"
+    },
+    "_folder_dark": {
+      "iconPath": "./icons/folder-dark.svg"
+    },
+    "_folder_open_dark": {
+      "iconPath": "./icons/folder-open-dark.svg"
+    },
+    "_file_light": {
+      "iconPath": "./icons/document-light.svg"
+    },
+    "_folder_light": {
+      "iconPath": "./icons/folder-light.svg"
+    },
+    "_folder_open_light": {
+      "iconPath": "./icons/folder-open-light.svg"
+    },
+    "_nextflow_script_dark": {
+      "iconPath": "./icons/nextflow-script-dark.svg"
+    },
+    "_nextflow_script_light": {
+      "iconPath": "./icons/nextflow-script-light.svg"
+    },
+    "_nextflow_log_dark": {
+      "iconPath": "./icons/nextflow-log-dark.svg"
+    },
+    "_nextflow_log_light": {
+      "iconPath": "./icons/nextflow-log-light.svg"
+    }
+  },
+  "folder": "_folder_dark",
+  "folderExpanded": "_folder_open_dark",
+  "file": "_file_dark",
+  "fileExtensions": {
+    "nf": "_nextflow_script_dark",
+    "config": "_nextflow_script_dark"
+  },
+  "fileNames": {
+    "nextflow.config": "_nextflow_script_dark",
+    "main.nf": "_nextflow_script_dark"
+  },
+  "languageIds": {
+    "nextflow": "_nextflow_script_dark",
+    "nextflow-config": "_nextflow_script_dark",
+    "nextflow-log": "_nextflow_log_dark"
+  },
+  "light": {
+    "folder": "_folder_light",
+    "folderExpanded": "_folder_open_light",
+    "file": "_file_light",
+    "fileExtensions": {
+      "nf": "_nextflow_script_light",
+      "config": "_nextflow_script_light"
+    },
+    "fileNames": {
+      "nextflow.config": "_nextflow_script_light",
+      "main.nf": "_nextflow_script_light"
+    },
+    "languageIds": {
+      "nextflow": "_nextflow_script_light",
+      "nextflow-config": "_nextflow_script_light",
+      "nextflow-log": "_nextflow_log_light"
+    }
+  }
+}
