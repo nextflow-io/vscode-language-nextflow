@@ -39,7 +39,7 @@ The tree view shows processes and workflows organized by call hierarchy:
 
 ![Project Tree View](images/project_view_tree.png)
 
-*Examples taken from the [nf-core/fetchngs](https://github.com/nf-core/fetchngs) pipeline.*
+_Examples taken from the [nf-core/fetchngs](https://github.com/nf-core/fetchngs) pipeline._
 
 The Project view allows you to:
 
@@ -67,7 +67,7 @@ This extension is available in the [Visual Studio Marketplace](https://marketpla
 
 The language server requires Java 17 or later.
 
-*Note: for custom Java installations such as conda, you might need to set the `nextflow.java.home` extension setting for the extension to find your Java installation.*
+_Note: for custom Java installations such as conda, you might need to set the `nextflow.java.home` extension setting for the extension to find your Java installation._
 
 Metro map preview requires the optional [nf-metro](https://github.com/pinin4fjords/nf-metro) CLI (`pip install nf-metro` or `conda install bioconda::nf-metro`). Set `nextflow.metro.path` if `nf-metro` is not on your `PATH`.
 
@@ -82,7 +82,7 @@ wget https://github.com/nextflow-io/language-server/releases/download/v24.10.0/l
 
 The extension will fall back to the latest patch version from the local cache if it can't download from GitHub.
 
-*Note: Nextflow language server patch versions have no correlation to Nextflow patch versions. Always use the latest patch version of the language server when downloading a release manually.*
+_Note: Nextflow language server patch versions have no correlation to Nextflow patch versions. Always use the latest patch version of the language server when downloading a release manually._
 
 ## Commands
 
@@ -104,7 +104,7 @@ The following settings are available:
 
 - `nextflow.formatting.harshilAlignment`: Use the [Harshil Alignment™️](https://nf-co.re/docs/contributing/code_editors_and_styling/harshil_alignment) when formatting Nextflow scripts and config files.
 
-  *Note: not all rules are supported.*
+  _Note: not all rules are supported._
 
 - `nextflow.formatting.maheshForm`: Place process outputs at the end of the process body when formatting Nextflow scripts.
 

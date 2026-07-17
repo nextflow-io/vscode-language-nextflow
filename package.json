@@ -341,7 +341,7 @@
         "nextflow.log.debugOpacity": {
           "type": "number",
           "minimum": 0.1,
-          "maximum": 1.0,
+          "maximum": 1,
           "default": 0.3,
           "markdownDescription": "Opacity applied to `DEBUG` and `TRACE` entries in `.nextflow.log` files. Set to `1.0` to disable dimming."
         },

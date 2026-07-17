@@ -50,7 +50,14 @@ const ItemActions: React.FC<Props> = ({ node }) => {
             !!node.test && openFile(node.test.path, node.test.line)
           }
         >
-          <i className={clsx("codicon", "codicon-beaker", styles.actionIcon, styles.actionGo)} />
+          <i
+            className={clsx(
+              "codicon",
+              "codicon-beaker",
+              styles.actionIcon,
+              styles.actionGo
+            )}
+          />
         </button>
       ) : (
         <button

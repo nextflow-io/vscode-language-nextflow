@@ -1,7 +1,7 @@
-import * as cp from 'child_process';
+import * as cp from "child_process";
 import * as fs from "fs";
 import * as path from "path";
-import * as semver from 'semver';
+import * as semver from "semver";
 import * as vscode from "vscode";
 
 function isFile(javaPath: string): boolean {
@@ -9,9 +9,8 @@ function isFile(javaPath: string): boolean {
 }
 
 export function findJava(): string | null {
-  const executableFile: string = (process["platform"] === "win32")
-    ? "java.exe"
-    : "java";
+  const executableFile: string =
+    process["platform"] === "win32" ? "java.exe" : "java";
 
   const settingsJavaHome = vscode.workspace
     .getConfiguration("nextflow")
@@ -48,15 +47,17 @@ export function findJava(): string | null {
 }
 
 export function checkJavaVersion(javaPath: string): boolean {
-  const output = cp.execSync(`"${javaPath}" -version 2>&1`, { encoding: 'utf8' });
+  const output = cp.execSync(`"${javaPath}" -version 2>&1`, {
+    encoding: "utf8"
+  });
   const match = output.match(/version "(.*?)"/);
   if (!match || match.length < 2) {
-    throw new Error('Could not parse Java version');
+    throw new Error("Could not parse Java version");
   }
 
   const versionString = match[1];
-  const version = versionString.startsWith('1.')
-    ? versionString.replace(/^1\./, '') // e.g. "1.8.0" → "8.0"
+  const version = versionString.startsWith("1.")
+    ? versionString.replace(/^1\./, "") // e.g. "1.8.0" → "8.0"
     : versionString;
 
   const coerced = semver.coerce(version);
@@ -64,5 +65,5 @@ export function checkJavaVersion(javaPath: string): boolean {
     throw new Error(`Invalid Java version format: ${coerced}`);
   }
 
-  return semver.gte(coerced, '17.0.0');
+  return semver.gte(coerced, "17.0.0");
 }
