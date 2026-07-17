@@ -10,7 +10,7 @@ See [Keep a Changelog](http://keepachangelog.com/) for recommendations on how to
 - Document the new formatter behavior and `// fmt:` directives in the README
 - Highlight `fmt:` formatter directives in comments
 
-*Note: the new formatter behavior requires a language server release built against the reworked nf-lang formatter ([nextflow-io/nextflow#7346](https://github.com/nextflow-io/nextflow/pull/7346)). Older language server versions ignore the new setting.*
+_Note: the new formatter behavior requires a language server release built against the reworked nf-lang formatter ([nextflow-io/nextflow#7346](https://github.com/nextflow-io/nextflow/pull/7346)). Older language server versions ignore the new setting._
 
 ## [1.7.1] - 2026-06-08
 
