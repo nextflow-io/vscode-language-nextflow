@@ -4,21 +4,31 @@ on:
   workflow_dispatch:
     inputs:
       vscode_marketplace:
-        description: 'Publish to Visual Studio Marketplace'
+        description: "Publish to Visual Studio Marketplace"
         type: boolean
         default: true
       open_vsx:
-        description: 'Publish to Open VSX Registry'
+        description: "Publish to Open VSX Registry"
         type: boolean
         default: true
 
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}
+  cancel-in-progress: false
+
 jobs:
   deploy:
+    name: Publish
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
+        with:
+          persist-credentials: false
 
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
         with:
           node-version: 20
           cache: "npm"
@@ -33,7 +43,7 @@ jobs:
 
       - name: Publish to Visual Studio Marketplace
         if: ${{ github.event.inputs.vscode_marketplace == 'true' }}
-        uses: HaaLeo/publish-vscode-extension@v1
+        uses: HaaLeo/publish-vscode-extension@ca5561daa085dee804bf9f37fe0165785a9b14db # v2.0.0
         with:
           pat: ${{ secrets.VSCE_TOKEN }}
           registryUrl: https://marketplace.visualstudio.com
@@ -41,7 +51,7 @@ jobs:
 
       - name: Publish to Open VSX Registry
         if: ${{ github.event.inputs.open_vsx == 'true' }}
-        uses: HaaLeo/publish-vscode-extension@v1
+        uses: HaaLeo/publish-vscode-extension@ca5561daa085dee804bf9f37fe0165785a9b14db # v2.0.0
         with:
           pat: ${{ secrets.OPEN_VSX_TOKEN }}
           extensionFile: build/nextflow.vsix

@@ -25,13 +25,15 @@ import {
   filterComputeEnvs
 } from "./utils";
 
-const TowerContext = createContext<TowerContextType>(null as any);
+const TowerContext = createContext<TowerContextType>(
+  null as unknown as TowerContextType
+);
 
 type Props = {
   children: React.ReactNode;
   authState?: AuthState;
   platformData: PlatformData;
-  vscode: any;
+  vscode: VSCodeApi;
 };
 
 type PlatformData = {

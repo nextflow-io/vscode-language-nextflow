@@ -14,9 +14,7 @@ function readOpacity(): number {
   return Math.max(0.1, Math.min(1.0, value));
 }
 
-function makeDimDecoration(
-  opacity: number
-): vscode.TextEditorDecorationType {
+function makeDimDecoration(opacity: number): vscode.TextEditorDecorationType {
   return vscode.window.createTextEditorDecorationType({
     opacity: String(opacity),
     rangeBehavior: vscode.DecorationRangeBehavior.OpenOpen

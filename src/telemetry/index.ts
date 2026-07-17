@@ -43,11 +43,13 @@ export function activateTelemetry(context: vscode.ExtensionContext) {
   // Track file open events
   const trackFileOpens = vscode.workspace.onDidOpenTextDocument((document) => {
     const fileName = document.fileName.toLowerCase();
-    const fileType = 
-      fileName.endsWith(".nf.test") ? ".nf.test"
-      : fileName.endsWith(".nf") ? ".nf"
-      : fileName.endsWith(".config") ? ".config"
-      : undefined;
+    const fileType = fileName.endsWith(".nf.test")
+      ? ".nf.test"
+      : fileName.endsWith(".nf")
+        ? ".nf"
+        : fileName.endsWith(".config")
+          ? ".config"
+          : undefined;
     if (fileType) {
       trackEvent("fileOpened", { fileType });
     }
@@ -99,13 +101,13 @@ function createTrackEvent(context: vscode.ExtensionContext) {
 }
 
 function isTelemetryEnabled(): boolean {
-    const globalTelemetryLevel = vscode.workspace
-      .getConfiguration("telemetry")
-      .get<string>("telemetryLevel", "all");
-    const enabled = vscode.workspace
-      .getConfiguration("nextflow")
-      .get<boolean>("telemetry.enabled", false);
-    return globalTelemetryLevel !== "off" && enabled;
+  const globalTelemetryLevel = vscode.workspace
+    .getConfiguration("telemetry")
+    .get<string>("telemetryLevel", "all");
+  const enabled = vscode.workspace
+    .getConfiguration("nextflow")
+    .get<boolean>("telemetry.enabled", false);
+  return globalTelemetryLevel !== "off" && enabled;
 }
 
 function getUserId(context: vscode.ExtensionContext): string {
@@ -117,7 +119,9 @@ function getUserId(context: vscode.ExtensionContext): string {
   return anonId;
 }
 
-export function deactivateTelemetry(context: vscode.ExtensionContext): Thenable<void> {
+export function deactivateTelemetry(
+  context: vscode.ExtensionContext
+): Thenable<void> {
   if (!isTelemetryEnabled() || !posthogClient) {
     return Promise.resolve();
   }

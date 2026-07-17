@@ -34,7 +34,9 @@ interface FilterItem extends vscode.QuickPickItem {
 }
 
 function readDefaultFilterEnabled(): boolean {
-  return vscode.workspace.getConfiguration().get<boolean>(FILTER_ENABLED_KEY, true);
+  return vscode.workspace
+    .getConfiguration()
+    .get<boolean>(FILTER_ENABLED_KEY, true);
 }
 
 function readDefaultHiddenLevels(): Set<LogLevel> {
@@ -51,14 +53,16 @@ function readDefaultHiddenLevels(): Set<LogLevel> {
 }
 
 function readDefaultStripAnsi(): boolean {
-  return vscode.workspace.getConfiguration().get<boolean>(FILTER_STRIP_ANSI_KEY, true);
+  return vscode.workspace
+    .getConfiguration()
+    .get<boolean>(FILTER_STRIP_ANSI_KEY, true);
 }
 
 function defaultState(): FileState {
   return {
     filterEnabled: readDefaultFilterEnabled(),
     hidden: readDefaultHiddenLevels(),
-    stripAnsi: readDefaultStripAnsi(),
+    stripAnsi: readDefaultStripAnsi()
   };
 }
 
@@ -89,8 +93,7 @@ async function saveAllSettings(
 
 function describeState(state: FileState): string {
   if (!state.filterEnabled) return "$(file) Raw file (click to change)";
-  if (state.hidden.size === 0)
-    return "$(list-filter) Filter log levels";
+  if (state.hidden.size === 0) return "$(list-filter) Filter log levels";
   const visible = LOG_LEVELS.filter((l) => !state.hidden.has(l));
   return `$(list-filter) ${visible.length ? `Showing: ${visible.join(" · ")}` : "Nothing visible"}`;
 }
