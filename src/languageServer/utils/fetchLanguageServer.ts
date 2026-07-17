@@ -36,9 +36,14 @@ async function getLatestRemoteVersion(
       const matchingReleases = (releases as any[])
         .filter((release) => release.tag_name.startsWith(versionPrefix))
         .filter((release) => !release.tag_name.endsWith("PREVIEW"))
-        .sort((a, b) => b.tag_name.localeCompare(a.tag_name, undefined, { numeric: true }));
+        .sort((a, b) =>
+          b.tag_name.localeCompare(a.tag_name, undefined, { numeric: true })
+        );
       return matchingReleases.length > 0
-        ? { tag: matchingReleases[0].tag_name, updatedAt: matchingReleases[0].updated_at }
+        ? {
+            tag: matchingReleases[0].tag_name,
+            updatedAt: matchingReleases[0].updated_at
+          }
         : null;
     }
   } catch (error) {
@@ -48,12 +53,13 @@ async function getLatestRemoteVersion(
 
 async function getGitHubToken(): Promise<string | undefined> {
   try {
-    const session = await vscode.authentication.getSession("github", ["repo"], { silent: true });
+    const session = await vscode.authentication.getSession("github", ["repo"], {
+      silent: true
+    });
     if (session?.accessToken) {
       return session.accessToken;
     }
-  } catch (error) {
-  }
+  } catch (error) {}
   return process.env.GITHUB_TOKEN;
 }
 
@@ -98,7 +104,10 @@ export async function fetchLanguageServer(context: vscode.ExtensionContext) {
   const versionPrefix = `v${languageVersion.replace(" (preview)", "")}`;
   let resolvedVersion: string | null = null;
   let remoteUpdatedAt: string | null = null;
-  const remoteVersionResponse = await getLatestRemoteVersion(versionPrefix, isPreview);
+  const remoteVersionResponse = await getLatestRemoteVersion(
+    versionPrefix,
+    isPreview
+  );
   if (remoteVersionResponse) {
     resolvedVersion = remoteVersionResponse.tag;
     remoteUpdatedAt = remoteVersionResponse.updatedAt;

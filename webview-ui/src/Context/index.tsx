@@ -16,7 +16,7 @@ import {
   HubPipeline
 } from "./types";
 
-const vscode = getVscode();
+const vscode = getVscode() as VSCodeApi;
 
 type Props = {
   children: React.ReactNode;

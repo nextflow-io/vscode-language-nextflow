@@ -44,8 +44,7 @@ function startLanguageServer(context: vscode.ExtensionContext) {
             );
             return;
           }
-        }
-        catch (e) {
+        } catch (e) {
           console.warn(`Failed to check Java version: ${e}`);
         }
         progress.report({
@@ -106,11 +105,12 @@ function startLanguageServer(context: vscode.ExtensionContext) {
   );
 }
 
-async function previewDag(context: vscode.ExtensionContext, uri: string, name?: string) {
-  const mediaPath = vscode.Uri.joinPath(
-    context.extensionUri,
-    "media"
-  );
+async function previewDag(
+  context: vscode.ExtensionContext,
+  uri: string,
+  name?: string
+) {
+  const mediaPath = vscode.Uri.joinPath(context.extensionUri, "media");
   const res: any = await vscode.commands.executeCommand(
     "nextflow.server.previewDag",
     uri,
@@ -143,12 +143,13 @@ async function convertScriptToTyped() {
     .getConfiguration("nextflow")
     .get("languageVersion") as string;
   if (languageVersion === "24.10" || languageVersion == "25.04") {
-    vscode.window.showErrorMessage("The Nextflow language version must be 25.10 or newer in order to convert to static types.");
+    vscode.window.showErrorMessage(
+      "The Nextflow language version must be 25.10 or newer in order to convert to static types."
+    );
     return;
   }
   const uri = vscode.window.activeTextEditor?.document?.uri;
-  if (!uri)
-    return;
+  if (!uri) return;
 
   const res: any = await vscode.commands.executeCommand(
     "nextflow.server.convertScriptToTyped",
@@ -157,9 +158,10 @@ async function convertScriptToTyped() {
   if (!res || res.error) {
     const message = res?.error ?? "Failed to convert script to static types.";
     vscode.window.showErrorMessage(message);
-  }
-  else {
-    vscode.window.showInformationMessage("Converted script to static types and updated call sites. Please review updated code for errors.");
+  } else {
+    vscode.window.showInformationMessage(
+      "Converted script to static types and updated call sites. Please review updated code for errors."
+    );
   }
 }
 
@@ -200,29 +202,31 @@ export function activateLanguageServer(
   context: vscode.ExtensionContext,
   trackEvent: TrackEvent
 ) {
-  vscode.workspace.onDidChangeConfiguration((event: vscode.ConfigurationChangeEvent) => {
-    const shouldRestart =
-      event.affectsConfiguration("nextflow.java.home") ||
-      event.affectsConfiguration("nextflow.languageVersion");
-    if (shouldRestart) {
-      restartLanguageServer(context);
+  vscode.workspace.onDidChangeConfiguration(
+    (event: vscode.ConfigurationChangeEvent) => {
+      const shouldRestart =
+        event.affectsConfiguration("nextflow.java.home") ||
+        event.affectsConfiguration("nextflow.languageVersion");
+      if (shouldRestart) {
+        restartLanguageServer(context);
+      }
     }
+  );
+  vscode.commands.registerCommand("nextflow.previewDag", (uri, name) => {
+    previewDag(context, uri, name);
   });
   vscode.commands.registerCommand(
-    "nextflow.previewDag",
-    (uri, name) => { previewDag(context, uri, name); }
-  );
-  vscode.commands.registerCommand(
     "nextflow.languageServer.convertScriptToTyped",
-    () => { convertScriptToTyped(); }
+    () => {
+      convertScriptToTyped();
+    }
   );
-  vscode.commands.registerCommand(
-    "nextflow.languageServer.restart",
-    () => { restartLanguageServer(context); }
-  );
-  vscode.commands.registerCommand("nextflow.languageServer.stop",
-    () => { stopLanguageServer(); }
-  );
+  vscode.commands.registerCommand("nextflow.languageServer.restart", () => {
+    restartLanguageServer(context);
+  });
+  vscode.commands.registerCommand("nextflow.languageServer.stop", () => {
+    stopLanguageServer();
+  });
   vscode.commands.registerCommand(
     "nextflow.openFileFromWebview",
     async (uriString: string) => {
