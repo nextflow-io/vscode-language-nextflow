@@ -26,7 +26,8 @@
     "vscode": "^1.96.0"
   },
   "categories": [
-    "Programming Languages"
+    "Programming Languages",
+    "Themes"
   ],
   "activationEvents": [
     "onStartupFinished",
@@ -36,6 +37,13 @@
   ],
   "main": "./extension.js",
   "contributes": {
+    "themes": [
+      {
+        "label": "Seqera Dark",
+        "uiTheme": "vs-dark",
+        "path": "./themes/seqera-dark-color-theme.json"
+      }
+    ],
     "languages": [
       {
         "id": "nextflow",
@@ -357,6 +365,7 @@
     }
   },
   "scripts": {
+    "design:lint": "npx -p @google/design.md designmd lint DESIGN.md",
     "check-types": "tsc --noEmit",
     "compile": "npm run check-types && npm run ui-build && node esbuild.js",
     "package": "npm run check-types && npm run ui-build && node esbuild.js --production && (cd build ; vsce package -o nextflow.vsix)",

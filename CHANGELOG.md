@@ -4,6 +4,11 @@ All notable changes to the Nextflow VS Code extension will be documented here.
 
 See [Keep a Changelog](http://keepachangelog.com/) for recommendations on how to structure this file.
 
+## [Unreleased]
+
+- Add `DESIGN.md` design system specification for Seqera/Nextflow visual identity
+- Add bundled **Seqera Dark** color theme with Nextflow-specific syntax colors
+
 ## [1.7.1] - 2026-06-08
 
 - Add syntax highlighting and filtering for Nextflow log files (#197)
