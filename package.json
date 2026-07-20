@@ -368,7 +368,7 @@
     "@types/node": "^20",
     "@types/semver": "^7.7.0",
     "@types/vscode": "^1.96.0",
-    "@vscode/vsce": "^3.2.1",
+    "@vscode/vsce": "^3.9.2",
     "esbuild": "^0.28.1",
     "esbuild-plugin-copy": "^2.1.1",
     "jwt-decode": "^4.0.0",
@@ -380,7 +380,7 @@
     "typescript": "^5.7.2",
     "uuid": "^14.0.0",
     "vscode-jsonrpc": "^8.0.2",
-    "vscode-languageclient": "^8.0.2"
+    "vscode-languageclient": "^10.1.0"
   },
   "extensionDependencies": [
     "vscode.git"
