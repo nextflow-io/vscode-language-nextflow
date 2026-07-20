@@ -9,7 +9,7 @@ const fetchUserInfo = async (token: string): Promise<UserInfoResponse> => {
         Authorization: `Bearer ${token}`
       }
     });
-    console.log("🟣 fetchUserInfo", response.status);
+    console.log("🟣 fetchUserInfo", response);
     if (response.status === 401) {
       throw new Error("Unauthorized");
     }
