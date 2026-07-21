@@ -266,6 +266,12 @@
           "default": false,
           "markdownDescription": "Place process outputs at the end of the process body when formatting Nextflow scripts."
         },
+        "nextflow.formatting.maxLineLength": {
+          "type": "integer",
+          "default": 120,
+          "minimum": 0,
+          "markdownDescription": "Maximum line length when formatting (`0` to disable line wrapping).\n\n*Note: requires Nextflow language version 26.08 or later.*"
+        },
         "nextflow.formatting.sortDeclarations": {
           "type": "boolean",
           "default": false,
