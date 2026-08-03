@@ -110,6 +110,7 @@ const WorkspaceProvider = ({ children, vscode, viewID }: Props) => {
 
   function selectFolder(name: string) {
     setSelectedFolder(name);
+    setNodes([]);
     vscode.postMessage({ command: "selectFolder", name });
   }
 
