@@ -16,8 +16,6 @@ async function main() {
     "node_modules/mermaid/dist/mermaid.min.js": "media",
     "webview-ui/dist/**": "webview-ui/dist"
   };
-  if (!production)
-    files["../language-server/build/libs/language-server-all.jar"] = "bin";
   await build({
     entryPoints: ["src/extension.ts"],
     bundle: true,

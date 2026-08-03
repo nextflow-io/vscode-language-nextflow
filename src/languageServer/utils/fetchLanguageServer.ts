@@ -82,20 +82,7 @@ async function getLatestLocalVersion(
   }
 }
 
-export async function fetchLanguageServer(context: vscode.ExtensionContext) {
-  // use development build if present
-  const devPath = path.resolve(
-    context.extensionPath,
-    "bin",
-    "language-server-all.jar"
-  );
-  if (fs.existsSync(devPath)) {
-    vscode.window.showInformationMessage(
-      "Using development build of language server."
-    );
-    return devPath;
-  }
-
+export async function fetchLanguageServer() {
   // get the latest patch release from GitHub or local cache
   const languageVersion = vscode.workspace
     .getConfiguration("nextflow")

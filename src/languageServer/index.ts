@@ -71,7 +71,7 @@ function startLanguageServer(context: vscode.ExtensionContext) {
             protocol2Code: (value) => vscode.Uri.parse(value)
           }
         };
-        const serverPath = await fetchLanguageServer(context);
+        const serverPath = await fetchLanguageServer();
         if (!serverPath) {
           resolve();
           vscode.window.showErrorMessage("Failed to retrieve language server.");
