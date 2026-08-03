@@ -59,7 +59,7 @@ const Context = ({ children }: Props) => {
       if (data.organizations) setOrganizations(data.organizations);
       if (data.runs) setRuns(data.runs);
       if (data.pipelines) setPipelines(data.pipelines);
-      if (data.repoInfo) setRepoInfo(data.repoInfo);
+      if (data.repoInfo !== undefined) setRepoInfo(data.repoInfo ?? undefined);
       if (data.datasets) setDatasets(data.datasets);
       if (data.dataLinks) setDataLinks(data.dataLinks);
       if (data.hubPipelines) setHubPipelines(data.hubPipelines);
