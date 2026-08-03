@@ -3,6 +3,9 @@ import { createContext, useContext, useEffect, useState } from "react";
 import { TestCreation, TreeNode } from "./types";
 
 const WorkspaceContext = createContext<WorkspaceContextType>({
+  folders: [],
+  selectedFolder: "",
+  selectFolder: () => {},
   nodes: [],
   findChildren: () => [],
   openFile: () => {},
@@ -21,6 +24,9 @@ const WorkspaceContext = createContext<WorkspaceContextType>({
 });
 
 interface WorkspaceContextType {
+  folders: string[];
+  selectedFolder: string;
+  selectFolder: (name: string) => void;
   nodes: TreeNode[];
   findChildren: (node: TreeNode) => TreeNode[];
   openFile: (filePath: string, line: number) => void;
@@ -47,6 +53,8 @@ type Props = {
 const WorkspaceProvider = ({ children, vscode, viewID }: Props) => {
   const state = vscode.getState();
 
+  const [folders, setFolders] = useState<string[]>([]);
+  const [selectedFolder, setSelectedFolder] = useState<string>("");
   const [nodes, setNodes] = useState<TreeNode[]>([]);
   const [testCreation, setCreatingTest] = useState<
     WorkspaceContextType["testCreation"]
@@ -63,6 +71,10 @@ const WorkspaceProvider = ({ children, vscode, viewID }: Props) => {
   useEffect(() => {
     const handleMessage = (event: MessageEvent) => {
       const message = event.data;
+      if (message.folders) {
+        setFolders(message.folders);
+        setSelectedFolder(message.selectedFolder);
+      }
       if (message.nodes) setNodes(message.nodes);
       if (message.testCreated) {
         const data = message.testCreated;
@@ -94,6 +106,11 @@ const WorkspaceProvider = ({ children, vscode, viewID }: Props) => {
     return node.children.flatMap((call) =>
       nodes.filter((n) => n.path === call.path && n.name === call.name)
     );
+  }
+
+  function selectFolder(name: string) {
+    setSelectedFolder(name);
+    vscode.postMessage({ command: "selectFolder", name });
   }
 
   function openFile(filePath: string, line: number) {
@@ -128,6 +145,9 @@ const WorkspaceProvider = ({ children, vscode, viewID }: Props) => {
   return (
     <WorkspaceContext.Provider
       value={{
+        folders,
+        selectedFolder,
+        selectFolder,
         nodes,
         findChildren,
         openFile,

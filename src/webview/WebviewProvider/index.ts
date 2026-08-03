@@ -11,6 +11,7 @@ import {
   fetchPlatformData,
   fetchRuns,
   getRepoInfo,
+  getWorkspaceFolders,
   queryWorkspace,
   getContainer,
   addPipeline
@@ -23,6 +24,7 @@ import fetchHubPipelines from "./lib/platform/fetchHubPipelines";
 class WebviewProvider implements vscode.WebviewViewProvider {
   _currentView?: vscode.WebviewView;
   private _extensionUri: vscode.Uri;
+  private _selectedFolder?: string;
 
   constructor(
     private readonly _context: vscode.ExtensionContext,
@@ -82,6 +84,10 @@ class WebviewProvider implements vscode.WebviewViewProvider {
           break;
         case "addPipeline":
           this.addPipeline(message);
+          break;
+        case "selectFolder":
+          this._selectedFolder = message.name;
+          this.queryWorkspace();
           break;
       }
     });
@@ -186,9 +192,21 @@ class WebviewProvider implements vscode.WebviewViewProvider {
       await fetchPlatformData(accessToken, view.webview, _context, refresh);
     }
     if (viewID === "project") {
-      const nodes = await queryWorkspace();
-      view.webview.postMessage({ nodes });
+      const folders = getWorkspaceFolders();
+      if (!this._selectedFolder || !folders.includes(this._selectedFolder)) {
+        this._selectedFolder = folders[0];
+      }
+      view.webview.postMessage({
+        folders,
+        selectedFolder: this._selectedFolder ?? ""
+      });
+      await this.queryWorkspace();
     }
+  }
+
+  private async queryWorkspace() {
+    const nodes = await queryWorkspace(this._selectedFolder);
+    this._currentView?.webview.postMessage({ nodes });
   }
 
   private async emitTestCreated(filePath: string, successful: boolean) {
