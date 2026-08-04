@@ -7,20 +7,27 @@ import {
 
 import { buildMermaid } from "./utils/buildMermaid";
 import { fetchLanguageServer } from "./utils/fetchLanguageServer";
-import { findJava, checkJavaVersion } from "./utils/findJava";
+import { findExecutable, findJava, checkJavaVersion } from "./utils/findExecutable";
 import type { TrackEvent } from "../telemetry";
 
 const LABEL_RELOAD_WINDOW = "Reload Window";
 
 let languageClient: LanguageClient | null = null;
 
+function findNativeServer(): string | null {
+  return findExecutable(
+    process.platform === "win32" ? "nextflow-lsp.exe" : "nextflow-lsp"
+  );
+}
+
 function startLanguageServer(context: vscode.ExtensionContext) {
   vscode.window.withProgress(
     { location: vscode.ProgressLocation.Window },
     (progress) => {
       return new Promise<void>(async (resolve, reject) => {
-        const javaPath = findJava();
-        if (!javaPath) {
+        const nativePath = findNativeServer();
+        const javaPath = nativePath ? null : findJava();
+        if (!nativePath && !javaPath) {
           resolve();
           const settingsJavaHome = vscode.workspace
             .getConfiguration("nextflow")
@@ -37,7 +44,7 @@ function startLanguageServer(context: vscode.ExtensionContext) {
           return;
         }
         try {
-          if (!checkJavaVersion(javaPath)) {
+          if (javaPath && !checkJavaVersion(javaPath)) {
             resolve();
             vscode.window.showErrorMessage(
               `Java 17 or later is required to use the Nextflow language server (using path: ${javaPath}).`
@@ -71,19 +78,29 @@ function startLanguageServer(context: vscode.ExtensionContext) {
             protocol2Code: (value) => vscode.Uri.parse(value)
           }
         };
-        const serverPath = await fetchLanguageServer();
-        if (!serverPath) {
-          resolve();
-          vscode.window.showErrorMessage("Failed to retrieve language server.");
-          return;
+        let executable: Executable;
+        if (nativePath) {
+          vscode.window.showInformationMessage(
+            `Using native Nextflow language server (${nativePath}).`
+          );
+          executable = { command: nativePath };
+        } else {
+          const serverPath = await fetchLanguageServer();
+          if (!serverPath) {
+            resolve();
+            vscode.window.showErrorMessage(
+              "Failed to retrieve language server."
+            );
+            return;
+          }
+          const args = ["-jar", serverPath];
+          // uncomment to allow a debugger to attach to the language server
+          // args.unshift("-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=5005,quiet=y");
+          executable = {
+            command: javaPath as string,
+            args: args
+          };
         }
-        const args = ["-jar", serverPath];
-        // uncomment to allow a debugger to attach to the language server
-        // args.unshift("-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=5005,quiet=y");
-        const executable: Executable = {
-          command: javaPath,
-          args: args
-        };
         languageClient = new LanguageClient(
           "nextflow",
           "Nextflow Language Server",

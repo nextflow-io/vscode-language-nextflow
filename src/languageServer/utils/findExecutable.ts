@@ -8,6 +8,20 @@ function isFile(javaPath: string): boolean {
   return fs.existsSync(javaPath) && fs.statSync(javaPath).isFile();
 }
 
+export function findExecutable(executableFile: string): string | null {
+  if (!("PATH" in process.env)) {
+    return null;
+  }
+  const paths = (process.env.PATH as string).split(path.delimiter);
+  for (const dir of paths) {
+    const filePath = path.join(dir, executableFile);
+    if (isFile(filePath)) {
+      return filePath;
+    }
+  }
+  return null;
+}
+
 export function findJava(): string | null {
   const executableFile: string =
     process["platform"] === "win32" ? "java.exe" : "java";
@@ -31,19 +45,7 @@ export function findJava(): string | null {
     }
   }
 
-  if ("PATH" in process.env) {
-    const PATH = process.env.PATH as string;
-    const paths = PATH.split(path.delimiter);
-    const pathCount = paths.length;
-    for (let i = 0; i < pathCount; i++) {
-      const javaPath = path.join(paths[i], executableFile);
-      if (isFile(javaPath)) {
-        return javaPath;
-      }
-    }
-  }
-
-  return null;
+  return findExecutable(executableFile);
 }
 
 export function checkJavaVersion(javaPath: string): boolean {
