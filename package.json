@@ -372,7 +372,7 @@
     "esbuild": "^0.28.1",
     "esbuild-plugin-copy": "^2.1.1",
     "jwt-decode": "^4.0.0",
-    "mermaid": "^11.15.0",
+    "mermaid": "^11.16.1",
     "node-fetch": "^3.3.2",
     "posthog-node": "^4.4.1",
     "prettier": "3.5.2",
