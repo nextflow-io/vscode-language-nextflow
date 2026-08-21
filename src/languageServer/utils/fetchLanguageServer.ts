@@ -3,6 +3,19 @@ import * as os from "os";
 import * as path from "path";
 import * as vscode from "vscode";
 
+export function resolveLanguageVersion(): {
+  versionPrefix: string;
+  isPreview: boolean;
+} {
+  const languageVersion = vscode.workspace
+    .getConfiguration("nextflow")
+    .get("languageVersion") as string;
+  return {
+    versionPrefix: `v${languageVersion.replace(" (preview)", "")}`,
+    isPreview: languageVersion.includes("(preview)")
+  };
+}
+
 async function getLatestRemoteVersion(
   versionPrefix: string,
   isPreview: boolean = false
@@ -63,10 +76,14 @@ async function getGitHubToken(): Promise<string | undefined> {
   return process.env.GITHUB_TOKEN;
 }
 
+function cacheDir(versionPrefix: string): string {
+  return path.join(os.homedir(), ".nextflow", "lsp", versionPrefix);
+}
+
 async function getLatestLocalVersion(
   versionPrefix: string
 ): Promise<string | null> {
-  const targetDir = path.join(os.homedir(), ".nextflow", "lsp", versionPrefix);
+  const targetDir = cacheDir(versionPrefix);
   try {
     const files = await vscode.workspace.fs.readDirectory(
       vscode.Uri.file(targetDir)
@@ -82,13 +99,11 @@ async function getLatestLocalVersion(
   }
 }
 
-export async function fetchLanguageServer() {
+export async function fetchLanguageServerJar(
+  versionPrefix: string,
+  isPreview: boolean
+) {
   // get the latest patch release from GitHub or local cache
-  const languageVersion = vscode.workspace
-    .getConfiguration("nextflow")
-    .get("languageVersion") as string;
-  const isPreview = languageVersion.includes("(preview)");
-  const versionPrefix = `v${languageVersion.replace(" (preview)", "")}`;
   let resolvedVersion: string | null = null;
   let remoteUpdatedAt: string | null = null;
   const remoteVersionResponse = await getLatestRemoteVersion(
@@ -112,7 +127,7 @@ export async function fetchLanguageServer() {
   }
 
   // use locally cached version if present
-  const targetDir = path.join(os.homedir(), ".nextflow", "lsp", versionPrefix);
+  const targetDir = cacheDir(versionPrefix);
   const cachePath = path.join(targetDir, `${resolvedVersion}.jar`);
   if (isPreview && fs.existsSync(cachePath) && remoteUpdatedAt) {
     // for preview versions, check if cached version is newer than remote
@@ -145,4 +160,12 @@ export async function fetchLanguageServer() {
     `Downloaded Nextflow language server ${resolvedVersion}.`
   );
   return fileUri.fsPath;
+}
+
+export function fetchLanguageServerNative(versionPrefix: string): string | null {
+  const nativePath = path.join(
+    cacheDir(versionPrefix),
+    process.platform === "win32" ? "nextflow-lsp.exe" : "nextflow-lsp"
+  );
+  return fs.existsSync(nativePath) ? nativePath : null;
 }

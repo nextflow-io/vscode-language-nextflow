@@ -6,26 +6,25 @@ import {
 } from "vscode-languageclient/node";
 
 import { buildMermaid } from "./utils/buildMermaid";
-import { fetchLanguageServer } from "./utils/fetchLanguageServer";
-import { findExecutable, findJava, checkJavaVersion } from "./utils/findExecutable";
+import {
+  fetchLanguageServerJar,
+  fetchLanguageServerNative,
+  resolveLanguageVersion
+} from "./utils/fetchLanguageServer";
+import { findJava, checkJavaVersion } from "./utils/findExecutable";
 import type { TrackEvent } from "../telemetry";
 
 const LABEL_RELOAD_WINDOW = "Reload Window";
 
 let languageClient: LanguageClient | null = null;
 
-function findNativeServer(): string | null {
-  return findExecutable(
-    process.platform === "win32" ? "nextflow-lsp.exe" : "nextflow-lsp"
-  );
-}
-
-function startLanguageServer(context: vscode.ExtensionContext) {
+function startLanguageServer() {
   vscode.window.withProgress(
     { location: vscode.ProgressLocation.Window },
     (progress) => {
       return new Promise<void>(async (resolve, reject) => {
-        const nativePath = findNativeServer();
+        const { versionPrefix, isPreview } = resolveLanguageVersion();
+        const nativePath = fetchLanguageServerNative(versionPrefix);
         const javaPath = nativePath ? null : findJava();
         if (!nativePath && !javaPath) {
           resolve();
@@ -81,11 +80,14 @@ function startLanguageServer(context: vscode.ExtensionContext) {
         let executable: Executable;
         if (nativePath) {
           vscode.window.showInformationMessage(
-            `Using native Nextflow language server (${nativePath}).`
+            `Using native Nextflow language server (${versionPrefix}).`
           );
           executable = { command: nativePath };
         } else {
-          const serverPath = await fetchLanguageServer();
+          const serverPath = await fetchLanguageServerJar(
+            versionPrefix,
+            isPreview
+          );
           if (!serverPath) {
             resolve();
             vscode.window.showErrorMessage(
@@ -182,16 +184,16 @@ async function convertScriptToTyped() {
   }
 }
 
-function restartLanguageServer(context: vscode.ExtensionContext) {
+function restartLanguageServer() {
   if (!languageClient) {
-    startLanguageServer(context);
+    startLanguageServer();
     return;
   }
   let oldLanguageClient = languageClient;
   languageClient = null;
   oldLanguageClient.stop().then(
     () => {
-      startLanguageServer(context);
+      startLanguageServer();
     },
     () => {
       vscode.window
@@ -225,7 +227,7 @@ export function activateLanguageServer(
         event.affectsConfiguration("nextflow.java.home") ||
         event.affectsConfiguration("nextflow.languageVersion");
       if (shouldRestart) {
-        restartLanguageServer(context);
+        restartLanguageServer();
       }
     }
   );
@@ -239,7 +241,7 @@ export function activateLanguageServer(
     }
   );
   vscode.commands.registerCommand("nextflow.languageServer.restart", () => {
-    restartLanguageServer(context);
+    restartLanguageServer();
   });
   vscode.commands.registerCommand("nextflow.languageServer.stop", () => {
     stopLanguageServer();
@@ -258,5 +260,5 @@ export function activateLanguageServer(
       });
     }
   );
-  startLanguageServer(context);
+  startLanguageServer();
 }
