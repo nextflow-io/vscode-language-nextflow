@@ -170,6 +170,21 @@
         "title": "Reload Seqera Webview",
         "category": "Nextflow",
         "icon": "$(refresh)"
+      },
+      {
+        "command": "nextflow.previewMetro",
+        "title": "Preview Metro Map",
+        "category": "Nextflow"
+      },
+      {
+        "command": "nextflow.openMetroFile",
+        "title": "Open Metro Map Preview",
+        "category": "Nextflow"
+      },
+      {
+        "command": "nextflow.findMetroOutputs",
+        "title": "Find Metro Map Outputs",
+        "category": "Nextflow"
       }
     ],
     "menus": {
@@ -185,6 +200,37 @@
         {
           "command": "nextflow.log.filter.toggle",
           "when": "resourceLangId == nextflow-log"
+        },
+        {
+          "command": "nextflow.previewMetro",
+          "when": "resourceExtname == '.nf'"
+        },
+        {
+          "command": "nextflow.openMetroFile",
+          "when": "resourceExtname =~ /\\.(mmd|html|svg)$/"
+        },
+        {
+          "command": "nextflow.findMetroOutputs",
+          "when": "workspaceFolderCount > 0"
+        }
+      ],
+      "editor/context": [
+        {
+          "command": "nextflow.previewMetro",
+          "when": "resourceExtname == '.nf'",
+          "group": "navigation@1"
+        },
+        {
+          "command": "nextflow.openMetroFile",
+          "when": "resourceExtname =~ /\\.(mmd|html|svg)$/",
+          "group": "navigation@1"
+        }
+      ],
+      "explorer/context": [
+        {
+          "command": "nextflow.openMetroFile",
+          "when": "resourceExtname =~ /\\.(mmd|html|svg)$/",
+          "group": "navigation@1"
         }
       ],
       "view/title": [
@@ -324,6 +370,30 @@
           "type": "boolean",
           "default": true,
           "markdownDescription": "Remove ANSI escape codes (e.g. `\\u001b[0;32m`) from `.nextflow.log` files when filtering is enabled. The file on disk is unchanged. Can be toggled per-file in the editor title bar."
+        },
+        "nextflow.metro.path": {
+          "type": "string",
+          "default": "",
+          "markdownDescription": "Path to the `nf-metro` executable. If empty, the extension looks for `nf-metro` on `PATH`."
+        },
+        "nextflow.metro.theme": {
+          "type": "string",
+          "enum": [
+            "nfcore",
+            "light",
+            "seqera"
+          ],
+          "default": "nfcore",
+          "markdownDescription": "Visual theme passed to [nf-metro](https://github.com/pinin4fjords/nf-metro) when rendering metro maps. `seqera` requires nf-metro 0.8+."
+        },
+        "nextflow.metro.format": {
+          "type": "string",
+          "enum": [
+            "html",
+            "svg"
+          ],
+          "default": "html",
+          "markdownDescription": "Output format for rendered metro maps: interactive `html` or static `svg`."
         }
       }
     },
@@ -358,6 +428,8 @@
   },
   "scripts": {
     "check-types": "tsc --noEmit",
+    "test": "npm run check-types && node --experimental-strip-types --test src/metro/metro.test.ts",
+    "test:metro-smoke": "node --experimental-strip-types src/metro/smoke.integration.ts",
     "compile": "npm run check-types && npm run ui-build && node esbuild.js",
     "package": "npm run check-types && npm run ui-build && node esbuild.js --production && (cd build ; vsce package -o nextflow.vsix)",
     "ui-dev": "cd webview-ui && npm run dev",
