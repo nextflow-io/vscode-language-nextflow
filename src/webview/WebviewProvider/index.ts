@@ -11,6 +11,7 @@ import {
   fetchPlatformData,
   fetchRuns,
   getRepoInfo,
+  getWorkspaceFolders,
   queryWorkspace,
   getContainer,
   addPipeline
@@ -22,7 +23,9 @@ import fetchHubPipelines from "./lib/platform/fetchHubPipelines";
 
 class WebviewProvider implements vscode.WebviewViewProvider {
   _currentView?: vscode.WebviewView;
+  public onDidSelectFolder?: (name: string) => void;
   private _extensionUri: vscode.Uri;
+  private _selectedFolder?: string;
 
   constructor(
     private readonly _context: vscode.ExtensionContext,
@@ -83,6 +86,11 @@ class WebviewProvider implements vscode.WebviewViewProvider {
         case "addPipeline":
           this.addPipeline(message);
           break;
+        case "selectFolder":
+          this._selectedFolder = message.name;
+          this.queryWorkspace();
+          this.onDidSelectFolder?.(message.name);
+          break;
       }
     });
 
@@ -114,10 +122,26 @@ class WebviewProvider implements vscode.WebviewViewProvider {
     });
   }
 
+  // Folder-specific state is keyed by workspace folder, defaulting to the first
+  // Nextflow project in the workspace.
+  private selectedFolder(): string | undefined {
+    const folders = getWorkspaceFolders();
+    if (!this._selectedFolder || !folders.includes(this._selectedFolder)) {
+      this._selectedFolder = folders[0];
+    }
+    return this._selectedFolder;
+  }
+
+  public setSelectedFolder(name: string) {
+    this._selectedFolder = name;
+    this.getRepoInfo();
+  }
+
   private async getRepoInfo() {
-    const repoInfo = await getRepoInfo(this._context);
+    const repoInfo = await getRepoInfo(this._context, this.selectedFolder());
     this._currentView?.webview.postMessage({
-      repoInfo
+      // null rather than undefined so the webview can clear a stale repo
+      repoInfo: repoInfo ?? null
     });
   }
 
@@ -186,9 +210,17 @@ class WebviewProvider implements vscode.WebviewViewProvider {
       await fetchPlatformData(accessToken, view.webview, _context, refresh);
     }
     if (viewID === "project") {
-      const nodes = await queryWorkspace();
-      view.webview.postMessage({ nodes });
+      view.webview.postMessage({
+        folders: getWorkspaceFolders(),
+        selectedFolder: this.selectedFolder() ?? ""
+      });
+      await this.queryWorkspace();
     }
+  }
+
+  private async queryWorkspace() {
+    const nodes = await queryWorkspace(this.selectedFolder());
+    this._currentView?.webview.postMessage({ nodes });
   }
 
   private async emitTestCreated(filePath: string, successful: boolean) {

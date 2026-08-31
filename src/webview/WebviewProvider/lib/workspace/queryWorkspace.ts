@@ -46,11 +46,24 @@ async function previewWorkspace(name: string): Promise<any> {
   }
 }
 
-export async function queryWorkspace(): Promise<TreeNode[]> {
-  const folders = vscode.workspace.workspaceFolders;
-  if (!folders || folders.length == 0) return [];
+const PROJECT_FILES = ["main.nf", "nextflow.config"];
 
-  const name = folders[0].name;
+export function getWorkspaceFolders(): string[] {
+  const folders = vscode.workspace.workspaceFolders ?? [];
+  const projects = folders.filter((folder) =>
+    PROJECT_FILES.some((file) =>
+      fs.existsSync(path.join(folder.uri.fsPath, file))
+    )
+  );
+  // fall back to every folder so projects with a non-standard layout still work
+  return (projects.length > 0 ? projects : folders).map(
+    (folder) => folder.name
+  );
+}
+
+export async function queryWorkspace(name?: string): Promise<TreeNode[]> {
+  if (!name) return [];
+
   const res: any = await previewWorkspace(name);
   if (!res || !res.result) {
     if (res?.error) vscode.window.showErrorMessage(res.error);

@@ -19,6 +19,11 @@ export function activateWebview(
     authProvider
   );
 
+  // The folder selector lives in the project view, but the Seqera Cloud view
+  // shows folder-specific state too (e.g. the repository URL).
+  projectProvider.onDidSelectFolder = (name) =>
+    seqeraCloudProvider.setSelectedFolder(name);
+
   const refresh = (uris?: readonly vscode.Uri[]) => {
     if (uris === undefined || uris.some((uri) => isNextflowFile(uri.fsPath))) {
       projectProvider.initViewData();

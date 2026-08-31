@@ -13,7 +13,8 @@ function round(x: number) {
 }
 
 const Project = () => {
-  const { nodes } = useWorkspaceContext();
+  const { folders, selectedFolder, selectFolder, nodes } =
+    useWorkspaceContext();
   const [viewMode, setViewMode] = useState<ViewMode>("list");
   const [search, setSearch] = useState("");
 
@@ -59,6 +60,16 @@ const Project = () => {
 
   return (
     <>
+      {folders.length > 1 && (
+        <div className={styles.filters}>
+          <Select
+            icon="codicon-folder"
+            options={folders.map((name) => ({ label: name, value: name }))}
+            value={selectedFolder}
+            onChange={(value) => selectFolder(value as string)}
+          />
+        </div>
+      )}
       <div className={styles.filters}>
         <Input
           value={search}

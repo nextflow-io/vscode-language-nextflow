@@ -6,21 +6,27 @@ import {
 } from "vscode-languageclient/node";
 
 import { buildMermaid } from "./utils/buildMermaid";
-import { fetchLanguageServer } from "./utils/fetchLanguageServer";
-import { findJava, checkJavaVersion } from "./utils/findJava";
+import {
+  fetchLanguageServerJar,
+  fetchLanguageServerNative,
+  resolveLanguageVersion
+} from "./utils/fetchLanguageServer";
+import { findJava, checkJavaVersion } from "./utils/findExecutable";
 import type { TrackEvent } from "../telemetry";
 
 const LABEL_RELOAD_WINDOW = "Reload Window";
 
 let languageClient: LanguageClient | null = null;
 
-function startLanguageServer(context: vscode.ExtensionContext) {
+function startLanguageServer() {
   vscode.window.withProgress(
     { location: vscode.ProgressLocation.Window },
     (progress) => {
       return new Promise<void>(async (resolve, reject) => {
-        const javaPath = findJava();
-        if (!javaPath) {
+        const { versionPrefix, isPreview } = resolveLanguageVersion();
+        const nativePath = fetchLanguageServerNative(versionPrefix);
+        const javaPath = nativePath ? null : findJava();
+        if (!nativePath && !javaPath) {
           resolve();
           const settingsJavaHome = vscode.workspace
             .getConfiguration("nextflow")
@@ -37,7 +43,7 @@ function startLanguageServer(context: vscode.ExtensionContext) {
           return;
         }
         try {
-          if (!checkJavaVersion(javaPath)) {
+          if (javaPath && !checkJavaVersion(javaPath)) {
             resolve();
             vscode.window.showErrorMessage(
               `Java 17 or later is required to use the Nextflow language server (using path: ${javaPath}).`
@@ -71,19 +77,32 @@ function startLanguageServer(context: vscode.ExtensionContext) {
             protocol2Code: (value) => vscode.Uri.parse(value)
           }
         };
-        const serverPath = await fetchLanguageServer(context);
-        if (!serverPath) {
-          resolve();
-          vscode.window.showErrorMessage("Failed to retrieve language server.");
-          return;
+        let executable: Executable;
+        if (nativePath) {
+          vscode.window.showInformationMessage(
+            `Using native Nextflow language server (${versionPrefix}).`
+          );
+          executable = { command: nativePath };
+        } else {
+          const serverPath = await fetchLanguageServerJar(
+            versionPrefix,
+            isPreview
+          );
+          if (!serverPath) {
+            resolve();
+            vscode.window.showErrorMessage(
+              "Failed to retrieve language server."
+            );
+            return;
+          }
+          const args = ["-jar", serverPath];
+          // uncomment to allow a debugger to attach to the language server
+          // args.unshift("-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=5005,quiet=y");
+          executable = {
+            command: javaPath as string,
+            args: args
+          };
         }
-        const args = ["-jar", serverPath];
-        // uncomment to allow a debugger to attach to the language server
-        // args.unshift("-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=5005,quiet=y");
-        const executable: Executable = {
-          command: javaPath,
-          args: args
-        };
         languageClient = new LanguageClient(
           "nextflow",
           "Nextflow Language Server",
@@ -165,16 +184,16 @@ async function convertScriptToTyped() {
   }
 }
 
-function restartLanguageServer(context: vscode.ExtensionContext) {
+function restartLanguageServer() {
   if (!languageClient) {
-    startLanguageServer(context);
+    startLanguageServer();
     return;
   }
   let oldLanguageClient = languageClient;
   languageClient = null;
   oldLanguageClient.stop().then(
     () => {
-      startLanguageServer(context);
+      startLanguageServer();
     },
     () => {
       vscode.window
@@ -208,7 +227,7 @@ export function activateLanguageServer(
         event.affectsConfiguration("nextflow.java.home") ||
         event.affectsConfiguration("nextflow.languageVersion");
       if (shouldRestart) {
-        restartLanguageServer(context);
+        restartLanguageServer();
       }
     }
   );
@@ -222,7 +241,7 @@ export function activateLanguageServer(
     }
   );
   vscode.commands.registerCommand("nextflow.languageServer.restart", () => {
-    restartLanguageServer(context);
+    restartLanguageServer();
   });
   vscode.commands.registerCommand("nextflow.languageServer.stop", () => {
     stopLanguageServer();
@@ -241,5 +260,5 @@ export function activateLanguageServer(
       });
     }
   );
-  startLanguageServer(context);
+  startLanguageServer();
 }

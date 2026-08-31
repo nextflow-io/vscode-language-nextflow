@@ -368,17 +368,18 @@
     "package": "npm run check-types && npm run ui-build && node esbuild.js --production && (cd build ; vsce package -o nextflow.vsix)",
     "ui-dev": "cd webview-ui && npm run dev",
     "ui-watch": "cd webview-ui && npm run build -- --watch",
-    "ui-build": "cd webview-ui && npm run build"
+    "ui-build": "cd webview-ui && npm run build",
+    "test:syntax": "node syntaxes/highlight.test.js"
   },
   "devDependencies": {
     "@types/node": "^20",
     "@types/semver": "^7.7.0",
     "@types/vscode": "^1.96.0",
-    "@vscode/vsce": "^3.2.1",
+    "@vscode/vsce": "^3.9.2",
     "esbuild": "^0.28.1",
     "esbuild-plugin-copy": "^2.1.1",
     "jwt-decode": "^4.0.0",
-    "mermaid": "^11.15.0",
+    "mermaid": "^11.16.1",
     "node-fetch": "^3.3.2",
     "posthog-node": "^4.4.1",
     "prettier": "3.5.2",
@@ -386,7 +387,9 @@
     "typescript": "^5.7.2",
     "uuid": "^14.0.0",
     "vscode-jsonrpc": "^8.0.2",
-    "vscode-languageclient": "^8.0.2"
+    "vscode-languageclient": "^10.1.0",
+    "vscode-oniguruma": "^2.0.1",
+    "vscode-textmate": "^9.3.2"
   },
   "extensionDependencies": [
     "vscode.git"

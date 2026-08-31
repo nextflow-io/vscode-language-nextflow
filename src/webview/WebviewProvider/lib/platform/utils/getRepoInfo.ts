@@ -1,19 +1,49 @@
 import { ExtensionContext } from "vscode";
+import * as path from "path";
 import * as vscode from "vscode";
 
 import { RepoInfo } from "../types";
 
-function handleUpdate(context: ExtensionContext, repoInfo: RepoInfo) {
+function stateKey(folderName?: string) {
+  return folderName ? `repoInfo:${folderName}` : "repoInfo";
+}
+
+function handleUpdate(
+  context: ExtensionContext,
+  folderName: string | undefined,
+  repoInfo: RepoInfo
+) {
   const vsCodeState = context.workspaceState;
-  vsCodeState.update("repoInfo", repoInfo);
+  vsCodeState.update(stateKey(folderName), repoInfo);
+}
+
+// Find the git repository for the given workspace folder, either the folder
+// itself or the closest repository containing it.
+function findRepository(repositories: any[], folderName?: string) {
+  const folder = vscode.workspace.workspaceFolders?.find(
+    (f) => f.name === folderName
+  );
+  if (!folder) return repositories[0];
+
+  const root = folder.uri.fsPath;
+  return repositories
+    .filter((repo) => {
+      const repoRoot = repo?.rootUri?.fsPath;
+      if (!repoRoot) return false;
+      return root === repoRoot || root.startsWith(repoRoot + path.sep);
+    })
+    .sort((a, b) => b.rootUri.fsPath.length - a.rootUri.fsPath.length)[0];
 }
 
 async function getRepoInfo(
-  context: ExtensionContext
+  context: ExtensionContext,
+  folderName?: string
 ): Promise<RepoInfo | undefined> {
   try {
     const wsState = context.workspaceState;
-    const savedState = wsState.get("repoInfo") as RepoInfo | undefined;
+    const savedState = wsState.get(stateKey(folderName)) as
+      | RepoInfo
+      | undefined;
     if (savedState) return savedState;
 
     const extension = vscode.extensions.getExtension("vscode.git");
@@ -30,7 +60,7 @@ async function getRepoInfo(
       return undefined;
     }
 
-    const repository = git.repositories[0];
+    const repository = findRepository(git.repositories, folderName);
     if (!repository) return undefined;
 
     const remotes = repository?.state?.remotes || repository?.remotes;
@@ -62,7 +92,7 @@ async function getRepoInfo(
       owner
     };
 
-    handleUpdate(context, repoInfo);
+    handleUpdate(context, folderName, repoInfo);
     return repoInfo;
   } catch (error) {
     console.error("Error getting repo info:", error);
