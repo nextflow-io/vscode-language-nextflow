@@ -270,7 +270,7 @@
           "type": "integer",
           "default": 120,
           "minimum": 0,
-          "markdownDescription": "Maximum line length when formatting (`0` to disable line wrapping).\n\n*Note: requires Nextflow language version 26.08 or later.*"
+          "markdownDescription": "Maximum line length for formatting. Use `0` to disable line wrapping.\n\n*Note: requires a language server version with formatter line wrapping; older versions ignore this setting.*"
         },
         "nextflow.formatting.sortDeclarations": {
           "type": "boolean",

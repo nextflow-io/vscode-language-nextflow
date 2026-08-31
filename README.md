@@ -30,17 +30,11 @@ Related blog posts:
 
 The extension can format your scripts and config files based on a standard set of formatting rules. Rules can be customized using the **Nextflow > Formatting** extension settings.
 
-The formatter:
+The formatter always preserves comments -- formatting never loses or alters a comment -- and re-indents multi-line strings to match the surrounding code.
 
-- Always preserves comments -- formatting never loses or alters a comment
-- Uses K&R style (`} else {`) for if/else and try/catch statements
-- Normalizes blank lines, e.g. collapsing multiple consecutive blank lines into one
-- Re-indents multi-line strings to match the surrounding code
-- Automatically wraps long lines at the configured maximum line length (see the `nextflow.formatting.maxLineLength` setting)
+Long lines are automatically wrapped at the configured maximum line length (see the `nextflow.formatting.maxLineLength` setting). To exclude code from formatting, use `// fmt: skip` on the last line of a statement or declaration, or enclose a region with `// fmt: off` and `// fmt: on`.
 
-To exclude code from formatting, use `// fmt: skip` on the last line of a statement or declaration, or enclose a region with `// fmt: off` and `// fmt: on`.
-
-_Note: the formatting behavior described above requires Nextflow language version 26.08 or later._
+_Note: line wrapping and the `fmt:` directives require a newer language server version and are ignored by older versions._
 
 ### Project view
 
@@ -113,9 +107,9 @@ The following settings are available:
 
 - `nextflow.formatting.maheshForm`: Place process outputs at the end of the process body when formatting Nextflow scripts.
 
-- `nextflow.formatting.maxLineLength`: Maximum line length when formatting (`0` to disable line wrapping).
+- `nextflow.formatting.maxLineLength`: Maximum line length for formatting. Use `0` to disable line wrapping.
 
-  _Note: requires Nextflow language version 26.08 or later._
+  _Note: requires a language server version with formatter line wrapping; older versions ignore this setting._
 
 - `nextflow.formatting.sortDeclarations`: Sort script declarations when formatting Nextflow scripts.
 
