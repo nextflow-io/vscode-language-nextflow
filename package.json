@@ -29,8 +29,8 @@
     "Programming Languages"
   ],
   "activationEvents": [
-    "onStartupFinished",
-    "onAuthenticationRequest:azuread",
+    "workspaceContains:*.nf",
+    "workspaceContains:nextflow.config",
     "onLanguage:nextflow-log",
     "onFileSystem:nextflow-log-filtered"
   ],
