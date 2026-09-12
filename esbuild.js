@@ -8,6 +8,8 @@ async function main() {
     "images/**": "./images",
     "snippets/**": "./snippets",
     "syntaxes/**": "./syntaxes",
+    "themes/**": "./themes",
+    "DESIGN.md": "./DESIGN.md",
     "CHANGELOG.md": "./CHANGELOG.md",
     "LICENSE.md": "./LICENSE.md",
     "README.md": "./README.md",
