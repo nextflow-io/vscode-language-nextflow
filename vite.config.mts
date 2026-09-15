@@ -7,7 +7,9 @@ export default defineConfig({
   plugins: [react()],
   root: "webview-ui",
   resolve: {
-    alias: { "@ext": fileURLToPath(new URL("./src", import.meta.url)) }
+    alias: {
+      "@shared": fileURLToPath(new URL("./src/shared", import.meta.url))
+    }
   },
   base: "./",
   build: {

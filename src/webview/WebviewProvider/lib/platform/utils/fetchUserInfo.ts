@@ -1,5 +1,5 @@
-import { SEQERA_API_URL } from "../../../../../constants";
-import type { UserInfoResponse } from "../types";
+import { SEQERA_API_URL } from "../../../../../shared/constants";
+import type { UserInfoResponse } from "../../../../../shared/types";
 
 const fetchUserInfo = async (token: string): Promise<UserInfoResponse> => {
   if (!token) return { message: "No token found" } as UserInfoResponse;

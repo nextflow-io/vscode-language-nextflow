@@ -1,8 +1,5 @@
-import { SEQERA_PLATFORM_URL } from "@ext/constants";
-import {
-  Workflow,
-  Workspace
-} from "@ext/webview/WebviewProvider/lib/platform/types";
+import { SEQERA_PLATFORM_URL } from "@shared/constants";
+import { Workflow, Workspace } from "@shared/types";
 
 export { formatDate, relativeTime } from "../../utils";
 

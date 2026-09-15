@@ -1,4 +1,4 @@
-import { AddPipelineResponse } from "@ext/webview/WebviewProvider/lib/platform/types";
+import { AddPipelineResponse } from "@shared/types";
 import Button from "../../../../../components/Button";
 import { getEditURL } from "../../../utils";
 

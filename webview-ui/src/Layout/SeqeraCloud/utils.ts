@@ -6,7 +6,7 @@ import {
   DataLink,
   AddPipelineResponse
 } from "../../Context/types";
-import { SEQERA_PLATFORM_URL } from "@ext/constants";
+import { SEQERA_PLATFORM_URL } from "@shared/constants";
 
 // Build URLs to Seqera Cloud
 
