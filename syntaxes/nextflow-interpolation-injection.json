@@ -1,0 +1,10 @@
+{
+  "scopeName": "nextflow.interpolation.injection",
+  "injectionSelector": "L:meta.embedded.block.shellscript",
+  "patterns": [
+    {
+      "name": "variable.other.interpolated.nextflow",
+      "match": "\\$\\{[^{}]*\\}|\\$[A-Za-z_][A-Za-z0-9_]*(\\.[A-Za-z_][A-Za-z0-9_]*)*"
+    }
+  ]
+}

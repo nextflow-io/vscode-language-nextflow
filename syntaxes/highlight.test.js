@@ -9,7 +9,27 @@ const vsctm = require("vscode-textmate");
 
 const GRAMMARS = {
   "source.nextflow": "nextflow.tmLanguage.json",
-  "source.nextflow-groovy": "groovy.tmLanguage.json"
+  "source.nextflow-groovy": "groovy.tmLanguage.json",
+  "nextflow.interpolation.injection": "nextflow-interpolation-injection.json"
+};
+
+// VS Code supplies the real shellscript grammar at runtime. This stub stands in
+// for it, and reproduces the one way an embedded grammar can break the host: a
+// begin/end string rule that opens on the first quote of the closing `"""` and
+// swallows the rest of the file.
+const SHELL_STUB = {
+  scopeName: "source.shell",
+  patterns: [
+    {
+      name: "string.quoted.double.shell",
+      begin: '"',
+      end: '"'
+    },
+    {
+      name: "keyword.control.shell",
+      match: "\\b(if|then|fi|for|do|done)\\b"
+    }
+  ]
 };
 
 // [ snippet, scope prefix, target ]
@@ -154,6 +174,41 @@ const CASES = [
     "when:"
   ],
   ["process FOO {\n  shell:\n  'x'\n}", "constant.block.nextflow", "shell:"],
+
+  // --- nextflow: embedded shell scripts -----------------------------------
+  [
+    'process FOO {\n  script:\n  """\n  echo hi\n  """\n}',
+    "meta.embedded.block.shellscript",
+    "echo hi"
+  ],
+  [
+    'process FOO {\n  script:\n  """\n  if x; then y; fi\n  """\n}',
+    "keyword.control.shell",
+    "then"
+  ],
+  // the closing delimiter is not part of the embedded region
+  [
+    'process FOO {\n  script:\n  """\n  echo hi\n  """\n}',
+    "string.quoted.double.multiline.nextflow",
+    '"""\n  echo hi\n  """'
+  ],
+  // an unterminated shell string must not swallow the rest of the file
+  [
+    'process FOO {\n  script:\n  """\n  echo "oops\n  """\n}\n\nworkflow {\n  FOO()\n}',
+    "keyword.nextflow",
+    "workflow"
+  ],
+  // groovy interpolation wins over shell expansion inside the embedded region
+  [
+    'process FOO {\n  script:\n  """\n  tool ${task.cpus} $reads\n  """\n}',
+    "variable.other.interpolated.nextflow",
+    "${task.cpus}"
+  ],
+  [
+    'process FOO {\n  script:\n  """\n  tool ${task.cpus} $reads\n  """\n}',
+    "variable.other.interpolated.nextflow",
+    "$reads"
+  ],
   ["process FOO {\n  script:\n  'echo hi'\n}", "process.nextflow", "process"],
 
   ["workflow {\n  FOO()\n}", "keyword.nextflow", "workflow"],
@@ -224,7 +279,12 @@ async function main() {
   }));
   const registry = new vsctm.Registry({
     onigLib,
+    getInjections: (scope) =>
+      scope === "source.nextflow"
+        ? ["nextflow.interpolation.injection"]
+        : undefined,
     loadGrammar: (scope) => {
+      if (scope === "source.shell") return Promise.resolve(SHELL_STUB);
       const file = GRAMMARS[scope];
       if (!file) return Promise.resolve(null);
       const raw = fs.readFileSync(path.join(__dirname, file), "utf8");

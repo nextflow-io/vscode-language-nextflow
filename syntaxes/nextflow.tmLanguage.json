@@ -235,6 +235,9 @@
     "process-body": {
       "patterns": [
         {
+          "include": "#script-block"
+        },
+        {
           "name": "constant.block.nextflow",
           "match": "(?:input|output|when|script|shell|exec):"
         },
@@ -244,6 +247,26 @@
         },
         {
           "include": "source.nextflow-groovy#groovy"
+        }
+      ]
+    },
+    "script-block": {
+      "name": "string.quoted.double.multiline.nextflow",
+      "begin": "\"\"\"",
+      "end": "\"\"\"",
+      "patterns": [
+        {
+          "include": "#embedded-shell"
+        }
+      ]
+    },
+    "embedded-shell": {
+      "begin": "(^|\\G)(?!\\s*\"\"\")",
+      "while": "^(?!\\s*\"\"\")",
+      "contentName": "meta.embedded.block.shellscript",
+      "patterns": [
+        {
+          "include": "source.shell"
         }
       ]
     },
