@@ -287,7 +287,7 @@ class WebviewProvider implements vscode.WebviewViewProvider {
   }
 
   private getBuildPath() {
-    return vscode.Uri.joinPath(this._extensionUri, "webview-ui", "dist");
+    return vscode.Uri.joinPath(this._extensionUri, "ui");
   }
 
   private getBuiltHTML(view: vscode.WebviewView) {

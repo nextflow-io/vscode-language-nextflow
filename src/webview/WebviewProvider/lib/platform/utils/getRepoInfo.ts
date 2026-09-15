@@ -2,7 +2,7 @@ import { ExtensionContext } from "vscode";
 import * as path from "path";
 import * as vscode from "vscode";
 
-import { RepoInfo } from "../types";
+import { RepoInfo } from "../../../../../shared/types";
 
 function stateKey(folderName?: string) {
   return folderName ? `repoInfo:${folderName}` : "repoInfo";

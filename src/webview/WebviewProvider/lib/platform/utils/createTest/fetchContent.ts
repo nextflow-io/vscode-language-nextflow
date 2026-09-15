@@ -1,4 +1,4 @@
-import { SEQERA_INTERN_API_URL } from "../../../../../../constants";
+import { SEQERA_INTERN_API_URL } from "../../../../../../shared/constants";
 import { systemPrompt } from "./prompt";
 
 async function fetchContent(

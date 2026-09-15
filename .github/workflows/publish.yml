@@ -34,9 +34,7 @@ jobs:
           cache: "npm"
 
       - name: npm clean install
-        run: |
-          (cd webview-ui ; npm ci)
-          npm ci
+        run: npm ci
 
       - name: Build vscode extension
         run: npm run package

@@ -14,15 +14,7 @@ cd vscode-language-nextflow
 Install dependencies:
 
 ```bash
-(cd webview-ui ; npm install)
 npm install
-```
-
-If you need to edit the language server, clone the repository and build it:
-
-```bash
-git clone https://github.com/nextflow-io/language-server ../language-server
-make server
 ```
 
 Finally, in VS Code or Cursor, press `F5` to build the extension and launch a new workspace with the extension loaded (alternatively you can run `Debug: Start Debugging` from the command palette).
@@ -32,6 +24,28 @@ Alternatively, you can build and run the extension from the command line:
 ```bash
 make test
 ```
+
+## Project structure
+
+The extension is two programs that run in different places and talk to each other over `postMessage`.
+
+```
+src/
+  extension.ts        entry point
+  auth/               Seqera Cloud login
+  languageServer/     language server client
+  nextflowLog/        .nextflow.log highlighting and filtering
+  telemetry/
+  webview/            extension side of the webviews
+  shared/             the only code both sides import
+  ui/                 the webviews themselves, a React app
+```
+
+Everything outside `src/ui` runs in the extension host, which is a Node process with the `vscode` module available. `src/ui` runs in a sandboxed browser iframe where it is not.
+
+`src/shared` holds what both sides need, currently the Seqera URL constants and the Platform API types. It must stay free of both `vscode` and Node, since it is compiled for two runtimes. The UI reaches it through the `@shared/*` alias, which is declared twice, in `vite.config.mts` for bundling and in `tsconfig.ui.json` for type checking. Both have to agree.
+
+A webview cannot import `vscode` no matter how the project is arranged. To reach the extension host, including for logging, post a message and handle it in `WebviewProvider`.
 
 ## Publishing
 

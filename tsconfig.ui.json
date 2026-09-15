@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.app.tsbuildinfo",
+    "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.ui.tsbuildinfo",
     "target": "ES2020",
     "useDefineForClassFields": true,
     "lib": ["ES2020", "DOM", "DOM.Iterable"],
@@ -14,6 +14,8 @@
     "moduleDetection": "force",
     "noEmit": true,
     "jsx": "react-jsx",
+    "baseUrl": ".",
+    "paths": { "@shared/*": ["src/shared/*"] },
 
     /* Linting */
     "strict": true,
@@ -22,5 +24,8 @@
     "noFallthroughCasesInSwitch": true,
     "noUncheckedSideEffectImports": true
   },
-  "include": ["src/**/*"]
+  // src/shared is pulled in through the @shared/* imports above, so it is
+  // checked by this config as well as by tsconfig.json. It has to satisfy
+  // both: no DOM, and the stricter unused-symbol rules here.
+  "include": ["src/ui/**/*", "vite.config.mts"]
 }
