@@ -9,7 +9,38 @@ const vsctm = require("vscode-textmate");
 
 const GRAMMARS = {
   "source.nextflow": "nextflow.tmLanguage.json",
-  "source.nextflow-groovy": "groovy.tmLanguage.json"
+  "source.nextflow-groovy": "groovy.tmLanguage.json",
+  "nextflow.interpolation.injection": "nextflow-interpolation-injection.json",
+  "nextflow.script.injection": "nextflow-script-injection.json"
+};
+
+// VS Code supplies the grammars for the embedded languages at runtime. These
+// stubs stand in for them. A rule that includes a grammar the registry cannot
+// resolve is dropped entirely, so the stubs are what make the embedding
+// testable at all. The shell stub also reproduces the one way an embedded
+// grammar can break the host: a begin/end string rule that opens on the first
+// quote of the closing `"""` and swallows the rest of the file.
+const STUBS = {
+  "source.shell": {
+    scopeName: "source.shell",
+    patterns: [
+      { name: "string.quoted.double.shell", begin: '"', end: '"' },
+      {
+        name: "keyword.control.shell",
+        match: "\\b(if|then|fi|for|do|done)\\b"
+      },
+      // probe for the `\G` limitation documented below, see the case using it
+      { name: "invalid.illegal.anchor-probe", match: "\\G\\s*@" }
+    ]
+  },
+  "source.python": {
+    scopeName: "source.python",
+    patterns: [{ name: "keyword.control.python", match: "\\b(def|print)\\b" }]
+  },
+  "source.r": {
+    scopeName: "source.r",
+    patterns: [{ name: "keyword.control.r", match: "\\b(function|library)\\b" }]
+  }
 };
 
 // [ snippet, scope prefix, target ]
@@ -154,6 +185,165 @@ const CASES = [
     "when:"
   ],
   ["process FOO {\n  shell:\n  'x'\n}", "constant.block.nextflow", "shell:"],
+
+  // --- nextflow: embedded shell scripts -----------------------------------
+  [
+    'process FOO {\n  script:\n  """\n  echo hi\n  """\n}',
+    "meta.embedded.block.shellscript",
+    "echo hi"
+  ],
+  [
+    'process FOO {\n  script:\n  """\n  if x; then y; fi\n  """\n}',
+    "keyword.control.shell",
+    "then"
+  ],
+  // the closing delimiter is not part of the embedded region
+  [
+    'process FOO {\n  script:\n  """\n  echo hi\n  """\n}',
+    "string.quoted.double.multiline.nextflow",
+    '"""\n  echo hi\n  """'
+  ],
+  // an unterminated shell string must not swallow the rest of the file
+  [
+    'process FOO {\n  script:\n  """\n  echo "oops\n  """\n}\n\nworkflow {\n  FOO()\n}',
+    "keyword.nextflow",
+    "workflow"
+  ],
+  // nested in an `if` block, which groovy's block rule would otherwise own
+  [
+    'process FOO {\n  script:\n  if( x ) {\n    """\n    echo hi\n    """\n  }\n}',
+    "meta.embedded.block.shellscript",
+    "echo hi"
+  ],
+  [
+    'process FOO {\n  script:\n  if( x ) {\n    """\n    echo hi\n    """\n  }\n  else\n    """\n    echo bye\n    """\n}',
+    "meta.embedded.block.shellscript",
+    "echo bye"
+  ],
+  // ...and the process still ends where it should
+  [
+    'process FOO {\n  script:\n  if( x ) {\n    """\n    echo hi\n    """\n  }\n}\n\nworkflow {\n  FOO()\n}',
+    "keyword.nextflow",
+    "workflow"
+  ],
+  // the injection must not reach triple-quoted strings outside a process
+  [
+    'workflow {\n  x = """\n  echo hi\n  """\n}',
+    "meta.embedded.block.shellscript",
+    false
+  ],
+  ['x = """\n  echo hi\n  """', "meta.embedded.block.shellscript", false],
+
+  // --- nextflow: shebang dispatch -----------------------------------------
+  [
+    'process FOO {\n  script:\n  """\n  #!/usr/bin/env python\n  print(1)\n  """\n}',
+    "meta.embedded.block.python",
+    "print(1)"
+  ],
+  [
+    'process FOO {\n  script:\n  """\n  #!/usr/bin/env Rscript\n  print(1)\n  """\n}',
+    "meta.embedded.block.r",
+    "print(1)"
+  ],
+  // the dispatched grammar really runs, it is not just a contentName
+  [
+    'process FOO {\n  script:\n  """\n  #!/usr/bin/env python\n  print(1)\n  """\n}',
+    "keyword.control.python",
+    "print"
+  ],
+  [
+    'process FOO {\n  script:\n  """\n  #!/usr/bin/env Rscript\n  library(x)\n  """\n}',
+    "keyword.control.r",
+    "library"
+  ],
+  // an unrecognised or absent shebang falls through to shell
+  [
+    'process FOO {\n  script:\n  """\n  #!/bin/bash\n  print(1)\n  """\n}',
+    "meta.embedded.block.shellscript",
+    "print(1)"
+  ],
+  // the shebang picks one language, not several
+  [
+    'process FOO {\n  script:\n  """\n  #!/usr/bin/env python\n  print(1)\n  """\n}',
+    "meta.embedded.block.shellscript",
+    false
+  ],
+  // interpolation still applies in a non-shell script block
+  [
+    'process FOO {\n  script:\n  """\n  #!/usr/bin/env python\n  n = ${task.cpus}\n  """\n}',
+    "variable.other.interpolated.nextflow",
+    "${task.cpus}"
+  ],
+  // and the closing delimiter still ends the block
+  [
+    'process FOO {\n  script:\n  """\n  #!/usr/bin/env python\n  print(1)\n  """\n}\n\nworkflow {\n  FOO()\n}',
+    "keyword.nextflow",
+    "workflow"
+  ],
+
+  // Known limitation. `\G` resolves to the end of the last stacked `while`,
+  // so the embedded region re-anchors it at the start of every line. Rules in
+  // the embedded grammar that use `\G` to mean "start of this construct" fire
+  // on every line instead. In shellscript that is `command_name_range`, which
+  // is why a continuation line of a `cmd \\` invocation is scoped as a command
+  // name and its options lose their highlighting.
+  //
+  // This is TextMate-conformant, not a vscode-textmate bug, and VS Code's own
+  // markdown fenced code blocks have it too. The fix would be a bail-out
+  // pattern on the include, requested in microsoft/vscode-textmate#207. Until
+  // then the alternative is `end` instead of `while`, which lets the embedded
+  // grammar swallow the closing delimiter and the rest of the file — worse.
+  //
+  // Asserts the current behaviour so a change in it is visible.
+  [
+    'process FOO {\n  script:\n  """\n  echo hi\n  @probe\n  """\n}',
+    "invalid.illegal.anchor-probe",
+    "@"
+  ],
+
+  // interpolation holds an arbitrary expression, so braces must balance
+  [
+    'process FOO {\n  script:\n  """\n  fastqc ${pairs.collect{ a, b -> b }.join(\' \')}\n  """\n}',
+    "variable.other.interpolated.nextflow",
+    "${pairs.collect{ a, b -> b }.join(' ')}"
+  ],
+  // a brace inside a quoted string does not count
+  [
+    'process FOO {\n  script:\n  """\n  echo ${x.join(\'}\')}\n  """\n}',
+    "variable.other.interpolated.nextflow",
+    "${x.join('}')}"
+  ],
+  // `\$` is an escaped shell variable, not groovy interpolation
+  [
+    'process FOO {\n  script:\n  """\n  echo \\${HOME}\n  """\n}',
+    "variable.other.interpolated.nextflow",
+    false
+  ],
+
+  // --- nextflow: single-quoted script blocks ------------------------------
+  [
+    "process FOO {\n  script:\n  '''\n  echo hi\n  '''\n}",
+    "meta.embedded.block.shellscript",
+    "echo hi"
+  ],
+  // groovy does not interpolate single-quoted strings, so `${...}` is shell
+  [
+    "process FOO {\n  script:\n  '''\n  echo ${HOME}\n  '''\n}",
+    "variable.other.interpolated.nextflow",
+    false
+  ],
+
+  // groovy interpolation wins over shell expansion inside the embedded region
+  [
+    'process FOO {\n  script:\n  """\n  tool ${task.cpus} $reads\n  """\n}',
+    "variable.other.interpolated.nextflow",
+    "${task.cpus}"
+  ],
+  [
+    'process FOO {\n  script:\n  """\n  tool ${task.cpus} $reads\n  """\n}',
+    "variable.other.interpolated.nextflow",
+    "$reads"
+  ],
   ["process FOO {\n  script:\n  'echo hi'\n}", "process.nextflow", "process"],
 
   ["workflow {\n  FOO()\n}", "keyword.nextflow", "workflow"],
@@ -224,7 +414,12 @@ async function main() {
   }));
   const registry = new vsctm.Registry({
     onigLib,
+    getInjections: (scope) =>
+      scope === "source.nextflow"
+        ? ["nextflow.script.injection", "nextflow.interpolation.injection"]
+        : undefined,
     loadGrammar: (scope) => {
+      if (STUBS[scope]) return Promise.resolve(STUBS[scope]);
       const file = GRAMMARS[scope];
       if (!file) return Promise.resolve(null);
       const raw = fs.readFileSync(path.join(__dirname, file), "utf8");

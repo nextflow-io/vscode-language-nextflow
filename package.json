@@ -92,7 +92,31 @@
       {
         "language": "nextflow",
         "scopeName": "source.nextflow",
-        "path": "./syntaxes/nextflow.tmLanguage.json"
+        "path": "./syntaxes/nextflow.tmLanguage.json",
+        "embeddedLanguages": {
+          "meta.embedded.block.shellscript": "shellscript",
+          "meta.embedded.block.python": "python",
+          "meta.embedded.block.r": "r"
+        }
+      },
+      {
+        "scopeName": "nextflow.script.injection",
+        "path": "./syntaxes/nextflow-script-injection.json",
+        "injectTo": [
+          "source.nextflow"
+        ],
+        "embeddedLanguages": {
+          "meta.embedded.block.shellscript": "shellscript",
+          "meta.embedded.block.python": "python",
+          "meta.embedded.block.r": "r"
+        }
+      },
+      {
+        "scopeName": "nextflow.interpolation.injection",
+        "path": "./syntaxes/nextflow-interpolation-injection.json",
+        "injectTo": [
+          "source.nextflow"
+        ]
       },
       {
         "language": "nextflow-config",
