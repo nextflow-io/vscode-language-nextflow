@@ -21,10 +21,14 @@ const Project = () => {
   const entryNodes = nodes.filter((n) => n.name === "<entry>");
 
   // Reveal the active file's first row, the way the explorer does on tab switch.
+  // A frame late, so rows that a node auto-expanded to reveal are in the DOM.
   useEffect(() => {
-    document
-      .querySelector("[data-active]")
-      ?.scrollIntoView({ block: "nearest" });
+    const frame = requestAnimationFrame(() =>
+      document
+        .querySelector("[data-active]")
+        ?.scrollIntoView({ block: "nearest" })
+    );
+    return () => cancelAnimationFrame(frame);
   }, [activeFile, nodes, viewMode, search]);
 
   function testCoverage() {
