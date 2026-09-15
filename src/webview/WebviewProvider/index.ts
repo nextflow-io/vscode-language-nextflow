@@ -1,6 +1,4 @@
 import * as vscode from "vscode";
-import * as fs from "fs";
-import * as path from "path";
 
 import {
   createTest,
@@ -291,27 +289,26 @@ class WebviewProvider implements vscode.WebviewViewProvider {
   }
 
   private getBuiltHTML(view: vscode.WebviewView) {
-    const distUri = this.getBuildPath();
-    let html = fs.readFileSync(path.join(distUri.fsPath, "index.html"), "utf8");
+    const assets = vscode.Uri.joinPath(this.getBuildPath(), "assets");
+    // The asset names are fixed, so the version is what busts the cache.
+    const version = this._context.extension.packageJSON.version;
+    const asset = (name: string) =>
+      `${view.webview.asWebviewUri(vscode.Uri.joinPath(assets, name))}?v=${version}`;
 
-    html = html.replace(
-      "</head>",
-      `<script>window.initialData = { viewID: "${this.viewID}" };</script></head>`
-    );
-
-    html = updateRefs(html, view.webview, distUri);
-    return html;
+    return `<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="${asset("ui.css")}">
+    <script>window.initialData = { viewID: "${this.viewID}" };</script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="${asset("ui.js")}"></script>
+  </body>
+</html>`;
   }
 }
-
-const updateRefs = (
-  html: string,
-  webview: vscode.Webview,
-  distUri: vscode.Uri
-): string =>
-  html.replace(
-    /((src|href)=["'])(\.\/|\/)?assets\//g,
-    `$1${webview.asWebviewUri(vscode.Uri.joinPath(distUri, "assets"))}/`
-  );
 
 export default WebviewProvider;

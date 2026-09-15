@@ -15,6 +15,25 @@ async function main() {
     "package.json": "./package.json",
     "node_modules/mermaid/dist/mermaid.min.js": "media"
   };
+  // The webview: a browser bundle, built from its own tsconfig so that the
+  // @shared/* alias resolves.
+  await build({
+    entryPoints: ["src/ui/main.tsx"],
+    bundle: true,
+    format: "esm",
+    minify: production,
+    sourcemap: !production,
+    sourcesContent: false,
+    platform: "browser",
+    outdir: "build/ui/assets",
+    entryNames: "ui",
+    assetNames: "[name]",
+    loader: { ".ttf": "file" },
+    tsconfig: "tsconfig.ui.json",
+    logLevel: "silent"
+  });
+
+  // The extension host: a Node bundle, plus everything else that ships.
   await build({
     entryPoints: ["src/extension.ts"],
     bundle: true,
