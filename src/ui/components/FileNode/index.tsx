@@ -13,7 +13,7 @@ type Props = {
 };
 
 const FileNode = ({ node, level = 0, searchTerm }: Props) => {
-  const { findChildren, openFile } = useWorkspaceContext();
+  const { findChildren, openFile, activeFile } = useWorkspaceContext();
   const [expanded, setExpanded] = useState(level < 1);
   const isWorkflow = node.type === "workflow";
 
@@ -59,7 +59,11 @@ const FileNode = ({ node, level = 0, searchTerm }: Props) => {
         [styles.expanded]: expanded
       })}
     >
-      <label className={clsx(styles.item)}>
+      <label
+        className={clsx(styles.item, {
+          [styles.active]: activeFile === node.path
+        })}
+      >
         <span className={styles.name} onClick={handleClick}>
           <Icon className={clsx(styles.icon, iconClassName)} />
           {node.name}

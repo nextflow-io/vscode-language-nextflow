@@ -12,6 +12,9 @@
     &:hover {
       background-color: var(--vscode-list-hoverBackground);
     }
+    &.active {
+      background-color: var(--vscode-list-inactiveSelectionBackground);
+    }
     & .name {
       display: flex;
       align-items: center;

@@ -2,10 +2,7 @@ import * as vscode from "vscode";
 import { AuthProvider } from "../auth";
 import ResourcesProvider from "./ResourcesProvider";
 import WebviewProvider from "./WebviewProvider";
-
-function isNextflowFile(filePath: string) {
-  return filePath.endsWith(".nf") || filePath.endsWith(".nf.test");
-}
+import { isNextflowFile } from "./utils";
 
 export function activateWebview(
   context: vscode.ExtensionContext,
@@ -58,6 +55,9 @@ export function activateWebview(
     refresh(e.files.map((r) => r.newUri))
   );
   vscode.workspace.onDidChangeWorkspaceFolders((_) => refresh());
+  vscode.window.onDidChangeActiveTextEditor((_) =>
+    projectProvider.postActiveFile()
+  );
 
   return providers;
 }

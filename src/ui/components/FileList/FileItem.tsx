@@ -1,3 +1,4 @@
+import clsx from "clsx";
 import { useWorkspaceContext } from "../../Context";
 import { TreeNode } from "../../Context/WorkspaceProvider/types";
 import { ProcessIcon } from "../../icons";
@@ -10,10 +11,14 @@ type Props = {
 };
 
 const FileItem = ({ node }: Props) => {
-  const { openFile } = useWorkspaceContext();
+  const { openFile, activeFile } = useWorkspaceContext();
 
   return (
-    <div className={styles.item}>
+    <div
+      className={clsx(styles.item, {
+        [styles.active]: activeFile === node.path
+      })}
+    >
       <label className={styles.label}>
         <span
           className={styles.name}
