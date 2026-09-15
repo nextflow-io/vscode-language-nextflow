@@ -301,6 +301,25 @@ const CASES = [
     "@"
   ],
 
+  // interpolation holds an arbitrary expression, so braces must balance
+  [
+    'process FOO {\n  script:\n  """\n  fastqc ${pairs.collect{ a, b -> b }.join(\' \')}\n  """\n}',
+    "variable.other.interpolated.nextflow",
+    "${pairs.collect{ a, b -> b }.join(' ')}"
+  ],
+  // a brace inside a quoted string does not count
+  [
+    'process FOO {\n  script:\n  """\n  echo ${x.join(\'}\')}\n  """\n}',
+    "variable.other.interpolated.nextflow",
+    "${x.join('}')}"
+  ],
+  // `\$` is an escaped shell variable, not groovy interpolation
+  [
+    'process FOO {\n  script:\n  """\n  echo \\${HOME}\n  """\n}',
+    "variable.other.interpolated.nextflow",
+    false
+  ],
+
   // --- nextflow: single-quoted script blocks ------------------------------
   [
     "process FOO {\n  script:\n  '''\n  echo hi\n  '''\n}",

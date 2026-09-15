@@ -3,8 +3,39 @@
   "injectionSelector": "L:meta.interpolated.nextflow",
   "patterns": [
     {
+      "include": "#interpolation"
+    },
+    {
       "name": "variable.other.interpolated.nextflow",
-      "match": "\\$\\{[^{}]*\\}|\\$[A-Za-z_][A-Za-z0-9_]*(\\.[A-Za-z_][A-Za-z0-9_]*)*"
+      "match": "(?<!\\\\)\\$[A-Za-z_][A-Za-z0-9_]*(\\.[A-Za-z_][A-Za-z0-9_]*)*"
     }
-  ]
+  ],
+  "repository": {
+    "interpolation": {
+      "name": "variable.other.interpolated.nextflow",
+      "begin": "(?<!\\\\)\\$\\{",
+      "end": "\\}",
+      "patterns": [
+        {
+          "include": "#expression"
+        }
+      ]
+    },
+    "expression": {
+      "patterns": [
+        {
+          "match": "'[^']*'|\"[^\"]*\""
+        },
+        {
+          "begin": "\\{",
+          "end": "\\}",
+          "patterns": [
+            {
+              "include": "#expression"
+            }
+          ]
+        }
+      ]
+    }
+  }
 }
