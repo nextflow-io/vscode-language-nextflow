@@ -20,8 +20,17 @@ export function buildMermaid(
     "font-src data:"
   ].join("; ");
 
-  // HTML boilerplate used by both VSCode and HTML export
-  const htmlHead = `<head>
+  return webview({ content, name, mermaidLibUri, nonce, csp });
+}
+
+/**
+ * The head shared by the webview and the HTML export. Only the webview passes
+ * anything extra: a policy naming the webview source would break the export,
+ * which loads Mermaid from a CDN.
+ */
+function htmlHead(extra = ""): string {
+  return `<head>
+    ${extra}
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1, maximum-scale=1">
     <style>
@@ -118,9 +127,15 @@ export function buildMermaid(
       }
     </style>
   </head>`;
+}
 
-  // Mermaid diagram
-  const mermaidDiagram = `
+/** Node links open files in the editor, which a standalone export cannot do. */
+function withoutClicks(content: string): string {
+  return content.replace(/\n\s*click.+/g, "");
+}
+
+function mermaidDiagram(content: string): string {
+  return `
   <pre class="mermaid">
     %%{
       init: {
@@ -140,28 +155,43 @@ export function buildMermaid(
     classDef default stroke-width:3px
   </pre>
   `;
+}
 
-  // HTML export encoded as a data URL
-  const htmlExport = encodeURIComponent(`
+/** A standalone HTML document, encoded for the data URL the export button uses. */
+function htmlExport(content: string): string {
+  return encodeURIComponent(`
   <html>
-    ${htmlHead}
+    ${htmlHead()}
     <body>
-      ${mermaidDiagram.replace(/\n\s*click.+/g, "")}
+      ${mermaidDiagram(withoutClicks(content))}
       <script type="module">
         import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs';
         mermaid.initialize({ startOnLoad: true, securityLevel: 'loose' });
       </script>
     </body>
   </html>`);
+}
 
-  // VSCode webview HTML
+function webview({
+  content,
+  name,
+  mermaidLibUri,
+  nonce,
+  csp
+}: {
+  content: string;
+  name: string;
+  mermaidLibUri: vscode.Uri;
+  nonce: string;
+  csp: string;
+}): string {
   return `
 <html>
-  ${htmlHead.replace("<head>", `<head><meta http-equiv="Content-Security-Policy" content="${csp}">`)}
+  ${htmlHead(`<meta http-equiv="Content-Security-Policy" content="${csp}">`)}
   <body>
     <h3>${name} workflow</h3>
     <p>Click on a process or workflow node to open it in the editor.</p>
-    ${mermaidDiagram}
+    ${mermaidDiagram(content)}
     <script src="${mermaidLibUri}"></script>
     <script nonce="${nonce}">
       document.addEventListener('DOMContentLoaded', function() {
@@ -179,7 +209,7 @@ export function buildMermaid(
     </div>
     <script nonce="${nonce}">
       function copyContent() {
-        const text = \`\\\`\\\`\\\`mermaid\\n${content.replace(/\n\s*click.+/g, "")}\\n\\\`\\\`\\\`\`;
+        const text = \`\\\`\\\`\\\`mermaid\\n${withoutClicks(content)}\\n\\\`\\\`\\\`\`;
         navigator.clipboard.writeText(text);
       }
       function downloadMermaidSvg() {
@@ -196,7 +226,7 @@ export function buildMermaid(
       }
       function downloadMermaidHtml() {
         const a = document.createElement('a');
-        a.href = "data:text/html;charset=utf-8," + "${htmlExport}";
+        a.href = "data:text/html;charset=utf-8," + "${htmlExport(content)}";
         a.download = 'dag-${name}.html';
         a.click();
       }
