@@ -13,23 +13,31 @@ const GRAMMARS = {
   "nextflow.interpolation.injection": "nextflow-interpolation-injection.json"
 };
 
-// VS Code supplies the real shellscript grammar at runtime. This stub stands in
-// for it, and reproduces the one way an embedded grammar can break the host: a
-// begin/end string rule that opens on the first quote of the closing `"""` and
-// swallows the rest of the file.
-const SHELL_STUB = {
-  scopeName: "source.shell",
-  patterns: [
-    {
-      name: "string.quoted.double.shell",
-      begin: '"',
-      end: '"'
-    },
-    {
-      name: "keyword.control.shell",
-      match: "\\b(if|then|fi|for|do|done)\\b"
-    }
-  ]
+// VS Code supplies the grammars for the embedded languages at runtime. These
+// stubs stand in for them. A rule that includes a grammar the registry cannot
+// resolve is dropped entirely, so the stubs are what make the embedding
+// testable at all. The shell stub also reproduces the one way an embedded
+// grammar can break the host: a begin/end string rule that opens on the first
+// quote of the closing `"""` and swallows the rest of the file.
+const STUBS = {
+  "source.shell": {
+    scopeName: "source.shell",
+    patterns: [
+      { name: "string.quoted.double.shell", begin: '"', end: '"' },
+      {
+        name: "keyword.control.shell",
+        match: "\\b(if|then|fi|for|do|done)\\b"
+      }
+    ]
+  },
+  "source.python": {
+    scopeName: "source.python",
+    patterns: [{ name: "keyword.control.python", match: "\\b(def|print)\\b" }]
+  },
+  "source.r": {
+    scopeName: "source.r",
+    patterns: [{ name: "keyword.control.r", match: "\\b(function|library)\\b" }]
+  }
 };
 
 // [ snippet, scope prefix, target ]
@@ -198,6 +206,53 @@ const CASES = [
     "keyword.nextflow",
     "workflow"
   ],
+  // --- nextflow: shebang dispatch -----------------------------------------
+  [
+    'process FOO {\n  script:\n  """\n  #!/usr/bin/env python\n  print(1)\n  """\n}',
+    "meta.embedded.block.python",
+    "print(1)"
+  ],
+  [
+    'process FOO {\n  script:\n  """\n  #!/usr/bin/env Rscript\n  print(1)\n  """\n}',
+    "meta.embedded.block.r",
+    "print(1)"
+  ],
+  // the dispatched grammar really runs, it is not just a contentName
+  [
+    'process FOO {\n  script:\n  """\n  #!/usr/bin/env python\n  print(1)\n  """\n}',
+    "keyword.control.python",
+    "print"
+  ],
+  [
+    'process FOO {\n  script:\n  """\n  #!/usr/bin/env Rscript\n  library(x)\n  """\n}',
+    "keyword.control.r",
+    "library"
+  ],
+  // an unrecognised or absent shebang falls through to shell
+  [
+    'process FOO {\n  script:\n  """\n  #!/bin/bash\n  print(1)\n  """\n}',
+    "meta.embedded.block.shellscript",
+    "print(1)"
+  ],
+  // the shebang picks one language, not several
+  [
+    'process FOO {\n  script:\n  """\n  #!/usr/bin/env python\n  print(1)\n  """\n}',
+    "meta.embedded.block.shellscript",
+    false
+  ],
+  // interpolation still applies in a non-shell script block
+  [
+    'process FOO {\n  script:\n  """\n  #!/usr/bin/env python\n  n = ${task.cpus}\n  """\n}',
+    "variable.other.interpolated.nextflow",
+    "${task.cpus}"
+  ],
+  // and the closing delimiter still ends the block
+  [
+    'process FOO {\n  script:\n  """\n  #!/usr/bin/env python\n  print(1)\n  """\n}\n\nworkflow {\n  FOO()\n}',
+    "keyword.nextflow",
+    "workflow"
+  ],
+
   // --- nextflow: single-quoted script blocks ------------------------------
   [
     "process FOO {\n  script:\n  '''\n  echo hi\n  '''\n}",
@@ -297,7 +352,7 @@ async function main() {
         ? ["nextflow.interpolation.injection"]
         : undefined,
     loadGrammar: (scope) => {
-      if (scope === "source.shell") return Promise.resolve(SHELL_STUB);
+      if (STUBS[scope]) return Promise.resolve(STUBS[scope]);
       const file = GRAMMARS[scope];
       if (!file) return Promise.resolve(null);
       const raw = fs.readFileSync(path.join(__dirname, file), "utf8");
