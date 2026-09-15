@@ -39,9 +39,9 @@ function htmlHead(extra = ""): string {
         --mm-container-square-fill: var(--vscode-sideBarTitle-background, #BABCBD22);
         --mm-container-square-stroke: var(--vscode-tab-lastPinnedBorder, #DDDEDE);
         --mm-container-title: var(--vscode-sideBarTitle-foreground, #160F26);
-        --mm-node-text: var(--vscode-tab-activeForeground, #160F26);
-        --mm-node-fill: var(--vscode-textCodeBlock-background, #B6ECE2);
-        --mm-node-fill-hover: var(--vscode-textBlockQuote-background, #86E0CE);
+        /* Paired so the label always contrasts with the node, in any theme */
+        --mm-node-text: var(--vscode-badge-foreground, #160F26);
+        --mm-node-fill: var(--vscode-badge-background, #B6ECE2);
         --mm-node-border: var(--vscode-checkbox-selectBorder, #065647);
         --mm-connector-lines: var(--vscode-tab-unfocusedActiveModifiedBorder, #545555);
       }
@@ -67,18 +67,22 @@ function htmlHead(extra = ""): string {
       .mermaid .cluster span {
         color: var(--mm-container-title) !important;
       }
-      /* All node rectangles */
+      /* All node shapes */
       .mermaid .node rect,
-      .mermaid .node polygon {
+      .mermaid .node polygon,
+      .mermaid .node path {
         fill: var(--mm-node-fill) !important;
         stroke: var(--mm-node-border) !important;
         stroke-width: 3px !important;
-        transition: fill .15s ease !important;
+        transition: filter .15s ease !important;
       }
-      .mermaid a .node:hover rect {
-        fill: var(--mm-node-fill-hover) !important;
+      .mermaid a .node:hover rect,
+      .mermaid a .node:hover polygon,
+      .mermaid a .node:hover path {
+        filter: brightness(1.25);
       }
-      .mermaid .nodeLabel {
+      .mermaid .nodeLabel,
+      .mermaid .nodeLabel p {
         fill: var(--mm-node-text) !important;
         color: var(--mm-node-text) !important;
       }
