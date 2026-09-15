@@ -13,8 +13,7 @@ async function main() {
     "README.md": "./README.md",
     "language-configuration.json": "./language-configuration.json",
     "package.json": "./package.json",
-    "node_modules/mermaid/dist/mermaid.min.js": "media",
-    "dist/**": "ui"
+    "node_modules/mermaid/dist/mermaid.min.js": "media"
   };
   await build({
     entryPoints: ["src/extension.ts"],

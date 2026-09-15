@@ -361,7 +361,6 @@
     "compile": "rm -rf build && npm run check-types && npm run ui-build && node esbuild.js",
     "package": "rm -rf build && npm run check-types && npm run ui-build && node esbuild.js --production && (cd build ; vsce package -o nextflow.vsix)",
     "ui-dev": "vite",
-    "ui-watch": "vite build --watch",
     "ui-build": "vite build",
     "test:syntax": "node syntaxes/highlight.test.js",
     "lint": "eslint ."

@@ -70,15 +70,19 @@ Two bundlers, because there are two targets:
 - **esbuild** (`esbuild.js`) bundles `src/extension.ts` to CommonJS for Node, with
   `vscode` left external because the runtime injects it.
 - **Vite** (`vite.config.mts`) builds `src/ui` for the browser, emitting the HTML,
-  hashed assets and the font into a top-level `dist/`.
+  hashed assets and the font straight into `build/ui`.
 
 Their inputs never overlap, so they do not conflict. Nothing imports `src/ui` from
 the extension side, so esbuild never walks into it.
 
-`npm run package` runs both, assembles everything into `build/`, and runs `vsce`
-from in there. That last part is worth knowing: **what ships is the copy list in
-`esbuild.js`**, not a `.vscodeignore`. Adding a file to the extension
-means adding it to that list.
+`npm run package` runs both, then runs `vsce` from inside `build/`. Both bundlers
+write into `build/` directly, so the order matters: Vite first, then esbuild,
+which adds to `build/` without clearing it.
+
+Nothing filters what gets packaged, because `build/` only ever contains what
+ships. There is no `.vscodeignore`, and adding one at the repository root would
+do nothing, since `vsce` runs a directory down. To add a file to the extension,
+add it to the copy list in `esbuild.js`.
 
 Type checking is also split, and `npm run check-types` runs both halves:
 
@@ -101,9 +105,10 @@ setting. An error there may be reported by the config you are not editing.
 | `npm run ui-dev`      | Vite dev server for the UI, on its own with no extension host. |
 | `npm run test:syntax` | Syntax highlighting tests for the TextMate grammars.           |
 
-`npm run ui-watch` rebuilds `dist/` but does not copy into `build/`, so a running
-Extension Development Host will not pick the changes up. Use `npm run compile` and
-restart.
+There is no watch mode for the UI. Editing `src/ui` means `npm run compile` and
+restarting the Extension Development Host. `npm run ui-dev` serves the UI on its
+own, which is useful for styling work but has no extension host to talk to, so
+anything driven by `postMessage` will not respond.
 
 ## Publishing
 

@@ -13,7 +13,7 @@ export default defineConfig({
   },
   base: "./",
   build: {
-    outDir: fileURLToPath(new URL("./dist", import.meta.url)),
+    outDir: fileURLToPath(new URL("./build/ui", import.meta.url)),
     emptyOutDir: true,
     assetsDir: "assets",
     rollupOptions: {

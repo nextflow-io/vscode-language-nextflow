@@ -2,6 +2,5 @@
 .vscode
 .vsix
 build/
-dist/
 language-server
 node_modules
