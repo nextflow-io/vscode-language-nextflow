@@ -358,8 +358,8 @@
   },
   "scripts": {
     "check-types": "tsc --noEmit && tsc --noEmit -p tsconfig.ui.json",
-    "compile": "npm run check-types && npm run ui-build && node esbuild.js",
-    "package": "npm run check-types && npm run ui-build && node esbuild.js --production && (cd build ; vsce package -o nextflow.vsix)",
+    "compile": "rm -rf build && npm run check-types && npm run ui-build && node esbuild.js",
+    "package": "rm -rf build && npm run check-types && npm run ui-build && node esbuild.js --production && (cd build ; vsce package -o nextflow.vsix)",
     "ui-dev": "vite",
     "ui-watch": "vite build --watch",
     "ui-build": "vite build",

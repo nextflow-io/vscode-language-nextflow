@@ -24,5 +24,8 @@
     "noFallthroughCasesInSwitch": true,
     "noUncheckedSideEffectImports": true
   },
-  "include": ["src/ui/**/*"]
+  // src/shared is pulled in through the @shared/* imports above, so it is
+  // checked by this config as well as by tsconfig.json. It has to satisfy
+  // both: no DOM, and the stricter unused-symbol rules here.
+  "include": ["src/ui/**/*", "vite.config.mts"]
 }
