@@ -14,6 +14,7 @@
     }
     &.active {
       background-color: var(--vscode-list-inactiveSelectionBackground);
+      color: var(--vscode-list-inactiveSelectionForeground);
     }
     & .name {
       display: flex;

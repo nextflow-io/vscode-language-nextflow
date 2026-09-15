@@ -10,6 +10,9 @@
   }
   &.active {
     background-color: var(--vscode-list-inactiveSelectionBackground);
+    & .label {
+      color: var(--vscode-list-inactiveSelectionForeground);
+    }
   }
 }
 .label {
