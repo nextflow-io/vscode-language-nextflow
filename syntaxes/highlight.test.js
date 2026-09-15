@@ -198,6 +198,19 @@ const CASES = [
     "keyword.nextflow",
     "workflow"
   ],
+  // --- nextflow: single-quoted script blocks ------------------------------
+  [
+    "process FOO {\n  script:\n  '''\n  echo hi\n  '''\n}",
+    "meta.embedded.block.shellscript",
+    "echo hi"
+  ],
+  // groovy does not interpolate single-quoted strings, so `${...}` is shell
+  [
+    "process FOO {\n  script:\n  '''\n  echo ${HOME}\n  '''\n}",
+    "variable.other.interpolated.nextflow",
+    false
+  ],
+
   // groovy interpolation wins over shell expansion inside the embedded region
   [
     'process FOO {\n  script:\n  """\n  tool ${task.cpus} $reads\n  """\n}',

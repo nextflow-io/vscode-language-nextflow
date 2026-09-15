@@ -238,6 +238,9 @@
           "include": "#script-block"
         },
         {
+          "include": "#script-block-single"
+        },
+        {
           "name": "constant.block.nextflow",
           "match": "(?:input|output|when|script|shell|exec):"
         },
@@ -263,6 +266,26 @@
     "embedded-shell": {
       "begin": "(^|\\G)(?!\\s*\"\"\")",
       "while": "^(?!\\s*\"\"\")",
+      "contentName": "meta.embedded.block.shellscript meta.interpolated.nextflow",
+      "patterns": [
+        {
+          "include": "source.shell"
+        }
+      ]
+    },
+    "script-block-single": {
+      "name": "string.quoted.single.multiline.nextflow",
+      "begin": "'''",
+      "end": "'''",
+      "patterns": [
+        {
+          "include": "#embedded-shell-single"
+        }
+      ]
+    },
+    "embedded-shell-single": {
+      "begin": "(^|\\G)(?!\\s*''')",
+      "while": "^(?!\\s*''')",
       "contentName": "meta.embedded.block.shellscript",
       "patterns": [
         {

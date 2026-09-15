@@ -1,6 +1,6 @@
 {
   "scopeName": "nextflow.interpolation.injection",
-  "injectionSelector": "L:meta.embedded.block.shellscript",
+  "injectionSelector": "L:meta.interpolated.nextflow",
   "patterns": [
     {
       "name": "variable.other.interpolated.nextflow",
