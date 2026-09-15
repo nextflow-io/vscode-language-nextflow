@@ -154,7 +154,12 @@ async function previewDag(
   const mermaidLibUri = panel.webview.asWebviewUri(
     vscode.Uri.joinPath(mediaPath, "mermaid.min.js")
   );
-  panel.webview.html = buildMermaid(content, name ?? "Entry", mermaidLibUri);
+  panel.webview.html = buildMermaid(
+    content,
+    name ?? "Entry",
+    mermaidLibUri,
+    panel.webview.cspSource
+  );
 }
 
 async function convertScriptToTyped() {

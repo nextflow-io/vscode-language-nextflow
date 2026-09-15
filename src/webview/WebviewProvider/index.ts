@@ -1,4 +1,5 @@
 import * as vscode from "vscode";
+import { randomUUID } from "crypto";
 
 import {
   createTest,
@@ -294,14 +295,16 @@ class WebviewProvider implements vscode.WebviewViewProvider {
     const version = this._context.extension.packageJSON.version;
     const asset = (name: string) =>
       `${view.webview.asWebviewUri(vscode.Uri.joinPath(assets, name))}?v=${version}`;
+    const nonce = randomUUID();
 
     return `<!doctype html>
 <html lang="en">
   <head>
+    <meta http-equiv="Content-Security-Policy" content="${contentSecurityPolicy(view.webview, nonce)}">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="${asset("ui.css")}">
-    <script>window.initialData = { viewID: "${this.viewID}" };</script>
+    <script nonce="${nonce}">window.initialData = { viewID: "${this.viewID}" };</script>
   </head>
   <body>
     <div id="root"></div>
@@ -310,5 +313,15 @@ class WebviewProvider implements vscode.WebviewViewProvider {
 </html>`;
   }
 }
+
+const contentSecurityPolicy = (webview: vscode.Webview, nonce: string) =>
+  [
+    "default-src 'none'",
+    `script-src ${webview.cspSource} 'nonce-${nonce}'`,
+    // React writes inline style attributes, which a nonce cannot cover
+    `style-src ${webview.cspSource} 'unsafe-inline'`,
+    `font-src ${webview.cspSource}`,
+    `img-src ${webview.cspSource} data:`
+  ].join("; ");
 
 export default WebviewProvider;
