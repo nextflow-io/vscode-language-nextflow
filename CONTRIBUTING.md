@@ -17,13 +17,6 @@ Install dependencies:
 npm install
 ```
 
-If you need to edit the language server, clone the repository and build it:
-
-```bash
-git clone https://github.com/nextflow-io/language-server ../language-server
-make server
-```
-
 Finally, in VS Code or Cursor, press `F5` to build the extension and launch a new workspace with the extension loaded (alternatively you can run `Debug: Start Debugging` from the command palette).
 
 Alternatively, you can build and run the extension from the command line:
@@ -34,8 +27,7 @@ make test
 
 ## Project structure
 
-The extension is two programs that run in different places and talk to each other
-over `postMessage`.
+The extension is two programs that run in different places and talk to each other over `postMessage`.
 
 ```
 src/
@@ -49,66 +41,11 @@ src/
   ui/                 the webviews themselves, a React app
 ```
 
-Everything outside `src/ui` runs in the extension host, which is a Node process
-with the `vscode` module available. `src/ui` runs in a sandboxed browser iframe
-where it is not. That boundary is the reason for most of what follows.
+Everything outside `src/ui` runs in the extension host, which is a Node process with the `vscode` module available. `src/ui` runs in a sandboxed browser iframe where it is not.
 
-`src/shared` holds what both sides need, currently the Seqera URL constants and
-the Platform API types. It must stay free of both `vscode` and Node, since it is
-compiled for two runtimes. The UI reaches it through the `@shared/*` alias, which
-is declared twice, in `vite.config.mts` for bundling and in `tsconfig.ui.json` for
-type checking. Both have to agree.
+`src/shared` holds what both sides need, currently the Seqera URL constants and the Platform API types. It must stay free of both `vscode` and Node, since it is compiled for two runtimes. The UI reaches it through the `@shared/*` alias, which is declared twice, in `vite.config.mts` for bundling and in `tsconfig.ui.json` for type checking. Both have to agree.
 
-A webview cannot import `vscode` no matter how the project is arranged. To reach
-the extension host, including for logging, post a message and handle it in
-`WebviewProvider`.
-
-## How the build works
-
-Two bundlers, because there are two targets:
-
-- **esbuild** (`esbuild.js`) bundles `src/extension.ts` to CommonJS for Node, with
-  `vscode` left external because the runtime injects it.
-- **Vite** (`vite.config.mts`) builds `src/ui` for the browser, emitting the HTML,
-  hashed assets and the font straight into `build/ui`.
-
-Their inputs never overlap, so they do not conflict. Nothing imports `src/ui` from
-the extension side, so esbuild never walks into it.
-
-`npm run package` runs both, then runs `vsce` from inside `build/`. Both bundlers
-write into `build/` directly, so the order matters: Vite first, then esbuild,
-which adds to `build/` without clearing it.
-
-Nothing filters what gets packaged, because `build/` only ever contains what
-ships. There is no `.vscodeignore`, and adding one at the repository root would
-do nothing, since `vsce` runs a directory down. To add a file to the extension,
-add it to the copy list in `esbuild.js`.
-
-Type checking is also split, and `npm run check-types` runs both halves:
-
-| Config             | Covers                      | Notes                                  |
-| ------------------ | --------------------------- | -------------------------------------- |
-| `tsconfig.json`    | `src`, excluding `src/ui`   | No DOM lib. The exclusion is required. |
-| `tsconfig.ui.json` | `src/ui`, `vite.config.mts` | DOM lib, stricter unused-symbol rules. |
-
-`src/shared` is compiled by both, so it has to satisfy the stricter of each
-setting. An error there may be reported by the config you are not editing.
-
-### Scripts
-
-| Command               | What it does                                                   |
-| --------------------- | -------------------------------------------------------------- |
-| `npm run compile`     | Type check, build the UI, bundle the extension into `build/`.  |
-| `npm run package`     | The above, minified, plus a `.vsix`.                           |
-| `npm run check-types` | Both tsconfigs.                                                |
-| `npm run lint`        | ESLint over `src/ui`.                                          |
-| `npm run ui-dev`      | Vite dev server for the UI, on its own with no extension host. |
-| `npm run test:syntax` | Syntax highlighting tests for the TextMate grammars.           |
-
-There is no watch mode for the UI. Editing `src/ui` means `npm run compile` and
-restarting the Extension Development Host. `npm run ui-dev` serves the UI on its
-own, which is useful for styling work but has no extension host to talk to, so
-anything driven by `postMessage` will not respond.
+A webview cannot import `vscode` no matter how the project is arranged. To reach the extension host, including for logging, post a message and handle it in `WebviewProvider`.
 
 ## Publishing
 
