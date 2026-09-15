@@ -24,6 +24,100 @@ export function buildMermaid(
 }
 
 /**
+ * Layout for the pan/zoom viewport. Webview only: the HTML export is a plain
+ * document that the browser can scroll and zoom on its own.
+ */
+const panZoomStyle = `<style>
+  body {
+    margin: 0 12px;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+  .viewport {
+    flex: 1;
+    overflow: hidden;
+    cursor: grab;
+    user-select: none;
+  }
+  .viewport.grabbing {
+    cursor: grabbing;
+  }
+  .viewport .mermaid {
+    transform-origin: 0 0;
+  }
+  /* Mermaid caps the diagram at its natural width; zooming needs it uncapped */
+  .viewport .mermaid svg {
+    max-width: none !important;
+  }
+</style>`;
+
+/** Drag to pan, wheel to zoom at the cursor, double-click to reset. */
+function panZoomScript(nonce: string): string {
+  return `<script nonce="${nonce}">
+    (function() {
+      const viewport = document.querySelector('.viewport');
+      const canvas = viewport.querySelector('.mermaid');
+      let scale = 1, x = 0, y = 0;
+      let dragging = false, dragged = 0, lastX = 0, lastY = 0;
+
+      function apply() {
+        canvas.style.transform = 'translate(' + x + 'px, ' + y + 'px) scale(' + scale + ')';
+      }
+
+      viewport.addEventListener('wheel', function(e) {
+        e.preventDefault();
+        const k = Math.min(Math.max(Math.exp(-e.deltaY / 400) * scale, 0.1), 20) / scale;
+        const rect = viewport.getBoundingClientRect();
+        const cx = e.clientX - rect.left, cy = e.clientY - rect.top;
+        // Keep the point under the cursor fixed
+        x = cx - (cx - x) * k;
+        y = cy - (cy - y) * k;
+        scale *= k;
+        apply();
+      }, { passive: false });
+
+      viewport.addEventListener('pointerdown', function(e) {
+        dragging = true;
+        dragged = 0;
+        lastX = e.clientX;
+        lastY = e.clientY;
+        viewport.classList.add('grabbing');
+      });
+      window.addEventListener('pointermove', function(e) {
+        if (!dragging) return;
+        const dx = e.clientX - lastX, dy = e.clientY - lastY;
+        dragged += Math.abs(dx) + Math.abs(dy);
+        x += dx;
+        y += dy;
+        lastX = e.clientX;
+        lastY = e.clientY;
+        apply();
+      });
+      window.addEventListener('pointerup', function() {
+        dragging = false;
+        viewport.classList.remove('grabbing');
+      });
+
+      // A drag that happens to end on a node should not also open its file
+      viewport.addEventListener('click', function(e) {
+        if (dragged > 4) {
+          e.preventDefault();
+          e.stopPropagation();
+        }
+      }, true);
+
+      viewport.addEventListener('dblclick', function() {
+        scale = 1;
+        x = 0;
+        y = 0;
+        apply();
+      });
+    })();
+  </script>`;
+}
+
+/**
  * The head shared by the webview and the HTML export. Only the webview passes
  * anything extra: a policy naming the webview source would break the export,
  * which loads Mermaid from a CDN.
@@ -99,6 +193,7 @@ function htmlHead(extra = ""): string {
       .action-buttons {
         display: flex;
         justify-content: center;
+        margin-bottom: 12px;
       }
       /* https://github.com/microsoft/vscode-extension-samples/blob/5ddd30fc052e03bbec52e5d84627eaa543fb0de8/webview-view-sample/media/vscode.css#L47 */
       button {
@@ -191,11 +286,18 @@ function webview({
 }): string {
   return `
 <html>
-  ${htmlHead(`<meta http-equiv="Content-Security-Policy" content="${csp}">`)}
+  ${htmlHead(`<meta http-equiv="Content-Security-Policy" content="${csp}">${panZoomStyle}`)}
   <body>
     <h3>${name} workflow</h3>
-    <p>Click on a process or workflow node to open it in the editor.</p>
-    ${mermaidDiagram(content)}
+    <p>Click on a process or workflow node to open it in the editor. Drag to pan, scroll to zoom, double-click to reset.</p>
+    <div class="action-buttons">
+      <button id="copy-markdown">Copy as Markdown</button>
+      <button id="export-svg">Export as SVG</button>
+      <button id="export-html">Export as HTML</button>
+    </div>
+    <div class="viewport">
+      ${mermaidDiagram(content)}
+    </div>
     <script src="${mermaidLibUri}"></script>
     <script nonce="${nonce}">
       document.addEventListener('DOMContentLoaded', function() {
@@ -206,11 +308,7 @@ function webview({
         });
       });
     </script>
-    <div class="action-buttons">
-      <button id="copy-markdown">Copy as Markdown</button>
-      <button id="export-svg">Export as SVG</button>
-      <button id="export-html">Export as HTML</button>
-    </div>
+    ${panZoomScript(nonce)}
     <script nonce="${nonce}">
       function copyContent() {
         const text = \`\\\`\\\`\\\`mermaid\\n${withoutClicks(content)}\\n\\\`\\\`\\\`\`;
