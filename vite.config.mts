@@ -5,7 +5,7 @@ import { fileURLToPath } from "node:url";
 // https://vite.dev/config/
 export default defineConfig({
   plugins: [react()],
-  root: "webview-ui",
+  root: "src/ui",
   resolve: {
     alias: {
       "@shared": fileURLToPath(new URL("./src/shared", import.meta.url))
@@ -13,6 +13,8 @@ export default defineConfig({
   },
   base: "./",
   build: {
+    outDir: fileURLToPath(new URL("./dist", import.meta.url)),
+    emptyOutDir: true,
     assetsDir: "assets",
     rollupOptions: {
       output: {

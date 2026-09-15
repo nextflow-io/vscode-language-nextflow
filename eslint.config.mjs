@@ -5,10 +5,10 @@ import reactRefresh from "eslint-plugin-react-refresh";
 import tseslint from "typescript-eslint";
 
 export default tseslint.config(
-  { ignores: ["build", "webview-ui/dist"] },
+  { ignores: ["build", "dist"] },
   {
     extends: [js.configs.recommended, ...tseslint.configs.recommended],
-    files: ["webview-ui/src/**/*.{ts,tsx}"],
+    files: ["src/ui/**/*.{ts,tsx}"],
     languageOptions: {
       ecmaVersion: 2020,
       globals: globals.browser

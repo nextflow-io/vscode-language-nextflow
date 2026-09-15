@@ -9,5 +9,7 @@
     "types": []
   },
   "include": ["src"],
-  "exclude": ["node_modules", ".vscode-test", "webview-ui"]
+  // src/ui is browser code built by Vite, and needs the DOM lib that this
+  // config deliberately omits. It is type checked by tsconfig.ui.json.
+  "exclude": ["node_modules", ".vscode-test", "src/ui"]
 }
