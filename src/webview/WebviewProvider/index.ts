@@ -19,6 +19,7 @@ import { AuthProvider, getAccessToken } from "../../auth";
 import { jwtExpired } from "../../auth/AuthProvider/utils/jwt";
 import { sleep } from "./lib/utils";
 import fetchHubPipelines from "./lib/platform/fetchHubPipelines";
+import { isNextflowFile } from "../utils";
 
 class WebviewProvider implements vscode.WebviewViewProvider {
   _currentView?: vscode.WebviewView;
@@ -131,6 +132,14 @@ class WebviewProvider implements vscode.WebviewViewProvider {
     return this._selectedFolder;
   }
 
+  // The project view highlights whichever Nextflow file is open in the editor.
+  public postActiveFile() {
+    const filePath = vscode.window.activeTextEditor?.document.uri.fsPath;
+    this._currentView?.webview.postMessage({
+      activeFile: filePath && isNextflowFile(filePath) ? filePath : null
+    });
+  }
+
   public setSelectedFolder(name: string) {
     this._selectedFolder = name;
     this.getRepoInfo();
@@ -214,6 +223,7 @@ class WebviewProvider implements vscode.WebviewViewProvider {
         selectedFolder: this.selectedFolder() ?? ""
       });
       await this.queryWorkspace();
+      this.postActiveFile();
     }
   }
 

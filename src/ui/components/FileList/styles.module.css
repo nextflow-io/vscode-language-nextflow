@@ -8,6 +8,12 @@
   &:hover {
     background-color: var(--vscode-list-hoverBackground);
   }
+  &.active {
+    background-color: var(--vscode-list-inactiveSelectionBackground);
+    & .label {
+      color: var(--vscode-list-inactiveSelectionForeground);
+    }
+  }
 }
 .label {
   line-height: 1;

@@ -13,7 +13,7 @@ type Props = {
 };
 
 const FileNode = ({ node, level = 0, searchTerm }: Props) => {
-  const { findChildren, openFile } = useWorkspaceContext();
+  const { findChildren, nodes, openFile, activeFile } = useWorkspaceContext();
   const [expanded, setExpanded] = useState(level < 1);
   const isWorkflow = node.type === "workflow";
 
@@ -21,6 +21,23 @@ const FileNode = ({ node, level = 0, searchTerm }: Props) => {
     if (searchTerm) setExpanded(true);
     if (!searchTerm) setExpanded(level < 1);
   }, [searchTerm]);
+
+  // Reveal the active file wherever it sits in the call graph. Collapsing the
+  // branch again still works; only a change of active file re-expands it.
+  useEffect(() => {
+    if (activeFile && hasActiveDescendant(node)) setExpanded(true);
+  }, [activeFile, nodes]);
+
+  // The seen set guards against a call graph that revisits a node.
+  function hasActiveDescendant(
+    node: TreeNode,
+    seen = new Set<TreeNode>()
+  ): boolean {
+    if (seen.has(node)) return false;
+    seen.add(node);
+    if (node.path === activeFile) return true;
+    return findChildren(node).some((child) => hasActiveDescendant(child, seen));
+  }
 
   function handleClick() {
     if (hasChildren && !searchTerm) setExpanded((prev) => !prev);
@@ -49,6 +66,7 @@ const FileNode = ({ node, level = 0, searchTerm }: Props) => {
   const hasChildren = filteredChildren.length > 0;
   if (!hasChildren && !isMatch(node)) return null;
 
+  const isActive = activeFile === node.path;
   const Icon = isWorkflow ? WorkflowIcon : ProcessIcon;
   const iconClassName = isWorkflow ? styles.workflowIcon : styles.processIcon;
 
@@ -59,7 +77,10 @@ const FileNode = ({ node, level = 0, searchTerm }: Props) => {
         [styles.expanded]: expanded
       })}
     >
-      <label className={clsx(styles.item)}>
+      <label
+        className={clsx(styles.item, { [styles.active]: isActive })}
+        data-active={isActive || undefined}
+      >
         <span className={styles.name} onClick={handleClick}>
           <Icon className={clsx(styles.icon, iconClassName)} />
           {node.name}

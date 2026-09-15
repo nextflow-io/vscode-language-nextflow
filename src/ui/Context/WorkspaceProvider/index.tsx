@@ -12,6 +12,7 @@ const WorkspaceContext = createContext<WorkspaceContextType>({
   selectedItems: [],
   selectItem: () => {},
   isSelected: () => false,
+  activeFile: "",
   viewID: "",
   login: () => {},
   selectedView: "pipelines",
@@ -33,6 +34,7 @@ interface WorkspaceContextType {
   selectedItems: string[];
   selectItem: (name: string) => void;
   isSelected: (name: string) => boolean;
+  activeFile: string;
   viewID: string;
   login: () => void;
   selectedView: string;
@@ -63,6 +65,7 @@ const WorkspaceProvider = ({ children, vscode, viewID }: Props) => {
     state?.selectedItems || []
   );
   const [selectedView, setSelectedView] = useState<string>("pipelines");
+  const [activeFile, setActiveFile] = useState<string>("");
 
   useEffect(() => {
     vscode.setState({ selectedItems });
@@ -76,6 +79,8 @@ const WorkspaceProvider = ({ children, vscode, viewID }: Props) => {
         setSelectedFolder(message.selectedFolder);
       }
       if (message.nodes) setNodes(message.nodes);
+      if (message.activeFile !== undefined)
+        setActiveFile(message.activeFile ?? "");
       if (message.testCreated) {
         const data = message.testCreated;
         setCreatingTest({
@@ -155,6 +160,7 @@ const WorkspaceProvider = ({ children, vscode, viewID }: Props) => {
         selectedItems,
         selectItem,
         isSelected,
+        activeFile,
         login,
         viewID,
         selectedView,
