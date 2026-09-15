@@ -15,6 +15,7 @@ async function main() {
     "package.json": "./package.json",
     "node_modules/mermaid/dist/mermaid.min.js": "media"
   };
+
   // The webview: a browser bundle, built from its own tsconfig so that the
   // @shared/* alias resolves.
   await build({
