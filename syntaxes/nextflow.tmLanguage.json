@@ -235,12 +235,6 @@
     "process-body": {
       "patterns": [
         {
-          "include": "#script-block"
-        },
-        {
-          "include": "#script-block-single"
-        },
-        {
           "name": "constant.block.nextflow",
           "match": "(?:input|output|when|script|shell|exec):"
         },
@@ -250,72 +244,6 @@
         },
         {
           "include": "source.nextflow-groovy#groovy"
-        }
-      ]
-    },
-    "script-block": {
-      "name": "string.quoted.double.multiline.nextflow",
-      "begin": "\"\"\"",
-      "end": "\"\"\"",
-      "patterns": [
-        {
-          "include": "#embedded-python"
-        },
-        {
-          "include": "#embedded-r"
-        },
-        {
-          "include": "#embedded-shell"
-        }
-      ]
-    },
-    "embedded-shell": {
-      "begin": "(^|\\G)(?!\\s*$)(?!\\s*\"\"\")",
-      "while": "^(?!\\s*\"\"\")",
-      "contentName": "meta.embedded.block.shellscript meta.interpolated.nextflow",
-      "patterns": [
-        {
-          "include": "source.shell"
-        }
-      ]
-    },
-    "embedded-python": {
-      "begin": "(^|\\G)(?=\\s*#!.*\\bpython[\\\\d.]*\\b)",
-      "while": "^(?!\\s*\"\"\")",
-      "contentName": "meta.embedded.block.python meta.interpolated.nextflow",
-      "patterns": [
-        {
-          "include": "source.python"
-        }
-      ]
-    },
-    "embedded-r": {
-      "begin": "(^|\\G)(?=\\s*#!.*\\b(?:R|Rscript)\\b)",
-      "while": "^(?!\\s*\"\"\")",
-      "contentName": "meta.embedded.block.r meta.interpolated.nextflow",
-      "patterns": [
-        {
-          "include": "source.r"
-        }
-      ]
-    },
-    "script-block-single": {
-      "name": "string.quoted.single.multiline.nextflow",
-      "begin": "'''",
-      "end": "'''",
-      "patterns": [
-        {
-          "include": "#embedded-shell-single"
-        }
-      ]
-    },
-    "embedded-shell-single": {
-      "begin": "(^|\\G)(?!\\s*''')",
-      "while": "^(?!\\s*''')",
-      "contentName": "meta.embedded.block.shellscript",
-      "patterns": [
-        {
-          "include": "source.shell"
         }
       ]
     },

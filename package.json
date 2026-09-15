@@ -100,6 +100,18 @@
         }
       },
       {
+        "scopeName": "nextflow.script.injection",
+        "path": "./syntaxes/nextflow-script-injection.json",
+        "injectTo": [
+          "source.nextflow"
+        ],
+        "embeddedLanguages": {
+          "meta.embedded.block.shellscript": "shellscript",
+          "meta.embedded.block.python": "python",
+          "meta.embedded.block.r": "r"
+        }
+      },
+      {
         "scopeName": "nextflow.interpolation.injection",
         "path": "./syntaxes/nextflow-interpolation-injection.json",
         "injectTo": [

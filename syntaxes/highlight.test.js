@@ -10,7 +10,8 @@ const vsctm = require("vscode-textmate");
 const GRAMMARS = {
   "source.nextflow": "nextflow.tmLanguage.json",
   "source.nextflow-groovy": "groovy.tmLanguage.json",
-  "nextflow.interpolation.injection": "nextflow-interpolation-injection.json"
+  "nextflow.interpolation.injection": "nextflow-interpolation-injection.json",
+  "nextflow.script.injection": "nextflow-script-injection.json"
 };
 
 // VS Code supplies the grammars for the embedded languages at runtime. These
@@ -208,6 +209,31 @@ const CASES = [
     "keyword.nextflow",
     "workflow"
   ],
+  // nested in an `if` block, which groovy's block rule would otherwise own
+  [
+    'process FOO {\n  script:\n  if( x ) {\n    """\n    echo hi\n    """\n  }\n}',
+    "meta.embedded.block.shellscript",
+    "echo hi"
+  ],
+  [
+    'process FOO {\n  script:\n  if( x ) {\n    """\n    echo hi\n    """\n  }\n  else\n    """\n    echo bye\n    """\n}',
+    "meta.embedded.block.shellscript",
+    "echo bye"
+  ],
+  // ...and the process still ends where it should
+  [
+    'process FOO {\n  script:\n  if( x ) {\n    """\n    echo hi\n    """\n  }\n}\n\nworkflow {\n  FOO()\n}',
+    "keyword.nextflow",
+    "workflow"
+  ],
+  // the injection must not reach triple-quoted strings outside a process
+  [
+    'workflow {\n  x = """\n  echo hi\n  """\n}',
+    "meta.embedded.block.shellscript",
+    false
+  ],
+  ['x = """\n  echo hi\n  """', "meta.embedded.block.shellscript", false],
+
   // --- nextflow: shebang dispatch -----------------------------------------
   [
     'process FOO {\n  script:\n  """\n  #!/usr/bin/env python\n  print(1)\n  """\n}',
@@ -371,7 +397,7 @@ async function main() {
     onigLib,
     getInjections: (scope) =>
       scope === "source.nextflow"
-        ? ["nextflow.interpolation.injection"]
+        ? ["nextflow.script.injection", "nextflow.interpolation.injection"]
         : undefined,
     loadGrammar: (scope) => {
       if (STUBS[scope]) return Promise.resolve(STUBS[scope]);
