@@ -22,6 +22,18 @@ const CASES = [
   ["x = 1 /**/", "comment.block.empty", "/**/"],
   ["/* one\ntwo */", "comment.block", "two"],
 
+  // --- fmt directives (must mirror the language server's parser:
+  // //\s*fmt:\s*(skip|off|on)\s* matched against the whole comment) --------
+  ["x = 1 // fmt: skip", "keyword.codetag.notation", "fmt: skip"],
+  ["x = 1 // fmt: skip", "comment.line.double-slash", "// fmt: skip"],
+  ["// fmt: off", "keyword.codetag.notation", "fmt: off"],
+  ["// fmt: on", "keyword.codetag.notation", "fmt: on"],
+  ["//fmt:skip", "keyword.codetag.notation", "fmt:skip"],
+  ["// fmt: skip extra text", "keyword.codetag.notation", false],
+  ["// fmt: offside", "keyword.codetag.notation", false],
+  ["// fmt: offside", "comment.line.double-slash", "// fmt: offside"],
+  ["// plain comment", "keyword.codetag.notation", false],
+
   // --- constants ----------------------------------------------------------
   ["x = MAX_SIZE", "constant.other", "MAX_SIZE"],
   ["x = true", "constant.language", "true"],

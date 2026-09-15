@@ -162,7 +162,9 @@ export async function fetchLanguageServerJar(
   return fileUri.fsPath;
 }
 
-export function fetchLanguageServerNative(versionPrefix: string): string | null {
+export function fetchLanguageServerNative(
+  versionPrefix: string
+): string | null {
   const nativePath = path.join(
     cacheDir(versionPrefix),
     process.platform === "win32" ? "nextflow-lsp.exe" : "nextflow-lsp"
