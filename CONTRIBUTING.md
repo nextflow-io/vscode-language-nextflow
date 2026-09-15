@@ -14,7 +14,6 @@ cd vscode-language-nextflow
 Install dependencies:
 
 ```bash
-(cd webview-ui ; npm install)
 npm install
 ```
 

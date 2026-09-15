@@ -1,4 +1,4 @@
-import { SEQERA_PLATFORM_URL } from "../../../../../src/constants";
+import { SEQERA_PLATFORM_URL } from "@ext/constants";
 import Button from "../../../components/Button";
 import { useTowerContext, useWorkspaceContext } from "../../../Context";
 import WorkspaceSelector from "./WorkspaceSelector";

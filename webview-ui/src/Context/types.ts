@@ -1,1 +1,1 @@
-export * from "../../../src/webview/WebviewProvider/lib/platform/types";
+export * from "@ext/webview/WebviewProvider/lib/platform/types";
