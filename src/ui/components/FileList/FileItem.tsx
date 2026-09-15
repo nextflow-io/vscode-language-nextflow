@@ -12,12 +12,12 @@ type Props = {
 
 const FileItem = ({ node }: Props) => {
   const { openFile, activeFile } = useWorkspaceContext();
+  const isActive = activeFile === node.path;
 
   return (
     <div
-      className={clsx(styles.item, {
-        [styles.active]: activeFile === node.path
-      })}
+      className={clsx(styles.item, { [styles.active]: isActive })}
+      data-active={isActive || undefined}
     >
       <label className={styles.label}>
         <span

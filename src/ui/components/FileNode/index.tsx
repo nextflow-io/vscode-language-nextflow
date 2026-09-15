@@ -49,6 +49,7 @@ const FileNode = ({ node, level = 0, searchTerm }: Props) => {
   const hasChildren = filteredChildren.length > 0;
   if (!hasChildren && !isMatch(node)) return null;
 
+  const isActive = activeFile === node.path;
   const Icon = isWorkflow ? WorkflowIcon : ProcessIcon;
   const iconClassName = isWorkflow ? styles.workflowIcon : styles.processIcon;
 
@@ -60,9 +61,8 @@ const FileNode = ({ node, level = 0, searchTerm }: Props) => {
       })}
     >
       <label
-        className={clsx(styles.item, {
-          [styles.active]: activeFile === node.path
-        })}
+        className={clsx(styles.item, { [styles.active]: isActive })}
+        data-active={isActive || undefined}
       >
         <span className={styles.name} onClick={handleClick}>
           <Icon className={clsx(styles.icon, iconClassName)} />

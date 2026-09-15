@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useWorkspaceContext } from "../../Context";
 import FileList from "../../components/FileList";
 import FileNode from "../../components/FileNode";
@@ -13,12 +13,19 @@ function round(x: number) {
 }
 
 const Project = () => {
-  const { folders, selectedFolder, selectFolder, nodes } =
+  const { folders, selectedFolder, selectFolder, nodes, activeFile } =
     useWorkspaceContext();
   const [viewMode, setViewMode] = useState<ViewMode>("list");
   const [search, setSearch] = useState("");
 
   const entryNodes = nodes.filter((n) => n.name === "<entry>");
+
+  // Reveal the active file's first row, the way the explorer does on tab switch.
+  useEffect(() => {
+    document
+      .querySelector("[data-active]")
+      ?.scrollIntoView({ block: "nearest" });
+  }, [activeFile, nodes, viewMode, search]);
 
   function testCoverage() {
     const totalCount = nodes.length - entryNodes.length;
