@@ -22,14 +22,23 @@ async function getLatestRemoteVersion(
 ): Promise<{ tag: string; updatedAt: string } | null> {
   try {
     const url = `https://api.github.com/repos/nextflow-io/language-server/releases`;
-    const headers: Record<string, string> = {
-      Accept: "application/vnd.github.v3+json"
-    };
-    const token = await getGitHubToken();
-    if (token) {
-      headers.Authorization = `Bearer ${token}`;
+    const query = (token: string | undefined) =>
+      fetch(url, {
+        headers: {
+          Accept: "application/vnd.github.v3+json",
+          ...(token ? { Authorization: `Bearer ${token}` } : {})
+        }
+      });
+
+    let response = await query(await getGitHubToken(true));
+    if (response.status === 403 || response.status === 429) {
+      // rate limited without credentials -- ask the user to grant access to
+      // their GitHub session, which appears as a badge on the Accounts menu
+      const token = await getGitHubToken(false);
+      if (token) {
+        response = await query(token);
+      }
     }
-    const response = await fetch(url, { headers });
     if (!response.ok) {
       return null;
     }
@@ -64,11 +73,15 @@ async function getLatestRemoteVersion(
   }
 }
 
-async function getGitHubToken(): Promise<string | undefined> {
+async function getGitHubToken(silent: boolean): Promise<string | undefined> {
   try {
-    const session = await vscode.authentication.getSession("github", ["repo"], {
-      silent: true
-    });
+    // no scopes are needed to read public releases, and an unscoped request
+    // matches the GitHub session the user is already signed into
+    const session = await vscode.authentication.getSession(
+      "github",
+      [],
+      silent ? { silent: true } : { createIfNone: false }
+    );
     if (session?.accessToken) {
       return session.accessToken;
     }
