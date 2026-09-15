@@ -27,7 +27,9 @@ const STUBS = {
       {
         name: "keyword.control.shell",
         match: "\\b(if|then|fi|for|do|done)\\b"
-      }
+      },
+      // probe for the `\G` limitation documented below, see the case using it
+      { name: "invalid.illegal.anchor-probe", match: "\\G\\s*@" }
     ]
   },
   "source.python": {
@@ -251,6 +253,26 @@ const CASES = [
     'process FOO {\n  script:\n  """\n  #!/usr/bin/env python\n  print(1)\n  """\n}\n\nworkflow {\n  FOO()\n}',
     "keyword.nextflow",
     "workflow"
+  ],
+
+  // Known limitation. `\G` resolves to the end of the last stacked `while`,
+  // so the embedded region re-anchors it at the start of every line. Rules in
+  // the embedded grammar that use `\G` to mean "start of this construct" fire
+  // on every line instead. In shellscript that is `command_name_range`, which
+  // is why a continuation line of a `cmd \\` invocation is scoped as a command
+  // name and its options lose their highlighting.
+  //
+  // This is TextMate-conformant, not a vscode-textmate bug, and VS Code's own
+  // markdown fenced code blocks have it too. The fix would be a bail-out
+  // pattern on the include, requested in microsoft/vscode-textmate#207. Until
+  // then the alternative is `end` instead of `while`, which lets the embedded
+  // grammar swallow the closing delimiter and the rest of the file — worse.
+  //
+  // Asserts the current behaviour so a change in it is visible.
+  [
+    'process FOO {\n  script:\n  """\n  echo hi\n  @probe\n  """\n}',
+    "invalid.illegal.anchor-probe",
+    "@"
   ],
 
   // --- nextflow: single-quoted script blocks ------------------------------
