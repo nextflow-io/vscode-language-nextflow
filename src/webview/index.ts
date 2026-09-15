@@ -29,7 +29,11 @@ export function activateWebview(
 
   // Register views
   const providers = [
-    vscode.window.registerWebviewViewProvider("project", projectProvider),
+    // Keep the view alive while hidden, so switching back to it does not
+    // remount the app and re-query the language server from an empty state.
+    vscode.window.registerWebviewViewProvider("project", projectProvider, {
+      webviewOptions: { retainContextWhenHidden: true }
+    }),
     vscode.window.registerWebviewViewProvider(
       "seqeraCloud",
       seqeraCloudProvider
