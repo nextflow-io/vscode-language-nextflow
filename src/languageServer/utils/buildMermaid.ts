@@ -1,12 +1,36 @@
 import * as vscode from "vscode";
+import { randomUUID } from "crypto";
 
 export function buildMermaid(
   content: string,
   name: string,
-  mermaidLibUri: vscode.Uri
+  mermaidLibUri: vscode.Uri,
+  cspSource: string
 ): string {
-  // HTML boilerplate used by both VSCode and HTML export
-  const htmlHead = `<head>
+  const nonce = randomUUID();
+
+  // Mermaid injects styles as it renders, which a nonce cannot cover. The
+  // library is the only thing loaded from disk, so it is the only use of
+  // the webview source.
+  const csp = [
+    "default-src 'none'",
+    `script-src ${cspSource} 'nonce-${nonce}'`,
+    "style-src 'unsafe-inline'",
+    "img-src data:",
+    "font-src data:"
+  ].join("; ");
+
+  return webview({ content, name, mermaidLibUri, nonce, csp });
+}
+
+/**
+ * The head shared by the webview and the HTML export. Only the webview passes
+ * anything extra: a policy naming the webview source would break the export,
+ * which loads Mermaid from a CDN.
+ */
+function htmlHead(extra = ""): string {
+  return `<head>
+    ${extra}
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1, maximum-scale=1">
     <style>
@@ -103,9 +127,15 @@ export function buildMermaid(
       }
     </style>
   </head>`;
+}
 
-  // Mermaid diagram
-  const mermaidDiagram = `
+/** Node links open files in the editor, which a standalone export cannot do. */
+function withoutClicks(content: string): string {
+  return content.replace(/\n\s*click.+/g, "");
+}
+
+function mermaidDiagram(content: string): string {
+  return `
   <pre class="mermaid">
     %%{
       init: {
@@ -125,30 +155,45 @@ export function buildMermaid(
     classDef default stroke-width:3px
   </pre>
   `;
+}
 
-  // HTML export encoded as a data URL
-  const htmlExport = encodeURIComponent(`
+/** A standalone HTML document, encoded for the data URL the export button uses. */
+function htmlExport(content: string): string {
+  return encodeURIComponent(`
   <html>
-    ${htmlHead}
+    ${htmlHead()}
     <body>
-      ${mermaidDiagram.replace(/\n\s*click.+/g, "")}
+      ${mermaidDiagram(withoutClicks(content))}
       <script type="module">
         import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs';
         mermaid.initialize({ startOnLoad: true, securityLevel: 'loose' });
       </script>
     </body>
   </html>`);
+}
 
-  // VSCode webview HTML
+function webview({
+  content,
+  name,
+  mermaidLibUri,
+  nonce,
+  csp
+}: {
+  content: string;
+  name: string;
+  mermaidLibUri: vscode.Uri;
+  nonce: string;
+  csp: string;
+}): string {
   return `
 <html>
-  ${htmlHead}
+  ${htmlHead(`<meta http-equiv="Content-Security-Policy" content="${csp}">`)}
   <body>
     <h3>${name} workflow</h3>
     <p>Click on a process or workflow node to open it in the editor.</p>
-    ${mermaidDiagram}
+    ${mermaidDiagram(content)}
     <script src="${mermaidLibUri}"></script>
-    <script>
+    <script nonce="${nonce}">
       document.addEventListener('DOMContentLoaded', function() {
         mermaid.initialize({
           startOnLoad: true,
@@ -158,13 +203,13 @@ export function buildMermaid(
       });
     </script>
     <div class="action-buttons">
-      <button onclick="copyContent()">Copy as Markdown</button>
-      <button onclick="downloadMermaidSvg()">Export as SVG</button>
-      <button onclick="downloadMermaidHtml()">Export as HTML</button>
+      <button id="copy-markdown">Copy as Markdown</button>
+      <button id="export-svg">Export as SVG</button>
+      <button id="export-html">Export as HTML</button>
     </div>
-    <script>
+    <script nonce="${nonce}">
       function copyContent() {
-        const text = \`\\\`\\\`\\\`mermaid\\n${content.replace(/\n\s*click.+/g, "")}\\n\\\`\\\`\\\`\`;
+        const text = \`\\\`\\\`\\\`mermaid\\n${withoutClicks(content)}\\n\\\`\\\`\\\`\`;
         navigator.clipboard.writeText(text);
       }
       function downloadMermaidSvg() {
@@ -181,10 +226,13 @@ export function buildMermaid(
       }
       function downloadMermaidHtml() {
         const a = document.createElement('a');
-        a.href = "data:text/html;charset=utf-8," + "${htmlExport}";
+        a.href = "data:text/html;charset=utf-8," + "${htmlExport(content)}";
         a.download = 'dag-${name}.html';
         a.click();
       }
+      document.getElementById('copy-markdown').addEventListener('click', copyContent);
+      document.getElementById('export-svg').addEventListener('click', downloadMermaidSvg);
+      document.getElementById('export-html').addEventListener('click', downloadMermaidHtml);
     </script>
   </body>
 </html>`;
