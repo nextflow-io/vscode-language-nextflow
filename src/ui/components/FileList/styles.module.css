@@ -5,14 +5,11 @@
   justify-content: space-between;
   align-items: center;
   cursor: pointer;
-  &.active {
-    background-color: var(
-      --vscode-list-inactiveSelectionBackground,
-      var(--vscode-list-hoverBackground)
-    );
-  }
   &:hover {
     background-color: var(--vscode-list-hoverBackground);
+  }
+  &.active {
+    background-color: var(--vscode-list-inactiveSelectionBackground);
   }
 }
 .label {

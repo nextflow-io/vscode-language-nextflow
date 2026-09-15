@@ -9,14 +9,11 @@
     width: 100%;
     cursor: pointer;
     color: var(--vscode-foreground);
-    &.active {
-      background-color: var(
-        --vscode-list-inactiveSelectionBackground,
-        var(--vscode-list-hoverBackground)
-      );
-    }
     &:hover {
       background-color: var(--vscode-list-hoverBackground);
+    }
+    &.active {
+      background-color: var(--vscode-list-inactiveSelectionBackground);
     }
     & .name {
       display: flex;
