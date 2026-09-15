@@ -43,7 +43,7 @@ src/
 
 Everything outside `src/ui` runs in the extension host, which is a Node process with the `vscode` module available. `src/ui` runs in a sandboxed browser iframe where it is not.
 
-`src/shared` holds what both sides need, currently the Seqera URL constants and the Platform API types. It must stay free of both `vscode` and Node, since it is compiled for two runtimes. The UI reaches it through the `@shared/*` alias, which is declared twice, in `vite.config.mts` for bundling and in `tsconfig.ui.json` for type checking. Both have to agree.
+`src/shared` holds what both sides need, currently the Seqera URL constants and the Platform API types. It must stay free of both `vscode` and Node, since it is compiled for two runtimes. The UI reaches it through the `@shared/*` alias, declared in `tsconfig.ui.json`, which esbuild reads as well when it bundles the UI.
 
 A webview cannot import `vscode` no matter how the project is arranged. To reach the extension host, including for logging, post a message and handle it in `WebviewProvider`.
 
