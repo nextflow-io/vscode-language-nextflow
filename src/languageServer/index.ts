@@ -148,7 +148,9 @@ async function previewDag(
     {
       enableCommandUris: true,
       enableScripts: true,
-      localResourceRoots: [mediaPath]
+      localResourceRoots: [mediaPath],
+      // the panel keeps its pan and zoom while it is hidden
+      retainContextWhenHidden: true
     }
   );
   const mermaidLibUri = panel.webview.asWebviewUri(
