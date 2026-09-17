@@ -1,7 +1,7 @@
 import * as vscode from "vscode";
 import { randomUUID } from "crypto";
 
-export function buildMermaid(
+export function buildDagPreview(
   content: string,
   name: string,
   mermaidLibUri: vscode.Uri,

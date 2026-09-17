@@ -5,7 +5,7 @@ import {
   Executable
 } from "vscode-languageclient/node";
 
-import { buildMermaid } from "./utils/buildMermaid";
+import { buildDagPreview } from "./utils/buildDagPreview";
 import {
   fetchLanguageServerJar,
   fetchLanguageServerNative,
@@ -148,13 +148,15 @@ async function previewDag(
     {
       enableCommandUris: true,
       enableScripts: true,
-      localResourceRoots: [mediaPath]
+      localResourceRoots: [mediaPath],
+      // the panel keeps its pan and zoom while it is hidden
+      retainContextWhenHidden: true
     }
   );
   const mermaidLibUri = panel.webview.asWebviewUri(
     vscode.Uri.joinPath(mediaPath, "mermaid.min.js")
   );
-  panel.webview.html = buildMermaid(
+  panel.webview.html = buildDagPreview(
     content,
     name ?? "Entry",
     mermaidLibUri,
