@@ -18,6 +18,7 @@ The extension uses the [Nextflow language server](https://github.com/nextflow-io
 - Hover hints
 - Rename
 - DAG preview for workflows
+- Config preview for processes
 
 Read the [Nextflow documentation](https://nextflow.io/docs/latest/vscode.html) for more information about the Nextflow language server.
 
