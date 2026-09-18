@@ -38,7 +38,11 @@ const Toolbar = () => {
           <SeqeraIcon style={{ height: 13, width: 13 }} />
           {!repoInfo && <span className="ml-2">Launchpad</span>}
         </Button>
-        <Button href="https://ai.seqera.io/" subtle2 description="Seqera Co-Scientist">
+        <Button
+          href="https://ai.seqera.io/"
+          subtle2
+          description="Seqera Co-Scientist"
+        >
           <AiIcon style={{ height: 13, width: 13 }} />
         </Button>
         <Button
