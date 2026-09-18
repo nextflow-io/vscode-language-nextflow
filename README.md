@@ -49,7 +49,7 @@ The Project view allows you to:
 
 ### Copilot for Nextflow
 
-The Copilot extension for Seqera AI has been removed. Use the [Seqera AI CLI](https://seqera.io/blog/seqera-ai-cli-announcement/) instead.
+The Copilot extension for Seqera AI has been removed. Use [Seqera Co-Scientist](https://docs.seqera.io/platform-cloud/co-scientist/) instead.
 
 ## Installation
 
