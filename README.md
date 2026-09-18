@@ -27,6 +27,16 @@ Related blog posts:
 - [Modernizing the Nextflow Developer Experience (Part 1): The IDE](https://seqera.io/blog/modernizing-nextflow-developer-experience/)
 - [Modernizing the Nextflow Developer Experience (Part 2): The Language Server](https://seqera.io/blog/modernizing-nextflow-developer-experience-part-2/)
 
+### Formatting
+
+The extension can format your scripts and config files based on a standard set of formatting rules. Rules can be customized using the **Nextflow > Formatting** extension settings.
+
+The formatter always preserves comments -- formatting never loses or alters a comment -- and re-indents multi-line strings to match the surrounding code.
+
+Long lines are automatically wrapped at the configured maximum line length (see the `nextflow.formatting.maxLineLength` setting). To exclude code from formatting, use `// fmt: skip` on the last line of a statement or declaration, or enclose a region with `// fmt: off` and `// fmt: on`.
+
+_Note: line wrapping and the `fmt:` directives require a newer language server version and are ignored by older versions._
+
 ### Project view
 
 The extension provides a custom view for Nextflow projects. The Project view uses the language server to provide an overview of your pipeline project.
@@ -97,6 +107,10 @@ The following settings are available:
   _Note: not all rules are supported._
 
 - `nextflow.formatting.maheshForm`: Place process outputs at the end of the process body when formatting Nextflow scripts.
+
+- `nextflow.formatting.maxLineLength`: Maximum line length for formatting. Use `0` to disable line wrapping.
+
+  _Note: requires a language server version with formatter line wrapping; older versions ignore this setting._
 
 - `nextflow.formatting.sortDeclarations`: Sort script declarations when formatting Nextflow scripts.
 
