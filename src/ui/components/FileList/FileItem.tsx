@@ -2,7 +2,7 @@ import clsx from "clsx";
 import { useWorkspaceContext } from "../../Context";
 import { TreeNode } from "../../Context/WorkspaceProvider/types";
 import { ProcessIcon } from "../../icons";
-import ItemActions from "./ItemActions";
+import ItemActions from "../ItemActions";
 
 import styles from "./styles.module.css";
 
@@ -19,15 +19,15 @@ const FileItem = ({ node }: Props) => {
       className={clsx(styles.item, { [styles.active]: isActive })}
       data-active={isActive || undefined}
     >
-      <label className={styles.label}>
+      <div className={styles.label}>
         <span
           className={styles.name}
           onClick={() => openFile(node.path, node.line)}
         >
           <ProcessIcon className={styles.icon} />
-          {node.name}
+          <span className={styles.text}>{node.name}</span>
         </span>
-      </label>
+      </div>
       <ItemActions node={node} />
     </div>
   );

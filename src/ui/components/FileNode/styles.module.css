@@ -20,11 +20,15 @@
       display: flex;
       align-items: center;
       padding: 5px 8px;
-      width: 100%;
+      flex: 1 1 auto;
+      min-width: 0;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      overflow: hidden;
     }
-    & i {
+    & > i {
       transition: transform 0.2s;
-      margin-right: 4px;
+      padding: 5px 4px 5px 8px;
     }
   }
   & .children {
@@ -48,7 +52,13 @@
     }
   }
 }
+.text {
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
 .icon {
+  flex: none;
   margin-right: 6px;
   height: 13px;
   width: 20px;

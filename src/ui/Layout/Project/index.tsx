@@ -15,7 +15,7 @@ function round(x: number) {
 const Project = () => {
   const { folders, selectedFolder, selectFolder, nodes, activeFile } =
     useWorkspaceContext();
-  const [viewMode, setViewMode] = useState<ViewMode>("list");
+  const [viewMode, setViewMode] = useState<ViewMode>("tree");
   const [search, setSearch] = useState("");
 
   const entryNodes = nodes.filter((n) => n.name === "<entry>");
@@ -96,7 +96,7 @@ const Project = () => {
           onChange={(value) => setViewMode(value as ViewMode)}
         />
       </div>
-      {viewMode === "list" && testCoverage()}
+      {testCoverage()}
       {viewMode === "tree" ? treeView() : listView()}
     </>
   );

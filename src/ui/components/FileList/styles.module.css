@@ -33,7 +33,13 @@
     overflow: hidden;
     cursor: pointer;
   }
+  & .text {
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+  }
   & .icon {
+    flex: none;
     width: 15px;
     height: 14px;
     margin-right: 6px;

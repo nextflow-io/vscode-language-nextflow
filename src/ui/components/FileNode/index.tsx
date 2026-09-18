@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import { useWorkspaceContext } from "../../Context";
 import { TreeNode } from "../../Context/WorkspaceProvider/types";
 import { ProcessIcon, WorkflowIcon } from "../../icons";
+import ItemActions from "../ItemActions";
 
 import styles from "./styles.module.css";
 
@@ -77,16 +78,22 @@ const FileNode = ({ node, level = 0, searchTerm }: Props) => {
         [styles.expanded]: expanded
       })}
     >
-      <label
+      <div
         className={clsx(styles.item, { [styles.active]: isActive })}
         data-active={isActive || undefined}
       >
         <span className={styles.name} onClick={handleClick}>
           <Icon className={clsx(styles.icon, iconClassName)} />
-          {node.name}
+          <span className={styles.text}>{node.name}</span>
         </span>
-        {hasChildren && <i className="codicon codicon-chevron-right" />}
-      </label>
+        {!isWorkflow && <ItemActions node={node} />}
+        {hasChildren && (
+          <i
+            className="codicon codicon-chevron-right"
+            onClick={() => setExpanded((prev) => !prev)}
+          />
+        )}
+      </div>
       {hasChildren && expanded && (
         <div className={styles.children}>
           {filteredChildren.map((child) => (
