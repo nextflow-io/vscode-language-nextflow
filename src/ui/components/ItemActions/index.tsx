@@ -1,9 +1,6 @@
 import clsx from "clsx";
-import {
-  TestCreation,
-  TreeNode
-} from "../../../Context/WorkspaceProvider/types";
-import { useWorkspaceContext } from "../../../Context/WorkspaceProvider";
+import { TestCreation, TreeNode } from "../../Context/WorkspaceProvider/types";
+import { useWorkspaceContext } from "../../Context/WorkspaceProvider";
 import WaveIcon from "./WaveIcon";
 
 import styles from "./styles.module.css";
