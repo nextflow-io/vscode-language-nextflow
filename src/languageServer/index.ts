@@ -5,6 +5,7 @@ import {
   Executable
 } from "vscode-languageclient/node";
 
+import { buildConfigPreview, ConfigPreview } from "./utils/buildConfigPreview";
 import { buildDagPreview } from "./utils/buildDagPreview";
 import {
   fetchLanguageServerJar,
@@ -164,6 +165,77 @@ async function previewDag(
   );
 }
 
+async function fetchConfigPreview(
+  uri: string,
+  name: string,
+  profiles: string[],
+  qualifiedName: string | null
+): Promise<ConfigPreview | null> {
+  const res: any = await vscode.commands.executeCommand(
+    "nextflow.server.previewConfig",
+    uri,
+    name,
+    profiles,
+    qualifiedName
+  );
+  if (!res || !res.result) {
+    const message = res?.error ?? "Failed to render config preview.";
+    vscode.window.showErrorMessage(message);
+    return null;
+  }
+  return res.result as ConfigPreview;
+}
+
+async function previewConfig(
+  uri: string,
+  name: string,
+  qualifiedName: string | null = null
+) {
+  const data = await fetchConfigPreview(uri, name, [], qualifiedName);
+  if (!data) return;
+
+  const panel = vscode.window.createWebviewPanel(
+    "config-preview",
+    `${qualifiedName ?? name} config`,
+    vscode.ViewColumn.Beside,
+    // the panel keeps profile, filter and scroll state while it is hidden
+    { enableScripts: true, retainContextWhenHidden: true }
+  );
+  panel.webview.html = buildConfigPreview(data);
+
+  // the previews are resolved concurrently, so a selection that is made while
+  // an earlier one is still pending must not be overwritten by it
+  let pending = 0;
+  let disposed = false;
+  panel.onDidDispose(() => {
+    disposed = true;
+  });
+
+  panel.webview.onDidReceiveMessage(async (message) => {
+    if (message.type === "open") {
+      const position = new vscode.Position(Math.max(message.line - 1, 0), 0);
+      await vscode.window.showTextDocument(vscode.Uri.parse(message.uri), {
+        viewColumn: vscode.ViewColumn.One,
+        selection: new vscode.Range(position, position)
+      });
+    }
+    // The cascade has to be resolved again for a new profile selection: a
+    // profile is merged into the base config before the process selectors
+    // are applied, so the winning setting cannot be filtered client-side.
+    if (message.type === "profiles") {
+      const generation = ++pending;
+      const updated = await fetchConfigPreview(
+        uri,
+        name,
+        message.profiles,
+        qualifiedName
+      );
+      if (updated && generation === pending && !disposed)
+        panel.webview.postMessage({ type: "update", data: updated });
+    }
+  });
+}
+
 async function convertScriptToTyped() {
   const languageVersion = vscode.workspace
     .getConfiguration("nextflow")
@@ -241,6 +313,12 @@ export function activateLanguageServer(
   vscode.commands.registerCommand("nextflow.previewDag", (uri, name) => {
     previewDag(context, uri, name);
   });
+  vscode.commands.registerCommand(
+    "nextflow.previewConfig",
+    (uri, name, qualifiedName) => {
+      previewConfig(uri, name, qualifiedName ?? null);
+    }
+  );
   vscode.commands.registerCommand(
     "nextflow.languageServer.convertScriptToTyped",
     () => {
