@@ -146,11 +146,6 @@
     ],
     "commands": [
       {
-        "command": "nextflow.languageServer.convertScriptToTyped",
-        "title": "Convert script to static types",
-        "category": "Nextflow"
-      },
-      {
         "command": "nextflow.languageServer.restart",
         "title": "Restart language server",
         "category": "Nextflow"
@@ -198,10 +193,6 @@
     ],
     "menus": {
       "commandPalette": [
-        {
-          "command": "nextflow.languageServer.convertScriptToTyped",
-          "when": "resourceExtname == '.nf'"
-        },
         {
           "command": "nextflow.log.filter.menu",
           "when": "resourceLangId == nextflow-log"

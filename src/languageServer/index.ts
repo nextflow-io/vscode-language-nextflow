@@ -236,33 +236,6 @@ async function previewConfig(
   });
 }
 
-async function convertScriptToTyped() {
-  const languageVersion = vscode.workspace
-    .getConfiguration("nextflow")
-    .get("languageVersion") as string;
-  if (languageVersion === "24.10" || languageVersion == "25.04") {
-    vscode.window.showErrorMessage(
-      "The Nextflow language version must be 25.10 or newer in order to convert to static types."
-    );
-    return;
-  }
-  const uri = vscode.window.activeTextEditor?.document?.uri;
-  if (!uri) return;
-
-  const res: any = await vscode.commands.executeCommand(
-    "nextflow.server.convertScriptToTyped",
-    uri.toString()
-  );
-  if (!res || res.error) {
-    const message = res?.error ?? "Failed to convert script to static types.";
-    vscode.window.showErrorMessage(message);
-  } else {
-    vscode.window.showInformationMessage(
-      "Converted script to static types and updated call sites. Please review updated code for errors."
-    );
-  }
-}
-
 function restartLanguageServer() {
   if (!languageClient) {
     startLanguageServer();
@@ -317,12 +290,6 @@ export function activateLanguageServer(
     "nextflow.previewConfig",
     (uri, name, qualifiedName) => {
       previewConfig(uri, name, qualifiedName ?? null);
-    }
-  );
-  vscode.commands.registerCommand(
-    "nextflow.languageServer.convertScriptToTyped",
-    () => {
-      convertScriptToTyped();
     }
   );
   vscode.commands.registerCommand("nextflow.languageServer.restart", () => {
