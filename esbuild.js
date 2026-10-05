@@ -13,11 +13,28 @@ async function main() {
     "README.md": "./README.md",
     "language-configuration.json": "./language-configuration.json",
     "package.json": "./package.json",
-    "node_modules/mermaid/dist/mermaid.min.js": "media",
-    "webview-ui/dist/**": "webview-ui/dist"
+    "node_modules/mermaid/dist/mermaid.min.js": "media"
   };
-  if (!production)
-    files["../language-server/build/libs/language-server-all.jar"] = "bin";
+
+  // The webview: a browser bundle, built from its own tsconfig so that the
+  // @shared/* alias resolves.
+  await build({
+    entryPoints: ["src/ui/main.tsx"],
+    bundle: true,
+    format: "esm",
+    minify: production,
+    sourcemap: !production,
+    sourcesContent: false,
+    platform: "browser",
+    outdir: "build/ui/assets",
+    entryNames: "ui",
+    assetNames: "[name]",
+    loader: { ".ttf": "file" },
+    tsconfig: "tsconfig.ui.json",
+    logLevel: "silent"
+  });
+
+  // The extension host: a Node bundle, plus everything else that ships.
   await build({
     entryPoints: ["src/extension.ts"],
     bundle: true,

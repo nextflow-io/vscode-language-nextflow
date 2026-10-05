@@ -2,7 +2,7 @@ import { ExtensionContext, WebviewView } from "vscode";
 import { fetchUserInfo, fetchWorkspaces } from "./utils";
 import { debounce } from "../utils";
 
-import { Workspace, UserInfoResponse } from "./types";
+import { Workspace, UserInfoResponse } from "../../../../shared/types";
 import getAuthState, { AuthState } from "./getAuthState";
 import { expired } from "../../../../auth/AuthProvider/utils/jwt";
 

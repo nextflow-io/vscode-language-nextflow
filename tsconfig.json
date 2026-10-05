@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "module": "commonjs",
+    "module": "preserve",
     "target": "es2020",
     "lib": ["es2020"],
     "sourceMap": true,
@@ -8,5 +8,14 @@
     "rootDir": "src",
     "types": []
   },
-  "exclude": ["node_modules", ".vscode-test", "webview-ui", "src/**/*.test.ts", "src/**/*.integration.ts"]
+  "include": ["src"],
+  // src/ui is browser code built by Vite, and needs the DOM lib that this
+  // config deliberately omits. It is type checked by tsconfig.ui.json.
+  "exclude": [
+    "node_modules",
+    ".vscode-test",
+    "src/ui",
+    "src/**/*.test.ts",
+    "src/**/*.integration.ts"
+  ]
 }

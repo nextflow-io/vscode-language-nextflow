@@ -4,7 +4,7 @@ const { getSession, onDidChangeSessions } = authentication;
 import getAccessToken from "./getAccessToken";
 import AuthProvider from "./AuthProvider";
 import type { ExtensionContext } from "vscode";
-import { SEQERA_PLATFORM_URL } from "../constants";
+import { SEQERA_PLATFORM_URL } from "../shared/constants";
 
 async function activateAuth(
   context: ExtensionContext,

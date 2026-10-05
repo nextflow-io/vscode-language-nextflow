@@ -3,20 +3,42 @@ import * as os from "os";
 import * as path from "path";
 import * as vscode from "vscode";
 
+export function resolveLanguageVersion(): {
+  versionPrefix: string;
+  isPreview: boolean;
+} {
+  const languageVersion = vscode.workspace
+    .getConfiguration("nextflow")
+    .get("languageVersion") as string;
+  return {
+    versionPrefix: `v${languageVersion.replace(" (preview)", "")}`,
+    isPreview: languageVersion.includes("(preview)")
+  };
+}
+
 async function getLatestRemoteVersion(
   versionPrefix: string,
   isPreview: boolean = false
 ): Promise<{ tag: string; updatedAt: string } | null> {
   try {
     const url = `https://api.github.com/repos/nextflow-io/language-server/releases`;
-    const headers: Record<string, string> = {
-      Accept: "application/vnd.github.v3+json"
-    };
-    const token = await getGitHubToken();
-    if (token) {
-      headers.Authorization = `Bearer ${token}`;
+    const query = (token: string | undefined) =>
+      fetch(url, {
+        headers: {
+          Accept: "application/vnd.github.v3+json",
+          ...(token ? { Authorization: `Bearer ${token}` } : {})
+        }
+      });
+
+    let response = await query(await getGitHubToken(true));
+    if (response.status === 403 || response.status === 429) {
+      // rate limited without credentials -- ask the user to grant access to
+      // their GitHub session, which appears as a badge on the Accounts menu
+      const token = await getGitHubToken(false);
+      if (token) {
+        response = await query(token);
+      }
     }
-    const response = await fetch(url, { headers });
     if (!response.ok) {
       return null;
     }
@@ -51,11 +73,15 @@ async function getLatestRemoteVersion(
   }
 }
 
-async function getGitHubToken(): Promise<string | undefined> {
+async function getGitHubToken(silent: boolean): Promise<string | undefined> {
   try {
-    const session = await vscode.authentication.getSession("github", ["repo"], {
-      silent: true
-    });
+    // no scopes are needed to read public releases, and an unscoped request
+    // matches the GitHub session the user is already signed into
+    const session = await vscode.authentication.getSession(
+      "github",
+      [],
+      silent ? { silent: true } : { createIfNone: false }
+    );
     if (session?.accessToken) {
       return session.accessToken;
     }
@@ -63,10 +89,14 @@ async function getGitHubToken(): Promise<string | undefined> {
   return process.env.GITHUB_TOKEN;
 }
 
+function cacheDir(versionPrefix: string): string {
+  return path.join(os.homedir(), ".nextflow", "lsp", versionPrefix);
+}
+
 async function getLatestLocalVersion(
   versionPrefix: string
 ): Promise<string | null> {
-  const targetDir = path.join(os.homedir(), ".nextflow", "lsp", versionPrefix);
+  const targetDir = cacheDir(versionPrefix);
   try {
     const files = await vscode.workspace.fs.readDirectory(
       vscode.Uri.file(targetDir)
@@ -82,26 +112,11 @@ async function getLatestLocalVersion(
   }
 }
 
-export async function fetchLanguageServer(context: vscode.ExtensionContext) {
-  // use development build if present
-  const devPath = path.resolve(
-    context.extensionPath,
-    "bin",
-    "language-server-all.jar"
-  );
-  if (fs.existsSync(devPath)) {
-    vscode.window.showInformationMessage(
-      "Using development build of language server."
-    );
-    return devPath;
-  }
-
+export async function fetchLanguageServerJar(
+  versionPrefix: string,
+  isPreview: boolean
+) {
   // get the latest patch release from GitHub or local cache
-  const languageVersion = vscode.workspace
-    .getConfiguration("nextflow")
-    .get("languageVersion") as string;
-  const isPreview = languageVersion.includes("(preview)");
-  const versionPrefix = `v${languageVersion.replace(" (preview)", "")}`;
   let resolvedVersion: string | null = null;
   let remoteUpdatedAt: string | null = null;
   const remoteVersionResponse = await getLatestRemoteVersion(
@@ -125,7 +140,7 @@ export async function fetchLanguageServer(context: vscode.ExtensionContext) {
   }
 
   // use locally cached version if present
-  const targetDir = path.join(os.homedir(), ".nextflow", "lsp", versionPrefix);
+  const targetDir = cacheDir(versionPrefix);
   const cachePath = path.join(targetDir, `${resolvedVersion}.jar`);
   if (isPreview && fs.existsSync(cachePath) && remoteUpdatedAt) {
     // for preview versions, check if cached version is newer than remote
@@ -158,4 +173,14 @@ export async function fetchLanguageServer(context: vscode.ExtensionContext) {
     `Downloaded Nextflow language server ${resolvedVersion}.`
   );
   return fileUri.fsPath;
+}
+
+export function fetchLanguageServerNative(
+  versionPrefix: string
+): string | null {
+  const nativePath = path.join(
+    cacheDir(versionPrefix),
+    process.platform === "win32" ? "nextflow-lsp.exe" : "nextflow-lsp"
+  );
+  return fs.existsSync(nativePath) ? nativePath : null;
 }

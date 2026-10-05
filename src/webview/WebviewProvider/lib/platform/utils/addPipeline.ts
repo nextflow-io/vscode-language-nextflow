@@ -1,5 +1,5 @@
-import { SEQERA_API_URL } from "../../../../../constants";
-import { AddPipelineRequest } from "../hubTypes";
+import { SEQERA_API_URL } from "../../../../../shared/constants";
+import { AddPipelineRequest } from "../../../../../shared/hubTypes";
 
 type Message = {
   requestBody: AddPipelineRequest;

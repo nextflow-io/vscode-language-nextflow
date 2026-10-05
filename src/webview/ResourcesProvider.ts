@@ -56,7 +56,7 @@ class ResourcesProvider implements vscode.TreeDataProvider<ResourceItem> {
       url: "https://docs.seqera.io/"
     },
     {
-      label: "Seqera AI",
+      label: "Seqera Co-Scientist",
       url: "https://ai.seqera.io/"
     },
     {

@@ -1,5 +1,5 @@
-import { SEQERA_API_URL } from "../../../../../constants";
-import type { Dataset } from "../types";
+import { SEQERA_API_URL } from "../../../../../shared/constants";
+import type { Dataset } from "../../../../../shared/types";
 
 const fetchDatasets = async (
   token: string,

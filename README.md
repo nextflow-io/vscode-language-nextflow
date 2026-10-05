@@ -18,6 +18,7 @@ The extension uses the [Nextflow language server](https://github.com/nextflow-io
 - Hover hints
 - Rename
 - DAG preview for workflows
+- Config preview for processes
 - Metro map preview for workflows and pipeline outputs ([nf-metro](https://github.com/pinin4fjords/nf-metro))
 
 Read the [Nextflow documentation](https://nextflow.io/docs/latest/vscode.html) for more information about the Nextflow language server.
@@ -29,23 +30,19 @@ Related blog posts:
 
 ### Project view
 
-The extension provides a custom view for Nextflow projects. The Project view uses the language server to provide an overview of your pipeline project.
-
-The list view lists all processes and workflows, as well as any associated [nf-test](https://www.nf-test.com/) files, in alphabetical order:
-
-![Project List View](images/project_view_list.png)
-
-The tree view shows processes and workflows organized by call hierarchy:
+The extension provides a custom view for Nextflow projects. The Project view uses the language server to provide an overview of your pipeline project:
 
 ![Project Tree View](images/project_view_tree.png)
 
-_Examples taken from the [nf-core/fetchngs](https://github.com/nf-core/fetchngs) pipeline._
+_Example taken from the [nf-core/fetchngs](https://github.com/nf-core/fetchngs) pipeline._
 
 The Project view allows you to:
 
 - See the structure of your pipeline
 - Navigate to a process, workflow, or test by name
 - Monitor test coverage across your entire pipeline
+- View and/or generate [nf-tests](https://www.nf-test.com/) for a process
+- Build a [Wave container](https://seqera.io/wave/) for a process
 
 ### Metro map preview
 
@@ -57,7 +54,7 @@ The extension integrates with [nf-metro](https://github.com/pinin4fjords/nf-metr
 
 ### Copilot for Nextflow
 
-The Copilot extension for Seqera AI has been removed. Use the [Seqera AI CLI](https://seqera.io/blog/seqera-ai-cli-announcement/) instead.
+The Copilot extension for Seqera AI has been removed. Use [Seqera Co-Scientist](https://docs.seqera.io/platform-cloud/co-scientist/) instead.
 
 ## Installation
 

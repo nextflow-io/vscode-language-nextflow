@@ -2,7 +2,7 @@
   "name": "nextflow",
   "displayName": "Nextflow",
   "description": "Nextflow language support",
-  "version": "1.7.1",
+  "version": "1.7.2",
   "publisher": "nextflow",
   "repository": {
     "type": "git",
@@ -29,8 +29,8 @@
     "Programming Languages"
   ],
   "activationEvents": [
-    "onStartupFinished",
-    "onAuthenticationRequest:azuread",
+    "workspaceContains:*.nf",
+    "workspaceContains:nextflow.config",
     "onLanguage:nextflow-log",
     "onFileSystem:nextflow-log-filtered"
   ],
@@ -92,7 +92,31 @@
       {
         "language": "nextflow",
         "scopeName": "source.nextflow",
-        "path": "./syntaxes/nextflow.tmLanguage.json"
+        "path": "./syntaxes/nextflow.tmLanguage.json",
+        "embeddedLanguages": {
+          "meta.embedded.block.shellscript": "shellscript",
+          "meta.embedded.block.python": "python",
+          "meta.embedded.block.r": "r"
+        }
+      },
+      {
+        "scopeName": "nextflow.script.injection",
+        "path": "./syntaxes/nextflow-script-injection.json",
+        "injectTo": [
+          "source.nextflow"
+        ],
+        "embeddedLanguages": {
+          "meta.embedded.block.shellscript": "shellscript",
+          "meta.embedded.block.python": "python",
+          "meta.embedded.block.r": "r"
+        }
+      },
+      {
+        "scopeName": "nextflow.interpolation.injection",
+        "path": "./syntaxes/nextflow-interpolation-injection.json",
+        "injectTo": [
+          "source.nextflow"
+        ]
       },
       {
         "language": "nextflow-config",
@@ -121,11 +145,6 @@
       }
     ],
     "commands": [
-      {
-        "command": "nextflow.languageServer.convertScriptToTyped",
-        "title": "Convert script to static types",
-        "category": "Nextflow"
-      },
       {
         "command": "nextflow.languageServer.restart",
         "title": "Restart language server",
@@ -189,10 +208,6 @@
     ],
     "menus": {
       "commandPalette": [
-        {
-          "command": "nextflow.languageServer.convertScriptToTyped",
-          "when": "resourceExtname == '.nf'"
-        },
         {
           "command": "nextflow.log.filter.menu",
           "when": "resourceLangId == nextflow-log"
@@ -427,32 +442,43 @@
     }
   },
   "scripts": {
-    "check-types": "tsc --noEmit",
+    "check-types": "tsc --noEmit && tsc --noEmit -p tsconfig.ui.json",
+    "compile": "rm -rf build && npm run check-types && node esbuild.js",
+    "package": "rm -rf build && npm run check-types && node esbuild.js --production && (cd build ; vsce package -o nextflow.vsix)",
     "test": "npm run check-types && node --experimental-strip-types --test src/metro/metro.test.ts",
     "test:metro-smoke": "node --experimental-strip-types src/metro/smoke.integration.ts",
-    "compile": "npm run check-types && npm run ui-build && node esbuild.js",
-    "package": "npm run check-types && npm run ui-build && node esbuild.js --production && (cd build ; vsce package -o nextflow.vsix)",
-    "ui-dev": "cd webview-ui && npm run dev",
-    "ui-watch": "cd webview-ui && npm run build -- --watch",
-    "ui-build": "cd webview-ui && npm run build"
+    "test:syntax": "node syntaxes/highlight.test.js",
+    "lint": "eslint ."
   },
   "devDependencies": {
+    "@eslint/js": "^9.21.0",
     "@types/node": "^20",
+    "@types/react": "^19.0.10",
+    "@types/react-dom": "^19.0.4",
     "@types/semver": "^7.7.0",
     "@types/vscode": "^1.96.0",
-    "@vscode/vsce": "^3.2.1",
+    "@vscode/vsce": "^3.9.2",
+    "clsx": "^2.1.1",
     "esbuild": "^0.28.1",
     "esbuild-plugin-copy": "^2.1.1",
+    "eslint": "^9.21.0",
+    "eslint-plugin-react-hooks": "^5.1.0",
+    "globals": "^15.15.0",
     "jwt-decode": "^4.0.0",
-    "mermaid": "^11.15.0",
+    "mermaid": "^11.16.1",
     "node-fetch": "^3.3.2",
     "posthog-node": "^4.4.1",
     "prettier": "3.5.2",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
     "semver": "^7.7.2",
     "typescript": "^5.7.2",
+    "typescript-eslint": "^8.24.1",
     "uuid": "^14.0.0",
     "vscode-jsonrpc": "^8.0.2",
-    "vscode-languageclient": "^8.0.2"
+    "vscode-languageclient": "^10.1.0",
+    "vscode-oniguruma": "^2.0.1",
+    "vscode-textmate": "^9.3.2"
   },
   "extensionDependencies": [
     "vscode.git"

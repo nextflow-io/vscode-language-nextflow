@@ -1,0 +1,466 @@
+// Tokenizes snippets with the real TextMate engine and asserts which scopes apply.
+// Run with: npm run test:syntax
+
+const assert = require("assert");
+const fs = require("fs");
+const path = require("path");
+const oniguruma = require("vscode-oniguruma");
+const vsctm = require("vscode-textmate");
+
+const GRAMMARS = {
+  "source.nextflow": "nextflow.tmLanguage.json",
+  "source.nextflow-groovy": "groovy.tmLanguage.json",
+  "nextflow.interpolation.injection": "nextflow-interpolation-injection.json",
+  "nextflow.script.injection": "nextflow-script-injection.json"
+};
+
+// VS Code supplies the grammars for the embedded languages at runtime. These
+// stubs stand in for them. A rule that includes a grammar the registry cannot
+// resolve is dropped entirely, so the stubs are what make the embedding
+// testable at all. The shell stub also reproduces the one way an embedded
+// grammar can break the host: a begin/end string rule that opens on the first
+// quote of the closing `"""` and swallows the rest of the file.
+const STUBS = {
+  "source.shell": {
+    scopeName: "source.shell",
+    patterns: [
+      { name: "string.quoted.double.shell", begin: '"', end: '"' },
+      {
+        name: "keyword.control.shell",
+        match: "\\b(if|then|fi|for|do|done)\\b"
+      },
+      // probe for the `\G` limitation documented below, see the case using it
+      { name: "invalid.illegal.anchor-probe", match: "\\G\\s*@" }
+    ]
+  },
+  "source.python": {
+    scopeName: "source.python",
+    patterns: [{ name: "keyword.control.python", match: "\\b(def|print)\\b" }]
+  },
+  "source.r": {
+    scopeName: "source.r",
+    patterns: [{ name: "keyword.control.r", match: "\\b(function|library)\\b" }]
+  }
+};
+
+// [ snippet, scope prefix, target ]
+// target = substring whose every token must carry the scope,
+//          or false = the scope must not appear anywhere in the snippet.
+const CASES = [
+  // --- comments -----------------------------------------------------------
+  ["x = 1 // comment", "comment.line.double-slash", "// comment"],
+  ["x = 1 /* comment */", "comment.block", "comment"],
+  ["x = 1 /**/", "comment.block.empty", "/**/"],
+  ["/* one\ntwo */", "comment.block", "two"],
+
+  // --- constants ----------------------------------------------------------
+  ["x = MAX_SIZE", "constant.other", "MAX_SIZE"],
+  ["x = true", "constant.language", "true"],
+  ["x = false", "constant.language", "false"],
+  ["x = null", "constant.language", "null"],
+
+  // --- numbers ------------------------------------------------------------
+  ["x = 42", "constant.numeric", "42"],
+  ["x = 0xFF", "constant.numeric", "0xFF"],
+  ["x = 1.5e-3", "constant.numeric", "1.5e-3"],
+  ["x = 10L", "constant.numeric", "10L"],
+
+  // --- strings ------------------------------------------------------------
+  ["x = 'foo'", "string.quoted.single", "foo"],
+  ['x = "foo"', "string.quoted.double", "foo"],
+  ["x = '''foo'''", "string.quoted.single.multiline", "foo"],
+  ['x = """foo"""', "string.quoted.double.multiline", "foo"],
+  ["x = '''a\nb'''", "string.quoted.single.multiline", "b"],
+  ['x = """a\nb"""', "string.quoted.double.multiline", "b"],
+  ['x = "a\\nb"', "constant.character.escape", "\\n"],
+  ["x = 'a\\'b'", "constant.character.escape", "\\'"],
+  ['x = "$foo"', "variable.other.interpolated", "$f"],
+  ['x = "$foo.bar"', "keyword.other.dereference", "."],
+  // note: the grammar does not highlight groovy code inside ${...}
+  ['x = "${ 1 + 2 }"', "source.groovy.embedded.source", "${"],
+
+  // --- slashy strings / division ------------------------------------------
+  [
+    'publishDir { file(params.output_dir) / "QC/${step}/multiqc/" }',
+    "string.regexp",
+    false
+  ],
+  ["file('foo') / 'bar.txt' // hello?", "string.regexp", false],
+  ["file('foo') / 'bar.txt'", "keyword.operator.arithmetic", "/"],
+  ["x = a / b", "string.regexp", false],
+  ["x = a/b", "string.regexp", false],
+  ["x = ['a', 'b'] / 2", "string.regexp", false],
+  ["def re = /foo\\d+/", "string.regexp", "/foo"],
+  ["if( it =~ /bar/ ) x", "string.regexp", "/bar/"],
+  ["x.split(/\\t/)", "string.regexp", "/\\t/"],
+  ["x = ~/foo/", "string.regexp", "/foo/"],
+  ["x = /a\\/b/", "constant.character.escape", "\\/"],
+  ['x = ~"foo"', "string.regexp.compiled", '~"'],
+
+  // --- keywords: language -------------------------------------------------
+  ["try { x() }", "keyword.control.exception", "try"],
+  ["catch( e ) { x() }", "keyword.control.exception", "catch"],
+  ["throw new Exception()", "keyword.control.exception", "throw"],
+  ["if( x ) y()", "keyword.control", "if"],
+  ["else y()", "keyword.control", "else"],
+  ["return x", "keyword.control", "return"],
+  ["assert x == 1", "meta.declaration.assertion", "assert"],
+  ["x = new Foo()", "keyword.control.new", "new"],
+
+  // --- keywords: operators ------------------------------------------------
+  ["x = y as int", "keyword.operator.as", "as"],
+  ["x = 'a' in list", "keyword.operator.in", "in"],
+  ["x = a ?: b", "keyword.operator.elvis", "?:"],
+  ["x = 1..10", "keyword.operator.range", ".."],
+  ["x = list.collect { it -> it }", "keyword.operator", "->"],
+  ["ch << 1", "keyword.operator.leftshift", "<<"],
+  ["x = a.b", "keyword.operator.navigation", "."],
+  ["x = a?.b", "keyword.operator.safe-navigation", "?."],
+  ["x = a ? b : c", "meta.evaluation.ternary", "?"],
+  ["x = a ? b : c", "keyword.operator.ternary", ":"],
+  ["x = a ==~ /b/", "keyword.operator.match", "==~"],
+  ["x = a =~ /b/", "keyword.operator.find", "=~"],
+  ["x = a instanceof Path", "keyword.operator.instanceof", "instanceof"],
+  ["x = a >= b", "keyword.operator.comparison", ">="],
+  ["x = 1", "keyword.operator.assignment", "="],
+  ["x++", "keyword.operator.increment-decrement", "++"],
+  ["x = a + b", "keyword.operator.arithmetic", "+"],
+  ["x = a && b", "keyword.operator.logical", "&&"],
+  ["x = !a", "keyword.operator.logical", "!"],
+
+  // --- types --------------------------------------------------------------
+  ["def x = 1", "storage.type.def", "def"],
+  ["int x = 1", "storage.type.primitive", "int"],
+  ["boolean x = true", "storage.type.primitive", "boolean"],
+  ["x = Channel.of(1)", "storage.type", "Channel"],
+  ["List<String> x = []", "storage.type.generic", "List"],
+  ["x = java.nio.file.Path.of('a')", "storage.type", "java.nio.file.Path"],
+
+  // --- variables / values -------------------------------------------------
+  ["def foo = 1", "meta.definition.variable", "foo"],
+  ["def foo = 1", "meta.definition.variable.name", "foo"],
+  ["int COUNT = 1", "constant.variable", "COUNT"],
+  ["x = [a: 1]", "constant.other.key", "a"],
+  ["x = [a: 1]", "punctuation.definition.seperator.key-value", ":"],
+  ["x = [1, 2]", "meta.structure", "1"],
+  ["x = [1, 2]", "punctuation.definition.separator", ","],
+  ["foo(1, 2)", "meta.method-call", "1"],
+  ["foo(1, 2)", "meta.method.groovy", "foo"],
+  ["foo(1, 2)", "punctuation.definition.method-parameters.begin", "("],
+  ["foo(1, 2)", "punctuation.definition.seperator.parameter", ","],
+  ["x = { a, b -> a }", "meta.closure.parameters", "a"],
+  ["x = { a, b -> a }", "meta.closure.parameter", "b"],
+  ["x = { a, b -> a }", "variable.parameter.method", "a"],
+  ["x = { a = 1 -> a }", "meta.parameter.default", "1"],
+
+  // --- nextflow: declarations ---------------------------------------------
+  ["include { FOO } from './foo.nf'", "keyword.nextflow", "include"],
+  ["include { FOO } from './foo.nf'", "keyword.nextflow", "from"],
+  ["include { FOO } from './foo.nf'", "string.quoted.single", "./foo.nf"],
+
+  ["process FOO {\n  script:\n  'echo hi'\n}", "keyword.nextflow", "process"],
+  [
+    "process FOO {\n  script:\n  'echo hi'\n}",
+    "entity.name.function.nextflow",
+    "FOO"
+  ],
+  [
+    "process FOO {\n  script:\n  'echo hi'\n}",
+    "constant.block.nextflow",
+    "script:"
+  ],
+  [
+    "process FOO {\n  input:\n  path infile\n}",
+    "constant.block.nextflow",
+    "input:"
+  ],
+  [
+    "process FOO {\n  output:\n  tuple val(x), path('*.txt')\n}",
+    "entity.name.function.nextflow",
+    "tuple"
+  ],
+  [
+    "process FOO {\n  when:\n  x > 1\n  exec:\n  y = 2\n}",
+    "constant.block.nextflow",
+    "when:"
+  ],
+  ["process FOO {\n  shell:\n  'x'\n}", "constant.block.nextflow", "shell:"],
+
+  // --- nextflow: embedded shell scripts -----------------------------------
+  [
+    'process FOO {\n  script:\n  """\n  echo hi\n  """\n}',
+    "meta.embedded.block.shellscript",
+    "echo hi"
+  ],
+  [
+    'process FOO {\n  script:\n  """\n  if x; then y; fi\n  """\n}',
+    "keyword.control.shell",
+    "then"
+  ],
+  // the closing delimiter is not part of the embedded region
+  [
+    'process FOO {\n  script:\n  """\n  echo hi\n  """\n}',
+    "string.quoted.double.multiline.nextflow",
+    '"""\n  echo hi\n  """'
+  ],
+  // an unterminated shell string must not swallow the rest of the file
+  [
+    'process FOO {\n  script:\n  """\n  echo "oops\n  """\n}\n\nworkflow {\n  FOO()\n}',
+    "keyword.nextflow",
+    "workflow"
+  ],
+  // nested in an `if` block, which groovy's block rule would otherwise own
+  [
+    'process FOO {\n  script:\n  if( x ) {\n    """\n    echo hi\n    """\n  }\n}',
+    "meta.embedded.block.shellscript",
+    "echo hi"
+  ],
+  [
+    'process FOO {\n  script:\n  if( x ) {\n    """\n    echo hi\n    """\n  }\n  else\n    """\n    echo bye\n    """\n}',
+    "meta.embedded.block.shellscript",
+    "echo bye"
+  ],
+  // ...and the process still ends where it should
+  [
+    'process FOO {\n  script:\n  if( x ) {\n    """\n    echo hi\n    """\n  }\n}\n\nworkflow {\n  FOO()\n}',
+    "keyword.nextflow",
+    "workflow"
+  ],
+  // the injection must not reach triple-quoted strings outside a process
+  [
+    'workflow {\n  x = """\n  echo hi\n  """\n}',
+    "meta.embedded.block.shellscript",
+    false
+  ],
+  ['x = """\n  echo hi\n  """', "meta.embedded.block.shellscript", false],
+
+  // --- nextflow: shebang dispatch -----------------------------------------
+  [
+    'process FOO {\n  script:\n  """\n  #!/usr/bin/env python\n  print(1)\n  """\n}',
+    "meta.embedded.block.python",
+    "print(1)"
+  ],
+  [
+    'process FOO {\n  script:\n  """\n  #!/usr/bin/env Rscript\n  print(1)\n  """\n}',
+    "meta.embedded.block.r",
+    "print(1)"
+  ],
+  // the dispatched grammar really runs, it is not just a contentName
+  [
+    'process FOO {\n  script:\n  """\n  #!/usr/bin/env python\n  print(1)\n  """\n}',
+    "keyword.control.python",
+    "print"
+  ],
+  [
+    'process FOO {\n  script:\n  """\n  #!/usr/bin/env Rscript\n  library(x)\n  """\n}',
+    "keyword.control.r",
+    "library"
+  ],
+  // an unrecognised or absent shebang falls through to shell
+  [
+    'process FOO {\n  script:\n  """\n  #!/bin/bash\n  print(1)\n  """\n}',
+    "meta.embedded.block.shellscript",
+    "print(1)"
+  ],
+  // the shebang picks one language, not several
+  [
+    'process FOO {\n  script:\n  """\n  #!/usr/bin/env python\n  print(1)\n  """\n}',
+    "meta.embedded.block.shellscript",
+    false
+  ],
+  // interpolation still applies in a non-shell script block
+  [
+    'process FOO {\n  script:\n  """\n  #!/usr/bin/env python\n  n = ${task.cpus}\n  """\n}',
+    "variable.other.interpolated.nextflow",
+    "${task.cpus}"
+  ],
+  // and the closing delimiter still ends the block
+  [
+    'process FOO {\n  script:\n  """\n  #!/usr/bin/env python\n  print(1)\n  """\n}\n\nworkflow {\n  FOO()\n}',
+    "keyword.nextflow",
+    "workflow"
+  ],
+
+  // Known limitation. `\G` resolves to the end of the last stacked `while`,
+  // so the embedded region re-anchors it at the start of every line. Rules in
+  // the embedded grammar that use `\G` to mean "start of this construct" fire
+  // on every line instead. In shellscript that is `command_name_range`, which
+  // is why a continuation line of a `cmd \\` invocation is scoped as a command
+  // name and its options lose their highlighting.
+  //
+  // This is TextMate-conformant, not a vscode-textmate bug, and VS Code's own
+  // markdown fenced code blocks have it too. The fix would be a bail-out
+  // pattern on the include, requested in microsoft/vscode-textmate#207. Until
+  // then the alternative is `end` instead of `while`, which lets the embedded
+  // grammar swallow the closing delimiter and the rest of the file — worse.
+  //
+  // Asserts the current behaviour so a change in it is visible.
+  [
+    'process FOO {\n  script:\n  """\n  echo hi\n  @probe\n  """\n}',
+    "invalid.illegal.anchor-probe",
+    "@"
+  ],
+
+  // interpolation holds an arbitrary expression, so braces must balance
+  [
+    'process FOO {\n  script:\n  """\n  fastqc ${pairs.collect{ a, b -> b }.join(\' \')}\n  """\n}',
+    "variable.other.interpolated.nextflow",
+    "${pairs.collect{ a, b -> b }.join(' ')}"
+  ],
+  // a brace inside a quoted string does not count
+  [
+    'process FOO {\n  script:\n  """\n  echo ${x.join(\'}\')}\n  """\n}',
+    "variable.other.interpolated.nextflow",
+    "${x.join('}')}"
+  ],
+  // `\$` is an escaped shell variable, not groovy interpolation
+  [
+    'process FOO {\n  script:\n  """\n  echo \\${HOME}\n  """\n}',
+    "variable.other.interpolated.nextflow",
+    false
+  ],
+
+  // --- nextflow: single-quoted script blocks ------------------------------
+  [
+    "process FOO {\n  script:\n  '''\n  echo hi\n  '''\n}",
+    "meta.embedded.block.shellscript",
+    "echo hi"
+  ],
+  // groovy does not interpolate single-quoted strings, so `${...}` is shell
+  [
+    "process FOO {\n  script:\n  '''\n  echo ${HOME}\n  '''\n}",
+    "variable.other.interpolated.nextflow",
+    false
+  ],
+
+  // groovy interpolation wins over shell expansion inside the embedded region
+  [
+    'process FOO {\n  script:\n  """\n  tool ${task.cpus} $reads\n  """\n}',
+    "variable.other.interpolated.nextflow",
+    "${task.cpus}"
+  ],
+  [
+    'process FOO {\n  script:\n  """\n  tool ${task.cpus} $reads\n  """\n}',
+    "variable.other.interpolated.nextflow",
+    "$reads"
+  ],
+  ["process FOO {\n  script:\n  'echo hi'\n}", "process.nextflow", "process"],
+
+  ["workflow {\n  FOO()\n}", "keyword.nextflow", "workflow"],
+  [
+    "workflow NAME {\n  main:\n  FOO()\n}",
+    "entity.name.function.nextflow",
+    "NAME"
+  ],
+  [
+    "workflow NAME {\n  take:\n  ch\n  main:\n  FOO(ch)\n  emit:\n  out = FOO.out\n}",
+    "constant.block.nextflow",
+    "take:"
+  ],
+  [
+    "workflow {\n  publish:\n  x >> 'y'\n}",
+    "constant.block.nextflow",
+    "publish:"
+  ],
+  ["workflow {\n  FOO()\n}", "workflow.nextflow", "workflow"],
+
+  ["params {\n  input = 'x'\n}", "keyword.nextflow", "params"],
+  ["params {\n  input = 'x'\n}", "params.nextflow", "params"],
+  ["output {\n  'foo' { path 'bar' }\n}", "keyword.nextflow", "output"],
+  ["output {\n  'foo' { path 'bar' }\n}", "output.nextflow", "output"],
+
+  ["record Foo {\n  String bar\n}", "keyword.nextflow", "record"],
+  ["record Foo {\n  String bar\n}", "storage.type", "Foo"],
+  ["record Foo {\n  String bar\n}", "record.nextflow", "record"],
+  ["enum Color {\n  RED,\n  GREEN\n}", "keyword.nextflow", "enum"],
+  ["enum Color {\n  RED,\n  GREEN\n}", "storage.type", "Color"],
+  ["enum Color {\n  RED,\n  GREEN\n}", "constant.enum.name", "RED"],
+
+  ["def foo(a, b) {\n  a + b\n}", "entity.name.function.nextflow", "foo"],
+  ["def foo(a, b) {\n  a + b\n}", "meta.definition.method", "foo"],
+  ["def foo(a, b) {\n  a + b\n}", "variable.parameter.method", "a"],
+  ["def foo(a = 1) {\n  a\n}", "meta.parameter.default", "1"],
+  ["def foo(a, b) {\n  a + b\n}", "meta.method.body", "+"],
+  ["String foo() {\n  'x'\n}", "meta.method.return-type", "String"]
+];
+
+function tokenize(grammar, snippet) {
+  let stack = vsctm.INITIAL;
+  const out = [];
+  let offset = 0;
+  for (const line of snippet.split("\n")) {
+    const result = grammar.tokenizeLine(line, stack);
+    stack = result.ruleStack;
+    for (const t of result.tokens) {
+      out.push({
+        start: offset + t.startIndex,
+        end: offset + t.endIndex,
+        text: line.slice(t.startIndex, t.endIndex),
+        scopes: t.scopes
+      });
+    }
+    offset += line.length + 1; // + newline
+  }
+  return out;
+}
+
+async function main() {
+  const wasm = fs.readFileSync(
+    require.resolve("vscode-oniguruma/release/onig.wasm")
+  );
+  const onigLib = oniguruma.loadWASM(wasm).then(() => ({
+    createOnigScanner: (patterns) => new oniguruma.OnigScanner(patterns),
+    createOnigString: (s) => new oniguruma.OnigString(s)
+  }));
+  const registry = new vsctm.Registry({
+    onigLib,
+    getInjections: (scope) =>
+      scope === "source.nextflow"
+        ? ["nextflow.script.injection", "nextflow.interpolation.injection"]
+        : undefined,
+    loadGrammar: (scope) => {
+      if (STUBS[scope]) return Promise.resolve(STUBS[scope]);
+      const file = GRAMMARS[scope];
+      if (!file) return Promise.resolve(null);
+      const raw = fs.readFileSync(path.join(__dirname, file), "utf8");
+      return Promise.resolve(vsctm.parseRawGrammar(raw, file));
+    }
+  });
+
+  const grammar = await registry.loadGrammar("source.nextflow");
+  let failed = 0;
+  for (const [snippet, scope, target] of CASES) {
+    const tokens = tokenize(grammar, snippet);
+    const hasScope = (t) => t.scopes.some((s) => s.startsWith(scope));
+    let actual;
+    if (target === false) {
+      actual = !tokens.some(hasScope);
+    } else {
+      const at = snippet.indexOf(target);
+      assert.notStrictEqual(at, -1, `bad case: ${target} not in ${snippet}`);
+      const covering = tokens.filter(
+        (t) => t.start < at + target.length && t.end > at
+      );
+      actual = covering.length > 0 && covering.every(hasScope);
+    }
+    const label = `${JSON.stringify(snippet)} -> ${scope} ${
+      target === false ? "absent" : `on ${JSON.stringify(target)}`
+    }`;
+    if (actual) {
+      console.log(`ok ${label}`);
+    } else {
+      failed++;
+      console.log(`FAIL ${label}`);
+      for (const t of tokens) {
+        console.log(`  ${JSON.stringify(t.text)} ${t.scopes.join(" ")}`);
+      }
+    }
+  }
+  assert.strictEqual(failed, 0, `${failed}/${CASES.length} cases failed`);
+  console.log(`${CASES.length} cases passed`);
+}
+
+main().catch((e) => {
+  console.error(e.message);
+  process.exit(1);
+});

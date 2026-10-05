@@ -1,5 +1,5 @@
-import type { DataLink, DataLinksResponse } from "../types";
-import { SEQERA_API_URL } from "../../../../../constants";
+import type { DataLink, DataLinksResponse } from "../../../../../shared/types";
+import { SEQERA_API_URL } from "../../../../../shared/constants";
 
 const fetchDataLinks = async (
   token: string,

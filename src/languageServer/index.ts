@@ -5,22 +5,29 @@ import {
   Executable
 } from "vscode-languageclient/node";
 
-import { buildMermaid } from "./utils/buildMermaid";
-import { fetchLanguageServer } from "./utils/fetchLanguageServer";
-import { findJava, checkJavaVersion } from "./utils/findJava";
+import { buildConfigPreview, ConfigPreview } from "./utils/buildConfigPreview";
+import { buildDagPreview } from "./utils/buildDagPreview";
+import {
+  fetchLanguageServerJar,
+  fetchLanguageServerNative,
+  resolveLanguageVersion
+} from "./utils/fetchLanguageServer";
+import { findJava, checkJavaVersion } from "./utils/findExecutable";
 import type { TrackEvent } from "../telemetry";
 
 const LABEL_RELOAD_WINDOW = "Reload Window";
 
 let languageClient: LanguageClient | null = null;
 
-function startLanguageServer(context: vscode.ExtensionContext) {
+function startLanguageServer() {
   vscode.window.withProgress(
     { location: vscode.ProgressLocation.Window },
     (progress) => {
       return new Promise<void>(async (resolve, reject) => {
-        const javaPath = findJava();
-        if (!javaPath) {
+        const { versionPrefix, isPreview } = resolveLanguageVersion();
+        const nativePath = fetchLanguageServerNative(versionPrefix);
+        const javaPath = nativePath ? null : findJava();
+        if (!nativePath && !javaPath) {
           resolve();
           const settingsJavaHome = vscode.workspace
             .getConfiguration("nextflow")
@@ -37,7 +44,7 @@ function startLanguageServer(context: vscode.ExtensionContext) {
           return;
         }
         try {
-          if (!checkJavaVersion(javaPath)) {
+          if (javaPath && !checkJavaVersion(javaPath)) {
             resolve();
             vscode.window.showErrorMessage(
               `Java 17 or later is required to use the Nextflow language server (using path: ${javaPath}).`
@@ -71,19 +78,32 @@ function startLanguageServer(context: vscode.ExtensionContext) {
             protocol2Code: (value) => vscode.Uri.parse(value)
           }
         };
-        const serverPath = await fetchLanguageServer(context);
-        if (!serverPath) {
-          resolve();
-          vscode.window.showErrorMessage("Failed to retrieve language server.");
-          return;
+        let executable: Executable;
+        if (nativePath) {
+          vscode.window.showInformationMessage(
+            `Using native Nextflow language server (${versionPrefix}).`
+          );
+          executable = { command: nativePath };
+        } else {
+          const serverPath = await fetchLanguageServerJar(
+            versionPrefix,
+            isPreview
+          );
+          if (!serverPath) {
+            resolve();
+            vscode.window.showErrorMessage(
+              "Failed to retrieve language server."
+            );
+            return;
+          }
+          const args = ["-jar", serverPath];
+          // uncomment to allow a debugger to attach to the language server
+          // args.unshift("-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=5005,quiet=y");
+          executable = {
+            command: javaPath as string,
+            args: args
+          };
         }
-        const args = ["-jar", serverPath];
-        // uncomment to allow a debugger to attach to the language server
-        // args.unshift("-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=5005,quiet=y");
-        const executable: Executable = {
-          command: javaPath,
-          args: args
-        };
         languageClient = new LanguageClient(
           "nextflow",
           "Nextflow Language Server",
@@ -129,52 +149,103 @@ async function previewDag(
     {
       enableCommandUris: true,
       enableScripts: true,
-      localResourceRoots: [mediaPath]
+      localResourceRoots: [mediaPath],
+      // the panel keeps its pan and zoom while it is hidden
+      retainContextWhenHidden: true
     }
   );
   const mermaidLibUri = panel.webview.asWebviewUri(
     vscode.Uri.joinPath(mediaPath, "mermaid.min.js")
   );
-  panel.webview.html = buildMermaid(content, name ?? "Entry", mermaidLibUri);
-}
-
-async function convertScriptToTyped() {
-  const languageVersion = vscode.workspace
-    .getConfiguration("nextflow")
-    .get("languageVersion") as string;
-  if (languageVersion === "24.10" || languageVersion == "25.04") {
-    vscode.window.showErrorMessage(
-      "The Nextflow language version must be 25.10 or newer in order to convert to static types."
-    );
-    return;
-  }
-  const uri = vscode.window.activeTextEditor?.document?.uri;
-  if (!uri) return;
-
-  const res: any = await vscode.commands.executeCommand(
-    "nextflow.server.convertScriptToTyped",
-    uri.toString()
+  panel.webview.html = buildDagPreview(
+    content,
+    name ?? "Entry",
+    mermaidLibUri,
+    panel.webview.cspSource
   );
-  if (!res || res.error) {
-    const message = res?.error ?? "Failed to convert script to static types.";
-    vscode.window.showErrorMessage(message);
-  } else {
-    vscode.window.showInformationMessage(
-      "Converted script to static types and updated call sites. Please review updated code for errors."
-    );
-  }
 }
 
-function restartLanguageServer(context: vscode.ExtensionContext) {
+async function fetchConfigPreview(
+  uri: string,
+  name: string,
+  profiles: string[],
+  qualifiedName: string | null
+): Promise<ConfigPreview | null> {
+  const res: any = await vscode.commands.executeCommand(
+    "nextflow.server.previewConfig",
+    uri,
+    name,
+    profiles,
+    qualifiedName
+  );
+  if (!res || !res.result) {
+    const message = res?.error ?? "Failed to render config preview.";
+    vscode.window.showErrorMessage(message);
+    return null;
+  }
+  return res.result as ConfigPreview;
+}
+
+async function previewConfig(
+  uri: string,
+  name: string,
+  qualifiedName: string | null = null
+) {
+  const data = await fetchConfigPreview(uri, name, [], qualifiedName);
+  if (!data) return;
+
+  const panel = vscode.window.createWebviewPanel(
+    "config-preview",
+    `${qualifiedName ?? name} config`,
+    vscode.ViewColumn.Beside,
+    // the panel keeps profile, filter and scroll state while it is hidden
+    { enableScripts: true, retainContextWhenHidden: true }
+  );
+  panel.webview.html = buildConfigPreview(data);
+
+  // the previews are resolved concurrently, so a selection that is made while
+  // an earlier one is still pending must not be overwritten by it
+  let pending = 0;
+  let disposed = false;
+  panel.onDidDispose(() => {
+    disposed = true;
+  });
+
+  panel.webview.onDidReceiveMessage(async (message) => {
+    if (message.type === "open") {
+      const position = new vscode.Position(Math.max(message.line - 1, 0), 0);
+      await vscode.window.showTextDocument(vscode.Uri.parse(message.uri), {
+        viewColumn: vscode.ViewColumn.One,
+        selection: new vscode.Range(position, position)
+      });
+    }
+    // The cascade has to be resolved again for a new profile selection: a
+    // profile is merged into the base config before the process selectors
+    // are applied, so the winning setting cannot be filtered client-side.
+    if (message.type === "profiles") {
+      const generation = ++pending;
+      const updated = await fetchConfigPreview(
+        uri,
+        name,
+        message.profiles,
+        qualifiedName
+      );
+      if (updated && generation === pending && !disposed)
+        panel.webview.postMessage({ type: "update", data: updated });
+    }
+  });
+}
+
+function restartLanguageServer() {
   if (!languageClient) {
-    startLanguageServer(context);
+    startLanguageServer();
     return;
   }
   let oldLanguageClient = languageClient;
   languageClient = null;
   oldLanguageClient.stop().then(
     () => {
-      startLanguageServer(context);
+      startLanguageServer();
     },
     () => {
       vscode.window
@@ -208,7 +279,7 @@ export function activateLanguageServer(
         event.affectsConfiguration("nextflow.java.home") ||
         event.affectsConfiguration("nextflow.languageVersion");
       if (shouldRestart) {
-        restartLanguageServer(context);
+        restartLanguageServer();
       }
     }
   );
@@ -216,13 +287,13 @@ export function activateLanguageServer(
     previewDag(context, uri, name);
   });
   vscode.commands.registerCommand(
-    "nextflow.languageServer.convertScriptToTyped",
-    () => {
-      convertScriptToTyped();
+    "nextflow.previewConfig",
+    (uri, name, qualifiedName) => {
+      previewConfig(uri, name, qualifiedName ?? null);
     }
   );
   vscode.commands.registerCommand("nextflow.languageServer.restart", () => {
-    restartLanguageServer(context);
+    restartLanguageServer();
   });
   vscode.commands.registerCommand("nextflow.languageServer.stop", () => {
     stopLanguageServer();
@@ -241,5 +312,5 @@ export function activateLanguageServer(
       });
     }
   );
-  startLanguageServer(context);
+  startLanguageServer();
 }

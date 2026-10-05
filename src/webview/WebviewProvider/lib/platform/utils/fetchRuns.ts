@@ -1,5 +1,5 @@
-import type { RunsResponse } from "../types";
-import { SEQERA_API_URL } from "../../../../../constants";
+import type { RunsResponse } from "../../../../../shared/types";
+import { SEQERA_API_URL } from "../../../../../shared/constants";
 
 const fetchRuns = async (
   token: string,

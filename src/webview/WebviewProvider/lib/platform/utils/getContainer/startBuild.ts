@@ -1,4 +1,4 @@
-import { SEQERA_HUB_API_URL } from "../../../../../../constants";
+import { SEQERA_HUB_API_URL } from "../../../../../../shared/constants";
 import type {
   ImageType,
   PackageResult,

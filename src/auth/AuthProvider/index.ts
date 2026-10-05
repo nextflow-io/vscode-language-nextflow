@@ -12,7 +12,7 @@ import {
 import { PromiseAdapter, promiseFromEvent } from "./utils/promiseFromEvent";
 import UriEventHandler from "./utils/UriEventHandler";
 import { fetchPlatformData } from "../../webview/WebviewProvider/lib";
-import { SEQERA_PLATFORM_URL } from "../../constants";
+import { SEQERA_PLATFORM_URL } from "../../shared/constants";
 
 import type {
   AuthenticationProvider,

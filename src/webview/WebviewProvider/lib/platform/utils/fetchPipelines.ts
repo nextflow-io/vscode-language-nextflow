@@ -1,5 +1,5 @@
-import type { PipelinesResponse } from "../types";
-import { SEQERA_API_URL } from "../../../../../constants";
+import type { PipelinesResponse } from "../../../../../shared/types";
+import { SEQERA_API_URL } from "../../../../../shared/constants";
 
 const fetchPipelines = async (
   token: string,

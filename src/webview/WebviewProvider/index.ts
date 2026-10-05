@@ -1,6 +1,5 @@
 import * as vscode from "vscode";
-import * as fs from "fs";
-import * as path from "path";
+import { randomUUID } from "crypto";
 
 import {
   createTest,
@@ -11,6 +10,7 @@ import {
   fetchPlatformData,
   fetchRuns,
   getRepoInfo,
+  getWorkspaceFolders,
   queryWorkspace,
   getContainer,
   addPipeline
@@ -19,10 +19,13 @@ import { AuthProvider, getAccessToken } from "../../auth";
 import { jwtExpired } from "../../auth/AuthProvider/utils/jwt";
 import { sleep } from "./lib/utils";
 import fetchHubPipelines from "./lib/platform/fetchHubPipelines";
+import { isNextflowFile } from "../utils";
 
 class WebviewProvider implements vscode.WebviewViewProvider {
   _currentView?: vscode.WebviewView;
+  public onDidSelectFolder?: (name: string) => void;
   private _extensionUri: vscode.Uri;
+  private _selectedFolder?: string;
 
   constructor(
     private readonly _context: vscode.ExtensionContext,
@@ -83,6 +86,11 @@ class WebviewProvider implements vscode.WebviewViewProvider {
         case "addPipeline":
           this.addPipeline(message);
           break;
+        case "selectFolder":
+          this._selectedFolder = message.name;
+          this.queryWorkspace();
+          this.onDidSelectFolder?.(message.name);
+          break;
       }
     });
 
@@ -114,10 +122,34 @@ class WebviewProvider implements vscode.WebviewViewProvider {
     });
   }
 
-  private async getRepoInfo() {
-    const repoInfo = await getRepoInfo(this._context);
+  // Folder-specific state is keyed by workspace folder, defaulting to the first
+  // Nextflow project in the workspace.
+  private selectedFolder(): string | undefined {
+    const folders = getWorkspaceFolders();
+    if (!this._selectedFolder || !folders.includes(this._selectedFolder)) {
+      this._selectedFolder = folders[0];
+    }
+    return this._selectedFolder;
+  }
+
+  // The project view highlights whichever Nextflow file is open in the editor.
+  public postActiveFile() {
+    const filePath = vscode.window.activeTextEditor?.document.uri.fsPath;
     this._currentView?.webview.postMessage({
-      repoInfo
+      activeFile: filePath && isNextflowFile(filePath) ? filePath : null
+    });
+  }
+
+  public setSelectedFolder(name: string) {
+    this._selectedFolder = name;
+    this.getRepoInfo();
+  }
+
+  private async getRepoInfo() {
+    const repoInfo = await getRepoInfo(this._context, this.selectedFolder());
+    this._currentView?.webview.postMessage({
+      // null rather than undefined so the webview can clear a stale repo
+      repoInfo: repoInfo ?? null
     });
   }
 
@@ -186,9 +218,18 @@ class WebviewProvider implements vscode.WebviewViewProvider {
       await fetchPlatformData(accessToken, view.webview, _context, refresh);
     }
     if (viewID === "project") {
-      const nodes = await queryWorkspace();
-      view.webview.postMessage({ nodes });
+      view.webview.postMessage({
+        folders: getWorkspaceFolders(),
+        selectedFolder: this.selectedFolder() ?? ""
+      });
+      await this.queryWorkspace();
+      this.postActiveFile();
     }
+  }
+
+  private async queryWorkspace() {
+    const nodes = await queryWorkspace(this.selectedFolder());
+    this._currentView?.webview.postMessage({ nodes });
   }
 
   private async emitTestCreated(filePath: string, successful: boolean) {
@@ -255,31 +296,42 @@ class WebviewProvider implements vscode.WebviewViewProvider {
   }
 
   private getBuildPath() {
-    return vscode.Uri.joinPath(this._extensionUri, "webview-ui", "dist");
+    return vscode.Uri.joinPath(this._extensionUri, "ui");
   }
 
   private getBuiltHTML(view: vscode.WebviewView) {
-    const distUri = this.getBuildPath();
-    let html = fs.readFileSync(path.join(distUri.fsPath, "index.html"), "utf8");
+    const assets = vscode.Uri.joinPath(this.getBuildPath(), "assets");
+    // The asset names are fixed, so the version is what busts the cache.
+    const version = this._context.extension.packageJSON.version;
+    const asset = (name: string) =>
+      `${view.webview.asWebviewUri(vscode.Uri.joinPath(assets, name))}?v=${version}`;
+    const nonce = randomUUID();
 
-    html = html.replace(
-      "</head>",
-      `<script>window.initialData = { viewID: "${this.viewID}" };</script></head>`
-    );
-
-    html = updateRefs(html, view.webview, distUri);
-    return html;
+    return `<!doctype html>
+<html lang="en">
+  <head>
+    <meta http-equiv="Content-Security-Policy" content="${contentSecurityPolicy(view.webview, nonce)}">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="${asset("ui.css")}">
+    <script nonce="${nonce}">window.initialData = { viewID: "${this.viewID}" };</script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="${asset("ui.js")}"></script>
+  </body>
+</html>`;
   }
 }
 
-const updateRefs = (
-  html: string,
-  webview: vscode.Webview,
-  distUri: vscode.Uri
-): string =>
-  html.replace(
-    /((src|href)=["'])(\.\/|\/)?assets\//g,
-    `$1${webview.asWebviewUri(vscode.Uri.joinPath(distUri, "assets"))}/`
-  );
+const contentSecurityPolicy = (webview: vscode.Webview, nonce: string) =>
+  [
+    "default-src 'none'",
+    `script-src ${webview.cspSource} 'nonce-${nonce}'`,
+    // React writes inline style attributes, which a nonce cannot cover
+    `style-src ${webview.cspSource} 'unsafe-inline'`,
+    `font-src ${webview.cspSource}`,
+    `img-src ${webview.cspSource} data:`
+  ].join("; ");
 
 export default WebviewProvider;

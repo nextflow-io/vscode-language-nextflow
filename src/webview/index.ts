@@ -2,10 +2,7 @@ import * as vscode from "vscode";
 import { AuthProvider } from "../auth";
 import ResourcesProvider from "./ResourcesProvider";
 import WebviewProvider from "./WebviewProvider";
-
-function isNextflowFile(filePath: string) {
-  return filePath.endsWith(".nf") || filePath.endsWith(".nf.test");
-}
+import { isNextflowFile } from "./utils";
 
 export function activateWebview(
   context: vscode.ExtensionContext,
@@ -19,6 +16,11 @@ export function activateWebview(
     authProvider
   );
 
+  // The folder selector lives in the project view, but the Seqera Cloud view
+  // shows folder-specific state too (e.g. the repository URL).
+  projectProvider.onDidSelectFolder = (name) =>
+    seqeraCloudProvider.setSelectedFolder(name);
+
   const refresh = (uris?: readonly vscode.Uri[]) => {
     if (uris === undefined || uris.some((uri) => isNextflowFile(uri.fsPath))) {
       projectProvider.initViewData();
@@ -27,7 +29,11 @@ export function activateWebview(
 
   // Register views
   const providers = [
-    vscode.window.registerWebviewViewProvider("project", projectProvider),
+    // Keep the view alive while hidden, so switching back to it does not
+    // remount the app and re-query the language server from an empty state.
+    vscode.window.registerWebviewViewProvider("project", projectProvider, {
+      webviewOptions: { retainContextWhenHidden: true }
+    }),
     vscode.window.registerWebviewViewProvider(
       "seqeraCloud",
       seqeraCloudProvider
@@ -53,6 +59,9 @@ export function activateWebview(
     refresh(e.files.map((r) => r.newUri))
   );
   vscode.workspace.onDidChangeWorkspaceFolders((_) => refresh());
+  vscode.window.onDidChangeActiveTextEditor((_) =>
+    projectProvider.postActiveFile()
+  );
 
   return providers;
 }

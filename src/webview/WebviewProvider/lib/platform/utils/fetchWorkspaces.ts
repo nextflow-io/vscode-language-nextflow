@@ -1,5 +1,5 @@
-import type { Workspace } from "../types";
-import { SEQERA_API_URL } from "../../../../../constants";
+import type { Workspace } from "../../../../../shared/types";
+import { SEQERA_API_URL } from "../../../../../shared/constants";
 
 const fetchWorkspaces = async (
   token: string,
