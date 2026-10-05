@@ -85,6 +85,14 @@
         }
       },
       {
+        "id": "nextflow-metro",
+        "aliases": [
+          "nf-metro"
+        ],
+        "firstLine": "^%%metro\\b",
+        "configuration": "./metro-language-configuration.json"
+      },
+      {
         "id": "nextflow-markdown-injection"
       }
     ],
@@ -127,6 +135,11 @@
         "language": "nextflow-log",
         "scopeName": "source.nextflow-log",
         "path": "./syntaxes/nextflow-log.tmLanguage.json"
+      },
+      {
+        "language": "nextflow-metro",
+        "scopeName": "source.metro",
+        "path": "./syntaxes/metro.tmLanguage.json"
       },
       {
         "scopeName": "source.nextflow-groovy",

@@ -12,6 +12,7 @@ async function main() {
     "LICENSE.md": "./LICENSE.md",
     "README.md": "./README.md",
     "language-configuration.json": "./language-configuration.json",
+    "metro-language-configuration.json": "./metro-language-configuration.json",
     "package.json": "./package.json",
     "node_modules/mermaid/dist/mermaid.min.js": "media"
   };

@@ -51,6 +51,7 @@ The extension integrates with [nf-metro](https://github.com/seqeralabs/nf-metro)
 - **Preview Metro Map** — render a metro map from the current workflow DAG (same source as Nextflow `-with-dag`)
 - **Open Metro Map Preview** — open pre-rendered `.html`, `.svg`, `.mmd` nf-metro files, or Nextflow `-with-dag` `.mmd` exports
 - **Find Metro Map Outputs** — scan common pipeline output directories (`results/`, `output/`, and configured `outputDir`) for nf-metro artifacts
+- **Syntax highlighting** — nf-metro `.mmd` files are highlighted when their first line starts with `%%metro`
 
 ### Copilot for Nextflow
 
