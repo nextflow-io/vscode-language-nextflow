@@ -53,10 +53,54 @@ function withCsp(html: string): string {
     : meta + withNonces;
 }
 
+// nf-metro's HTML viewer hardcodes a dark chrome whatever the map's mode, so
+// remap it onto the VS Code theme. Selectors mirror nf-metro's
+// render/standalone.html.
+const VSCODE_CHROME = `<style>
+  :root {
+    --bg: var(--vscode-editor-background);
+    --panel: var(--vscode-sideBar-background, var(--vscode-editor-background));
+    --panel-border: var(--vscode-panel-border, var(--vscode-widget-border, transparent));
+    --text: var(--vscode-foreground);
+    --muted: var(--vscode-descriptionForeground);
+    --hover: var(--vscode-list-hoverBackground);
+    --active: var(--vscode-list-activeSelectionBackground);
+  }
+  html, body { font-family: var(--vscode-font-family); }
+  .btn, .btn.primary {
+    color: var(--vscode-button-secondaryForeground);
+    background: var(--vscode-button-secondaryBackground);
+    border-color: var(--vscode-button-border, transparent);
+  }
+  .btn:hover { color: var(--vscode-button-secondaryForeground); background: var(--vscode-button-secondaryHoverBackground); }
+  .footer-help kbd {
+    color: var(--vscode-keybindingLabel-foreground);
+    background: var(--vscode-keybindingLabel-background);
+    border-color: var(--vscode-keybindingLabel-border);
+  }
+  .nf-metro-tip, .nf-metro-modal {
+    color: var(--vscode-editorWidget-foreground);
+    background: var(--vscode-editorWidget-background);
+    border-color: var(--vscode-editorWidget-border, var(--vscode-widget-border, transparent));
+  }
+  .nf-metro-modal pre {
+    background: var(--vscode-textCodeBlock-background);
+    border-color: var(--vscode-widget-border, transparent);
+  }
+</style>`;
+
+function withVscodeChrome(html: string): string {
+  return /<\/head>/i.test(html)
+    ? html.replace(/<\/head>/i, `${VSCODE_CHROME}\n</head>`)
+    : html;
+}
+
 export async function loadMetroWebviewContent(
   filePath: string,
   format: MetroFormat
 ): Promise<string> {
   const content = await fs.readFile(filePath, "utf8");
-  return withCsp(format === "html" ? content : wrapSvg(content));
+  return withCsp(
+    format === "html" ? withVscodeChrome(content) : wrapSvg(content)
+  );
 }
