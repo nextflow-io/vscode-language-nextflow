@@ -3,10 +3,7 @@ import * as path from "path";
 import * as vscode from "vscode";
 
 import { detectMetroFile } from "./detectMetroFile";
-import {
-  NfMetroNotFoundError,
-  showNfMetroNotFound
-} from "./findNfMetro";
+import { NfMetroNotFoundError, showNfMetroNotFound } from "./findNfMetro";
 import { findMetroOutputs } from "./findMetroOutputs";
 import { logMetroMessage } from "./outputChannel";
 import { openMetroWebview } from "./openMetroWebview";
@@ -23,7 +20,9 @@ async function previewMetroArtifact(
   const kind = detectMetroFile(content, ext);
 
   if (!kind) {
-    vscode.window.showErrorMessage("This file does not appear to be an nf-metro output.");
+    vscode.window.showErrorMessage(
+      "This file does not appear to be an nf-metro output."
+    );
     return;
   }
 

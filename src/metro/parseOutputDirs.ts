@@ -19,7 +19,9 @@ export function parseOutputDirsFromConfig(
     const match = config.match(pattern);
     if (match?.[1]) {
       const outdir = match[1];
-      dirs.add(path.isAbsolute(outdir) ? outdir : path.join(workspaceRoot, outdir));
+      dirs.add(
+        path.isAbsolute(outdir) ? outdir : path.join(workspaceRoot, outdir)
+      );
     }
   }
 

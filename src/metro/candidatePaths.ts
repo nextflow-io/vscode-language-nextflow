@@ -7,7 +7,14 @@ export function getCandidateNfMetroPaths(): string[] {
 
   if (process.platform === "win32") {
     candidates.push(
-      path.join(home, "AppData", "Roaming", "Python", "Scripts", "nf-metro.exe"),
+      path.join(
+        home,
+        "AppData",
+        "Roaming",
+        "Python",
+        "Scripts",
+        "nf-metro.exe"
+      ),
       path.join(home, ".local", "bin", "nf-metro.exe")
     );
   } else {

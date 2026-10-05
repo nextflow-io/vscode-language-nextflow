@@ -12,7 +12,8 @@ export function activateMetro(
   context.subscriptions.push(
     vscode.commands.registerCommand(
       "nextflow.previewMetro",
-      (uri?: string, name?: string) => previewMetro(context, uri, name, trackEvent)
+      (uri?: string, name?: string) =>
+        previewMetro(context, uri, name, trackEvent)
     ),
     vscode.commands.registerCommand(
       "nextflow.openMetroFile",

@@ -30,7 +30,10 @@ function findNfMetroWithoutPath(): string | undefined {
 }
 
 function scanMetroOutputs(workspaceRoot: string): string[] {
-  const config = fs.readFileSync(path.join(workspaceRoot, "nextflow.config"), "utf8");
+  const config = fs.readFileSync(
+    path.join(workspaceRoot, "nextflow.config"),
+    "utf8"
+  );
   const dirs = parseOutputDirsFromConfig(config, workspaceRoot);
   const found: string[] = [];
   const extensions = new Set([".mmd", ".html", ".svg"]);
@@ -69,7 +72,11 @@ function main() {
 
   // 1. File detection
   const dag = readFixture("dag.mmd");
-  assert.equal(detectMetroFile(dag, ".mmd"), "nextflow-dag", "dag.mmd detection");
+  assert.equal(
+    detectMetroFile(dag, ".mmd"),
+    "nextflow-dag",
+    "dag.mmd detection"
+  );
   assert.equal(
     detectMetroFile(readFixture("results/metro_map.html"), ".html"),
     "html",
@@ -91,8 +98,15 @@ function main() {
 
   // 3. Output scanning (simulates findMetroOutputs)
   const outputs = scanMetroOutputs(FIXTURE_ROOT);
-  assert.equal(outputs.length, 2, `expected 2 outputs, got ${outputs.length}: ${outputs}`);
-  console.log("✓ scanMetroOutputs ->", outputs.map((p) => path.basename(p)).join(", "));
+  assert.equal(
+    outputs.length,
+    2,
+    `expected 2 outputs, got ${outputs.length}: ${outputs}`
+  );
+  console.log(
+    "✓ scanMetroOutputs ->",
+    outputs.map((p) => path.basename(p)).join(", ")
+  );
 
   // 4. CLI discovery without PATH
   const nfMetro = findNfMetroWithoutPath();
@@ -142,7 +156,10 @@ function main() {
   console.log("✓ nf-metro render curated .mmd ->", mmdOut);
 
   // 7. Pre-rendered html loads (simulates openMetroFile on .html)
-  const html = fs.readFileSync(path.join(FIXTURE_ROOT, "results/metro_map.html"), "utf8");
+  const html = fs.readFileSync(
+    path.join(FIXTURE_ROOT, "results/metro_map.html"),
+    "utf8"
+  );
   assert.equal(detectMetroFile(html, ".html"), "html");
   console.log("✓ pre-rendered html open path");
 

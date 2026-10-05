@@ -4,7 +4,10 @@ function isNextflowDag(content: string): boolean {
   return /flowchart\s+TB/i.test(content) && /\(\["/.test(content);
 }
 
-export function detectMetroFile(content: string, ext: string): MetroFileKind | undefined {
+export function detectMetroFile(
+  content: string,
+  ext: string
+): MetroFileKind | undefined {
   const lowerExt = ext.toLowerCase();
 
   if (lowerExt === ".mmd") {

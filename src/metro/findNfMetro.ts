@@ -25,7 +25,8 @@ export function getMetroConfig(): MetroConfig {
 }
 
 function findOnPath(): Promise<string | undefined> {
-  const lookup = process.platform === "win32" ? "where nf-metro" : "which nf-metro";
+  const lookup =
+    process.platform === "win32" ? "where nf-metro" : "which nf-metro";
   return new Promise((resolve) => {
     cp.exec(lookup, (error, stdout) => {
       if (error || !stdout.trim()) {

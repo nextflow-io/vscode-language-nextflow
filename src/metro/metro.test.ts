@@ -6,7 +6,10 @@ import { parseOutputDirsFromConfig } from "./parseOutputDirs.ts";
 
 describe("detectMetroFile", () => {
   it("detects nf-metro mmd files", () => {
-    assert.equal(detectMetroFile("%%metro title: test\ngraph LR", ".mmd"), "mmd");
+    assert.equal(
+      detectMetroFile("%%metro title: test\ngraph LR", ".mmd"),
+      "mmd"
+    );
   });
 
   it("detects nextflow dag mmd files", () => {
@@ -23,7 +26,8 @@ describe("detectMetroFile", () => {
   });
 
   it("detects nf-metro svg files", () => {
-    const svg = '<svg data-node-id="fastqc"><script type="application/json">{}</script></svg>';
+    const svg =
+      '<svg data-node-id="fastqc"><script type="application/json">{}</script></svg>';
     assert.equal(detectMetroFile(svg, ".svg"), "svg");
   });
 

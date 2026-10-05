@@ -1,10 +1,7 @@
 import * as path from "path";
 import * as vscode from "vscode";
 
-import {
-  NfMetroNotFoundError,
-  showNfMetroNotFound
-} from "./findNfMetro";
+import { NfMetroNotFoundError, showNfMetroNotFound } from "./findNfMetro";
 import { logMetroMessage } from "./outputChannel";
 import { openMetroWebview } from "./openMetroWebview";
 import { renderFromDag } from "./renderFromDag";
@@ -15,10 +12,16 @@ async function fetchDagContent(
   name?: string
 ): Promise<string | undefined> {
   const res: { result?: string; error?: string } | undefined =
-    await vscode.commands.executeCommand("nextflow.server.previewDag", uri, name);
+    await vscode.commands.executeCommand(
+      "nextflow.server.previewDag",
+      uri,
+      name
+    );
 
   if (!res?.result) {
-    vscode.window.showErrorMessage(res?.error ?? "Failed to render DAG preview.");
+    vscode.window.showErrorMessage(
+      res?.error ?? "Failed to render DAG preview."
+    );
     return undefined;
   }
 
