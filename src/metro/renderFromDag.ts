@@ -12,18 +12,33 @@ function execNfMetro(
   args: string[]
 ): Promise<{ stdout: string; stderr: string }> {
   return new Promise((resolve, reject) => {
-    cp.execFile(command, args, { maxBuffer: 10 * 1024 * 1024 }, (error, stdout, stderr) => {
-      if (error) {
-        const message = stderr.trim() || stdout.trim() || error.message;
-        reject(new Error(message));
-        return;
+    cp.execFile(
+      command,
+      args,
+      { maxBuffer: 10 * 1024 * 1024 },
+      (error, stdout, stderr) => {
+        if (error) {
+          const message = stderr.trim() || stdout.trim() || error.message;
+          reject(new Error(message));
+          return;
+        }
+        resolve({ stdout, stderr });
       }
-      resolve({ stdout, stderr });
-    });
+    );
   });
 }
 
-async function createTempDir(context: vscode.ExtensionContext): Promise<string> {
+function isDarkTheme(): boolean {
+  const { kind } = vscode.window.activeColorTheme;
+  return (
+    kind === vscode.ColorThemeKind.Dark ||
+    kind === vscode.ColorThemeKind.HighContrast
+  );
+}
+
+async function createTempDir(
+  context: vscode.ExtensionContext
+): Promise<string> {
   const tmpDir = path.join(
     context.globalStorageUri.fsPath,
     "metro-tmp",
@@ -49,7 +64,9 @@ async function renderWithNfMetro(
     "--format",
     format,
     "--theme",
-    theme
+    theme,
+    "--mode",
+    isDarkTheme() ? "dark" : "light"
   ];
 
   if (options.fromNextflow) {
@@ -75,7 +92,10 @@ export async function renderFromDag(
   const { format } = getMetroConfig();
   const tmpDir = await createTempDir(context);
   const dagFile = path.join(tmpDir, "dag.mmd");
-  const outputFile = path.join(tmpDir, `metro.${format === "html" ? "html" : "svg"}`);
+  const outputFile = path.join(
+    tmpDir,
+    `metro.${format === "html" ? "html" : "svg"}`
+  );
 
   await fs.writeFile(dagFile, dagContent, "utf8");
   return renderWithNfMetro(dagFile, outputFile, { fromNextflow: true, title });
@@ -89,7 +109,10 @@ export async function renderMetroFile(
 ): Promise<RenderResult> {
   const { format } = getMetroConfig();
   const tmpDir = await createTempDir(context);
-  const outputFile = path.join(tmpDir, `metro.${format === "html" ? "html" : "svg"}`);
+  const outputFile = path.join(
+    tmpDir,
+    `metro.${format === "html" ? "html" : "svg"}`
+  );
   return renderWithNfMetro(inputPath, outputFile, {
     fromNextflow,
     title: title ?? path.basename(inputPath, path.extname(inputPath))

@@ -19,7 +19,7 @@ The extension uses the [Nextflow language server](https://github.com/nextflow-io
 - Rename
 - DAG preview for workflows
 - Config preview for processes
-- Metro map preview for workflows and pipeline outputs ([nf-metro](https://github.com/pinin4fjords/nf-metro))
+- Metro map preview for workflows and pipeline outputs ([nf-metro](https://github.com/seqeralabs/nf-metro))
 
 Read the [Nextflow documentation](https://nextflow.io/docs/latest/vscode.html) for more information about the Nextflow language server.
 
@@ -46,7 +46,7 @@ The Project view allows you to:
 
 ### Metro map preview
 
-The extension integrates with [nf-metro](https://github.com/pinin4fjords/nf-metro) to visualize pipelines as transit-style metro maps:
+The extension integrates with [nf-metro](https://github.com/seqeralabs/nf-metro) to visualize pipelines as transit-style metro maps:
 
 - **Preview Metro Map** — render a metro map from the current workflow DAG (same source as Nextflow `-with-dag`)
 - **Open Metro Map Preview** — open pre-rendered `.html`, `.svg`, `.mmd` nf-metro files, or Nextflow `-with-dag` `.mmd` exports
@@ -66,7 +66,7 @@ The language server requires Java 17 or later.
 
 _Note: for custom Java installations such as conda, you might need to set the `nextflow.java.home` extension setting for the extension to find your Java installation._
 
-Metro map preview requires the optional [nf-metro](https://github.com/pinin4fjords/nf-metro) CLI (`pip install nf-metro` or `conda install bioconda::nf-metro`). Set `nextflow.metro.path` if `nf-metro` is not on your `PATH`.
+Metro map preview requires the optional [nf-metro](https://github.com/seqeralabs/nf-metro) CLI, version 1.1 or later (`pip install nf-metro` or `conda install bioconda::nf-metro`). Set `nextflow.metro.path` if `nf-metro` is not on your `PATH`.
 
 ### Offline usage
 
@@ -121,7 +121,7 @@ The following settings are available:
 
 - `nextflow.metro.path`: Path to the `nf-metro` executable. If empty, the extension looks for `nf-metro` on `PATH`.
 
-- `nextflow.metro.theme`: Visual theme passed to nf-metro when rendering metro maps (`nfcore`, `light`, or `seqera`; `seqera` requires nf-metro 0.8+).
+- `nextflow.metro.theme`: Visual theme passed to nf-metro when rendering metro maps (`nfcore`, `light`, or `seqera`). Maps follow the light or dark mode of the VS Code color theme.
 
 - `nextflow.metro.format`: Output format for rendered metro maps (`html` or `svg`).
 
