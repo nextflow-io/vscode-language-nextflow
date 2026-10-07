@@ -47,6 +47,10 @@ Everything outside `src/ui` runs in the extension host, which is a Node process 
 
 A webview cannot import `vscode` no matter how the project is arranged. To reach the extension host, including for logging, post a message and handle it in `WebviewProvider`.
 
+## Syntax highlighting
+
+`syntaxes/metro.tmLanguage.json` is copied from `website/src/grammars/metro.tmLanguage.json` in [nf-metro](https://github.com/seqeralabs/nf-metro). Keep the two in sync.
+
 ## Publishing
 
 1. Update the extension version number in `package.json`.

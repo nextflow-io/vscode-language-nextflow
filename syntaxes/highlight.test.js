@@ -11,7 +11,8 @@ const GRAMMARS = {
   "source.nextflow": "nextflow.tmLanguage.json",
   "source.nextflow-groovy": "groovy.tmLanguage.json",
   "nextflow.interpolation.injection": "nextflow-interpolation-injection.json",
-  "nextflow.script.injection": "nextflow-script-injection.json"
+  "nextflow.script.injection": "nextflow-script-injection.json",
+  "source.metro": "metro.tmLanguage.json"
 };
 
 // VS Code supplies the grammars for the embedded languages at runtime. These
@@ -384,6 +385,21 @@ const CASES = [
   ["String foo() {\n  'x'\n}", "meta.method.return-type", "String"]
 ];
 
+const METRO_CASES = [
+  ["%%metro title: My Pipeline", "keyword.control.directive.metro", "%%metro"],
+  ["%%metro title: My Pipeline", "support.type.property-name.metro", "title:"],
+  [
+    "%%metro line: main | Main | #0570b0",
+    "constant.other.color.rgb-value.hex",
+    "#0570b0"
+  ],
+  ["%% a comment", "comment.line.percentage.mermaid", "%% a comment"],
+  ["graph LR", "keyword.control.mermaid", "graph"],
+  ["graph LR", "keyword.control.mermaid", "LR"],
+  ["a --> b", "keyword.operator.edge.mermaid", "-->"],
+  ["a[FastQC]", "string.quoted.nodelabel.mermaid", "[FastQC]"]
+];
+
 function tokenize(grammar, snippet) {
   let stack = vsctm.INITIAL;
   const out = [];
@@ -427,10 +443,17 @@ async function main() {
     }
   });
 
-  const grammar = await registry.loadGrammar("source.nextflow");
+  const grammars = {
+    "source.nextflow": await registry.loadGrammar("source.nextflow"),
+    "source.metro": await registry.loadGrammar("source.metro")
+  };
+  const cases = [
+    ...CASES.map((c) => ["source.nextflow", ...c]),
+    ...METRO_CASES.map((c) => ["source.metro", ...c])
+  ];
   let failed = 0;
-  for (const [snippet, scope, target] of CASES) {
-    const tokens = tokenize(grammar, snippet);
+  for (const [root, snippet, scope, target] of cases) {
+    const tokens = tokenize(grammars[root], snippet);
     const hasScope = (t) => t.scopes.some((s) => s.startsWith(scope));
     let actual;
     if (target === false) {
@@ -456,8 +479,8 @@ async function main() {
       }
     }
   }
-  assert.strictEqual(failed, 0, `${failed}/${CASES.length} cases failed`);
-  console.log(`${CASES.length} cases passed`);
+  assert.strictEqual(failed, 0, `${failed}/${cases.length} cases failed`);
+  console.log(`${cases.length} cases passed`);
 }
 
 main().catch((e) => {

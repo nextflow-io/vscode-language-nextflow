@@ -1,6 +1,7 @@
 import * as vscode from "vscode";
 
 import { activateLanguageServer, stopLanguageServer } from "./languageServer";
+import { activateMetro } from "./metro";
 import { activateTelemetry, deactivateTelemetry } from "./telemetry";
 import { activateWebview } from "./webview";
 import { activateAuth, AuthProvider } from "./auth";
@@ -11,6 +12,7 @@ export function activate(context: vscode.ExtensionContext) {
   const authProvider = new AuthProvider(context);
   activateAuth(context, authProvider);
   activateLanguageServer(context, trackEvent);
+  activateMetro(context, trackEvent);
   activateWebview(context, authProvider);
   activateNextflowLog(context);
 }
