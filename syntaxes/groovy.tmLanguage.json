@@ -113,9 +113,12 @@
           "captures": {
             "1": {
               "name": "punctuation.definition.comment.groovy"
+            },
+            "2": {
+              "name": "keyword.codetag.notation.groovy"
             }
           },
-          "match": "(//).*$\\n?",
+          "match": "(//)(?:\\s*(fmt:\\s*(?:skip|off|on))\\s*$)?.*$\\n?",
           "name": "comment.line.double-slash.groovy"
         }
       ]

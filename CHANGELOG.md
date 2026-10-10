@@ -4,6 +4,14 @@ All notable changes to the Nextflow VS Code extension will be documented here.
 
 See [Keep a Changelog](http://keepachangelog.com/) for recommendations on how to structure this file.
 
+## [Unreleased]
+
+- Add `nextflow.formatting.maxLineLength` setting to control automatic line wrapping when formatting
+- Document the new formatter behavior and `// fmt:` directives in the README
+- Highlight `fmt:` formatter directives in comments
+
+_Note: the new formatter behavior requires a language server release built against the reworked nf-lang formatter -- comment preservation ([nextflow-io/nextflow#7346](https://github.com/nextflow-io/nextflow/pull/7346), merged) plus the pending line wrapping ([#7520](https://github.com/nextflow-io/nextflow/pull/7520)) and `fmt:` directives ([#7522](https://github.com/nextflow-io/nextflow/pull/7522)) follow-ups. Older language server versions ignore the new setting._
+
 ## [1.7.1] - 2026-06-08
 
 - Add syntax highlighting and filtering for Nextflow log files (#197)
