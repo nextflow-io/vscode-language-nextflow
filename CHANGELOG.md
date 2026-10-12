@@ -4,6 +4,19 @@ All notable changes to the Nextflow VS Code extension will be documented here.
 
 See [Keep a Changelog](http://keepachangelog.com/) for recommendations on how to structure this file.
 
+## [1.8.0] - 2026-10-12
+
+- Add option for Nextflow 26.10
+- Remove convert script to static types command
+- Make tree view the default in Project view and bring it to parity with list view (#241)
+- Add config preview for a process (#240)
+- Highlight the active file in Project view (#120)
+- Highlight process script blocks in their own language (#24)
+- Add pan and zoom to DAG preview (#46)
+- Fix unreadable DAG node labels in dark themes (#236)
+- Use the signed-in GitHub session when querying releases (#238)
+- Set a Content-Security-Policy on the webviews (#234)
+
 ## [1.7.1] - 2026-06-08
 
 - Add syntax highlighting and filtering for Nextflow log files (#197)
