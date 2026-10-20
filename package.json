@@ -394,7 +394,7 @@
     "eslint-plugin-react-hooks": "^5.1.0",
     "globals": "^15.15.0",
     "jwt-decode": "^4.0.0",
-    "mermaid": "^11.16.1",
+    "mermaid": "^12.2.0",
     "node-fetch": "^3.3.2",
     "posthog-node": "^4.4.1",
     "prettier": "3.5.2",
