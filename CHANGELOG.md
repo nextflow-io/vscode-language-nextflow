@@ -6,7 +6,7 @@ See [Keep a Changelog](http://keepachangelog.com/) for recommendations on how to
 
 ## Unreleased
 
-- Use the standalone language server on Linux, macOS (Apple silicon) and Windows (x64), which does not require Java
+- Use the standalone language server on Linux and macOS (Apple silicon), which does not require Java
 - Remove old language server versions from the local cache
 
 ## [1.8.0] - 2026-10-12

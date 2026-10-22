@@ -3,7 +3,6 @@ import * as crypto from "crypto";
 import * as fs from "fs";
 import * as path from "path";
 import { promisify } from "util";
-import type { Executable } from "vscode-languageclient/node";
 
 const execFile = promisify(cp.execFile);
 
@@ -18,7 +17,7 @@ export type DownloadProgress = (received: number, total: number) => void;
 
 const BUNDLE_PREFIX = "nextflow-language-server-";
 const BUNDLE_PATTERN =
-  /^nextflow-language-server-(.+)-(linux|macos|windows)-(x64|arm64)$/;
+  /^nextflow-language-server-(.+)-(linux|macos)-(x64|arm64)$/;
 const JAR_PATTERN = /^v(\d.*)\.jar$/;
 const TEMP_PREFIX = ".download-";
 
@@ -50,9 +49,6 @@ export function bundlePlatform(
     if (arch === "arm64" || (arch === "x64" && isTranslated())) {
       return "macos-arm64";
     }
-  }
-  if (platform === "win32" && arch === "x64") {
-    return "windows-x64";
   }
   return null;
 }
@@ -87,47 +83,16 @@ export function bundleDirName(archive: ReleaseAsset): string {
 }
 
 export function bundleLauncher(bundleDir: string): string {
-  const name =
-    process.platform === "win32" ? "nextflow-lsp.cmd" : "nextflow-lsp";
-  return path.join(bundleDir, "bin", name);
+  return path.join(bundleDir, "bin", "nextflow-lsp");
 }
 
 export function isValidBundle(bundleDir: string): boolean {
-  // there are no exec bits on Windows
-  const mode =
-    process.platform === "win32" ? fs.constants.F_OK : fs.constants.X_OK;
   try {
-    fs.accessSync(bundleLauncher(bundleDir), mode);
+    fs.accessSync(bundleLauncher(bundleDir), fs.constants.X_OK);
     return true;
   } catch (error) {
     return false;
   }
-}
-
-/**
- * Get the executable to start a launcher. Node can only run `.cmd` files
- * through a shell (CVE-2024-27980), which takes the command line as is,
- * so the path is quoted.
- */
-export function launcherExecutable(launcher: string): Executable {
-  if (/\.cmd$/i.test(launcher)) {
-    return { command: `"${launcher}"`, options: { shell: true } };
-  }
-  return { command: launcher };
-}
-
-/**
- * Use the tar of Windows (bsdtar), since a GNU tar on the PATH (e.g. of
- * Git for Windows) takes the `C:` of a path for a remote host.
- */
-export function tarCommand(): string {
-  if (process.platform === "win32" && process.env.SystemRoot) {
-    const tar = path.join(process.env.SystemRoot, "System32", "tar.exe");
-    if (fs.existsSync(tar)) {
-      return tar;
-    }
-  }
-  return "tar";
 }
 
 /**
@@ -210,10 +175,9 @@ export async function installBundle(
       throw new Error(`Checksum mismatch for ${archive.name}`);
     }
 
-    // tar preserves file mtimes, which the AOT cache of the launcher depends on
     const extractDir = path.join(tempDir, "extract");
     await fs.promises.mkdir(extractDir);
-    await execFile(tarCommand(), ["-xzf", archivePath, "-C", extractDir]);
+    await execFile("tar", ["-xzf", archivePath, "-C", extractDir]);
     const extracted = path.join(extractDir, name);
     if (!isValidBundle(extracted)) {
       throw new Error(`${archive.name} does not contain a valid bundle`);
@@ -234,11 +198,8 @@ export async function installBundle(
       await fs.promises.rename(extracted, targetDir);
     } catch (error: any) {
       // another window installed the bundle in the meantime
-      // (EPERM on Windows)
       if (
-        (error.code === "ENOTEMPTY" ||
-          error.code === "EEXIST" ||
-          error.code === "EPERM") &&
+        (error.code === "ENOTEMPTY" || error.code === "EEXIST") &&
         isValidBundle(targetDir)
       ) {
         return targetDir;

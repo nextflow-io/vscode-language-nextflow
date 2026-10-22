@@ -280,13 +280,9 @@ export async function fetchLanguageServer(
 export function fetchLanguageServerNative(
   versionPrefix: string
 ): string | null {
-  const names =
-    process.platform === "win32"
-      ? ["nextflow-lsp.exe", "nextflow-lsp.cmd"]
-      : ["nextflow-lsp"];
-  return (
-    names
-      .map((name) => path.join(cacheDir(versionPrefix), name))
-      .find((nativePath) => fs.existsSync(nativePath)) ?? null
+  const nativePath = path.join(
+    cacheDir(versionPrefix),
+    process.platform === "win32" ? "nextflow-lsp.exe" : "nextflow-lsp"
   );
+  return fs.existsSync(nativePath) ? nativePath : null;
 }

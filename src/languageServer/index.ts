@@ -14,7 +14,7 @@ import {
   resolveLanguageVersion
 } from "./utils/fetchLanguageServer";
 import { findJava, checkJavaVersion } from "./utils/findExecutable";
-import { launcherExecutable, pruneLocalInstalls } from "./utils/installBundle";
+import { pruneLocalInstalls } from "./utils/installBundle";
 import type { TrackEvent } from "../telemetry";
 
 const LABEL_RELOAD_WINDOW = "Reload Window";
@@ -68,7 +68,7 @@ function startLanguageServer() {
           vscode.window.showInformationMessage(
             `Using native Nextflow language server (${versionPrefix}).`
           );
-          executable = launcherExecutable(nativePath);
+          executable = { command: nativePath };
         } else {
           const server = await fetchLanguageServer(versionPrefix, isPreview);
           if (typeof server === "string") {
@@ -78,7 +78,7 @@ function startLanguageServer() {
           }
           serverName = server.name;
           if (server.kind === "bundle") {
-            executable = launcherExecutable(server.path);
+            executable = { command: server.path };
           } else {
             usesJava = true;
             const javaPath = resolveJava();
