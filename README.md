@@ -53,13 +53,24 @@ This extension is available in the [Visual Studio Marketplace](https://marketpla
 
 ### Requirements
 
-The language server requires Java 17 or later.
+On Linux (x64 and arm64) and macOS (Apple silicon), the extension downloads a standalone build of the language server that includes its own Java runtime, so Java is not required.
+
+On other platforms, such as Windows and Intel-based Macs, the extension uses the language server jar, which requires Java 17 or later.
 
 _Note: for custom Java installations such as conda, you might need to set the `nextflow.java.home` extension setting for the extension to find your Java installation._
 
 ### Offline usage
 
-The extension downloads an appropriate version of the language server from GitHub based on the `nextflow.languageVersion` extension setting. To use the language server in an offline environment, you must download a language server release manually and save it in the local cache directory used by the extension. For example:
+The extension downloads an appropriate version of the language server from GitHub based on the `nextflow.languageVersion` extension setting. To use the language server in an offline environment, you must download a language server release manually and save it in the local cache directory used by the extension. For example, the standalone build for Linux (x64):
+
+```bash
+VERSION=26.10.1
+mkdir -p ~/.nextflow/lsp/v26.10
+wget https://github.com/nextflow-io/language-server/releases/download/v${VERSION}/nextflow-language-server-${VERSION}-linux-x64.tar.gz
+tar -xzf nextflow-language-server-${VERSION}-linux-x64.tar.gz -C ~/.nextflow/lsp/v26.10
+```
+
+Or the jar:
 
 ```bash
 mkdir -p ~/.nextflow/lsp/v24.10
@@ -96,7 +107,7 @@ The following settings are available:
 
 - `nextflow.formatting.sortDeclarations`: Sort script declarations when formatting Nextflow scripts.
 
-- `nextflow.java.home`: Specify the folder path to the desired Java runtime. Equivalent to the `JAVA_HOME` environment variable, i.e. the Java binary should be located at `$JAVA_HOME/bin/java`. Use this setting if the extension cannot find Java automatically.
+- `nextflow.java.home`: Specify the folder path to the desired Java runtime. Equivalent to the `JAVA_HOME` environment variable, i.e. the Java binary should be located at `$JAVA_HOME/bin/java`. Use this setting if the extension cannot find Java automatically. Only used on platforms where the language server is run from the jar (e.g. Windows, Intel-based Macs).
 
 - `nextflow.languageVersion`: Nextflow language version to be used by the language server.
 

@@ -8,16 +8,50 @@ import {
 import { buildConfigPreview, ConfigPreview } from "./utils/buildConfigPreview";
 import { buildDagPreview } from "./utils/buildDagPreview";
 import {
-  fetchLanguageServerJar,
-  fetchLanguageServerNative,
+  cacheDir,
+  fetchLanguageServer,
   resolveLanguageVersion
 } from "./utils/fetchLanguageServer";
 import { findJava, checkJavaVersion } from "./utils/findExecutable";
+import { pruneLocalInstalls } from "./utils/installBundle";
 import type { TrackEvent } from "../telemetry";
 
 const LABEL_RELOAD_WINDOW = "Reload Window";
 
 let languageClient: LanguageClient | null = null;
+
+// whether the language server is run with the Java from `nextflow.java.home`
+let usesJava = false;
+
+function resolveJava(): string | null {
+  const javaPath = findJava();
+  if (!javaPath) {
+    const settingsJavaHome = vscode.workspace
+      .getConfiguration("nextflow")
+      .get<string>("java.home");
+    if (settingsJavaHome) {
+      vscode.window.showErrorMessage(
+        "The `nextflow.java.home` setting does not point to a valid Java install."
+      );
+    } else {
+      vscode.window.showErrorMessage(
+        "Could not locate Java. Use the `nextflow.java.home` setting to configure Java manually."
+      );
+    }
+    return null;
+  }
+  try {
+    if (!checkJavaVersion(javaPath)) {
+      vscode.window.showErrorMessage(
+        `Java 17 or later is required to use the Nextflow language server (using path: ${javaPath}).`
+      );
+      return null;
+    }
+  } catch (e) {
+    console.warn(`Failed to check Java version: ${e}`);
+  }
+  return javaPath;
+}
 
 function startLanguageServer() {
   vscode.window.withProgress(
@@ -25,34 +59,30 @@ function startLanguageServer() {
     (progress) => {
       return new Promise<void>(async (resolve, reject) => {
         const { versionPrefix, isPreview } = resolveLanguageVersion();
-        const nativePath = fetchLanguageServerNative(versionPrefix);
-        const javaPath = nativePath ? null : findJava();
-        if (!nativePath && !javaPath) {
+        let executable: Executable;
+        usesJava = false;
+        const server = await fetchLanguageServer(versionPrefix, isPreview);
+        if (typeof server === "string") {
           resolve();
-          const settingsJavaHome = vscode.workspace
-            .getConfiguration("nextflow")
-            .get<string>("java.home");
-          if (settingsJavaHome) {
-            vscode.window.showErrorMessage(
-              "The `nextflow.java.home` setting does not point to a valid Java install."
-            );
-          } else {
-            vscode.window.showErrorMessage(
-              "Could not locate Java. Use the `nextflow.java.home` setting to configure Java manually."
-            );
-          }
+          vscode.window.showErrorMessage(server);
           return;
         }
-        try {
-          if (javaPath && !checkJavaVersion(javaPath)) {
+        if (server.kind === "bundle") {
+          executable = { command: server.path };
+        } else {
+          usesJava = true;
+          const javaPath = resolveJava();
+          if (!javaPath) {
             resolve();
-            vscode.window.showErrorMessage(
-              `Java 17 or later is required to use the Nextflow language server (using path: ${javaPath}).`
-            );
             return;
           }
-        } catch (e) {
-          console.warn(`Failed to check Java version: ${e}`);
+          const args = ["-jar", server.path];
+          // uncomment to allow a debugger to attach to the language server
+          // args.unshift("-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=5005,quiet=y");
+          executable = {
+            command: javaPath,
+            args: args
+          };
         }
         progress.report({
           message: "Initializing Nextflow language server..."
@@ -78,32 +108,6 @@ function startLanguageServer() {
             protocol2Code: (value) => vscode.Uri.parse(value)
           }
         };
-        let executable: Executable;
-        if (nativePath) {
-          vscode.window.showInformationMessage(
-            `Using native Nextflow language server (${versionPrefix}).`
-          );
-          executable = { command: nativePath };
-        } else {
-          const serverPath = await fetchLanguageServerJar(
-            versionPrefix,
-            isPreview
-          );
-          if (!serverPath) {
-            resolve();
-            vscode.window.showErrorMessage(
-              "Failed to retrieve language server."
-            );
-            return;
-          }
-          const args = ["-jar", serverPath];
-          // uncomment to allow a debugger to attach to the language server
-          // args.unshift("-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=5005,quiet=y");
-          executable = {
-            command: javaPath as string,
-            args: args
-          };
-        }
         languageClient = new LanguageClient(
           "nextflow",
           "Nextflow Language Server",
@@ -120,6 +124,10 @@ function startLanguageServer() {
           return;
         }
         resolve();
+        // remove old versions, keeping the most recent one as a fallback
+        pruneLocalInstalls(cacheDir(versionPrefix), server.name).catch((e) =>
+          console.warn(`Failed to remove old language server versions: ${e}`)
+        );
       });
     }
   );
@@ -276,7 +284,7 @@ export function activateLanguageServer(
   vscode.workspace.onDidChangeConfiguration(
     (event: vscode.ConfigurationChangeEvent) => {
       const shouldRestart =
-        event.affectsConfiguration("nextflow.java.home") ||
+        (usesJava && event.affectsConfiguration("nextflow.java.home")) ||
         event.affectsConfiguration("nextflow.languageVersion");
       if (shouldRestart) {
         restartLanguageServer();

@@ -4,6 +4,11 @@ All notable changes to the Nextflow VS Code extension will be documented here.
 
 See [Keep a Changelog](http://keepachangelog.com/) for recommendations on how to structure this file.
 
+## Unreleased
+
+- Use the standalone language server on Linux and macOS (Apple silicon), which does not require Java
+- Remove old language server versions from the local cache
+
 ## [1.8.0] - 2026-10-12
 
 - Add option for Nextflow 26.10
