@@ -276,13 +276,3 @@ export async function fetchLanguageServer(
   );
   return local;
 }
-
-export function fetchLanguageServerNative(
-  versionPrefix: string
-): string | null {
-  const nativePath = path.join(
-    cacheDir(versionPrefix),
-    process.platform === "win32" ? "nextflow-lsp.exe" : "nextflow-lsp"
-  );
-  return fs.existsSync(nativePath) ? nativePath : null;
-}

@@ -10,7 +10,6 @@ import { buildDagPreview } from "./utils/buildDagPreview";
 import {
   cacheDir,
   fetchLanguageServer,
-  fetchLanguageServerNative,
   resolveLanguageVersion
 } from "./utils/fetchLanguageServer";
 import { findJava, checkJavaVersion } from "./utils/findExecutable";
@@ -60,40 +59,30 @@ function startLanguageServer() {
     (progress) => {
       return new Promise<void>(async (resolve, reject) => {
         const { versionPrefix, isPreview } = resolveLanguageVersion();
-        const nativePath = fetchLanguageServerNative(versionPrefix);
         let executable: Executable;
-        let serverName: string | null = null;
         usesJava = false;
-        if (nativePath) {
-          vscode.window.showInformationMessage(
-            `Using native Nextflow language server (${versionPrefix}).`
-          );
-          executable = { command: nativePath };
+        const server = await fetchLanguageServer(versionPrefix, isPreview);
+        if (typeof server === "string") {
+          resolve();
+          vscode.window.showErrorMessage(server);
+          return;
+        }
+        if (server.kind === "bundle") {
+          executable = { command: server.path };
         } else {
-          const server = await fetchLanguageServer(versionPrefix, isPreview);
-          if (typeof server === "string") {
+          usesJava = true;
+          const javaPath = resolveJava();
+          if (!javaPath) {
             resolve();
-            vscode.window.showErrorMessage(server);
             return;
           }
-          serverName = server.name;
-          if (server.kind === "bundle") {
-            executable = { command: server.path };
-          } else {
-            usesJava = true;
-            const javaPath = resolveJava();
-            if (!javaPath) {
-              resolve();
-              return;
-            }
-            const args = ["-jar", server.path];
-            // uncomment to allow a debugger to attach to the language server
-            // args.unshift("-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=5005,quiet=y");
-            executable = {
-              command: javaPath,
-              args: args
-            };
-          }
+          const args = ["-jar", server.path];
+          // uncomment to allow a debugger to attach to the language server
+          // args.unshift("-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=5005,quiet=y");
+          executable = {
+            command: javaPath,
+            args: args
+          };
         }
         progress.report({
           message: "Initializing Nextflow language server..."
@@ -135,12 +124,10 @@ function startLanguageServer() {
           return;
         }
         resolve();
-        if (serverName) {
-          // remove old versions, keeping the most recent one as a fallback
-          pruneLocalInstalls(cacheDir(versionPrefix), serverName).catch((e) =>
-            console.warn(`Failed to remove old language server versions: ${e}`)
-          );
-        }
+        // remove old versions, keeping the most recent one as a fallback
+        pruneLocalInstalls(cacheDir(versionPrefix), server.name).catch((e) =>
+          console.warn(`Failed to remove old language server versions: ${e}`)
+        );
       });
     }
   );
